@@ -6,6 +6,8 @@ Aiming to answer the common problem of trying to find the connection adapter for
 
 
 ## Table of Contents
+
+<!-- TODO: Update the links to the correct sections -->
 1. [Setup of RPi Image](#setup-of-rpi-image)
 2. [Explanation of Project Contents and Structure](#explanation-of-project-contents-and-structure)
 3. [Development Setup of Project](#development-setup-of-project)
