@@ -16,6 +16,12 @@ Aiming to answer the common problem of trying to find the connection adapter for
 
 ## Instructions
 
+Software setup:
+1) Install docker
+2) Clone repo
+3) cd into folder
+4) `docker-compose up -d`
+
 <!-- 1. Setup of RPi Image -->
 <!-- TODO: Add detailed instructions for setting up the RPi image -->
 
@@ -35,5 +41,3 @@ Aiming to answer the common problem of trying to find the connection adapter for
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
