@@ -21,6 +21,8 @@ Software setup:
 2) Clone repo
 3) cd into folder
 4) `docker-compose up -d`
+5) terminal in the container and run `bin/cake migrations migrate` to migrate the DB
+6) terminal in the container and run `bin/cake migrations seed` to seed the DB
 
 <!-- 1. Setup of RPi Image -->
 <!-- TODO: Add detailed instructions for setting up the RPi image -->
