@@ -45,6 +45,22 @@ class PagesController extends AppController
      */
     public function display(string ...$path): ?Response
     {
+        /**
+         * TODO: Make this into a table called like question_flow
+         * with a join table of question_flow to user_id
+         * then read in for a user account or save it in
+         * the session
+         */
+        $adapters = [
+            ['title' => 'USB Adapter', 'description' => 'A versatile USB adapter for multiple devices.'],
+            ['title' => 'HDMI Adapter', 'description' => 'HDMI adapter for high-definition video transfer.'],
+            ['title' => 'Ethernet Adapter', 'description' => 'A fast Ethernet adapter for wired connections.'],
+            ['title' => 'Audio Adapter', 'description' => 'Adapter for connecting audio devices seamlessly.'],
+            ['title' => 'Video Adapter', 'description' => 'Adapter for video connections to projectors and screens.']
+        ];
+
+        $this->set(compact('adapters'));
+
         if (!$path) {
             return $this->redirect('/');
         }
