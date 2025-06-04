@@ -5,6 +5,9 @@ version: '3.8'
 # The frontend service runs a CakePHP 5 application, while the backend service runs a Node.js application.
 # The database service uses PostgreSQL, and Redis is used for caching.
 services:
+
+# Frontend service for CakePHP 5 application
+# This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
   frontend:
     image: shinsenter/cakephp5
     container_name: WebAdaptors-CakePHP5
@@ -19,7 +22,7 @@ services:
       - no-new-privileges:true
     user: 1026:100
     volumes:
-      - /volume1/docker/webadapters/cakephp5:/var/www/html:rw
+      - /volume1/docker/webadapters/cakephp:/var/www/html:rw
     depends_on:
       - db
       - redis
@@ -33,8 +36,6 @@ services:
     security_opt:
       - no-new-privileges:true
     user: 1026:100
-    ports:
-      - 3000:3000
     environment:
       - TZ=America/Chicago
       - NODE_ENV=production
@@ -51,9 +52,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    security_opt:
-      - no-new-privileges:true
-    user: 1026:100
     ports:
       - 4444:3000
     volumes:

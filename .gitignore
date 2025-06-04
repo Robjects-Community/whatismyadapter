@@ -274,3 +274,5 @@ etc/images/clone_sd_card_configuration.png
 .DS_Store
 .DS_Store
 whatismyadapter-dev_portainer.code-workspace
+etc/dev/dataset
+etc/dev/models
