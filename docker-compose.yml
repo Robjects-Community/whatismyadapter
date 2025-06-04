@@ -9,7 +9,7 @@ services:
       retries: 3
       start_period: 90s
     volumes:
-      - /volume1/docker/paperlessngxai:/app/data:rw
+      - /volume1/docker/webadapters:/app/data:rw
     ports:
       - 3747:3000
     restart: on-failure:5
