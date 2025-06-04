@@ -16,8 +16,8 @@ services:
   # typically under a top-level 'configs:' key. This config can be used to provide configuration files
   # (such as for Apache HTTPD) to the service at runtime.
   configs:
-      - httpd-config # find out what is definied here
-      - custom-config
+      #- httpd-config # find out what is definied here
+      #- custom-config
   depends_on:
     db:
       condition: service_started
@@ -32,9 +32,9 @@ services:
     # - /volume1/docker/webadapters:/var/www/html:rw
   environment:
     WEBADAPTERS_DB_HOST: webadapters_host
-    WEBADAPTERS_DB_USER: ${}
-    WEBADAPTERS_DB_PASSWORD: ${}
-    WEBADAPTERS_DB_NAME: 
+    WEBADAPTERS_DB_USER: webadapters_user
+    WEBADAPTERS_DB_PASSWORD: webadapters_password
+    WEBADAPTERS_DB_NAME: webadapters_db
     networks:
       - webadapters_network
     restart: unless-stopped
@@ -110,7 +110,109 @@ services:
 # Docker volumes for persistent storage
 volumes:
   db_data:
+  webadapters_db_data:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  redis_data:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: webadapters_network
+  front-tier-webadapters:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: front-tier-webadapters
+  back-tier-webadapters:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: back-tier-webadapters
+  webadapters_host:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_host_data:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_host_config:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_host_logs:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_host_cache:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_host_sessions:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_host_tmp:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_host_uploads:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_host_backups:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_host_logs:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
+  webadapters_host_config:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      o: "o=size=1000m, uid=1026, gid=100"
 
 # Docker networks for communication between containers
 networks:
   app_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: app_network
+  webadapters_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: webadapters_network
+  front-tier-webadapters:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: front-tier-webadapters
+  back-tier-webadapters:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: back-tier-webadapters
+# Docker secrets for sensitive data
+secrets:
+  mysql_root_password:
+    file: ./secrets/mysql_root_password.txt
+  mysql_database:
+    file: ./secrets/mysql_database.txt
+  mysql_user:
+    file: ./secrets/mysql_user.txt
+  mysql_password:
+    file: ./secrets/mysql_password.txt
