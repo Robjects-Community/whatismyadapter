@@ -37,8 +37,7 @@ services:
   db:
     image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
     container_name: WebAdaptors-DB
-    security_opt:
-      - no-new-privileges:true
+    user: 1026:100
     hostname: webadapters-db
     environment:
       MYSQL_DATABASE: webadapters_db
@@ -53,7 +52,7 @@ services:
 # Adminer service for database management
   # This service provides a web interface for managing the database and is configured to use specific ports and security options.
   adminer:
-    image: adminer:latest
+    image: adminer
     container_name: WebAdaptors-Adminer
     hostname: adminer
     depends_on:
@@ -67,6 +66,16 @@ services:
     environment:
       - ADMINER_DEFAULT_SERVER=db
       - ADMINER_DEFAULT_DB=webadapters_db
+      - ADMINER_DEFAULT_USER=robjects
+      - ADMINER_DEFAULT_PASSWORD=assHIgai1!?
+      - ADMINER_PLUGINS=adminer-plugins
+      - ADMINER_PLUGINS_DIR=/var/www/html/plugins
+      - ADMINER_DESIGN=pepa-linha
+      - ADMINER_DESIGN_DIR=/var/www/html/designs
+      - ADMINER_SESSION=1
+      - ADMINER_SESSION_NAME=adminer_session
+      - ADMINER_SESSION_COOKIE_LIFETIME=3600
+      - ADMINER_SESSION_COOKIE_PATH=/
       - TZ=America/Chicago
     # Healthcheck to ensure the Adminer service is running
     healthcheck:
@@ -75,10 +84,7 @@ services:
       timeout: 5s
       retries: 3
       start_period: 90s
-# This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis cache, Adminer for database management, and Jupyter Notebook for data science tasks.
-# It includes health checks for the backend and database services, and sets resource limits for each service to ensure efficient resource usage.
-# The services are configured to run with specific user permissions and security options to enhance security.
-# The frontend service runs a CakePHP 5 application, while the backend service runs a Node.js application.
+# This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis 
     restart: on-failure:5
   
 # redis service for caching
