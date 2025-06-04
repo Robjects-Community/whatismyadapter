@@ -23,46 +23,7 @@ services:
     user: 1026:100
     volumes:
       - /volume1/docker/webadapters/cakephp:/var/www/html:rw
-  backend:
-    container_name: WebAdaptors-Node
-    image: node:20-alpine
-    hostname: backend
-    # This service runs a Node.js application and is configured to use specific ports, environment variables, and volumes for persistent storage.
-    mem_limit: 512m
-    cpu_shares: 512
-    security_opt:
-      - no-new-privileges:true
-    user: 1026:100
-    environment:
-      - TZ=America/Chicago
-      - NODE_ENV=production
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=webadapters
-      - DB_PASSWORD=rootpass
-      - DB_NAME=webadapters_db
-    # depends_on:
-    #   - db
-    #   - redis
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    ports:
-      - 4444:3000
-    volumes:
-      
-      - /volume1/docker/webadapters/backend:/app:rw
-    command: node server.js
-    # Healthcheck to ensure the backend service is running  
-    healthcheck:
-      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 90s
-  
+
 # Database service using PostgreSQL
 # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
     
@@ -78,8 +39,10 @@ services:
       MYSQL_PASSWORD: assHIgai1!?
       MYSQL_ROOT_PASSWORD: rootpass
       TZ: America/Chicago
+      ports: 
+    - 3309:3306
     volumes:
-      - /volume1/docker/webadapters/db:/var/lib/mysql:rw
+      - db_data:/var/lib/mysql:rw
     restart: on-failure:5
     # container_name: WebAdaptors-PostgreSQL
     # image: postgres
@@ -167,3 +130,31 @@ services:
   #     - JUPYTER_TOKEN=webadapters
   #     - TZ=America/Chicago
   #   restart: on-failure:5
+
+# Volumes for persistent storage
+
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      device: /volume1/docker/webadapters/db
+      o: bind
+  redis_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /volume1/docker/webadapters/redis
+      o: bind
+  adminer_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /volume1/docker/webadapters/adminer
+      o: bind
+  jupyter_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /volume1/docker/webadapters/jupyter
+      o: bind
