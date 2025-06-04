@@ -17,7 +17,7 @@ services:
       - /volume1/docker/webadapters:/app/data:rw
     restart: unless-stopped
   jupyter:
-    container_name: Jupyter
+    container_name: WebAdaptors-Jupyter
     image: jupyter/datascience-notebook:latest
     mem_limit: 3g
     cpu_shares: 768
