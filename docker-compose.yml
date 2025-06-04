@@ -67,14 +67,6 @@ services:
       - ADMINER_DEFAULT_DB=webadapters_db
       - ADMINER_DEFAULT_USER=robjects
       - ADMINER_DEFAULT_PASSWORD=assHIgai1!?
-      - ADMINER_PLUGINS=adminer-plugins
-      - ADMINER_PLUGINS_DIR=/var/www/html/plugins
-      - ADMINER_DESIGN=pepa-linha
-      - ADMINER_DESIGN_DIR=/var/www/html/designs
-      - ADMINER_SESSION=1
-      - ADMINER_SESSION_NAME=adminer_session
-      - ADMINER_SESSION_COOKIE_LIFETIME=3600
-      - ADMINER_SESSION_COOKIE_PATH=/
       - TZ=America/Chicago
     # Healthcheck to ensure the Adminer service is running
     healthcheck:
