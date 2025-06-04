@@ -1,7 +1,14 @@
 FROM node:20-alpine
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /backend
+# Set environment variable to avoid warnings
+ENV NODE_ENV=production
+# Set the timezone to Asia/Shanghai
+ENV TZ=America/Chicago
+# Set the locale to UTF-8
+ENV LANG=C.UTF-8
+# Install necessary packages
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
