@@ -1,7 +1,12 @@
 services:
-  paperlessngx-ai:
-    image: 
+  webadapters:
+    image: shinsenter/cakephp5
     container_name: 
+    environment:
+      - TZ=America/Chicago
+    ports:
+      - 8321:80
+      - 3747:3000
     healthcheck:
       test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
       interval: 10s
@@ -10,14 +15,19 @@ services:
       start_period: 90s
     volumes:
       - /volume1/docker/webadapters:/app/data:rw
-    ports:
-      - 3747:3000
-    restart: on-failure:5
-
-web:
-    image: shinsenter/cakephp5
+    restart: unless-stopped
+  db:
+    image: mysql:8.0
+    container_name: webadapters_db
     environment:
-      PHP_DISPLAY_ERRORS: "1"
-      PHP_POST_MAX_SIZE: "100M"
-      PHP_UPLOAD_MAX_FILESIZE: "100M"
-      PHP_SESSION_COOKIE_HTTPONLY: "1"
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: webadapters_db
+      MYSQL_USER: webadapters_user
+      MYSQL_PASSWORD: webadapters
+    volumes:
+      - /volume1/docker/webadapters/db:/var/lib/mysql:rw
+    ports:
+      - 2578:3306
+    restart: unless-stopped
+
+      
