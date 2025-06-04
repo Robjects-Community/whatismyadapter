@@ -1,5 +1,4 @@
 .DS_Store
-
 database development/adapter-tiered-predictions/models/rull-test-with-form-data/sample_requirements.csv
 .DS_Store
 .DS_Store
@@ -272,3 +271,4 @@ dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding file
 dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/webadapters-website/sample-adapters-reduced-side/all-adapter-columns.json
 dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/webadapters-website/sample-adapters-reduced-side/amazon.xlsx
 etc/images/clone_sd_card_configuration.png
+.DS_Store
