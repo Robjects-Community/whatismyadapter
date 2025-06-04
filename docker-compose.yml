@@ -56,7 +56,6 @@ services:
       - 4444:3000
     volumes:
       - /volume1/docker/webadapters/backend:/app:rw
-       - /volume1/docker/webadapters:/app/data:rw
     # Command to start the backend service
     command: node server.js
     # Healthcheck to ensure the backend service is running  
