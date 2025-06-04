@@ -148,21 +148,21 @@ services:
     environment:
       TZ: America/Chicago
 
-  jupyter:
-    container_name: WebAdaptors-Jupyter
-    image: jupyter/datascience-notebook:latest
-    mem_limit: 3g
-    cpu_shares: 768
-    security_opt:
-      - no-new-privileges:true
-    volumes:
-      - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
-    ports:
-      - 10445:8888
-    depends_on:
-      - db
-    environment:
-      - JUPYTER_ENABLE_LAB=yes
-      - JUPYTER_TOKEN=webadapters
-      - TZ=America/Chicago
-    restart: on-failure:5
+  # jupyter:
+  #   container_name: WebAdaptors-Jupyter
+  #   image: jupyter/datascience-notebook:latest
+  #   mem_limit: 3g
+  #   cpu_shares: 768
+  #   security_opt:
+  #     - no-new-privileges:true
+  #   volumes:
+  #     - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
+  #   ports:
+  #     - 10445:8888
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - JUPYTER_ENABLE_LAB=yes
+  #     - JUPYTER_TOKEN=webadapters
+  #     - TZ=America/Chicago
+  #   restart: on-failure:5
