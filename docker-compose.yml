@@ -1,7 +1,7 @@
 services:
-  webadapters:
+  frontend:
     image: shinsenter/cakephp5
-    container_name: 
+    container_name: WebAdaptors-Frontend
     environment:
       - TZ=America/Chicago
     ports:
