@@ -23,11 +23,6 @@ services:
     user: 1026:100
     volumes:
       - /volume1/docker/webadapters/cakephp:/var/www/html:rw
-    depends_on:
-      - db
-      - redis
-      - adminer
-      - jupyter
   backend:
     container_name: WebAdaptors-Node
     image: node:20-alpine
@@ -46,9 +41,9 @@ services:
       - DB_USER=webadapters
       - DB_PASSWORD=rootpass
       - DB_NAME=webadapters_db
-    depends_on:
-      - db
-      - redis
+    # depends_on:
+    #   - db
+    #   - redis
     logging:
       driver: "json-file"
       options:
@@ -71,6 +66,20 @@ services:
 # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
     
   db:
+    # image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
+    # container_name: WebAdaptors-DB
+    # security_opt:
+    #   - no-new-privileges:true
+    # hostname: webadapters-db
+    # environment:
+    #   MYSQL_DATABASE: webadapters_db
+    #   MYSQL_USER: robjects
+    #   MYSQL_PASSWORD: assHIgai1!?
+    #   MYSQL_ROOT_PASSWORD: rootpass
+    #   TZ: America/Chicago
+    # volumes:
+    #   - /volume1/docker/webadapters/db:/var/lib/mysql:rw
+    # restart: on-failure:5
     container_name: WebAdaptors-PostgreSQL
     image: postgres
     mem_limit: 256m
@@ -97,7 +106,7 @@ services:
       - no-new-privileges:true
     user: 1026:100
     ports:
-      - 8220:8080
+      - 8222:8080
     restart: on-failure:5
 
 # redis service for caching
@@ -124,5 +133,5 @@ services:
     volumes:
       - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
     ports:
-      - 10235:8888
+      - 10445:8888
     restart: on-failure:5
