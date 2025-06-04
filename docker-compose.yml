@@ -8,28 +8,25 @@ services:
 # Frontend service for CakePHP 5 application
 # This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
 
-  cakephp:
-    container_name: WebAdaptors-CakePHP
+  app:
     image: shinsenter/cakephp5
+    container_name: cakephp_app
     environment:
       - TZ=America/Chicago
     ports:
       - 8321:80
       - 8322:443
-    depends_on:
-      - db
-      - redis
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 10s
       timeout: 5s
       retries: 3
       start_period: 90s
-    security_opt:
-      - no-new-privileges:true
-    user: 1026:100
     volumes:
       - /volume1/docker/webadapters/cakephp:/var/www/html:rw
+      
+
 
 # Database service using PostgreSQL
 # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
