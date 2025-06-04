@@ -29,7 +29,7 @@ services:
       - adminer
       - jupyter
   backend:
-    container_name: WebAdaptors-Backend
+    container_name: WebAdaptors-Node
     image: node:20-alpine
     hostname: backend
     # This service runs a Node.js application and is configured to use specific ports, environment variables, and volumes for persistent storage.

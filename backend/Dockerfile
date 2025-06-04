@@ -1,29 +1,24 @@
-#
-# MailHog Dockerfile
-#
+FROM node:20-alpine
 
-FROM golang:1.18-alpine as builder
+# Set the working directory
+WORKDIR /app
 
-# Install MailHog:
-RUN apk --no-cache add --virtual build-dependencies \
-    git \
-  && mkdir -p /root/gocode \
-  && export GOPATH=/root/gocode \
-  && go install github.com/mailhog/MailHog@latest
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-FROM alpine:3
-# Add mailhog user/group with uid/gid 1000.
-# This is a workaround for boot2docker issue #581, see
-# https://github.com/boot2docker/boot2docker/issues/581
-RUN adduser -D -u 1000 mailhog
+# Install dependencies
+RUN npm install --production
 
-COPY --from=builder /root/gocode/bin/MailHog /usr/local/bin/
+# Copy the rest of the application code
+COPY . .
 
-USER mailhog
+# Expose the application port
+EXPOSE 3000
 
-WORKDIR /home/mailhog
-
-ENTRYPOINT ["MailHog"]
-
-# Expose the SMTP and HTTP ports:
-EXPOSE 1025 8025
+# Start the application
+CMD ["node", "server.js"]
+# Note: Adjust the CMD line to match your application's entry point if it's different
+# If you have a specific start script in package.json, you can use:
+# CMD ["npm", "start"]
+# or
+# CMD ["node", "your-entry-file.js"]
