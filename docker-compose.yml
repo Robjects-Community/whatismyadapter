@@ -39,8 +39,8 @@ services:
       MYSQL_PASSWORD: assHIgai1!?
       MYSQL_ROOT_PASSWORD: rootpass
       TZ: America/Chicago
-      ports: 
-    - 3309:3306
+      ports:
+        - 3309:3306
     volumes:
       - db_data:/var/lib/mysql:rw
     restart: on-failure:5
@@ -76,11 +76,10 @@ services:
     cpu_shares: 256
     security_opt:
       - no-new-privileges:true
-    user: 1026:100
     ports:
       - 8222:8080
     volumes:
-      - /volume1/docker/webadapters/adminer:/var/www/html:rw
+      - adminer_data:/var/www/html:rw
     environment:
       - ADMINER_DEFAULT_SERVER=db
       - ADMINER_DEFAULT_DB=webadapters_db
@@ -108,7 +107,7 @@ services:
     healthcheck:
      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
     volumes:
-      - /volume1/docker/webadapters/redis:/data:rw
+      - redis_data:/data:rw
     environment:
       TZ: America/Chicago
 
