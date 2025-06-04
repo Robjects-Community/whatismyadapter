@@ -54,28 +54,18 @@ services:
   adminer:
     image: adminer
     container_name: WebAdaptors-Adminer
-    hostname: adminer
-    depends_on:
-      - db
+    hostname: adminer:latest
     security_opt:
       - no-new-privileges:true
+    user: 1026:100
     ports:
       - 8222:8080
-    volumes:
-      - /volume1/docker/webadapters/adminer:/var/www/html:rw
     environment:
-      - ADMINER_DEFAULT_SERVER=db
       - ADMINER_DEFAULT_DB=webadapters_db
       - ADMINER_DEFAULT_USER=robjects
       - ADMINER_DEFAULT_PASSWORD=assHIgai1!?
       - ADMINER_PLUGINS=adminer-plugins
-      - ADMINER_PLUGINS_DIR=/var/www/html/plugins
-      - ADMINER_DESIGN=pepa-linha
-      - ADMINER_DESIGN_DIR=/var/www/html/designs
-      - ADMINER_SESSION=1
-      - ADMINER_SESSION_NAME=adminer_session
-      - ADMINER_SESSION_COOKIE_LIFETIME=3600
-      - ADMINER_SESSION_COOKIE_PATH=/
+   
       - TZ=America/Chicago
     # Healthcheck to ensure the Adminer service is running
     healthcheck:
@@ -120,6 +110,7 @@ services:
       - TZ=America/Chicago
     restart: on-failure:5
 
+
 # Volumes for persistent storage
 volumes:
   db_data:
@@ -142,4 +133,3 @@ volumes:
     driver_opts:
       device: /volume1/docker/webadapters/adminer
       o: bind
-  jupyter_data:
