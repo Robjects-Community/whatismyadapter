@@ -66,36 +66,44 @@ services:
 # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
     
   db:
-    # image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
-    # container_name: WebAdaptors-DB
-    # security_opt:
-    #   - no-new-privileges:true
-    # hostname: webadapters-db
-    # environment:
-    #   MYSQL_DATABASE: webadapters_db
-    #   MYSQL_USER: robjects
-    #   MYSQL_PASSWORD: assHIgai1!?
-    #   MYSQL_ROOT_PASSWORD: rootpass
-    #   TZ: America/Chicago
-    # volumes:
-    #   - /volume1/docker/webadapters/db:/var/lib/mysql:rw
-    # restart: on-failure:5
-    container_name: WebAdaptors-PostgreSQL
-    image: postgres
-    mem_limit: 256m
-    cpu_shares: 768
-    healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "marius_DB", "-U", "root"]
+    image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
+    container_name: WebAdaptors-DB
+    security_opt:
+      - no-new-privileges:true
+    hostname: webadapters-db
     environment:
-      POSTGRES_USER: webadapters
-      POSTGRES_PASSWORD: rootpass
-      POSTGRES_DB: webadapters_db
+      MYSQL_DATABASE: webadapters_db
+      MYSQL_USER: robjects
+      MYSQL_PASSWORD: assHIgai1!?
+      MYSQL_ROOT_PASSWORD: rootpass
+      TZ: America/Chicago
     volumes:
-      - /volume1/docker/webadapters:/var/lib/postgresql/data:rw
-    ports:
-      - 2665:5432
+      - /volume1/docker/webadapters/db:/var/lib/mysql:rw
     restart: on-failure:5
-  
+    # container_name: WebAdaptors-PostgreSQL
+    # image: postgres
+    # mem_limit: 256m
+    # cpu_shares: 768
+    # healthcheck:
+    #   test: ["CMD", "pg_isready", "-q", "-d", "marius_DB", "-U", "root"]
+    # environment:
+    #   POSTGRES_USER: webadapters_user
+    #   POSTGRES_PASSWORD: rootpass
+    #   POSTGRES_DB: webadapters_db
+    # volumes:
+    #   - /volume1/docker/webadapters/postgres:/var/lib/postgresql/data:rw
+    ports:
+      - 2665:3306
+    user: 1026:100
+    # Healthcheck to ensure the database service is running
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+# Adminer service for database management
+  # This service provides a web interface for managing the database and is configured to use specific ports and security options.
   adminer:
     image: adminer:latest
     container_name: WebAdaptors-Adminer
@@ -107,10 +115,27 @@ services:
     user: 1026:100
     ports:
       - 8222:8080
+    volumes:
+      - /volume1/docker/webadapters/adminer:/var/www/html:rw
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+      - ADMINER_DEFAULT_DB=webadapters_db
+      - TZ=America/Chicago
+    # Healthcheck to ensure the Adminer service is running
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+# This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis cache, Adminer for database management, and Jupyter Notebook for data science tasks.
+# It includes health checks for the backend and database services, and sets resource limits for each service to ensure efficient resource usage.
+# The services are configured to run with specific user permissions and security options to enhance security.
+# The frontend service runs a CakePHP 5 application, while the backend service runs a Node.js application.
     restart: on-failure:5
-
+  
 # redis service for caching
-  # This service is used by the 
+# This service is used by the backend to cache data and improve performance. It is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the Redis service is running properly.
   redis:
     image: redis
     hostname: WebAdaptors-redis
@@ -134,4 +159,10 @@ services:
       - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
     ports:
       - 10445:8888
+    depends_on:
+      - db
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=webadapters
+      - TZ=America/Chicago
     restart: on-failure:5
