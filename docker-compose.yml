@@ -17,17 +17,31 @@ services:
       - /volume1/docker/webadapters:/app/data:rw
     restart: unless-stopped
   db:
-    image: mysql:8.0
-    container_name: webadapters_db
+    container_name: WebAdaptors-PostgreSQL
+    image: postgres
+    mem_limit: 256m
+    cpu_shares: 768
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "marius_DB", "-U", "root"]
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: webadapters_db
-      MYSQL_USER: webadapters_user
-      MYSQL_PASSWORD: webadapters
+      POSTGRES_USER: webadapters
+      POSTGRES_PASSWORD: rootpass
+      POSTGRES_DB: webadapters_db
     volumes:
-      - /volume1/docker/webadapters/db:/var/lib/mysql:rw
+      - /volume1/docker/webadapters:/var/lib/postgresql/data:rw
     ports:
-      - 2578:3306
-    restart: unless-stopped
-
-      
+      - 2665:5432
+    restart: on-failure:5
+  
+  adminer:
+    image: adminer:latest
+    container_name: WebAdaptors-Adminer
+    hostname: adminer
+    mem_limit: 128m
+    cpu_shares: 256
+    security_opt:
+      - no-new-privileges:true
+    user: 1026:100
+    ports:
+      - 8220:8080
+    restart: on-failure:5
