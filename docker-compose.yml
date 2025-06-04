@@ -30,7 +30,9 @@ services:
       - jupyter
   backend:
     container_name: WebAdaptors-Backend
-    image: shinsenter/webadapters-backend
+    image: node:20-alpine
+    hostname: backend
+    # This service runs a Node.js application and is configured to use specific ports, environment variables, and volumes for persistent storage.
     mem_limit: 512m
     cpu_shares: 512
     security_opt:
@@ -56,7 +58,6 @@ services:
       - 4444:3000
     volumes:
       - /volume1/docker/webadapters/backend:/app:rw
-    # Command to start the backend service
     command: node server.js
     # Healthcheck to ensure the backend service is running  
     healthcheck:
@@ -65,7 +66,9 @@ services:
       timeout: 5s
       retries: 3
       start_period: 90s
-    restart: unless-stopped  
+  
+# Database service using PostgreSQL
+# This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
     
   db:
     container_name: WebAdaptors-PostgreSQL
