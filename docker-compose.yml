@@ -1,3 +1,9 @@
+version: '3.8'
+# This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis cache, Adminer for database management, and Jupyter Notebook for data science tasks.
+# It includes health checks for the backend and database services, and sets resource limits for each service to ensure efficient resource usage.
+# The services are configured to run with specific user permissions and security options to enhance security.
+# The frontend service runs a CakePHP 5 application, while the backend service runs a Node.js application.
+# The database service uses PostgreSQL, and Redis is used for caching.
 services:
   frontend:
     image: shinsenter/cakephp5
@@ -6,28 +12,65 @@ services:
       - TZ=America/Chicago
     ports:
       - 8321:80
-      - 3888:3000
+      - 8322:443
+    mem_limit: 512m
+    cpu_shares: 512
+    security_opt:
+      - no-new-privileges:true
+    user: 1026:100
+    volumes:
+      - /volume1/docker/webadapters/cakephp5:/var/www/html:rw
+    depends_on:
+      - db
+      - redis
+      - adminer
+      - jupyter
+  backend:
+    container_name: WebAdaptors-Backend
+    image: shinsenter/webadapters-backend
+    mem_limit: 512m
+    cpu_shares: 512
+    security_opt:
+      - no-new-privileges:true
+    user: 1026:100
+    ports:
+      - 3000:3000
+    environment:
+      - TZ=America/Chicago
+      - NODE_ENV=production
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=webadapters
+      - DB_PASSWORD=rootpass
+      - DB_NAME=webadapters_db
+    depends_on:
+      - db
+      - redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    security_opt:
+      - no-new-privileges:true
+    user: 1026:100
+    ports:
+      - 4444:3000
+    volumes:
+      - /volume1/docker/webadapters/backend:/app:rw
+    command: node server.js
+    # Healthcheck to ensure the backend service is running  
     healthcheck:
       test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
       interval: 10s
       timeout: 5s
       retries: 3
       start_period: 90s
+  
     volumes:
       - /volume1/docker/webadapters:/app/data:rw
-    restart: unless-stopped
-  jupyter:
-    container_name: WebAdaptors-Jupyter
-    image: jupyter/datascience-notebook:latest
-    mem_limit: 3g
-    cpu_shares: 768
-    security_opt:
-      - no-new-privileges:true
-    volumes:
-      - /volume1/docker/jupyter:/home/jovyan/work:rw
-    ports:
-      - 10235:8888
-    restart: on-failure:5
+    restart: unless-stopped  
+    
   db:
     container_name: WebAdaptors-PostgreSQL
     image: postgres
@@ -56,4 +99,31 @@ services:
     user: 1026:100
     ports:
       - 8220:8080
+    restart: on-failure:5
+
+# redis service for caching
+  # This service is used by the 
+  redis:
+    image: redis
+    hostname: WebAdaptors-redis
+    container_name: WebAdaptors-REDIS
+    user: 1026:100
+    healthcheck:
+     test: ["CMD-SHELL", "redis-cli ping || exit 1"]
+    volumes:
+      - /volume1/docker/webadapters/redis:/data:rw
+    environment:
+      TZ: America/Chicago
+
+  jupyter:
+    container_name: WebAdaptors-Jupyter
+    image: jupyter/datascience-notebook:latest
+    mem_limit: 3g
+    cpu_shares: 768
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
+    ports:
+      - 10235:8888
     restart: on-failure:5
