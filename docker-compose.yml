@@ -1,0 +1,116 @@
+services:
+  # Web server with CakePHP
+  frontend:
+    image: shinsenter/cakephp5:latest
+    container_name: webadapters
+    ports:
+      # - "80:80"
+      # - "443:443"
+      - "2215:80"
+      - "4415:443"
+  networks:
+      - front-tier-webadapters
+      - back-tier-webadapters
+  # The 'configs' section allows you to specify configuration data that can be mounted into services.
+  # In this case, 'httpd-config' refers to a named config defined elsewhere in the docker-compose file,
+  # typically under a top-level 'configs:' key. This config can be used to provide configuration files
+  # (such as for Apache HTTPD) to the service at runtime.
+  configs:
+      - httpd-config # find out what is definied here
+      - custom-config
+  depends_on:
+    db:
+      condition: service_started
+    redis:
+      condition: service_healthy
+    phpmyadmin:
+      condition: service_healthy
+    backend:
+      condition: service_healthy # for configuring any api related services
+  volumes:
+    - /volume1/docker/webadapters:/var/www/html:rw
+    # - /volume1/docker/webadapters:/var/www/html:rw
+  environment:
+    WEBADAPTERS_DB_HOST: webadapters_host
+    WEBADAPTERS_DB_USER: ${}
+    WEBADAPTERS_DB_PASSWORD: ${}
+    WEBADAPTERS_DB_NAME: 
+    networks:
+      - webadapters_network
+    restart: unless-stopped
+
+# API service definition
+  api:
+      build:
+        context: .
+        target: builder
+      container_name: fastapi-application
+      ports:  
+        - '4750:8000'
+      restart: "no"
+
+  # MySQL database service
+  db:
+    image: mysql:8.4
+    container_name: cakephp_db
+    secrets:
+      - mysql_root_password
+      - mysql_database
+      - mysql_user
+      - mysql_password
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      MYSQL_DATABASE_FILE: /run/secrets/mysql_database
+      MYSQL_USER_FILE: /run/secrets/mysql_user
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+    ports:
+      - "3306:3306"
+    volumes:
+      webadapters_db_data:
+        driver: local
+        driver_opts:
+          type: "btrfs"
+          o: "o=size=1000m, uid "
+
+      # - db_data:/var/lib/mysql  # Persist MySQL data
+      - db_data:/var/lib/mysql  # Persist MySQL data
+      - db_data:/var/lib/mysql  # Persist MySQL data
+    networks:
+      - app_network
+
+    restart: unless-stopped
+
+  redis:
+    image: redislabs/redismod
+    hostname: webadapters-redis
+    container_name: WebAdapters-REDIS
+    user: 1026:100
+    healthcheck:
+     test: ["CMD-SHELL", "echo 'hello from redis' && redis-cli ping || exit 1"]
+    volumes:
+      - /volume1/docker/webadapters/redis:/data:rw
+    environment:
+      TZ: America/Chicago
+    restart: on-failure:5
+  # phpMyAdmin for managing MySQL database (optional)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "8081:80"
+    networks:
+      - app_network
+    restart: unless-stopped
+
+# Docker volumes for persistent storage
+volumes:
+  db_data:
+
+# Docker networks for communication between containers
+networks:
+  app_network:
