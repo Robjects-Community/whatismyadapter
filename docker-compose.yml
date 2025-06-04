@@ -52,6 +52,7 @@ services:
     ports:
       - 4444:3000
     volumes:
+      
       - /volume1/docker/webadapters/backend:/app:rw
     command: node server.js
     # Healthcheck to ensure the backend service is running  
