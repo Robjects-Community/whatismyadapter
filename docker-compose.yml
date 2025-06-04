@@ -8,24 +8,23 @@ services:
 # Frontend service for CakePHP 5 application
 # This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
 
-  app:
+  frontend:
     image: shinsenter/cakephp5
-    container_name: cakephp_app
-    hostname: WebAdaptors-CakePHP
+    container_name: WebAdaptors-CakePHP5
     environment:
       - TZ=America/Chicago
-      - WEBADAPTERS_DB_HOST=db
-      - WEBADAPTERS_DB_USER=robjects
-      - WEBADAPTERS_DB_PASSWORD=assHIgai1!?
-      - WEBADAPTERS_DB_NAME=webadapters_db
-    healthcheck:
-      test: curl -f http://localhost:80/ || exit 1
-    volumes:
-      - /volume1/docker/webadapters/cakephp:/var/www/html:rw
     ports:
-      - 8080:80
-    user: :100
-    restart: on-failure:5
+      - 8321:80
+      - 3888:3000
+    healthcheck:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+    volumes:
+      - /volume1/docker/webadapters:/app/data:rw
+    restart: unless-stopped
 
 
 
