@@ -16,13 +16,20 @@ services:
     ports:
       - 8321:80
       - 8322:443
-    mem_limit: 512m
-    cpu_shares: 512
+    depends_on:
+      - db
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
     security_opt:
       - no-new-privileges:true
     user: 1026:100
     volumes:
-      - cakephp_data:/var/www/html:rw
+      - /volume1/docker/webadapters/cakephp:/var/www/html:rw
 
 # Database service using PostgreSQL
 # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
@@ -39,47 +46,24 @@ services:
       MYSQL_PASSWORD: assHIgai1!?
       MYSQL_ROOT_PASSWORD: rootpass
       TZ: America/Chicago
-      ports:
-        - 3309:3306
     volumes:
-      - db_data:/var/lib/mysql:rw
+      - /volume1/docker/webadapters/db:/var/lib/mysql:rw
     restart: on-failure:5
-    # container_name: WebAdaptors-PostgreSQL
-    # image: postgres
-    # mem_limit: 256m
-    # cpu_shares: 768
-    # healthcheck:
-    #   test: ["CMD", "pg_isready", "-q", "-d", "marius_DB", "-U", "root"]
-    # environment:
-    #   POSTGRES_USER: webadapters_user
-    #   POSTGRES_PASSWORD: rootpass
-    #   POSTGRES_DB: webadapters_db
-    # volumes:
-    #   - /volume1/docker/webadapters/postgres:/var/lib/postgresql/data:rw
-    ports:
-      - 2665:3306
-    user: 1026:100
-    # Healthcheck to ensure the database service is running
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 90s
+
 # Adminer service for database management
   # This service provides a web interface for managing the database and is configured to use specific ports and security options.
   adminer:
     image: adminer:latest
     container_name: WebAdaptors-Adminer
     hostname: adminer
-    mem_limit: 128m
-    cpu_shares: 256
+    depends_on:
+      - db
     security_opt:
       - no-new-privileges:true
     ports:
       - 8222:8080
     volumes:
-      - adminer_data:/var/www/html:rw
+      - /volume1/docker/webadapters/adminer:/var/www/html:rw
     environment:
       - ADMINER_DEFAULT_SERVER=db
       - ADMINER_DEFAULT_DB=webadapters_db
@@ -107,58 +91,49 @@ services:
     healthcheck:
      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
     volumes:
-      - redis_data:/data:rw
+      - /volume1/docker/webadapters/redis:/data:rw
     environment:
       TZ: America/Chicago
 
-  # jupyter:
-  #   container_name: WebAdaptors-Jupyter
-  #   image: jupyter/datascience-notebook:latest
-  #   mem_limit: 3g
-  #   cpu_shares: 768
-  #   security_opt:
-  #     - no-new-privileges:true
-  #   volumes:
-  #     - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
-  #   ports:
-  #     - 10445:8888
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - JUPYTER_ENABLE_LAB=yes
-  #     - JUPYTER_TOKEN=webadapters
-  #     - TZ=America/Chicago
-  #   restart: on-failure:5
+  jupyter:
+    container_name: WebAdaptors-Jupyter
+    image: jupyter/datascience-notebook:latest
+    mem_limit: 3g
+    cpu_shares: 768
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
+    ports:
+      - 10445:8888
+    depends_on:
+      - db
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=webadapters
+      - TZ=America/Chicago
+    restart: on-failure:5
 
 # Volumes for persistent storage
 volumes:
   db_data:
     driver: local
     driver_opts:
-      type: "btrfs"
       device: /volume1/docker/webadapters/db
       o: bind
   cakephp_data:
     driver: local
     driver_opts:
-      type: "btrfs"
       device: /volume1/docker/webadapters/cakephp
       o: bind
   redis_data:
     driver: local
     driver_opts:
-      type: "btrfs"
       device: /volume1/docker/webadapters/redis
       o: bind
   adminer_data:
     driver: local
     driver_opts:
-      type: "btrfs"
       device: /volume1/docker/webadapters/adminer
       o: bind
   jupyter_data:
-    driver: local
-    driver_opts:
-      type: "btrfs"
-      device: /volume1/docker/webadapters/jupyter
-      o: bind
