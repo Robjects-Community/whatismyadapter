@@ -6,7 +6,7 @@ services:
       - TZ=America/Chicago
     ports:
       - 8321:80
-      - 3747:3000
+      - 3888:3000
     healthcheck:
       test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
       interval: 10s
