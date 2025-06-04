@@ -140,21 +140,27 @@ volumes:
       type: "btrfs"
       device: /volume1/docker/webadapters/db
       o: bind
+  cakephp_data:
+    driver: local
+    driver_opts:
+      type: "btrfs"
+      device: /volume1/docker/webadapters/cakephp
+      o: bind
   redis_data:
     driver: local
     driver_opts:
-      type: none
+      type: "btrfs"
       device: /volume1/docker/webadapters/redis
       o: bind
   adminer_data:
     driver: local
     driver_opts:
-      type: none
+      type: "btrfs"
       device: /volume1/docker/webadapters/adminer
       o: bind
   jupyter_data:
     driver: local
     driver_opts:
-      type: none
+      type: "btrfs"
       device: /volume1/docker/webadapters/jupyter
       o: bind
