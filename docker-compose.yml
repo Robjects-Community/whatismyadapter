@@ -16,6 +16,18 @@ services:
     volumes:
       - /volume1/docker/webadapters:/app/data:rw
     restart: unless-stopped
+  jupyter:
+    container_name: Jupyter
+    image: jupyter/datascience-notebook:latest
+    mem_limit: 3g
+    cpu_shares: 768
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /volume1/docker/jupyter:/home/jovyan/work:rw
+    ports:
+      - 10235:8888
+    restart: on-failure:5
   db:
     container_name: WebAdaptors-PostgreSQL
     image: postgres
