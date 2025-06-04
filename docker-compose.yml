@@ -11,21 +11,23 @@ services:
   app:
     image: shinsenter/cakephp5
     container_name: cakephp_app
+    hostname: WebAdaptors-CakePHP
     environment:
       - TZ=America/Chicago
-    ports:
-      - 8321:80
-      - 8322:443
-
+      - WEBADAPTERS_DB_HOST=db
+      - WEBADAPTERS_DB_USER=robjects
+      - WEBADAPTERS_DB_PASSWORD=assHIgai1!?
+      - WEBADAPTERS_DB_NAME=webadapters_db
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:80"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 90s
+      test: curl -f http://localhost:80/ || exit 1
     volumes:
       - /volume1/docker/webadapters/cakephp:/var/www/html:rw
-      
+    ports:
+      - 8080:80
+    user: :100
+    restart: on-failure:5
+
+
 
 
 # Database service using PostgreSQL
