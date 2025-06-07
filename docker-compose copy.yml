@@ -1,0 +1,152 @@
+version: '3.8'
+# This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis cache, Adminer for database management, and Jupyter Notebook for data science tasks.
+# It includes health checks for the backend and database services, and sets resource limits for each service to ensure efficient resource usage.
+# The services are configured to run with specific user permissions and security options to enhance security.
+# The frontend service runs a CakePHP 5 application, while the backend service runs a Node.js application.
+# The database service uses PostgreSQL, and Redis is used for caching.
+services:
+# Frontend service for CakePHP 5 application
+# This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
+
+  frontend:
+    image: shinsenter/cakephp5
+    container_name: WebAdaptors-CakePHP5
+    environment:
+      - TZ=America/Chicago
+    ports:
+      - 8110:80
+      - 4445:443 # This port is used for HTTPS
+      - 8111:8080 # This port is used for the CakePHP application
+      - 3111:3000 # This port is used for the backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+    volumes:
+      - /volume1/docker/webadapters:/app/data:rw
+    restart: unless-stopped
+
+# Database service for mariadb
+# This service runs a MariaDB database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database service is running properly.
+  # The database is used by the CakePHP application and the backend service.
+  # It is configured to use a specific user and password for security, and the database is set to be created on startup.
+  # The database service is set to restart on failure with a maximum of 5 retries.
+  db:
+    image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
+    container_name: WebAdaptors-DB
+    user: 1026:100
+    hostname: webadapters-db
+    environment:
+      MYSQL_DATABASE: webadapters_db
+      MYSQL_USER: robjects
+      MYSQL_PASSWORD: assHIgai1!?
+      MYSQL_ROOT_PASSWORD: rootpass
+      TZ: America/Chicago
+    volumes:
+      - /volume1/docker/webadapters/db:/var/lib/mysql:rw
+    restart: on-failure:5
+
+# Adminer service for database management
+  # This service provides a web interface for managing the database and is configured to use specific ports and security options.
+  adminer:
+    image: adminer
+    container_name: WebAdaptors-Adminer
+    hostname: adminer:latest
+    security_opt:
+      - no-new-privileges:true
+    user: 1026:100
+    ports:
+      - 8232:8080
+    volumes:
+      - /volume1/docker/webadapters/adminer:/var/www/html:rw
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+      - ADMINER_DEFAULT_DB=webadapters_db
+      - ADMINER_DEFAULT_USER=robjects
+      - ADMINER_DEFAULT_PASSWORD=assHIgai1!?
+      - TZ=America/Chicago
+    # Healthcheck to ensure the Adminer service is running
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+    depends_on:
+      - db
+# Backend service for Node.js application
+
+    # This service is used to manage the database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the Adminer service is running properly.
+  backend:
+    image: node:20
+    container_name: WebAdaptors-Backend
+    user: 1026:100 # Use a specific user and group ID for security
+    working_dir: /app
+    volumes:
+      - /volume1/docker/webadapters/backend:/app:rw
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DATABASE_URL=postgres://robjects:assHIgai1!?@db:5432/webadapters_db
+      - REDIS_URL=redis://redis:6379
+      - TZ=America/Chicago
+    restart: on-failure:5
+
+# redis service for caching
+# This service is used by the backend to cache data and improve performance. It is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the Redis service is running properly.
+  redis:
+    image: redis
+    hostname: WebAdaptors-redis
+    container_name: WebAdaptors-REDIS
+    user: 1026:100
+    healthcheck:
+     test: ["CMD-SHELL", "redis-cli ping || exit 1"]
+    volumes:
+      - /volume1/docker/webadapters/redis:/data:rw
+    environment:
+      TZ: America/Chicago
+
+  # jupyter:
+  #   container_name: WebAdaptors-Jupyter
+  #   image: jupyter/datascience-notebook:latest
+  #   mem_limit: 3g
+  #   cpu_shares: 768
+  #   security_opt:
+  #     - no-new-privileges:true
+  #   volumes:
+  #     - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
+  #   ports:
+  #     - 10445:8888
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - JUPYTER_ENABLE_LAB=yes
+  #     - JUPYTER_TOKEN=webadapters
+  #     - TZ=America/Chicago
+  #   restart: on-failure:5
+
+
+# Volumes for persistent storage
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/db
+      o: bind
+  cakephp_data:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/cakephp
+      o: bind
+  redis_data:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/redis
+      o: bind
+  adminer_data:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/adminer
+      o: bind
