@@ -277,3 +277,4 @@ whatismyadapter-dev_portainer.code-workspace
 etc/dev/dataset
 etc/dev/models
 .DS_Store
+.vscode/settings.json

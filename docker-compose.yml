@@ -73,9 +73,24 @@ services:
       timeout: 5s
       retries: 3
       start_period: 90s
-# This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis 
+    depends_on:
+      - db
+    # This service is used to manage the database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the Adminer service is running properly.
+  backend:
+    image: node:20
+    container_name: WebAdaptors-Backend
+    user: 1026:100 # Use a specific user and group ID for security
+    working_dir: /app
+    volumes:
+      - /volume1/docker/webadapters/backend:/app:rw
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DATABASE_URL=postgres://robjects:assHIgai1!?@db:5432/webadapters_db
+      - REDIS_URL=redis://redis:6379
+      - TZ=America/Chicago
     restart: on-failure:5
-  
+
 # redis service for caching
 # This service is used by the backend to cache data and improve performance. It is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the Redis service is running properly.
   redis:
