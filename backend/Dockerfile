@@ -25,6 +25,12 @@ EXPOSE 3000
 # Start the application
 CMD ["node", "server.js"]
 # Note: Adjust the CMD line to match your application's entry point if it's different
+# For example, if your main file is `app.js`, you would use:
+# CMD ["node", "app.js"]
+# If you are using a framework like Express, you might have a different entry point.
+# If you are using a process manager like PM2, you might use:
+# CMD ["pm2-runtime", "start", "server.js"]
+# If you are using a different port, make sure to expose that port and set the environment variable accordingly.        
 # If you have a specific start script in package.json, you can use:
 # CMD ["npm", "start"]
 # or
