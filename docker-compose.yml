@@ -14,10 +14,12 @@ services:
     environment:
       - TZ=America/Chicago
     ports:
-      - 8323:80
-      - 7888:3000
+      - 8110:80
+      - 4445:443 # This port is used for HTTPS
+      - 8111:8080 # This port is used for the CakePHP application
+      - 3111:3000 # This port is used for the backend
     healthcheck:
-      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
+      test: ["CMD", "curl", "-f", "http://localhost/"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -26,12 +28,11 @@ services:
       - /volume1/docker/webadapters:/app/data:rw
     restart: unless-stopped
 
-
-
-
-# Database service using PostgreSQL
-# This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
-    
+# Database service for mariadb
+# This service runs a MariaDB database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database service is running properly.
+  # The database is used by the CakePHP application and the backend service.
+  # It is configured to use a specific user and password for security, and the database is set to be created on startup.
+  # The database service is set to restart on failure with a maximum of 5 retries.
   db:
     image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
     container_name: WebAdaptors-DB
@@ -57,7 +58,7 @@ services:
       - no-new-privileges:true
     user: 1026:100
     ports:
-      - 8222:8080
+      - 8232:8080
     volumes:
       - /volume1/docker/webadapters/adminer:/var/www/html:rw
     environment:
@@ -75,6 +76,8 @@ services:
       start_period: 90s
     depends_on:
       - db
+# Backend service for Node.js application
+
     # This service is used to manage the database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the Adminer service is running properly.
   backend:
     image: node:20
@@ -105,24 +108,24 @@ services:
     environment:
       TZ: America/Chicago
 
-  jupyter:
-    container_name: WebAdaptors-Jupyter
-    image: jupyter/datascience-notebook:latest
-    mem_limit: 3g
-    cpu_shares: 768
-    security_opt:
-      - no-new-privileges:true
-    volumes:
-      - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
-    ports:
-      - 10445:8888
-    depends_on:
-      - db
-    environment:
-      - JUPYTER_ENABLE_LAB=yes
-      - JUPYTER_TOKEN=webadapters
-      - TZ=America/Chicago
-    restart: on-failure:5
+  # jupyter:
+  #   container_name: WebAdaptors-Jupyter
+  #   image: jupyter/datascience-notebook:latest
+  #   mem_limit: 3g
+  #   cpu_shares: 768
+  #   security_opt:
+  #     - no-new-privileges:true
+  #   volumes:
+  #     - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
+  #   ports:
+  #     - 10445:8888
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - JUPYTER_ENABLE_LAB=yes
+  #     - JUPYTER_TOKEN=webadapters
+  #     - TZ=America/Chicago
+  #   restart: on-failure:5
 
 
 # Volumes for persistent storage
