@@ -113,7 +113,7 @@ services:
 
   adminer:
     image: adminer:latest
-    container_name: WebAdaptors-Adminer2
+    container_name: WebAdaptors-Adminer
     hostname: adminer:latest
     security_opt:
       - no-new-privileges:true
