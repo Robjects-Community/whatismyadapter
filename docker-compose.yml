@@ -33,13 +33,12 @@ services:
     # The 'no-new-privileges' option prevents the container from gaining additional privileges,
     # which can help mitigate security risks.
     # This is especially important for applications that handle sensitive data or run in production environments.
-    security_opt:
-      - no-new-privileges:true
     depends_on:
       - db_postgresql
       - db_mariadb
       - db_data
-  # Database service using MySQL
+
+
   db_data:
     image: mysql:8.0
     environment:
@@ -58,7 +57,7 @@ services:
     container_name: WebAdaptors-MySQL
     hostname: WebAdaptors-MySQL
     ports:
-      - 33100:3306
+      - 3311:3306
 
 
       
