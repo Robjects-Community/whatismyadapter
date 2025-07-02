@@ -56,7 +56,6 @@ services:
     hostname: adminer:latest
     security_opt:
       - no-new-privileges:true
-    user: 1026:100
     ports:
       - 8232:8080
     volumes:
@@ -82,7 +81,6 @@ services:
   backend:
     image: node:20
     container_name: WebAdaptors-Backend
-    user: 1026:100 # Use a specific user and group ID for security
     working_dir: /app
     volumes:
       - /volume1/docker/webadapters/backend:/app:rw
