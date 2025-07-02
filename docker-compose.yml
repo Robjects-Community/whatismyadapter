@@ -72,6 +72,8 @@ services:
     security_opt:
       - no-new-privileges:true
     user: 1026:100
+    mem_limit: 512m
+    cpu_shares: 256
     ports:
       - 8222:8080
     volumes:
@@ -178,18 +180,18 @@ services:
   #   restart: on-failure:5
  
   
-  adminer:
-    image: adminer:latest
-    container_name: WebAdaptors-Adminer
-    hostname: adminer
-    mem_limit: 128m
-    cpu_shares: 256
-    security_opt:
-      - no-new-privileges:true
-    user: 1026:100
-    ports:
-      - 8220:8080
-    restart: on-failure:5
+  # adminer:
+  #   image: adminer:latest
+  #   container_name: WebAdaptors-Adminer
+  #   hostname: adminer
+  #   mem_limit: 512m
+  #   cpu_shares: 256
+  #   security_opt:
+  #     - no-new-privileges:true
+  #   user: 1026:100
+  #   ports:
+  #     - 8220:8080
+  #   restart: on-failure:5
 
 
 # Volumes for persistent storage
