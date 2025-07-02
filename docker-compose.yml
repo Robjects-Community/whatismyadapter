@@ -56,7 +56,10 @@ services:
       MYSQL_PASSWORD: cakephp_password
 
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql:rw
+    restart: on-failure:5
+    container_name: WebAdaptors-MySQL
+    hostname: WebAdaptors-MySQL
     ports:
       - 33100:3306
 
