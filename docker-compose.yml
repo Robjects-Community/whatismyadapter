@@ -142,8 +142,8 @@ services:
   cakephp5:
     image: shinsenter/cakephp5
     container_name: WebAdaptors-CakePHP5
-    # user: 1026:100
-    user: root
+    user: 1026:100
+    # user: root
     environment:
       - DB_DATABASE=webadapters_db
       - DB_USER=robjects
