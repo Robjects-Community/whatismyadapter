@@ -144,6 +144,19 @@ services:
     container_name: WebAdaptors-CakePHP5
     user: 1026:100
     environment:
+      - DB_DATABASE=webadapters_db
+      - DB_USER=robjects
+      - DB_PASSWORD=assHIgai1!?
+      - DB_ROOT_PASSWORD=rootpass
+      - DB_HOST=db_postgresql
+      - DB_PORT=5432
+      - DB_SOCKET=/var/run/postgresql/postgresql.sock
+      - DB_CHARSET=utf8mb4
+      - DB_COLLATE=utf8mb4_unicode_ci
+      - CAKEPHP_ENV=production
+      - CAKEPHP_DEBUG=0
+      - CAKEPHP_LOG_LEVEL=error
+      - CAKEPHP_LOG_FILE=/app/logs/error.log
       - TZ=America/Chicago
     ports:
       - 8323:80
