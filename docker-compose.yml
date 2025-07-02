@@ -87,7 +87,13 @@ services:
     volumes:
       - /volume1/docker/webadapters/adminer:/var/www/html:rw
     environment:
-      - ADMINER_DEFAULT_SERVER=db
+      - ADMINER_DEFAULT_SERVER=db_mariadb
+      - ADMINER_DEFAULT_SERVER_POSTGRES=db_postgresql
+      - ADMINER_DEFAULT_SERVER_REDIS=redis
+      - ADMINER_DEFAULT_SERVER_JUPYTER=jupyter
+      - ADMINER_DEFAULT_SERVER_BACKEND=backend
+      - ADMINER_DEFAULT_SERVER_FRONTEND=frontend
+      - ADMINER_DEFAULT_SERVER_ADMINER=adminer
       - ADMINER_DEFAULT_DB=webadapters_db
       - ADMINER_DEFAULT_USER=robjects
       - ADMINER_DEFAULT_PASSWORD=assHIgai1!?
@@ -184,4 +190,14 @@ volumes:
     driver: local
     driver_opts:
       device: /volume1/docker/webadapters/adminer
+      o: bind
+  backend_data:
+    driver: local
+    driver_opts:  
+      device: /volume1/docker/webadapters/backend
+      o: bind
+  jupyter_data:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/jupyter
       o: bind
