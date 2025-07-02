@@ -179,11 +179,8 @@ services:
 
     volumes:
       - /volume1/docker/webadapters/cakephp:/app/data:rw
-      - /volume1/docker/webadapters/cakephp/logs:/app/data/logs:rw
-      - /volume1/docker/webadapters/cakephp/tmp:/app/data/tmp:rw
-      - /volume1/docker/webadapters/cakephp/config:/app/data/config:rw
-      - /volume1/docker/webadapters/cakephp/plugins:/app/data/plugins:rw
-      - /volume1/docker/webadapters/cakephp/vendor:/app/data/vendor:rw
+      - /volume1/docker/webadapters/db_postgresql:/app/data/db_postgresql:rw
+      - /volume1/docker/webadapters/db_mariadb:/app/data/db_mariadb:rw
     restart: on-failure:5
     security_opt:
       - no-new-privileges:true
