@@ -27,10 +27,16 @@ services:
   db_data:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: cakephp
-      MYSQL_USER: cakephpuser
-      MYSQL_PASSWORD: cakephp_password
+      MYSQL_PORT: 3306
+      MYSQL_HOST_AUTH_METHOD: trust
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: webadapters_db
+      MYSQL_USER: robjects
+      MYSQL_PASSWORD: assHIgai1!?
+      # MYSQL_ROOT_PASSWORD: rootpassword
+      # MYSQL_DATABASE: cakephp
+      # MYSQL_USER: cakephpuser
+      # MYSQL_PASSWORD: cakephp_password
     volumes:
       - db_mysql:/var/lib/mysql:rw
     restart: on-failure:5
@@ -45,15 +51,15 @@ services:
     user: 1026:100
     hostname: webadapters-db
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: webadapters_db
-      MYSQL_USER: robjects
-      MYSQL_PASSWORD: assHIgai1!?
-      DB_DATABASE: webadapters_db
-      DB_USER: robjects
-      DB_PASSWORD: assHIgai1!?
-      DB_NAME: webadapters_db
-      DB_ROOT_PASSWORD: rootpass
+      MARIADB_ROOT_PASSWORD: rootpass
+      MARIADB_DATABASE: webadapters_db
+      MARIADB_USER: robjects
+      MARIADB_PASSWORD: assHIgai1!?
+      MARIADB_HOST: db_mariadb
+      MARIADB_PORT: 3306
+      MARIADB_CHARSET: utf8mb4
+      MARIADB_COLLATION: utf8mb4_unicode_ci
+      MARIADB_INITDB_ARGS: "--character
       TZ: America/Chicago
     volumes:
       - db_mariadb:/var/lib/mysql:rw
@@ -69,6 +75,9 @@ services:
     environment:
       POSTGRES_USER: robjects
       POSTGRES_PASSWORD: assHIgai1!?
+      POSTGRES_HOST: db_postgresql
+      POSTGRES_PORT: 5432
+      
       POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
       TZ: America/Chicago
