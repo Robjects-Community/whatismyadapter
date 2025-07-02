@@ -27,12 +27,6 @@ services:
     volumes:
       - /Volume1/docker/webadapters/cakephp:/var/www/html:rw
       - /Volume1/docker/webadapters/cakephp:/app/data:rw
-    # Security options to prevent privilege escalation
-    # This option ensures that the container does not gain new privileges, enhancing security.
-    # It is particularly important for applications that handle sensitive data or run in production environments.
-    # The 'no-new-privileges' option prevents the container from gaining additional privileges,
-    # which can help mitigate security risks.
-    # This is especially important for applications that handle sensitive data or run in production environments.
     depends_on:
       - db_postgresql
       - db_mariadb
@@ -52,7 +46,7 @@ services:
       MYSQL_PASSWORD: cakephp_password
 
     volumes:
-      - db_data:/var/lib/mysql:rw
+      - /Volume1/docker/webadapters/db_mysql:/var/lib/mysql:rw
     restart: on-failure:5
     container_name: WebAdaptors-MySQL
     hostname: WebAdaptors-MySQL
@@ -188,9 +182,16 @@ services:
 
 # Volumes for persistent storage
 volumes:
+  db_mysql:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/db_mysql
+      o: bind
+  # db_mariadb:
   db_data:
     driver: local
     driver_opts:
+      type: none
       device: /volume1/docker/webadapters/db_data
       o: bind
   db_postgresql:
