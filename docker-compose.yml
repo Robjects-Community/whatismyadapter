@@ -194,7 +194,7 @@ services:
     restart: unless-stopped
     depends_on:
       - db_postgresql
-      - db_mariadb
+      # - db_mariadb
       - redis
       - adminer
 
