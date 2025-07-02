@@ -2,6 +2,34 @@ services:
       # Database service using PostgreSQL
       # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
 
+  cakephp:
+    image: shinsenter/cakephp5:latest
+    # This service runs a CakePHP 5 application and is configured to use specific ports,
+    # environment variables, and volumes for persistent storage. It also includes health checks to ensure the
+    container_name: WebAdaptors-CakePHP5
+    hostname: WebAdaptors-CakePHP5
+    restart: unless-stopped
+    environment:
+      - TZ=America/Chicago
+    ports:
+      - 8323:80
+      - 3888:3000
+    # Healthcheck: verifies that the application on port 3000 is up and responding to HTTP requests
+    healthcheck:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+    volumes:
+      - /volume1/docker/webadapters/cakephp:/app/data:rw
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - db_postgresql
+      - db_mariadb
+      - redis
+      - adminer
   db_mariadb:
     image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
     container_name: WebAdaptors-DB
@@ -133,32 +161,7 @@ services:
 
 # Frontend service for CakePHP 5 application
 # This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
-  cakephp5:
-    image: shinsenter/cakephp5
-    container_name: WebAdaptors-CakePHP5
-    hostname: WebAdaptors-CakePHP5
-    restart: unless-stopped
-    environment:
-      - TZ=America/Chicago
-    ports:
-      - 8323:80
-      - 3888:3000
-    # Healthcheck: verifies that the application on port 3000 is up and responding to HTTP requests
-    healthcheck:
-      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 90s
-    volumes:
-      - /volume1/docker/webadapters/cakephp:/app/data:rw
-    security_opt:
-      - no-new-privileges:true
-    depends_on:
-      - db_postgresql
-      - db_mariadb
-      - redis
-      - adminer
+
 
 
 # Volumes for persistent storage
