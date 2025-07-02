@@ -3,7 +3,9 @@ services:
       # Database service using PostgreSQL
       # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
 
-  cakephp:
+  app:
+    build:
+      context: ./docker
     image: shinsenter/cakephp5:latest
     # This service runs a CakePHP 5 application and is configured to use specific ports,
     # environment variables, and volumes for persistent storage. It also includes health checks to ensure the
@@ -24,7 +26,12 @@ services:
       retries: 3
       start_period: 90s
     volumes:
+      - /volume1/docker/webadapters/app:/app/data:rw
+      - /volume1/docker/webadapters/app:/var/www/html:rw
+      - /volume1/docker/webadapters/cakephp:/var/www/html:rw
       - /volume1/docker/webadapters/cakephp:/app/data:rw
+      - /volume1/docker/webadapters/cakephp:/var/www/html/plugins:rw
+
     security_opt:
       - no-new-privileges:true
     depends_on:
