@@ -199,7 +199,7 @@ volumes:
     driver_opts:
       device: /volume1/docker/webadapters/db_postgresql
       o: bind
-db_mariadb:
+  db_mariadb:
     driver: local
     driver_opts:
       device: /volume1/docker/webadapters/db_mariadb
