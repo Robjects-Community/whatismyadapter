@@ -184,13 +184,6 @@ services:
       - /volume1/docker/webadapters/cakephp/config:/app/data/config:rw
       - /volume1/docker/webadapters/cakephp/plugins:/app/data/plugins:rw
       - /volume1/docker/webadapters/cakephp/vendor:/app/data/vendor:rw
-      - /volume1/docker/webadapters/cakephp/webroot:/app/data/webroot
-      - /volume1/docker/webadapters/cakephp/src:/app/data/src:rw
-      - /volume1/docker/webadapters/cakephp/tests:/app/data/tests:rw
-      - /volume1/docker/webadapters/cakephp/node_modules:/app/data/node_modules
-      - /volume1/docker/webadapters/cakephp/public:/app/data/public:rw
-      - /volume1/docker/webadapters/cakephp/vendor/bin:/app/data/vendor/bin
-      - /volume1/docker/webadapters/cakephp/vendor/composer:/app/data/vendor
     restart: on-failure:5
     security_opt:
       - no-new-privileges:true
