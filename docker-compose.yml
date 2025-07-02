@@ -5,48 +5,24 @@ version: '3.8'
 # The frontend service runs a CakePHP 5 application, while the backend service runs a Node.js application.
 # The database service uses PostgreSQL, and Redis is used for caching.
 services:
-# Frontend service for CakePHP 5 application
-# This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
-  cakephp5:
-    image: shinsenter/cakephp5
-    container_name: WebAdaptors-CakePHP5
-    environment:
-      - TZ=America/Chicago
-    ports:
-      - 8323:80
-      - 3888:3000
-    healthcheck:
-      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 90s
-    volumes:
-      - /volume1/docker/webadapters/cakephp:/app/data:rw
-    restart: unless-stopped
-    depends_on:
-      - db_postgresql
-      - db_mariadb
-      - redis
-      - adminer
 
       # Database service using PostgreSQL
       # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
 
-  db_mariadb:
-    image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
-    container_name: WebAdaptors-DB
-    user: 1026:100
-    hostname: webadapters-db
-    environment:
-      MYSQL_DATABASE: webadapters_db
-      MYSQL_USER: robjects
-      MYSQL_PASSWORD: assHIgai1!?
-      MYSQL_ROOT_PASSWORD: rootpass
-      TZ: America/Chicago
-    volumes:
-      - /volume1/docker/webadapters/db_mariadb:/var/lib/mysql:rw
-    restart: on-failure:5
+  # db_mariadb:
+  #   image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
+  #   container_name: WebAdaptors-DB
+  #   user: 1026:100
+  #   hostname: webadapters-db
+  #   environment:
+  #     MYSQL_DATABASE: webadapters_db
+  #     MYSQL_USER: robjects
+  #     MYSQL_PASSWORD: assHIgai1!?
+  #     MYSQL_ROOT_PASSWORD: rootpass
+  #     TZ: America/Chicago
+  #   volumes:
+  #     - /volume1/docker/webadapters/db_mariadb:/var/lib/mysql:rw
+  #   restart: on-failure:5
   db_postgresql:
     container_name: WebAdaptors-PostgreSQL
     image: postgres
@@ -76,6 +52,8 @@ services:
     ports:
       - 2665:5432
     restart: on-failure:5
+    depends_on:
+      - redis
     
 # Adminer service for database management
   # This service provides a web interface for managing the database and is configured to use specific ports and security options.
@@ -192,6 +170,33 @@ services:
 #     volumes:
 #       - /volume1/docker/webadapters/backend:/app/data:rw
 #     restart: unless-stopped
+
+# Frontend service for CakePHP 5 application
+# This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
+  cakephp5:
+    image: shinsenter/cakephp5
+    container_name: WebAdaptors-CakePHP5
+    user: 1026:100
+    environment:
+      - TZ=America/Chicago
+    ports:
+      - 8323:80
+      - 3888:3000
+    # Healthcheck: verifies that the application on port 3000 is up and responding to HTTP requests
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:3000"] 
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+    volumes:
+      - /volume1/docker/webadapters/cakephp:/app/data:rw
+    restart: unless-stopped
+    depends_on:
+      - db_postgresql
+      - db_mariadb
+      - redis
+      - adminer
 
 
 # Volumes for persistent storage
