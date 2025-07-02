@@ -41,9 +41,9 @@ services:
       - db_mariadb
       - redis
       - adminer
-      - db
-
-  db:
+      - db_data
+  # Database service using MySQL
+  db_data:
     image: mysql:8.0
     environment:
 
@@ -58,7 +58,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     ports:
-      - 3310:3306
+      - 33100:3306
 
 
       
@@ -189,6 +189,11 @@ services:
 
 # Volumes for persistent storage
 volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/db_data
+      o: bind
   db_postgresql:
     driver: local
     driver_opts:
