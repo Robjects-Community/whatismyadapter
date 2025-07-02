@@ -32,7 +32,7 @@ services:
 # Database service using PostgreSQL
 # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
     
-  db:
+  db_mariadb:
     image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
     container_name: WebAdaptors-DB
     user: 1026:100
@@ -132,3 +132,82 @@ volumes:
     driver_opts:
       device: /volume1/docker/webadapters/adminer
       o: bind
+# Backend service for CakePHP 5 application
+# This service runs a Node.js application and is configured to use specific ports, environment variables,
+# and volumes for persistent storage. It also includes health checks to ensure the backend service is running
+# properly before the frontend service starts.
+  backend:
+    image: shinsenter/cakephp5-backend
+    container_name: WebAdaptors-Backend
+    environment:
+      - TZ=America/Chicago
+    ports:
+      - 8320:80
+      - 3889:3000
+    healthcheck:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.1/3000' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+    volumes:
+      - /volume1/docker/webadapters/backend:/app/data:rw
+    restart: unless-stopped
+  frontend:
+    image: shinsenter/cakephp5
+    container_name: WebAdaptors-CakePHP5
+    environment:
+      - TZ=America/Chicago
+    ports:
+      - 8321:80
+      - 3888:3000
+    healthcheck:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+    volumes:
+      - /volume1/docker/webadapters/frontend:/app/data:rw
+    restart: unless-stopped
+  # jupyter:
+  #   container_name: WebAdaptors-Jupyter
+  #   image: jupyter/datascience-notebook:latest
+  #   mem_limit: 3g
+  #   cpu_shares: 768
+  #   security_opt:
+  #     - no-new-privileges:true
+  #   volumes:
+  #     - /volume1/docker/jupyter:/home/jovyan/work:rw
+  #   ports:
+  #     - 10235:8888
+  #   restart: on-failure:5
+  db_postgresql:
+    container_name: WebAdaptors-PostgreSQL
+    image: postgres
+    mem_limit: 256m
+    cpu_shares: 768
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "marius_DB", "-U", "root"]
+    environment:
+      POSTGRES_USER: webadapters
+      POSTGRES_PASSWORD: rootpass
+      POSTGRES_DB: webadapters_db
+    volumes:
+      - /volume1/docker/webadapters/db_postgresql:/var/lib/postgresql/data:rw
+    ports:
+      - 2665:5432
+    restart: on-failure:5
+  
+  adminer:
+    image: adminer:latest
+    container_name: WebAdaptors-Adminer
+    hostname: adminer
+    mem_limit: 128m
+    cpu_shares: 256
+    security_opt:
+      - no-new-privileges:true
+    user: 1026:100
+    ports:
+      - 8220:8080
+    restart: on-failure:5
