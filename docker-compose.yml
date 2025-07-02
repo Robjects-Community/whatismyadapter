@@ -1,6 +1,6 @@
 services:
   cakephp:
-    image: shinsenter/cakephp5:latest
+    image: shinsenter/cakephp5
     container_name: WebAdaptors-CakePHP5
     hostname: WebAdaptors-CakePHP5
     restart: unless-stopped
