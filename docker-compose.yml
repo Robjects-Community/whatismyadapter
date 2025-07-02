@@ -14,33 +14,33 @@ services:
       retries: 3
       start_period: 90s
     volumes:
-      - /volume1/docker/webadapters:/app/data:rw
+      - /volume1/docker/whatismyadapter-willow:/app/data:rw
     restart: unless-stopped
-  jupyter:
-    container_name: WebAdaptors-Jupyter
-    image: jupyter/datascience-notebook:latest
-    mem_limit: 3g
-    cpu_shares: 768
-    security_opt:
-      - no-new-privileges:true
-    volumes:
-      - /volume1/docker/jupyter:/home/jovyan/work:rw
-    ports:
-      - 10235:8888
-    restart: on-failure:5
+  # jupyter:
+  #   container_name: WebAdaptors-Jupyter
+  #   image: jupyter/datascience-notebook:latest
+  #   mem_limit: 3g
+  #   cpu_shares: 768
+  #   security_opt:
+  #     - no-new-privileges:true
+  #   volumes:
+  #     - /volume1/docker/whatismyadapter-willow/jupyter:/home/jovyan/work:rw
+  #   ports:
+  #     - 10235:8888
+  #   restart: on-failure:5
   db:
-    container_name: WebAdaptors-PostgreSQL
+    container_name: Whatismyadapter-Willow-PostgreSQL
     image: postgres
     mem_limit: 256m
     cpu_shares: 768
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "marius_DB", "-U", "root"]
     environment:
-      POSTGRES_USER: webadapters
+      POSTGRES_USER: whatismyadapter-willow
       POSTGRES_PASSWORD: rootpass
-      POSTGRES_DB: webadapters_db
+      POSTGRES_DB: whatismyadapter_willow_db
     volumes:
-      - /volume1/docker/webadapters:/var/lib/postgresql/data:rw
+      - /volume1/docker/whatismyadapter-willow:/var/lib/postgresql/data:rw
     ports:
       - 2665:5432
     restart: on-failure:5
