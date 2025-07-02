@@ -38,13 +38,8 @@ services:
     environment:
       DB_DATABASE: webadapters_db
       DB_USER: robjects
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      # DB_HOST: db_mariadb
-      # DB_PORT: 3306
-      # DB_SOCKET: /var/run/mysqld/mysqld.sock
-      # DB_CHARSET: utf8mb4
-      # DB_COLLATE: utf8mb4_unicode_ci
+      DB_PASSWORD: assHIgai1!?
+      DB_ROOT_PASSWORD: rootpass
       TZ: America/Chicago
     volumes:
       - /volume1/docker/webadapters/db_mariadb:/var/lib/mysql:rw
@@ -62,16 +57,23 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
       TZ: America/Chicago
-      POSTGRES_INITDB_WALDIR: /var/lib/postgresql/wal
-      POSTGRES_INITDB_XLOGDIR: /var/lib/postgresql/xlog
-      POSTGRES_INITDB_DATADIR: /var/lib/postgresql/data
-      POSTGRES_INITDB_LOGDIR: /var/lib/postgresql/log
-      POSTGRES_INITDB_BACKUPDIR: /var/lib/postgresql/backup
-      POSTGRES_INITDB_TMPDIR: /var/lib/postgresql/tmp
-      POSTGRES_INITDB_SCRATCHDIR: /var/lib/postgresql/scratch
-      POSTGRES_INITDB_CONFIGURE: "--auth-host=md5 --auth-local=trust"
-      POSTGRES_INITDB_LOCALE: "en_US.UTF-8"
-      POSTGRES_INITDB_ENCODING: "UTF8"
+    hostname: WebAdaptors-PostgreSQL
+    user: 1026:100
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      POSTGRES_USER: robjects
+      POSTGRES_PASSWORD: assHIgai1!?
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+      TZ: America/Chicago
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: robjects
+      POSTGRES_PASSWORD: assHIgai1!?
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+      TZ: America/Chicago
       POSTGRES_DB: webadapters_db
     volumes:
       - /volume1/docker/webadapters/db_postgresql:/var/lib/postgresql/data:rw
@@ -101,9 +103,18 @@ services:
       - ADMINER_DEFAULT_SERVER=db_postgresql
       - ADMINER_DEFAULT_SERVER_POSTGRES=db_postgresql
       - ADMINER_DEFAULT_SERVER_REDIS=redis
-
-# This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis 
-  
+      - ADMINER_DEFAULT_DB=webadapters_db
+      - ADMINER_DEFAULT_USER=robjects
+      - ADMINER_DEFAULT_PASSWORD=assHIgai1!?
+      - TZ=America/Chicago
+    # Healthcheck to ensure the Adminer service is running
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+      
 # redis service for caching
 # This service is used by the backend to cache data and improve performance. It is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the Redis service is running properly.
   redis:
