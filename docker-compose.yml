@@ -155,8 +155,14 @@ services:
       - 8323:80
       - 3888:3000
     # Healthcheck: verifies that the application on port 3000 is up and responding to HTTP requests
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://127.0.0.1:3000"] 
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 3
+    #   start_period: 90s
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://127.0.0.1:3000"] 
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
       interval: 10s
       timeout: 5s
       retries: 3
