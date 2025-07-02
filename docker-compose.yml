@@ -1,4 +1,3 @@
-version: '3.8'
 services:
       # Database service using PostgreSQL
       # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
