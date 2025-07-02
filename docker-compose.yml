@@ -210,13 +210,13 @@ volumes:
     driver_opts:
       device: /volume1/docker/webadapters/adminer
       o: bind
-  backend_data:
-    driver: local
-    driver_opts:  
-      device: /volume1/docker/webadapters/backend
-      o: bind
-  jupyter_data:
-    driver: local
-    driver_opts:
-      device: /volume1/docker/webadapters/jupyter
-      o: bind
+  # backend_data:
+  #   driver: local
+  #   driver_opts:  
+  #     device: /volume1/docker/webadapters/backend
+  #     o: bind
+  # jupyter_data:
+  #   driver: local
+  #   driver_opts:
+  #     device: /volume1/docker/webadapters/jupyter
+  #     o: bind
