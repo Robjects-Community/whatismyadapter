@@ -7,7 +7,7 @@ version: '3.8'
 services:
 # Frontend service for CakePHP 5 application
 # This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
-  frontend:
+  cakephp5:
     image: shinsenter/cakephp5
     container_name: WebAdaptors-CakePHP5
     environment:
@@ -22,11 +22,17 @@ services:
       retries: 3
       start_period: 90s
     volumes:
-      - /volume1/docker/webadapters/frontend:/app/data:rw
+      - /volume1/docker/webadapters/cakephp:/app/data:rw
     restart: unless-stopped
-# Database service using PostgreSQL
-# This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
-    
+    depends_on:
+      - db_postgresql
+      - db_mariadb
+      - redis
+      - adminer
+
+      # Database service using PostgreSQL
+      # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
+
   db_mariadb:
     image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
     container_name: WebAdaptors-DB
