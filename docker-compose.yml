@@ -73,43 +73,63 @@ services:
     
 # Adminer service for database management
   # This service provides a web interface for managing the database and is configured to use specific ports and security options.
+  # adminer:
+  #   image: adminer:latest
+  #   container_name: WebAdaptors-Adminer
+  #   hostname: adminer
+  #   mem_limit: 128m
+  #   cpu_shares: 256
+  #   security_opt:
+  #     - no-new-privileges:true
+  #   user: 1026:100
+  #   ports:
+  #     - 8220:8080
+  #   restart: on-failure:5
+  #   volumes:
+  #     - /volume1/docker/webadapters/adminer:/var/www/html:rw
+  #   depends_on:
+  #     - db_mariadb
+  #     - db_postgresql
+  #     - redis
+  #   environment:
+  #     - ADMINER_DEFAULT_SERVER=db_mariadb
+  #     - ADMINER_DEFAULT_SERVER_POSTGRES=db_postgresql
+  #     - ADMINER_DEFAULT_SERVER_REDIS=redis
+  #     - ADMINER_DEFAULT_SERVER_JUPYTER=jupyter
+  #     - ADMINER_DEFAULT_SERVER_BACKEND=backend
+  #     - ADMINER_DEFAULT_SERVER_FRONTEND=frontend
+  #     - ADMINER_DEFAULT_SERVER_ADMINER=adminer
+  #     - ADMINER_DEFAULT_DB=webadapters_db
+  #     - ADMINER_DEFAULT_USER=robjects
+  #     - ADMINER_DEFAULT_PASSWORD=assHIgai1!?
+  #     - TZ=America/Chicago
+  #   # Healthcheck to ensure the Adminer service is running
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:8080"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 3
+  #     start_period: 90s
+
   adminer:
     image: adminer:latest
-    container_name: WebAdaptors-Adminer
-    hostname: adminer
-    mem_limit: 128m
-    cpu_shares: 256
+    container_name: WebAdaptors-Adminer2
+    hostname: adminer:latest
     security_opt:
       - no-new-privileges:true
     user: 1026:100
     ports:
-      - 8220:8080
+      - 8443:8080
     restart: on-failure:5
-    volumes:
-      - /volume1/docker/webadapters/adminer:/var/www/html:rw
     depends_on:
-      - db_mariadb
       - db_postgresql
+      - db_mariadb
       - redis
     environment:
-      - ADMINER_DEFAULT_SERVER=db_mariadb
+      - ADMINER_DEFAULT_SERVER=db_postgresql
       - ADMINER_DEFAULT_SERVER_POSTGRES=db_postgresql
       - ADMINER_DEFAULT_SERVER_REDIS=redis
-      - ADMINER_DEFAULT_SERVER_JUPYTER=jupyter
-      - ADMINER_DEFAULT_SERVER_BACKEND=backend
-      - ADMINER_DEFAULT_SERVER_FRONTEND=frontend
-      - ADMINER_DEFAULT_SERVER_ADMINER=adminer
-      - ADMINER_DEFAULT_DB=webadapters_db
-      - ADMINER_DEFAULT_USER=robjects
-      - ADMINER_DEFAULT_PASSWORD=assHIgai1!?
-      - TZ=America/Chicago
-    # Healthcheck to ensure the Adminer service is running
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 90s
+
 # This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis 
   
 # redis service for caching
