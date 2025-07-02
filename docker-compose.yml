@@ -125,24 +125,24 @@ services:
 # Backend service for CakePHP 5 application
 # This service runs a Node.js application and is configured to use specific ports, environment variables,
 # and volumes for persistent storage. It also includes health checks to ensure the backend service is running
-# properly before the frontend service starts.
-  backend:
-    image: shinsenter/cakephp5-backend
-    container_name: WebAdaptors-Backend
-    environment:
-      - TZ=America/Chicago
-    ports:
-      - 8320:80
-      - 3889:3000
-    healthcheck:
-      test: timeout 10s bash -c ':> /dev/tcp/127.0.1/3000' || exit 1
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 90s
-    volumes:
-      - /volume1/docker/webadapters/backend:/app/data:rw
-    restart: unless-stopped
+# # properly before the frontend service starts.
+#   backend:
+#     image: shinsenter/cakephp5-backend
+#     container_name: WebAdaptors-Backend
+#     environment:
+#       - TZ=America/Chicago
+#     ports:
+#       - 8320:80
+#       - 3889:3000
+#     healthcheck:
+#       test: timeout 10s bash -c ':> /dev/tcp/127.0.1/3000' || exit 1
+#       interval: 10s
+#       timeout: 5s
+#       retries: 3
+#       start_period: 90s
+#     volumes:
+#       - /volume1/docker/webadapters/backend:/app/data:rw
+#     restart: unless-stopped
 
 
 # Volumes for persistent storage
