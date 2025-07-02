@@ -25,8 +25,8 @@ services:
       retries: 3
       start_period: 90s
     volumes:
-      - cakephp_data:/var/www/html:rw
-      - cakephp_data:/app/data:rw
+      - /Volume1/docker/webadapters/cakephp:/var/www/html:rw
+      - /Volume1/docker/webadapters/cakephp:/app/data:rw
     # Security options to prevent privilege escalation
     # This option ensures that the container does not gain new privileges, enhancing security.
     # It is particularly important for applications that handle sensitive data or run in production environments.
@@ -38,8 +38,6 @@ services:
     depends_on:
       - db_postgresql
       - db_mariadb
-      - redis
-      - adminer
       - db_data
   # Database service using MySQL
   db_data:
