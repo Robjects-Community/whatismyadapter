@@ -15,7 +15,7 @@ RUN set -eux; \
 
 # Copy Cake PHP application to the container
 
-COPY ../app /var/www/html
+COPY . /var/www/html
 
  
 
