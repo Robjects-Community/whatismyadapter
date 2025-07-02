@@ -56,8 +56,6 @@ services:
       POSTGRES_DB: webadapters_db
     hostname: WebAdaptors-PostgreSQL
     user: 1026:100
-    security_opt:
-      - no-new-privileges:true
     volumes:
       - /volume1/docker/webadapters/db_postgresql:/var/lib/postgresql/data:rw
     ports:
