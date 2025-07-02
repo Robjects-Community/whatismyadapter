@@ -74,18 +74,23 @@ services:
 # Adminer service for database management
   # This service provides a web interface for managing the database and is configured to use specific ports and security options.
   adminer:
-    image: adminer
+    image: adminer:latest
     container_name: WebAdaptors-Adminer
-    hostname: adminer:latest
+    hostname: adminer
+    mem_limit: 128m
+    cpu_shares: 256
     security_opt:
       - no-new-privileges:true
     user: 1026:100
-    mem_limit: 512m
-    cpu_shares: 256
     ports:
-      - 8222:8080
+      - 8220:8080
+    restart: on-failure:5
     volumes:
       - /volume1/docker/webadapters/adminer:/var/www/html:rw
+    depends_on:
+      - db_mariadb
+      - db_postgresql
+      - redis
     environment:
       - ADMINER_DEFAULT_SERVER=db_mariadb
       - ADMINER_DEFAULT_SERVER_POSTGRES=db_postgresql
@@ -106,7 +111,6 @@ services:
       retries: 3
       start_period: 90s
 # This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis 
-    restart: on-failure:5
   
 # redis service for caching
 # This service is used by the backend to cache data and improve performance. It is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the Redis service is running properly.
