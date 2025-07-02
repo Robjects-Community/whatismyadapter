@@ -16,8 +16,8 @@ services:
     environment:
       DB_DATABASE: webadapters_db
       DB_USER: robjects
-      DB_PASSWORD: assHIgai1!?
-      DB_ROOT_PASSWORD: rootpass
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       # DB_HOST: db_mariadb
       # DB_PORT: 3306
       # DB_SOCKET: /var/run/mysqld/mysqld.sock
@@ -144,19 +144,39 @@ services:
     container_name: WebAdaptors-CakePHP5
     user: 1026:100
     # user: root
+    hostname: WebAdaptors-cakephp5
+    mem_limit: 3g
+    cpu_shares: 768
+    # security_opt:
+    #   - no-new-privileges:true
+    # This service runs a CakePHP 5 application and is configured to use specific ports,
+    # environment variables, and volumes for persistent storage. It also includes health checks to ensure the
+    # CakePHP application is running properly before the frontend service starts.
     environment:
-      - DB_DATABASE=webadapters_db
-      - DB_USER=robjects
-      - DB_PASSWORD=assHIgai1!?
-      - DB_ROOT_PASSWORD=rootpass
-      - DB_HOST=db_postgresql
-      - TZ=America/Chicago
+      # Set DB_HOST and DB_PORT to match the intended database.
+      # For PostgreSQL (default):
+      # DB_HOST: db_postgresql
+      # DB_PORT: 5432
+      # DB_HOST: db_mariadb
+      # DB_PORT: 3306
+      # For PostgreSQL, comment the above two lines and uncomment below:
+      # DB_HOST: db_postgresql
+      # DB_PORT: 5432
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
     ports:
       - 8323:80
       - 3888:3000
     # Healthcheck: verifies that the application on port 3000 is up and responding to HTTP requests
     # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://127.0.0.1:3000"] 
+    #   test: ["CMD", "curl", "-f", "http://127.0.0.1:3000"]
+    #   # test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
+    #   # test: ["CMD", "curl", "-f", "http://127.0.1:3000"]
+    #   # test: ["CMD", "curl", "-f", "http://127.0.1:3000"]
+    #   # test: ["CMD", "curl", "-f", "http://127.0.1:3000"]
+    
     #   interval: 10s
     #   timeout: 5s
     #   retries: 3
@@ -174,7 +194,7 @@ services:
       - no-new-privileges:true
     depends_on:
       - db_postgresql
-      - db_mariadb
+      # - db_mariadb
       - redis
       - adminer
 
