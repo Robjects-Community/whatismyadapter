@@ -31,7 +31,7 @@ services:
       - redis
       - adminer
     networks:
-      - webadaptors_net
+      - adapters_default
       
   db_mariadb:
     image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
