@@ -1,3 +1,4 @@
+version: '3.8'
 services:
       # Database service using PostgreSQL
       # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
@@ -11,6 +12,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Chicago
+      - APP_ENV=development
     ports:
       - 8323:80
       - 3888:3000
@@ -22,18 +24,33 @@ services:
       retries: 3
       start_period: 90s
     volumes:
-      - cakephp_data:/app/data:rw
-      - ../db_mariadb:/var/lib/mysql:rw
-      - ../db_postgresql:/var/lib/postgresql/data:rw
-      - ../redis:/data:rw
-      - ../adminer:/var/www/html:rw
-      - ../backend:/app/backend:rw
-      - ../jupyter:/home/jovyan/work:rw
+      - /volume1/docker/webadapters/cakephp:/app/data:rw
+    security_opt:
+      - no-new-privileges:true
     depends_on:
       - db_postgresql
       - db_mariadb
       - redis
       - adminer
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+
+      MYSQL_ROOT_PASSWORD: rootpassword
+
+      MYSQL_DATABASE: cakephp
+
+      MYSQL_USER: cakephpuser
+
+      MYSQL_PASSWORD: cakephp_password
+
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - 3310:3306
+
 
       
   db_mariadb:
@@ -42,7 +59,7 @@ services:
     user: 1026:100
     hostname: webadapters-db
     environment:
-      MYSQL_ROOT_PASSWORD: rootpasswo
+      MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_DATABASE: webadapters_db
       MYSQL_USER: robjects
       MYSQL_PASSWORD: assHIgai1!?
@@ -163,6 +180,11 @@ services:
 
 # Volumes for persistent storage
 volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/db_data
+      o: bind
   db_postgresql:
     driver: local
     driver_opts:
