@@ -46,7 +46,23 @@ services:
     volumes:
       - /volume1/docker/webadapters/db_mariadb:/var/lib/mysql:rw
     restart: on-failure:5
-
+  db_postgresql:
+    container_name: WebAdaptors-PostgreSQL
+    image: postgres
+    mem_limit: 256m
+    cpu_shares: 768
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "marius_DB", "-U", "root"]
+    environment:
+      POSTGRES_USER: webadapters
+      POSTGRES_PASSWORD: rootpass
+      POSTGRES_DB: webadapters_db
+    volumes:
+      - /volume1/docker/webadapters/db_postgresql:/var/lib/postgresql/data:rw
+    ports:
+      - 2665:5432
+    restart: on-failure:5
+    
 # Adminer service for database management
   # This service provides a web interface for managing the database and is configured to use specific ports and security options.
   adminer:
@@ -110,28 +126,6 @@ services:
     restart: on-failure:5
 
 
-# Volumes for persistent storage
-volumes:
-  db_data:
-    driver: local
-    driver_opts:
-      device: /volume1/docker/webadapters/db
-      o: bind
-  cakephp_data:
-    driver: local
-    driver_opts:
-      device: /volume1/docker/webadapters/cakephp
-      o: bind
-  redis_data:
-    driver: local
-    driver_opts:
-      device: /volume1/docker/webadapters/redis
-      o: bind
-  adminer_data:
-    driver: local
-    driver_opts:
-      device: /volume1/docker/webadapters/adminer
-      o: bind
 # Backend service for CakePHP 5 application
 # This service runs a Node.js application and is configured to use specific ports, environment variables,
 # and volumes for persistent storage. It also includes health checks to ensure the backend service is running
@@ -182,22 +176,7 @@ volumes:
   #   ports:
   #     - 10235:8888
   #   restart: on-failure:5
-  db_postgresql:
-    container_name: WebAdaptors-PostgreSQL
-    image: postgres
-    mem_limit: 256m
-    cpu_shares: 768
-    healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "marius_DB", "-U", "root"]
-    environment:
-      POSTGRES_USER: webadapters
-      POSTGRES_PASSWORD: rootpass
-      POSTGRES_DB: webadapters_db
-    volumes:
-      - /volume1/docker/webadapters/db_postgresql:/var/lib/postgresql/data:rw
-    ports:
-      - 2665:5432
-    restart: on-failure:5
+ 
   
   adminer:
     image: adminer:latest
@@ -211,3 +190,32 @@ volumes:
     ports:
       - 8220:8080
     restart: on-failure:5
+
+
+# Volumes for persistent storage
+volumes:
+  db_postgresql:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/db_postgresql
+      o: bind
+db_mariadb:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/db_mariadb
+      o: bind
+  cakephp_data:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/cakephp
+      o: bind
+  redis_data:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/redis
+      o: bind
+  adminer_data:
+    driver: local
+    driver_opts:
+      device: /volume1/docker/webadapters/adminer
+      o: bind
