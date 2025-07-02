@@ -1,13 +1,6 @@
 services:
-      # Database service using PostgreSQL
-      # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
-
   cakephp:
-  # This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage.
-  # It also includes health checks to ensure the application is running properly before other services depend on
     image: shinsenter/cakephp5:latest
-    # This service runs a CakePHP 5 application and is configured to use specific ports,
-    # environment variables, and volumes for persistent storage. It also includes health checks to ensure the
     container_name: WebAdaptors-CakePHP5
     hostname: WebAdaptors-CakePHP5
     restart: unless-stopped
@@ -17,7 +10,6 @@ services:
     ports:
       - 8323:80
       - 3888:3000
-    # Healthcheck: verifies that the application on port 3000 is up and responding to HTTP requests
     healthcheck:
       test: ["CMD-SHELL", "timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1"]
       interval: 10s
@@ -25,38 +17,30 @@ services:
       retries: 3
       start_period: 90s
     volumes:
-      - /Volume1/docker/webadapters/cakephp:/var/www/html:rw
-      - /Volume1/docker/webadapters/cakephp:/app/data:rw
+      - cakephp_data:/var/www/html:rw
+      - cakephp_data:/app/data:rw
     depends_on:
       - db_postgresql
       - db_mariadb
       - db_data
 
-
   db_data:
     image: mysql:8.0
     environment:
-
       MYSQL_ROOT_PASSWORD: rootpassword
-
       MYSQL_DATABASE: cakephp
-
       MYSQL_USER: cakephpuser
-
       MYSQL_PASSWORD: cakephp_password
-
     volumes:
-      - /Volume1/docker/webadapters/db_mysql:/var/lib/mysql:rw
+      - db_mysql:/var/lib/mysql:rw
     restart: on-failure:5
     container_name: WebAdaptors-MySQL
     hostname: WebAdaptors-MySQL
     ports:
       - 3311:3306
 
-
-      
   db_mariadb:
-    image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
+    image: mariadb:11.4-noble
     container_name: WebAdaptors-DB
     user: 1026:100
     hostname: webadapters-db
@@ -69,12 +53,12 @@ services:
       DB_USER: robjects
       DB_PASSWORD: assHIgai1!?
       DB_NAME: webadapters_db
-      # DB_NAME: webadapters_db
       DB_ROOT_PASSWORD: rootpass
       TZ: America/Chicago
     volumes:
-      - /volume1/docker/webadapters/db_mariadb:/var/lib/mysql:rw
+      - db_mariadb:/var/lib/mysql:rw
     restart: on-failure:5
+
   db_postgresql:
     container_name: WebAdaptors-PostgreSQL
     image: postgres
@@ -90,15 +74,13 @@ services:
       TZ: America/Chicago
       POSTGRES_DB: webadapters_db
     volumes:
-      - /volume1/docker/webadapters/db_postgresql:/var/lib/postgresql/data:rw
+      - db_postgresql:/var/lib/postgresql/data:rw
     ports:
       - 2665:5432
     restart: on-failure:5
     depends_on:
       - redis
-    
-# Adminer service for database management
-  # This service provides a web interface for managing the database and is configured to use specific ports and security options.
+
   adminer:
     image: adminer:latest
     container_name: WebAdaptors-Adminer
@@ -117,68 +99,21 @@ services:
       - ADMINER_DEFAULT_SERVER=db_postgresql
       - ADMINER_DEFAULT_SERVER_POSTGRES=db_postgresql
       - ADMINER_DEFAULT_SERVER_REDIS=redis
+    volumes:
+      - adminer_data:/var/www/html:rw
 
-# This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis 
-  
-# redis service for caching
-# This service is used by the backend to cache data and improve performance. It is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the Redis service is running properly.
   redis:
     image: redis
     hostname: WebAdaptors-redis
     container_name: WebAdaptors-REDIS
     user: 1026:100
     healthcheck:
-     test: ["CMD-SHELL", "redis-cli ping || exit 1"]
+      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
     volumes:
-      - /volume1/docker/webadapters/redis:/data:rw
+      - redis_data:/data:rw
     environment:
       TZ: America/Chicago
 
-  # jupyter:
-  #   container_name: WebAdaptors-Jupyter
-  #   image: jupyter/datascience-notebook:latest
-  #   mem_limit: 3g
-  #   cpu_shares: 768
-  #   security_opt:
-  #     - no-new-privileges:true
-  #   volumes:
-  #     - /volume1/docker/webadapters/jupyter:/home/jovyan/work:rw
-  #   ports:
-  #     - 10445:8888
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - JUPYTER_ENABLE_LAB=yes
-  #     - JUPYTER_TOKEN=webadapters
-  #     - TZ=America/Chicago
-  #   restart: on-failure:5
-
-# Backend service for CakePHP 5 application
-# This service runs a Node.js application and is configured to use specific ports, environment variables,
-# and volumes for persistent storage. It also includes health checks to ensure the backend service is running
-# # properly before the frontend service starts.
-#   backend:
-#     image: shinsenter/cakephp5-backend
-#     container_name: WebAdaptors-Backend
-#     environment:
-#       - TZ=America/Chicago
-#     ports:
-#       - 8320:80
-#       - 3889:3000
-#     healthcheck:
-#       test: timeout 10s bash -c ':> /dev/tcp/127.0.1/3000' || exit 1
-#       interval: 10s
-#       timeout: 5s
-#       retries: 3
-#       start_period: 90s
-#     volumes:
-#       - /volume1/docker/webadapters/backend:/app/data:rw
-#     restart: unless-stopped
-
-# Frontend service for CakePHP 5 application
-# This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
-
-# Volumes for persistent storage
 volumes:
   db_mysql:
     driver: local
@@ -222,41 +157,3 @@ volumes:
       type: none
       device: ${ADMINER_DATA_PATH:-/volume1/docker/webadapters/adminer}
       o: bind
-  # backend_data:
-  #   driver: local
-  #   driver_opts:  
-  #     type: none
-  #     device: ${BACKEND_DATA_PATH:-/volume1/docker/webadapters/backend}
-  #     o: bind
-  # jupyter_data:
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     device: ${JUPYTER_DATA_PATH:-/volume1/docker/webadapters/jupyter}
-  #     o: bind
-
-# -----------------------------------------------------------------------------
-# Volume Variable Documentation
-#
-# Each variable below can be set in your .env file to override the default
-# host path for the corresponding Docker volume. If not set, the default path
-# (after the colon) will be used.
-#
-# Example usage in .env:
-#   DB_MYSQL_PATH=/custom/path/mysql
-#   CAKEPHP_DATA_PATH=/custom/path/cakephp
-#
-# Variable Name         | Used For         | Default Path
-# ----------------------|------------------|-----------------------------------------------
-# DB_MYSQL_PATH         | MySQL data       | /volume1/docker/webadapters/db_mysql
-# DB_DATA_PATH          | MySQL data (alt) | /volume1/docker/webadapters/db_data
-# DB_POSTGRESQL_PATH    | PostgreSQL data  | /volume1/docker/webadapters/db_postgresql
-# DB_MARIADB_PATH       | MariaDB data     | /volume1/docker/webadapters/db_mariadb
-# CAKEPHP_DATA_PATH     | CakePHP data     | /volume1/docker/webadapters/cakephp
-# REDIS_DATA_PATH       | Redis data       | /volume1/docker/webadapters/redis
-# ADMINER_DATA_PATH     | Adminer data     | /volume1/docker/webadapters/adminer
-# BACKEND_DATA_PATH     | Backend data     | /volume1/docker/webadapters/backend
-# JUPYTER_DATA_PATH     | Jupyter data     | /volume1/docker/webadapters/jupyter
-#
-# To apply: Add or edit the variable(s) in your .env file, then (re)start your stack.
-# -----------------------------------------------------------------------------
