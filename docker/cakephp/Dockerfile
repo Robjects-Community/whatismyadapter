@@ -2,17 +2,14 @@
 
 FROM php:8.2-apache
 
- 
-
 # Install required PHP extensions
-
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 
- 
-
 # Enable mod_rewrite for Apache
-
-RUN a2enmod rewrite
+RUN set -eux; \
+	if [ -x /usr/sbin/a2enmod ]; then \
+		a2enmod rewrite; \
+	fi
 
  
 
