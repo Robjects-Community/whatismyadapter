@@ -39,6 +39,10 @@ services:
     user: 1026:100
     hostname: webadapters-db
     environment:
+      MYSQL_ROOT_PASSWORD: rootpasswo
+      MYSQL_DATABASE: webadapters_db
+      MYSQL_USER: robjects
+      MYSQL_PASSWORD: assHIgai1!?
       DB_DATABASE: webadapters_db
       DB_USER: robjects
       DB_PASSWORD: assHIgai1!?
