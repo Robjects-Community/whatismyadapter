@@ -81,7 +81,7 @@ services:
       - TZ=America/Chicago
     # Healthcheck to ensure the Adminer service is running
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      test: ["CMD", "curl", "-f", "http://localhost:8222"]
       interval: 10s
       timeout: 5s
       retries: 3
