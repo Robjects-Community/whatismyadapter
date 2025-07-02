@@ -51,4 +51,3 @@ ENV PROXY_LOGIN=$PROXY_LOGIN
 
 # Start the app
 CMD [ "npm", "start" ]
->>>>>>> main
