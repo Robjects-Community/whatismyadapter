@@ -170,31 +170,33 @@ services:
       - 8323:80
       - 3888:3000
     # Healthcheck: verifies that the application on port 3000 is up and responding to HTTP requests
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://127.0.0.1:3000"]
-    #   # test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
-    #   # test: ["CMD", "curl", "-f", "http://127.0.1:3000"]
-    #   # test: ["CMD", "curl", "-f", "http://127.0.1:3000"]
-    #   # test: ["CMD", "curl", "-f", "http://127.0.1:3000"]
-    
-    #   interval: 10s
-    #   timeout: 5s
-    #   retries: 3
-    #   start_period: 90s
     healthcheck:
       test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
       interval: 10s
       timeout: 5s
       retries: 3
       start_period: 90s
+
     volumes:
       - /volume1/docker/webadapters/cakephp:/app/data:rw
+      - /volume1/docker/webadapters/cakephp/logs:/app/data/logs:rw
+      - /volume1/docker/webadapters/cakephp/tmp:/app/data/tmp:rw
+      - /volume1/docker/webadapters/cakephp/config:/app/data/config:rw
+      - /volume1/docker/webadapters/cakephp/plugins:/app/data/plugins:rw
+      - /volume1/docker/webadapters/cakephp/vendor:/app/data/vendor:rw
+      - /volume1/docker/webadapters/cakephp/webroot:/app/data/webroot
+      - /volume1/docker/webadapters/cakephp/src:/app/data/src:rw
+      - /volume1/docker/webadapters/cakephp/tests:/app/data/tests:rw
+      - /volume1/docker/webadapters/cakephp/node_modules:/app/data/node_modules
+      - /volume1/docker/webadapters/cakephp/public:/app/data/public:rw
+      - /volume1/docker/webadapters/cakephp/vendor/bin:/app/data/vendor/bin
+      - /volume1/docker/webadapters/cakephp/vendor/composer:/app/data/vendor
     restart: on-failure:5
     security_opt:
       - no-new-privileges:true
     depends_on:
       - db_postgresql
-      # - db_mariadb
+      - db_mariadb
       - redis
       - adminer
 
