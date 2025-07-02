@@ -4,8 +4,8 @@ services:
       # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
 
   cakephp:
-    build:
-      context: ./docker
+  # This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage.
+  # It also includes health checks to ensure the application is running properly before other services depend on
     image: shinsenter/cakephp5:latest
     # This service runs a CakePHP 5 application and is configured to use specific ports,
     # environment variables, and volumes for persistent storage. It also includes health checks to ensure the
@@ -26,10 +26,14 @@ services:
       retries: 3
       start_period: 90s
     volumes:
-      - /volume1/docker/webadapters/cakephp:/var/www/html:rw
-      - /volume1/docker/webadapters/cakephp:/app/data:rw
-      - /volume1/docker/webadapters/cakephp:/var/www/html/plugins:rw
-
+      - cakephp_data:/var/www/html:rw
+      - cakephp_data:/app/data:rw
+    # Security options to prevent privilege escalation
+    # This option ensures that the container does not gain new privileges, enhancing security.
+    # It is particularly important for applications that handle sensitive data or run in production environments.
+    # The 'no-new-privileges' option prevents the container from gaining additional privileges,
+    # which can help mitigate security risks.
+    # This is especially important for applications that handle sensitive data or run in production environments.
     security_opt:
       - no-new-privileges:true
     depends_on:
@@ -185,11 +189,6 @@ services:
 
 # Volumes for persistent storage
 volumes:
-  db_data:
-    driver: local
-    driver_opts:
-      device: /volume1/docker/webadapters/db_data
-      o: bind
   db_postgresql:
     driver: local
     driver_opts:
