@@ -30,6 +30,9 @@ services:
       - db_mariadb
       - redis
       - adminer
+    networks:
+      - webadaptors_net
+      
   db_mariadb:
     image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
     container_name: WebAdaptors-DB
