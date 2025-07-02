@@ -178,54 +178,85 @@ services:
 # Frontend service for CakePHP 5 application
 # This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
 
-
-
 # Volumes for persistent storage
 volumes:
   db_mysql:
     driver: local
     driver_opts:
-      device: /volume1/docker/webadapters/db_mysql
+      type: none
+      device: ${DB_MYSQL_PATH:-/volume1/docker/webadapters/db_mysql}
       o: bind
-  # db_mariadb:
   db_data:
     driver: local
     driver_opts:
       type: none
-      device: /volume1/docker/webadapters/db_data
+      device: ${DB_DATA_PATH:-/volume1/docker/webadapters/db_data}
       o: bind
   db_postgresql:
     driver: local
     driver_opts:
-      device: /volume1/docker/webadapters/db_postgresql
+      type: none
+      device: ${DB_POSTGRESQL_PATH:-/volume1/docker/webadapters/db_postgresql}
       o: bind
   db_mariadb:
     driver: local
     driver_opts:
-      device: /volume1/docker/webadapters/db_mariadb
+      type: none
+      device: ${DB_MARIADB_PATH:-/volume1/docker/webadapters/db_mariadb}
       o: bind
   cakephp_data:
     driver: local
     driver_opts:
-      device: /volume1/docker/webadapters/cakephp
+      type: none
+      device: ${CAKEPHP_DATA_PATH:-/volume1/docker/webadapters/cakephp}
       o: bind
   redis_data:
     driver: local
     driver_opts:
-      device: /volume1/docker/webadapters/redis
+      type: none
+      device: ${REDIS_DATA_PATH:-/volume1/docker/webadapters/redis}
       o: bind
   adminer_data:
     driver: local
     driver_opts:
-      device: /volume1/docker/webadapters/adminer
+      type: none
+      device: ${ADMINER_DATA_PATH:-/volume1/docker/webadapters/adminer}
       o: bind
   # backend_data:
   #   driver: local
   #   driver_opts:  
-  #     device: /volume1/docker/webadapters/backend
+  #     type: none
+  #     device: ${BACKEND_DATA_PATH:-/volume1/docker/webadapters/backend}
   #     o: bind
   # jupyter_data:
   #   driver: local
   #   driver_opts:
-  #     device: /volume1/docker/webadapters/jupyter
+  #     type: none
+  #     device: ${JUPYTER_DATA_PATH:-/volume1/docker/webadapters/jupyter}
   #     o: bind
+
+# -----------------------------------------------------------------------------
+# Volume Variable Documentation
+#
+# Each variable below can be set in your .env file to override the default
+# host path for the corresponding Docker volume. If not set, the default path
+# (after the colon) will be used.
+#
+# Example usage in .env:
+#   DB_MYSQL_PATH=/custom/path/mysql
+#   CAKEPHP_DATA_PATH=/custom/path/cakephp
+#
+# Variable Name         | Used For         | Default Path
+# ----------------------|------------------|-----------------------------------------------
+# DB_MYSQL_PATH         | MySQL data       | /volume1/docker/webadapters/db_mysql
+# DB_DATA_PATH          | MySQL data (alt) | /volume1/docker/webadapters/db_data
+# DB_POSTGRESQL_PATH    | PostgreSQL data  | /volume1/docker/webadapters/db_postgresql
+# DB_MARIADB_PATH       | MariaDB data     | /volume1/docker/webadapters/db_mariadb
+# CAKEPHP_DATA_PATH     | CakePHP data     | /volume1/docker/webadapters/cakephp
+# REDIS_DATA_PATH       | Redis data       | /volume1/docker/webadapters/redis
+# ADMINER_DATA_PATH     | Adminer data     | /volume1/docker/webadapters/adminer
+# BACKEND_DATA_PATH     | Backend data     | /volume1/docker/webadapters/backend
+# JUPYTER_DATA_PATH     | Jupyter data     | /volume1/docker/webadapters/jupyter
+#
+# To apply: Add or edit the variable(s) in your .env file, then (re)start your stack.
+# -----------------------------------------------------------------------------
