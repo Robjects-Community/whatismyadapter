@@ -22,16 +22,19 @@ services:
       retries: 3
       start_period: 90s
     volumes:
-      - /volume1/docker/webadapters/cakephp:/app/data:rw
-    security_opt:
-      - no-new-privileges:true
+      - cakephp_data:/app/data:rw
+      - ../db_mariadb:/var/lib/mysql:rw
+      - ../db_postgresql:/var/lib/postgresql/data:rw
+      - ../redis:/data:rw
+      - ../adminer:/var/www/html:rw
+      - ../backend:/app/backend:rw
+      - ../jupyter:/home/jovyan/work:rw
     depends_on:
       - db_postgresql
       - db_mariadb
       - redis
       - adminer
-    networks:
-      - adapters_default
+
       
   db_mariadb:
     image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
