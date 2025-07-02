@@ -14,10 +14,15 @@ services:
     user: 1026:100
     hostname: webadapters-db
     environment:
-      MYSQL_DATABASE: webadapters_db
-      MYSQL_USER: robjects
-      MYSQL_PASSWORD: assHIgai1!?
-      MYSQL_ROOT_PASSWORD: rootpass
+      DB_DATABASE: webadapters_db
+      DB_USER: robjects
+      DB_PASSWORD: assHIgai1!?
+      DB_ROOT_PASSWORD: rootpass
+      # DB_HOST: db_mariadb
+      # DB_PORT: 3306
+      # DB_SOCKET: /var/run/mysqld/mysqld.sock
+      # DB_CHARSET: utf8mb4
+      # DB_COLLATE: utf8mb4_unicode_ci
       TZ: America/Chicago
     volumes:
       - /volume1/docker/webadapters/db_mariadb:/var/lib/mysql:rw
