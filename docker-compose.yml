@@ -6,12 +6,12 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Chicago
-      - APP_ENV=development
+      # - APP_ENV=development
     ports:
       - 8323:80
       - 3888:3000
     healthcheck:
-      test: ["CMD-SHELL", "timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1"]
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -20,35 +20,33 @@ services:
       - cakephp_data:/var/www/html:rw
       - cakephp_data:/app/data:rw
     depends_on:
-      - db_postgresql
       - db_mariadb
-      - db_data
 
-  db_data:
-    image: mysql:8.0
-    environment:
-      MYSQL_PORT: 3306
-      MYSQL_HOST_AUTH_METHOD: trust
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: webadapters_db
-      MYSQL_USER: robjects
-      MYSQL_PASSWORD: assHIgai1!?
-      # MYSQL_ROOT_PASSWORD: rootpassword
-      # MYSQL_DATABASE: cakephp
-      # MYSQL_USER: cakephpuser
-      # MYSQL_PASSWORD: cakephp_password
-    volumes:
-      - db_mysql:/var/lib/mysql:rw
-    restart: on-failure:5
-    container_name: WebAdaptors-MySQL
-    hostname: WebAdaptors-MySQL
-    ports:
-      - 3311:3306
+
+  # db_data:
+  #   image: mysql:8.0
+  #   environment:
+  #     MYSQL_PORT: 3306
+  #     MYSQL_HOST_AUTH_METHOD: trust
+  #     MYSQL_ROOT_PASSWORD: rootpass
+  #     MYSQL_DATABASE: webadapters_db
+  #     MYSQL_USER: robjects
+  #     MYSQL_PASSWORD: assHIgai1!?
+  #     # MYSQL_ROOT_PASSWORD: rootpassword
+  #     # MYSQL_DATABASE: cakephp
+  #     # MYSQL_USER: cakephpuser
+  #     # MYSQL_PASSWORD: cakephp_password
+  #   volumes:
+  #     - db_mysql:/var/lib/mysql:rw
+  #   restart: on-failure:5
+  #   container_name: WebAdaptors-MySQL
+  #   hostname: WebAdaptors-MySQL
+  #   ports:
+  #     - 3311:3306
 
   db_mariadb:
     image: mariadb:11.4-noble
     container_name: WebAdaptors-DB
-    user: 1026:100
     hostname: webadapters-db
     environment:
       MARIADB_ROOT_PASSWORD: rootpass
@@ -57,38 +55,40 @@ services:
       MARIADB_PASSWORD: assHIgai1!?
       MARIADB_HOST: db_mariadb
       MARIADB_PORT: 3306
+      MARIADB_ALLOW_EMPTY_PASSWORD: "yes"
+      MARIADB_ROOT_HOST: '%'
+      MARIADB_INITDB_ARGS: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
       MARIADB_CHARSET: utf8mb4
       MARIADB_COLLATION: utf8mb4_unicode_ci
-      MARIADB_INITDB_ARGS: "--character
       TZ: America/Chicago
     volumes:
       - db_mariadb:/var/lib/mysql:rw
     restart: on-failure:5
 
-  db_postgresql:
-    container_name: WebAdaptors-PostgreSQL
-    image: postgres
-    mem_limit: 256m
-    cpu_shares: 768
-    healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "marius_DB", "-U", "root"]
-    environment:
-      POSTGRES_USER: robjects
-      POSTGRES_PASSWORD: assHIgai1!?
-      POSTGRES_HOST: db_postgresql
-      POSTGRES_PORT: 5432
+  # db_postgresql:
+  #   container_name: WebAdaptors-PostgreSQL
+  #   image: postgres
+  #   mem_limit: 256m
+  #   cpu_shares: 768
+  #   healthcheck:
+  #     test: ["CMD", "pg_isready", "-q", "-d", "marius_DB", "-U", "root"]
+  #   environment:
+  #     POSTGRES_USER: robjects
+  #     POSTGRES_PASSWORD: assHIgai1!?
+  #     POSTGRES_HOST: db_postgresql
+  #     POSTGRES_PORT: 5432
       
-      POSTGRES_HOST_AUTH_METHOD: trust
-      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
-      TZ: America/Chicago
-      POSTGRES_DB: webadapters_db
-    volumes:
-      - db_postgresql:/var/lib/postgresql/data:rw
-    ports:
-      - 2665:5432
-    restart: on-failure:5
-    depends_on:
-      - redis
+  #     POSTGRES_HOST_AUTH_METHOD: trust
+  #     POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+  #     TZ: America/Chicago
+  #     POSTGRES_DB: webadapters_db
+  #   volumes:
+  #     - db_postgresql:/var/lib/postgresql/data:rw
+  #   ports:
+  #     - 2665:5432
+  #   restart: on-failure:5
+  #   depends_on:
+  #     - redis
 
   adminer:
     image: adminer:latest
@@ -100,10 +100,6 @@ services:
     ports:
       - 8443:8080
     restart: on-failure:5
-    depends_on:
-      - db_postgresql
-      - db_mariadb
-      - redis
     environment:
       - ADMINER_DEFAULT_SERVER=db_postgresql
       - ADMINER_DEFAULT_SERVER_POSTGRES=db_postgresql
