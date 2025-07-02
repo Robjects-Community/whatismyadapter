@@ -8,10 +8,6 @@ services:
 # Frontend service for CakePHP 5 application
 # This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
 
-
-
-
-
 # Database service using PostgreSQL
 # This service runs a PostgreSQL database and is configured to use specific environment variables, volumes for persistent storage, and health checks to ensure the database is ready before other services depend on it.
     
@@ -149,33 +145,6 @@ services:
     volumes:
       - /volume1/docker/webadapters/frontend:/app/data:rw
     restart: unless-stopped
-  # jupyter:
-  #   container_name: WebAdaptors-Jupyter
-  #   image: jupyter/datascience-notebook:latest
-  #   mem_limit: 3g
-  #   cpu_shares: 768
-  #   security_opt:
-  #     - no-new-privileges:true
-  #   volumes:
-  #     - /volume1/docker/jupyter:/home/jovyan/work:rw
-  #   ports:
-  #     - 10235:8888
-  #   restart: on-failure:5
- 
-  
-  # adminer:
-  #   image: adminer:latest
-  #   container_name: WebAdaptors-Adminer
-  #   hostname: adminer
-  #   mem_limit: 512m
-  #   cpu_shares: 256
-  #   security_opt:
-  #     - no-new-privileges:true
-  #   user: 1026:100
-  #   ports:
-  #     - 8220:8080
-  #   restart: on-failure:5
-
 
 # Volumes for persistent storage
 volumes:
