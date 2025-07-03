@@ -1,0 +1,3 @@
+ cms_app_local.php is a configuration file for the Adapter CMS application. It is used to set up local environment-specific configurations that override the default settings in the main configuration file.
+
+ Specifically, this file is used to define the database connection settings for the application. It allows you to specify the database host, username, password, and database name that the application will use to connect to the database.

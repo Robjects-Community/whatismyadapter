@@ -210,9 +210,6 @@ If completed successfully, it creates aliases in your shell configuration file (
 
 Once pre-requisites are met, it asks you to run one of the following options based on your total project configuration:
 
-
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
-
 # Understanding Willow CMS Interactive Menu Options: Rebuilding, Running Migrations, and Continue
 
 Based on the logs from the Willow CMS GitHub repository and the Docker development environment setup, the interactive menu that appears during container startup provides five critical options for managing your development environment. Here's a comprehensive explanation of what each option does:
@@ -274,7 +271,7 @@ Use this for resolving temporary service issues or applying configuration change
 
 ### **run [M]igrations - Database Schema Updates**
 
-The migrations option specifically handles **database schema evolution**[^5][^6][^7]:
+The migrations option specifically handles **database schema evolution**:
 
 - **CakePHP Migrations**: Executes pending database migrations using CakePHP's migration system
 - **Schema Updates**: Applies changes to table structures, indexes, and constraints
