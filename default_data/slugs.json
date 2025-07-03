@@ -1,0 +1,27 @@
+[
+    {
+        "model": "ImageGalleries",
+        "foreign_key": "2f2e3c93-cde2-4fc6-8d89-16bc6270a781",
+        "slug": "type-c-adapters"
+    },
+    {
+        "model": "Articles",
+        "foreign_key": "3e164e5c-2704-4135-b703-d216e6fcfa41",
+        "slug": "adapters-post"
+    },
+    {
+        "model": "Tags",
+        "foreign_key": "9d7baffe-aa1d-45d7-9510-7b60eccd6c4c",
+        "slug": "adapters-tag"
+    },
+    {
+        "model": "Articles",
+        "foreign_key": "16d41cc2-fd65-485b-abd6-934a8a36a14e",
+        "slug": "adapters"
+    },
+    {
+        "model": "Tags",
+        "foreign_key": "8b3b8c68-c26e-4b40-b5b7-2ec15f9a84f6",
+        "slug": "tag"
+    }
+]
