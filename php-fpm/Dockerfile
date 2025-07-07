@@ -1,5 +1,4 @@
-FROM php:8.1-fpm
-
+FROM phpdockerio/php:8.1-fpm
 WORKDIR "/var/www/myapp"
 
 # Install selected extensions and other stuff
