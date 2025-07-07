@@ -69,11 +69,11 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /volume1/docker/myapp/php-fpm
+      device: /volume1/docker/myapp/docker/php-fpm
       o: bind
   myapp-nginx:
     driver: local
     driver_opts:
       type: none
-      device: /volume1/docker/myapp/nginx
+      device: /volume1/docker/myapp/docker/nginx
       o: bind
