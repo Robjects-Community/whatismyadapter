@@ -1,402 +1,309 @@
-# 🌿 Willow CMS
+# cakephp-docker
+A Docker Compose setup for containerized CakePHP Applications
 
-> **A Modern Content Management System Built with CakePHP 5.x and AI Integration**
+This setup spools up the following containers
 
-[![Build Status](https://github.com/matthewdeaves/willow/workflows/CI/badge.svg)](https://github.com/matthewdeaves/willow/actions)
-[![PHP Version](https://img.shields.io/badge/PHP-8.1%20|%208.2%20|%208.3-blue)](https://php.net)
-[![CakePHP](https://img.shields.io/badge/CakePHP-5.x-red)](https://cakephp.org)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+* **mysql** (8.0)
+* **nginx**
+* **php-fpm** (php 8.1)
+* **mailhog** (smtp server for testing)
 
-Willow CMS is a powerful, AI-enhanced content management system that combines the robustness of CakePHP 5.x with cutting-edge AI capabilities. Built with developers in mind, it offers a complete Docker development environment and production-ready features.
+The guide will walk you thru the following things
 
-**🆓 FREE & OPEN SOURCE** • **🏢 COMMERCIAL USE ALLOWED** • **🔧 FULLY CUSTOMIZABLE**
+* [Quick Start](#quick-start)
+* [Installation](#installation)
+* [How to use `bin/cake`, `mysql` and other commandline utils now that you're using containers](#now-how-to-run-bincake-and-mysql)
+* [OK, so what did the defaults set up?](#ok-so-what-did-the-defaults-set-up)
+* [Installing Docker on my Host](#installing-docker-on-my-host)
+* [Troubleshooting](#troubleshooting)
+  * [nginx open logs/access.log failed no such file or directory](#nginx-open-logsaccesslog-failed-no-such-file-or-directory)
+  * [creating a CakePHP app](#creating-a-CakePHP-app)
 
-**🚀 [Live Demo](https://willowcms.app) | 📖 [Development Blog](https://willowcms.app) | 📄 [MIT License](#-license)**
+## Quick Start
 
----
+For those looking to get started in `60 sec` using just the defaults (which are fine for dev) do the following:
 
-## ✨ Key Features
+1. Download the ZIP file for this repo
+1. Create the following folder structure
+ * Put your CakePHP app inside the `cakephp` folder (assumes you already have one; if not, look here)
+ * and the files from this repo into the `docker` folder
 
-### 🤖 **AI-Powered Content Management**
-- **Automatic Translation**: Support for 25+ languages with AI and Google Translate integration
-- **SEO Optimization**: AI-generated meta titles, descriptions, and social media content
-- **Smart Tagging**: Automatic article tagging based on content analysis
-- **Image Analysis**: AI-powered alt text, keywords, and descriptions for images
-- **Comment Moderation**: Intelligent spam and inappropriate content detection
-- **Content Generation**: AI-powered article summaries and content enhancement
+	```
+	    myapp
+	        docker
+	            .. put the zip files in here ..
+	        cakephp
+	            .. put your cake app in here ..
+	```
 
-### 🎨 **Flexible Architecture**
-- **Plugin-Based Theming**: Separate frontend (`DefaultTheme`) and admin (`AdminTheme`) interfaces
-- **Multi-Language First**: Built-in internationalization with locale-aware routing
-- **Queue-Based Processing**: Background jobs for heavy operations (image processing, AI tasks)
-- **Modern Security**: IP blocking, rate limiting, CSRF protection, and secure authentication
-- **Advanced Content Management**: WYSIWYG editor (Trumbowyg) with image galleries and responsive design
-- **Image Gallery System**: Comprehensive image management with AI-powered descriptions and metadata
+	If you want to do that all from commandline...
 
-### 🛠️ **Developer Experience**
-- **Docker Development Environment**: Complete setup with Nginx, PHP, MySQL, Redis, PHPMyAdmin, Mailpit, and Jenkins
-- **Management Tool**: Interactive CLI (`./manage.sh`) for data management, backups, and system operations
-- **Code Quality Tools**: PHP CodeSniffer, PHPStan, and comprehensive unit testing with 292+ tests
-- **CakePHP 5.x Foundation**: Following modern MVC patterns and conventions
-- **Developer Aliases**: Streamlined shell commands for common development tasks
-- **GitHub Actions CI/CD**: Automated testing on PHP 8.1, 8.2, 8.3 with Redis integration
+	```bash
+    cd ~/path/to/your/local/dev/folder
+    mkdir myapp
+    mkdir myapp/cakephp
+	```
 
----
+	And then to simultaneously download the latest master file, unpack it, stuff it into a folder named docker, and clone the `.env` file ... run this...
 
-## 🚀 Quick Start
+	```bash
+    cd myapp
+    curl -Lo cakephp-docker.zip https://github.com/cwbit/cakephp-docker/archive/master.zip && \
+    unzip cakephp-docker.zip && \
+    mv cakephp-docker-master docker && \
+    cp docker/.env.sample docker/.env
+    rm cakephp-docker.zip
+	```
+3. Move your cakephp app into the `cakephp` folder or if you're creating one from scratch skip to the next step
+4. From commandline, `cd` into the `docker` directory and run `docker-compose up`
 
-### Prerequisites
-- [Docker](https://www.docker.com/get-started) (only requirement on your host machine)
-- Git
+	```bash
+	$ cd /path/to/somefolder/docker
+	$ docker-compose up
 
-### Installation
+	Starting myapp-mysql
+	Starting myapp-mailhog
+	Starting myapp-php-fpm
+	Starting myapp-nginx
+	Attaching to myapp-mailhog, myapp-mysql, myapp-nginx, myapp-php-fpm
+  	myapp-mailhog  | 2024/06/12 15:59:39 Using in-memory storage
+  	myapp-mailhog  | 2024/06/12 15:59:39 [SMTP] Binding to address: 0.0.0.0:1025
+  	myapp-mailhog  | 2024/06/12 15:59:39 Serving under http://0.0.0.0:8025/
+  	myapp-mailhog  | [HTTP] Binding to address: 0.0.0.0:8025
+  	myapp-mailhog  | Creating API v1 with WebPath:
+  	myapp-mailhog  | Creating API v2 with WebPath:
+  	myapp-mysql    | 2024-06-12 15:59:39+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.27-1debian10 started.
+  	myapp-php-fpm  | [12-Jun-2024 15:59:39] NOTICE: fpm is running, pid 1
+  	myapp-php-fpm  | [12-Jun-2024 15:59:39] NOTICE: ready to handle connections
+  	myapp-php-fpm  | [12-Jun-2024 15:59:39] NOTICE: systemd monitor interval set to 10000ms
+  	myapp-nginx    | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+  	myapp-nginx    | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+  	myapp-nginx    | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+	... you'll probably see more crap spit out here ...
+	```
+5. If you're creating a new cakephp app, follow the steps in [creating a CakePHP app](#creating-a-CakePHP-app)
+6. That's it! Go to `localhost:8180` and your app will be live.
+
+All these defaults can be completely overridden. Start with the [Installation](#installation) section to get a feel for what's going on, and then tweak the defaults to suit your individual project needs.
+
+
+
+## Installation
+
+Clone this repo (or just download the zip) and put it in a `docker` folder inside your root app folder
+
+Here is an example of what my typical setup looks like
+
+```
+	myapp
+		cakephp
+			src
+			config
+			..
+		docker
+			.env
+			.env.sample
+			docker-compose.yml
+			mysql
+				my.cnf
+			nginx
+				nginx.conf
+			php-fpm
+				Dockerfile
+				php-ini-overrides.ini
+```
+
+Next, **Update the Environment File**
+
+Copy or Rename `docker/.env.sample` to `docker/.env`.
+This is an environment file that your Docker Compose setup will look for automatically which gives us a great, simple way to store things like your mysql database credentials outside of the repo.
+
+By default the file will contain the following
+
+```
+MYSQL_ROOT_PASSWORD=root
+MYSQL_DATABASE=myapp
+MYSQL_USER=myapp
+MYSQL_PASSWORD=myapp
+```
+
+Docker Compose will automatically replace things like `${MYSQL_USER}` in the `docker-compose.yml` file with whatever corresponding variables it finds defined in `.env`
+
+Lastly, **Find/Replace** `myapp` with the name of your app.
+
+> **WHY?** by default the files are set to name the containers based on your app prefix. By default this is `myapp`.
+> A find/replace on `myapp` is safe and will allow you to customize the names of the containers
+>
+> e.g. myapp-mysql, myapp-php-fpm, myapp-nginx, myapp-mailhog
+
+**Build and Run your Containers**
 
 ```bash
-# Clone the repository
-git clone git@github.com:matthewdeaves/willow.git
-cd willow/
-
-# Run the setup script
-./setup_dev_env.sh
+cd /path/to/your/app/docker
+docker-compose up
 ```
 
-🎉 **That's it!** Your development environment is ready:
+That's it. You can now access your CakePHP app at
 
-- **Main Site**: [http://localhost:8080](http://localhost:8080)
-- **Admin Panel**: [http://localhost:8080/admin](http://localhost:8080/admin)
-  - **Login**: `admin@test.com` / `password`
+`localhost:8180`
 
-### Additional Services
+> **tip**: start docker-compose with `-d` to run (or re-run changed containers) in the background.
+>
+> `docker-compose up -d`
 
-- **phpMyAdmin**: [http://localhost:8082](http://localhost:8082) (root/password)
-- **Mailpit**: [http://localhost:8025](http://localhost:8025) (email testing)
-- **Redis Commander**: [http://localhost:8084](http://localhost:8084) (root/password)
-- **Jenkins**: [http://localhost:8081](http://localhost:8081) (start with `./setup_dev_env.sh --jenkins`)
+**Connecting to your database**
 
----
+Also by default the first time you run the app it will create a `MySQL` database with the credentials you specified in your `.env` file (see above)
 
-## 🔧 Development Workflow
+``` yaml
+host : myapp-mysql
+username : myapp
+password : myapp
+database : myapp
+```
 
-### Developer Aliases
+You can access your MySQL database (with your favorite GUI app) on
 
-Install helpful shell aliases for streamlined development:
+`localhost:8106`
+
+Your `cakephp/config/app_local.php` file should be set to the following (it connects through the docker link)
+
+```php
+  'Datasources' => [
+    'default' => [
+      'host' => 'myapp-mysql',
+      'port' => '3306',
+      'username' => 'myapp',
+      'password' => 'myapp',
+      'database' => 'myapp',
+    ],
+```
+
+To change these defaults edit the variables in the `docker/.env` file or tweak the `docker-compose.yml` file under `myapp-mysql`'s `environment` section.
+
+## Now, how to run `bin/cake` and `mysql`
+
+Now that you're running stuff in containers you need to access the code a little differently
+
+You can run things like `composer` on your host, but if you want to run `bin/cake` or use MySQL from commandline you just need to connect into the appropriate container first
+
+**access your php server**
 
 ```bash
-./setup_dev_aliases.sh
+docker exec -it myapp-php-fpm /bin/bash
 ```
+> remember to replace `myapp` with whatever you really named the container
 
-This provides shortcuts like:
-- `cake_queue_worker` - Start background job processing
-- `phpunit` - Run all tests
-- `phpcs_sniff` - Check code standards
-- `phpcs_fix` - Auto-fix code violations
-
-### Essential Commands
-
-#### Queue Workers (Required for AI Features)
-```bash
-# Start queue worker for AI processing, image handling, etc.
-cake_queue_worker_verbose
-# or
-docker compose exec willowcms bin/cake queue worker --verbose
-```
-
-#### Testing
-```bash
-# Run all tests (292+ tests with comprehensive coverage)
-phpunit
-
-# Run with coverage report
-phpunit_cov_html
-# Accessible at http://localhost:8080/coverage/
-
-# Run specific test file
-phpunit tests/TestCase/Controller/UsersControllerTest.php
-```
-
-#### Code Quality
-```bash
-# Check coding standards
-phpcs_sniff
-
-# Auto-fix code violations
-phpcs_fix
-
-# Static analysis (PHPStan level 5)
-phpstan_analyse
-
-# All quality checks
-composer cs-check && composer stan
-```
-
-#### Database Management
-```bash
-# Run migrations
-cake_migrate
-
-# Create migration after schema changes
-bake_diff YourMigrationName
-
-# Direct database access
-docker compose exec mysql mysql -u cms_user -ppassword cms
-```
-
-### Management Tool
-
-The interactive management tool provides easy access to common tasks:
+**access mysql cli**
 
 ```bash
-./manage.sh
+docker exec -it myapp-mysql /usr/bin/mysql -u root -p myapp
 ```
+> remember to replace `myapp` with whatever you really named the container and with your actual database name and user login
 
-**Features:**
-- 📊 Database backups and restoration
-- 🌐 Internationalization management  
-- 📁 File backup and restoration
-- 🧹 Cache clearing and system maintenance
-- 🔧 Interactive container shell access
 
----
+## OK, so what did the defaults set up?
 
-## 🤖 AI Integration Setup
+There are 4 containers that I use all the time that will be spooled up automatically
 
-Willow CMS integrates with leading AI services for enhanced functionality:
+### `myapp-nginx` - the web server
 
-### Anthropic Claude API
-- Content analysis and generation
-- SEO optimization
-- Image analysis
-- Comment moderation
-- Article summarization
+First we're creating an nginx server. The configuration is set based on the CakePHP suggestions for nginx and `myapp-nginx` will handle all the incoming requests from the client and forward them to the `myapp-php-fpm` server which is what actually runs your PHP code.
 
-### Google Translate API
-- Professional-grade translations
-- Batch processing support
-- 25+ language support
+You can configure the **nginx server** by editing the `/nginx/nginx.conf` file
 
-### Configuration
+### `myapp-php-fpm` - the PHP processor
 
-1. Navigate to **Settings**: [http://localhost:8080/admin/settings](http://localhost:8080/admin/settings)
-2. Add your API keys:
-   - Anthropic API key
-   - Google Translate API key
-3. Enable AI features and select desired languages
-4. Start a queue worker to process AI jobs
+This container runs `php` (and it's extensions) needed for your CakePHP app
 
----
+It automatically includes the following extensions
 
-## 🏗️ Architecture Overview
+* `php8.1-intl` (required for CakePHP 4.0+)
+* `php8.1-mbstring` (included in the base image)
+* `php8.1-sqlite3` (required for DebugKit)
+* `php8.1-mysql`
 
-### Core Technologies
-- **Framework**: CakePHP 5.x
-- **Database**: MySQL 8.0+
-- **Cache/Queue**: Redis
-- **Container**: Docker + Alpine Linux
-- **Web Server**: Nginx + PHP-FPM
+It also includes some php ini overrides (see `php-fpm\php-ini-overrides.ini`)
 
-### Project Structure
-```
-willow/
-├── 📁 src/                          # Core application code
-│   ├── 🎮 Controller/              # Frontend controllers
-│   │   └── Admin/                  # Admin backend controllers
-│   ├── 📊 Model/                   # Data models, entities, and behaviors
-│   │   ├── Behavior/              # Reusable model behaviors
-│   │   ├── Entity/                # Entity classes with business logic
-│   │   └── Table/                 # Table classes with queries
-│   ├── 🔌 Service/Api/             # AI and external API integrations
-│   │   ├── Anthropic/             # Claude AI services
-│   │   └── Google/                # Google Translate services
-│   ├── ⚡ Job/                     # Background job classes
-│   ├── 🛠️ Command/                 # CLI command tools
-│   ├── 🛡️ Middleware/              # Security and rate limiting
-│   ├── 👁️ View/                    # View helpers and cells
-│   └── 🔧 Utility/                 # Helper and utility classes
-├── 🎨 plugins/                     # Plugin-based themes
-│   ├── AdminTheme/                # Administrative interface (Bootstrap)
-│   │   ├── src/                   # Plugin controllers and logic
-│   │   ├── templates/             # Admin templates and forms
-│   │   └── webroot/               # Admin assets (CSS, JS)
-│   └── DefaultTheme/              # Public website theme
-│       ├── src/                   # Theme controllers
-│       ├── templates/             # Public templates
-│       └── webroot/               # Public assets
-├── ⚙️ config/                      # Configuration files
-│   ├── Migrations/                # Database migration files
-│   ├── schema/                    # Database schema files
-│   └── routes.php                 # URL routing configuration
-├── 🧪 tests/                       # Comprehensive test suite (292+ tests)
-│   ├── TestCase/                  # Test classes
-│   └── Fixture/                   # Test data fixtures
-├── 🐳 docker/                      # Docker development environment
-├── 📁 webroot/                     # Public web assets and uploads
-├── 🌍 resources/locales/           # Translation files (25+ languages)
-└── 🔧 manage.sh                    # Interactive management tool
-```
+This container will (by default) look for your web app code in `../cakephp/` (relative to the `docker-compose` file).
 
-### Key Behaviors & Components
-- **ImageAssociableBehavior**: Cross-model image associations via pivot table
-- **SlugBehavior**: SEO-friendly URLs with history tracking and automatic redirects
-- **OrderableBehavior**: Drag-and-drop content ordering for galleries and lists
-- **CommentableBehavior**: Universal commenting system with AI moderation
-- **QueueableImageBehavior**: Automated background image processing and analysis
-- **ContentHelper**: Advanced content formatting with alignment and responsive images
-- **GalleryCell**: Reusable gallery display component with translation support
+You can configure what **PHP extensions** are loaded by editing `/php-fpm/Dockerfile`
 
----
+You can configure **PHP overrides** by editing `/php-fpm/php-ini-overrides.ini`
 
-## 🧪 Testing & Quality
+### `myapp-mysql` - the database server
 
-### Continuous Integration
-- **GitHub Actions**: Automated testing on PHP 8.1, 8.2, 8.3 with Redis and MySQL
-- **Code Coverage**: HTML reports available at `/coverage/` with detailed metrics
-- **Pre-commit Hooks**: Automatic test execution and code quality checks before pushes
-- **292+ Tests**: Comprehensive test suite covering controllers, models, behaviors, and services
+The first time you run the docker containers it will create a folder in your root structure called `mysql` (at the same level as your `docker` folder) and this is where it will store all your database data.
 
-### Code Standards
-- **PHP CodeSniffer**: CakePHP coding standards enforcement
-- **PHPStan**: Static analysis (level 5)
-- **Unit Tests**: Comprehensive test coverage with fixtures
+Since the data is stored on your host device you can bring the mysql container up and down or completely destroy and rebuild it without ever actually touching your data - it is "safely" stored on the host.
 
-### Running Tests
+You can configure **MySQL overrides** by editing `/mysql/my.cnf`
+
+### `myapp-mailhog` - the smtp server
+
+This is just a built-in mail server you can use to 'send' and intercept mail coming from your application.
+
+Set up your `cakephp/config/app_local.php` with the following
+
+```php
+    'EmailTransport' => [
+        ...
+	    'mailhog' => [
+	        # These are default settings for the MailHog container - make sure it's running first
+	        'className' => 'Smtp',
+	        'host' => 'myapp-mailhog',
+	        'port' => 1025,
+	        'timeout' => 30,
+	      ],
+	      ...
+```          
+
+You can access the **Web GUI** (using the defaults) for mailhog at
+
+`localhost:8125`
+
+To send mail over the transport layer just set your `Email::transport('mailhog')`
+
+
+## Installing Docker on my Host
+
+If you've never worked with Docker before they have some super easy ways to install the needed runtimes on almost any host
+
+* Mac, Windows, Ubuntu, Centos, Debian, Fedora, Azure, AWS
+
+You can download the (free) community edition here [https://www.docker.com/community-edition#/download]()
+
+**Cloud Hosting Docker Applications**
+
+[DigitalOcean](https://m.do.co/c/640e75c994b4) has been super reliable for us as a host and has a one-click deploy of a  docker host.
+
+Just click `CREATE DROPLET` and then under `Choose an Image` pick the `One-click Apps` (tab) and choose `Docker X.Y.Z on X.Y` and you're good to go; DO will spool up a droplet with `docker` and `docker-compose` already installed and ready to run.
+
+## Troubleshooting
+
+### nginx open logs/access.log failed no such file or directory
+
+submitted by @jeroenvdv
+
+`myapp-nginx | nginx: [emerg] open() "/var/www/myapp/logs/access.log" failed (2: No such file or directory)`
+
+This is caused by not installing CakePHP completely and can be fixed by creating the logs folder in your `myapp/cakephp` folder.
+
+If you are starting fresh and need to install cake using the container you just created then follow the next step, [Creating a CakePHP app](#creating-a-CakePHP-app).
+
+### creating a CakePHP app
+
+Most of the time I set this up without an existing CakePHP app. This will cause the initial `up` command to fail because folders are missing. To solve this run the install command (from the official CakePHP docs) but set the app name to `.` instead of `myapp`.
+
 ```bash
-# All tests
-docker compose exec willowcms php vendor/bin/phpunit
-
-# Specific test file
-docker compose exec willowcms php vendor/bin/phpunit tests/TestCase/Controller/UsersControllerTest.php
-
-# With coverage report
-docker compose exec willowcms php vendor/bin/phpunit --coverage-html webroot/coverage
+docker exec -it myapp-php-fpm /bin/bash
 ```
+> remember to replace `myapp` with whatever you really named the container
 
----
-
-## 🌐 Multi-Language Support
-
-Willow CMS is built with internationalization as a core feature:
-
-### Supported Languages
-Over 25 languages including English, Spanish, French, German, Chinese, Japanese, and more.
-
-### Features
-- **Automatic Translation**: AI-powered content translation
-- **Locale-Aware Routing**: Language-specific URLs
-- **SEO Translation**: Meta content in multiple languages
-- **Content Localization**: Articles, tags, and UI elements
-
-### Commands
+and then, inside the container
 ```bash
-# Extract translatable strings
-docker compose exec willowcms bin/cake i18n extract
-
-# Generate translation files
-docker compose exec willowcms bin/cake generate_po_files
-
-# Import default translations
-docker compose exec willowcms bin/cake load_default_18n
+composer create-project --prefer-dist cakephp/app:5.* .
 ```
+Next, fix the database connection strings by following the steps in [Connecting to your database](#Connecting-to-your-database) (above).
 
----
-
-## 🚢 Production Deployment
-
-For production environments, we provide a separate deployment repository optimized for AWS AppRunner:
-
-**📦 [Production Deployment Guide](https://github.com/matthewdeaves/willow_cms_production_deployment)**
-
-### Production Features
-- **Optimized Performance**: Redis caching, query optimization
-- **Security Hardened**: Production-ready security configurations
-- **Scalable Architecture**: Cloud-native deployment patterns
-- **Monitoring**: Built-in logging and performance monitoring
-
----
-
-## 📚 Documentation
-
-- **[Developer Guide](DeveloperGuide.md)**: Comprehensive development documentation
-- **[CakePHP Book](https://book.cakephp.org/5/en/index.html)**: Framework documentation
-- **[API Documentation](docs/)**: Generated API docs (if available)
-
-### Key Documentation Sections
-1. **Getting Started**: Shell aliases, project structure, and conventions
-2. **Feature Development**: Database migrations and best practices
-3. **Testing**: Unit tests, coverage reports, and CI/CD
-4. **AI Integration**: Service classes and API configurations
-5. **Environment Setup**: Docker configuration and deployment
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-### Development Process
-1. **Fork** the repository
-2. **Create** a feature branch
-3. **Follow** coding standards (use `phpcs_sniff` and `phpcs_fix`)
-4. **Write** tests for new features
-5. **Submit** a pull request
-
-### Code Standards
-- Follow CakePHP 5.x conventions
-- Maintain test coverage above 80%
-- Use meaningful commit messages
-- Document new features
-
----
-
-## 📄 License
-
-**Willow CMS is released under the MIT License** - one of the most permissive open source licenses available.
-
-### What this means for you:
-
-✅ **Commercial Use**: Use Willow CMS in commercial projects without restrictions  
-✅ **Modification**: Modify the source code to fit your needs  
-✅ **Distribution**: Share and redistribute Willow CMS freely  
-✅ **Private Use**: Use Willow CMS in private/internal projects  
-✅ **Patent Use**: Includes patent protection for users  
-
-### Your only obligations:
-- Include the original copyright notice and license text
-- Include the [LICENSE](LICENSE) file in distributions
-
-**No attribution required in your final product, no royalties, no restrictions on how you use it.**
-
-See the [LICENSE](LICENSE) file for complete details.
-
-### Why MIT License?
-
-We chose the MIT License to ensure **maximum freedom for developers and organizations**:
-- **Startups** can build commercial products without licensing fees
-- **Enterprises** can modify and deploy without legal concerns  
-- **Open Source Projects** can integrate and extend Willow CMS
-- **Educational Institutions** can use it freely for teaching and research
-- **Government Agencies** can deploy it without bureaucratic hurdles
-
-**Our philosophy**: Great software should be accessible to everyone.
-
----
-
-## 🆘 Support
-
-- **Issues**: [GitHub Issues](https://github.com/matthewdeaves/willow/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/matthewdeaves/willow/discussions)
-- **Documentation**: [Developer Guide](DeveloperGuide.md)
-
----
-
-## 🙏 Acknowledgments
-
-- **[CakePHP](https://cakephp.org)**: The robust PHP framework powering Willow CMS
-- **[Anthropic](https://anthropic.com)**: AI capabilities via Claude API
-- **[Google Cloud](https://cloud.google.com)**: Translation services
-- **Community**: All contributors and users who make this project possible
-
----
-
-<div align="center">
-  <strong>🌿 Built with passion for the web development community</strong>
-</div>
+That's it. You should have lots of happy green checkmarks at `localhost:8180` or whatever you set nginx to respond to.
