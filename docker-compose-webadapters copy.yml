@@ -56,7 +56,6 @@ services:
     hostname: adminer:latest
     security_opt:
       - no-new-privileges:true
-    user: 1026:100
     ports:
       - 8232:8080
     volumes:
@@ -82,7 +81,6 @@ services:
   backend:
     image: node:20
     container_name: WebAdaptors-Backend
-    user: 1026:100 # Use a specific user and group ID for security
     working_dir: /app
     volumes:
       - /volume1/docker/webadapters/backend:/app:rw
@@ -128,25 +126,56 @@ services:
   #   restart: on-failure:5
 
 
-# Volumes for persistent storage
+# # Volumes for persistent storage
+# volumes:
+#   db_data:
+#     driver: local
+#     driver_opts:
+#       device: /volume1/docker/webadapters/db
+#       o: bind
+#   cakephp_data:
+#     driver: local
+#     driver_opts:
+#       device: /volume1/docker/webadapters/cakephp
+#       o: bind
+#   redis_data:
+#     driver: local
+#     driver_opts:
+#       device: /volume1/docker/webadapters/redis
+#       o: bind
+#   adminer_data:
+#     driver: local
+#     driver_opts:
+#       device: /volume1/docker/webadapters/adminer
+#       o: bind
 volumes:
+  webadapters_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/webadapters
+      o: bind
   db_data:
     driver: local
     driver_opts:
-      device: /volume1/docker/webadapters/db
+      type: none
+      device: ${PWD}/webadapters/db
       o: bind
-  cakephp_data:
+  backend_data:
     driver: local
     driver_opts:
-      device: /volume1/docker/webadapters/cakephp
+      type: none
+      device: ${PWD}/webadapters/backend
       o: bind
   redis_data:
     driver: local
     driver_opts:
-      device: /volume1/docker/webadapters/redis
+      type: none
+      device: ${PWD}/webadapters/redis
       o: bind
   adminer_data:
     driver: local
     driver_opts:
-      device: /volume1/docker/webadapters/adminer
+      type: none
+      device: ${PWD}/webadapters/adminer
       o: bind
