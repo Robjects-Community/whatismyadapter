@@ -39,7 +39,7 @@ services:
         - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
         - ./nginx/nginx-cms.conf:/etc/nginx/conf.d/nginx-cms.conf
     ports:
-     - "8180:80"
+     - "8180:88"
     #  - "8880:88"
     links:
      - myapp-php-fpm
@@ -62,6 +62,7 @@ services:
   willowcms-mysql:
     image: mysql:8.4.3
     platform: linux/amd64
+    container_name: willowcms-mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
       DB_USERNAME: cms_user
@@ -76,15 +77,26 @@ services:
     build:
       context: .
       dockerfile: willowcms/Dockerfile
+
     container_name: willowcms
     working_dir: /var/www/willowcms
+    links:
+      - willowcms-mysql
+      - redis-commander
     ports: 
-      - "8880:80"
+      - "8080:80"
     volumes:
       - ../willowcms:/var/www/willowcms/
-      - ./willowcms/config/app/cms_app_local.php:/var/www/willowcms/config/app_local.php
-      - ./willowcms/config/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./willowcms/config/nginx/nginx-cms.conf:/etc/nginx/conf.d/default.conf
+      - ./willowcms/config/supervisord:/etc/supervisor/conf.d
+      - ../willowcms/config/app/cms_app_local.php:/var/www/willowcms/config/app_local.php
+      # This is the local configuration file for WillowCMS
+      # It should be created based on the example file provided in the WillowCMS repository.
+      # Make sure to adjust the path if your local setup differs.
+      # If you don't have a local configuration file, you can copy the example file from the WillowCMS repository:
+      # cp ../willowcms/config/app/cms_app_local.example.php ../willowcms/config/app/cms_app_local.php
+      # Then, edit the cms_app_local.php file to suit your local environment.
+      # Ensure that the file is writable by the web server user (usually www-data or nginx).
+      - ./nginx/nginx-cms.conf:/etc/nginx/nginx-cms.conf
       - ./logs/nginx-cms:/var/log/nginx-cms/
     environment:
       - DEBUG=true
@@ -143,7 +155,6 @@ services:
       context: .
       dockerfile: jenkins/Dockerfile
     privileged: true
-    user: 1026:100
     ports:
       - "8081:8080"
       - "50000:50000"
@@ -154,3 +165,12 @@ services:
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
 
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8082:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+      - UPLOAD_LIMIT=300M
