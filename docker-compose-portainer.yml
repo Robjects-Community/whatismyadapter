@@ -16,7 +16,7 @@ services:
         - /volume1/docker/myapp/mysql:/var/lib/mysql
         - /volume1/docker/myapp/mysql-files:/var/lib/mysql-files
         - /volume1/docker/myapp/cakephp:/var/www/myapp
-        - /volume1/docker/myapp/mysql/my.cnf:/etc/mysql/my.cnf
+        - /volume1/docker/myapp/docker/mysql/my.cnf:/etc/mysql/my.cnf
     ports:
       - "8106:3306"
     environment:
