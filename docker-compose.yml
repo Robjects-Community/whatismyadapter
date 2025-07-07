@@ -48,3 +48,20 @@ services:
     links:
       - myapp-mailhog
       - myapp-mysql
+
+jenkins:
+  build:
+    context: ./jenkins
+    dockerfile: jenkins/Dockerfile
+  privileged: true
+  user: root
+  ports:
+    - "8081:8080"
+    - "50000:50000"
+  volumes:
+    - jenkins_home:/var/jenkins_home
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+  environment:
+    - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+
