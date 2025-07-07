@@ -134,3 +134,4 @@ etc/dev/models
 .vscode/settings.json
 
 docker-volumes
+db

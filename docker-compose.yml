@@ -25,6 +25,15 @@ services:
       start_period: 90s
     volumes:
       - ${APP_DATA}:/app/data:rw
+      - ${APP_CONFIG}:/app/config:rw
+      - ${APP_PLUGINS}:/app/plugins:rw
+      - ${APP_TEMPLATES}:/app/templates:rw
+      - ${APP_WEBROOT}:/app/webroot:rw
+      - ${APP_VENDOR}:/app/vendor:rw
+      - ${APP_LOGS}:/app/logs:rw
+      - ${APP_TMP}:/app/tmp:rw
+      - ${APP_PUBLIC}:/app/public:rw
+      - ${APP_S6}:/etc/s6-overlay/s6-rc.d:ro
     restart: unless-stopped
 
 # Database service for mariadb
