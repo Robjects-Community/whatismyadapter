@@ -1,7 +1,4 @@
-###############################################################################
-#                          Generated on phpdocker.io                          #
-###############################################################################
-version: '3.8'
+
 services:
   myapp-mailhog:
     image: 'mailhog/mailhog:latest'
@@ -49,14 +46,13 @@ services:
       - myapp-mailhog
       - myapp-mysql
 
-Volumes:
+volumes:
   myapp-mysql-data:
     driver: local
     driver_opts:
       type: none
       device: /volume1/docker/myapp/mysql
       o: bind
-
   myapp-mysql-files:
     driver: local
     driver_opts:
