@@ -14,7 +14,7 @@ services:
       - myapp-mysql-data:/var/lib/mysql:rw
       - myapp-mysql-files:/var/lib/mysql-files:rw
       - /volume1/docker/myapp/cakephp:/var/www/myapp:rw
-      - /volume1/docker/myapp/docker/mysql/my.cnf:/etc/mysql/my.cnf:rw
+      - /volume1/docker/myapp/docker/my.cnf:/etc/mysql/my.cnf:rw
     ports:
       - "8106:3306"
     environment:
@@ -41,7 +41,7 @@ services:
     working_dir: /var/www/myapp
     volumes:
       - /volume1/docker/myapp/cakephp:/var/www/myapp:rw
-      - /volume1/docker/myapp/docker/php-ini-overrides.ini:/etc/php/8.1/fpm/conf.d/99-overrides.ini:rw
+      - /volume1/docker/myapp/docker/php-fpm/php-ini-overrides.ini:/etc/php/8.1/fpm/conf.d/99-overrides.ini:rw
     links:
       - myapp-mailhog
       - myapp-mysql
