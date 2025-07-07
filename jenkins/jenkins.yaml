@@ -1,0 +1,62 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin"
+  numExecutors: 2
+  scmCheckoutRetryCount: 2
+  mode: NORMAL
+
+jobs:
+  - script: >
+      pipelineJob('CMS-Build-and-Test') {
+        definition {
+          cps {
+            script('''
+              pipeline {
+                agent any
+                stages {
+                  stage('Clone Repository') {
+                    steps {
+                      git branch: 'main', 
+                          url: 'https://github.com/matthewdeaves/willow.git'
+                          // credentialsId: 'your-credentials-id'  // Uncomment and set if needed
+                    }
+                  }
+                  stage('Setup Configuration') {
+                    steps {
+                      sh 'cp docker/php/cms_app_local.php config/app_local.php'
+                    }
+                  }
+                  stage('Install Composer Dependencies') {
+                    steps {
+                      sh 'composer install'
+                    }
+                  }
+                  stage('Run Unit Tests') {
+                    steps {
+                      sh './vendor/bin/phpunit'
+                    }
+                  }
+                  stage('Check Coding Standards') {
+                    steps {
+                      sh 'vendor/bin/phpcbf -n --standard=PSR2 src/'
+                    }
+                  }
+                  stage('Run Security Checks') {
+                    steps {
+                      sh 'composer audit'
+                    }
+                  }
+                }
+                post {
+                  success {
+                    echo 'Build and tests passed!'
+                  }
+                  failure {
+                    echo 'Build or tests failed.'
+                  }
+                }
+              }
+            ''')
+            sandbox()
+          }
+        }
+      }
