@@ -11,8 +11,8 @@ services:
     container_name: myapp-mysql
     working_dir: /var/www/myapp
     volumes:
-      - myapp-mysql-data:/var/lib/mysql:rw
-      - myapp-mysql-files:/var/lib/mysql-files:rw
+      - /volume1/docker/myapp/mysql:/var/lib/mysql:rw
+      - /volume1/docker/myapp/mysql-files:/var/lib/mysql-files:rw
       - /volume1/docker/myapp/cakephp:/var/www/myapp:rw
       - /volume1/docker/myapp/docker/mysql/my.cnf:/etc/mysql/my.cnf:rw
     ports:
