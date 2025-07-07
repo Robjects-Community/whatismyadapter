@@ -1,7 +1,6 @@
 ###############################################################################
 #                          Generated on phpdocker.io                          #
 ###############################################################################
-version: '3.1'
 services:
   myapp-mailhog:
     image: 'mailhog/mailhog:latest'
@@ -77,17 +76,35 @@ services:
     build:
       context: .
       dockerfile: willowcms/Dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
 
     container_name: willowcms
     ports: 
       - "8080:80"
     volumes:
       - ../willowcms:/var/www/html/
-      
+
       - ./willowcms/config/supervisord:/etc/supervisor/conf.d
       - ./willowcms/config/app/cms_app_local.php:/var/www/willowcms/config/app_local.php
       # for webroot files
-      - ../willowcms/webroot/files:/var/www/willowcms/webroot/files
+      - ../willowcms/webroot:/var/www/html/webroot
+      # for tmp files
+      - ../willowcms/tmp:/var/www/html/tmp
+      # for logs
+      - ../willowcms/logs:/var/www/html/logs
+      # for composer vendor files
+      - ../willowcms/vendor:/var/www/html/vendor
+      # for composer cache files
+      - ../willowcms/composer_cache:/var/www/html/composer_cache
+      # for node modules
+      - ../willowcms/node_modules:/var/www/html/node_modules
+      # for public files
+      - ../willowcms/webroot/files:/var/www/html/webroot/files
+      # for public files (ImageGalleries)
+      - ../willowcms/webroot/files/ImageGalleries/preview:/var/www/html/webroot/files/ImageGalleries/preview
+      # for public files (ImageGalleries)
       # This is the local configuration file for WillowCMS
       # It should be created based on the example file provided in the WillowCMS repository.
       # Make sure to adjust the path if your local setup differs.
@@ -95,10 +112,11 @@ services:
       # cp ../willowcms/config/app/cms_app_local.example.php ../willowcms/config/app/cms_app_local.php
       # Then, edit the cms_app_local.php file to suit your local environment.
       # Ensure that the file is writable by the web server user (usually www-data or nginx).
-      - ./nginx/nginx-cms.conf:/etc/nginx/nginx-cms.conf
-      - ./logs/nginx-cms:/var/log/nginx-cms/
+      - ../willowcms/config/nginx/nginx-cms.conf:/etc/nginx/nginx-cms.conf
+      - ../willowcms/logs/nginx-cms:/var/log/nginx-cms/
     environment:
       - DEBUG=true
+      - APP_NAME=WillowCMS
       - APP_ENCODING=UTF-8
       - APP_DEFAULT_LOCALE=en_GB
       - APP_DEFAULT_TIMEZONE=America/Chicago
@@ -160,16 +178,16 @@ services:
     volumes:
       - ../jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+      - ./jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
 
-  phpmyadmin:
-    image: phpmyadmin
-    ports:
-      - 8082:80
-    environment:
-      - PMA_HOST=mysql
-      - PMA_USER=root
-      - PMA_PASSWORD=password
-      - UPLOAD_LIMIT=300M
+  # phpmyadmin:
+  #   image: phpmyadmin
+  #   ports:
+  #     - 8082:80
+  #   environment:
+  #     - PMA_HOST=mysql
+  #     - PMA_USER=root
+  #     - PMA_PASSWORD=password
+  #     - UPLOAD_LIMIT=300M
