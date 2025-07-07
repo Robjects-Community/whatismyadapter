@@ -14,7 +14,7 @@ services:
       - myapp-mysql-data:/var/lib/mysql:rw
       - myapp-mysql-files:/var/lib/mysql-files:rw
       - /volume1/docker/myapp/cakephp:/var/www/myapp:rw
-      - myapp-mysql-config/my.cnf:/etc/mysql/my.cnf:rw
+      - /volume1/docker/myapp/docker/mysql/my.cnf:/etc/mysql/my.cnf:rw
     ports:
       - "8106:3306"
     environment:
