@@ -1,7 +1,7 @@
 FROM alpine:3.20.3
 
 # Setup document root
-WORKDIR /var/www/willowcms  
+WORKDIR /var/www/html  
 
 
 # Install packages and remove default server definition
@@ -52,14 +52,14 @@ RUN echo "requirepass ${REDIS_PASSWORD}" >> /etc/redis.conf && \
     echo "user ${REDIS_USERNAME} on >${REDIS_PASSWORD} ~* +@all" >> /etc/redis.conf
 
 # Configure nginx - http
-COPY ./willowcms/config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY willowcms/config/nginx/nginx.conf /etc/nginx/nginx.conf
 # Configure nginx - default server
-COPY ./willowcms/config/nginx/nginx-cms.conf /etc/nginx/conf.d/default.conf
+COPY willowcms/config/nginx/nginx-cms.conf /etc/nginx/conf.d/default.conf
 
 # Configure PHP-FPM
 ENV PHP_INI_DIR /etc/php83
-COPY ./willowcms/config/php/fpm-pool.conf ${PHP_INI_DIR}/php-fpm.d/www.conf
-COPY ./willowcms/config/php/php.ini ${PHP_INI_DIR}/conf.d/custom.ini
+COPY willowcms/config/php/fpm-pool.conf ${PHP_INI_DIR}/php-fpm.d/www.conf
+COPY willowcms/config/php/php.ini ${PHP_INI_DIR}/conf.d/custom.ini
 
 # Install Composer
 RUN wget https://getcomposer.org/installer -O composer-setup.php && \
@@ -67,7 +67,7 @@ RUN wget https://getcomposer.org/installer -O composer-setup.php && \
     rm composer-setup.php
 
 # Configure supervisord
-COPY ./willowcms/config/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY willowcms/config/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 ARG UID
 ARG GID
@@ -93,7 +93,7 @@ RUN mkdir -p /var/www/willowcms /var/www/willowcms/tmp/archives /var/www/willowc
 USER nobody
 
 # Expose the port nginx is reachable on
-EXPOSE 88
+EXPOSE 80
 
 # Supervisord will start FPM
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

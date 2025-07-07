@@ -79,16 +79,15 @@ services:
       dockerfile: willowcms/Dockerfile
 
     container_name: willowcms
-    working_dir: /var/www/willowcms
-    links:
-      - willowcms-mysql
-      - redis-commander
     ports: 
       - "8080:80"
     volumes:
-      - ../willowcms:/var/www/willowcms/
+      - ../willowcms:/var/www/html/
+      
       - ./willowcms/config/supervisord:/etc/supervisor/conf.d
-      - ../willowcms/config/app/cms_app_local.php:/var/www/willowcms/config/app_local.php
+      - ./willowcms/config/app/cms_app_local.php:/var/www/willowcms/config/app_local.php
+      # for webroot files
+      - ../willowcms/webroot/files:/var/www/willowcms/webroot/files
       # This is the local configuration file for WillowCMS
       # It should be created based on the example file provided in the WillowCMS repository.
       # Make sure to adjust the path if your local setup differs.
