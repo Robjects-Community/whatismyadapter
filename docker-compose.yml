@@ -1,14 +1,16 @@
-# This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis cache, Adminer for database management, and Jupyter Notebook for data science tasks.
-# It includes health checks for the backend and database services, and sets resource limits for each service to ensure efficient resource usage.
-# The services are configured to run with specific user permissions and security options to enhance security.
-# The frontend service runs a CakePHP 5 application, while the backend service runs a Node.js application.
-# The database service uses PostgreSQL, and Redis is used for caching.
+
 services:
 # Frontend service for CakePHP 5 application
 # This service runs a CakePHP 5 application and is configured to use specific ports, environment variables, and volumes for persistent storage. 
 
   frontend:
     image: shinsenter/cakephp5
+    # This image is a custom CakePHP 5 image that includes the necessary dependencies and configurations
+    # for running a CakePHP 5 application.
+    # The image is built from the Dockerfile in the current directory.
+    # The image is based on the latest version of CakePHP 5.
+    # The image is built with the necessary dependencies and configurations for running a CakePHP 5 application.
+    # The image is built with the necessary dependencies and configurations for running a CakePHP
     container_name: WebAdaptors-CakePHP5
     environment:
       - TZ=America/Chicago
@@ -24,16 +26,16 @@ services:
       retries: 3
       start_period: 90s
     volumes:
-      - ${APP_DATA}:/app/data:rw
-      - ${APP_CONFIG}:/app/config:rw
-      - ${APP_PLUGINS}:/app/plugins:rw
-      - ${APP_TEMPLATES}:/app/templates:rw
-      - ${APP_WEBROOT}:/app/webroot:rw
-      - ${APP_VENDOR}:/app/vendor:rw
-      - ${APP_LOGS}:/app/logs:rw
-      - ${APP_TMP}:/app/tmp:rw
-      - ${APP_PUBLIC}:/app/public:rw
-      - ${APP_S6}:/etc/s6-overlay/s6-rc.d:ro
+      - ${PWD}/frontend:/app:rw
+      - ${PWD}/frontend/app/s6-overlay:/etc/s6-overlay:rw
+      - ${PWD}/frontend/app/s6-overlay/s6-rc.d:/etc/s6-overlay/s6-rc.d:rw
+      - app_data:/var/www/html:rw
+      - app_data:/var/www/html/app:rw
+      - app_data:/var/www/html/app/logs:rw
+      - app_data:/var/www/html/app/tmp:rw
+      - app_data:/var/www/html/app/public:rw
+      - app_data:/var/www/html/app/config:rw
+      - app_data:/var/www/html/app/vendor:rw
     restart: unless-stopped
 
 # Database service for mariadb
@@ -89,7 +91,7 @@ services:
   backend:
     image: node:20
     container_name: WebAdaptors-Backend
-    working_dir: /app
+    working_dir: /backend
     volumes:
       - ${BACKEND_DATA}:/app:rw
     environment:
@@ -106,7 +108,6 @@ services:
     image: redis
     hostname: WebAdaptors-redis
     container_name: WebAdaptors-REDIS
-    user: 1026:100
     healthcheck:
      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
     volumes:
@@ -156,34 +157,36 @@ services:
 #     driver_opts:
 #       device: /volume1/docker/webadapters/adminer
 #       o: bind
+
+
 volumes:
-  webadapters_data:
+  app_data:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/webadapters
+      device: ${PWD}/frontend/app
       o: bind
   db_data:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/webadapters/db
+      device: ${PWD}/db
       o: bind
   backend_data:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/webadapters/backend
+      device: ${PWD}/backend
       o: bind
   redis_data:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/webadapters/redis
+      device: ${PWD}/redis
       o: bind
   adminer_data:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/webadapters/adminer
+      device: ${PWD}/adminer
       o: bind
