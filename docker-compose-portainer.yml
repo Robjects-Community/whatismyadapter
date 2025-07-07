@@ -69,7 +69,6 @@ Volumes:
       type: none
       device: /volume1/docker/myapp/docker/mysql
       o: bind
-
   myapp-php-fpm:
     driver: local
     driver_opts:
