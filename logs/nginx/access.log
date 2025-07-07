@@ -1,0 +1,8 @@
+192.168.65.1 - - [07/Jul/2025:12:33:21 +0000] "GET / HTTP/1.1" 404 153 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"
+192.168.65.1 - - [07/Jul/2025:12:33:21 +0000] "GET /favicon.ico HTTP/1.1" 404 153 "http://localhost:8880/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"
+192.168.65.1 - - [07/Jul/2025:12:41:20 +0000] "GET / HTTP/1.1" 403 153 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"
+192.168.65.1 - - [07/Jul/2025:12:44:34 +0000] "GET / HTTP/1.1" 403 153 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"
+192.168.65.1 - - [07/Jul/2025:12:46:50 +0000] "GET / HTTP/1.1" 403 153 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"
+192.168.65.1 - - [07/Jul/2025:12:52:46 +0000] "GET / HTTP/1.1" 403 153 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"
+192.168.65.1 - - [07/Jul/2025:13:02:50 +0000] "GET / HTTP/1.1" 403 153 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"
+192.168.65.1 - - [07/Jul/2025:13:04:13 +0000] "GET / HTTP/1.1" 403 153 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"

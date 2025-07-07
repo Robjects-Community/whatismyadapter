@@ -79,7 +79,7 @@ services:
     container_name: willowcms
     working_dir: /var/www/willowcms
     ports: 
-      - "8880:88"
+      - "8880:80"
     volumes:
       - ../willowcms:/var/www/willowcms/
       - ./willowcms/config/app/cms_app_local.php:/var/www/willowcms/config/app_local.php
