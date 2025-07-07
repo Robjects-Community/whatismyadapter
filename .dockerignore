@@ -9,3 +9,5 @@
 /.env
 /adapter_database
 /etc
+docker-compose-webadapters_2.yml
+docker-compose-webadapters_3.yml

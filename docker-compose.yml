@@ -1,4 +1,3 @@
-version: '3.8'
 # This docker-compose file is used to set up a CakePHP 5 application with a backend service, PostgreSQL database, Redis cache, Adminer for database management, and Jupyter Notebook for data science tasks.
 # It includes health checks for the backend and database services, and sets resource limits for each service to ensure efficient resource usage.
 # The services are configured to run with specific user permissions and security options to enhance security.
