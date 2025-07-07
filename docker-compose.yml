@@ -17,6 +17,10 @@ services:
         - ../mysql:/var/lib/mysql
         - ../mysql-files:/var/lib/mysql-files
         - ../cakephp:/var/www/myapp
+        # - ../willowcms:/var/www/willowcms
+        # - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+        # - ./mysql/init-test.sql:/docker-entrypoint-initdb.d/init-test.sql
+        # - ./mysql/init-willowcms.sql:/docker-entrypoint-initdb.d/init-willowcms.sql
         - ./mysql/my.cnf:/etc/mysql/my.cnf
     ports:
       - "8106:3306"
@@ -33,10 +37,13 @@ services:
     volumes:
         - ../cakephp:/var/www/myapp
         - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./nginx/nginx-cms.conf:/etc/nginx/conf.d/nginx-cms.conf
     ports:
      - "8180:80"
+    #  - "8880:88"
     links:
      - myapp-php-fpm
+
 
   myapp-php-fpm:
     build: ./php-fpm
@@ -49,19 +56,101 @@ services:
       - myapp-mailhog
       - myapp-mysql
 
-jenkins:
-  build:
-    context: ./jenkins
-    dockerfile: jenkins/Dockerfile
-  privileged: true
-  user: root
-  ports:
-    - "8081:8080"
-    - "50000:50000"
-  volumes:
-    - jenkins_home:/var/jenkins_home
-    - /var/run/docker.sock:/var/run/docker.sock
-    - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
-  environment:
-    - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+
+
+############### TESTING SERVICES ###############
+  willowcms-mysql:
+    image: mysql:8.4.3
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      DB_USERNAME: cms_user
+      DB_PASSWORD: password
+      DB_DATABASE: cms
+    ports:
+      - "3310:3306"
+    volumes:
+      - ../willowcms-mysql:/var/lib/mysql
+      - ./willowcms-mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+  willowcms:
+    build:
+      context: .
+      dockerfile: willowcms/Dockerfile
+    container_name: willowcms
+    working_dir: /var/www/willowcms
+    ports: 
+      - "8880:88"
+    volumes:
+      - ../willowcms:/var/www/willowcms/
+      - ./willowcms/config/app/cms_app_local.php:/var/www/willowcms/config/app_local.php
+      - ./willowcms/config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./willowcms/config/nginx/nginx-cms.conf:/etc/nginx/conf.d/default.conf
+      - ./logs/nginx-cms:/var/log/nginx-cms/
+    environment:
+      - DEBUG=true
+      - APP_ENCODING=UTF-8
+      - APP_DEFAULT_LOCALE=en_GB
+      - APP_DEFAULT_TIMEZONE=America/Chicago
+      - SECURITY_SALT=developmentsalt
+      - DB_HOST=mysql
+      - DB_USERNAME=cms_user
+      - DB_PASSWORD=password
+      - DB_DATABASE=cms
+      - DB_PORT=3306
+      - TEST_DB_HOST=mysql
+      - TEST_DB_USERNAME=cms_user_test
+      - TEST_DB_PASSWORD=password
+      - TEST_DB_DATABASE=cms_test
+      - TEST_DB_PORT=3306
+      - EMAIL_HOST=mailpit
+      - EMAIL_PORT=1025
+      - EMAIL_TIMEOUT=30
+      - EMAIL_USERNAME=
+      - EMAIL_PASSWORD=
+      - EMAIL_REPLY=hello@willowcms.app
+      - EMAIL_NOREPLY=noreply@willowcms.app
+      - REDIS_USERNAME=root
+      - REDIS_PASSWORD=root
+      - REDIS_HOST=127.0.0.1
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+      - REDIS_URL=redis://root:root@127.0.0.1:6379/0
+      - REDIS_TEST_URL=redis://root:root@127.0.0.1:6379/0
+      - YOUTUBE_API_KEY=
+      - TRANSLATE_API_KEY=
+      - QUEUE_DEFAULT_URL=redis://root:root@127.0.0.1:6379/0
+      - QUEUE_TEST_URL=redis://root:root@127.0.0.1:6379/0
+      - EXPERIMENTAL_TESTS=Off
+      - WILLOW_ADMIN_USERNAME=admin
+      - WILLOW_ADMIN_PASSWORD=password
+      - WILLOW_ADMIN_EMAIL=admin@test.com
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOST=willowcms
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=root
+      - HTTP_USER=root
+      - HTTP_PASSWORD=root
+    ports:
+      - "8084:8081"
+    depends_on:
+      - willowcms
+
+  jenkins:
+    build:
+      context: .
+      dockerfile: jenkins/Dockerfile
+    privileged: true
+    user: 1026:100
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    volumes:
+      - ../jenkins:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
 
