@@ -24,7 +24,7 @@ services:
       retries: 3
       start_period: 90s
     volumes:
-      - /volume1/docker/webadapters:/app/data:rw
+      - ${APP_DATA}:/app/data:rw
     restart: unless-stopped
 
 # Database service for mariadb
@@ -44,7 +44,7 @@ services:
       MYSQL_ROOT_PASSWORD: rootpass
       TZ: America/Chicago
     volumes:
-      - /volume1/docker/webadapters/db:/var/lib/mysql:rw
+      - ${DB_DATA}:/var/lib/mysql:rw
     restart: on-failure:5
 
 # Adminer service for database management
@@ -58,7 +58,7 @@ services:
     ports:
       - 8232:8080
     volumes:
-      - /volume1/docker/webadapters/adminer:/var/www/html:rw
+      - ${ADMINER_DATA}:/var/www/html:rw
     environment:
       - ADMINER_DEFAULT_SERVER=db
       - ADMINER_DEFAULT_DB=webadapters_db
@@ -82,7 +82,7 @@ services:
     container_name: WebAdaptors-Backend
     working_dir: /app
     volumes:
-      - /volume1/docker/webadapters/backend:/app:rw
+      - ${BACKEND_DATA}:/app:rw
     environment:
       - NODE_ENV=development
       - PORT=3000
@@ -101,7 +101,7 @@ services:
     healthcheck:
      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
     volumes:
-      - /volume1/docker/webadapters/redis:/data:rw
+      - ${REDIS_DATA}:/data:rw
     environment:
       TZ: America/Chicago
 
