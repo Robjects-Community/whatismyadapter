@@ -84,26 +84,28 @@ services:
     ports: 
       - "8080:80"
     volumes:
-      - ../willowcms:/var/www/html/
-
+      - ../willowcms:/var/www/willowcms
+      - ./willowcms/config/php/fpm-pool.conf:/etc/php83/php-fpm.d/www.conf
+      - ./willowcms/config/php/php.ini:/etc/php83/conf.d/custom.ini
+      - ./willowcms/config/supervisord/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+      # for supervisord configuration
       - ./willowcms/config/supervisord:/etc/supervisor/conf.d
       - ./willowcms/config/app/cms_app_local.php:/var/www/willowcms/config/app_local.php
       # for webroot files
-      - ../willowcms/webroot:/var/www/html/webroot
       # for tmp files
-      - ../willowcms/tmp:/var/www/html/tmp
+      - ../willowcms/tmp:/var/www/willowcms/tmp
       # for logs
-      - ../willowcms/logs:/var/www/html/logs
+      - ../willowcms/logs:/var/www/willowcms/logs
       # for composer vendor files
-      - ../willowcms/vendor:/var/www/html/vendor
+      - ../willowcms/vendor:/var/www/willowcms/vendor
       # for composer cache files
-      - ../willowcms/composer_cache:/var/www/html/composer_cache
+      - ../willowcms/composer_cache:/var/www/willowcms/composer_cache
       # for node modules
-      - ../willowcms/node_modules:/var/www/html/node_modules
+      - ../willowcms/node_modules:/var/www/willowcms/node_modules
       # for public files
-      - ../willowcms/webroot/files:/var/www/html/webroot/files
+      - ../willowcms/webroot/files:/var/www/willowcms/webroot/files
       # for public files (ImageGalleries)
-      - ../willowcms/webroot/files/ImageGalleries/preview:/var/www/html/webroot/files/ImageGalleries/preview
+      - ../willowcms/webroot/files/ImageGalleries/preview:/var/www/willowcms/webroot/files/ImageGalleries/preview
       # for public files (ImageGalleries)
       # This is the local configuration file for WillowCMS
       # It should be created based on the example file provided in the WillowCMS repository.
@@ -172,13 +174,15 @@ services:
       context: .
       dockerfile: jenkins/Dockerfile
     privileged: true
+    user: root
+    container_name: jenkins
     ports:
       - "8081:8080"
       - "50000:50000"
     volumes:
       - ../jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+      - ../jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
 
