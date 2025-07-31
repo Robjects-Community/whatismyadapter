@@ -19,6 +19,23 @@ class ArticleTest extends TestCase
 
     protected array $fixtures = ['app.Articles', 'app.Users', 'app.Tags', 'app.ArticlesTags'];
 
+      protected function setUp(): void
+    {
+        parent::setUp();
+        $this->Articles = $this->getTableLocator()->get('Articles');
+    }
+
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
+    protected function tearDown(): void
+    {
+        unset($this->Article);
+
+        parent::tearDown();
+    }
     /**
      * Test the reorder functionality of the Articles model.
      *
@@ -154,26 +171,5 @@ class ArticleTest extends TestCase
         $this->assertEquals($expectedErrors, $longTitleArticle->getErrors(), 'Error message for title max length should match expected format');
     }
 
-    /**
-     * setUp method
-     *
-     * @return void
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->Articles = $this->getTableLocator()->get('Articles');
-    }
-
-    /**
-     * tearDown method
-     *
-     * @return void
-     */
-    protected function tearDown(): void
-    {
-        unset($this->Article);
-
-        parent::tearDown();
-    }
+ 
 }

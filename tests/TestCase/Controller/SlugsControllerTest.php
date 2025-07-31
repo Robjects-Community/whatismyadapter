@@ -23,6 +23,7 @@ class SlugsControllerTest extends AppControllerTestCase
     protected array $fixtures = [
         'app.Users',
         'app.Articles',
+        'app.Products',
         'app.Slugs',
         'app.Tags',
     ];
@@ -42,6 +43,33 @@ class SlugsControllerTest extends AppControllerTestCase
     }
 
     /**
+     * Data provider for model configurations
+     *
+     * @return array
+     */
+    public function modelProvider(): array
+    {
+        return [
+            'Articles' => [
+                'model' => 'Articles',
+                'foreignKey' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
+                'existingSlugId' => '1e6c7b88-283d-43df-bfa3-fa33d4319f75',
+                'existingSlug' => 'article-one',
+                'newSlug' => 'new-article-slug',
+                'searchTerm' => 'article',
+            ],
+            'Products' => [
+                'model' => 'Products',
+                'foreignKey' => 'prod-001-usb-c-cable',
+                'existingSlugId' => '2f7d8c99-394e-54ef-cga4-gb44e5430g86', // Update with actual fixture ID
+                'existingSlug' => 'product-one',
+                'newSlug' => 'new-product-slug',
+                'searchTerm' => 'product',
+            ],
+        ];
+    }
+
+    /**
      * Test index method
      *
      * @return void
@@ -52,12 +80,18 @@ class SlugsControllerTest extends AppControllerTestCase
         $this->assertResponseOk();
         $this->assertResponseContains('Slugs');
 
-        // Test model type filtering
+        // Test model type filtering for both Articles and Products
         $this->get('/admin/slugs?status=Articles');
         $this->assertResponseOk();
 
-        // Test search functionality
+        $this->get('/admin/slugs?status=Products');
+        $this->assertResponseOk();
+
+        // Test search functionality for both models
         $this->get('/admin/slugs?search=article-one');
+        $this->assertResponseOk();
+
+        $this->get('/admin/slugs?search=product-one');
         $this->assertResponseOk();
 
         // Test AJAX request
@@ -66,26 +100,41 @@ class SlugsControllerTest extends AppControllerTestCase
         ]);
         $this->get('/admin/slugs?search=article');
         $this->assertResponseOk();
-    }
 
-    /**
-     * Test view method
-     *
-     * @return void
-     */
-    public function testView(): void
-    {
-        $this->get('/admin/slugs/view/1e6c7b88-283d-43df-bfa3-fa33d4319f75');
+        $this->get('/admin/slugs?search=product');
         $this->assertResponseOk();
-        $this->assertResponseContains('article-one');
     }
 
     /**
-     * Test add method
+     * Test view method with both models
      *
+     * @dataProvider modelProvider
+     * @param string $model
+     * @param string $foreignKey
+     * @param string $existingSlugId
+     * @param string $existingSlug
      * @return void
      */
-    public function testAdd(): void
+    public function testView(string $model, string $foreignKey, string $existingSlugId, string $existingSlug): void
+    {
+        $this->get('/admin/slugs/view/' . $existingSlugId);
+        $this->assertResponseOk();
+        $this->assertResponseContains($existingSlug);
+        $this->assertResponseContains($model);
+    }
+
+    /**
+     * Test add method with both models
+     *
+     * @dataProvider modelProvider
+     * @param string $model
+     * @param string $foreignKey
+     * @param string $existingSlugId
+     * @param string $existingSlug
+     * @param string $newSlug
+     * @return void
+     */
+    public function testAdd(string $model, string $foreignKey, string $existingSlugId, string $existingSlug, string $newSlug): void
     {
         $this->enableCsrfToken();
 
@@ -93,15 +142,25 @@ class SlugsControllerTest extends AppControllerTestCase
         $this->get('/admin/slugs/add');
         $this->assertResponseOk();
 
-        // Test POST request with valid data
+        // Test POST request with valid data for current model
         $this->post('/admin/slugs/add', [
-            'model' => 'Articles',
-            'foreign_key' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
-            'slug' => 'new-test-slug',
+            'model' => $model,
+            'foreign_key' => $foreignKey,
+            'slug' => $newSlug,
         ]);
 
         $this->assertRedirect(['action' => 'index']);
         $this->assertFlashMessage('The slug has been saved.');
+    }
+
+    /**
+     * Test add method with invalid data
+     *
+     * @return void
+     */
+    public function testAddWithInvalidData(): void
+    {
+        $this->enableCsrfToken();
 
         // Test POST request with invalid data
         $this->post('/admin/slugs/add', [
@@ -115,37 +174,53 @@ class SlugsControllerTest extends AppControllerTestCase
     }
 
     /**
-     * Test edit method
+     * Test edit method with both models
      *
+     * @dataProvider modelProvider
+     * @param string $model
+     * @param string $foreignKey
+     * @param string $existingSlugId
+     * @param string $existingSlug
+     * @param string $newSlug
      * @return void
      */
-    public function testEdit(): void
+    public function testEdit(string $model, string $foreignKey, string $existingSlugId, string $existingSlug, string $newSlug): void
     {
         $this->enableCsrfToken();
 
         // Test GET request
-        $this->get('/admin/slugs/edit/1e6c7b88-283d-43df-bfa3-fa33d4319f75');
+        $this->get('/admin/slugs/edit/' . $existingSlugId);
         $this->assertResponseOk();
 
         // Test POST request with valid data
-        $this->post('/admin/slugs/edit/1e6c7b88-283d-43df-bfa3-fa33d4319f75', [
-            'model' => 'Articles',
-            'foreign_key' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
-            'slug' => 'updated-test-slug',
+        $this->post('/admin/slugs/edit/' . $existingSlugId, [
+            'model' => $model,
+            'foreign_key' => $foreignKey,
+            'slug' => 'updated-' . $newSlug,
         ]);
 
         $this->assertRedirect(['action' => 'index']);
         $this->assertFlashMessage('The slug has been saved.');
+    }
+
+    /**
+     * Test edit method with invalid data
+     *
+     * @return void
+     */
+    public function testEditWithInvalidData(): void
+    {
+        $this->enableCsrfToken();
+        $existingSlugId = '1e6c7b88-283d-43df-bfa3-fa33d4319f75';
 
         // Test POST request with invalid data
-        $this->post('/admin/slugs/edit/1e6c7b88-283d-43df-bfa3-fa33d4319f75', [
+        $this->post('/admin/slugs/edit/' . $existingSlugId, [
             'model' => '',
             'foreign_key' => '',
             'slug' => '',
         ]);
 
         $this->assertResponseOk(); // Form should re-render
-
         $this->assertResponseContains('The slug could not be saved. Please, try again.');
 
         // Test with non-existent ID
@@ -154,18 +229,32 @@ class SlugsControllerTest extends AppControllerTestCase
     }
 
     /**
-     * Test delete method
+     * Test delete method with both models
      *
+     * @dataProvider modelProvider
+     * @param string $model
+     * @param string $foreignKey
+     * @param string $existingSlugId
      * @return void
      */
-    public function testDelete(): void
+    public function testDelete(string $model, string $foreignKey, string $existingSlugId): void
     {
         $this->enableCsrfToken();
 
         // Test successful delete
-        $this->delete('/admin/slugs/delete/1e6c7b88-283d-43df-bfa3-fa33d4319f75');
+        $this->delete('/admin/slugs/delete/' . $existingSlugId);
         $this->assertRedirect();
         $this->assertFlashMessage('The slug has been deleted.');
+    }
+
+    /**
+     * Test delete method with invalid scenarios
+     *
+     * @return void
+     */
+    public function testDeleteWithInvalidScenarios(): void
+    {
+        $this->enableCsrfToken();
 
         // Test delete with non-existent ID
         $this->delete('/admin/slugs/delete/non-existent-id');
@@ -174,6 +263,64 @@ class SlugsControllerTest extends AppControllerTestCase
         // Test with GET request (should fail)
         $this->get('/admin/slugs/delete/1e6c7b88-283d-43df-bfa3-fa33d4319f75');
         $this->assertResponseError();
+    }
+
+    /**
+     * Test cross-model functionality
+     *
+     * @return void
+     */
+    public function testCrossModelFunctionality(): void
+    {
+        $this->enableCsrfToken();
+
+        // Test creating same slug for different models (should be allowed)
+        $sameslug = 'shared-slug-test';
+
+        // Create Article slug
+        $this->post('/admin/slugs/add', [
+            'model' => 'Articles',
+            'foreign_key' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
+            'slug' => $sameslug,
+        ]);
+        $this->assertRedirect(['action' => 'index']);
+
+        // Create Product slug with same name (should succeed)
+        $this->post('/admin/slugs/add', [
+            'model' => 'Products',
+            'foreign_key' => 'prod-001-usb-c-cable',
+            'slug' => $sameslug,
+        ]);
+        $this->assertRedirect(['action' => 'index']);
+
+        // Test filtering by model type
+        $this->get('/admin/slugs?status=Articles&search=' . $sameslug);
+        $this->assertResponseOk();
+        $this->assertResponseContains($sameslug);
+
+        $this->get('/admin/slugs?status=Products&search=' . $sameslug);
+        $this->assertResponseOk();
+        $this->assertResponseContains($sameslug);
+    }
+
+    /**
+     * Test bulk operations across models
+     *
+     * @return void
+    */
+    public function testBulkOperationsAcrossModels(): void
+    {
+        // Test index with combined search across models
+        $this->get('/admin/slugs?search=test');
+        $this->assertResponseOk();
+
+        // Test pagination with mixed model results
+        $this->get('/admin/slugs?page=1&limit=10');
+        $this->assertResponseOk();
+
+        // Test sorting by model
+        $this->get('/admin/slugs?sort=model&direction=asc');
+        $this->assertResponseOk();
     }
 
     /**

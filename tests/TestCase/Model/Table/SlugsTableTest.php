@@ -27,6 +27,7 @@ class SlugsTableTest extends TestCase
     protected array $fixtures = [
         'app.Slugs',
         'app.Articles',
+        'app.Products',
         'app.Tags',
     ];
 
@@ -51,6 +52,29 @@ class SlugsTableTest extends TestCase
     {
         unset($this->Slugs);
         parent::tearDown();
+    }
+
+    /**
+     * Data provider for model configurations
+     *
+     * @return array
+     */
+    public function modelProvider(): array
+    {
+        return [
+            'Articles' => [
+                'model' => 'Articles',
+                'foreignKey' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
+                'existingSlug' => 'article-one',
+                'newSlug' => 'new-article-slug',
+            ],
+            'Products' => [
+                'model' => 'Products',
+                'foreignKey' => 'prod-001-usb-c-cable',
+                'existingSlug' => 'product-one',
+                'newSlug' => 'new-product-slug',
+            ],
+        ];
     }
 
     /**
@@ -102,45 +126,50 @@ class SlugsTableTest extends TestCase
     }
 
     /**
-     * Test buildRules method
+     * Test buildRules method with both models
      *
+     * @dataProvider modelProvider
      * @return void
      */
-    public function testBuildRules(): void
+    public function testBuildRules(string $model, string $foreignKey, string $existingSlug): void
     {
         // Test unique slug within same model
         $slug = $this->Slugs->newEntity([
-            'model' => 'Articles',
-            'foreign_key' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
-            'slug' => 'article-one', // Already exists in fixture
+            'model' => $model,
+            'foreign_key' => $foreignKey,
+            'slug' => $existingSlug, // Already exists in fixture
         ]);
         $this->assertFalse($this->Slugs->save($slug));
 
         // Test same slug allowed for different models
+        $differentModel = $model === 'Articles' ? 'Products' : 'Articles';
+        $differentKey = $model === 'Articles' ? 'prod-001-usb-c-cable' : '263a5364-a1bc-401c-9e44-49c23d066a0f';
+        
         $slug = $this->Slugs->newEntity([
-            'model' => 'Tags',
-            'foreign_key' => '334310b4-96ad-4d58-a0a9-af6dc7253c5e',
-            'slug' => 'article-one',
+            'model' => $differentModel,
+            'foreign_key' => $differentKey,
+            'slug' => $existingSlug,
         ]);
         $this->assertNotFalse($this->Slugs->save($slug));
     }
 
     /**
-     * Test findBySlugAndModel finder
+     * Test findBySlugAndModel finder with both models
      *
+     * @dataProvider modelProvider
      * @return void
      */
-    public function testFindBySlugAndModel(): void
+    public function testFindBySlugAndModel(string $model, string $foreignKey, string $existingSlug): void
     {
-        $result = $this->Slugs->find('bySlugAndModel', slug: 'article-one', model: 'Articles')
+        $result = $this->Slugs->find('bySlugAndModel', slug: $existingSlug, model: $model)
             ->first();
 
         $this->assertNotNull($result);
-        $this->assertEquals('article-one', $result->slug);
-        $this->assertEquals('Articles', $result->model);
+        $this->assertEquals($existingSlug, $result->slug);
+        $this->assertEquals($model, $result->model);
 
         // Test with non-existent slug
-        $result = $this->Slugs->find('bySlugAndModel', slug: 'non-existent', model: 'Articles')
+        $result = $this->Slugs->find('bySlugAndModel', slug: 'non-existent', model: $model)
             ->first();
 
         $this->assertNull($result);
@@ -149,20 +178,21 @@ class SlugsTableTest extends TestCase
     /**
      * Test saving multiple slugs for the same record
      *
+     * @dataProvider modelProvider
      * @return void
      */
-    public function testSavingMultipleSlugs(): void
+    public function testSavingMultipleSlugs(string $model, string $foreignKey, string $existingSlug, string $newSlug): void
     {
         $slugs = [
             [
-                'model' => 'Articles',
-                'foreign_key' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
-                'slug' => 'new-slug-1',
+                'model' => $model,
+                'foreign_key' => $foreignKey,
+                'slug' => $newSlug . '-1',
             ],
             [
-                'model' => 'Articles',
-                'foreign_key' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
-                'slug' => 'new-slug-2',
+                'model' => $model,
+                'foreign_key' => $foreignKey,
+                'slug' => $newSlug . '-2',
             ],
         ];
 
@@ -174,12 +204,47 @@ class SlugsTableTest extends TestCase
         // Verify both slugs were saved
         $count = $this->Slugs->find()
             ->where([
-                'foreign_key' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
-                'slug IN' => ['new-slug-1', 'new-slug-2'],
+                'foreign_key' => $foreignKey,
+                'slug IN' => [$newSlug . '-1', $newSlug . '-2'],
             ])
             ->count();
 
         $this->assertEquals(2, $count);
+    }
+
+    /**
+     * Test cross-model slug compatibility
+     *
+     * @return void
+     */
+    public function testCrossModelSlugCompatibility(): void
+    {
+        $sameslug = 'shared-slug-name';
+        
+        // Create slug for Articles
+        $articleSlug = $this->Slugs->newEntity([
+            'model' => 'Articles',
+            'foreign_key' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
+            'slug' => $sameslug,
+        ]);
+        $this->assertNotFalse($this->Slugs->save($articleSlug));
+
+        // Create same slug for Products (should be allowed)
+        $productSlug = $this->Slugs->newEntity([
+            'model' => 'Products',
+            'foreign_key' => 'prod-001-usb-c-cable',
+            'slug' => $sameslug,
+        ]);
+        $this->assertNotFalse($this->Slugs->save($productSlug));
+
+        // Verify both exist
+        $articleResult = $this->Slugs->find('bySlugAndModel', slug: $sameslug, model: 'Articles')->first();
+        $productResult = $this->Slugs->find('bySlugAndModel', slug: $sameslug, model: 'Products')->first();
+
+        $this->assertNotNull($articleResult);
+        $this->assertNotNull($productResult);
+        $this->assertEquals('Articles', $articleResult->model);
+        $this->assertEquals('Products', $productResult->model);
     }
 
     /**
@@ -198,8 +263,40 @@ class SlugsTableTest extends TestCase
             ->toArray();
 
         $this->assertContains('Articles', $models);
+        $this->assertContains('Products', $models);
         $this->assertContains('Tags', $models);
-        // Test should be flexible about total count since other tests may create additional models
-        $this->assertGreaterThanOrEqual(2, count($models), 'Should have at least Articles and Tags models');
+        $this->assertGreaterThanOrEqual(3, count($models), 'Should have at least Articles, Products, and Tags models');
+    }
+
+    /**
+     * Test bulk operations across models
+     *
+     * @return void
+     */
+    public function testBulkOperationsAcrossModels(): void
+    {
+        // Create multiple slugs for both models
+        $bulkData = [
+            ['model' => 'Articles', 'foreign_key' => '263a5364-a1bc-401c-9e44-49c23d066a0f', 'slug' => 'bulk-article-1'],
+            ['model' => 'Articles', 'foreign_key' => '263a5364-a1bc-401c-9e44-49c23d066a0f', 'slug' => 'bulk-article-2'],
+            ['model' => 'Products', 'foreign_key' => 'prod-001-usb-c-cable', 'slug' => 'bulk-product-1'],
+            ['model' => 'Products', 'foreign_key' => 'prod-001-usb-c-cable', 'slug' => 'bulk-product-2'],
+        ];
+
+        foreach ($bulkData as $data) {
+            $entity = $this->Slugs->newEntity($data);
+            $this->assertNotFalse($this->Slugs->save($entity));
+        }
+
+        // Test filtering by model
+        $articleCount = $this->Slugs->find()
+            ->where(['model' => 'Articles', 'slug LIKE' => 'bulk-article-%'])
+            ->count();
+        $this->assertEquals(2, $articleCount);
+
+        $productCount = $this->Slugs->find()
+            ->where(['model' => 'Products', 'slug LIKE' => 'bulk-product-%'])
+            ->count();
+        $this->assertEquals(2, $productCount);
     }
 }
