@@ -71,7 +71,7 @@ class ArticlesTable extends Table
             'displayField' => 'title',
         ]);
 
-        $this->addBehavior('Slug');
+        $this->addBehavior(name: 'Slug');
 
         $this->addBehavior('ImageAssociable');
 
@@ -99,18 +99,20 @@ class ArticlesTable extends Table
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'joinType' => 'LEFT',
+            'joinType' => 'LEFT', // Use LEFT join to allow articles without a user
         ]);
         $this->belongsToMany('Tags', [
-            'foreignKey' => 'article_id',
+            'foreignKey' => 'article_id', // Foreign key in the junction table meaning that the table that contains the foreign key is the 
             'targetForeignKey' => 'tag_id',
             'joinTable' => 'articles_tags',
         ]);
 
+        // TODO: MAKE PAGE VIEWS A BEHAVIOR OR FIND ANOTHER WAY TO HAVE PAGE VIEWS FOR OTHER MODELS
+        // This allows tracking page views for articles
         $this->hasMany('PageViews', [
-            'foreignKey' => 'article_id',
-            'dependent' => true,
-            'cascadeCallbacks' => true,
+            'foreignKey' => 'article_id', // Foreign key in PageViews table
+            'dependent' => true, // Ensure page views are deleted when article is deleted
+            'cascadeCallbacks' => true, // Ensure page views are deleted when article is deleted
         ]);
     }
 

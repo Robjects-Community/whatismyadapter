@@ -53,7 +53,7 @@ class SlugBehavior extends Behavior
     {
         parent::initialize($config);
 
-        // Add the hasMany relationship to Slugs
+        // Add the hasMany relationship to Slugs - this means that each entity can have multiple slugs over time
         $this->_table->hasMany('Slugs', [
             'foreignKey' => 'foreign_key',
             'conditions' => ['Slugs.model' => $this->_table->getAlias()],
@@ -85,10 +85,13 @@ class SlugBehavior extends Behavior
         $targetField = $this->getConfig('targetField');
         $maxLength = $this->getConfig('maxLength');
 
-        if (!empty($entity->get($targetField))) {
+        // If the slug is already set, do not regenerate it
+        if (!empty($entity->get($targetField))) { // If the slug is already set, do not regenerate it
             $slug = $this->generateSlug($entity->get($targetField), $maxLength);
             $entity->set($targetField, $slug);
         } elseif (!empty($entity->get($sourceField))) {
+            // Generate slug from the source field
+            // If the source field is set, generate a slug from it
             $slug = $this->generateSlug($entity->get($sourceField), $maxLength);
             $entity->set($targetField, $slug);
         }
@@ -165,9 +168,9 @@ class SlugBehavior extends Behavior
      */
     protected function generateSlug(string $text, int $maxLength): string
     {
-        $slug = Text::slug(strtolower($text), ['transliterator' => null]);
+        $slug = Text::slug(strtolower($text), ['transliterator' => null]); // Convert text to a URL-friendly slug without transliteration
 
-        return substr($slug, 0, $maxLength);
+        return substr($slug, 0, $maxLength); // Ensure the slug does not exceed the maximum length
     }
 
     /**
