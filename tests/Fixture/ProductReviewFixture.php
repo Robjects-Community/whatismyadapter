@@ -6,16 +6,16 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * ProductsCategoriesFixture
+ * ProductReviewsFixture
  */
-class ProductsCategoriesFixture extends TestFixture
+class ProductReviewsFixture extends TestFixture
 {
     /**
      * Table name
      *
      * @var string
      */
-    public string $table = 'products_categories';
+    public string $table = 'product_reviews';
 
     /**
      * Init method

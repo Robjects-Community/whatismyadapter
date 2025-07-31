@@ -113,13 +113,14 @@ class ArticlesFixture extends TestFixture
                 'published' => null,
                 'parent_id' => '5119fb0c-ff60-4c16-9e25-aba3d32d5d5c',
                 'lft' => 13,
-                'rght' => 14,
+                'rght' => 14, // This is a child of Page Five
                 'kind' => 'page',
             ],
+
             // Articles
             [
                 'id' => '263a5364-a1bc-401c-9e44-49c23d066a0f',
-                'user_id' => '6509480c-e7e6-4e65-9c38-1423a8d09d0f',
+                'user_id' => '6509480c-e7e6-4e65-9c38-1423a8d09d0f', // Using an existing user ID from fixtures
                 'title' => 'Article One',
                 'slug' => 'article-one',
                 'body' => 'Content for Article One',
@@ -128,8 +129,8 @@ class ArticlesFixture extends TestFixture
                 'modified' => '2024-09-27 07:58:35',
                 'published' => '2024-09-27 07:59:35',
                 'parent_id' => null,
-                'lft' => 17,
-                'rght' => 18,
+                'lft' => 17, // This is a root level article
+                'rght' => 18, // This is a root level article
                 'kind' => 'article',
             ],
             [
