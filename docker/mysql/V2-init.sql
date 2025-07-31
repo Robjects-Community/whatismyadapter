@@ -243,7 +243,7 @@ CREATE TABLE `product_reviews` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rating` tinyint(1) NOT NULL COMMENT 'Rating from 1 to 5',
+  `rating` tinyint UNSIGNED NOT NULL COMMENT 'Rating from 1 to 5',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `review_text` text COLLATE utf8mb4_unicode_ci,
   `verified_purchase` tinyint(1) NOT NULL DEFAULT 0,
@@ -261,6 +261,7 @@ CREATE TABLE `product_reviews` (
   KEY `idx_review_rating` (`rating`),
   KEY `idx_review_featured` (`is_featured`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 -- Product specifications (flexible key-value store)
 CREATE TABLE `product_specifications` (

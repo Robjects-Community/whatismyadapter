@@ -15419,7 +15419,7 @@ CREATE TABLE IF NOT EXISTS `product_reviews` (
   `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rating` tinyint(1) NOT NULL COMMENT 'Rating from 1 to 5',
+  `rating` tinyint UNSIGNED NOT NULL COMMENT 'Rating from 1 to 5',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `review_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `verified_purchase` tinyint(1) NOT NULL DEFAULT '0',
