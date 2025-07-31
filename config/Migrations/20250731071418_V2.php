@@ -406,11 +406,12 @@ class V2 extends BaseMigration
                 'limit' => null,
                 'null' => false,
             ])
-            ->addColumn('rating', 'boolean', [
+            ->addColumn('rating', 'tinyinteger', [
                 'comment' => 'Rating from 1 to 5',
                 'default' => null,
                 'limit' => null,
                 'null' => false,
+                'signed' => false,
             ])
             ->addColumn('title', 'string', [
                 'default' => null,
