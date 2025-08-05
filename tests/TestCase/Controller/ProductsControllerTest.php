@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use App\Test\TestCase\Controller\AppControllerTest;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 use Cake\I18n\DateTime;
@@ -27,7 +26,6 @@ class ProductsControllerTest extends TestCase
         'app.Users', 
         'app.Articles',
         'app.Tags',
-        'app.ProductsTags',
     ];
 
     /**

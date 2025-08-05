@@ -1,9 +1,10 @@
 <?php
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\AppController;
+use App\Test\TestCase\AppControllerTestCase;
+use Cake\Http\Response;
 
-class AdaptersController extends AppController
+class AdaptersControllerTest extends AppControllerTestCase
 {
     public function index()
     {

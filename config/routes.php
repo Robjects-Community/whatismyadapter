@@ -208,8 +208,52 @@ return function (RouteBuilder $routes): void {
             'pass' => ['id'],
         ]);
 
-        $builder->connect('/adapters', ['controller' => 'Products', 'action' => 'index'], ['routeClass' => 'ADmad/I18n.I18nRoute']);
-        $builder->connect('/articles/add-comment/*', ['controller' => 'Articles', 'action' => 'addComment'], ['routeClass' => 'ADmad/I18n.I18nRoute']);
+
+        // start of product routes 
+        $builder->connect('/adapters', ['controller' => 'Products', 'action' => 'index']);
+        $builder->connect('/products', ['controller' => 'Products', 'action' => 'index-simple']);
+        $builder->connect('/adapters/{slug}', ['controller' => 'Products', 'action' => 'view'])
+            ->setPatterns(['slug' => '[a-z0-9\-]+'])
+            ->setPass(['slug']);
+        
+        // Integration with existing quiz
+        $builder->connect('/product-recommendation', ['controller' => 'Articles', 'action' => 'view', '76607f25-53ce-4b3e-af70-4a9cf18cdc8e']);
+
+        // End of product routes
+        $builder->connect(
+            '/products-simple',
+            ['controller' => 'Products', 'action' => 'index-simple'],
+            ['routeClass' => 'ADmad/I18n.I18nRoute']
+        );
+
+        // Search routes
+        $builder->connect(
+            '/search',
+            ['controller' => 'Search', 'action' => 'index'],
+            ['routeClass' => 'ADmad/I18n.I18nRoute']
+        );
+
+        $builder->connect(
+            '/adapters/search',
+            ['controller' => 'Products', 'action' => 'search'],
+            ['routeClass' => 'ADmad/I18n.I18nRoute']
+        );
+
+        $builder->connect(
+            '/adapters/{slug}',
+            ['controller' => 'Products', 'action' => 'view'],
+            ['routeClass' => 'ADmad/I18n.I18nRoute']
+        );
+        // END OF CUSTOM adapter/product routes
+
+        // Articles routes
+        $builder->connect(
+            '/articles/add-comment/*',
+            ['controller' => 'Articles', 'action' => 'addComment'],
+            ['routeClass' => 'ADmad/I18n.I18nRoute']
+        );
+
+        // Tags routes
         $builder->connect(
             '/tags',
             ['controller' => 'Tags', 'action' => 'index'],
@@ -269,13 +313,16 @@ return function (RouteBuilder $routes): void {
                 '_name' => 'cookie-consent',
             ]
         );
+
+
     });
 
+    // Admin routes
     $routes->prefix('Admin', function (RouteBuilder $routes) {
         $routes->connect('/', ['controller' => 'Articles', 'action' => 'index', 'prefix' => 'Admin']);
 
 
-        
+
         // Specific route for removing images from galleries
         $routes->connect(
             '/image-galleries/remove-image/{id}/{imageId}',

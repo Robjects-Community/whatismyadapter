@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Model\Table;
 
 use Cake\ORM\Query\SelectQuery;
@@ -31,7 +30,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class AdaptersTable extends Table
+class ProductsTable extends Table
 {
     /**
      * Initialize method
