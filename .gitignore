@@ -105,3 +105,4 @@ project_mysql_backups
 
 # CakePHP Book
 CakePHPBook.txt
+.hidden-items.json

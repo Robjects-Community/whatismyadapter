@@ -208,6 +208,7 @@ return function (RouteBuilder $routes): void {
             'pass' => ['id'],
         ]);
 
+        $builder->connect('/adapters', ['controller' => 'Products', 'action' => 'index'], ['routeClass' => 'ADmad/I18n.I18nRoute']);
         $builder->connect('/articles/add-comment/*', ['controller' => 'Articles', 'action' => 'addComment'], ['routeClass' => 'ADmad/I18n.I18nRoute']);
         $builder->connect(
             '/tags',
