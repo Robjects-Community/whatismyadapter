@@ -4,29 +4,30 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Http\Response;
+
 class ProductsController extends AppController
 {
 
-public function importAdapters()
-{
-    $csvData = $this->request->getUploadedFiles()['csv_file'];
-    
-    foreach ($this->parseCsv($csvData) as $row) {
-        $adapter = $this->Products->newEntity([
-            'title' => "{$row['connector_type_a']} to {$row['connector_type_b']} Adapter",
-            'connector_type_a' => $row['connector_type_a'],
-            'connector_type_b' => $row['connector_type_b'],
-            'supports_usb_pd' => (bool)$row['supports_usb_pd'],
-            'max_power_delivery' => $row['max_power_delivery'],
-            'price' => $row['price_usd'],
-            'category_rating' => $row['category_rating'],
-            'verification_status' => 'pending',
-            'user_id' => $this->Authentication->getIdentity()->id
-        ]);
+    public function importAdapters()
+    {
+        $csvData = $this->request->getUploadedFiles()['csv_file'];
         
-        $this->Products->save($adapter);
+        foreach ($this->parseCsv($csvData) as $row) {
+            $adapter = $this->Products->newEntity([
+                'title' => "{$row['connector_type_a']} to {$row['connector_type_b']} Adapter",
+                'connector_type_a' => $row['connector_type_a'],
+                'connector_type_b' => $row['connector_type_b'],
+                'supports_usb_pd' => (bool)$row['supports_usb_pd'],
+                'max_power_delivery' => $row['max_power_delivery'],
+                'price' => $row['price_usd'],
+                'category_rating' => $row['category_rating'],
+                'verification_status' => 'pending',
+                'user_id' => $this->Authentication->getIdentity()->id
+            ]);
+            $this->Products->save($adapter);
         }
-}
+    }
+
     public function index()
     {
         // Customer-facing adapter catalog
@@ -85,7 +86,7 @@ public function importAdapters()
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index(): ?Response
+    public function indexSearch(): ?Response
     {
         $statusFilter = $this->request->getQuery('status');
         $query = $this->Products->find()
@@ -191,4 +192,5 @@ public function importAdapters()
 
         return $this->redirect($this->referer());
     }
-}
+
+    }

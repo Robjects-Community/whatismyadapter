@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
+use Cake\ORM\Behavior\Translate\TranslateTrait;
 use Cake\ORM\Entity;
 
 /**
@@ -65,5 +66,13 @@ class Product extends Entity
         'user' => true,
         'article' => true,
         'tags' => true,
+        // Allow mass assignment for SEO fields
+        // 'meta_title' => true,
+        // 'meta_description' => true,
+        // 'meta_keywords' => true,
+        // 'facebook_description' => true,
+        // 'linkedin_description' => true,
+        // 'twitter_description' => true,
+        // 'instagram_description' => true,
     ];
 }
