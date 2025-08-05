@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use App\Job\AbstractJob;
 use Migrations\AbstractMigration;
 
 class CreateProducts extends AbstractMigration
@@ -14,7 +13,7 @@ class CreateProducts extends AbstractMigration
             'primary_key' => ['id'],
         ]);
 
-        // Add columns for product details
+        //
         $table->addColumn('id', 'uuid', [
             'default' => null,
             'null' => false,
@@ -105,10 +104,10 @@ class CreateProducts extends AbstractMigration
             ->addColumn('modified', 'datetime', [
                 'default' => null,
                 'null' => false,
-            ]);
+            ])
 
             // TODO: Additional fields for product details pertaining to USB cables - NEED TO INCORPORATE IN SIMILAR PATTERN TO SEO FIELDS
-        $this->addColumn('connector_type_a', 'string', ['limit' => 50, 'null' => true, 'after' => 'model_number'])
+            ->addColumn('connector_type_a', 'string', ['limit' => 50, 'null' => true, 'after' => 'model_number'])
           ->addColumn('connector_type_b', 'string', ['limit' => 50, 'null' => true])
           ->addColumn('supports_usb_pd', 'boolean', ['default' => false])
           ->addColumn('max_power_delivery', 'string', ['limit' => 50, 'null' => true])
@@ -127,6 +126,27 @@ class CreateProducts extends AbstractMigration
           ->addColumn('shopping_link', 'string', ['limit' => 255, 'null' => true]) // Amazon/online URL
           ->addColumn('notes', 'text', ['null' => true]);
 
+        $table->addColumn('created_by', 'uuid', [
+                'default' => null,
+                'null' => true,
+            ])
+            ->addColumn('modified_by', 'uuid', [
+                'default' => null,
+                'null' => true,
+            ])
+            ->addColumn('meta_title', 'string', [
+                'default' => null,
+                'limit' => 255, 
+                'null' => true,
+            ])
+            ->addColumn('meta_description', 'text', [
+                'default' => null,
+                'null' => true,
+            ])
+            ->addColumn('meta_keywords', 'text', [
+                'default' => null,
+                'null' => true,
+            ])
             ->addIndex(['slug'], ['unique' => true, 'name' => 'idx_products_slug'])
             ->addIndex(['user_id'], ['name' => 'idx_products_user'])
             ->addIndex(['article_id'], ['name' => 'idx_products_article'])

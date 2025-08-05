@@ -2,64 +2,85 @@
     {
         "version": 20241128230315,
         "migration_name": "V1",
-        "start_time": "2025-08-04T18:04:12+01:00",
-        "end_time": "2025-08-04T18:04:12+01:00",
+        "start_time": "2025-08-05T16:58:34+01:00",
+        "end_time": "2025-08-05T16:58:35+01:00",
         "breakpoint": false
     },
     {
         "version": 20241201193813,
         "migration_name": "ChangeExpiresAtToDatetime",
-        "start_time": "2025-08-04T18:04:12+01:00",
-        "end_time": "2025-08-04T18:04:12+01:00",
+        "start_time": "2025-08-05T16:58:35+01:00",
+        "end_time": "2025-08-05T16:58:35+01:00",
         "breakpoint": false
     },
     {
         "version": 20241202164800,
         "migration_name": "InsertSettings",
-        "start_time": "2025-08-04T18:04:12+01:00",
-        "end_time": "2025-08-04T18:04:12+01:00",
+        "start_time": "2025-08-05T16:58:35+01:00",
+        "end_time": "2025-08-05T16:58:35+01:00",
         "breakpoint": false
     },
     {
         "version": 20241203215800,
         "migration_name": "AddRobotsTemplate",
-        "start_time": "2025-08-04T18:04:12+01:00",
-        "end_time": "2025-08-04T18:04:12+01:00",
+        "start_time": "2025-08-05T16:58:35+01:00",
+        "end_time": "2025-08-05T16:58:35+01:00",
         "breakpoint": false
     },
     {
         "version": 20241208194033,
         "migration_name": "Newslugstable",
-        "start_time": "2025-08-04T18:04:12+01:00",
-        "end_time": "2025-08-04T18:04:12+01:00",
+        "start_time": "2025-08-05T16:58:35+01:00",
+        "end_time": "2025-08-05T16:58:35+01:00",
         "breakpoint": false
     },
     {
         "version": 20241214165907,
         "migration_name": "ArticleViews",
-        "start_time": "2025-08-04T18:04:12+01:00",
-        "end_time": "2025-08-04T18:04:12+01:00",
+        "start_time": "2025-08-05T16:58:35+01:00",
+        "end_time": "2025-08-05T16:58:35+01:00",
         "breakpoint": false
     },
     {
         "version": 20250523122807,
         "migration_name": "AddSecuritySettings",
-        "start_time": "2025-08-04T18:04:12+01:00",
-        "end_time": "2025-08-04T18:04:12+01:00",
+        "start_time": "2025-08-05T16:58:35+01:00",
+        "end_time": "2025-08-05T16:58:35+01:00",
         "breakpoint": false
     },
     {
         "version": 20250523132600,
         "migration_name": "AddRateLimitSettings",
-        "start_time": "2025-08-04T18:04:12+01:00",
-        "end_time": "2025-08-04T18:04:12+01:00",
+        "start_time": "2025-08-05T16:58:35+01:00",
+        "end_time": "2025-08-05T16:58:35+01:00",
         "breakpoint": false
     },
     {
         "version": 20250604074527,
         "migration_name": "CreateImageGalleries",
-        "start_time": "2025-08-04T18:04:12+01:00",
-        "end_time": "2025-08-04T18:04:12+01:00",
+        "start_time": "2025-08-05T16:58:35+01:00",
+        "end_time": "2025-08-05T16:58:35+01:00",
+        "breakpoint": false
+    },
+    {
+        "version": 20250605211400,
+        "migration_name": "AddGalleryAiSettings",
+        "start_time": "2025-08-05T16:58:35+01:00",
+        "end_time": "2025-08-05T16:58:35+01:00",
+        "breakpoint": false
+    },
+    {
+        "version": 20250805155925,
+        "migration_name": "CreateProducts",
+        "start_time": "2025-08-05T17:01:43+01:00",
+        "end_time": "2025-08-05T17:01:43+01:00",
+        "breakpoint": false
+    },
+    {
+        "version": 20250805172816,
+        "migration_name": "CreateAdapters",
+        "start_time": "2025-08-05T18:58:55+01:00",
+        "end_time": "2025-08-05T18:58:56+01:00",
         "breakpoint": false
     }
 ]
