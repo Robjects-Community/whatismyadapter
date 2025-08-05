@@ -1,4 +1,4 @@
-### Overview:
+### iOverview:
 
 This document provides a comprehensive, step-by-step implementation plan for implementing a **simplified** Product Management System in Willow CMS starting from version tag v1.4.0. The system features a single products table with essential fields, unified tagging across articles and products, and optional article associations for detailed product information.
 
@@ -525,7 +525,7 @@ class UnifiedSearchService
             $products = $this->productsTable->searchProducts($term)
                 ->limit($limit)
                 ->toArray();
-          
+        
             $results['products'] = array_map(function($product) {
                 return [
                     'id' => $product->id,
@@ -928,7 +928,7 @@ class ProductVerificationJob extends AbstractJob
             ]);
 
             $verificationScore = $this->calculateVerificationScore($product);
-      
+    
             // Use AI verification if enabled
             if (SettingsManager::read('Products.aiVerificationEnabled', true)) {
                 $aiScore = $this->runAIVerification($product);
@@ -937,7 +937,7 @@ class ProductVerificationJob extends AbstractJob
 
             // Update product with verification score
             $product->reliability_score = $verificationScore;
-      
+    
             // Auto-publish if score is high enough
             $autoPublishThreshold = (float)SettingsManager::read('Products.autoPublishThreshold', 4.0);
             if ($verificationScore >= $autoPublishThreshold) {
@@ -1144,7 +1144,7 @@ class ProductsController extends AppController
         $tags = $this->Products->Tags
             ->find('list', ['keyField' => 'id', 'valueField' => 'title'])
             ->order(['title' => 'ASC']);
-      
+    
         $this->set(compact('tags'));
     }
 
@@ -1226,19 +1226,19 @@ class ProductsController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             $data['user_id'] = $this->getRequest()->getAttribute('identity')->id;
-      
+    
             $product = $this->Products->patchEntity($product, $data, [
                 'associated' => ['Tags']
             ]);
-      
+    
             if ($this->Products->save($product)) {
                 $this->Flash->success(__('The product has been saved.'));
-          
+        
                 // Queue verification job
                 $this->queueJob('ProductVerificationJob', [
                     'product_id' => $product->id
                 ]);
-          
+        
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
@@ -1266,21 +1266,21 @@ class ProductsController extends AppController
   
         if ($this->request->is(['patch', 'post', 'put'])) {
             $originalScore = $product->reliability_score;
-      
+    
             $product = $this->Products->patchEntity($product, $this->request->getData(), [
                 'associated' => ['Tags']
             ]);
-      
+    
             if ($this->Products->save($product)) {
                 $this->Flash->success(__('The product has been saved.'));
-          
+        
                 // Re-verify if significant changes were made
                 if ($this->hasSignificantChanges($product)) {
                     $this->queueJob('ProductVerificationJob', [
                         'product_id' => $product->id
                     ]);
                 }
-          
+        
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
@@ -1746,7 +1746,7 @@ class ProductsControllerTest extends TestCase
             ->contain(['Tags'])
             ->where(['title' => 'Tagged Product'])
             ->first();
-      
+    
         $this->assertNotEmpty($product->tags);
     }
 }

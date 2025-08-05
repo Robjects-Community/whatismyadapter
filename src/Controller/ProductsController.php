@@ -14,7 +14,7 @@ use Cake\Http\Response;
 class ProductsController extends AppController
 {
 
-    
+
     /**
      * Index method
      *
@@ -25,7 +25,8 @@ class ProductsController extends AppController
         $adapters = $this->Products->find('all')
         ->where(['is_published' => 1, 'verification_status' => 'verified'])
         ->order(['created' => 'DESC'])
-        ->limit(20); // Paginate as needed
+        ->limit(20); // Paginate as needed'
+        
         $this->set(compact('adapters'));
 
         $query = $this->Products->find()
