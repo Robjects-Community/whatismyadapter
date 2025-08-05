@@ -1,23 +1,17 @@
 <?php
-declare(strict_types=1);
 namespace App\Controller\Admin;
 
+use App\Controller\Admin\AppController;
 
-use App\Controller\AppController;
-use Cake\Http\Response;
-
-class AdaptersController extends AppController {
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
-    public function index(): ?Response
+class AdaptersController extends AppController
+{
+    public function index()
     {
-        $statusFilter = $this->request->getQuery('status');
-
-        $query = $this->fetchTable('Adapters')->find()
+        // Your existing detailed query, adapted for admin (with published finder)
+        $statusFilter = $this->request->getQuery('status');  // Keep if needed for admin filtering
+        
+        $query = $this->fetchTable('Adapters')
+            ->find('published')  // Custom finder for published adapters (add this to AdaptersTable if not present)
             ->select([
                 'Adapters.id',
                 'Adapters.product_id',
@@ -43,10 +37,10 @@ class AdaptersController extends AppController {
                 'Adapters.created',
                 'Adapters.modified',
             ])
-            ->contain(['Tags'])
-            ->order(['Adapters.created' => 'DESC']);
+            ->contain(['Tags'])  // Include associated tags as per the snippet
+            ->limit(10);  // Limit results as per the snippet
 
-        
+        // Keep your search logic
         $search = $this->request->getQuery('search');
         if (!empty($search)) {
             $query->where([
@@ -64,22 +58,16 @@ class AdaptersController extends AppController {
                 ],
             ]);
         }
+
         $adapters = $this->paginate($query);
+
         if ($this->request->is('ajax')) {
             $this->set(compact('adapters', 'search'));
             $this->viewBuilder()->setLayout('ajax');
-
             return $this->render('search_results');
         }
-        $this->set(compact('adapters'));
 
+        $this->set(compact('adapters'));
         return null;
     }
-
-
-
 }
-   
-
-
-
