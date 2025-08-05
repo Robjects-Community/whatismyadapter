@@ -112,6 +112,13 @@ class ArticlesTable extends Table
             'dependent' => true,
             'cascadeCallbacks' => true,
         ]);
+
+        // Add to initialize() method in ArticlesTable - for simple-products-REFACTORING-plan.md
+        $this->hasMany('Products', [
+            'foreignKey' => 'article_id',
+            'dependent' => false, // Don't delete products when article is deleted
+        ]);
+
     }
 
     /**
@@ -181,7 +188,7 @@ class ArticlesTable extends Table
 
         // Calculate word count if body is set or modified
         if ($entity->isDirty('body') || ($entity->isNew() && !empty($entity->body))) {
-            $strippedBody = strip_tags((string)$entity->body); // Ensure body is a string
+            $strippedBody = strip_tags((string) $entity->body); // Ensure body is a string
             $wordCount = str_word_count($strippedBody);
             $entity->word_count = $wordCount;
         }
@@ -219,8 +226,8 @@ class ArticlesTable extends Table
             if (
                 $entity->kind == 'article' &&
                 ((isset($options['regenerateTags']) &&
-                $options['regenerateTags'] == 1) ||
-                !isset($options['regenerateTags']))
+                    $options['regenerateTags'] == 1) ||
+                    !isset($options['regenerateTags']))
             ) {
                 // Queue up an ArticleTagUpdateJob
                 if (SettingsManager::read('AI.articleTags')) {
@@ -383,7 +390,7 @@ class ArticlesTable extends Table
             if (!isset($dates[$year])) {
                 $dates[$year] = [];
             }
-            $dates[$year][] = (int)$result->month;
+            $dates[$year][] = (int) $result->month;
         }
 
         return $dates;

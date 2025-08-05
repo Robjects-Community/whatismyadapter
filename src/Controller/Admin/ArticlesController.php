@@ -158,7 +158,7 @@ class ArticlesController extends AppController
             ->orderBy(['Articles.created' => 'DESC']);
 
         if ($statusFilter !== null) {
-            $query->where(['Articles.is_published' => (int)$statusFilter]);
+            $query->where(['Articles.is_published' => (int) $statusFilter]);
         }
 
         $search = $this->request->getQuery('search');
@@ -317,7 +317,7 @@ class ArticlesController extends AppController
                 ->where([
                     'kind' => 'page',
                     'id !=' => $id,
-                    ])
+                ])
                 ->all();
         }
 

@@ -54,25 +54,28 @@ class ProductsTableTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * Test validationDefault method
-     *
-     * @return void
-     * @uses \App\Model\Table\ProductsTable::validationDefault()
-     */
-    public function testValidationDefault(): void
+    public function testGetPublishedProducts(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $result = $this->Products->getPublishedProducts();
+        $this->assertInstanceOf('Cake\ORM\Query', $result);
+
+        $products = $result->toArray();
+        foreach ($products as $product) {
+            $this->assertTrue($product->is_published);
+        }
     }
 
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     * @uses \App\Model\Table\ProductsTable::buildRules()
-     */
-    public function testBuildRules(): void
+    public function testSearchProducts(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $result = $this->Products->searchProducts('test');
+        $this->assertInstanceOf('Cake\ORM\Query', $result);
+    }
+
+    public function testValidation(): void
+    {
+        $product = $this->Products->newEntity([]);
+        $errors = $product->getErrors();
+
+        $this->assertArrayHasKey('title', $errors);
     }
 }

@@ -1,8 +1,5 @@
-
 <?php
 declare(strict_types=1);
-
-namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
@@ -169,6 +166,93 @@ private function determineRedirectAction($product)
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+
+    /**
+     * Verify method - Manual verification trigger
+     */
+    public function verify($id = null): void
+    {
+        $this->request->allowMethod(['post']);
+
+        $this->queueJob('ProductVerificationJob', [
+            'product_id' => $id,
+        ]);
+
+        $this->Flash->success(__('Product verification has been queued.'));
+
+        $this->redirect(['action' => 'view', $id]);
+    }
+
+    /**
+     * Toggle featured status
+     */
+    public function toggleFeatured($id = null): void
+    {
+        $this->request->allowMethod(['post']);
+
+        $product = $this->Products->get($id);
+        $product->featured = !$product->featured;
+
+        if ($this->Products->save($product)) {
+            $this->clearContentCache();
+            $status = $product->featured ? 'featured' : 'unfeatured';
+            $this->Flash->success(__('Product has been {0}.', $status));
+        } else {
+            $this->Flash->error(__('Could not update product status.'));
+        }
+
+        $this->redirect($this->referer(['action' => 'index']));
+    }
+
+    /**
+     * Toggle published status
+     */
+    public function togglePublished($id = null): void
+    {
+        $this->request->allowMethod(['post']);
+
+        $product = $this->Products->get($id);
+        $product->is_published = !$product->is_published;
+
+        if ($this->Products->save($product)) {
+            $this->clearContentCache();
+            $status = $product->is_published ? 'published' : 'unpublished';
+            $this->Flash->success(__('Product has been {0}.', $status));
+        } else {
+            $this->Flash->error(__('Could not update product status.'));
+        }
+
+        $this->redirect($this->referer(['action' => 'index']));
+    }
+
+    /**
+     * Check if product has significant changes requiring re-verification
+     */
+    private function hasSignificantChanges($product): bool
+    {
+        return $product->isDirty(['title', 'description', 'manufacturer', 'model_number']);
+    }
+
+    /**
+     * Queue a background job using the proper Message format
+     */
+    private function queueJob(string $jobClass, array $data): void
+    {
+        $this->loadComponent('Queue.Queue');
+
+        // Create job with proper Message format
+        $this->Queue->createJob($jobClass, $data, [
+            'reference' => $data['product_id'] ?? null,
+        ]);
+    }
+
+    /**
+     * Clear content cache after operations
+     */
+    private function clearContentCache(): void
+    {
+        Cache::clear('content');
+    }
 }
-
-

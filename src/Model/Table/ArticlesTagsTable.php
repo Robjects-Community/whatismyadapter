@@ -50,6 +50,13 @@ class ArticlesTagsTable extends Table
             'foreignKey' => 'tag_id',
             'joinType' => 'INNER',
         ]);
+        // // Add to initialize() method in TagsTable - for simple-products-REFACTORING-plan.md
+        // $this->belongsToMany('Products', [
+        //     'foreignKey' => 'tag_id',
+        //     'targetForeignKey' => 'product_id',
+        //     'joinTable' => 'products_tags',
+        // ]);
+
     }
 
     /**

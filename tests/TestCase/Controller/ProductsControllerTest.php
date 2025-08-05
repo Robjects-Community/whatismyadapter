@@ -5,7 +5,6 @@ namespace App\Test\TestCase\Controller;
 
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
-use Cake\I18n\DateTime;
 
 /**
  * App\Controller\ProductsController Test Case
@@ -63,7 +62,7 @@ class ProductsControllerTest extends TestCase
         $this->assertResponseContains('name="price"');
     }
 
-    /**
+    /*
      * Test add method POST request with valid data
      *
      * @return void
@@ -307,38 +306,14 @@ class ProductsControllerTest extends TestCase
         ]);
 
         $data = [
-            'title' => 'Test Product',
-            'description' => 'Test description',
-            'price' => 19.99,
+            'title' => 'Unauthorized Product',
+            'description' => 'This product should not be added.',
+            'price' => 99.99,
         ];
 
         $this->post('/products/add', $data);
-        
-        // Should be redirected or show authorization error
-        // Adjust based on your authorization logic
-        $this->assertRedirect();
-    }
 
-    /**
-     * Test remaining methods (keeping original structure for compatibility)
-     */
-    public function testIndex(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    public function testView(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    public function testEdit(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    public function testDelete(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
+        // Assert that the user is redirected to the login page
+        $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 }

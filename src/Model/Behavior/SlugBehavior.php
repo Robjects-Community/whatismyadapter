@@ -41,6 +41,15 @@ class SlugBehavior extends Behavior
         'maxLength' => 255,
     ];
 
+    // Add to the model types array:
+    protected $supportedModels = [
+        'Article',
+        'Tag',
+        'User',
+        'Page',
+        'Product', // New addition
+    ];
+
     /**
      * Initialize the behavior
      *
