@@ -1,4 +1,4 @@
-### iOverview:
+###Overview
 
 This document provides a comprehensive, step-by-step implementation plan for implementing a **simplified** Product Management System in Willow CMS starting from version tag v1.4.0. The system features a single products table with essential fields, unified tagging across articles and products, and optional article associations for detailed product information.
 
@@ -752,8 +752,6 @@ class UnifiedSearchService
 # Create settings migration for product configuration
 docker compose exec willowcms bin/cake bake migration InsertSimplifiedProductSettings
 
-# Run the migration after editing
-docker compose exec willowcms bin/cake migrations migrate
 ```
 
 **Migration Content:** `config/Migrations/YYYYMMDD_HHMMSS_InsertSimplifiedProductSettings.php`
@@ -895,6 +893,10 @@ class InsertSimplifiedProductSettings extends AbstractMigration
 }
 ```
 
+```bash
+# Run the migration after editing
+docker compose exec willowcms bin/cake migrations migrate
+```
 ### Day 6: Basic Job System Integration
 
 #### 6.1 Create Product Verification Job
@@ -929,6 +931,7 @@ class ProductVerificationJob extends AbstractJob
 
             $verificationScore = $this->calculateVerificationScore($product);
     
+      
             // Use AI verification if enabled
             if (SettingsManager::read('Products.aiVerificationEnabled', true)) {
                 $aiScore = $this->runAIVerification($product);
@@ -938,6 +941,7 @@ class ProductVerificationJob extends AbstractJob
             // Update product with verification score
             $product->reliability_score = $verificationScore;
     
+      
             // Auto-publish if score is high enough
             $autoPublishThreshold = (float)SettingsManager::read('Products.autoPublishThreshold', 4.0);
             if ($verificationScore >= $autoPublishThreshold) {
@@ -1145,6 +1149,7 @@ class ProductsController extends AppController
             ->find('list', ['keyField' => 'id', 'valueField' => 'title'])
             ->order(['title' => 'ASC']);
     
+      
         $this->set(compact('tags'));
     }
 
@@ -1274,13 +1279,14 @@ class ProductsController extends AppController
             if ($this->Products->save($product)) {
                 $this->Flash->success(__('The product has been saved.'));
         
+          
                 // Re-verify if significant changes were made
                 if ($this->hasSignificantChanges($product)) {
                     $this->queueJob('ProductVerificationJob', [
                         'product_id' => $product->id
                     ]);
                 }
-        
+          
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));

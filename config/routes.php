@@ -24,10 +24,12 @@
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
 
+use Cake\Core\Configure;
+
 /*
  * This file is loaded in the context of the `Application` class.
-  * So you can use  `$this` to reference the application class instance
-  * if required.
+ * So you can use  `$this` to reference the application class instance
+ * if required.
  */
 return function (RouteBuilder $routes): void {
     /*
@@ -77,7 +79,7 @@ return function (RouteBuilder $routes): void {
 
     $routes->scope('/', function (RouteBuilder $builder): void {
         $builder->setExtensions(['xml', 'rss']);
-        
+
         $builder->connect('/', ['controller' => 'Articles', 'action' => 'index']);
         $builder->connect(
             '/',
@@ -197,16 +199,18 @@ return function (RouteBuilder $routes): void {
             ]
         );
 
-        $builder->connect('/users/edit/{id}',
-        [
-            'controller' => 'Users',
-            'action' => 'edit'
-        ],
-        [
-            '_name' => 'account',
-            'routeClass' => 'ADmad/I18n.I18nRoute',
-            'pass' => ['id'],
-        ]);
+        $builder->connect(
+            '/users/edit/{id}',
+            [
+                'controller' => 'Users',
+                'action' => 'edit'
+            ],
+            [
+                '_name' => 'account',
+                'routeClass' => 'ADmad/I18n.I18nRoute',
+                'pass' => ['id'],
+            ]
+        );
 
 
         // start of product routes 
@@ -262,7 +266,7 @@ return function (RouteBuilder $routes): void {
                 '_name' => 'tags-index',
             ]
         );
-        
+
         $builder->connect(
             'articles/{slug}',
             [
@@ -285,7 +289,7 @@ return function (RouteBuilder $routes): void {
             [
                 'routeClass' => 'ADmad/I18n.I18nRoute',
                 '_name' => 'page-by-slug',
-                'pass' => ['slug'] 
+                'pass' => ['slug']
             ]
         );
 
@@ -298,7 +302,7 @@ return function (RouteBuilder $routes): void {
             [
                 'routeClass' => 'ADmad/I18n.I18nRoute',
                 '_name' => 'tag-by-slug',
-                'pass' => ['slug'] 
+                'pass' => ['slug']
             ]
         );
 
@@ -315,154 +319,22 @@ return function (RouteBuilder $routes): void {
         );
 
 
+
+        // Connect the default routes for all controllers.
+        $builder->fallbacks(DashedRoute::class);
     });
 
     // Admin routes
     $routes->prefix('Admin', function (RouteBuilder $routes) {
         $routes->connect('/', ['controller' => 'Articles', 'action' => 'index', 'prefix' => 'Admin']);
-
-
-
+        
         // Specific route for removing images from galleries
         $routes->connect(
             '/image-galleries/remove-image/{id}/{imageId}',
             ['controller' => 'ImageGalleries', 'action' => 'removeImage'],
             ['pass' => ['id', 'imageId']]
         );
-        // //// START OF PRODUCTS ROUTES
-        // Products routes
-        //dashboard for analytics
-        $routes->connect('/products/dashboard', [
-            'controller' => 'Products',
-            'action' => 'dashboard'
-        ]);
-
-        // product admin references for all products (verified, unverified, featured, etc.)
-        $routes->connect('/products', [
-            'controller' => 'Products',
-            'action' => 'index'
-        ]);
-        // product admin references for all products (verified, unverified, featured, etc.) v2
-        $routes->connect('/products/v2', [
-            'controller' => 'Products',
-            'action' => 'index2'
-        ]);
-        $routes->connect('/products/view2/*', [
-            'controller' => 'Products',
-            'action' => 'view2'
-        ]);
-        $routes->connect('/products/edit2/*', [
-            'controller' => 'Products',
-            'action' => 'edit2'
-        ]);
-        $routes->connect('/products/add2', [
-            'controller' => 'Products',
-            'action' => 'add2'
-        ]);
-
-        $routes->connect('/products/toggle-featured/*', [
-            'controller' => 'Products',
-            'action' => 'toggleFeatured'
-        ]);
-        $routes->connect('/products/verify/*', [
-            'controller' => 'Products',
-            'action' => 'verify'
-        ]);
-        $routes->connect('/products/bulk-verify', [
-            'controller' => 'Products',
-            'action' => 'bulkVerify'
-        ]);
-        $routes->connect('/products/add', [
-            'controller' => 'Products',
-            'action' => 'add'
-        ]);
-        $routes->connect('/products/edit/*', [
-            'controller' => 'Products',
-            'action' => 'edit'
-        ]);
-        $routes->connect('/products/delete/*', [
-            'controller' => 'Products',
-            'action' => 'delete'
-        ]);
-        $routes->connect('/products/view/*', [
-            'controller' => 'Products',
-            'action' => 'view'
-        ]);
-        $routes->connect('/products/reorder', [
-            'controller' => 'Products',
-            'action' => 'reorder'
-        ]);
         
-
-         // //// START OF PRODUCTS ROUTES
-        // Products routes
-        //dashboard for analytics
-        $routes->connect('/products/dashboard', [
-            'controller' => 'Products',
-            'action' => 'dashboard'
-        ]);
-        // product admin references for all products (verified, unverified, featured, etc.)
-        $routes->connect('/products', [
-            'controller' => 'Products',
-            'action' => 'index'
-        ]);
-        // product admin references for all products (verified, unverified, featured, etc.) v2
-        $routes->connect('/products/v2', [
-            'controller' => 'Products',
-            'action' => 'index2'
-        ]);
-        $routes->connect('/products/view2/*', [
-            'controller' => 'Products',
-            'action' => 'view2'
-        ]);
-        $routes->connect('/products/edit2/*', [
-            'controller' => 'Products',
-            'action' => 'edit2'
-        ]);
-        $routes->connect('/products/add2', [
-            'controller' => 'Products',
-            'action' => 'add2'
-        ]);
-
-        $routes->connect('/products/toggle-featured/*', [
-            'controller' => 'Products',
-            'action' => 'toggleFeatured'
-        ]);
-        $routes->connect('/products/verify/*', [
-            'controller' => 'Products',
-            'action' => 'verify'
-        ]);
-        $routes->connect('/products/bulk-verify', [
-            'controller' => 'Products',
-            'action' => 'bulkVerify'
-        ]);
-        $routes->connect('/products/add', [
-            'controller' => 'Products',
-            'action' => 'add'
-        ]);
-        $routes->connect('/products/edit/*', [
-            'controller' => 'Products',
-            'action' => 'edit'
-        ]);
-        $routes->connect('/products/delete/*', [
-            'controller' => 'Products',
-            'action' => 'delete'
-        ]);
-        $routes->connect('/products/view/*', [
-            'controller' => 'Products',
-            'action' => 'view'
-        ]);
-        $routes->connect('/products/reorder', [
-            'controller' => 'Products',
-            'action' => 'reorder'
-        ]);
-
-        // Product Categories routes
-        $routes->connect('/product-categories/reorder', [
-            'controller' => 'ProductCategories',
-            'action' => 'reorder'
-        ]);
-        // END OF PRODUCTS ROUTES
         $routes->fallbacks(DashedRoute::class);
     });
 
@@ -471,5 +343,9 @@ return function (RouteBuilder $routes): void {
         $routes->plugin('DebugKit', function (RouteBuilder $routes) {
             $routes->fallbacks();
         });
+        Configure::write('DebugKit.safeTld', ['local', 'localhost', 'dev']);
+        Configure::write('DebugKit.ignoreAuthorization', true);
+
+
     }
 };
