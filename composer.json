@@ -1,20 +1,20 @@
 {
-    "name": "matthewdeaves/willow",
-    "description": "Willow CMS - A Modern Content Management System Built with CakePHP 5.x and AI Integration",
+    "name": "garzarobm/willow",
+    "description": "Adapter CMS - A Modern Content Management System Built with CakePHP 5.x and AI Integration",
     "license": "MIT",
     "type": "project",
     "homepage": "https://willowcms.app",
     "keywords": ["cms", "content-management", "cakephp", "ai", "blog", "multilingual", "docker"],
     "authors": [
         {
-            "name": "Matthew Deaves",
-            "homepage": "https://github.com/matthewdeaves"
+            "name": "Mike",
+            "homepage": "https://github.com/garzarobm"
         }
     ],
     "support": {
-        "issues": "https://github.com/matthewdeaves/willow/issues",
-        "source": "https://github.com/matthewdeaves/willow",
-        "docs": "https://github.com/matthewdeaves/willow/blob/main/README.md"
+        "issues": "https://github.com/garzarobm/willow/issues",
+        "source": "https://github.com/garzarobm/willow",
+        "docs": "https://github.com/garzarobm/willow/blob/main/README.md"
     },
     "require": {
         "php": ">=8.1 <8.4",

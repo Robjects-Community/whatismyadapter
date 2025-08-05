@@ -282,13 +282,14 @@ return function (RouteBuilder $routes): void {
             ['controller' => 'ImageGalleries', 'action' => 'removeImage'],
             ['pass' => ['id', 'imageId']]
         );
-        $// //// START OF PRODUCTS ROUTES
+        // //// START OF PRODUCTS ROUTES
         // Products routes
         //dashboard for analytics
         $routes->connect('/products/dashboard', [
             'controller' => 'Products',
             'action' => 'dashboard'
         ]);
+
         // product admin references for all products (verified, unverified, featured, etc.)
         $routes->connect('/products', [
             'controller' => 'Products',
@@ -344,192 +345,7 @@ return function (RouteBuilder $routes): void {
             'controller' => 'Products',
             'action' => 'reorder'
         ]);
-// //// START OF PRODUCTS ROUTES
-        // Products routes
-        //dashboard for analytics
-        $routes->connect('/products/dashboard', [
-            'controller' => 'Products',
-            'action' => 'dashboard'
-        ]);
-        // product admin references for all products (verified, unverified, featured, etc.)
-        $routes->connect('/products', [
-            'controller' => 'Products',
-            'action' => 'index'
-        ]);
-        // product admin references for all products (verified, unverified, featured, etc.) v2
-        $routes->connect('/products/v2', [
-            'controller' => 'Products',
-            'action' => 'index2'
-        ]);
-        $routes->connect('/products/view2/*', [
-            'controller' => 'Products',
-            'action' => 'view2'
-        ]);
-        $routes->connect('/products/edit2/*', [
-            'controller' => 'Products',
-            'action' => 'edit2'
-        ]);
-        $routes->connect('/products/add2', [
-            'controller' => 'Products',
-            'action' => 'add2'
-        ]);
-
-        $routes->connect('/products/toggle-featured/*', [
-            'controller' => 'Products',
-            'action' => 'toggleFeatured'
-        ]);
-        $routes->connect('/products/verify/*', [
-            'controller' => 'Products',
-            'action' => 'verify'
-        ]);
-        $routes->connect('/products/bulk-verify', [
-            'controller' => 'Products',
-            'action' => 'bulkVerify'
-        ]);
-        $routes->connect('/products/add', [
-            'controller' => 'Products',
-            'action' => 'add'
-        ]);
-        $routes->connect('/products/edit/*', [
-            'controller' => 'Products',
-            'action' => 'edit'
-        ]);
-        $routes->connect('/products/delete/*', [
-            'controller' => 'Products',
-            'action' => 'delete'
-        ]);
-        $routes->connect('/products/view/*', [
-            'controller' => 'Products',
-            'action' => 'view'
-        ]);
-        $routes->connect('/products/reorder', [
-            'controller' => 'Products',
-            'action' => 'reorder'
-        ]);
-// //// START OF PRODUCTS ROUTES
-        // Products routes
-        //dashboard for analytics
-        $routes->connect('/products/dashboard', [
-            'controller' => 'Products',
-            'action' => 'dashboard'
-        ]);
-        // product admin references for all products (verified, unverified, featured, etc.)
-        $routes->connect('/products', [
-            'controller' => 'Products',
-            'action' => 'index'
-        ]);
-        // product admin references for all products (verified, unverified, featured, etc.) v2
-        $routes->connect('/products/v2', [
-            'controller' => 'Products',
-            'action' => 'index2'
-        ]);
-        $routes->connect('/products/view2/*', [
-            'controller' => 'Products',
-            'action' => 'view2'
-        ]);
-        $routes->connect('/products/edit2/*', [
-            'controller' => 'Products',
-            'action' => 'edit2'
-        ]);
-        $routes->connect('/products/add2', [
-            'controller' => 'Products',
-            'action' => 'add2'
-        ]);
-
-        $routes->connect('/products/toggle-featured/*', [
-            'controller' => 'Products',
-            'action' => 'toggleFeatured'
-        ]);
-        $routes->connect('/products/verify/*', [
-            'controller' => 'Products',
-            'action' => 'verify'
-        ]);
-        $routes->connect('/products/bulk-verify', [
-            'controller' => 'Products',
-            'action' => 'bulkVerify'
-        ]);
-        $routes->connect('/products/add', [
-            'controller' => 'Products',
-            'action' => 'add'
-        ]);
-        $routes->connect('/products/edit/*', [
-            'controller' => 'Products',
-            'action' => 'edit'
-        ]);
-        $routes->connect('/products/delete/*', [
-            'controller' => 'Products',
-            'action' => 'delete'
-        ]);
-        $routes->connect('/products/view/*', [
-            'controller' => 'Products',
-            'action' => 'view'
-        ]);
-        $routes->connect('/products/reorder', [
-            'controller' => 'Products',
-            'action' => 'reorder'
-        ]);
-// //// START OF PRODUCTS ROUTES
-        // Products routes
-        //dashboard for analytics
-        $routes->connect('/products/dashboard', [
-            'controller' => 'Products',
-            'action' => 'dashboard'
-        ]);
-        // product admin references for all products (verified, unverified, featured, etc.)
-        $routes->connect('/products', [
-            'controller' => 'Products',
-            'action' => 'index'
-        ]);
-        // product admin references for all products (verified, unverified, featured, etc.) v2
-        $routes->connect('/products/v2', [
-            'controller' => 'Products',
-            'action' => 'index2'
-        ]);
-        $routes->connect('/products/view2/*', [
-            'controller' => 'Products',
-            'action' => 'view2'
-        ]);
-        $routes->connect('/products/edit2/*', [
-            'controller' => 'Products',
-            'action' => 'edit2'
-        ]);
-        $routes->connect('/products/add2', [
-            'controller' => 'Products',
-            'action' => 'add2'
-        ]);
-
-        $routes->connect('/products/toggle-featured/*', [
-            'controller' => 'Products',
-            'action' => 'toggleFeatured'
-        ]);
-        $routes->connect('/products/verify/*', [
-            'controller' => 'Products',
-            'action' => 'verify'
-        ]);
-        $routes->connect('/products/bulk-verify', [
-            'controller' => 'Products',
-            'action' => 'bulkVerify'
-        ]);
-        $routes->connect('/products/add', [
-            'controller' => 'Products',
-            'action' => 'add'
-        ]);
-        $routes->connect('/products/edit/*', [
-            'controller' => 'Products',
-            'action' => 'edit'
-        ]);
-        $routes->connect('/products/delete/*', [
-            'controller' => 'Products',
-            'action' => 'delete'
-        ]);
-        $routes->connect('/products/view/*', [
-            'controller' => 'Products',
-            'action' => 'view'
-        ]);
-        $routes->connect('/products/reorder', [
-            'controller' => 'Products',
-            'action' => 'reorder'
-        ]);
+        
 
          // //// START OF PRODUCTS ROUTES
         // Products routes
