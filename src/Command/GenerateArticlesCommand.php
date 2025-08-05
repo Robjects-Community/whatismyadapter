@@ -48,6 +48,11 @@ class GenerateArticlesCommand extends Command
      */
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
+        $parser = parent::buildOptionParser($parser);
+        $parser->addOption('import-csv', [
+            'help' => __('Path to CSV file for importing adapters into default data'),
+            'short' => 'i'
+        ]);
         $parser->addArgument('count', [
             'help' => __('Number of articles to generate'),
             'required' => true,
@@ -68,6 +73,12 @@ class GenerateArticlesCommand extends Command
      */
     public function execute(Arguments $args, ConsoleIo $io): ?int
     {
+        $this->loadAdminUser();
+
+        if ($csvPath = $args->getOption('import-csv')) {
+            return $this->importAdaptersFromCsv($csvPath, $io);
+        }
+
         if ($args->getOption('delete')) {
             $this->Articles->deleteAll([]);
             $io->out(__('All articles have been deleted.'));
@@ -112,6 +123,47 @@ class GenerateArticlesCommand extends Command
         return static::CODE_SUCCESS;
     }
 
+     private function importAdaptersFromCsv(string $csvPath, ConsoleIo $io): int {
+        if (!file_exists($csvPath)) {
+            $io->error(__('CSV file not found: {0}', $csvPath));
+            return self::CODE_ERROR;
+        }
+
+        $data = array_map('str_getcsv', file($csvPath));
+        $headers = array_shift($data);  // First row as headers
+
+        $imported = 0;
+        $defaultData = [];  // Array to build default data fixture
+
+        foreach ($data as $row) {
+            $adapter = array_combine($headers, $row);
+
+            // Transform CSV data into entity (adapt to your Adapters/Products model)
+            $entity = $this->Articles->newEntity([
+                'title' => $adapter['connector_type_a'] . ' to ' . $adapter['connector_type_b'],
+                'description' => 'Max Power: ' . $adapter['max_power_delivery'] . '. Features: USB PD ' . ($adapter['supports_usb_pd'] ? 'Yes' : 'No'),
+                'slug' => strtolower(str_replace(' ', '-', $adapter['connector_type_a'] . '-' . $adapter['connector_type_b'])),
+                'user_id' => $this->adminUserId,
+                'is_published' => true,
+                'published' => new DateTime(),
+                // Add other fields like price, etc., from CSV
+            ]);
+
+            if ($this->Articles->save($entity)) {
+                $imported++;
+                $defaultData[] = $entity->toArray();  // Collect for default data export
+            } else {
+                $io->error(__('Failed to import: {0}', json_encode($adapter)));
+            }
+        }
+
+        // Save to default_data folder (e.g., as JSON)
+        $outputPath = CONFIG . 'default_data/adapters.json';  // Adjust path as needed
+        file_put_contents($outputPath, json_encode($defaultData, JSON_PRETTY_PRINT));
+        $io->success(__('Imported {0} adapters and saved to {1}', $imported, $outputPath));
+
+        return self::CODE_SUCCESS;
+    }
     /**
      * Ensures there are at least 10 top-level tags in the system
      *
