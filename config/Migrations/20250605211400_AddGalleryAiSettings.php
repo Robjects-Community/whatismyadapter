@@ -14,6 +14,7 @@ class AddGalleryAiSettings extends AbstractMigration
                 'ordering' => 200,
                 'category' => 'AI',
                 'key_name' => 'gallerySEO',
+             
                 'value' => '0',
                 'value_type' => 'bool',
                 'value_obscure' => false,
