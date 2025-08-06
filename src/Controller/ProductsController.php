@@ -14,7 +14,7 @@ class ProductsController extends AppController
         
         foreach ($this->parseCsv($csvData) as $row) {
             $adapter = $this->Products->newEntity([
-                'title' => "{$row['connector_type_a']} to {$row['connector_type_b']} Adapter",
+                'title' => "{$row['connector _type_a']} to {$row['connector_type_b']} Adapter",
                 'connector_type_a' => $row['connector_type_a'],
                 'connector_type_b' => $row['connector_type_b'],
                 'supports_usb_pd' => (bool)$row['supports_usb_pd'],
