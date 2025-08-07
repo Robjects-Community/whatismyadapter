@@ -69,7 +69,8 @@
             "php": "8.1.0"
         },
         "platform-check": true,
-        "sort-packages": true
+        "sort-packages": true,
+        "process-timeout": 3600
     },
     "scripts": {
         "post-install-cmd": "App\\Console\\Installer::postInstall",

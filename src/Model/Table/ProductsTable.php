@@ -9,7 +9,11 @@ use Cake\ORM\Behavior\Translate\TranslateTrait;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\ORM\RulesChecker;
+use Cake\ORM\Query\CommonQueryTrait
 
+use Cake\Validation\ValidatorFactory;
+use function Cake\Core\deprecationWarning;
 class ProductsTable extends Table
 {
     use ImageValidationTrait;
@@ -103,8 +107,8 @@ class ProductsTable extends Table
             ->notEmptyString('featured');
 
         return $validator;
-    }
 
+    }
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['slug']), ['errorField' => 'slug']);
@@ -151,28 +155,51 @@ class ProductsTable extends Table
      */
     public function getProductsByStatus(string $status): Query
     {
-        return $this->find()
-            ->where(['verification_status' => $status])
-            ->contain(['Users', 'Tags'])
-            ->order(['created' => 'ASC']);
+        //     return $this->find()
+        //         ->where(['verification_status' => $status])
+        //         ->contain(['Users', 'Tags'])
+        //         ->orderBy(['created' => 'ASC']);
     }
 
     /**
      * Search products across title, description, manufacturer
+     *
+     * @param string $term
+     * @return \Cake\ORM\Query\SelectQuery
      */
+
     public function searchProducts(string $term): Query
     {
-        return $this->find()
+        $query = $this->find();
+        return($query
             ->where([
                 'OR' => [
-                    'Products.title LIKE' => "%{$term}%",
-                    'Products.description LIKE' => "%{$term}%",
-                    'Products.manufacturer LIKE' => "%{$term}%",
-                    'Products.model_number LIKE' => "%{$term}%",
+                    'Products.title LIKE' => '%' . $term . '%',
+                    'Products.description LIKE' => '%' . $term . '%',
+                    'Products.manufacturer LIKE' => '%' . $term . '%',
+                    'Products.model_number LIKE' => '%' . $term . '%',
                 ],
             ])
             ->contain(['Tags', 'Users'])
-            ->where(['Products.is_published' => true]);
+            ->where(['Products.is_published' => true])
+            );
+
+        // // Deprecated: Use the above query instead
+        // deprecationWarning('searchProducts() is deprecated, use getPublishedProducts() with search options instead.');  
+        // if (empty($term)) {
+        //     return $this->find("published")->where(['1 = 0']); // Return empty result if no term
+        // }
+        // return $this->find("published")
+        //     ->where([
+        //         'OR' => [
+        //             'Products.title LIKE' => "%{$term}%",
+        //             'Products.description LIKE' => "%{$term}%",
+        //             'Products.manufacturer LIKE' => "%{$term}%",
+        //             'Products.model_number LIKE' => "%{$term}%",
+        //         ],
+        //     ])
+        //     ->contain(['Tags', 'Users'])
+        //     ->where(['Products.is_published' => true]);
     }
 
     /**
@@ -205,9 +232,11 @@ class ProductsTable extends Table
      */
     public function incrementViewCount(string $productId): bool
     {
-        return $this->updateAll(
+        return (bool)$this->updateAll(
             ['view_count = view_count + 1'],
             ['id' => $productId],
         );
+
     }
+    
 }

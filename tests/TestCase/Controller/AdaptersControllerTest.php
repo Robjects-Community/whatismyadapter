@@ -1,16 +1,32 @@
 <?php
-namespace App\Controller\Admin;
+declare(strict_types=1);
+
+namespace Tests\TestCase\Controller;
 
 use App\Test\TestCase\AppControllerTestCase;
-use Cake\Http\Response;
+
+use Cake\ORM\TableRegistry;
+use Cake\TestSuite\TestCase;
+use Cake\Utility\Hash;
+use Cake\Utility\Inflector;
+use App\Service\Api\Anthropic\ArticleTagsGenerator
 
 class AdaptersControllerTest extends AppControllerTestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+      $this->loadComponent("Paginator");
+    }
     public function index()
     {
         // Your existing detailed query, adapted for admin (with published finder)
         $statusFilter = $this->request->getQuery('status');  // Keep if needed for admin filtering
-        
+        if ($statusFilter === 'published') {
+            $this->paginate = [
+                'conditions' => ['Adapters.status' => 'published'],
+            ];
+        }
         $query = $this->fetchTable('Adapters')
             ->find('published')  // Custom finder for published adapters (add this to AdaptersTable if not present)
             ->select([
@@ -64,11 +80,26 @@ class AdaptersControllerTest extends AppControllerTestCase
 
         if ($this->request->is('ajax')) {
             $this->set(compact('adapters', 'search'));
+            
             $this->viewBuilder()->setLayout('ajax');
             return $this->render('search_results');
         }
 
-        $this->set(compact('adapters'));
+        $this->set(compact(var_name: 'adapters'));
+        
         return null;
+
     }
+
+    /**
+     * Search action for AJAX requests
+     *
+     * @return void
+     */
+    public function searchAction(): void
+    {
+        $search = $this->request->getQuery('search');
+        $this->set(compact('search'));
+    }
+
 }

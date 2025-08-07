@@ -18,8 +18,8 @@ services:
       - DEBUG=true
       - APP_ENCODING=UTF-8
       - APP_DEFAULT_LOCALE=en_GB
-      - APP_DEFAULT_TIMEZONE=Europe/London
-      - SECURITY_SALT=developmentsalt
+      - APP_DEFAULT_TIMEZONE=America/Chicago 
+      - SECURITY_SALT=dcd21896a8503d927f98db16221f8e0e09e0c4470b9fffdf8c44b834767fdc0a
       - DB_HOST=mysql
       - DB_USERNAME=cms_user
       - DB_PASSWORD=password

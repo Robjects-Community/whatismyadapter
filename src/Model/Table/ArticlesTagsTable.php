@@ -56,7 +56,6 @@ class ArticlesTagsTable extends Table
         //     'targetForeignKey' => 'product_id',
         //     'joinTable' => 'products_tags',
         // ]);
-
     }
 
     /**

@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 namespace App\Test\TestCase\View\Cell;
-
 use App\View\Cell\GalleryCell;
 use Cake\Cache\Cache;
 use Cake\TestSuite\TestCase;
@@ -12,6 +11,7 @@ use Cake\TestSuite\TestCase;
  */
 class GalleryCellTest extends TestCase
 {
+
     /**
      * Request mock
      *
