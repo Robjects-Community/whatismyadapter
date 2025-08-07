@@ -118,7 +118,6 @@ class ArticlesTable extends Table
             'foreignKey' => 'article_id',
             'dependent' => false, // Don't delete products when article is deleted
         ]);
-
     }
 
     /**
@@ -188,7 +187,7 @@ class ArticlesTable extends Table
 
         // Calculate word count if body is set or modified
         if ($entity->isDirty('body') || ($entity->isNew() && !empty($entity->body))) {
-            $strippedBody = strip_tags((string) $entity->body); // Ensure body is a string
+            $strippedBody = strip_tags((string)$entity->body); // Ensure body is a string
             $wordCount = str_word_count($strippedBody);
             $entity->word_count = $wordCount;
         }
@@ -390,7 +389,7 @@ class ArticlesTable extends Table
             if (!isset($dates[$year])) {
                 $dates[$year] = [];
             }
-            $dates[$year][] = (int) $result->month;
+            $dates[$year][] = (int)$result->month;
         }
 
         return $dates;

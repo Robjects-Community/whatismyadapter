@@ -1,5 +1,7 @@
 
 <?php
+declare(strict_types=1);
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query\SelectQuery;
@@ -29,64 +31,63 @@ class AdaptersTable extends Table
     }
 }
 
-        
- /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator): Validator
-    {
-        $validator
-            ->scalar('connector_type_a')
-            ->maxLength('connector_type_a', 255)
-            ->requirePresence('connector_type_a', 'create')
-            ->notEmptyString('connector_type_a');
+/**
+ * Default validation rules.
+ *
+ * @param \Cake\Validation\Validator $validator Validator instance.
+ * @return \Cake\Validation\Validator
+ */
+public function validationDefault(Validator $validator): Validator
+{
+    $validator
+        ->scalar('connector_type_a')
+        ->maxLength('connector_type_a', 255)
+        ->requirePresence('connector_type_a', 'create')
+        ->notEmptyString('connector_type_a');
 
-        $validator
-            ->scalar('connector_type_b')
-            ->maxLength('connector_type_b', 255)
-            ->requirePresence('connector_type_b', 'create')
-            ->notEmptyString('connector_type_b');
+    $validator
+        ->scalar('connector_type_b')
+        ->maxLength('connector_type_b', 255)
+        ->requirePresence('connector_type_b', 'create')
+        ->notEmptyString('connector_type_b');
 
-        $validator
-            ->scalar('max_power_delivery')
-            ->maxLength('max_power_delivery', 255)
-            ->allowEmptyString('max_power_delivery');
+    $validator
+        ->scalar('max_power_delivery')
+        ->maxLength('max_power_delivery', 255)
+        ->allowEmptyString('max_power_delivery');
 
-        // Add validation for other fields from your CSV as needed
+    // Add validation for other fields from your CSV as needed
 
-        return $validator;
-    }
+    return $validator;
+}
 
     // Adapter-specific methods
 
-    /**
-     * Custom finder to retrieve adapters by connector types.
-     *
-     * @param \Cake\ORM\Query\SelectQuery $query The query object.
-     * @param string $connectorA The first connector type.
-     * @param string $connectorB The second connector type.
-     * @return \Cake\ORM\Query\SelectQuery
-     */
-    public function findByConnectorType(SelectQuery $query, string $connectorA, string $connectorB): SelectQuery
-    {
-        return $query
-            ->where(['connector_type_a' => $connectorA])
-            ->where(['connector_type_b' => $connectorB]);
-    }
+/**
+ * Custom finder to retrieve adapters by connector types.
+ *
+ * @param \Cake\ORM\Query\SelectQuery $query The query object.
+ * @param string $connectorA The first connector type.
+ * @param string $connectorB The second connector type.
+ * @return \Cake\ORM\Query\SelectQuery
+ */
+public function findByConnectorType(SelectQuery $query, string $connectorA, string $connectorB): SelectQuery
+{
+    return $query
+        ->where(['connector_type_a' => $connectorA])
+        ->where(['connector_type_b' => $connectorB]);
+}
 
-    /**
-     * Custom finder to retrieve adapters by minimum power delivery.
-     *
-     * @param \Cake\ORM\Query\SelectQuery $query The query object.
-     * @param int $minWatts The minimum power in watts.
-     * @return \Cake\ORM\Query\SelectQuery
-     */
-    public function findByPowerDelivery(SelectQuery $query, int $minWatts): SelectQuery
-    {
-        return $query
-            ->where(['max_power_delivery >=' => $minWatts . 'W']);
-    }
+/**
+ * Custom finder to retrieve adapters by minimum power delivery.
+ *
+ * @param \Cake\ORM\Query\SelectQuery $query The query object.
+ * @param int $minWatts The minimum power in watts.
+ * @return \Cake\ORM\Query\SelectQuery
+ */
+public function findByPowerDelivery(SelectQuery $query, int $minWatts): SelectQuery
+{
+    return $query
+        ->where(['max_power_delivery >=' => $minWatts . 'W']);
+}
 }

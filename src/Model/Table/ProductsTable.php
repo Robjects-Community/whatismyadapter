@@ -7,13 +7,10 @@ use App\Model\Behavior\ImageValidationTrait;
 use Cake\Log\LogTrait;
 use Cake\ORM\Behavior\Translate\TranslateTrait;
 use Cake\ORM\Query;
+use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\ORM\RulesChecker;
-use Cake\ORM\Query\CommonQueryTrait
 
-use Cake\Validation\ValidatorFactory;
-use function Cake\Core\deprecationWarning;
 class ProductsTable extends Table
 {
     use ImageValidationTrait;
@@ -107,8 +104,8 @@ class ProductsTable extends Table
             ->notEmptyString('featured');
 
         return $validator;
-
     }
+
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['slug']), ['errorField' => 'slug']);
@@ -116,7 +113,6 @@ class ProductsTable extends Table
         $rules->add($rules->existsIn(['article_id'], 'Articles'), ['errorField' => 'article_id']);
 
         return $rules;
-
     }
 
     /**
@@ -171,7 +167,8 @@ class ProductsTable extends Table
     public function searchProducts(string $term): Query
     {
         $query = $this->find();
-        return($query
+
+        return $query
             ->where([
                 'OR' => [
                     'Products.title LIKE' => '%' . $term . '%',
@@ -181,11 +178,10 @@ class ProductsTable extends Table
                 ],
             ])
             ->contain(['Tags', 'Users'])
-            ->where(['Products.is_published' => true])
-            );
+            ->where(['Products.is_published' => true]);
 
         // // Deprecated: Use the above query instead
-        // deprecationWarning('searchProducts() is deprecated, use getPublishedProducts() with search options instead.');  
+        // deprecationWarning('searchProducts() is deprecated, use getPublishedProducts() with search options instead.');
         // if (empty($term)) {
         //     return $this->find("published")->where(['1 = 0']); // Return empty result if no term
         // }
@@ -236,7 +232,5 @@ class ProductsTable extends Table
             ['view_count = view_count + 1'],
             ['id' => $productId],
         );
-
     }
-    
 }

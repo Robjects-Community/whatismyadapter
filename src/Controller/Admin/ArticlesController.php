@@ -158,7 +158,7 @@ class ArticlesController extends AppController
             ->orderBy(['Articles.created' => 'DESC']);
 
         if ($statusFilter !== null) {
-            $query->where(['Articles.is_published' => (int) $statusFilter]);
+            $query->where(['Articles.is_published' => (int)$statusFilter]);
         }
 
         $search = $this->request->getQuery('search');
@@ -195,13 +195,15 @@ class ArticlesController extends AppController
      */
     public function view(?string $id = null): void
     {
-        $article = $this->Articles->get($id, contain: [
-            'Users',
-            'PageViews',
-            'Tags',
-            'Images',
-            'Slugs',
-            'Comments',
+        $article = $this->Articles->get($id, [
+            'contain' => [
+                'Users',
+                'PageViews',
+                'Tags',
+                'Images',
+                'Slugs',
+                'Comments',
+            ],
         ]);
 
         if (!$article) {

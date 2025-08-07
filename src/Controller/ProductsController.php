@@ -1,17 +1,16 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Controller;
 
-use App\Controller\AppController;
 use Cake\Http\Response;
 
 class ProductsController extends AppController
 {
-
     public function importAdapters()
     {
         $csvData = $this->request->getUploadedFiles()['csv_file'];
-        
+
         foreach ($this->parseCsv($csvData) as $row) {
             $adapter = $this->Products->newEntity([
                 'title' => "{$row['connector _type_a']} to {$row['connector_type_b']} Adapter",
@@ -22,7 +21,7 @@ class ProductsController extends AppController
                 'price' => $row['price_usd'],
                 'category_rating' => $row['category_rating'],
                 'verification_status' => 'pending',
-                'user_id' => $this->Authentication->getIdentity()->id
+                'user_id' => $this->Authentication->getIdentity()->id,
             ]);
             $this->Products->save($adapter);
         }
@@ -36,9 +35,10 @@ class ProductsController extends AppController
             ->contain(['Tags'])
             ->order(['featured' => 'DESC', 'view_count' => 'DESC'])
             ->limit(50);
-        
+
         $this->set(compact('adapters'));
     }
+
     public function indexSimple()
     {
         // Customer-facing adapter catalog
@@ -47,7 +47,7 @@ class ProductsController extends AppController
             ->contain(['Tags'])
             ->order(['featured' => 'DESC', 'view_count' => 'DESC'])
             ->limit(50);
-        
+
         $this->set(compact('adapters'));
     }
 
@@ -58,28 +58,27 @@ class ProductsController extends AppController
             ->where(['is_published' => true])
             ->contain(['Tags', 'Users'])
             ->firstOrFail();
-            
+
         // Increment view count
         $this->Products->updateAll(['view_count' => $adapter->view_count + 1], ['id' => $adapter->id]);
-        
+
         $this->set(compact('adapter'));
     }
-    
-    
+
     public function search()
     {
         // AJAX-powered adapter search by connector types
         $criteria = $this->request->getQuery();
         $adapters = $this->Products->searchAdapters($criteria);
-        
+
         if ($this->request->is('ajax')) {
             $this->viewBuilder()->setLayout('ajax');
+
             return $this->render('search_results');
         }
-        
+
         $this->set(compact('adapters', 'criteria'));
     }
-
 
     /**
      * Index method
@@ -92,7 +91,6 @@ class ProductsController extends AppController
         $query = $this->Products->find()
             ->contain(['Users', 'Articles']);
 
-        
         $search = $this->request->getQuery('search');
         if (!empty($search)) {
             $query->where([
@@ -119,7 +117,7 @@ class ProductsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view(?string $id = null)
     {
         $product = $this->Products->get($id, contain: ['Users', 'Articles', 'Tags', 'Slugs']);
         $this->set(compact('product'));
@@ -155,7 +153,7 @@ class ProductsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(?string $id = null)
     {
         $product = $this->Products->get($id, contain: ['Tags']);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -180,7 +178,7 @@ class ProductsController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null): ?Response
+    public function delete(?string $id = null): ?Response
     {
         $this->request->allowMethod(['post', 'delete']);
         $product = $this->Products->get($id);
@@ -192,5 +190,4 @@ class ProductsController extends AppController
 
         return $this->redirect($this->referer());
     }
-
-    }
+}

@@ -334,6 +334,33 @@ return function (RouteBuilder $routes): void {
             ['controller' => 'ImageGalleries', 'action' => 'removeImage'],
             ['pass' => ['id', 'imageId']]
         );
+
+        $routes->connect(
+            '/products',
+            ['controller' => 'Products', 'action' => 'index-simple', 'prefix' => 'Admin'],
+        );
+        $routes->connect(
+            '/products/add',
+            ['controller' => 'Products', 'action' => 'add', 'prefix' => 'Admin'],
+        );
+        $routes->connect(
+            '/products/edit/{id}',
+            ['controller' => 'Products', 'action' => 'edit', 'prefix' => 'Admin'],
+            ['pass' => ['id']]
+        );
+        $routes->connect(
+            '/products/delete/{id}',
+            ['controller' => 'Products', 'action' => 'delete', 'prefix' => 'Admin'],
+            ['pass' => ['id']]
+        );
+
+        // Connect the default routes for all controllers.
+        $routes->connect('/:controller', ['action' => 'index'], ['prefix' => 'Admin']);
+        $routes->connect('/:controller/:action/*', [], ['prefix' => 'Admin']);
+
+        // Fallbacks for admin routes
+
+        
         
         $routes->fallbacks(DashedRoute::class);
     });

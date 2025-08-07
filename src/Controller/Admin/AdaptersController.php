@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
-namespace App\Controller\Admin;
 
+namespace App\Controller;
 
-use App\Controller\AppController;
 use Cake\Http\Response;
 
-class AdaptersController extends AppController {
-
+class AdaptersController extends AppController
+{
     /**
      * Index method
      *
@@ -44,9 +43,8 @@ class AdaptersController extends AppController {
                 'Adapters.modified',
             ])
             ->contain(['Tags'])
-            ->order(['Adapters.created' => 'DESC']);
+            ->orderBy(['Adapters.created' => 'DESC']);
 
-        
         $search = $this->request->getQuery('search');
         if (!empty($search)) {
             $query->where([
@@ -71,15 +69,8 @@ class AdaptersController extends AppController {
 
             return $this->render('search_results');
         }
-        $this->set(compact('adapters'));
+        $this->set(compact(var_name: 'adapters'));
 
         return null;
     }
-
-
-
 }
-   
-
-
-

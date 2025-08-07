@@ -106,5 +106,11 @@ project_mysql_backups
 # CakePHP Book
 CakePHPBook.txt
 .hidden-items.json
-docker/willowcms/config/php/php.ini
 temp-33.rdb
+
+# Recent edits #
+################
+# Do not suggest code that has been deleted.
+# These are files that have been recently edited and should not be ignored.
+# Ensure to keep the context of the changes made.
+vendor

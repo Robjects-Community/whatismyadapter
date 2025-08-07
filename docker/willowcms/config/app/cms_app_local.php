@@ -38,7 +38,7 @@ return [
         'default' => [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
+            'persistent' => true,
             'host' => env('DB_HOST', 'mysql'),
             'username' => env('DB_USERNAME', 'cms_user'),
             'password' => env('DB_PASSWORD', 'password'),

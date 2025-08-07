@@ -18,7 +18,7 @@ class ProductsController extends AppController
         $query = $this->Products->find()
             ->contain(['Users', 'Articles', 'Tags'])
             ->orderBy(['Products.created' => 'DESC']); // Fix column ambiguity
-            
+
         $products = $this->paginate($query);
         $this->set(compact('products'));
         $adapters = $this->Products->find('all')
@@ -27,32 +27,31 @@ class ProductsController extends AppController
             ->limit(20); // Paginate as needed
 
         $this->set(compact('products', 'adapters'));
-
-  
     }
+
     public function pendingReview()
     {
-  
-    $products = $this->Products->find()
+
+        $products = $this->Products->find()
         ->where(['verification_status' => 'pending'])
         ->contain(['Users', 'Articles', 'Tags'])
         ->orderBy(['Products.created' => 'DESC']);
 
-    $this->set(compact('products'));
+        $this->set(compact('products'));
 
         // // Handle pending product submissions
         // $pendingProducts = $this->Products->find()
         //     ->where(['verification_status IN' => ['pending', 'flagged']])
         //     ->contain(['Users'])
         //     ->orderBy(['Products.created' => 'DESC']);
-            
+
         // $this->set('products', $this->paginate($pendingProducts));
     }
 
     public function dashboard()
-{
+    {
     // Product analytics dashboard
-    $stats = [
+        $stats = [
         'total_products' => $this->Products->find()->count(),
         'published' => $this->Products->find()->where(['is_published' => true])->count(),
         'pending_review' => $this->Products->find()->where(['verification_status' => 'pending'])->count(),
@@ -61,52 +60,45 @@ class ProductsController extends AppController
             ->group(['connector_type_a', 'connector_type_b'])
             ->orderBy(['count' => 'DESC'])
             ->limit(10)
-            ->toArray()
-    ];
-    
-    $this->set(compact('stats'));
-}
+            ->toArray(),
+        ];
 
-public function add()
-{
-    $product = $this->Products->newEmptyEntity();
-    
-    if ($this->request->is('post')) {
-        $product = $this->Products->patchEntity($product, $this->request->getData());
-        
-        if ($this->Products->save($product)) {
-            $this->Flash->success(__('The adapter has been saved.'));
-            
-            // Smart redirection based on user context
-            $redirectAction = $this->determineRedirectAction($product);
-            return $this->redirect($redirectAction);
+        $this->set(compact('stats'));
+    }
+
+    public function add()
+    {
+        $product = $this->Products->newEmptyEntity();
+
+        if ($this->request->is('post')) {
+            $product = $this->Products->patchEntity($product, $this->request->getData());
+
+            if ($this->Products->save($product)) {
+                $this->Flash->success(__('The adapter has been saved.'));
+
+                // Smart redirection based on user context
+                $redirectAction = $this->determineRedirectAction($product);
+
+                return $this->redirect($redirectAction);
+            }
+
+            $this->Flash->error(__('The adapter could not be saved. Please, try again.'));
         }
-        
-        $this->Flash->error(__('The adapter could not be saved. Please, try again.'));
-    }
-    
-    $this->set(compact('product'));
-}
 
-
-private function determineRedirectAction($product)
-{
-    // Redirect logic based on product status and user role
-    if ($product->verification_status === 'pending') {
-        return ['action' => 'pendingReview'];
-    } elseif ($product->is_published) {
-        return ['action' => 'index'];
-    } else {
-        return ['action' => 'edit', $product->id];
+        $this->set(compact('product'));
     }
 
-}
-
-
-
-
-
-
+    private function determineRedirectAction($product)
+    {
+        // Redirect logic based on product status and user role
+        if ($product->verification_status === 'pending') {
+            return ['action' => 'pendingReview'];
+        } elseif ($product->is_published) {
+            return ['action' => 'index'];
+        } else {
+            return ['action' => 'edit', $product->id];
+        }
+    }
 
     /**
      * View method
@@ -115,8 +107,8 @@ private function determineRedirectAction($product)
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    
-    public function view($id = null)
+
+    public function view(?string $id = null)
     {
         $product = $this->Products->get($id, contain: ['Users', 'Articles', 'Tags']);
         $this->set(compact('product'));
@@ -129,7 +121,7 @@ private function determineRedirectAction($product)
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(?string $id = null)
     {
         $product = $this->Products->get($id, contain: ['Tags']);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -154,7 +146,7 @@ private function determineRedirectAction($product)
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $product = $this->Products->get($id);
@@ -166,8 +158,6 @@ private function determineRedirectAction($product)
 
         return $this->redirect(['action' => 'index']);
     }
-
-
 
     /**
      * Verify method - Manual verification trigger

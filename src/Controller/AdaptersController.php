@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Controller\AppController;
 use Cake\Http\Response;
 
 /**
  * Adapters Controller
- *
  */
 class AdaptersController extends AppController
 {
@@ -47,7 +45,6 @@ class AdaptersController extends AppController
                 'Adapters.modified',
             ]);
 
-        
         $search = $this->request->getQuery('search');
         if (!empty($search)) {
             $query->where([
@@ -84,7 +81,7 @@ class AdaptersController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view(?string $id = null)
     {
         $adapter = $this->Adapters->get($id, contain: []);
         $this->set(compact('adapter'));
@@ -117,7 +114,7 @@ class AdaptersController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(?string $id = null)
     {
         $adapter = $this->Adapters->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -139,7 +136,7 @@ class AdaptersController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null): ?Response
+    public function delete(?string $id = null): ?Response
     {
         $this->request->allowMethod(['post', 'delete']);
         $adapter = $this->Adapters->get($id);
