@@ -108,6 +108,7 @@ services:
       - MP_SMTP_AUTH_ALLOW_INSECURE=1
 
   redis-commander:
+    platform: linux/amd64
     image: rediscommander/redis-commander:latest
     environment:
       - REDIS_HOST=willowcms
