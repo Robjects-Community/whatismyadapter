@@ -51,7 +51,7 @@ class GenerateArticlesCommand extends Command
         $parser = parent::buildOptionParser($parser);
         $parser->addOption('import-csv', [
             'help' => __('Path to CSV file for importing adapters into default data'),
-            'short' => 'i'
+            'short' => 'i',
         ]);
         $parser->addArgument('count', [
             'help' => __('Number of articles to generate'),
@@ -123,9 +123,11 @@ class GenerateArticlesCommand extends Command
         return static::CODE_SUCCESS;
     }
 
-     private function importAdaptersFromCsv(string $csvPath, ConsoleIo $io): int {
+    private function importAdaptersFromCsv(string $csvPath, ConsoleIo $io): int
+    {
         if (!file_exists($csvPath)) {
             $io->error(__('CSV file not found: {0}', $csvPath));
+
             return self::CODE_ERROR;
         }
 
@@ -164,6 +166,7 @@ class GenerateArticlesCommand extends Command
 
         return self::CODE_SUCCESS;
     }
+
     /**
      * Ensures there are at least 10 top-level tags in the system
      *
