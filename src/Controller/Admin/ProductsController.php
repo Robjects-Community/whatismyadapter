@@ -965,34 +965,43 @@ class ProductsController extends AppController
     {
         // Load settings for product forms configuration
         $settingsTable = TableRegistry::getTableLocator()->get('Settings');
-        
+
         // Get current form configuration settings
         $formSettings = [
-            'enable_public_submissions' => $settingsTable->findByName('products.enable_public_submissions')->first()?->value ?? 'false',
-            'default_status' => $settingsTable->findByName('products.default_status')->first()?->value ?? 'pending',
-            'require_admin_approval' => $settingsTable->findByName('products.require_admin_approval')->first()?->value ?? 'true',
-            'allowed_file_types' => $settingsTable->findByName('products.allowed_file_types')->first()?->value ?? 'jpg,jpeg,png,gif',
-            'max_file_size' => $settingsTable->findByName('products.max_file_size')->first()?->value ?? '5',
-            'required_fields' => $settingsTable->findByName('products.required_fields')->first()?->value ?? 'title,description,manufacturer',
-            'notification_email' => $settingsTable->findByName('products.notification_email')->first()?->value ?? '',
-            'success_message' => $settingsTable->findByName('products.success_message')->first()?->value ?? 'Your product has been submitted and is awaiting review.',
+            'enable_public_submissions' => $settingsTable->
+            findByName('products.enable_public_submissions')->first()?->value ?? 'false',
+            'default_status' => $settingsTable->
+            findByName('products.default_status')->first()?->value ?? 'pending',
+            'require_admin_approval' => $settingsTable->
+            findByName('products.require_admin_approval')->first()?->value ?? 'true',
+            'allowed_file_types' => $settingsTable->
+            findByName('products.allowed_file_types')->first()?->value ?? 'jpg,jpeg,png,gif',
+            'max_file_size' => $settingsTable->
+            findByName('products.max_file_size')->first()?->value ?? '5',
+            'required_fields' => $settingsTable->
+            findByName('products.required_fields')->first()?->value ?? 'title,description,manufacturer',
+            'notification_email' => $settingsTable->
+            findByName('products.notification_email')->first()?->value ?? '',
+            'success_message' => $settingsTable->
+            findByName('products.success_message')->first()?->value ??
+            'Your product has been submitted and is awaiting review.',
         ];
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
-            
+
             // Validate and save each setting
             $savedSettings = 0;
             $failedSettings = [];
-            
+
             foreach ($data as $settingName => $settingValue) {
                 // Skip CSRF token and other non-setting fields
                 if (in_array($settingName, ['_csrfToken'])) {
                     continue;
                 }
-                
+
                 $fullSettingName = 'products.' . $settingName;
-                
+
                 // Find or create the setting
                 $setting = $settingsTable->findByName($fullSettingName)->first();
                 if (!$setting) {
@@ -1003,23 +1012,24 @@ class ProductsController extends AppController
                 } else {
                     $setting->value = (string)$settingValue;
                 }
-                
+
                 if ($settingsTable->save($setting)) {
                     $savedSettings++;
                 } else {
                     $failedSettings[] = $settingName;
                 }
             }
-            
+
             if ($savedSettings > 0) {
                 $this->clearContentCache();
-                $this->Flash->success(__('Product form configuration has been updated. ({0} settings saved)', $savedSettings));
+                $this->Flash->success(__('Product form configuration has been \n
+                updated. ({0} settings saved)', $savedSettings));
             }
-            
+
             if (!empty($failedSettings)) {
                 $this->Flash->error(__('Failed to save some settings: {0}', implode(', ', $failedSettings)));
             }
-            
+
             return $this->redirect(['action' => 'forms']);
         }
 
@@ -1028,18 +1038,18 @@ class ProductsController extends AppController
             'total_submissions' => $this->Products->find()->where(['user_id IS NOT' => null])->count(),
             'pending_submissions' => $this->Products->find()->where([
                 'user_id IS NOT' => null,
-                'verification_status' => 'pending'
+                'verification_status' => 'pending',
             ])->count(),
             'approved_submissions' => $this->Products->find()->where([
                 'user_id IS NOT' => null,
-                'verification_status' => 'approved'
+                'verification_status' => 'approved',
             ])->count(),
             'rejected_submissions' => $this->Products->find()->where([
                 'user_id IS NOT' => null,
-                'verification_status' => 'rejected'
+                'verification_status' => 'rejected',
             ])->count(),
         ];
-        
+
         // Recent user submissions for preview
         $recentSubmissions = $this->Products->find()
             ->contain(['Users'])
@@ -1049,7 +1059,7 @@ class ProductsController extends AppController
             ->toArray();
 
         $this->set(compact('formSettings', 'submissionStats', 'recentSubmissions'));
-        
+
         return null;
     }
 
@@ -1061,7 +1071,7 @@ class ProductsController extends AppController
      */
     private function getSettingDescription(string $settingName): string
     {
-        return match($settingName) {
+        return match ($settingName) {
             'enable_public_submissions' => 'Allow public users to submit products via frontend forms',
             'default_status' => 'Default verification status for user-submitted products',
             'require_admin_approval' => 'Whether user-submitted products require admin approval before publication',
