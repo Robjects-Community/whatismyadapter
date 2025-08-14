@@ -15,7 +15,7 @@ use RuntimeException;
 
 /**
  * GenerateProducts command.
- * 
+ *
  * Generates sample products with precise control over quantities and status distribution.
  * Example usage:
  * - Generate 50 products with default pending status: `bin/cake generate_products 50`
@@ -52,36 +52,36 @@ class GenerateProductsCommand extends Command
 
     /**
      * Sample product data for realistic generation
-     * 
+     *
      * @var array<string, array<int, string>>
      */
     private array $sampleData = [
         'manufacturers' => [
-            'Apple', 'Samsung', 'Microsoft', 'Sony', 'Nintendo', 'Tesla', 
+            'Apple', 'Samsung', 'Microsoft', 'Sony', 'Nintendo', 'Tesla',
             'Ford', 'Toyota', 'Nike', 'Adidas', 'Canon', 'Nikon',
             'Dell', 'HP', 'Lenovo', 'ASUS', 'Logitech', 'Razer',
             'Intel', 'AMD', 'NVIDIA', 'LG', 'Panasonic', 'Philips',
-            'Bosch', 'Siemens', 'KitchenAid', 'Dyson', 'Roomba', 'GoPro'
+            'Bosch', 'Siemens', 'KitchenAid', 'Dyson', 'Roomba', 'GoPro',
         ],
         'categories' => [
             'Electronics', 'Computing', 'Gaming', 'Mobile Devices', 'Cameras',
             'Audio', 'Home & Garden', 'Sports & Fitness', 'Automotive',
             'Kitchen Appliances', 'Wearables', 'Smart Home', 'Tools',
-            'Books', 'Clothing', 'Toys', 'Health & Beauty', 'Office Supplies'
+            'Books', 'Clothing', 'Toys', 'Health & Beauty', 'Office Supplies',
         ],
         'adjectives' => [
             'Professional', 'Premium', 'Advanced', 'Compact', 'Wireless',
             'Smart', 'Portable', 'High-Performance', 'Ultra', 'Pro',
             'Max', 'Mini', 'Lite', 'Plus', 'Elite', 'Classic',
-            'Digital', 'Automatic', 'Manual', 'Deluxe', 'Standard'
+            'Digital', 'Automatic', 'Manual', 'Deluxe', 'Standard',
         ],
         'product_types' => [
             'Smartphone', 'Laptop', 'Tablet', 'Headphones', 'Speaker',
             'Camera', 'Watch', 'Monitor', 'Keyboard', 'Mouse',
             'Printer', 'Scanner', 'Router', 'Drive', 'Charger',
             'Cable', 'Case', 'Stand', 'Mount', 'Adapter',
-            'Microphone', 'Webcam', 'Controller', 'Console', 'Software'
-        ]
+            'Microphone', 'Webcam', 'Controller', 'Console', 'Software',
+        ],
     ];
 
     /**
@@ -163,9 +163,10 @@ class GenerateProductsCommand extends Command
     {
         $quantity = (int)$args->getArgument('quantity');
         $statusDistribution = $args->getArgument('status_distribution');
-        
+
         if ($quantity <= 0) {
             $io->error(__('Quantity must be a positive integer.'));
+
             return static::CODE_ERROR;
         }
 
@@ -184,8 +185,12 @@ class GenerateProductsCommand extends Command
         // Validate total matches requested quantity
         $totalFromDistribution = array_sum($statusCounts);
         if ($totalFromDistribution !== $quantity) {
-            $io->error(__('Status distribution total ({0}) does not match requested quantity ({1}).', 
-                $totalFromDistribution, $quantity));
+            $io->error(__(
+                'Status distribution total ({0}) does not match requested quantity ({1}).',
+                $totalFromDistribution,
+                $quantity,
+            ));
+
             return static::CODE_ERROR;
         }
 
@@ -203,10 +208,10 @@ class GenerateProductsCommand extends Command
         // Generate products for each status
         foreach ($statusCounts as $status => $count) {
             $io->out(__('Generating {0} products with status: {1}', $count, $status));
-            
+
             for ($i = 0; $i < $count; $i++) {
                 $product = $this->generateProduct($status, $featuredPercent, $adminOnly, $withImages);
-                
+
                 if ($this->Products->save($product, ['associated' => ['Tags']])) {
                     $io->verbose(__('Generated product: {0} (Status: {1})', $product->title, $product->verification_status));
                     $successCount++;
@@ -235,7 +240,7 @@ class GenerateProductsCommand extends Command
         $io->out(__('  - Dashboard: /admin/products/dashboard'));
         $io->out(__('  - All Products: /admin/products'));
         $io->out(__('  - Pending Review: /admin/products/pending-review'));
-        
+
         if ($statusCounts['pending'] ?? 0 > 0) {
             $io->out(__('  - {0} products are pending admin review', $statusCounts['pending']));
         }
@@ -265,6 +270,7 @@ class GenerateProductsCommand extends Command
             $parts = explode(':', trim($pair));
             if (count($parts) !== 2) {
                 $io->error(__('Invalid status distribution format: {0}. Expected format: "status:count,status:count"', $pair));
+
                 return null;
             }
 
@@ -273,11 +279,13 @@ class GenerateProductsCommand extends Command
 
             if (!in_array($status, self::VALID_STATUSES, true)) {
                 $io->error(__('Invalid status: {0}. Valid statuses: {1}', $status, implode(', ', self::VALID_STATUSES)));
+
                 return null;
             }
 
             if ($count <= 0) {
                 $io->error(__('Count must be positive for status: {0}', $status));
+
                 return null;
             }
 
@@ -307,7 +315,7 @@ class GenerateProductsCommand extends Command
         $adjective = $this->getRandomItem($this->sampleData['adjectives']);
         $productType = $this->getRandomItem($this->sampleData['product_types']);
         $category = $this->getRandomItem($this->sampleData['categories']);
-        
+
         // Create varied title formats
         $titleFormats = [
             '{manufacturer} {adjective} {productType}',
@@ -319,11 +327,11 @@ class GenerateProductsCommand extends Command
         $title = str_replace(
             ['{manufacturer}', '{adjective}', '{productType}'],
             [$manufacturer, $adjective, $productType],
-            $titleFormat
+            $titleFormat,
         );
 
         // Generate model number
-        $modelNumber = $manufacturer . '-' . strtoupper(substr($productType, 0, 3)) . '-' . 
+        $modelNumber = $manufacturer . '-' . strtoupper(substr($productType, 0, 3)) . '-' .
                       str_pad((string)rand(100, 999), 3, '0', STR_PAD_LEFT);
 
         // Generate description
@@ -340,7 +348,7 @@ class GenerateProductsCommand extends Command
         $product->model_number = $modelNumber;
         $product->price = $price;
         $product->currency = 'USD';
-        
+
         // Image handling
         if ($withImages) {
             $product->image = $this->generateImageReference($productType);
@@ -349,7 +357,7 @@ class GenerateProductsCommand extends Command
 
         // Status and publication logic
         $product->verification_status = $status;
-        
+
         // Publishing logic based on status and admin settings
         if ($status === 'approved') {
             $product->is_published = true;
@@ -406,13 +414,13 @@ class GenerateProductsCommand extends Command
             'High-quality construction', 'Advanced technology', 'User-friendly design',
             'Energy efficient', 'Compact form factor', 'Reliable performance',
             'Professional grade', 'Easy to use', 'Durable materials',
-            'Innovative features', 'Ergonomic design', 'Superior craftsmanship'
+            'Innovative features', 'Ergonomic design', 'Superior craftsmanship',
         ];
 
         $benefits = [
             'Perfect for daily use', 'Ideal for professionals', 'Great for beginners',
             'Suitable for all skill levels', 'Excellent value for money',
-            'Industry leading performance', 'Trusted by experts worldwide'
+            'Industry leading performance', 'Trusted by experts worldwide',
         ];
 
         // Select 2-4 random features
@@ -422,8 +430,8 @@ class GenerateProductsCommand extends Command
         $selectedFeatures = array_slice($shuffledFeatures, 0, $numFeatures);
         $selectedBenefit = $this->getRandomItem($benefits);
 
-        $description = "The {$manufacturer} {$productType} is a premium {$category} product featuring " . 
-                      strtolower(implode(', ', $selectedFeatures)) . 
+        $description = "The {$manufacturer} {$productType} is a premium {$category} product featuring " .
+                      strtolower(implode(', ', $selectedFeatures)) .
                       ". {$selectedBenefit}.";
 
         return $description;
@@ -450,11 +458,11 @@ class GenerateProductsCommand extends Command
 
         // Default range if type not found
         $range = $basePrices[$productType] ?? [25, 500];
-        
+
         $basePrice = rand($range[0] * 100, $range[1] * 100) / 100;
 
         // Slight price adjustment based on status (for realism)
-        $multiplier = match($status) {
+        $multiplier = match ($status) {
             'approved' => rand(95, 105) / 100, // Approved products vary normally
             'pending' => rand(90, 110) / 100,  // Pending might have more variation
             'rejected' => rand(80, 95) / 100,  // Rejected might be slightly lower
@@ -471,7 +479,7 @@ class GenerateProductsCommand extends Command
      */
     private function generateReliabilityScore(string $status): float
     {
-        return match($status) {
+        return match ($status) {
             'approved' => rand(750, 1000) / 100,  // 7.5 to 10.0
             'pending' => rand(0, 500) / 100,      // 0.0 to 5.0 (not yet verified)
             'rejected' => rand(100, 400) / 100,   // 1.0 to 4.0 (failed verification)
@@ -487,12 +495,12 @@ class GenerateProductsCommand extends Command
     private function generateImageReference(string $productType): string
     {
         $baseNames = [
-            'sample', 'product', 'demo', 'test', 'placeholder'
+            'sample', 'product', 'demo', 'test', 'placeholder',
         ];
-        
+
         $baseName = $this->getRandomItem($baseNames);
         $suffix = rand(1000, 9999);
-        
+
         return "{$baseName}_{$productType}_{$suffix}.jpg";
     }
 
@@ -505,9 +513,9 @@ class GenerateProductsCommand extends Command
     {
         $sixMonthsAgo = (new DateTime())->subMonths(6);
         $now = new DateTime();
-        
+
         $randomTimestamp = rand($sixMonthsAgo->getTimestamp(), $now->getTimestamp());
-        
+
         return new DateTime('@' . $randomTimestamp);
     }
 
@@ -530,7 +538,7 @@ class GenerateProductsCommand extends Command
 
         $numTags = rand(1, min(5, count($availableTags)));
         $selectedIndices = (array)array_rand($availableTags, $numTags);
-        
+
         // Convert to array if only one tag selected
         if (!is_array($selectedIndices)) {
             $selectedIndices = [$selectedIndices];
@@ -564,7 +572,7 @@ class GenerateProductsCommand extends Command
     private function loadUsers(): void
     {
         $usersTable = TableRegistry::getTableLocator()->get('Users');
-        
+
         // Load admin user
         $adminUser = $usersTable->find()
             ->select(['id'])
@@ -607,7 +615,7 @@ class GenerateProductsCommand extends Command
             'Photography', 'Wearables', 'Smart Home', 'Automotive', 'Sports',
             'Health', 'Kitchen', 'Tools', 'Office', 'Entertainment', 'Education',
             'Professional', 'Consumer', 'Premium', 'Budget', 'Wireless',
-            'Portable', 'Indoor', 'Outdoor'
+            'Portable', 'Indoor', 'Outdoor',
         ];
 
         for ($i = 0; $i < $tagsToCreate; $i++) {
@@ -615,7 +623,7 @@ class GenerateProductsCommand extends Command
             $tagTitle = $sampleTags[$i % count($sampleTags)] . ($i >= count($sampleTags) ? ' ' . (intval($i / count($sampleTags)) + 1) : '');
             $tag->title = $tagTitle;
             $tag->description = "Sample tag: {$tagTitle}";
-            
+
             $tagsTable->save($tag);
         }
     }

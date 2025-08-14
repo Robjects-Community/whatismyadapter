@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Service\Api\RateLimitService;
 use Cake\Http\Response;
 
 /**
@@ -13,7 +14,6 @@ use Cake\Http\Response;
  */
 class AiMetricsController extends AppController
 {
-
     /**
      * Dashboard method - AI metrics overview
      */
@@ -21,39 +21,40 @@ class AiMetricsController extends AppController
     {
         $last30Days = date('Y-m-d', strtotime('-30 days'));
         $today = date('Y-m-d');
-        
+
         // Summary statistics
         $totalCalls = $this->AiMetrics->find()
             ->where(['created >=' => $last30Days])
             ->count();
-            
+
         $successfulCalls = $this->AiMetrics->find()
             ->where(['created >=' => $last30Days, 'success' => true])
             ->count();
-            
-        $successRate = $totalCalls > 0 ? ($successfulCalls / $totalCalls) * 100 : 0;
-        
+
+        $successRate = $totalCalls > 0 ? $successfulCalls / $totalCalls * 100 : 0;
+
         $totalCost = $this->AiMetrics->getCostsByDateRange($last30Days, $today);
-        
+
         // Task type breakdown
         $taskMetrics = $this->AiMetrics->getTaskTypeSummary($last30Days, $today);
-        
+
         // Recent errors
         $recentErrors = $this->AiMetrics->getRecentErrors(5);
-        
+
         // Rate limiting status
-        $rateLimitService = new \App\Service\Api\RateLimitService();
+        $rateLimitService = new RateLimitService();
         $currentUsage = $rateLimitService->getCurrentUsage();
-        
+
         $this->set(compact(
-            'totalCalls', 
-            'successRate', 
-            'totalCost', 
+            'totalCalls',
+            'successRate',
+            'totalCost',
             'taskMetrics',
             'recentErrors',
-            'currentUsage'
+            'currentUsage',
         ));
     }
+
     /**
      * Index method
      *
@@ -76,7 +77,6 @@ class AiMetricsController extends AppController
                 'AiMetrics.modified',
             ]);
 
-        
         $search = $this->request->getQuery('search');
         if (!empty($search)) {
             $query->where([
@@ -106,7 +106,7 @@ class AiMetricsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view(?string $id = null)
     {
         $aiMetric = $this->AiMetrics->get($id, contain: []);
         $this->set(compact('aiMetric'));
@@ -139,7 +139,7 @@ class AiMetricsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(?string $id = null)
     {
         $aiMetric = $this->AiMetrics->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -161,7 +161,7 @@ class AiMetricsController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null): ?Response
+    public function delete(?string $id = null): ?Response
     {
         $this->request->allowMethod(['post', 'delete']);
         $aiMetric = $this->AiMetrics->get($id);

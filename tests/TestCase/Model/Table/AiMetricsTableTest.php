@@ -60,7 +60,7 @@ class AiMetricsTableTest extends TestCase
     {
         $entity = $this->AiMetrics->newEntity([
             'task_type' => 'summarize',
-            'success' => true
+            'success' => true,
         ]);
         $this->assertEmpty($entity->getErrors());
         $result = $this->AiMetrics->save($entity);
@@ -77,14 +77,14 @@ class AiMetricsTableTest extends TestCase
         // Test task_type too long
         $entity = $this->AiMetrics->newEntity([
             'task_type' => str_repeat('a', 51), // Max is 50
-            'success' => true
+            'success' => true,
         ]);
         $this->assertNotEmpty($entity->getErrors());
         $this->assertArrayHasKey('task_type', $entity->getErrors());
 
         // Test missing task_type
         $entity2 = $this->AiMetrics->newEntity([
-            'success' => true
+            'success' => true,
         ]);
         $this->assertNotEmpty($entity2->getErrors());
         $this->assertArrayHasKey('task_type', $entity2->getErrors());
@@ -93,7 +93,7 @@ class AiMetricsTableTest extends TestCase
         $entity3 = $this->AiMetrics->newEntity([
             'task_type' => 'test',
             'model_used' => str_repeat('b', 51), // Max is 50
-            'success' => true
+            'success' => true,
         ]);
         $this->assertNotEmpty($entity3->getErrors());
         $this->assertArrayHasKey('model_used', $entity3->getErrors());
@@ -145,7 +145,7 @@ class AiMetricsTableTest extends TestCase
         $this->assertFalse((bool)$errors[0]->success);
         // Verify ordering (most recent first)
         if (count($errors) > 1) {
-            $this->assertTrue($errors[0]->created >= $errors[count($errors)-1]->created);
+            $this->assertTrue($errors[0]->created >= $errors[count($errors) - 1]->created);
         }
     }
 }

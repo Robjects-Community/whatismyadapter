@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller\Admin;
 
-use App\Controller\Admin\AiMetricsController;
 use App\Test\TestCase\AppControllerTestCase;
 use Cake\TestSuite\IntegrationTestTrait;
 
@@ -36,7 +35,7 @@ class AiMetricsControllerTest extends AppControllerTestCase
         parent::setUp();
         $this->enableCsrfToken();
         $this->enableSecurityToken();
-        
+
         // Login as admin user using ID from Users fixture
         $this->loginUser('6509480c-e7e6-4e65-9c38-1423a8d09d0f');
     }
@@ -60,7 +59,7 @@ class AiMetricsControllerTest extends AppControllerTestCase
     public function testIndexAjaxSearch(): void
     {
         $this->configRequest([
-            'headers' => ['X-Requested-With' => 'XMLHttpRequest']
+            'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
         ]);
         $this->get('/admin/ai-metrics?search=summarize');
         $this->assertResponseOk();
@@ -90,13 +89,13 @@ class AiMetricsControllerTest extends AppControllerTestCase
             'execution_time_ms' => 100,
             'tokens_used' => 50,
             'cost_usd' => 0.25,
-            'model_used' => 'test-model'
+            'model_used' => 'test-model',
         ];
 
         $this->post('/admin/ai-metrics/add', $data);
         $this->assertRedirect(['action' => 'index']);
         $this->assertFlashMessage('The ai metric has been saved.');
-        
+
         // Verify record was created
         $table = $this->getTableLocator()->get('AiMetrics');
         $entity = $table->find()->where(['task_type' => 'test'])->first();
@@ -132,13 +131,13 @@ class AiMetricsControllerTest extends AppControllerTestCase
         $data = [
             'task_type' => 'updated_task',
             'success' => false,
-            'error_message' => 'Updated error'
+            'error_message' => 'Updated error',
         ];
 
         $this->put('/admin/ai-metrics/edit/11111111-1111-1111-1111-111111111111', $data);
         $this->assertRedirect(['action' => 'index']);
         $this->assertFlashMessage('The ai metric has been saved.');
-        
+
         // Verify record was updated
         $table = $this->getTableLocator()->get('AiMetrics');
         $entity = $table->get('11111111-1111-1111-1111-111111111111');
@@ -156,14 +155,14 @@ class AiMetricsControllerTest extends AppControllerTestCase
     {
         $this->configRequest([
             'environment' => [
-                'HTTP_REFERER' => 'http://localhost:8080/admin/ai-metrics'
-            ]
+                'HTTP_REFERER' => 'http://localhost:8080/admin/ai-metrics',
+            ],
         ]);
-        
+
         $this->delete('/admin/ai-metrics/delete/11111111-1111-1111-1111-111111111111');
         $this->assertRedirect('http://localhost:8080/admin/ai-metrics');
         $this->assertFlashMessage('The ai metric has been deleted.');
-        
+
         // Verify record was deleted
         $table = $this->getTableLocator()->get('AiMetrics');
         $this->expectException('Cake\Datasource\Exception\RecordNotFoundException');

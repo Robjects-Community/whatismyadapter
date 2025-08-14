@@ -1,11 +1,14 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Service\Api\Anthropic;
+
 use Cake\Log\LogTrait;
+
 abstract class AbstractAnthropicService
 {
     use LogTrait;
-    
+
     protected function validateAndFallback(array $result, array $expectedKeys): array
     {
         foreach ($expectedKeys as $key => $constraints) {
@@ -14,15 +17,16 @@ abstract class AbstractAnthropicService
                 $result[$key] = $this->getSmartFallback($key, $result);
             }
         }
+
         return $result;
     }
-    
+
     private function validateField(string $key, $value, array $constraints): bool
     {
         if (!is_string($value)) {
             return false;
         }
-        
+
         $validators = [
             'meta_title' => fn($v) => strlen($v) <= 255,
             'meta_description' => fn($v) => strlen($v) <= 300,
@@ -30,10 +34,10 @@ abstract class AbstractAnthropicService
             'meta_keywords' => fn($v) => str_word_count($v) <= 20,
             'alt_text' => fn($v) => strlen($v) <= 200,
         ];
-        
+
         return isset($validators[$key]) ? $validators[$key]($value) : true;
     }
-    
+
     private function getSmartFallback(string $key, array $context): string
     {
         $fallbacks = [
@@ -46,7 +50,7 @@ abstract class AbstractAnthropicService
             'linkedin_description' => substr(strip_tags($context['content'] ?? ''), 0, 700),
             'instagram_description' => substr(strip_tags($context['content'] ?? ''), 0, 1500),
         ];
-        
+
         return $fallbacks[$key] ?? '';
     }
 }

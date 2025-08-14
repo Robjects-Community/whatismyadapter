@@ -20,10 +20,10 @@ trait AdminAuthTrait
         // Create identity and set it in the session
         $identity = new Identity($user);
         $this->session(['Auth' => $identity]);
-        
+
         // Also set it as request attribute for the Authentication component
         $this->configRequest([
-            'attributes' => ['identity' => $identity]
+            'attributes' => ['identity' => $identity],
         ]);
     }
 }

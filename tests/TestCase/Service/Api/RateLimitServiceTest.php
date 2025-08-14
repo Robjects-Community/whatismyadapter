@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Test\TestCase\Service\Api;
 
 use App\Service\Api\RateLimitService;
+use App\TestSuite\Stub\SettingsManagerStub;
 use Cake\Cache\Cache;
 use Cake\TestSuite\TestCase;
 
@@ -18,24 +19,24 @@ class RateLimitServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Configure array cache for testing if not already configured
         if (!Cache::configured('default')) {
             Cache::setConfig('default', ['className' => 'Array']);
         }
-        
+
         // Clear any existing cache data
         Cache::clear('default');
-        
+
         // Reset settings stub
-        \App\TestSuite\Stub\SettingsManagerStub::reset();
+        SettingsManagerStub::reset();
     }
 
     protected function tearDown(): void
     {
         // Clear cache data but don't drop the config
         Cache::clear('default');
-        
+
         parent::tearDown();
     }
 
@@ -46,11 +47,11 @@ class RateLimitServiceTest extends TestCase
      */
     public function testGetCurrentUsageBaseline(): void
     {
-        \App\TestSuite\Stub\SettingsManagerStub::set('AI.hourlyLimit', 5);
-        
-        $service = new RateLimitService(\App\TestSuite\Stub\SettingsManagerStub::class);
+        SettingsManagerStub::set('AI.hourlyLimit', 5);
+
+        $service = new RateLimitService(SettingsManagerStub::class);
         $usage = $service->getCurrentUsage('testsvc');
-        
+
         $this->assertEquals(0, $usage['current']);
         $this->assertEquals(5, $usage['limit']);
         $this->assertEquals(5, $usage['remaining']);
@@ -63,10 +64,10 @@ class RateLimitServiceTest extends TestCase
      */
     public function testEnforceLimitIncrementsAndBlocks(): void
     {
-        \App\TestSuite\Stub\SettingsManagerStub::set('AI.hourlyLimit', 2);
-        
-        $service = new RateLimitService(\App\TestSuite\Stub\SettingsManagerStub::class);
-        
+        SettingsManagerStub::set('AI.hourlyLimit', 2);
+
+        $service = new RateLimitService(SettingsManagerStub::class);
+
         $this->assertTrue($service->enforceLimit('testsvc'));
         $this->assertTrue($service->enforceLimit('testsvc'));
         $this->assertFalse($service->enforceLimit('testsvc')); // Should be blocked
@@ -79,10 +80,10 @@ class RateLimitServiceTest extends TestCase
      */
     public function testEnforceLimitUnlimited(): void
     {
-        \App\TestSuite\Stub\SettingsManagerStub::set('AI.hourlyLimit', 0); // Unlimited
-        
-        $service = new RateLimitService(\App\TestSuite\Stub\SettingsManagerStub::class);
-        
+        SettingsManagerStub::set('AI.hourlyLimit', 0); // Unlimited
+
+        $service = new RateLimitService(SettingsManagerStub::class);
+
         // Should allow many calls
         $this->assertTrue($service->enforceLimit('testsvc'));
         $this->assertTrue($service->enforceLimit('testsvc'));
@@ -98,11 +99,11 @@ class RateLimitServiceTest extends TestCase
      */
     public function testEnforceLimitDisabledMetrics(): void
     {
-        \App\TestSuite\Stub\SettingsManagerStub::set('AI.enableMetrics', false);
-        \App\TestSuite\Stub\SettingsManagerStub::set('AI.hourlyLimit', 1); // Very restrictive limit
-        
-        $service = new RateLimitService(\App\TestSuite\Stub\SettingsManagerStub::class);
-        
+        SettingsManagerStub::set('AI.enableMetrics', false);
+        SettingsManagerStub::set('AI.hourlyLimit', 1); // Very restrictive limit
+
+        $service = new RateLimitService(SettingsManagerStub::class);
+
         // Should always return true when metrics are disabled
         $this->assertTrue($service->enforceLimit('testsvc'));
         $this->assertTrue($service->enforceLimit('testsvc'));
@@ -116,10 +117,10 @@ class RateLimitServiceTest extends TestCase
      */
     public function testCheckDailyCostLimit(): void
     {
-        \App\TestSuite\Stub\SettingsManagerStub::set('AI.dailyCostLimit', 10.00);
-        
-        $service = new RateLimitService(\App\TestSuite\Stub\SettingsManagerStub::class);
-        
+        SettingsManagerStub::set('AI.dailyCostLimit', 10.00);
+
+        $service = new RateLimitService(SettingsManagerStub::class);
+
         $this->assertTrue($service->checkDailyCostLimit(9.99));
         $this->assertFalse($service->checkDailyCostLimit(10.01));
         $this->assertFalse($service->checkDailyCostLimit(15.00));
@@ -132,10 +133,10 @@ class RateLimitServiceTest extends TestCase
      */
     public function testCheckDailyCostLimitUnlimited(): void
     {
-        \App\TestSuite\Stub\SettingsManagerStub::set('AI.dailyCostLimit', 0); // Unlimited
-        
-        $service = new RateLimitService(\App\TestSuite\Stub\SettingsManagerStub::class);
-        
+        SettingsManagerStub::set('AI.dailyCostLimit', 0); // Unlimited
+
+        $service = new RateLimitService(SettingsManagerStub::class);
+
         // Should always return true when limit is 0
         $this->assertTrue($service->checkDailyCostLimit(100.00));
         $this->assertTrue($service->checkDailyCostLimit(1000.00));
@@ -148,16 +149,16 @@ class RateLimitServiceTest extends TestCase
      */
     public function testGetCurrentUsageAfterIncrements(): void
     {
-        \App\TestSuite\Stub\SettingsManagerStub::set('AI.hourlyLimit', 5);
-        
-        $service = new RateLimitService(\App\TestSuite\Stub\SettingsManagerStub::class);
-        
+        SettingsManagerStub::set('AI.hourlyLimit', 5);
+
+        $service = new RateLimitService(SettingsManagerStub::class);
+
         // Use the service a few times
         $service->enforceLimit('testsvc2');
         $service->enforceLimit('testsvc2');
-        
+
         $usage = $service->getCurrentUsage('testsvc2');
-        
+
         $this->assertEquals(2, $usage['current']);
         $this->assertEquals(5, $usage['limit']);
         $this->assertEquals(3, $usage['remaining']);

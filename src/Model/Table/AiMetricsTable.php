@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query\SelectQuery;
-use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
@@ -24,7 +22,6 @@ use Cake\Validation\Validator;
  * @method iterable<\App\Model\Entity\AiMetric>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\AiMetric> saveManyOrFail(iterable $entities, array $options = [])
  * @method iterable<\App\Model\Entity\AiMetric>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\AiMetric>|false deleteMany(iterable $entities, array $options = [])
  * @method iterable<\App\Model\Entity\AiMetric>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\AiMetric> deleteManyOrFail(iterable $entities, array $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class AiMetricsTable extends Table
@@ -89,44 +86,46 @@ class AiMetricsTable extends Table
     }
 
     /**
- * Get total cost by date range
- */
-public function getCostsByDateRange(string $startDate, string $endDate): float
-{
-    $result = $this->find()
+     * Get total cost by date range
+     */
+    public function getCostsByDateRange(string $startDate, string $endDate): float
+    {
+        $result = $this->find()
         ->where(['created >=' => $startDate, 'created <=' => $endDate])
         ->select(['total' => 'SUM(cost_usd)'])
         ->first();
-        
-    return (float)($result->total ?? 0);
-}
-/**
- * Get metrics summary by task type
- */
-public function getTaskTypeSummary(string $startDate, string $endDate): array
-{
-    return $this->find()
+
+        return (float)($result->total ?? 0);
+    }
+
+    /**
+     * Get metrics summary by task type
+     */
+    public function getTaskTypeSummary(string $startDate, string $endDate): array
+    {
+        return $this->find()
         ->select([
             'task_type',
             'count' => 'COUNT(*)',
             'avg_time' => 'AVG(execution_time_ms)',
             'success_rate' => 'AVG(success) * 100',
             'total_cost' => 'SUM(cost_usd)',
-            'total_tokens' => 'SUM(tokens_used)'
+            'total_tokens' => 'SUM(tokens_used)',
         ])
         ->where(['created >=' => $startDate, 'created <=' => $endDate])
         ->groupBy('task_type')
         ->toArray();
-}
-/**
- * Get recent error logs
- */
-public function getRecentErrors(int $limit = 10): array
-{
-    return $this->find()
+    }
+
+    /**
+     * Get recent error logs
+     */
+    public function getRecentErrors(int $limit = 10): array
+    {
+        return $this->find()
         ->where(['success' => false])
         ->orderBy(['created' => 'DESC'])
         ->limit($limit)
         ->toArray();
-}
+    }
 }

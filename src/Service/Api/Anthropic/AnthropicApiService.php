@@ -213,8 +213,6 @@ class AnthropicApiService extends AbstractApiService
         return json_decode($responseData['content'][0]['text'], true);
     }
 
-
-
     /**
      * Records metrics for a specific AI task.
      *
@@ -226,15 +224,15 @@ class AnthropicApiService extends AbstractApiService
      * @return void
      */
     private function recordMetrics(string $taskType, float $startTime, array $payload, bool $success, ?string $error = null): void
-{
-    if (!SettingsManager::read('AI.enableMetrics', true)) {
-        return;
-    }
-    
-    $executionTime = (microtime(true) - $startTime) * 1000;
-    $cost = $this->calculateCost($payload);
-    
-    $metric = $this->aiMetricsTable->newEntity([
+    {
+        if (!SettingsManager::read('AI.enableMetrics', true)) {
+            return;
+        }
+
+        $executionTime = (microtime(true) - $startTime) * 1000;
+        $cost = $this->calculateCost($payload);
+
+        $metric = $this->aiMetricsTable->newEntity([
         'task_type' => $taskType,
         'execution_time_ms' => (int)$executionTime,
         'tokens_used' => $payload['max_tokens'] ?? null,
@@ -242,8 +240,8 @@ class AnthropicApiService extends AbstractApiService
         'success' => $success,
         'error_message' => $error,
         'cost_usd' => $cost,
-    ]);
-    
-    $this->aiMetricsTable->save($metric);
-}
+        ]);
+
+        $this->aiMetricsTable->save($metric);
+    }
 }

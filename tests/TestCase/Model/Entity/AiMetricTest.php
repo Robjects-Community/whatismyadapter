@@ -95,7 +95,7 @@ class AiMetricTest extends TestCase
     public function testAccessibleProperties(): void
     {
         $entity = new AiMetric();
-        
+
         // These should be accessible
         $this->assertTrue($entity->isAccessible('task_type'));
         $this->assertTrue($entity->isAccessible('execution_time_ms'));
@@ -104,7 +104,7 @@ class AiMetricTest extends TestCase
         $this->assertTrue($entity->isAccessible('success'));
         $this->assertTrue($entity->isAccessible('error_message'));
         $this->assertTrue($entity->isAccessible('model_used'));
-        
+
         // ID should not be accessible by default
         $this->assertFalse($entity->isAccessible('id'));
     }
