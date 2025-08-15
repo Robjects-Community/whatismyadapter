@@ -672,3 +672,4 @@ docker/accept-a-payment/server/public/utils.js
 docker/accept-a-payment/server/public/webhook.php
 docker/accept-a-payment/server/public/css/base.css
 docker/mysql/latest_backup_WITH_FOREIGN_KEYS_ON_cms_test_foreign_keys.sql
+default_data/next-feature.sql
