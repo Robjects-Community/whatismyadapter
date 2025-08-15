@@ -792,9 +792,9 @@ docker compose exec willowcms bin/cake generate_articles 5
 ```
 
 #### 13.3 Manual Testing Checklist
-- [ ] AI Metrics dashboard loads correctly
+- [x] AI Metrics dashboard loads correctly
 - [ ] Rate limiting works as expected
-- [ ] Settings can be modified in admin area
+- [x] Settings can be modified in admin area
 - [ ] Metrics are recorded for AI operations
 - [ ] Error handling works properly
 - [ ] Cost calculations are accurate
