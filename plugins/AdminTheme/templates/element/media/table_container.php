@@ -1,7 +1,7 @@
 <?php
 /**
  * Reusable media table container element
- * 
+ *
  * @var \App\View\AppView $this
  * @var iterable $items Items to display in table
  * @var array $columns Table column configuration
@@ -16,18 +16,18 @@ $tableClass = $tableClass ?? 'table table-striped table-hover';
 ?>
 
 <div id="ajax-target">
-    <?php if (empty($items)): ?>
+    <?php if (empty($items)) : ?>
         <?= $this->element('empty_state', $emptyState) ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="table-responsive">
             <table class="<?= $tableClass ?>">
                 <thead>
                     <tr>
-                        <?php foreach ($columns as $column): ?>
+                        <?php foreach ($columns as $column) : ?>
                         <th<?= isset($column['class']) ? ' class="' . $column['class'] . '"' : '' ?>>
-                            <?php if (isset($column['sortable']) && $column['sortable']): ?>
+                            <?php if (isset($column['sortable']) && $column['sortable']) : ?>
                                 <?= $this->Paginator->sort($column['field'], $column['title']) ?>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <?= $column['title'] ?>
                             <?php endif; ?>
                         </th>
@@ -35,16 +35,16 @@ $tableClass = $tableClass ?? 'table table-striped table-hover';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($items as $item): ?>
+                    <?php foreach ($items as $item) : ?>
                     <tr>
-                        <?php foreach ($columns as $column): ?>
+                        <?php foreach ($columns as $column) : ?>
                         <td<?= isset($column['cellClass']) ? ' class="' . $column['cellClass'] . '"' : '' ?>>
                             <?php
                             if (isset($column['element'])) {
                                 // Render element for this column
                                 echo $this->element($column['element'], array_merge(
                                     ['item' => $item],
-                                    $column['elementData'] ?? []
+                                    $column['elementData'] ?? [],
                                 ));
                             } elseif (isset($column['callback']) && is_callable($column['callback'])) {
                                 // Use callback function

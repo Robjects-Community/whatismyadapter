@@ -62,7 +62,6 @@ class AiMetricsController extends AppController
      */
     public function index(): ?Response
     {
-        $statusFilter = $this->request->getQuery('status');
         $query = $this->AiMetrics->find()
             ->select([
                 'AiMetrics.id',
@@ -106,7 +105,7 @@ class AiMetricsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(?string $id = null)
+    public function view(?string $id = null): Response|null
     {
         $aiMetric = $this->AiMetrics->get($id, contain: []);
         $this->set(compact('aiMetric'));
@@ -117,7 +116,7 @@ class AiMetricsController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add(): Response|null
     {
         $aiMetric = $this->AiMetrics->newEmptyEntity();
         if ($this->request->is('post')) {
@@ -139,7 +138,7 @@ class AiMetricsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit(?string $id = null)
+    public function edit(?string $id = null): Response|null
     {
         $aiMetric = $this->AiMetrics->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {

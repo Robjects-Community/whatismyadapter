@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($internationalisations as $internationalisation): ?>
+      <?php foreach ($internationalisations as $internationalisation) : ?>
       <tr>
                       <td><?= h($internationalisation->locale) ?></td>
                       <td><?= h($internationalisation->message_id) ?></td>

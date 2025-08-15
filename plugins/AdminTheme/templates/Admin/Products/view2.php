@@ -9,7 +9,7 @@ echo $this->element('actions_card', [
     'modelName' => 'Product',
     'controllerName' => 'Products',
     'entity' => $product,
-    'entityDisplayName' => $product->title
+    'entityDisplayName' => $product->title,
 ]);
 ?>
 <div class="container my-4">

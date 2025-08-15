@@ -4,15 +4,15 @@
  * @var \App\Model\Entity\Image $image
  */
 ?>
-<?php if (!$image->isNew()): ?>
-<?php
+<?php if (!$image->isNew()) : ?>
+    <?php
     echo $this->element('actions_card', [
         'modelName' => 'Image',
         'controllerName' => 'Images',
         'entity' => $image,
-        'entityDisplayName' => $image->name
+        'entityDisplayName' => $image->name,
     ]);
-?>
+    ?>
 <?php endif; ?>
 <div class="container mt-4">
     <div class="row">
@@ -22,16 +22,18 @@
                     <h5 class="card-title"><?= __('Add Image') ?></h5>
                 </div>
                 <div class="card-body">
-                    <?= $this->Form->create($image,
-                    [
+                    <?= $this->Form->create(
+                        $image,
+                        [
                         'type' => 'file',
                         'enctype' => 'multipart/form-data',
-                        'class' => 'needs-validation', 'novalidate' => true
-                    ]) ?>
+                        'class' => 'needs-validation', 'novalidate' => true,
+                        ],
+                    ) ?>
                     <fieldset>
                         <div class="mb-3">
                             <?php echo $this->Form->control('name', ['class' => 'form-control' . ($this->Form->isFieldError('name') ? ' is-invalid' : '')]); ?>
-                            <?php if ($this->Form->isFieldError('name')): ?>
+                            <?php if ($this->Form->isFieldError('name')) : ?>
                                 <div class="invalid-feedback">
                                     <?= $this->Form->error('name') ?>
                                 </div>
@@ -39,7 +41,7 @@
                         </div>
                         <div class="mb-3">
                             <?php echo $this->Form->control('alt_text', ['class' => 'form-control' . ($this->Form->isFieldError('alt_text') ? ' is-invalid' : '')]); ?>
-                            <?php if ($this->Form->isFieldError('alt_text')): ?>
+                            <?php if ($this->Form->isFieldError('alt_text')) : ?>
                                 <div class="invalid-feedback">
                                     <?= $this->Form->error('alt_text') ?>
                                 </div>
@@ -47,7 +49,7 @@
                         </div>
                         <div class="mb-3">
                             <?php echo $this->Form->control('keywords', ['class' => 'form-control' . ($this->Form->isFieldError('keywords') ? ' is-invalid' : '')]); ?>
-                            <?php if ($this->Form->isFieldError('keywords')): ?>
+                            <?php if ($this->Form->isFieldError('keywords')) : ?>
                                 <div class="invalid-feedback">
                                     <?= $this->Form->error('keywords') ?>
                                 </div>
@@ -58,12 +60,12 @@
                                 'type' => 'file',
                                 'label' => [
                                     'text' => __('Image'),
-                                    'class' => 'form-label'
+                                    'class' => 'form-label',
                                 ],
                                 'class' => 'form-control' . ($this->Form->isFieldError('image') ? ' is-invalid' : ''),
-                                'id' => 'customFile'
+                                'id' => 'customFile',
                             ]) ?>
-                            <?php if ($this->Form->isFieldError('image')): ?>
+                            <?php if ($this->Form->isFieldError('image')) : ?>
                                 <div class="invalid-feedback">
                                     <?= $this->Form->error('image') ?>
                                 </div>

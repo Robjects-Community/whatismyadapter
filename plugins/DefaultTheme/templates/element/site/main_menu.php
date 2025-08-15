@@ -6,8 +6,8 @@
 
         <?php $url = $this->Html->Url->build(['_name' => 'home']); ?>
         <?= $this->Html->link(__('Blog'), $url, [
-            'class' => 'nav-item nav-link link-body-emphasis fw-medium px-3' . (($currentUrl == $url) ? ' active' : ''),
-            'aria-current' => ($currentUrl == $url) ? 'page' : false
+            'class' => 'nav-item nav-link link-body-emphasis fw-medium px-3' . ($currentUrl == $url ? ' active' : ''),
+            'aria-current' => $currentUrl == $url ? 'page' : false,
         ]) ?>
 
         <?php foreach ($menuPages as $menuPage) : ?>
@@ -17,10 +17,10 @@
                     htmlspecialchars_decode($menuPage['title']),
                     $url,
                     [
-                        'class' => 'nav-item nav-link link-body-emphasis fw-medium px-3' . (($currentUrl == $url) ? ' active' : ''),
+                        'class' => 'nav-item nav-link link-body-emphasis fw-medium px-3' . ($currentUrl == $url ? ' active' : ''),
                         'escape' => false,
-                        'aria-current' => ($currentUrl == $url) ? 'page' : false
-                    ]
+                        'aria-current' => $currentUrl == $url ? 'page' : false,
+                    ],
                 );
             ?>
         <?php endforeach ?>

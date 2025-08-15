@@ -26,7 +26,7 @@ class AppControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Create controller instance
         $this->AppController = new AppController();
     }

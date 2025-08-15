@@ -4,7 +4,7 @@
  * @var iterable<\App\Model\Entity\SystemLog> $systemLogs
  */
 ?>
-<?php foreach ($systemLogs as $systemLog): ?>
+<?php foreach ($systemLogs as $systemLog) : ?>
 <tr>
     <td><?= h($systemLog->level) ?></td>
     <td><?= h($systemLog->group_name) ?></td>

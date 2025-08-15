@@ -7,7 +7,7 @@
         'hideNew' => true,
         'hideEdit' => true,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
@@ -47,7 +47,7 @@
                             ?>
                         </div>
                     </div>
-                    <?php if (!empty($systemLog->context)): ?>
+                    <?php if (!empty($systemLog->context)) : ?>
                     <div class="mt-4">
                     <div class="p-3 rounded">
                         <h5><?= __('Context') ?></h5>

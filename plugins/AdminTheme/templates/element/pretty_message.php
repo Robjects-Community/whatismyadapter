@@ -11,4 +11,3 @@ foreach ($lines as $line) {
     }
 }
 echo $output;
-?>

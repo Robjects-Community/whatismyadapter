@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($aiprompts as $aiprompt): ?>
+        <?php foreach ($aiprompts as $aiprompt) : ?>
         <tr>
             <td><?= h($aiprompt->task_type) ?></td>
             <td><?= h($aiprompt->model) ?></td>

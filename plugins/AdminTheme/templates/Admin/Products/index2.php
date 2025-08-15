@@ -6,7 +6,7 @@
 
 // Load search utility scripts
 $this->Html->script('AdminTheme.utils/search-handler', ['block' => true]);
-$this->Html->script('AdminTheme.utils/popover-manager', ['block' => true]); 
+$this->Html->script('AdminTheme.utils/popover-manager', ['block' => true]);
 ?>
 
 <header class="py-3 mb-3 border-bottom">
@@ -18,7 +18,7 @@ $this->Html->script('AdminTheme.utils/popover-manager', ['block' => true]);
                     'all' => ['label' => __('All'), 'params' => []],
                     'filter1' => ['label' => __('Filter 1'), 'params' => ['status' => '0']],
                     'filter2' => ['label' => __('Filter 2'), 'params' => ['status' => '1']],
-                ]
+                ],
             ]) ?>
             
             <!-- Search Form -->
@@ -26,7 +26,7 @@ $this->Html->script('AdminTheme.utils/popover-manager', ['block' => true]);
                 'id' => 'product-search-form',
                 'inputId' => 'productSearch',
                 'placeholder' => __('Search Products...'),
-                'class' => 'd-flex me-3 flex-grow-1'
+                'class' => 'd-flex me-3 flex-grow-1',
             ]) ?>
         </div>
         
@@ -34,7 +34,7 @@ $this->Html->script('AdminTheme.utils/popover-manager', ['block' => true]);
             <?= $this->Html->link(
                 '<i class="fas fa-plus"></i> ' . __('New Product'),
                 ['action' => 'add'],
-                ['class' => 'btn btn-success', 'escape' => false]
+                ['class' => 'btn btn-success', 'escape' => false],
             ) ?>
         </div>
     </div>
@@ -66,7 +66,7 @@ $this->Html->script('AdminTheme.utils/popover-manager', ['block' => true]);
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($products as $product): ?>
+        <?php foreach ($products as $product) : ?>
         <tr>
                                                                                     <td><?= h($product->id) ?></td>
                                                       <td><?= $product->hasValue('user') ? $this->Html->link($product->user->username, ['controller' => 'Users', 'action' => 'view', $product->user->id], ['class' => 'btn btn-link']) : '' ?></td>

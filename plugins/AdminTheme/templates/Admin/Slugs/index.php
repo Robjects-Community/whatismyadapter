@@ -16,22 +16,22 @@
               <?php $activeFilter = $this->request->getQuery('status');  ?>
               <li>
                 <?= $this->Html->link(
-                    __('All'), 
-                    ['action' => 'index'], 
+                    __('All'),
+                    ['action' => 'index'],
                     [
-                      'class' => 'dropdown-item' . (null === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === null ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
-              <?php foreach($modelTypes as $count => $modelType) : ?>
+              <?php foreach ($modelTypes as $count => $modelType) : ?>
               <li>
-                <?= $this->Html->link(
-                    $modelType, 
-                    ['action' => 'index', '?' => ['status' => $modelType]],
-                    [
-                      'class' => 'dropdown-item' . ($modelType === $activeFilter ? ' active' : '')
-                    ]
-                ) ?>
+                    <?= $this->Html->link(
+                        $modelType,
+                        ['action' => 'index', '?' => ['status' => $modelType]],
+                        [
+                        'class' => 'dropdown-item' . ($modelType === $activeFilter ? ' active' : ''),
+                        ],
+                    ) ?>
               </li>
               <?php endforeach; ?>
             </ul>
@@ -58,7 +58,7 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($slugs as $slug): ?>
+      <?php foreach ($slugs as $slug) : ?>
       <tr>
         <td>
             <?php
@@ -70,58 +70,58 @@
             ?>
         </td>
           <td>
-              <?php if (isset($relatedData[$slug->id])): ?>
-                  <?= $this->Html->link(
-                      h($relatedData[$slug->id]['title']),
-                      [
+              <?php if (isset($relatedData[$slug->id])) : ?>
+                    <?= $this->Html->link(
+                        h($relatedData[$slug->id]['title']),
+                        [
                           'controller' => $relatedData[$slug->id]['controller'],
                           'action' => 'view',
-                          $relatedData[$slug->id]['id']
-                      ],
-                      [
+                          $relatedData[$slug->id]['id'],
+                        ],
+                        [
                           'class' => 'text-decoration-none',
-                          'escape' => false
-                      ]
-                  ) ?>
-                  <?php if ($slug->model === 'Articles' && isset($relatedData[$slug->id]['is_published']) && !$relatedData[$slug->id]['is_published']): ?>
+                          'escape' => false,
+                        ],
+                    ) ?>
+                    <?php if ($slug->model === 'Articles' && isset($relatedData[$slug->id]['is_published']) && !$relatedData[$slug->id]['is_published']) : ?>
                       <span class="badge bg-warning ms-2"><?= __('Not Published') ?></span>
-                  <?php endif; ?>
-              <?php else: ?>
+                    <?php endif; ?>
+              <?php else : ?>
                   <?= h($slug->foreign_key) ?>
               <?php endif; ?>
           </td>
           <td>
               <?php
-              if (isset($relatedData[$slug->id])) {
-                  $routeName = match ($slug->model) {
-                      'Articles' => (isset($relatedData[$slug->id]['kind']) && $relatedData[$slug->id]['kind'] === 'page') ? 'page-by-slug' : 'article-by-slug',
-                      'Tags' => 'tag-by-slug',
-                      default => null,
-                  };
+                if (isset($relatedData[$slug->id])) {
+                    $routeName = match ($slug->model) {
+                        'Articles' => isset($relatedData[$slug->id]['kind']) && $relatedData[$slug->id]['kind'] === 'page' ? 'page-by-slug' : 'article-by-slug',
+                        'Tags' => 'tag-by-slug',
+                        default => null,
+                    };
 
-                  // Only create link if it's a Tag or a published Article
-                  $showLink = $slug->model === 'Tags' || 
+                    // Only create link if it's a Tag or a published Article
+                    $showLink = $slug->model === 'Tags' ||
                       ($slug->model === 'Articles' && isset($relatedData[$slug->id]['is_published']) && $relatedData[$slug->id]['is_published']);
 
-                  if ($routeName && $showLink) {
-                      echo $this->Html->link(
-                          h($slug->slug),
-                          [
+                    if ($routeName && $showLink) {
+                        echo $this->Html->link(
+                            h($slug->slug),
+                            [
                               '_name' => $routeName,
                               'slug' => $slug->slug,
-                          ],
-                          [
+                            ],
+                            [
                               'class' => 'text-decoration-none',
-                              'target' => '_blank'
-                          ]
-                      );
-                  } else {
-                      echo h($slug->slug);
-                  }
-              } else {
-                  echo h($slug->slug);
-              }
-              ?>
+                              'target' => '_blank',
+                            ],
+                        );
+                    } else {
+                        echo h($slug->slug);
+                    }
+                } else {
+                    echo h($slug->slug);
+                }
+                ?>
           </td>
           <td><?= h($slug->created) ?></td>
           <td>
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let url = `<?= $this->Url->build(['action' => 'index']) ?>`;
 
-            <?php if (null !== $activeFilter): ?>
+            <?php if ($activeFilter !== null) : ?>
             url += `?status=<?= urlencode($activeFilter) ?>`;
             <?php endif; ?>
 

@@ -65,7 +65,7 @@
         </div>
     </div>
 
-    <?php if (!empty($viewsOverTime) && $viewsOverTime->count() > 0): ?>
+    <?php if (!empty($viewsOverTime) && $viewsOverTime->count() > 0) : ?>
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -84,7 +84,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="stats-table-body">
-                                    <?php foreach ($viewsOverTime as $view): ?>
+                                    <?php foreach ($viewsOverTime as $view) : ?>
                                     <tr>
                                         <td><?= h((new DateTime($view->date))->format('M j, Y')) ?></td>
                                         <td class="text-end">
@@ -94,7 +94,7 @@
                                             <?= $this->Html->link(
                                                 '<i class="fas fa-list"></i> ' . __('Details'),
                                                 ['action' => 'viewRecords', $article->id, '?' => ['date' => $view->date]],
-                                                ['title' => __('View detailed records for this date'), 'class' => 'btn btn-sm btn-outline-primary', 'escape' => false]
+                                                ['title' => __('View detailed records for this date'), 'class' => 'btn btn-sm btn-outline-primary', 'escape' => false],
                                             ) ?>
                                         </td>
                                     </tr>
@@ -105,7 +105,7 @@
 
                         <!-- Mobile Cards -->
                         <div class="d-md-none p-3" id="stats-mobile-cards">
-                            <?php foreach ($viewsOverTime as $view): ?>
+                            <?php foreach ($viewsOverTime as $view) : ?>
                             <div class="card mb-2 mobile-stat-card">
                                 <div class="card-body p-3">
                                     <div class="d-flex justify-content-between align-items-center">
@@ -117,7 +117,7 @@
                                             <?= $this->Html->link(
                                                 '<i class="fas fa-list"></i>',
                                                 ['action' => 'viewRecords', $article->id, '?' => ['date' => $view->date]],
-                                                ['title' => __('View details'), 'class' => 'btn btn-sm btn-outline-primary', 'escape' => false]
+                                                ['title' => __('View details'), 'class' => 'btn btn-sm btn-outline-primary', 'escape' => false],
                                             ) ?>
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
                 </div>
             </div>
         </div>
-    <?php else: ?>
+    <?php else : ?>
         <div class="row">
             <div class="col-12">
                 <div class="alert alert-info" role="alert">

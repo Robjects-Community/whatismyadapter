@@ -65,9 +65,9 @@ $this->Html->css('willow-admin', ['block' => true]);
                 <h5><?= __('Recent Products') ?></h5>
             </div>
             <div class="card-body">
-                <?php if (!empty($recentProducts)): ?>
+                <?php if (!empty($recentProducts)) : ?>
                     <div class="list-group">
-                        <?php foreach ($recentProducts as $product): ?>
+                        <?php foreach ($recentProducts as $product) : ?>
                             <div class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     <strong><?= h($product->title) ?></strong>
@@ -75,16 +75,16 @@ $this->Html->css('willow-admin', ['block' => true]);
                                 </div>
                                 <div>
                                     <small class="text-muted"><?= $product->created->format('M j, Y') ?></small>
-                                    <?php if ($product->is_published): ?>
+                                    <?php if ($product->is_published) : ?>
                                         <span class="badge badge-success ml-2"><?= __('Published') ?></span>
-                                    <?php else: ?>
+                                    <?php else : ?>
                                         <span class="badge badge-secondary ml-2"><?= __('Draft') ?></span>
                                     <?php endif; ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
-                <?php else: ?>
+                <?php else : ?>
                     <p><?= __('No products found.') ?></p>
                 <?php endif; ?>
             </div>
@@ -100,16 +100,16 @@ $this->Html->css('willow-admin', ['block' => true]);
                 <h5><?= __('Top Manufacturers') ?></h5>
             </div>
             <div class="card-body">
-                <?php if (!empty($topManufacturers)): ?>
+                <?php if (!empty($topManufacturers)) : ?>
                     <ul class="list-unstyled">
-                        <?php foreach ($topManufacturers as $manufacturer): ?>
+                        <?php foreach ($topManufacturers as $manufacturer) : ?>
                             <li class="d-flex justify-content-between">
                                 <span><?= h($manufacturer->manufacturer) ?></span>
                                 <span class="badge badge-primary"><?= number_format($manufacturer->count) ?></span>
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                <?php else: ?>
+                <?php else : ?>
                     <p><?= __('No manufacturer data available.') ?></p>
                 <?php endif; ?>
             </div>
@@ -122,16 +122,16 @@ $this->Html->css('willow-admin', ['block' => true]);
                 <h5><?= __('Popular Tags') ?></h5>
             </div>
             <div class="card-body">
-                <?php if (!empty($popularTags)): ?>
+                <?php if (!empty($popularTags)) : ?>
                     <ul class="list-unstyled">
-                        <?php foreach ($popularTags as $tag): ?>
+                        <?php foreach ($popularTags as $tag) : ?>
                             <li class="d-flex justify-content-between">
                                 <span><?= h($tag->title) ?></span>
                                 <span class="badge badge-info"><?= number_format($tag->count) ?></span>
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                <?php else: ?>
+                <?php else : ?>
                     <p><?= __('No tag data available.') ?></p>
                 <?php endif; ?>
             </div>

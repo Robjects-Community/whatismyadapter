@@ -28,7 +28,7 @@ echo $this->element('actions_card', [
     'modelName' => 'Image Gallery',
     'controllerName' => 'Image Galleries',
     'entity' => $imageGallery,
-    'entityDisplayName' => $imageGallery->name
+    'entityDisplayName' => $imageGallery->name,
 ]);
 ?>
 <div class="container my-4">
@@ -76,11 +76,11 @@ echo $this->element('actions_card', [
                             echo $this->cell('Gallery::display', [
                                 $imageGallery->id,
                                 'admin',
-                                ''
+                                '',
                             ]);
                             ?>
                             
-                            <?php if (!empty($imageGallery->images)): ?>
+                            <?php if (!empty($imageGallery->images)) : ?>
                                 <!-- Admin actions for gallery management -->
                                 <div class="mt-4 pt-4 border-top">
                                     <div class="row align-items-center">
@@ -89,13 +89,13 @@ echo $this->element('actions_card', [
                                                 <?= $this->Html->link(
                                                     '<i class="fas fa-edit me-2"></i>' . __('Manage Images'),
                                                     ['action' => 'manageImages', $imageGallery->id],
-                                                    ['class' => 'btn btn-primary btn-lg', 'escape' => false]
+                                                    ['class' => 'btn btn-primary btn-lg', 'escape' => false],
                                                 ) ?>
                                                 
                                                 <?= $this->Html->link(
                                                     '<i class="fas fa-plus me-2"></i>' . __('Add More Images'),
                                                     ['action' => 'edit', $imageGallery->id],
-                                                    ['class' => 'btn btn-outline-secondary btn-lg ms-2', 'escape' => false]
+                                                    ['class' => 'btn btn-outline-secondary btn-lg ms-2', 'escape' => false],
                                                 ) ?>
                                             </div>
                                         </div>

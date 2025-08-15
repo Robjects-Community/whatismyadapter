@@ -10,11 +10,11 @@
     <div class="card mb-4 shadow-sm">
         <div class="card-body">
             <div class="d-flex flex-wrap gap-2">
-                <?php foreach ($tags as $tag): ?>
+                <?php foreach ($tags as $tag) : ?>
                     <?= $this->Html->link(
                         htmlspecialchars_decode($tag->title),
                         ['action' => 'view-by-slug', $tag->slug],
-                        ['class' => 'btn btn-outline-primary']
+                        ['class' => 'btn btn-outline-primary'],
                     ) ?>
                 <?php endforeach; ?>
             </div>

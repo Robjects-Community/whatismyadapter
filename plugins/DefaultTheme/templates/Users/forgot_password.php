@@ -1,4 +1,4 @@
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <div class="col-md-6 container mt-4 mb-3">
     <div class="row">
         <?= $this->Flash->render() ?>
@@ -9,7 +9,7 @@
 
             <div class="mb-3">
                 <?php echo $this->Form->control('email', ['class' => 'form-control' . ($this->Form->isFieldError('email') ? ' is-invalid' : '')]); ?>
-                <?php if ($this->Form->isFieldError('email')): ?>
+                <?php if ($this->Form->isFieldError('email')) : ?>
                     <div class="invalid-feedback">
                         <?= $this->Form->error('email') ?>
                     </div>

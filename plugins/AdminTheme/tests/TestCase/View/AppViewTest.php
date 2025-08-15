@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace AdminTheme\Test\TestCase\View;
 
 use AdminTheme\View\AppView;
-use Cake\Http\ServerRequest;
 use Cake\Http\Response;
+use Cake\Http\ServerRequest;
 use Cake\TestSuite\TestCase;
+use Cake\View\View;
 
 /**
  * AdminTheme\View\AppView Test Case
@@ -28,10 +29,10 @@ class AppViewTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $request = new ServerRequest();
         $response = new Response();
-        
+
         $this->AppView = new AppView($request, $response);
     }
 
@@ -54,7 +55,7 @@ class AppViewTest extends TestCase
     public function testViewInstantiation(): void
     {
         $this->assertInstanceOf(AppView::class, $this->AppView);
-        $this->assertInstanceOf(\Cake\View\View::class, $this->AppView);
+        $this->assertInstanceOf(View::class, $this->AppView);
     }
 
     /**
@@ -66,7 +67,7 @@ class AppViewTest extends TestCase
     {
         // Initialize the view
         $this->AppView->initialize();
-        
+
         // Check if Gallery helper is loaded
         $this->assertTrue($this->AppView->helpers()->has('Gallery'));
     }
@@ -80,13 +81,13 @@ class AppViewTest extends TestCase
     {
         // Initialize the view
         $this->AppView->initialize();
-        
+
         // Get form helper
         $formHelper = $this->AppView->Form;
-        
+
         // Test some key bootstrap template configurations
         $templates = $formHelper->getTemplates();
-        
+
         $this->assertStringContainsString('form-label', $templates['label']);
         $this->assertStringContainsString('form-control', $templates['input']);
         $this->assertStringContainsString('form-control', $templates['textarea']);
@@ -103,21 +104,21 @@ class AppViewTest extends TestCase
     public function testFormControlTemplates(): void
     {
         $this->AppView->initialize();
-        
+
         $formHelper = $this->AppView->Form;
         $templates = $formHelper->getTemplates();
-        
+
         // Test input container templates
         $this->assertArrayHasKey('inputContainer', $templates);
         $this->assertArrayHasKey('inputContainerError', $templates);
-        
+
         // Test that error template includes Bootstrap validation classes
         $this->assertStringContainsString('has-validation', $templates['inputContainerError']);
-        
+
         // Test radio button configuration
         $this->assertArrayHasKey('radioContainer', $templates);
         $this->assertStringContainsString('form-check', $templates['radioContainer']);
-        
+
         // Test input group templates for Bootstrap input groups
         $this->assertArrayHasKey('inputGroupContainer', $templates);
         $this->assertStringContainsString('input-group', $templates['inputGroupContainer']);

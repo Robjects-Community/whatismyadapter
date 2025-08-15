@@ -20,7 +20,7 @@ $this->Html->css('images-grid', ['block' => true]);
             <!-- View Switcher -->
             <?= $this->element('view_switcher', [
                 'currentView' => $viewType,
-                'queryParams' => $this->request->getQueryParams()
+                'queryParams' => $this->request->getQueryParams(),
             ]) ?>
             
             <!-- Search Form -->
@@ -29,8 +29,8 @@ $this->Html->css('images-grid', ['block' => true]);
                 'options' => [
                     'id' => 'gallery-search-form',
                     'inputId' => 'gallery-search',
-                    'placeholder' => __('Search galleries...')
-                ]
+                    'placeholder' => __('Search galleries...'),
+                ],
             ]) ?>
             
             <!-- Status Filter -->
@@ -41,7 +41,7 @@ $this->Html->css('images-grid', ['block' => true]);
             <?= $this->Html->link(
                 '<i class="fas fa-plus"></i> ' . __('New Gallery'),
                 ['action' => 'add'],
-                ['class' => 'btn btn-success', 'escape' => false]
+                ['class' => 'btn btn-success', 'escape' => false],
             ) ?>
         </div>
     </div>
@@ -49,17 +49,17 @@ $this->Html->css('images-grid', ['block' => true]);
 
 <!-- Content Target for AJAX updates -->
 <div id="ajax-target">
-    <?php if (empty($imageGalleries)): ?>
+    <?php if (empty($imageGalleries)) : ?>
         <?= $this->element('empty_state', [
             'icon' => 'fas fa-images',
             'title' => __('No Image Galleries Found'),
             'message' => __('Create your first gallery to get started.'),
             'actionText' => __('Create Gallery'),
-            'actionUrl' => ['action' => 'add']
+            'actionUrl' => ['action' => 'add'],
         ]) ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            <?php foreach ($imageGalleries as $gallery): ?>
+            <?php foreach ($imageGalleries as $gallery) : ?>
             <div class="col">
                 <?= $this->element('ImageGalleries/gallery_card', ['gallery' => $gallery]) ?>
             </div>

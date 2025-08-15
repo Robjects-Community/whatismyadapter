@@ -6,19 +6,21 @@
  * @var string $carouselId
  */
 ?>
-<?php if (!empty($images)): ?>
+<?php if (!empty($images)) : ?>
 <div class="col-md-6 mb-4">
 <h4><?= __('Images') ?></h4>
 <div id="<?= $carouselId ?>" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        <?php foreach ($images as $index => $image): ?>
+        <?php foreach ($images as $index => $image) : ?>
             <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                <?= $this->Html->image(SettingsManager::read('ImageSizes.medium', '200') . '/' . $image->image, 
-                [
+                <?= $this->Html->image(
+                    SettingsManager::read('ImageSizes.medium', '200') . '/' . $image->image,
+                    [
                     'pathPrefix' => 'files/Images/image/',
                     'class' => 'd-block w-100',
                     'alt' => $image->alt_text,
-                ]) ?>
+                    ],
+                ) ?>
             </div>
         <?php endforeach; ?>
     </div>

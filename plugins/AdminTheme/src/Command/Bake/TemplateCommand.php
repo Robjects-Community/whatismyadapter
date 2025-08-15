@@ -8,7 +8,9 @@ use Bake\Utility\Model\AssociationFilter;
 use Cake\Console\Arguments;
 use Cake\Console\ConsoleIo;
 use Cake\Core\Configure;
+use Cake\ORM\Table;
 use Cake\Utility\Inflector;
+use Exception;
 
 class TemplateCommand extends BakeTemplateCommand
 {
@@ -47,7 +49,7 @@ class TemplateCommand extends BakeTemplateCommand
             try {
                 $content = $this->getContent($args, $io, $method, $vars);
                 $this->bake($args, $io, $method, $content);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $io->error($e->getMessage());
             }
         }
@@ -123,7 +125,7 @@ class TemplateCommand extends BakeTemplateCommand
         ConsoleIo $io,
         string $template,
         string|bool $content = '',
-        ?string $outputFile = null
+        ?string $outputFile = null,
     ): void {
         if ($outputFile === null) {
             $outputFile = $template;
@@ -133,6 +135,7 @@ class TemplateCommand extends BakeTemplateCommand
         }
         if (empty($content)) {
             $io->err("<warning>No generated content for '{$template}.{$this->ext}', not generating template.</warning>");
+
             return;
         }
         $path = $this->getTemplatePath($args);
@@ -148,7 +151,7 @@ class TemplateCommand extends BakeTemplateCommand
      * @param \Cake\ORM\Table $model Table
      * @return array associations
      */
-    protected function _filteredAssociations(\Cake\ORM\Table $model): array
+    protected function _filteredAssociations(Table $model): array
     {
         if ($this->_associationFilter === null) {
             $this->_associationFilter = new AssociationFilter();

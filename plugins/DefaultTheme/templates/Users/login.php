@@ -13,8 +13,8 @@
                 'id' => 'floatingInput',
                 'label' => false,
                 'templates' => [
-                    'inputContainer' => '{{content}}'
-                ]
+                    'inputContainer' => '{{content}}',
+                ],
             ]) ?>
             <label for="floatingInput">Email address</label>
         </div>
@@ -28,8 +28,8 @@
                 'id' => 'floatingPassword',
                 'label' => false,
                 'templates' => [
-                    'inputContainer' => '{{content}}'
-                ]
+                    'inputContainer' => '{{content}}',
+                ],
             ]) ?>
             <label for="floatingPassword">Password</label>
         </div>

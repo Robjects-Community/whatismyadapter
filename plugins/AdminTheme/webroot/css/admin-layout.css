@@ -302,7 +302,7 @@ html, body {
   .admin-sidebar {
     display: none;
   }
-  
+
   .admin-main {
     width: 100%;
   }
@@ -496,7 +496,7 @@ html, body {
   .page-actions-floating {
     justify-content: center;
   }
-  
+
   .page-actions-floating .btn-group {
     display: flex;
     flex-wrap: wrap;
@@ -504,7 +504,7 @@ html, body {
     box-shadow: none;
     border: none;
   }
-  
+
   .page-actions-floating .btn {
     border-radius: 0.5rem !important;
     margin-bottom: 0.25rem;

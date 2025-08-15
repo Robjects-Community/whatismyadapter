@@ -1,5 +1,5 @@
 <ul class="list-group sortable-list" data-level="<?= $level ?>">
-    <?php foreach ($articles as $article): ?>
+    <?php foreach ($articles as $article) : ?>
         <li class="list-group-item list-group-item-action sortable-item py-2 px-3 border" data-id="<?= $article['id'] ?>">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center">
@@ -12,8 +12,8 @@
                                 'controller' => 'Articles',
                                 'action' => 'view-by-slug',
                                 'slug' => $article->slug,
-                                '_name' => 'page-by-slug'
-                            ]
+                                '_name' => 'page-by-slug',
+                            ],
                         );
                     } else {
                         $title = html_entity_decode($article['title']);
@@ -29,12 +29,12 @@
                             'prefix' => 'Admin',
                             'controller' => 'PageViews',
                             'action' => 'pageViewStats',
-                            $article['id']
+                            $article['id'],
                         ],
                         [
                             'escape' => false,
-                            'class' => 'ms-2'
-                        ]
+                            'class' => 'ms-2',
+                        ],
                     ) ?>
                 </div>
                 <div class="btn-group" role="group">
@@ -55,9 +55,9 @@
                 </div>
             </div>
             <div class="children-container">
-                <?php if (!empty($article['children'])): ?>
+                <?php if (!empty($article['children'])) : ?>
                     <?= $this->element('tree/page_tree', ['articles' => $article['children'], 'level' => $level + 1]) ?>
-                <?php else: ?>
+                <?php else : ?>
                     <ul class="list-group sortable-list"></ul>
                 <?php endif; ?>
             </div>

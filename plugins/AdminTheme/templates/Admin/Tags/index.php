@@ -4,7 +4,7 @@
  * @var iterable<\App\Model\Entity\Tag> $tags
  */
 ?>
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <header class="py-3 mb-3 border-bottom">
     <div class="container-fluid d-flex align-items-center tags">
       <div class="d-flex align-items-center me-auto">
@@ -15,29 +15,29 @@
               <?php $activeFilter = $this->request->getQuery('level'); ?>
               <li>
                 <?= $this->Html->link(
-                    __('All'), 
+                    __('All'),
                     ['action' => 'index'],
                     [
-                      'class' => 'dropdown-item' . (null === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === null ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
               <li>
                 <?= $this->Html->link(
-                    __('Root'), 
+                    __('Root'),
                     ['action' => 'index', '?' => ['level' => 0]],
                     [
-                      'class' => 'dropdown-item' . ('0' === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === '0' ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
               <li>
                 <?= $this->Html->link(
-                    __('Child'), 
+                    __('Child'),
                     ['action' => 'index', '?' => ['level' => 1]],
                     [
-                      'class' => 'dropdown-item' . ('1' === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === '1' ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
             </ul>
@@ -84,7 +84,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($tags as $tag): ?>
+    <?php foreach ($tags as $tag) : ?>
     <tr>
         <td>
           <?php if (!empty($tag->image)) : ?>
@@ -97,10 +97,10 @@
             <td><?= h($tag->slug) ?></td>
             <td>
               <?php if (!empty($tag->parent_tag)) : ?>
-                  <?= $this->Html->link(
-                      h($tag->parent_tag->title), 
-                      ['controller' => 'Tags', 'action' => 'view', $tag->parent_tag->id]
-                  ); ?>
+                    <?= $this->Html->link(
+                        h($tag->parent_tag->title),
+                        ['controller' => 'Tags', 'action' => 'view', $tag->parent_tag->id],
+                    ); ?>
               <?php endif; ?>
             </td>
         <td>
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let url = `<?= $this->Url->build(['action' => 'index']) ?>`;
 
-            <?php if (null !== $activeFilter): ?>
+            <?php if ($activeFilter !== null) : ?>
             url += `?level=<?= urlencode($activeFilter) ?>`;
             <?php endif; ?>
 

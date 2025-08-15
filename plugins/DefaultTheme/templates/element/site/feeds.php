@@ -10,8 +10,8 @@
                     'target' => '_blank',
                     'rel' => 'noopener noreferrer',
                     'title' => __('Latest Articles RSS Feed'),
-                    'escape' => false
-                ]
+                    'escape' => false,
+                ],
             ); ?>
         </li>
     </ol>

@@ -11,13 +11,13 @@ $this->Html->css('willow-admin', ['block' => true]);
                 <?= $this->Html->link(
                     '<i class="fas fa-list"></i> ' . __('List Products'),
                     ['action' => 'index'],
-                    ['class' => 'btn btn-secondary', 'escape' => false]
+                    ['class' => 'btn btn-secondary', 'escape' => false],
                 ) ?>
-                <?php if (isset($product->id)): ?>
+                <?php if (isset($product->id)) : ?>
                     <?= $this->Html->link(
                         '<i class="fas fa-eye"></i> ' . __('View'),
                         ['action' => 'view', $product->id],
-                        ['class' => 'btn btn-info', 'escape' => false]
+                        ['class' => 'btn btn-info', 'escape' => false],
                     ) ?>
                     <?= $this->Form->postLink(
                         '<i class="fas fa-trash"></i> ' . __('Delete'),
@@ -25,8 +25,8 @@ $this->Html->css('willow-admin', ['block' => true]);
                         [
                             'confirm' => __('Are you sure you want to delete {0}?', $product->title),
                             'class' => 'btn btn-danger',
-                            'escape' => false
-                        ]
+                            'escape' => false,
+                        ],
                     ) ?>
                 <?php endif; ?>
             </div>
@@ -40,20 +40,20 @@ $this->Html->css('willow-admin', ['block' => true]);
             <div class="card-body">
                 <?= $this->Form->create($product, [
                     'type' => 'file',
-                    'novalidate' => true
+                    'novalidate' => true,
                 ]) ?>
                 
                 <div class="form-group">
                     <?= $this->Form->control('title', [
                         'class' => 'form-control',
-                        'required' => true
+                        'required' => true,
                     ]) ?>
                 </div>
 
                 <div class="form-group">
                     <?= $this->Form->control('slug', [
                         'class' => 'form-control',
-                        'help' => __('URL-friendly version of the title. Leave blank to auto-generate.')
+                        'help' => __('URL-friendly version of the title. Leave blank to auto-generate.'),
                     ]) ?>
                 </div>
 
@@ -62,7 +62,7 @@ $this->Html->css('willow-admin', ['block' => true]);
                         'type' => 'textarea',
                         'class' => 'form-control',
                         'rows' => 6,
-                        'help' => __('Brief description of the product')
+                        'help' => __('Brief description of the product'),
                     ]) ?>
                 </div>
 
@@ -70,14 +70,14 @@ $this->Html->css('willow-admin', ['block' => true]);
                     <div class="col-md-6">
                         <div class="form-group">
                             <?= $this->Form->control('manufacturer', [
-                                'class' => 'form-control'
+                                'class' => 'form-control',
                             ]) ?>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <?= $this->Form->control('model_number', [
-                                'class' => 'form-control'
+                                'class' => 'form-control',
                             ]) ?>
                         </div>
                     </div>
@@ -89,7 +89,7 @@ $this->Html->css('willow-admin', ['block' => true]);
                             <?= $this->Form->control('price', [
                                 'type' => 'number',
                                 'step' => '0.01',
-                                'class' => 'form-control'
+                                'class' => 'form-control',
                             ]) ?>
                         </div>
                     </div>
@@ -101,9 +101,9 @@ $this->Html->css('willow-admin', ['block' => true]);
                                     'USD' => 'USD',
                                     'EUR' => 'EUR',
                                     'GBP' => 'GBP',
-                                    'CAD' => 'CAD'
+                                    'CAD' => 'CAD',
                                 ],
-                                'class' => 'form-control'
+                                'class' => 'form-control',
                             ]) ?>
                         </div>
                     </div>
@@ -115,12 +115,12 @@ $this->Html->css('willow-admin', ['block' => true]);
                     <?= $this->Form->file('image_uploads[]', [
                         'multiple' => true,
                         'accept' => 'image/*',
-                        'class' => 'form-control-file'
+                        'class' => 'form-control-file',
                     ]) ?>
                     <small class="form-text text-muted"><?= __('Upload product images (JPG, PNG, GIF)') ?></small>
                 </div>
 
-                <?php if ($product->image): ?>
+                <?php if ($product->image) : ?>
                     <div class="current-image mb-3">
                         <label><?= __('Current Image') ?></label>
                         <div>
@@ -133,12 +133,12 @@ $this->Html->css('willow-admin', ['block' => true]);
                 <div class="form-group">
                     <?= $this->Form->control('alt_text', [
                         'class' => 'form-control',
-                        'help' => __('Alternative text for images (accessibility)')
+                        'help' => __('Alternative text for images (accessibility)'),
                     ]) ?>
                 </div>
 
                 <?= $this->Form->button(__('Save Product'), [
-                    'class' => 'btn btn-success'
+                    'class' => 'btn btn-success',
                 ]) ?>
                 
                 <?= $this->Form->end() ?>
@@ -156,14 +156,14 @@ $this->Html->css('willow-admin', ['block' => true]);
                 <div class="form-group">
                     <?= $this->Form->control('is_published', [
                         'type' => 'checkbox',
-                        'label' => __('Published')
+                        'label' => __('Published'),
                     ]) ?>
                 </div>
                 
                 <div class="form-group">
                     <?= $this->Form->control('featured', [
                         'type' => 'checkbox',
-                        'label' => __('Featured Product')
+                        'label' => __('Featured Product'),
                     ]) ?>
                 </div>
 
@@ -173,9 +173,9 @@ $this->Html->css('willow-admin', ['block' => true]);
                         'options' => [
                             'pending' => __('Pending'),
                             'approved' => __('Approved'),
-                            'rejected' => __('Rejected')
+                            'rejected' => __('Rejected'),
                         ],
-                        'class' => 'form-control'
+                        'class' => 'form-control',
                     ]) ?>
                 </div>
             </div>
@@ -192,7 +192,7 @@ $this->Html->css('willow-admin', ['block' => true]);
                     'multiple' => true,
                     'options' => $tags,
                     'class' => 'form-control select2',
-                    'label' => false
+                    'label' => false,
                 ]) ?>
                 <small class="form-text text-muted"><?= __('Select tags for unified search across articles and products') ?></small>
             </div>
@@ -209,7 +209,7 @@ $this->Html->css('willow-admin', ['block' => true]);
                     'options' => $articles,
                     'empty' => __('None - No detailed article'),
                     'class' => 'form-control',
-                    'label' => false
+                    'label' => false,
                 ]) ?>
                 <small class="form-text text-muted"><?= __('Optional: Link to a detailed article about this product') ?></small>
             </div>
@@ -221,7 +221,7 @@ $this->Html->css('willow-admin', ['block' => true]);
 $(document).ready(function() {
     // Initialize Select2 for tags
     $('.select2').select2({
-        placeholder: '<?= __("Select tags...") ?>',
+        placeholder: '<?= __('Select tags...') ?>',
         allowClear: true
     });
     

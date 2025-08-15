@@ -1,8 +1,8 @@
 <?php if (!empty($consentData) && $consentData['marketing_consent']) :?>
-    <?php 
+    <?php
     $url = $this->Url->build(
         ['_name' => $article->kind . '-by-slug', 'slug' => $article->slug],
-        ['fullBase' => true]
+        ['fullBase' => true],
     );
     $encodedUrl = urlencode($url) . ';src=sdkpreparse';
     ?>

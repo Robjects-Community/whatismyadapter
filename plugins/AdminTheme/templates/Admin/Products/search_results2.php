@@ -4,13 +4,13 @@
  * @var iterable<\App\Model\Entity\Product> $products
  */
 ?>
-<?php if (empty($products)): ?>
+<?php if (empty($products)) : ?>
     <?= $this->element('empty_state', [
         'type' => 'search',
         'title' => __('No Products found'),
-        'message' => __('Try adjusting your search terms or filters.')
+        'message' => __('Try adjusting your search terms or filters.'),
     ]) ?>
-<?php else: ?>
+<?php else : ?>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -37,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($products as $product): ?>
+            <?php foreach ($products as $product) : ?>
       <tr>
                                                         <td><?= h($product->id) ?></td>
                                     <td><?= $product->hasValue('user') ? $this->Html->link($product->user->username, ['controller' => 'Users', 'action' => 'view', $product->user->id], ['class' => 'btn btn-link']) : '' ?></td>
@@ -59,7 +59,7 @@
                                                                 <td><?= h($product->created) ?></td>
                                                                 <td><?= h($product->modified) ?></td>
                           <td>
-            <?= $this->element('evd_dropdown', ['model' => $product, 'display' => 'title']); ?>
+                <?= $this->element('evd_dropdown', ['model' => $product, 'display' => 'title']); ?>
           </td>
             </tr>
             <?php endforeach; ?>

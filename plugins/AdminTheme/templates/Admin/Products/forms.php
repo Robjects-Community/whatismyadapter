@@ -33,7 +33,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                     <?= $this->Form->create(null, [
                         'method' => 'post',
                         'class' => 'needs-validation',
-                        'novalidate' => true
+                        'novalidate' => true,
                     ]) ?>
 
                     <div class="row">
@@ -41,14 +41,14 @@ echo $this->element('AdminTheme.nav/products_tabs');
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <?= $this->Form->label('enable_public_submissions', __('Enable Public Submissions'), [
-                                    'class' => 'form-label fw-bold'
+                                    'class' => 'form-label fw-bold',
                                 ]) ?>
                                 <div class="form-check form-switch">
                                     <?= $this->Form->checkbox('enable_public_submissions', [
                                         'value' => 'true',
                                         'checked' => $formSettings['enable_public_submissions'] === 'true',
                                         'class' => 'form-check-input',
-                                        'id' => 'enable_public_submissions'
+                                        'id' => 'enable_public_submissions',
                                     ]) ?>
                                 </div>
                                 <small class="form-text text-muted">
@@ -61,14 +61,14 @@ echo $this->element('AdminTheme.nav/products_tabs');
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <?= $this->Form->label('require_admin_approval', __('Require Admin Approval'), [
-                                    'class' => 'form-label fw-bold'
+                                    'class' => 'form-label fw-bold',
                                 ]) ?>
                                 <div class="form-check form-switch">
                                     <?= $this->Form->checkbox('require_admin_approval', [
                                         'value' => 'true',
                                         'checked' => $formSettings['require_admin_approval'] === 'true',
                                         'class' => 'form-check-input',
-                                        'id' => 'require_admin_approval'
+                                        'id' => 'require_admin_approval',
                                     ]) ?>
                                 </div>
                                 <small class="form-text text-muted">
@@ -83,16 +83,16 @@ echo $this->element('AdminTheme.nav/products_tabs');
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <?= $this->Form->label('default_status', __('Default Status'), [
-                                    'class' => 'form-label fw-bold'
+                                    'class' => 'form-label fw-bold',
                                 ]) ?>
                                 <?= $this->Form->select('default_status', [
                                     'pending' => __('Pending Review'),
                                     'approved' => __('Approved'),
-                                    'rejected' => __('Rejected')
+                                    'rejected' => __('Rejected'),
                                 ], [
                                     'value' => $formSettings['default_status'],
                                     'class' => 'form-select',
-                                    'id' => 'default_status'
+                                    'id' => 'default_status',
                                 ]) ?>
                                 <small class="form-text text-muted">
                                     <?= __('Initial verification status for user-submitted products') ?>
@@ -104,7 +104,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <?= $this->Form->label('max_file_size', __('Max File Size (MB)'), [
-                                    'class' => 'form-label fw-bold'
+                                    'class' => 'form-label fw-bold',
                                 ]) ?>
                                 <div class="input-group">
                                     <?= $this->Form->number('max_file_size', [
@@ -113,7 +113,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                                         'min' => 1,
                                         'max' => 100,
                                         'step' => 0.1,
-                                        'id' => 'max_file_size'
+                                        'id' => 'max_file_size',
                                     ]) ?>
                                     <span class="input-group-text">MB</span>
                                 </div>
@@ -127,13 +127,13 @@ echo $this->element('AdminTheme.nav/products_tabs');
                     <!-- Allowed File Types -->
                     <div class="mb-3">
                         <?= $this->Form->label('allowed_file_types', __('Allowed File Types'), [
-                            'class' => 'form-label fw-bold'
+                            'class' => 'form-label fw-bold',
                         ]) ?>
                         <?= $this->Form->text('allowed_file_types', [
                             'value' => $formSettings['allowed_file_types'],
                             'class' => 'form-control',
                             'placeholder' => 'jpg,jpeg,png,gif,webp',
-                            'id' => 'allowed_file_types'
+                            'id' => 'allowed_file_types',
                         ]) ?>
                         <small class="form-text text-muted">
                             <?= __('Comma-separated list of allowed file extensions (without dots)') ?>
@@ -143,13 +143,13 @@ echo $this->element('AdminTheme.nav/products_tabs');
                     <!-- Required Fields -->
                     <div class="mb-3">
                         <?= $this->Form->label('required_fields', __('Required Fields'), [
-                            'class' => 'form-label fw-bold'
+                            'class' => 'form-label fw-bold',
                         ]) ?>
                         <?= $this->Form->text('required_fields', [
                             'value' => $formSettings['required_fields'],
                             'class' => 'form-control',
                             'placeholder' => 'title,description,manufacturer,price',
-                            'id' => 'required_fields'
+                            'id' => 'required_fields',
                         ]) ?>
                         <small class="form-text text-muted">
                             <?= __('Comma-separated list of required form fields') ?>
@@ -165,13 +165,13 @@ echo $this->element('AdminTheme.nav/products_tabs');
                     <!-- Notification Email -->
                     <div class="mb-3">
                         <?= $this->Form->label('notification_email', __('Notification Email'), [
-                            'class' => 'form-label fw-bold'
+                            'class' => 'form-label fw-bold',
                         ]) ?>
                         <?= $this->Form->email('notification_email', [
                             'value' => $formSettings['notification_email'],
                             'class' => 'form-control',
                             'placeholder' => 'admin@example.com',
-                            'id' => 'notification_email'
+                            'id' => 'notification_email',
                         ]) ?>
                         <small class="form-text text-muted">
                             <?= __('Email address to notify when new products are submitted (leave empty to disable)') ?>
@@ -181,14 +181,14 @@ echo $this->element('AdminTheme.nav/products_tabs');
                     <!-- Success Message -->
                     <div class="mb-4">
                         <?= $this->Form->label('success_message', __('Success Message'), [
-                            'class' => 'form-label fw-bold'
+                            'class' => 'form-label fw-bold',
                         ]) ?>
                         <?= $this->Form->textarea('success_message', [
                             'value' => $formSettings['success_message'],
                             'class' => 'form-control',
                             'rows' => 3,
                             'placeholder' => 'Your product has been submitted and is awaiting review.',
-                            'id' => 'success_message'
+                            'id' => 'success_message',
                         ]) ?>
                         <small class="form-text text-muted">
                             <?= __('Message shown to users after successful product submission') ?>
@@ -198,7 +198,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                     <div class="d-flex justify-content-end">
                         <?= $this->Form->button(__('Save Configuration'), [
                             'type' => 'submit',
-                            'class' => 'btn btn-primary btn-lg'
+                            'class' => 'btn btn-primary btn-lg',
                         ]) ?>
                     </div>
 
@@ -261,12 +261,12 @@ echo $this->element('AdminTheme.nav/products_tabs');
                         </div>
                     </div>
 
-                    <?php if ($submissionStats['pending_submissions'] > 0): ?>
+                    <?php if ($submissionStats['pending_submissions'] > 0) : ?>
                         <div class="mt-3">
                             <?= $this->Html->link(
                                 __('Review Pending Products'),
                                 ['action' => 'pendingReview'],
-                                ['class' => 'btn btn-outline-warning btn-sm w-100']
+                                ['class' => 'btn btn-outline-warning btn-sm w-100'],
                             ) ?>
                         </div>
                     <?php endif; ?>
@@ -282,14 +282,14 @@ echo $this->element('AdminTheme.nav/products_tabs');
                     </h6>
                 </div>
                 <div class="card-body p-0">
-                    <?php if (empty($recentSubmissions)): ?>
+                    <?php if (empty($recentSubmissions)) : ?>
                         <div class="p-3 text-center text-muted">
                             <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
                             <?= __('No user submissions yet') ?>
                         </div>
-                    <?php else: ?>
+                    <?php else : ?>
                         <div class="list-group list-group-flush">
-                            <?php foreach (array_slice($recentSubmissions, 0, 5) as $submission): ?>
+                            <?php foreach (array_slice($recentSubmissions, 0, 5) as $submission) : ?>
                                 <div class="list-group-item">
                                     <div class="d-flex justify-content-between align-items-start">
                                         <div class="flex-grow-1">
@@ -297,7 +297,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                                                 <?= $this->Html->link(
                                                     h($submission->title),
                                                     ['action' => 'view', $submission->id],
-                                                    ['class' => 'text-decoration-none']
+                                                    ['class' => 'text-decoration-none'],
                                                 ) ?>
                                             </h6>
                                             <p class="mb-1 small text-muted">
@@ -307,9 +307,9 @@ echo $this->element('AdminTheme.nav/products_tabs');
                                                 <?= $submission->created->timeAgoInWords() ?>
                                             </small>
                                         </div>
-                                        <span class="badge <?= 
-                                            $submission->verification_status === 'approved' ? 'bg-success' : 
-                                            ($submission->verification_status === 'rejected' ? 'bg-danger' : 'bg-warning') 
+                                        <span class="badge <?=
+                                            $submission->verification_status === 'approved' ? 'bg-success' :
+                                            ($submission->verification_status === 'rejected' ? 'bg-danger' : 'bg-warning')
                                         ?>">
                                             <?= ucfirst(h($submission->verification_status)) ?>
                                         </span>
@@ -318,12 +318,12 @@ echo $this->element('AdminTheme.nav/products_tabs');
                             <?php endforeach; ?>
                         </div>
 
-                        <?php if (count($recentSubmissions) > 5): ?>
+                        <?php if (count($recentSubmissions) > 5) : ?>
                             <div class="card-footer text-center">
                                 <?= $this->Html->link(
                                     __('View All Submissions'),
                                     ['action' => 'index'],
-                                    ['class' => 'btn btn-outline-secondary btn-sm']
+                                    ['class' => 'btn btn-outline-secondary btn-sm'],
                                 ) ?>
                             </div>
                         <?php endif; ?>
@@ -384,12 +384,13 @@ echo $this->element('AdminTheme.nav/products_tabs');
                     <div class="alert alert-info mt-3">
                         <i class="fas fa-info-circle me-2"></i>
                         <strong><?= __('Frontend Integration:') ?></strong>
-                        <?= __('Users can submit products at {0} when public submissions are enabled.', 
+                        <?= __(
+                            'Users can submit products at {0} when public submissions are enabled.',
                             $this->Html->link(
                                 '/products/add',
                                 ['controller' => 'Products', 'action' => 'add', 'prefix' => false],
-                                ['class' => 'alert-link']
-                            )
+                                ['class' => 'alert-link'],
+                            ),
                         ) ?>
                     </div>
                 </div>

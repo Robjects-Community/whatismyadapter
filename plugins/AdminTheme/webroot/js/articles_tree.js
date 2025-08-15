@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var nestedSortables = [].slice.call(document.querySelectorAll('.sortable-list'));
 
     for (var i = 0; i < nestedSortables.length; i++) {

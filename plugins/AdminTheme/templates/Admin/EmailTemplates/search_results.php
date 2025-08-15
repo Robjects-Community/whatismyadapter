@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($emailTemplates as $emailTemplate): ?>
+        <?php foreach ($emailTemplates as $emailTemplate) : ?>
         <tr>
             <td><?= h($emailTemplate->name) ?></td>
             <td><?= h($emailTemplate->created) ?></td>

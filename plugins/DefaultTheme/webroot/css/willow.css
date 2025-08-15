@@ -540,7 +540,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 1rem auto;
     border-radius: 6px;
   }
-  
+
   .article-body p[style*="text-align: center"]:not(.photo-gallery) img:not(.gallery-image),
   .article-body p[style*="text-align:center"]:not(.photo-gallery) img:not(.gallery-image),
   .blog-post p[style*="text-align: center"]:not(.photo-gallery) img:not(.gallery-image),
@@ -567,7 +567,7 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 400px;
     display: inline;
   }
-  
+
   .article-body p[style*="text-align: right"]:not(.photo-gallery) img:not(.gallery-image),
   .article-body p[style*="text-align:right"]:not(.photo-gallery) img:not(.gallery-image),
   .blog-post p[style*="text-align: right"]:not(.photo-gallery) img:not(.gallery-image),
@@ -634,7 +634,7 @@ h1, h2, h3, h4, h5, h6 {
     float: none !important;
     display: block !important;
   }
-  
+
   .article-body,
   .blog-post {
     font-size: 12pt;
@@ -649,7 +649,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 2rem 1rem 0;
     display: inline;
   }
-  
+
   .article-body img.align-right {
     float: right;
     max-width: 400px;
@@ -675,7 +675,7 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 300px;
     margin: 0 1.5rem 1rem 0;
   }
-  
+
   .article-content-wrapper > img.float-right,
   #article-body-content img.float-right {
     float: right;
@@ -801,7 +801,7 @@ body {
     display: block;
     overflow: hidden;
   }
-  
+
   .blog-post .article-content img {
     float: left;
     max-width: 250px;
@@ -846,7 +846,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
-  
+
   .article-image-right {
     float: right;
     max-width: 300px;
@@ -1021,7 +1021,7 @@ body {
     margin: 0 0 1rem 0;
     display: block;
   }
-  
+
   .sidebar-article-image {
     float: none;
     max-width: 100%;
@@ -1029,23 +1029,23 @@ body {
     margin: 0 0 0.75rem 0;
     display: block;
   }
-  
+
   .sidebar-article-item {
     overflow: visible; /* Allow content to flow normally on mobile */
   }
-  
+
   .read-more-container {
     text-align: left;
     clear: none;
   }
-  
+
   /* Article index mobile layout - center image and disable text wrap */
   .article-image-container {
     float: none;
     margin: 0 auto 1rem auto;
     text-align: center;
   }
-  
+
   .article-wrap-image {
     display: block;
     margin: 0 auto;
@@ -1066,7 +1066,7 @@ body {
     margin: 0 auto 1rem auto;
     text-align: center;
   }
-  
+
   .article-wrap-image {
     display: block;
     margin: 0 auto;
@@ -1079,7 +1079,7 @@ body {
     float: left;
     margin: 0 1.5rem 1rem 0;
   }
-  
+
   .article-wrap-image {
     max-width: 400px;
     display: block;
@@ -1092,12 +1092,12 @@ body {
     float: left;
     margin: 0 1.5rem 1rem 0;
   }
-  
+
   .article-wrap-image {
     max-width: 400px;
     display: block;
   }
-  
+
   .article-image-float {
     max-width: 320px;
   }

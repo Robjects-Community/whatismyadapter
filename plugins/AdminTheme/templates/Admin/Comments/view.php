@@ -9,9 +9,9 @@
         'modelName' => 'Comment',
         'controllerName' => 'Comments',
         'entity' => $comment,
-        'entityDisplayName' => $comment->model
+        'entityDisplayName' => $comment->model,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">

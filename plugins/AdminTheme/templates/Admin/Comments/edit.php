@@ -2,8 +2,8 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Comment $comment
- * @var string[]|\Cake\Collection\CollectionInterface $users
- * @var string[]|\Cake\Collection\CollectionInterface $articles
+ * @var \Cake\Collection\CollectionInterface|array<string> $users
+ * @var \Cake\Collection\CollectionInterface|array<string> $articles
  */
 ?>
 <?php
@@ -11,9 +11,9 @@
         'modelName' => 'Comment',
         'controllerName' => 'Comments',
         'entity' => $comment,
-        'entityDisplayName' => $comment->model
+        'entityDisplayName' => $comment->model,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
@@ -27,22 +27,22 @@
 
                         <div class="mb-3">
                             <?php echo $this->Form->control('content', ['class' => 'form-control' . ($this->Form->isFieldError('content') ? ' is-invalid' : '')]); ?>
-                                <?php if ($this->Form->isFieldError('content')): ?>
+                                <?php if ($this->Form->isFieldError('content')) : ?>
                                 <div class="invalid-feedback">
                                     <?= $this->Form->error('content') ?>
                                 </div>
-                            <?php endif; ?>
+                                <?php endif; ?>
                         </div>
                         
                         <div class="mb-3">
                             <div class="form-check">
                                 <?php echo $this->Form->checkbox('display', [
-                                    'class' => 'form-check-input' . ($this->Form->isFieldError('display') ? ' is-invalid' : '')
+                                    'class' => 'form-check-input' . ($this->Form->isFieldError('display') ? ' is-invalid' : ''),
                                 ]); ?>
                                 <label class="form-check-label" for="is-published">
                                     <?= __('Display') ?>
                                 </label>
-                                <?php if ($this->Form->isFieldError('display')): ?>
+                                <?php if ($this->Form->isFieldError('display')) : ?>
                                     <div class="invalid-feedback">
                                         <?= $this->Form->error('display') ?>
                                     </div>
@@ -53,12 +53,12 @@
                         <div class="mb-3">
                             <div class="form-check">
                                 <?php echo $this->Form->checkbox('is_inappropriate', [
-                                    'class' => 'form-check-input' . ($this->Form->isFieldError('is_inappropriate') ? ' is-invalid' : '')
+                                    'class' => 'form-check-input' . ($this->Form->isFieldError('is_inappropriate') ? ' is-invalid' : ''),
                                 ]); ?>
                                 <label class="form-check-label" for="is-published">
                                     <?= __('Inappropriate') ?>
                                 </label>
-                                <?php if ($this->Form->isFieldError('is_inappropriate')): ?>
+                                <?php if ($this->Form->isFieldError('is_inappropriate')) : ?>
                                     <div class="invalid-feedback">
                                         <?= $this->Form->error('is_inappropriate') ?>
                                     </div>

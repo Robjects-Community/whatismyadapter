@@ -1,16 +1,16 @@
 <?php
 /**
  * Products Navigation Tabs Element
- * 
+ *
  * Outputs a Bootstrap 5 navigation bar with three links (Dashboard, Products, Pending Review)
  * for the Products controller pages with responsive design and proper accessibility features.
- * 
+ *
  * Features:
  * - Bootstrap 5 nav-pills styling with custom product-tabs class
  * - Responsive design: stacks vertically on very small screens, horizontal from small screens up
  * - Active state detection based on controller and action
  * - Proper accessibility with aria-current="page" for active links
- * 
+ *
  * Usage: <?= $this->element('AdminTheme.nav/products_tabs') ?>
  */
 
@@ -23,23 +23,23 @@ $navLinks = [
     'dashboard' => [
         'url' => ['controller' => 'Products', 'action' => 'dashboard', 'prefix' => 'Admin'],
         'text' => __('Dashboard'),
-        'icon' => 'fas fa-tachometer-alt'
+        'icon' => 'fas fa-tachometer-alt',
     ],
     'index' => [
         'url' => ['controller' => 'Products', 'action' => 'index', 'prefix' => 'Admin'],
         'text' => __('Products'),
-        'icon' => 'fas fa-boxes'
+        'icon' => 'fas fa-boxes',
     ],
     'pendingReview' => [
         'url' => ['controller' => 'Products', 'action' => 'pendingReview', 'prefix' => 'Admin'],
         'text' => __('Pending Review'),
-        'icon' => 'fas fa-clock'
+        'icon' => 'fas fa-clock',
     ],
     'forms' => [
         'url' => ['controller' => 'Products', 'action' => 'forms', 'prefix' => 'Admin'],
         'text' => __('Forms Configuration'),
-        'icon' => 'fas fa-cogs'
-    ]
+        'icon' => 'fas fa-cogs',
+    ],
 ];
 
 // Check if we're in the Products controller for tab activation
@@ -48,23 +48,23 @@ $isProductsController = ($currentController === 'Products');
 
 <div class="product-tabs-wrapper mb-4">
     <ul class="nav nav-pills product-tabs flex-column flex-sm-row">
-        <?php foreach ($navLinks as $action => $link): ?>
+        <?php foreach ($navLinks as $action => $link) : ?>
             <?php
             // Determine if this link should be active
             $isActive = $isProductsController && ($currentAction === $action);
-            
+
             // Build CSS classes
             $linkClasses = ['nav-link'];
             if ($isActive) {
                 $linkClasses[] = 'active';
             }
-            
+
             // Build link attributes
             $linkAttributes = [
                 'class' => implode(' ', $linkClasses),
-                'title' => $link['text']
+                'title' => $link['text'],
             ];
-            
+
             // Add aria-current for accessibility on active link
             if ($isActive) {
                 $linkAttributes['aria-current'] = 'page';
@@ -72,12 +72,13 @@ $isProductsController = ($currentController === 'Products');
             ?>
             <li class="nav-item">
                 <?= $this->Html->link(
-                    sprintf('<i class="%s me-2"></i>%s', 
-                        $link['icon'], 
-                        h($link['text'])
+                    sprintf(
+                        '<i class="%s me-2"></i>%s',
+                        $link['icon'],
+                        h($link['text']),
                     ),
                     $link['url'],
-                    array_merge($linkAttributes, ['escape' => false])
+                    array_merge($linkAttributes, ['escape' => false]),
                 ) ?>
             </li>
         <?php endforeach; ?>

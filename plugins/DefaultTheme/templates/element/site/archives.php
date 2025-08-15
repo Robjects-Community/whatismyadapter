@@ -2,7 +2,7 @@
 <div class="p-4">
     <h4 class="fst-italic"><?= __('Archives') ?></h4>
     <ol class="list-unstyled mb-0">
-        <?php foreach ($articleArchives as $year => $months): ?>
+        <?php foreach ($articleArchives as $year => $months) : ?>
             <li>
                 <?php
                 $isYearActive = ($this->request->getQuery('year') == $year);
@@ -15,14 +15,14 @@
                         '?' => ['year' => $year],
                     ],
                     [
-                        'class' => $isYearActive 
-                            ? 'fw-bold text-decoration-none' 
+                        'class' => $isYearActive
+                            ? 'fw-bold text-decoration-none'
                             : 'text-decoration-none',
-                    ]
+                    ],
                 );
                 ?>
                 <ol class="list-unstyled ms-3">
-                    <?php foreach ($months as $month): ?>
+                    <?php foreach ($months as $month) : ?>
                     <li>
                         <?php
                         $isActive = (
@@ -34,17 +34,17 @@
                             [
                                 'lang' => $this->request->getParam('lang'),
                                 '_name' => 'home',
-                                '?' => 
+                                '?' =>
                                     [
-                                        'year' => $year, 
+                                        'year' => $year,
                                         'month' => $month,
-                                    ]
+                                    ],
                             ],
                             [
-                                'class' => $isActive 
-                                    ? 'fw-bold text-decoration-none' 
+                                'class' => $isActive
+                                    ? 'fw-bold text-decoration-none'
                                     : 'text-decoration-none',
-                            ]
+                            ],
                         );
                         ?>
                     </li>

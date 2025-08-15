@@ -4,15 +4,15 @@
  * @var \App\Model\Entity\BlockedIp $blockedIp
  */
 ?>
-<?php if (!$blockedIp->isNew()): ?>
-<?php
+<?php if (!$blockedIp->isNew()) : ?>
+    <?php
     echo $this->element('actions_card', [
         'modelName' => 'Blocked Ip',
         'controllerName' => 'Blocked Ips',
         'entity' => $blockedIp,
-        'entityDisplayName' => $blockedIp->ip_address
+        'entityDisplayName' => $blockedIp->ip_address,
     ]);
-?>
+    ?>
 <?php endif; ?>
 <div class="container mt-4">
     <div class="row">
@@ -26,35 +26,35 @@
                     <fieldset>
                     <div class="mb-3">
                             <?php echo $this->Form->control('ip_address', ['class' => 'form-control' . ($this->Form->isFieldError('ip_address') ? ' is-invalid' : '')]); ?>
-                                                                                        <?php if ($this->Form->isFieldError('ip_address')): ?>
+                                                                                        <?php if ($this->Form->isFieldError('ip_address')) : ?>
                                 <div class="invalid-feedback">
-                                    <?= $this->Form->error('ip_address') ?>
+                                                                                            <?= $this->Form->error('ip_address') ?>
                                 </div>
-                            <?php endif; ?>
+                                                                                        <?php endif; ?>
                         </div>
                                         <div class="mb-3">
                             <?php echo $this->Form->control('reason', ['class' => 'form-control' . ($this->Form->isFieldError('reason') ? ' is-invalid' : '')]); ?>
-                                                                                        <?php if ($this->Form->isFieldError('reason')): ?>
+                                                                                        <?php if ($this->Form->isFieldError('reason')) : ?>
                                 <div class="invalid-feedback">
-                                    <?= $this->Form->error('reason') ?>
+                                                                                            <?= $this->Form->error('reason') ?>
                                 </div>
-                            <?php endif; ?>
+                                                                                        <?php endif; ?>
                         </div>
                                         <div class="mb-3">
                             <?php echo $this->Form->control('blocked_at', ['class' => 'form-control' . ($this->Form->isFieldError('blocked_at') ? ' is-invalid' : '')]); ?>
-                                                                                        <?php if ($this->Form->isFieldError('blocked_at')): ?>
+                                                                                        <?php if ($this->Form->isFieldError('blocked_at')) : ?>
                                 <div class="invalid-feedback">
-                                    <?= $this->Form->error('blocked_at') ?>
+                                                                                            <?= $this->Form->error('blocked_at') ?>
                                 </div>
-                            <?php endif; ?>
+                                                                                        <?php endif; ?>
                         </div>
                                         <div class="mb-3">
                             <?php echo $this->Form->control('expires_at', ['class' => 'form-control' . ($this->Form->isFieldError('expires_at') ? ' is-invalid' : '')]); ?>
-                                                                                        <?php if ($this->Form->isFieldError('expires_at')): ?>
+                                                                                        <?php if ($this->Form->isFieldError('expires_at')) : ?>
                                 <div class="invalid-feedback">
-                                    <?= $this->Form->error('expires_at') ?>
+                                                                                            <?= $this->Form->error('expires_at') ?>
                                 </div>
-                            <?php endif; ?>
+                                                                                        <?php endif; ?>
                         </div>                                                                     
                     </fieldset>
                     <div class="form-group">

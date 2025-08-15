@@ -9,9 +9,9 @@
         'modelName' => 'Internationalisation',
         'controllerName' => 'Internationalisations',
         'entity' => $internationalisation,
-        'entityDisplayName' => $internationalisation->message_id
+        'entityDisplayName' => $internationalisation->message_id,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">

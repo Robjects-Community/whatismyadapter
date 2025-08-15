@@ -7,8 +7,8 @@
             __('Privacy Policy'),
             [
                 '_name' => 'page-by-slug',
-                'slug' => $sitePrivacyPolicy['slug']
-            ]
+                'slug' => $sitePrivacyPolicy['slug'],
+            ],
         ); ?>
     </p>
     <?php endif; ?>

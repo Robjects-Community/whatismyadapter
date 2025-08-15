@@ -43,15 +43,17 @@
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <?php foreach ($images as $image): ?>
+                <?php foreach ($images as $image) : ?>
                         <div class="col">
                             <div class="card shadow-sm">
                                 <?= $this->Html->image(
-                                    SettingsManager::read('ImageSizes.large') . '/' . $image->image, [
+                                    SettingsManager::read('ImageSizes.large') . '/' . $image->image,
+                                    [
                                         'pathPrefix' => 'files/Images/image/',
                                         'alt' => $image->alt_text,
-                                        'class' => 'card-img-top'
-                                ]) ?>
+                                        'class' => 'card-img-top',
+                                    ],
+                                ) ?>
                                 
                                 <div class="card-body">
                                     <p class="card-text"><?= h($image->name) ?></p>

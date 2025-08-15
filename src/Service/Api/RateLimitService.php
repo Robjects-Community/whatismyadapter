@@ -32,6 +32,12 @@ class RateLimitService
         return SettingsManager::read($key, $default);
     }
 
+    /**
+     * Enforce the configured hourly request limit for a given AI service.
+     *
+     * @param string $service Service identifier (e.g., 'anthropic').
+     * @return bool True when allowed (under limit or unlimited); false when limit exceeded.
+     */
     public function enforceLimit(string $service = 'anthropic'): bool
     {
         if (!$this->readSetting('AI.enableMetrics', true)) {
@@ -56,6 +62,12 @@ class RateLimitService
         return true;
     }
 
+    /**
+     * Get current hour usage details for a given AI service.
+     *
+     * @param string $service Service identifier (e.g., 'anthropic').
+     * @return array{current:int,limit:int,remaining:int} Usage metrics for the active hour.
+     */
     public function getCurrentUsage(string $service = 'anthropic'): array
     {
         $key = "rate_limit_{$service}_" . date('Y-m-d-H');
@@ -69,6 +81,12 @@ class RateLimitService
         ];
     }
 
+    /**
+     * Check whether today's cumulative AI cost is under the configured daily limit.
+     *
+     * @param float $todaysCost Cost today in USD.
+     * @return bool True when under the limit or unlimited (0.0); false when the limit is reached/exceeded.
+     */
     public function checkDailyCostLimit(float $todaysCost): bool
     {
         $dailyLimit = (float)$this->readSetting('AI.dailyCostLimit', 50.00);

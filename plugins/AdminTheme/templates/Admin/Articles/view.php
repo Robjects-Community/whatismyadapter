@@ -6,14 +6,14 @@
 ?>
 <?php
     echo $this->element('actions_card', [
-        'modelName' => ($article->kind == 'page') ? 'Page' : 'Post',
+        'modelName' => $article->kind == 'page' ? 'Page' : 'Post',
         'controllerName' => 'Articles',
-        'controllerIndexAction' => ($article->kind == 'page') ? 'tree-index' : 'index',
+        'controllerIndexAction' => $article->kind == 'page' ? 'tree-index' : 'index',
         'entity' => $article,
         'entityDisplayName' => $article->title,
-        'urlParams' => ($article->kind == 'page') ? ['kind' => 'page'] : [],
+        'urlParams' => $article->kind == 'page' ? ['kind' => 'page'] : [],
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
@@ -38,9 +38,8 @@
                         <tr>
                             <th><?= __('Slug') ?></th>
                             <td>
-                                <?php $ruleName = ($article->kind == 'article') ? 'article-by-slug' : 'page-by-slug';?>
-                                <?php if ($article->is_published == true): ?>
-                                    
+                                <?php $ruleName = $article->kind == 'article' ? 'article-by-slug' : 'page-by-slug';?>
+                                <?php if ($article->is_published == true) : ?>
                                     <?= $this->Html->link(
                                         $article->slug,
                                         [
@@ -49,19 +48,19 @@
                                             'slug' => $article->slug,
                                             '_name' => $ruleName,
                                         ],
-                                        ['escape' => false]
+                                        ['escape' => false],
                                     );
                                     ?>
-                                <?php else: ?>
+                                <?php else : ?>
                                     <?= $this->Html->link(
                                         $article->slug,
                                         [
                                             'prefix' => 'Admin',
                                             'controller' => 'Articles',
                                             'action' => 'view',
-                                            $article->id
+                                            $article->id,
                                         ],
-                                        ['escape' => false]
+                                        ['escape' => false],
                                     ) ?>
                                 <?php endif; ?>
                             </td>
@@ -103,12 +102,12 @@
                                     'prefix' => 'Admin',
                                     'controller' => 'PageViews',
                                     'action' => 'pageViewStats',
-                                    $article['id']
+                                    $article['id'],
                                 ],
                                 [
                                     'escape' => false,
-                                    'class' => 'ms-2'
-                                ]
+                                    'class' => 'ms-2',
+                                ],
                             ) ?>
                             </td>
                         </tr>

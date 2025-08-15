@@ -14,29 +14,29 @@ if ($activeFilter === null) {
             <ul class="dropdown-menu">
               <li>
                 <?= $this->Html->link(
-                    __('All'), 
-                    ['action' => 'treeIndex', 'id' => ''], 
+                    __('All'),
+                    ['action' => 'treeIndex', 'id' => ''],
                     [
-                      'class' => 'dropdown-item' . ($activeFilter === null ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === null ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
               <li>
                 <?= $this->Html->link(
-                    __('Un-Published'), 
-                    ['action' => 'treeIndex', 'id' => '', '?' => ['status' => 0]], 
+                    __('Un-Published'),
+                    ['action' => 'treeIndex', 'id' => '', '?' => ['status' => 0]],
                     [
-                      'class' => 'dropdown-item' . ($activeFilter === '0' ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === '0' ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
               <li>
                 <?= $this->Html->link(
-                    __('Published'), 
-                    ['action' => 'treeIndex', 'id' => '', '?' => ['status' => 1]], 
+                    __('Published'),
+                    ['action' => 'treeIndex', 'id' => '', '?' => ['status' => 1]],
                     [
-                      'class' => 'dropdown-item' . ($activeFilter === '1' ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === '1' ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
             </ul>
@@ -53,11 +53,11 @@ if ($activeFilter === null) {
 </header>
 <span id="ajax-target">
 <?php
-    if (!empty($articles)) {
-        echo $this->element('tree/page_tree', ['articles' => $articles, 'level' => 0]);
-    } else {
-        echo $this->Html->tag('p', __('No pages found.'));
-    }
+if (!empty($articles)) {
+    echo $this->element('tree/page_tree', ['articles' => $articles, 'level' => 0]);
+} else {
+    echo $this->Html->tag('p', __('No pages found.'));
+}
 ?>
 </span>
 
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         debounceTimer = setTimeout(() => {
             const searchTerm = this.value.trim();
             let url = `<?= $this->Url->build(['action' => 'treeIndex']) ?>`;
-            <?php if (null !== $activeFilter): ?>
+            <?php if ($activeFilter !== null) : ?>
             url += `?status=<?= urlencode($activeFilter) ?>`;
             <?php endif; ?>
             if (searchTerm.length > 0) {

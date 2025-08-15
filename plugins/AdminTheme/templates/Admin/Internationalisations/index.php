@@ -4,7 +4,7 @@
  * @var iterable<\App\Model\Entity\Internationalisation> $internationalisations
  */
 ?>
-<?php use App\Utility\I18nManager; ?>
+<?php ?>
 <header class="py-3 mb-3 border-bottom">
     <div class="container-fluid d-flex align-items-center internationalisations">
       <div class="d-flex align-items-center me-auto">
@@ -15,22 +15,22 @@
               <?php $activeFilter = $this->request->getQuery('locale');  ?>
               <li>
                 <?= $this->Html->link(
-                    __('All'), 
-                    ['action' => 'index'], 
+                    __('All'),
+                    ['action' => 'index'],
                     [
-                      'class' => 'dropdown-item' . (null === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === null ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
               <?php foreach ($locales as $locale) : ?>
                 <li>
-                  <?= $this->Html->link(
-                      $locale, 
-                      ['action' => 'index', '?' => ['locale' => $locale]],
-                      [
-                        'class' => 'dropdown-item' . ($locale === $activeFilter ? ' active' : '')
-                      ]
-                  ) ?>
+                    <?= $this->Html->link(
+                        $locale,
+                        ['action' => 'index', '?' => ['locale' => $locale]],
+                        [
+                        'class' => 'dropdown-item' . ($locale === $activeFilter ? ' active' : ''),
+                        ],
+                    ) ?>
                 </li>
               <?php endforeach; ?>
             </ul>
@@ -56,7 +56,7 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($internationalisations as $internationalisation): ?>
+      <?php foreach ($internationalisations as $internationalisation) : ?>
       <tr>
                       <td><?= h($internationalisation->locale) ?></td>
                       <td><?= h($internationalisation->message_id) ?></td>
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let url = `<?= $this->Url->build(['action' => 'index']) ?>`;
 
-            <?php if (null !== $activeFilter): ?>
+            <?php if ($activeFilter !== null) : ?>
             url += `?locale=<?= urlencode($activeFilter) ?>`;
             <?php endif; ?>
 

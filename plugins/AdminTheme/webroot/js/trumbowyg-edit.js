@@ -2,7 +2,7 @@
  * Main editor initialization and handlers
  * This file handles the Trumbowyg editor setup, image/video insertion, and code highlighting
  */
-$(document).ready(function() {
+$(document).ready(function () {
     // --- Constants ---
     // URLs (Note: Ideally, these should be passed from server-side PHP if changes were allowed)
     const URLS = {
@@ -38,7 +38,8 @@ $(document).ready(function() {
      * @param {*} unsafe - The unsafe string or value to escape.
      * @returns {string} The escaped string, or an empty string if input is not a string.
      */
-    function escapeHtml(unsafe) {
+    function escapeHtml(unsafe)
+    {
         if (typeof unsafe !== 'string') {
             // console.warn('escapeHtml called with non-string value:', unsafe);
             return ''; // Return empty string for non-string inputs
@@ -55,7 +56,8 @@ $(document).ready(function() {
      * Safely highlights code blocks using highlight.js.
      * The :not(.hljs) selector in querySelectorAll prevents re-highlighting.
      */
-    function safeHighlight() {
+    function safeHighlight()
+    {
         document.querySelectorAll('pre code:not(.hljs)').forEach(block => {
             hljs.highlightElement(block);
         });
@@ -63,7 +65,7 @@ $(document).ready(function() {
 
     // Initialize Highlight.js on page load and Trumbowyg events
     safeHighlight();
-    $(SELECTORS.ARTICLE_BODY).on('tbwchange tbwinit', function() {
+    $(SELECTORS.ARTICLE_BODY).on('tbwchange tbwinit', function () {
         safeHighlight();
     });
 
@@ -73,9 +75,10 @@ $(document).ready(function() {
      * @param {number} delay - The delay in milliseconds.
      * @returns {function} - The debounced function.
      */
-    function debounce(func, delay) {
+    function debounce(func, delay)
+    {
         let debounceTimer;
-        return function() {
+        return function () {
             const context = this;
             const args = arguments;
             clearTimeout(debounceTimer);
@@ -87,12 +90,12 @@ $(document).ready(function() {
     $.extend(true, $.trumbowyg, {
         plugins: {
             insertImageFromLibrary: {
-                init: function(trumbowyg) {
+                init: function (trumbowyg) {
                     trumbowyg.o.plugins.insertImageFromLibrary = trumbowyg.o.plugins.insertImageFromLibrary || {};
                     trumbowyg.addBtnDef('insertImageFromLibrary', {
-                        fn: function() {
+                        fn: function () {
                             trumbowyg.saveRange();
-                            
+
                             // Use brilliant enhanced WillowModal directly
                             WillowModal.showImageSelector(trumbowyg, {
                                 title: 'Insert Image from Library'
@@ -105,12 +108,12 @@ $(document).ready(function() {
             },
 
             insertVideoFromLibrary: {
-                init: function(trumbowyg) {
+                init: function (trumbowyg) {
                     trumbowyg.o.plugins.insertVideoFromLibrary = trumbowyg.o.plugins.insertVideoFromLibrary || {};
                     trumbowyg.addBtnDef('insertVideoFromLibrary', {
-                        fn: function() {
+                        fn: function () {
                             trumbowyg.saveRange();
-                            
+
                             // Use brilliant enhanced WillowModal directly
                             WillowModal.showVideoSelector(trumbowyg, {
                                 title: 'Insert YouTube Video'
@@ -123,12 +126,12 @@ $(document).ready(function() {
             },
 
             insertGalleryFromLibrary: {
-                init: function(trumbowyg) {
+                init: function (trumbowyg) {
                     trumbowyg.o.plugins.insertGalleryFromLibrary = trumbowyg.o.plugins.insertGalleryFromLibrary || {};
                     trumbowyg.addBtnDef('insertGalleryFromLibrary', {
-                        fn: function() {
+                        fn: function () {
                             trumbowyg.saveRange();
-                            
+
                             // Use brilliant enhanced WillowModal directly
                             WillowModal.showGallerySelector(trumbowyg, {
                                 title: 'Insert Image Gallery'
@@ -141,35 +144,35 @@ $(document).ready(function() {
             },
 
             highlight: {
-                init: function(trumbowyg) {
+                init: function (trumbowyg) {
                     trumbowyg.o.plugins.highlight = trumbowyg.o.plugins.highlight || {};
                     trumbowyg.addBtnDef('highlight', {
-                        fn: function() {
+                        fn: function () {
                             trumbowyg.saveRange();
-                            
+
                             const highlightModalHtmlContent = `
-                                <div class="form-group mb-3">
-                                    <label for="code-language">Language</label>
-                                    <select class="form-select" id="code-language">
-                                        <option value="php">PHP</option>
-                                        <option value="javascript">JavaScript</option>
-                                        <option value="css">CSS</option>
-                                        <option value="html">HTML</option>
-                                        <option value="sql">SQL</option>
-                                        <option value="bash">Bash</option>
-                                        <option value="json">JSON</option>
-                                        <option value="xml">XML</option>
-                                        <option value="plaintext">Plain Text</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="code-content">Code</label>
-                                    <textarea class="form-control" id="code-content" rows="10"></textarea>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary" id="insertCode">Insert</button>
-                                </div>
+                                < div class = "form-group mb-3" >
+                                    < label for = "code-language" > Language < / label >
+                                    < select class = "form-select" id = "code-language" >
+                                        < option value = "php" > PHP < / option >
+                                        < option value = "javascript" > JavaScript < / option >
+                                        < option value = "css" > CSS < / option >
+                                        < option value = "html" > HTML < / option >
+                                        < option value = "sql" > SQL < / option >
+                                        < option value = "bash" > Bash < / option >
+                                        < option value = "json" > JSON < / option >
+                                        < option value = "xml" > XML < / option >
+                                        < option value = "plaintext" > Plain Text < / option >
+                                    <  / select >
+                                <  / div >
+                                < div class = "form-group mb-3" >
+                                    < label for = "code-content" > Code < / label >
+                                    < textarea class = "form-control" id = "code-content" rows = "10" > < / textarea >
+                                <  / div >
+                                < div class = "modal-footer" >
+                                    < button type = "button" class = "btn btn-secondary" data - bs - dismiss = "modal" > Cancel < / button >
+                                    < button type = "button" class = "btn btn-primary" id = "insertCode" > Insert < / button >
+                                <  / div >
                             `;
 
                             // Use WillowModal for consistent modal handling
@@ -177,32 +180,34 @@ $(document).ready(function() {
                                 title: 'Insert Code Snippet',
                                 dialogClass: 'modal-dialog',
                                 closeable: true,
-                                onContentLoaded: function() {
+                                onContentLoaded: function () {
                                     const modal = document.getElementById('dynamicModal');
                                     const insertButton = modal.querySelector('#insertCode');
-                                    
+
                                     if (insertButton && insertButton.dataset[WillowModalConfig.events.datasetMarker] !== 'true') {
-                                        insertButton.addEventListener('click', function() {
+                                        insertButton.addEventListener('click', function () {
                                             const languageSelect = modal.querySelector('#code-language');
                                             const codeTextarea = modal.querySelector('#code-content');
-                                            
+
                                             if (languageSelect && codeTextarea) {
                                                 const language = escapeHtml(languageSelect.value);
                                                 const rawCode = codeTextarea.value;
                                                 const escapedCodeForHtml = escapeHtml(rawCode);
-                                                
-                                                const htmlToInsert = `<pre><code class="language-${language}">${escapedCodeForHtml}</code></pre>`;
-                                                
+
+                                                const htmlToInsert = ` < pre > < code class = "language-${language}" > ${escapedCodeForHtml} < / code > < / pre > `;
+
                                                 trumbowyg.restoreRange();
                                                 trumbowyg.execCmd('insertHTML', htmlToInsert, false, true);
-                                                
+
                                                 setTimeout(safeHighlight, 50);
-                                                
+
                                                 const modalInstance = bootstrap.Modal.getInstance(modal);
-                                                if (modalInstance) modalInstance.hide();
+                                                if (modalInstance) {
+                                                    modalInstance.hide();
+                                                }
                                             }
                                         });
-                                        
+
                                         insertButton.dataset[WillowModalConfig.events.datasetMarker] = 'true';
                                     }
                                 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Status Filter Element
- * 
+ *
  * @var \App\View\AppView $this
  * @var array $options Configuration options
  */
@@ -33,12 +33,12 @@ unset($currentParams['status']);
         <?= h($config['buttonText']) ?>
     </button>
     <ul class="<?= h($config['menuClass']) ?>">
-        <?php foreach ($config['filters'] as $key => $filter): ?>
+        <?php foreach ($config['filters'] as $key => $filter) : ?>
             <li>
                 <?= $this->Html->link(
                     h($filter['label']),
                     ['action' => $config['action'], '?' => $filter['params'] + $currentParams],
-                    ['class' => $config['itemClass']]
+                    ['class' => $config['itemClass']],
                 ) ?>
             </li>
         <?php endforeach; ?>

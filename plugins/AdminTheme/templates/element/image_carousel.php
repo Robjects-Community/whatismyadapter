@@ -6,25 +6,27 @@
  * @var string $carouselId
  */
 ?>
-<?php if (!empty($images)): ?>
+<?php if (!empty($images)) : ?>
 <h4><?= __('Images') ?></h4>
 <div id="<?= $carouselId ?>" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        <?php foreach ($images as $index => $image): ?>
+        <?php foreach ($images as $index => $image) : ?>
             <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                <?= $this->Html->image(SettingsManager::read('ImageSizes.large', '200') . '/' . $image->image, 
-                [
+                <?= $this->Html->image(
+                    SettingsManager::read('ImageSizes.large', '200') . '/' . $image->image,
+                    [
                     'pathPrefix' => 'files/Images/image/',
                     'class' => 'd-block w-100',
                     'alt' => $image->alt_text,
-                ]) ?>
+                    ],
+                ) ?>
                 <?php if (empty($hideRemove)) :?>
                 <div class="carousel-caption">
                     <?= $this->Form->control('unlink_images[]', [
                         'type' => 'checkbox',
                         'label' => 'Unlink this image',
                         'value' => $image->id,
-                        'class' => 'form-check-input'
+                        'class' => 'form-check-input',
                     ]) ?>
                 </div>
                 <?php endif; ?>

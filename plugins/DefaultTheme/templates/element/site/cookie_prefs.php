@@ -1,5 +1,5 @@
 <?php use Cake\Routing\Router; ?>
-<?php if (!isset($consentData)): ?>
+<?php if (!isset($consentData)) : ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     WillowModal.show('<?= Router::url(['_name' => 'cookie-consent']) ?>', {

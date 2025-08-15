@@ -1,11 +1,11 @@
 <?php use App\Utility\SettingsManager; ?>
-<?php use Cake\Routing\Router; ?>
+<?php ?>
 <!doctype html>
 <html lang="<?= $this->request->getParam('lang', 'en') ?>" data-bs-theme="auto">
   <head>
   <?php if (!empty($consentData) && $consentData['analytics_consent']) :?>
-    <?= SettingsManager::read('Google.tagManagerHead', '') ?>
-    <?php endif; ?>
+        <?= SettingsManager::read('Google.tagManagerHead', '') ?>
+  <?php endif; ?>
     <?= $this->Html->script('willow-modal') ?>
     <?= $this->Html->script('DefaultTheme.color-modes') ?>
     <?= $this->Html->charset() ?>
@@ -21,20 +21,20 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <?= $this->Html->scriptBlock(sprintf(
         'var csrfToken = %s;',
-        json_encode($this->request->getAttribute('csrfToken'))
+        json_encode($this->request->getAttribute('csrfToken')),
     )); ?>
     <?= $this->Html->meta([
         'link' => Router::url([
-            '_name' => 'rss'
+            '_name' => 'rss',
         ], true),
         'type' => 'application/rss+xml',
         'title' => __('Latest Articles RSS Feed'),
-        'rel' => 'alternate'
+        'rel' => 'alternate',
     ]); ?>
 </head>
   <body>
       <?php if (!empty($consentData) && $consentData['marketing_consent']) :?>
-      <?= $this->element('site/facebook/sdk') ?>
+            <?= $this->element('site/facebook/sdk') ?>
       <?php endif; ?>
 
     <?= $this->element('site/bootstrap') ?>

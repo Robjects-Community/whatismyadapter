@@ -4,15 +4,15 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <?php
     echo $this->element('actions_card', [
         'modelName' => 'User',
         'controllerName' => 'Users',
         'entity' => $user,
-        'entityDisplayName' => $user->username
+        'entityDisplayName' => $user->username,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
@@ -31,7 +31,7 @@
                         <tr>
                             <th><?= __('Image') ?></th>
                             <td>
-                                <?php if (!empty($user->image)): ?>
+                                <?php if (!empty($user->image)) : ?>
                                     <div class="mb-3">
                                         <?= $this->element('image/icon', ['model' => $user, 'icon' => $user->teenyImageUrl, 'preview' => $user->extraLargeImageUrl]); ?>
                                     </div>

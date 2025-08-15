@@ -223,8 +223,13 @@ class AnthropicApiService extends AbstractApiService
      * @param string|null $error An optional error message.
      * @return void
      */
-    private function recordMetrics(string $taskType, float $startTime, array $payload, bool $success, ?string $error = null): void
-    {
+    private function recordMetrics(
+        string $taskType,
+        float $startTime,
+        array $payload,
+        bool $success,
+        ?string $error = null,
+    ): void {
         if (!SettingsManager::read('AI.enableMetrics', true)) {
             return;
         }

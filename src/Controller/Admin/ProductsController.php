@@ -880,7 +880,9 @@ class ProductsController extends AppController
         if (empty($validIds)) {
             $this->Flash->error(__('Invalid product IDs provided.'));
 
-            return $this->redirect($this->referer(['action' => 'pendingReview']));
+            return $this->redirect(
+                $this->referer(['action' => 'pendingReview']),
+            );
         }
 
         try {
@@ -915,7 +917,9 @@ class ProductsController extends AppController
         if (empty($ids)) {
             $this->Flash->error(__('Please select products to reject.'));
 
-            return $this->redirect($this->referer(['action' => 'pendingReview']));
+            return $this->redirect(
+                $this->referer(['action' => 'pendingReview']),
+            );
         }
 
         // Basic sanity check - validate IDs are strings/UUIDs
@@ -929,7 +933,9 @@ class ProductsController extends AppController
         if (empty($validIds)) {
             $this->Flash->error(__('Invalid product IDs provided.'));
 
-            return $this->redirect($this->referer(['action' => 'pendingReview']));
+            return $this->redirect(
+                $this->referer(['action' => 'pendingReview']),
+            );
         }
 
         try {
@@ -968,14 +974,31 @@ class ProductsController extends AppController
 
         // Get current form configuration settings
         $formSettings = [
-            'enable_public_submissions' => $settingsTable->findByName('products.enable_public_submissions')->first()?->value ?? 'false',
-            'default_status' => $settingsTable->findByName('products.default_status')->first()?->value ?? 'pending',
-            'require_admin_approval' => $settingsTable->findByName('products.require_admin_approval')->first()?->value ?? 'true',
-            'allowed_file_types' => $settingsTable->findByName('products.allowed_file_types')->first()?->value ?? 'jpg,jpeg,png,gif',
-            'max_file_size' => $settingsTable->findByName('products.max_file_size')->first()?->value ?? '5',
-            'required_fields' => $settingsTable->findByName('products.required_fields')->first()?->value ?? 'title,description,manufacturer',
-            'notification_email' => $settingsTable->findByName('products.notification_email')->first()?->value ?? '',
-            'success_message' => $settingsTable->findByName('products.success_message')->first()?->value ?? 'Your product has been submitted and is awaiting review.',
+            'enable_public_submissions' => $settingsTable
+                ->findByName('products.enable_public_submissions')
+                ->first()?->value ?? 'false',
+            'default_status' => $settingsTable
+                ->findByName('products.default_status')
+                ->first()?->value ?? 'pending',
+            'require_admin_approval' => $settingsTable
+                ->findByName('products.require_admin_approval')
+                ->first()?->value ?? 'true',
+            'allowed_file_types' => $settingsTable
+                ->findByName('products.allowed_file_types')
+                ->first()?->value ?? 'jpg,jpeg,png,gif',
+            'max_file_size' => $settingsTable
+                ->findByName('products.max_file_size')
+                ->first()?->value ?? '5',
+            'required_fields' => $settingsTable
+                ->findByName('products.required_fields')
+                ->first()?->value ?? 'title,description,manufacturer',
+            'notification_email' => $settingsTable
+                ->findByName('products.notification_email')
+                ->first()?->value ?? '',
+            'success_message' => $settingsTable
+                ->findByName('products.success_message')
+                ->first()?->value
+                ?? 'Your product has been submitted and is awaiting review.',
         ];
 
         if ($this->request->is(['patch', 'post', 'put'])) {

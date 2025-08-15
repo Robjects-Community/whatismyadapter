@@ -5,24 +5,24 @@
     --theme-text: #212529;
     --theme-border: #dee2e6;
     --theme-hover: #f8f9fa;
-    
+
     /* Component colors */
     --theme-sidebar-bg: #f8f9fa;
     --theme-sidebar-text: #212529;
     --theme-header-bg: #ffffff;
     --theme-header-text: #212529;
-    
+
     /* Interactive elements */
     --theme-link-color: #0d6efd;
     --theme-link-hover: #0a58ca;
     --theme-button-primary: #0d6efd;
     --theme-button-hover: #0b5ed7;
-    
+
     /* Status colors */
     --theme-success: rgb(72, 133, 102);
     --theme-error: rgb(255, 0, 0);
     --theme-warning: rgb(255, 153, 0);
-    
+
     /* Code and pre elements */
     --theme-code-bg: #f8f9fa;
     --theme-code-text: #212529;
@@ -37,24 +37,24 @@
     --theme-text: #f8f9fa;
     --theme-border: #495057;
     --theme-hover: #343a40;
-    
+
     /* Component colors */
     --theme-sidebar-bg: #2b3035;
     --theme-sidebar-text: #e9ecef;
     --theme-header-bg: #343a40;
     --theme-header-text: #f8f9fa;
-    
+
     /* Interactive elements */
     --theme-link-color: #6ea8fe;
     --theme-link-hover: #8bb9fe;
     --theme-button-primary: #0d6efd;
     --theme-button-hover: #0b5ed7;
-    
+
     /* Status colors remain the same for visibility */
     --theme-success: rgb(72, 133, 102);
     --theme-error: rgb(255, 0, 0);
     --theme-warning: rgb(255, 153, 0);
-    
+
     /* Code and pre elements */
     --theme-code-bg: #2d2d2d;
     --theme-code-text: #e9ecef;

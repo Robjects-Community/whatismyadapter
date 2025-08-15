@@ -49,8 +49,8 @@ $session = $this->request->getSession();
   <?= $this->fetch('css') ?>
   <?= $this->fetch('script') ?>
   <?= $this->Html->scriptBlock(sprintf(
-    'var csrfToken = %s;',
-    json_encode($this->request->getAttribute('csrfToken'))
+      'var csrfToken = %s;',
+      json_encode($this->request->getAttribute('csrfToken')),
   )); ?>
   <?= $this->element('libraries/highlightjs'); ?>
 </head>
@@ -77,9 +77,9 @@ $session = $this->request->getSession();
     </symbol>
   </svg>
 
-  <?php if (SettingsManager::read('Editing.editor') == 'trumbowyg'): ?>
+  <?php if (SettingsManager::read('Editing.editor') == 'trumbowyg') : ?>
     <div id="trumbowyg-icons">
-      <?= $this->element('trumbowyg-icons') ?>
+        <?= $this->element('trumbowyg-icons') ?>
     </div>
   <?php endif; ?>
 
@@ -150,7 +150,7 @@ $session = $this->request->getSession();
           'class' => 'navbar-logo me-2',
           'url' => ['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'index'],
           'width' => 30,
-          'height' => 30
+          'height' => 30,
         ]) ?>
         <a class="navbar-brand"
           href="<?= $this->Url->build(['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'index']) ?>">
@@ -182,27 +182,27 @@ $session = $this->request->getSession();
 
           <!-- Dashboard ANALYTICS -->
           <?= $this->Html->link(
-            '<i class="fas fa-tachometer-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Analytics') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'PageViews', 'action' => 'dashboard'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($activeCtl == 'PageViews') ? ' active' : ''),
+              '<i class="fas fa-tachometer-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Analytics') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'PageViews', 'action' => 'dashboard'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'PageViews' ? ' active' : ''),
               'escape' => false,
               'title' => __('Analytics'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
           <!-- Dashboard AI Metrics -->
           <?= $this->Html->link(
-            '<i class="fas fa-tachometer-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('AI Metrics') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'AiMetrics', 'action' => 'dashboard'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($activeCtl == 'AiMetrics') ? ' active' : ''),
+              '<i class="fas fa-tachometer-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('AI Metrics') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'AiMetrics', 'action' => 'dashboard'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'AiMetrics' ? ' active' : ''),
               'escape' => false,
               'title' => __('AI Metrics'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
           <!-- #endregion -->
 
@@ -220,39 +220,39 @@ $session = $this->request->getSession();
           <!-- #region Products Header Items -->
           <!-- Dashboard -->
           <?= $this->Html->link(
-            '<i class="fas fa-tachometer-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Dashboard') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'dashboard'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($activeCtl == 'Products' && $activeAct == 'dashboard') ? ' active' : ''),
+              '<i class="fas fa-tachometer-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Dashboard') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'dashboard'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Products' && $activeAct == 'dashboard' ? ' active' : ''),
               'escape' => false,
               'title' => __('Products Dashboard'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
           <!-- Products  -->
           <?= $this->Html->link(
-            '<i class="fas fa-tachometer-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Products') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'index'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($activeCtl == 'Products' && $activeAct == 'index') ? ' active' : ''),
+              '<i class="fas fa-tachometer-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Products') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'index'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Products' && $activeAct == 'index' ? ' active' : ''),
               'escape' => false,
               'title' => __('Products'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
           <!-- Product Page #2 - pending review -->
           <?= $this->Html->link(
-            '<i class="fas fa-tachometer-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Pending Review') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'pendingReview'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($activeCtl == 'Products' && $activeAct == 'pendingReview') ? ' active' : ''),
+              '<i class="fas fa-tachometer-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Pending Review') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'pendingReview'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Products' && $activeAct == 'pendingReview' ? ' active' : ''),
               'escape' => false,
               'title' => __('Pending Review'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
           <!-- End Products Dropdown -->
 
@@ -262,77 +262,77 @@ $session = $this->request->getSession();
           </div>
 
           <?= $this->Html->link(
-            '<i class="fas fa-newspaper sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Posts') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'index'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($activeCtl == 'Articles' && $activeAct != 'treeIndex' && empty($this->request->getQuery('kind'))) ? ' active' : ''),
+              '<i class="fas fa-newspaper sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Posts') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'index'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Articles' && $activeAct != 'treeIndex' && empty($this->request->getQuery('kind')) ? ' active' : ''),
               'escape' => false,
               'title' => __('Posts'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-file-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Pages') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'treeIndex'],
-            [
+              '<i class="fas fa-file-alt sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Pages') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'treeIndex'],
+              [
               'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($activeCtl == 'Articles' && $activeAct == 'treeIndex') || (!empty($this->request->getQuery('kind'))) ? ' active' : ''),
               'escape' => false,
               'title' => __('Pages'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-tags sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Tags') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Tags', 'action' => $session->read('Tags.indexAction', 'treeIndex')],
-            [
+              '<i class="fas fa-tags sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Tags') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Tags', 'action' => $session->read('Tags.indexAction', 'treeIndex')],
+              [
               'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Tags' ? ' active' : ''),
               'escape' => false,
               'title' => __('Tags'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-images sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Images') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Images', 'action' => 'index'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($this->request->getParam('controller') == 'Images') ? ' active' : ''),
+              '<i class="fas fa-images sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Images') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Images', 'action' => 'index'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($this->request->getParam('controller') == 'Images' ? ' active' : ''),
               'escape' => false,
               'title' => __('Images'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-layer-group sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Image Galleries') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'ImageGalleries', 'action' => 'index'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($this->request->getParam('controller') == 'ImageGalleries') ? ' active' : ''),
+              '<i class="fas fa-layer-group sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Image Galleries') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'ImageGalleries', 'action' => 'index'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($this->request->getParam('controller') == 'ImageGalleries' ? ' active' : ''),
               'escape' => false,
               'title' => __('Image Galleries'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
-          <?php if (SettingsManager::read('Comments.pagesEnabled', false) || SettingsManager::read('Comments.articlesEnabled', false)): ?>
-            <?= $this->Html->link(
-              '<i class="fas fa-comments sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Comments') . '</span>',
-              ['prefix' => 'Admin', 'controller' => 'Comments', 'action' => 'index'],
-              [
-                'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Comments' ? ' active' : ''),
-                'escape' => false,
-                'title' => __('Comments'),
-                'data-bs-toggle' => 'tooltip',
-                'data-bs-placement' => 'right'
-              ]
-            ) ?>
+          <?php if (SettingsManager::read('Comments.pagesEnabled', false) || SettingsManager::read('Comments.articlesEnabled', false)) : ?>
+                <?= $this->Html->link(
+                    '<i class="fas fa-comments sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Comments') . '</span>',
+                    ['prefix' => 'Admin', 'controller' => 'Comments', 'action' => 'index'],
+                    [
+                    'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Comments' ? ' active' : ''),
+                    'escape' => false,
+                    'title' => __('Comments'),
+                    'data-bs-toggle' => 'tooltip',
+                    'data-bs-placement' => 'right',
+                    ],
+                ) ?>
           <?php endif; ?>
 
           <!-- User Management -->
@@ -341,15 +341,15 @@ $session = $this->request->getSession();
           </div>
 
           <?= $this->Html->link(
-            '<i class="fas fa-users sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Manage Users') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index'],
-            [
+              '<i class="fas fa-users sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Manage Users') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Users' ? ' active' : ''),
               'escape' => false,
               'title' => __('Manage Users'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
           <!-- Administration -->
@@ -358,65 +358,65 @@ $session = $this->request->getSession();
           </div>
 
           <?= $this->Html->link(
-            '<i class="fas fa-cog sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Settings') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Settings', 'action' => 'index'],
-            [
+              '<i class="fas fa-cog sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Settings') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Settings', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Settings' ? ' active' : ''),
               'escape' => false,
               'title' => __('Settings'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-envelope sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Email Templates') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'EmailTemplates', 'action' => 'index'],
-            [
+              '<i class="fas fa-envelope sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Email Templates') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'EmailTemplates', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'EmailTemplates' ? ' active' : ''),
               'escape' => false,
               'title' => __('Email Templates'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-link sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Slugs') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Slugs', 'action' => 'index'],
-            [
+              '<i class="fas fa-link sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Slugs') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Slugs', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Slugs' ? ' active' : ''),
               'escape' => false,
               'title' => __('Slugs'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
-          <?php if (Configure::read('debug')): ?>
-            <?= $this->Html->link(
-              '<i class="fas fa-robot sidebar-icon"></i><span class="sidebar-text ms-2">' . __('AI Prompts') . '</span>',
-              ['prefix' => 'Admin', 'controller' => 'Aiprompts', 'action' => 'index'],
-              [
-                'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Aiprompts' ? ' active' : ''),
-                'escape' => false,
-                'title' => __('AI Prompts'),
-                'data-bs-toggle' => 'tooltip',
-                'data-bs-placement' => 'right'
-              ]
-            ) ?>
+          <?php if (Configure::read('debug')) : ?>
+                <?= $this->Html->link(
+                    '<i class="fas fa-robot sidebar-icon"></i><span class="sidebar-text ms-2">' . __('AI Prompts') . '</span>',
+                    ['prefix' => 'Admin', 'controller' => 'Aiprompts', 'action' => 'index'],
+                    [
+                    'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Aiprompts' ? ' active' : ''),
+                    'escape' => false,
+                    'title' => __('AI Prompts'),
+                    'data-bs-toggle' => 'tooltip',
+                    'data-bs-placement' => 'right',
+                    ],
+                ) ?>
 
-            <?= $this->Html->link(
-              '<i class="fas fa-globe sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Internationalisation') . '</span>',
-              ['prefix' => 'Admin', 'controller' => 'Internationalisations', 'action' => 'index'],
-              [
-                'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Internationalisations' ? ' active' : ''),
-                'escape' => false,
-                'title' => __('Internationalisation'),
-                'data-bs-toggle' => 'tooltip',
-                'data-bs-placement' => 'right'
-              ]
-            ) ?>
+                <?= $this->Html->link(
+                    '<i class="fas fa-globe sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Internationalisation') . '</span>',
+                    ['prefix' => 'Admin', 'controller' => 'Internationalisations', 'action' => 'index'],
+                    [
+                    'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Internationalisations' ? ' active' : ''),
+                    'escape' => false,
+                    'title' => __('Internationalisation'),
+                    'data-bs-toggle' => 'tooltip',
+                    'data-bs-placement' => 'right',
+                    ],
+                ) ?>
           <?php endif; ?>
 
           <!-- System -->
@@ -425,39 +425,39 @@ $session = $this->request->getSession();
           </div>
 
           <?= $this->Html->link(
-            '<i class="fas fa-trash sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Clear Cache') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'Cache', 'action' => 'clearAll'],
-            [
+              '<i class="fas fa-trash sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Clear Cache') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'Cache', 'action' => 'clearAll'],
+              [
               'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'Cache' ? ' active' : ''),
               'escape' => false,
               'title' => __('Clear Cache'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-ban sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Blocked IPs') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'BlockedIps', 'action' => 'index'],
-            [
+              '<i class="fas fa-ban sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Blocked IPs') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'BlockedIps', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'BlockedIps' ? ' active' : ''),
               'escape' => false,
               'title' => __('Blocked IPs'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-file-text sidebar-icon"></i><span class="sidebar-text ms-2">' . __('System Logs') . '</span>',
-            ['prefix' => 'Admin', 'controller' => 'SystemLogs', 'action' => 'index'],
-            [
+              '<i class="fas fa-file-text sidebar-icon"></i><span class="sidebar-text ms-2">' . __('System Logs') . '</span>',
+              ['prefix' => 'Admin', 'controller' => 'SystemLogs', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . ($activeCtl == 'SystemLogs' ? ' active' : ''),
               'escape' => false,
               'title' => __('System Logs'),
               'data-bs-toggle' => 'tooltip',
-              'data-bs-placement' => 'right'
-            ]
+              'data-bs-placement' => 'right',
+              ],
           ) ?>
         </div>
       </div>
@@ -478,12 +478,12 @@ $session = $this->request->getSession();
           </div>
 
           <?= $this->Html->link(
-            '<i class="fas fa-tachometer-alt me-2"></i>' . __('Analytics'),
-            ['prefix' => 'Admin', 'controller' => 'PageViews', 'action' => 'dashboard'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0' . (($activeCtl == 'PageViews') ? ' active' : ''),
-              'escape' => false
-            ]
+              '<i class="fas fa-tachometer-alt me-2"></i>' . __('Analytics'),
+              ['prefix' => 'Admin', 'controller' => 'PageViews', 'action' => 'dashboard'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'PageViews' ? ' active' : ''),
+              'escape' => false,
+              ],
           ) ?>
 
           <!-- Products -->
@@ -492,30 +492,30 @@ $session = $this->request->getSession();
           </div>
 
           <?= $this->Html->link(
-            '<i class="fas fa-tachometer-alt me-2"></i>' . __('Dashboard'),
-            ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'dashboard'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0' . (($activeCtl == 'Products' && $activeAct == 'dashboard') ? ' active' : ''),
-              'escape' => false
-            ]
+              '<i class="fas fa-tachometer-alt me-2"></i>' . __('Dashboard'),
+              ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'dashboard'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Products' && $activeAct == 'dashboard' ? ' active' : ''),
+              'escape' => false,
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-tachometer-alt me-2"></i>' . __('Products'),
-            ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'index'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0' . (($activeCtl == 'Products' && $activeAct == 'index') ? ' active' : ''),
-              'escape' => false
-            ]
+              '<i class="fas fa-tachometer-alt me-2"></i>' . __('Products'),
+              ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'index'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Products' && $activeAct == 'index' ? ' active' : ''),
+              'escape' => false,
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-tachometer-alt me-2"></i>' . __('Pending Review'),
-            ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'pendingReview'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0' . (($activeCtl == 'Products' && $activeAct == 'pendingReview') ? ' active' : ''),
-              'escape' => false
-            ]
+              '<i class="fas fa-tachometer-alt me-2"></i>' . __('Pending Review'),
+              ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'pendingReview'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Products' && $activeAct == 'pendingReview' ? ' active' : ''),
+              'escape' => false,
+              ],
           ) ?>
 
           <!-- Content Management -->
@@ -524,59 +524,59 @@ $session = $this->request->getSession();
           </div>
 
           <?= $this->Html->link(
-            '<i class="fas fa-newspaper me-2"></i>' . __('Posts'),
-            ['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'index'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0' . (($activeCtl == 'Articles' && $activeAct != 'treeIndex' && empty($this->request->getQuery('kind'))) ? ' active' : ''),
-              'escape' => false
-            ]
-          ) ?>
-
-          <?= $this->Html->link(
-            '<i class="fas fa-file-alt me-2"></i>' . __('Pages'),
-            ['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'treeIndex'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0' . (($activeCtl == 'Articles' && $activeAct == 'treeIndex') || (!empty($this->request->getQuery('kind'))) ? ' active' : ''),
-              'escape' => false
-            ]
-          ) ?>
-
-          <?= $this->Html->link(
-            '<i class="fas fa-tags me-2"></i>' . __('Tags'),
-            ['prefix' => 'Admin', 'controller' => 'Tags', 'action' => $session->read('Tags.indexAction', 'treeIndex')],
-            [
-              'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Tags' ? ' active' : ''),
-              'escape' => false
-            ]
-          ) ?>
-
-          <?= $this->Html->link(
-            '<i class="fas fa-images me-2"></i>' . __('Images'),
-            ['prefix' => 'Admin', 'controller' => 'Images', 'action' => 'index'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0' . (($this->request->getParam('controller') == 'Images') ? ' active' : ''),
-              'escape' => false
-            ]
-          ) ?>
-
-          <?= $this->Html->link(
-            '<i class="fas fa-layer-group me-2"></i>' . __('Image Galleries'),
-            ['prefix' => 'Admin', 'controller' => 'ImageGalleries', 'action' => 'index'],
-            [
-              'class' => 'list-group-item list-group-item-action border-0' . (($this->request->getParam('controller') == 'ImageGalleries') ? ' active' : ''),
-              'escape' => false
-            ]
-          ) ?>
-
-          <?php if (SettingsManager::read('Comments.pagesEnabled', false) || SettingsManager::read('Comments.articlesEnabled', false)): ?>
-            <?= $this->Html->link(
-              '<i class="fas fa-comments me-2"></i>' . __('Comments'),
-              ['prefix' => 'Admin', 'controller' => 'Comments', 'action' => 'index'],
+              '<i class="fas fa-newspaper me-2"></i>' . __('Posts'),
+              ['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'index'],
               [
-                'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Comments' ? ' active' : ''),
-                'escape' => false
-              ]
-            ) ?>
+              'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Articles' && $activeAct != 'treeIndex' && empty($this->request->getQuery('kind')) ? ' active' : ''),
+              'escape' => false,
+              ],
+          ) ?>
+
+          <?= $this->Html->link(
+              '<i class="fas fa-file-alt me-2"></i>' . __('Pages'),
+              ['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'treeIndex'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0' . (($activeCtl == 'Articles' && $activeAct == 'treeIndex') || (!empty($this->request->getQuery('kind'))) ? ' active' : ''),
+              'escape' => false,
+              ],
+          ) ?>
+
+          <?= $this->Html->link(
+              '<i class="fas fa-tags me-2"></i>' . __('Tags'),
+              ['prefix' => 'Admin', 'controller' => 'Tags', 'action' => $session->read('Tags.indexAction', 'treeIndex')],
+              [
+              'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Tags' ? ' active' : ''),
+              'escape' => false,
+              ],
+          ) ?>
+
+          <?= $this->Html->link(
+              '<i class="fas fa-images me-2"></i>' . __('Images'),
+              ['prefix' => 'Admin', 'controller' => 'Images', 'action' => 'index'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0' . ($this->request->getParam('controller') == 'Images' ? ' active' : ''),
+              'escape' => false,
+              ],
+          ) ?>
+
+          <?= $this->Html->link(
+              '<i class="fas fa-layer-group me-2"></i>' . __('Image Galleries'),
+              ['prefix' => 'Admin', 'controller' => 'ImageGalleries', 'action' => 'index'],
+              [
+              'class' => 'list-group-item list-group-item-action border-0' . ($this->request->getParam('controller') == 'ImageGalleries' ? ' active' : ''),
+              'escape' => false,
+              ],
+          ) ?>
+
+          <?php if (SettingsManager::read('Comments.pagesEnabled', false) || SettingsManager::read('Comments.articlesEnabled', false)) : ?>
+                <?= $this->Html->link(
+                    '<i class="fas fa-comments me-2"></i>' . __('Comments'),
+                    ['prefix' => 'Admin', 'controller' => 'Comments', 'action' => 'index'],
+                    [
+                    'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Comments' ? ' active' : ''),
+                    'escape' => false,
+                    ],
+                ) ?>
           <?php endif; ?>
 
           <!-- User Management -->
@@ -585,12 +585,12 @@ $session = $this->request->getSession();
           </div>
 
           <?= $this->Html->link(
-            '<i class="fas fa-users me-2"></i>' . __('Manage Users'),
-            ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index'],
-            [
+              '<i class="fas fa-users me-2"></i>' . __('Manage Users'),
+              ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Users' ? ' active' : ''),
-              'escape' => false
-            ]
+              'escape' => false,
+              ],
           ) ?>
 
           <!-- Administration -->
@@ -599,50 +599,50 @@ $session = $this->request->getSession();
           </div>
 
           <?= $this->Html->link(
-            '<i class="fas fa-cog me-2"></i>' . __('Settings'),
-            ['prefix' => 'Admin', 'controller' => 'Settings', 'action' => 'index'],
-            [
+              '<i class="fas fa-cog me-2"></i>' . __('Settings'),
+              ['prefix' => 'Admin', 'controller' => 'Settings', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Settings' ? ' active' : ''),
-              'escape' => false
-            ]
+              'escape' => false,
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-envelope me-2"></i>' . __('Email Templates'),
-            ['prefix' => 'Admin', 'controller' => 'EmailTemplates', 'action' => 'index'],
-            [
+              '<i class="fas fa-envelope me-2"></i>' . __('Email Templates'),
+              ['prefix' => 'Admin', 'controller' => 'EmailTemplates', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'EmailTemplates' ? ' active' : ''),
-              'escape' => false
-            ]
+              'escape' => false,
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-link me-2"></i>' . __('Slugs'),
-            ['prefix' => 'Admin', 'controller' => 'Slugs', 'action' => 'index'],
-            [
+              '<i class="fas fa-link me-2"></i>' . __('Slugs'),
+              ['prefix' => 'Admin', 'controller' => 'Slugs', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Slugs' ? ' active' : ''),
-              'escape' => false
-            ]
+              'escape' => false,
+              ],
           ) ?>
 
-          <?php if (Configure::read('debug')): ?>
-            <?= $this->Html->link(
-              '<i class="fas fa-robot me-2"></i>' . __('AI Prompts'),
-              ['prefix' => 'Admin', 'controller' => 'Aiprompts', 'action' => 'index'],
-              [
-                'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Aiprompts' ? ' active' : ''),
-                'escape' => false
-              ]
-            ) ?>
+          <?php if (Configure::read('debug')) : ?>
+                <?= $this->Html->link(
+                    '<i class="fas fa-robot me-2"></i>' . __('AI Prompts'),
+                    ['prefix' => 'Admin', 'controller' => 'Aiprompts', 'action' => 'index'],
+                    [
+                    'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Aiprompts' ? ' active' : ''),
+                    'escape' => false,
+                    ],
+                ) ?>
 
-            <?= $this->Html->link(
-              '<i class="fas fa-globe me-2"></i>' . __('Internationalisation'),
-              ['prefix' => 'Admin', 'controller' => 'Internationalisations', 'action' => 'index'],
-              [
-                'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Internationalisations' ? ' active' : ''),
-                'escape' => false
-              ]
-            ) ?>
+                <?= $this->Html->link(
+                    '<i class="fas fa-globe me-2"></i>' . __('Internationalisation'),
+                    ['prefix' => 'Admin', 'controller' => 'Internationalisations', 'action' => 'index'],
+                    [
+                    'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Internationalisations' ? ' active' : ''),
+                    'escape' => false,
+                    ],
+                ) ?>
           <?php endif; ?>
 
           <!-- System -->
@@ -651,30 +651,30 @@ $session = $this->request->getSession();
           </div>
 
           <?= $this->Html->link(
-            '<i class="fas fa-trash me-2"></i>' . __('Clear Cache'),
-            ['prefix' => 'Admin', 'controller' => 'Cache', 'action' => 'clearAll'],
-            [
+              '<i class="fas fa-trash me-2"></i>' . __('Clear Cache'),
+              ['prefix' => 'Admin', 'controller' => 'Cache', 'action' => 'clearAll'],
+              [
               'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'Cache' ? ' active' : ''),
-              'escape' => false
-            ]
+              'escape' => false,
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-ban me-2"></i>' . __('Blocked IPs'),
-            ['prefix' => 'Admin', 'controller' => 'BlockedIps', 'action' => 'index'],
-            [
+              '<i class="fas fa-ban me-2"></i>' . __('Blocked IPs'),
+              ['prefix' => 'Admin', 'controller' => 'BlockedIps', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'BlockedIps' ? ' active' : ''),
-              'escape' => false
-            ]
+              'escape' => false,
+              ],
           ) ?>
 
           <?= $this->Html->link(
-            '<i class="fas fa-file-text me-2"></i>' . __('System Logs'),
-            ['prefix' => 'Admin', 'controller' => 'SystemLogs', 'action' => 'index'],
-            [
+              '<i class="fas fa-file-text me-2"></i>' . __('System Logs'),
+              ['prefix' => 'Admin', 'controller' => 'SystemLogs', 'action' => 'index'],
+              [
               'class' => 'list-group-item list-group-item-action border-0' . ($activeCtl == 'SystemLogs' ? ' active' : ''),
-              'escape' => false
-            ]
+              'escape' => false,
+              ],
           ) ?>
         </div>
       </div>

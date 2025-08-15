@@ -4,7 +4,7 @@
  * @var iterable<\App\Model\Entity\EmailTemplate> $emailTemplates
  */
 ?>
-<?php use Cake\Core\Configure; ?>
+<?php ?>
 <header class="py-3 mb-3 border-bottom">
     <div class="container-fluid d-flex align-items-center emailTemplates">
       <div class="d-flex align-items-center me-auto">
@@ -14,7 +14,7 @@
       </div>
       <div class="flex-shrink-0">
         <?php if (Configure::read('debug')) : ?>
-        <?= $this->Html->link(__('New Email Template'), ['action' => 'add'], ['class' => 'btn btn-primary']) ?>
+            <?= $this->Html->link(__('New Email Template'), ['action' => 'add'], ['class' => 'btn btn-primary']) ?>
         <?php endif ?>
         <?= $this->Html->link(__('Send Email'), ['action' => 'sendEmail'], ['class' => 'btn btn-primary']) ?>
       </div>
@@ -31,7 +31,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($emailTemplates as $emailTemplate): ?>
+        <?php foreach ($emailTemplates as $emailTemplate) : ?>
         <tr>
             <td><?= h($emailTemplate->name) ?></td>
             <td><?= h($emailTemplate->created) ?></td>

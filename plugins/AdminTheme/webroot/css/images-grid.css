@@ -334,26 +334,26 @@
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 0.75rem;
     }
-    
+
     .gallery-image-item {
         padding: 0.5rem;
         min-height: 140px;
     }
-    
+
     .gallery-image-item img {
         min-height: 80px;
         max-height: 100px;
     }
-    
+
     .gallery-preview-overlay {
         height: 150px;
     }
-    
+
     .gallery-card-header,
     .gallery-card-footer {
         padding: 0.5rem;
     }
-    
+
     .gallery-card-info {
         padding: 0.75rem;
     }
@@ -364,7 +364,7 @@
     .gallery-manage-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
-    
+
     .gallery-preview-overlay {
         height: 180px;
     }
@@ -431,7 +431,7 @@
     .gallery-image-item {
         border-width: 3px;
     }
-    
+
     .gallery-card {
         border-width: 2px;
     }

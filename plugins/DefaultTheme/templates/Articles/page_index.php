@@ -6,14 +6,15 @@
  */
 
 // Recursive function to build the nested menu
-function buildMenu($articles, $view) {
+function buildMenu($articles, $view): void
+{
     echo '<ul class="nested-menu">';
     foreach ($articles as $page) {
         echo '<li>';
         echo $view->Html->link(
             h($page->title),
             ['prefix' => false, 'controller' => 'Articles', 'action' => 'view-by-slug', $page->slug],
-            ['class' => 'menu-item']
+            ['class' => 'menu-item'],
         );
         if (!empty($page->children)) {
             buildMenu($page->children, $view);

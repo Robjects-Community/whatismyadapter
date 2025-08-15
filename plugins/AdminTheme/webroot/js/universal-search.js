@@ -3,7 +3,7 @@
  * Provides consistent search behavior across all admin interfaces
  * Automatically triggers search after 3+ characters with 300ms debounce
  */
-(function() {
+(function () {
     'use strict';
 
     /**
@@ -17,7 +17,8 @@
      * @param {number} [options.debounceDelay=300] - Debounce delay in milliseconds
      * @param {Function} [options.onComplete] - Callback after search completes
      */
-    function initUniversalSearch(options) {
+    function initUniversalSearch(options)
+    {
         const config = Object.assign({
             minChars: 3,
             debounceDelay: 300,
@@ -39,7 +40,8 @@
 
         let debounceTimer = null;
 
-        function performSearch(searchTerm) {
+        function performSearch(searchTerm)
+        {
             // Only search if meets minimum character requirement or is empty (show all)
             if (searchTerm.length > 0 && searchTerm.length < config.minChars) {
                 return;
@@ -79,10 +81,10 @@
                 resultsContainer.innerHTML = html;
                 resultsContainer.style.opacity = '';
                 resultsContainer.style.pointerEvents = '';
-                
+
                 // Update browser history
                 window.history.replaceState({}, '', url.toString());
-                
+
                 // Call completion callback
                 if (config.onComplete && typeof config.onComplete === 'function') {
                     config.onComplete();
@@ -92,18 +94,18 @@
                 console.error('Universal search error:', error);
                 resultsContainer.style.opacity = '';
                 resultsContainer.style.pointerEvents = '';
-                
+
                 resultsContainer.innerHTML = `
-                    <div class="alert alert-danger" role="alert">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
+                    < div class = "alert alert-danger" role = "alert" >
+                        < i class = "fas fa-exclamation-triangle me-2" > < / i >
                         Search failed. Please try again.
-                    </div>
+                    < / div >
                 `;
             });
         }
 
         // Bind input events
-        searchInput.addEventListener('input', function() {
+        searchInput.addEventListener('input', function () {
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(() => {
                 performSearch(this.value.trim());
@@ -111,7 +113,7 @@
         });
 
         // Bind form submission
-        searchForm.addEventListener('submit', function(e) {
+        searchForm.addEventListener('submit', function (e) {
             e.preventDefault();
             clearTimeout(debounceTimer);
             performSearch(searchInput.value.trim());
@@ -121,20 +123,21 @@
     /**
      * Auto-initialize universal search for common patterns
      */
-    function autoInitialize() {
+    function autoInitialize()
+    {
         // Standard admin search pattern
         const standardSearch = document.querySelector('#search-form');
         if (standardSearch) {
             const searchInput = standardSearch.querySelector('input[type="search"]');
             const resultsContainer = document.querySelector('#ajax-target');
-            
+
             if (searchInput && resultsContainer) {
                 initUniversalSearch({
                     inputSelector: `#${searchInput.id}`,
                     formSelector: '#search-form',
                     targetSelector: '#ajax-target',
                     baseUrl: window.location.pathname,
-                    onComplete: function() {
+                    onComplete: function () {
                         // Re-initialize Bootstrap popovers
                         const popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
                         popovers.forEach(el => {

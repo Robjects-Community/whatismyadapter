@@ -16,24 +16,24 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($slugs as $slug): ?>
+      <?php foreach ($slugs as $slug) : ?>
       <tr>
           <td><?= h($slug->model) ?></td>
           <td>
-              <?php if (isset($relatedData[$slug->id])): ?>
-                  <?= $this->Html->link(
-                      h($relatedData[$slug->id]['title']),
-                      [
+              <?php if (isset($relatedData[$slug->id])) : ?>
+                    <?= $this->Html->link(
+                        h($relatedData[$slug->id]['title']),
+                        [
                           'controller' => $relatedData[$slug->id]['controller'],
                           'action' => 'view',
-                          $relatedData[$slug->id]['id']
-                      ],
-                      [
+                          $relatedData[$slug->id]['id'],
+                        ],
+                        [
                           'class' => 'text-decoration-none',
-                          'escape' => false
-                      ]
-                  ) ?>
-              <?php else: ?>
+                          'escape' => false,
+                        ],
+                    ) ?>
+              <?php else : ?>
                   <?= h($slug->foreign_key) ?>
               <?php endif; ?>
           </td>

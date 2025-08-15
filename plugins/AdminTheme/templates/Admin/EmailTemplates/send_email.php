@@ -8,9 +8,9 @@
     echo $this->element('actions_card', [
         'modelName' => 'Email Template',
         'controllerName' => 'EmailTemplates',
-        'debugOnlyOptions' => ['add']
+        'debugOnlyOptions' => ['add'],
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
@@ -27,7 +27,7 @@
                         'options' => $emailTemplates,
                         'empty' => 'Select an email template',
                         'class' => 'form-control',
-                        'label' => ['class' => 'mb-2', 'text' => 'Email Template']
+                        'label' => ['class' => 'mb-2', 'text' => 'Email Template'],
                     ]) ?>
                     </div>
 
@@ -36,7 +36,7 @@
                         'options' => $users,
                         'empty' => 'Select a user',
                         'class' => 'form-control',
-                        'label' => ['class' => 'mb-2', 'text' => 'Recipient']
+                        'label' => ['class' => 'mb-2', 'text' => 'Recipient'],
                     ]) ?>
                     </div>
                                                                          

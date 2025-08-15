@@ -9,9 +9,9 @@
         'modelName' => 'Tag',
         'controllerName' => 'Tags',
         'entity' => $tag,
-        'entityDisplayName' => $tag->title
+        'entityDisplayName' => $tag->title,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">

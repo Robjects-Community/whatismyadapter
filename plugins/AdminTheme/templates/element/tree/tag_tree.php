@@ -1,5 +1,5 @@
 <ul class="list-group sortable-list" data-level="<?= $level ?>">
-    <?php foreach ($tags as $tag): ?>
+    <?php foreach ($tags as $tag) : ?>
         <li class="list-group-item list-group-item-action sortable-item py-2 px-3 border" data-id="<?= $tag['id'] ?>">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center">
@@ -24,9 +24,9 @@
                 </div>
             </div>
             <div class="children-container">
-                <?php if (!empty($tag['children'])): ?>
+                <?php if (!empty($tag['children'])) : ?>
                     <?= $this->element('tree/tag_tree', ['tags' => $tag['children'], 'level' => $level + 1]) ?>
-                <?php else: ?>
+                <?php else : ?>
                     <ul class="list-group sortable-list"></ul>
                 <?php endif; ?>
             </div>

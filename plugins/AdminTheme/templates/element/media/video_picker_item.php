@@ -1,7 +1,7 @@
 <?php
 /**
  * Video picker item element
- * 
+ *
  * @var \App\View\AppView $this
  * @var array $item Video data from YouTube API
  * @var array $pickerOptions Picker configuration
@@ -12,7 +12,9 @@ $item = $item ?? [];
 $pickerOptions = $pickerOptions ?? [];
 $viewType = $viewType ?? 'grid';
 
-if (empty($item)) return;
+if (empty($item)) {
+    return;
+}
 
 $videoId = h($item['id'] ?? '');
 $videoTitle = h($item['title'] ?? '');
@@ -20,7 +22,7 @@ $videoThumbnail = h($item['thumbnail'] ?? '');
 $videoDescription = h($item['description'] ?? '');
 ?>
 
-<?php if ($viewType === 'list'): ?>
+<?php if ($viewType === 'list') : ?>
     <div class="list-group-item list-group-item-action select-video" 
          data-video-id="<?= $videoId ?>"
          data-title="<?= $videoTitle ?>"
@@ -36,13 +38,13 @@ $videoDescription = h($item['description'] ?? '');
             </div>
             <div class="flex-grow-1">
                 <h6 class="mb-1"><?= $this->Text->truncate($videoTitle, 60) ?></h6>
-                <?php if ($videoDescription): ?>
+                <?php if ($videoDescription) : ?>
                     <small class="text-muted"><?= $this->Text->truncate($videoDescription, 100) ?></small>
                 <?php endif; ?>
             </div>
         </div>
     </div>
-<?php else: ?>
+<?php else : ?>
     <div class="card h-100 video-picker-card">
         <div class="card-body p-2">
             <div class="position-relative mb-2 select-video"
@@ -69,7 +71,7 @@ $videoDescription = h($item['description'] ?? '');
             
             <h6 class="card-title small mb-1"><?= $this->Text->truncate($videoTitle, 30) ?></h6>
             
-            <?php if ($videoDescription): ?>
+            <?php if ($videoDescription) : ?>
                 <small class="text-muted"><?= $this->Text->truncate($videoDescription, 50) ?></small>
             <?php endif; ?>
         </div>

@@ -4,7 +4,7 @@
  * @var iterable<\App\Model\Entity\Image> $images
  */
 ?>
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <header class="py-3 mb-3 border-bottom">
     <div class="container-fluid d-flex align-items-center images">
         <div class="d-flex align-items-center me-auto">
@@ -50,7 +50,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($images as $image): ?>
+    <?php foreach ($images as $image) : ?>
     <tr>
             <td>
                 <div class="position-relative">

@@ -1,7 +1,7 @@
 <?php
 /**
  * Enhanced Pagination Element
- * 
+ *
  * @var \App\View\AppView $this
  * @var array $options Configuration options
  */
@@ -39,13 +39,13 @@ if ($config['preserveParams']) {
     $queryParams = $this->request->getQueryParams();
     // Remove 'page' parameter as it's handled by paginator
     unset($queryParams['page']);
-    
+
     if (!empty($queryParams)) {
         $paginationOptions['url']['?'] = $queryParams;
     }
 }
 ?>
-<?php if ($this->Paginator->total() > 1): ?>
+<?php if ($this->Paginator->total() > 1) : ?>
     <div class="<?= h($config['class']) ?>">
         <nav aria-label="<?= __('Pagination Navigation') ?>">
             <ul class="pagination">
@@ -56,7 +56,7 @@ if ($config['preserveParams']) {
         </nav>
     </div>
     
-    <?php if ($config['showCounter'] && $this->Paginator->total() > 0): ?>
+    <?php if ($config['showCounter'] && $this->Paginator->total() > 0) : ?>
         <div class="<?= h($config['counterClass']) ?>">
             <small class="text-muted">
                 <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>

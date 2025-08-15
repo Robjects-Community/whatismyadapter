@@ -6,7 +6,8 @@
  */
 
 // Helper function to extract browser name from user agent
-function extractBrowserName($userAgent) {
+function extractBrowserName($userAgent)
+{
     $browsers = [
         'Chrome' => '/Chrome\/[\d.]+/',
         'Firefox' => '/Firefox\/[\d.]+/',
@@ -49,7 +50,7 @@ function extractBrowserName($userAgent) {
                         <span class="badge bg-info"><?= number_format($viewRecords->count()) ?> <?= __('records') ?></span>
                     </div>
                     
-                    <?php if (!$viewRecords->isEmpty()): ?>
+                    <?php if (!$viewRecords->isEmpty()) : ?>
                         <!-- Desktop Table -->
                         <div class="table-responsive d-none d-lg-block">
                             <table class="table table-hover">
@@ -62,7 +63,7 @@ function extractBrowserName($userAgent) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($viewRecords as $record): ?>
+                                    <?php foreach ($viewRecords as $record) : ?>
                                         <tr>
                                             <td>
                                                 <div><?= $record->created->format('M j, Y') ?></div>
@@ -77,11 +78,11 @@ function extractBrowserName($userAgent) {
                                                 </div>
                                             </td>
                                             <td>
-                                                <?php if ($record->referer): ?>
+                                                <?php if ($record->referer) : ?>
                                                     <div class="text-truncate" style="max-width: 200px;" title="<?= h($record->referer) ?>">
                                                         <?= h(parse_url($record->referer, PHP_URL_HOST) ?: $record->referer) ?>
                                                     </div>
-                                                <?php else: ?>
+                                                <?php else : ?>
                                                     <span class="text-muted"><?= __('Direct') ?></span>
                                                 <?php endif; ?>
                                             </td>
@@ -93,7 +94,7 @@ function extractBrowserName($userAgent) {
 
                         <!-- Mobile/Tablet Cards -->
                         <div class="d-lg-none">
-                            <?php foreach ($viewRecords as $record): ?>
+                            <?php foreach ($viewRecords as $record) : ?>
                                 <div class="card mb-3 view-record-card">
                                     <div class="card-body p-3">
                                         <div class="row">
@@ -114,9 +115,9 @@ function extractBrowserName($userAgent) {
                                                 </p>
                                                 <p class="mb-0">
                                                     <strong><?= __('Source:') ?></strong><br>
-                                                    <?php if ($record->referer): ?>
+                                                    <?php if ($record->referer) : ?>
                                                         <span class="text-muted text-break"><?= h(parse_url($record->referer, PHP_URL_HOST) ?: $record->referer) ?></span>
-                                                    <?php else: ?>
+                                                    <?php else : ?>
                                                         <span class="text-muted"><?= __('Direct') ?></span>
                                                     <?php endif; ?>
                                                 </p>
@@ -126,7 +127,7 @@ function extractBrowserName($userAgent) {
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                    <?php else: ?>
+                    <?php else : ?>
                         <div class="alert alert-info d-flex align-items-center" role="alert">
                             <i class="fas fa-info-circle me-2"></i>
                             <?= __('No view records found for this article.') ?>

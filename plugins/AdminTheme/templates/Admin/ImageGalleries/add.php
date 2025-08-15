@@ -2,7 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\ImageGallery $imageGallery
- * @var \Cake\Collection\CollectionInterface|string[] $images
+ * @var \Cake\Collection\CollectionInterface|array<string> $images
  */
 ?>
 <?php
@@ -12,7 +12,7 @@ if (!$imageGallery->isNew()) {
         'modelName' => 'Image Gallery',
         'controllerName' => 'Image Galleries',
         'entity' => $imageGallery,
-        'entityDisplayName' => $imageGallery->name
+        'entityDisplayName' => $imageGallery->name,
     ]);
 }
 ?>
@@ -24,16 +24,18 @@ if (!$imageGallery->isNew()) {
                     <h5 class="card-title"><?= __('Add Image Gallery') ?></h5>
                 </div>
                 <div class="card-body">
-                    <?= $this->Form->create($imageGallery,
-                    [
+                    <?= $this->Form->create(
+                        $imageGallery,
+                        [
                         'type' => 'file',
                         'enctype' => 'multipart/form-data',
-                        'class' => 'needs-validation', 'novalidate' => true
-                    ]) ?>
+                        'class' => 'needs-validation', 'novalidate' => true,
+                        ],
+                    ) ?>
                     <fieldset>
                         <div class="mb-3">
                             <?php echo $this->Form->control('name', ['class' => 'form-control' . ($this->Form->isFieldError('name') ? ' is-invalid' : '')]); ?>
-                            <?php if ($this->Form->isFieldError('name')): ?>
+                            <?php if ($this->Form->isFieldError('name')) : ?>
                                 <div class="invalid-feedback">
                                     <?= $this->Form->error('name') ?>
                                 </div>
@@ -42,7 +44,7 @@ if (!$imageGallery->isNew()) {
                         
                         <div class="mb-3">
                             <?php echo $this->Form->control('description', ['type' => 'textarea', 'rows' => 3, 'class' => 'form-control' . ($this->Form->isFieldError('description') ? ' is-invalid' : '')]); ?>
-                            <?php if ($this->Form->isFieldError('description')): ?>
+                            <?php if ($this->Form->isFieldError('description')) : ?>
                                 <div class="invalid-feedback">
                                     <?= $this->Form->error('description') ?>
                                 </div>
@@ -52,13 +54,13 @@ if (!$imageGallery->isNew()) {
                         <div class="mb-3">
                             <div class="form-check">
                                 <?php echo $this->Form->checkbox('is_published', [
-                                    'class' => 'form-check-input' . ($this->Form->isFieldError('is_published') ? ' is-invalid' : '')
+                                    'class' => 'form-check-input' . ($this->Form->isFieldError('is_published') ? ' is-invalid' : ''),
                                 ]); ?>
                                 <label class="form-check-label" for="is-published">
                                     <?= __('Is Published') ?>
                                 </label>
                             </div>
-                            <?php if ($this->Form->isFieldError('is_published')): ?>
+                            <?php if ($this->Form->isFieldError('is_published')) : ?>
                                 <div class="invalid-feedback">
                                     <?= $this->Form->error('is_published') ?>
                                 </div>
@@ -80,9 +82,9 @@ if (!$imageGallery->isNew()) {
                                 'multiple' => true,
                                 'accept' => 'image/*,.zip,.tar,.tar.gz,.tgz',
                                 'class' => 'form-control' . ($this->Form->isFieldError('image_files') ? ' is-invalid' : ''),
-                                'label' => false
+                                'label' => false,
                             ]); ?>
-                            <?php if ($this->Form->isFieldError('image_files')): ?>
+                            <?php if ($this->Form->isFieldError('image_files')) : ?>
                                 <div class="invalid-feedback">
                                     <?= $this->Form->error('image_files') ?>
                                 </div>

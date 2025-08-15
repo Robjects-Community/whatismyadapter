@@ -1,24 +1,26 @@
 <?php use App\Utility\SettingsManager; ?>
 
-<?php if ($this->Identity->isLoggedIn()): ?>
+<?php if ($this->Identity->isLoggedIn()) : ?>
 <div class="flex-shrink-0 dropdown ms-auto">
     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <?php if (isset($profilePic)) : ?>
-            <?= $this->Html->image($profilePic, 
-            [
-                'pathPrefix' => '', 
+            <?= $this->Html->image(
+                $profilePic,
+                [
+                'pathPrefix' => '',
                 'class' => 'rounded-circle',
                 'width' => '32',
                 'height' => '32',
 
-            ])?>
-        <?php else: ?>
+                ],
+            )?>
+        <?php else : ?>
             <img src="/img/willow-icon.png" width="32" height="32" class="rounded-circle">
         <?php endif; ?>
     </a>
     <ul class="dropdown-menu dropdown-menu-end text-small shadow">
         <li>
-            <?php if ($this->Identity->get('is_admin')): ?>
+            <?php if ($this->Identity->get('is_admin')) : ?>
                 <?= $this->Html->link(__('Admin'), ['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'index'], ['class' => 'dropdown-item']) ?>
             <?php endif; ?>
         </li>
@@ -35,8 +37,7 @@
     </ul>
 </div>
 
-<?php else: ?>
-
+<?php else : ?>
 <ul class="navbar-nav me-3">
     <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"><?= __('Account') ?></a>
@@ -49,7 +50,7 @@
         </li>
         <li>
             <?php if (SettingsManager::read('Users.registrationEnabled', false)) :?>
-            <?= $this->Html->link(__('Register'), ['controller' => 'Users', 'action' => 'register'], ['class' => 'dropdown-item']) ?>
+                <?= $this->Html->link(__('Register'), ['controller' => 'Users', 'action' => 'register'], ['class' => 'dropdown-item']) ?>
             <?php endif; ?>
         </li>
     </ul>

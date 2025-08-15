@@ -16,7 +16,7 @@ $this->Html->script('AdminTheme.gallery-search', ['block' => 'scriptBottom']);
             <!-- View Switcher -->
             <?= $this->element('view_switcher', [
                 'currentView' => $viewType,
-                'queryParams' => $this->request->getQueryParams()
+                'queryParams' => $this->request->getQueryParams(),
             ]) ?>
             
             <!-- Search Form -->
@@ -25,8 +25,8 @@ $this->Html->script('AdminTheme.gallery-search', ['block' => 'scriptBottom']);
                 'options' => [
                     'id' => 'gallery-search-form',
                     'inputId' => 'gallery-search',
-                    'placeholder' => __('Search galleries...')
-                ]
+                    'placeholder' => __('Search galleries...'),
+                ],
             ]) ?>
             
             <!-- Status Filter -->
@@ -37,7 +37,7 @@ $this->Html->script('AdminTheme.gallery-search', ['block' => 'scriptBottom']);
             <?= $this->Html->link(
                 '<i class="fas fa-plus"></i> ' . __('New Gallery'),
                 ['action' => 'add'],
-                ['class' => 'btn btn-success', 'escape' => false]
+                ['class' => 'btn btn-success', 'escape' => false],
             ) ?>
         </div>
     </div>
@@ -45,15 +45,15 @@ $this->Html->script('AdminTheme.gallery-search', ['block' => 'scriptBottom']);
 
 <!-- Content Target for AJAX updates -->
 <div id="ajax-target">
-    <?php if (empty($imageGalleries)): ?>
+    <?php if (empty($imageGalleries)) : ?>
         <?= $this->element('empty_state', [
             'icon' => 'fas fa-images',
             'title' => __('No Image Galleries Found'),
             'message' => __('Create your first gallery to get started.'),
             'actionText' => __('Create Gallery'),
-            'actionUrl' => ['action' => 'add']
+            'actionUrl' => ['action' => 'add'],
         ]) ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead>
@@ -68,10 +68,10 @@ $this->Html->script('AdminTheme.gallery-search', ['block' => 'scriptBottom']);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($imageGalleries as $gallery): ?>
+                    <?php foreach ($imageGalleries as $gallery) : ?>
                     <tr>
                         <td>
-                            <?php if ($gallery->hasPreviewImage()): ?>
+                            <?php if ($gallery->hasPreviewImage()) : ?>
                                 <img src="<?= h($gallery->getPreviewImageUrl()) ?>"
                                      alt="<?= h($gallery->name) ?>"
                                      class="img-thumbnail gallery-preview-thumb"
@@ -80,14 +80,14 @@ $this->Html->script('AdminTheme.gallery-search', ['block' => 'scriptBottom']);
                                      data-bs-content="<img src='<?= h($gallery->getPreviewImageUrl()) ?>' style='max-width: 300px; max-height: 200px;' alt='<?= h($gallery->name) ?>'>"
                                      data-bs-html="true"
                                      data-bs-placement="right">
-                            <?php elseif (!empty($gallery->images)): ?>
+                            <?php elseif (!empty($gallery->images)) : ?>
                                 <?= $this->element('image/icon', [
                                     'model' => $gallery->images[0],
                                     'icon' => $gallery->images[0]->tinyImageUrl,
                                     'preview' => $gallery->images[0]->mediumImageUrl,
-                                    'class' => 'img-thumbnail gallery-preview-thumb'
+                                    'class' => 'img-thumbnail gallery-preview-thumb',
                                 ]) ?>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <div class="text-center text-muted d-flex align-items-center justify-content-center img-thumbnail gallery-preview-thumb"
                                      style="border: 1px solid #ddd; border-radius: 4px;">
                                     <i class="fas fa-images"></i>
@@ -96,17 +96,17 @@ $this->Html->script('AdminTheme.gallery-search', ['block' => 'scriptBottom']);
                         </td>
                         <td>
                             <strong><?= h($gallery->name) ?></strong>
-                            <?php if ($gallery->description): ?>
+                            <?php if ($gallery->description) : ?>
                                 <br><small class="text-muted"><?= $this->Text->truncate(h($gallery->description), 50) ?></small>
                             <?php endif; ?>
                         </td>
                         <td><code><?= h($gallery->slug) ?></code></td>
                         <td>
-                            <?php if ($gallery->is_published): ?>
+                            <?php if ($gallery->is_published) : ?>
                                 <span class="badge bg-success">
                                     <i class="fas fa-eye"></i> <?= __('Published') ?>
                                 </span>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <span class="badge bg-secondary">
                                     <i class="fas fa-eye-slash"></i> <?= __('Draft') ?>
                                 </span>
@@ -122,7 +122,7 @@ $this->Html->script('AdminTheme.gallery-search', ['block' => 'scriptBottom']);
                             <?= $this->element('evd_dropdown', [
                                 'model' => $gallery,
                                 'display' => 'name',
-                                'controller' => 'ImageGalleries'
+                                'controller' => 'ImageGalleries',
                             ]) ?>
                         </td>
                     </tr>

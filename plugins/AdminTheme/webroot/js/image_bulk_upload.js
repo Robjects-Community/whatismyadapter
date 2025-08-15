@@ -1,11 +1,11 @@
 Dropzone.autoDiscover = false; // Recommended
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const dropzoneForm = document.getElementById('imageUploadDropzone');
-    if (!dropzoneForm) {
-        console.error('Dropzone form #imageUploadDropzone not found.');
-        return;
-    }
+if (!dropzoneForm) {
+    console.error('Dropzone form #imageUploadDropzone not found.');
+    return;
+}
 
     const uploadUrl = dropzoneForm.dataset.uploadUrl;
     const deleteUrl = dropzoneForm.dataset.deleteUrl;

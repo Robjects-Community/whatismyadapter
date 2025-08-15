@@ -8,6 +8,7 @@ use Cake\Console\CommandCollection;
 use Cake\Core\Container;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\RouteBuilder;
+use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use TestApp\Application;
 
@@ -53,10 +54,10 @@ class AdminThemePluginTest extends TestCase
     public function testBootstrap(): void
     {
         $app = $this->createMock(Application::class);
-        
+
         // This should not throw any exceptions
         $this->plugin->bootstrap($app);
-        
+
         // Since bootstrap doesn't return anything or modify state in the basic implementation,
         // we just verify it executes without error
         $this->assertTrue(true);
@@ -69,11 +70,11 @@ class AdminThemePluginTest extends TestCase
      */
     public function testRoutes(): void
     {
-        $routes = new RouteBuilder($this->createMock(\Cake\Routing\Router::class), '/', []);
-        
+        $routes = new RouteBuilder($this->createMock(Router::class), '/', []);
+
         // Test that routes can be called without error
         $this->plugin->routes($routes);
-        
+
         // Verify that the plugin routes were added
         $this->assertTrue(true); // Basic verification that method executes
     }
@@ -86,9 +87,9 @@ class AdminThemePluginTest extends TestCase
     public function testMiddleware(): void
     {
         $middlewareQueue = new MiddlewareQueue();
-        
+
         $result = $this->plugin->middleware($middlewareQueue);
-        
+
         // Should return the same middleware queue (no middleware added in basic implementation)
         $this->assertInstanceOf(MiddlewareQueue::class, $result);
     }
@@ -101,9 +102,9 @@ class AdminThemePluginTest extends TestCase
     public function testConsole(): void
     {
         $commands = new CommandCollection();
-        
+
         $result = $this->plugin->console($commands);
-        
+
         // Should return a CommandCollection instance
         $this->assertInstanceOf(CommandCollection::class, $result);
     }
@@ -116,10 +117,10 @@ class AdminThemePluginTest extends TestCase
     public function testServices(): void
     {
         $container = new Container();
-        
+
         // This should not throw any exceptions
         $this->plugin->services($container);
-        
+
         // Since services doesn't return anything or modify state in the basic implementation,
         // we just verify it executes without error
         $this->assertTrue(true);

@@ -7,17 +7,17 @@
  * @var string|null $statusFilter
  */
 
-if ($viewType === 'grid'): ?>
+if ($viewType === 'grid') : ?>
     <!-- Grid View Results -->
-    <?php if (empty($imageGalleries)): ?>
+    <?php if (empty($imageGalleries)) : ?>
         <?= $this->element('empty_state', [
             'type' => 'search',
             'title' => __('No galleries found'),
-            'message' => __('Try adjusting your search terms or filters.')
+            'message' => __('Try adjusting your search terms or filters.'),
         ]) ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            <?php foreach ($imageGalleries as $gallery): ?>
+            <?php foreach ($imageGalleries as $gallery) : ?>
             <div class="col">
                 <?= $this->element('ImageGalleries/gallery_card', ['gallery' => $gallery]) ?>
             </div>
@@ -27,15 +27,15 @@ if ($viewType === 'grid'): ?>
         <?= $this->element('pagination') ?>
     <?php endif; ?>
 
-<?php else: ?>
+<?php else : ?>
     <!-- List View Results -->
-    <?php if (empty($imageGalleries)): ?>
+    <?php if (empty($imageGalleries)) : ?>
         <?= $this->element('empty_state', [
             'type' => 'search',
             'title' => __('No galleries found'),
-            'message' => __('Try adjusting your search terms or filters.')
+            'message' => __('Try adjusting your search terms or filters.'),
         ]) ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead>
@@ -50,10 +50,10 @@ if ($viewType === 'grid'): ?>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($imageGalleries as $gallery): ?>
+                    <?php foreach ($imageGalleries as $gallery) : ?>
                     <tr>
                         <td>
-                            <?php if ($gallery->hasPreviewImage()): ?>
+                            <?php if ($gallery->hasPreviewImage()) : ?>
                                 <img src="<?= h($gallery->getPreviewImageUrl()) ?>"
                                      alt="<?= h($gallery->name) ?>"
                                      class="img-thumbnail gallery-preview-thumb"
@@ -63,14 +63,14 @@ if ($viewType === 'grid'): ?>
                                      data-bs-content="<img src='<?= h($gallery->getPreviewImageUrl()) ?>' style='max-width: 300px; max-height: 200px;' alt='<?= h($gallery->name) ?>'>"
                                      data-bs-html="true"
                                      data-bs-placement="right">
-                            <?php elseif (!empty($gallery->images)): ?>
+                            <?php elseif (!empty($gallery->images)) : ?>
                                 <?= $this->element('image/icon', [
                                     'model' => $gallery->images[0],
                                     'icon' => $gallery->images[0]->tinyImageUrl,
                                     'preview' => $gallery->images[0]->mediumImageUrl,
-                                    'class' => 'img-thumbnail gallery-preview-thumb'
+                                    'class' => 'img-thumbnail gallery-preview-thumb',
                                 ]) ?>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <div class="text-center text-muted d-flex align-items-center justify-content-center img-thumbnail"
                                      style="width: 60px; height: 45px; border: 1px solid #ddd; border-radius: 4px;">
                                     <i class="fas fa-images"></i>
@@ -79,17 +79,17 @@ if ($viewType === 'grid'): ?>
                         </td>
                         <td>
                             <strong><?= h($gallery->name) ?></strong>
-                            <?php if ($gallery->description): ?>
+                            <?php if ($gallery->description) : ?>
                                 <br><small class="text-muted"><?= $this->Text->truncate(h($gallery->description), 50) ?></small>
                             <?php endif; ?>
                         </td>
                         <td><code><?= h($gallery->slug) ?></code></td>
                         <td>
-                            <?php if ($gallery->is_published): ?>
+                            <?php if ($gallery->is_published) : ?>
                                 <span class="badge bg-success">
                                     <i class="fas fa-eye"></i> <?= __('Published') ?>
                                 </span>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <span class="badge bg-secondary">
                                     <i class="fas fa-eye-slash"></i> <?= __('Draft') ?>
                                 </span>
@@ -105,7 +105,7 @@ if ($viewType === 'grid'): ?>
                             <?= $this->element('evd_dropdown', [
                                 'model' => $gallery,
                                 'display' => 'name',
-                                'controller' => 'ImageGalleries'
+                                'controller' => 'ImageGalleries',
                             ]) ?>
                         </td>
                     </tr>

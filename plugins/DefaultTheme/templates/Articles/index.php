@@ -7,7 +7,7 @@
  * @var string|null $selectedTag
  */
 ?>
-<?php foreach ($articles as $article): ?>
+<?php foreach ($articles as $article) : ?>
 <article class="article-list-item mb-4">
     <a class="text-decoration-none" href="<?= $this->Url->build(['_name' => $article->kind . '-by-slug', 'slug' => $article->slug]) ?>">
         <h2 class="article-title h4 link-body-emphasis mb-2"><?= htmlspecialchars_decode($article->title) ?></h2>
@@ -20,14 +20,14 @@
     
     <?php $displayMode = SettingsManager::read('Blog.articleDisplayMode', 'summary') ?>
     <div class="article-wrap-container">
-        <?php if (!empty($article->image)): ?>
+        <?php if (!empty($article->image)) : ?>
         <div class="article-image-container">
             <a href="<?= $this->Url->build(['_name' => $article->kind . '-by-slug', 'slug' => $article->slug]) ?>">
                 <?= $this->element('image/icon', [
-                    'model' => $article, 
-                    'icon' => $article->extraLargeImageUrl, 
+                    'model' => $article,
+                    'icon' => $article->extraLargeImageUrl,
                     'preview' => false,
-                    'class' => 'article-wrap-image'
+                    'class' => 'article-wrap-image',
                 ]); ?>
             </a>
         </div>

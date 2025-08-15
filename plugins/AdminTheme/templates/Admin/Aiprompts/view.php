@@ -9,9 +9,9 @@
         'modelName' => 'Aiprompt',
         'controllerName' => 'Aiprompts',
         'entity' => $aiprompt,
-        'entityDisplayName' => $aiprompt->task_type
+        'entityDisplayName' => $aiprompt->task_type,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">

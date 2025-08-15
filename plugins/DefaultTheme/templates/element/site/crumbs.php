@@ -1,5 +1,5 @@
 <?php $currentUrl = $this->request->getPath(); ?>
-<?php if (!empty($crumbs) && count($crumbs) >1 ) : ?>
+<?php if (!empty($crumbs) && count($crumbs) > 1) : ?>
 <div class="border-bottom mb-3">
     <nav class="breadcrumb">
         <ol class="breadcrumb breadcrumb-chevron">
@@ -11,8 +11,8 @@
                     $crumb->title,
                     $url,
                     [
-                        'class' => 'link-body-emphasis text-decoration-none' . (($currentUrl == $url) ? ' fw-semibold' : '')
-                    ]
+                        'class' => 'link-body-emphasis text-decoration-none' . ($currentUrl == $url ? ' fw-semibold' : ''),
+                    ],
                 );
                 ?>
             </li>

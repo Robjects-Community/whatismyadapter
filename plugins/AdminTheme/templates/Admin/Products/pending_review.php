@@ -13,17 +13,17 @@ $this->Html->css('willow-admin', ['block' => true]);
                 <?= $this->Html->link(
                     '<i class="fas fa-plus"></i> ' . __('New Product'),
                     ['action' => 'add'],
-                    ['class' => 'btn btn-success', 'escape' => false]
+                    ['class' => 'btn btn-success', 'escape' => false],
                 ) ?>
                 <?= $this->Html->link(
                     '<i class="fas fa-chart-line"></i> ' . __('Dashboard'),
                     ['action' => 'dashboard'],
-                    ['class' => 'btn btn-info', 'escape' => false]
+                    ['class' => 'btn btn-info', 'escape' => false],
                 ) ?>
                 <?= $this->Html->link(
                     '<i class="fas fa-arrow-left"></i> ' . __('Back to All Products'),
                     ['action' => 'index'],
-                    ['class' => 'btn btn-secondary', 'escape' => false]
+                    ['class' => 'btn btn-secondary', 'escape' => false],
                 ) ?>
             </div>
         </div>
@@ -44,7 +44,7 @@ $this->Html->css('willow-admin', ['block' => true]);
                         'placeholder' => __('Search products...'),
                         'value' => $this->request->getQuery('search'),
                         'class' => 'form-control',
-                        'label' => false
+                        'label' => false,
                     ]) ?>
                 </div>
 
@@ -55,7 +55,7 @@ $this->Html->css('willow-admin', ['block' => true]);
                         'placeholder' => __('Manufacturer'),
                         'value' => $this->request->getQuery('manufacturer'),
                         'class' => 'form-control',
-                        'label' => false
+                        'label' => false,
                     ]) ?>
                 </div>
 
@@ -64,7 +64,7 @@ $this->Html->css('willow-admin', ['block' => true]);
                     <?= $this->Form->control('featured', [
                         'type' => 'checkbox',
                         'label' => __('Featured Only'),
-                        'checked' => $this->request->getQuery('featured')
+                        'checked' => $this->request->getQuery('featured'),
                     ]) ?>
                 </div>
 
@@ -72,11 +72,11 @@ $this->Html->css('willow-admin', ['block' => true]);
                 <div class="form-group mr-3">
                     <?= $this->Form->control('user_id', [
                         'type' => 'select',
-                        'options' => isset($users) ? $users : [],
+                        'options' => $users ?? [],
                         'empty' => __('All Users'),
                         'value' => $this->request->getQuery('user_id'),
                         'class' => 'form-control',
-                        'label' => false
+                        'label' => false,
                     ]) ?>
                 </div>
 
@@ -87,7 +87,7 @@ $this->Html->css('willow-admin', ['block' => true]);
                         'value' => $this->request->getQuery('date_from'),
                         'class' => 'form-control',
                         'label' => false,
-                        'placeholder' => __('From Date')
+                        'placeholder' => __('From Date'),
                     ]) ?>
                 </div>
 
@@ -98,7 +98,7 @@ $this->Html->css('willow-admin', ['block' => true]);
                         'value' => $this->request->getQuery('date_to'),
                         'class' => 'form-control',
                         'label' => false,
-                        'placeholder' => __('To Date')
+                        'placeholder' => __('To Date'),
                     ]) ?>
                 </div>
 
@@ -119,11 +119,11 @@ $this->Html->css('willow-admin', ['block' => true]);
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <?php if (!empty($products)): ?>
+                <?php if (!empty($products)) : ?>
                     <!-- Bulk Actions Form -->
                     <?= $this->Form->create(null, [
                         'type' => 'post',
-                        'id' => 'bulk-actions-form'
+                        'id' => 'bulk-actions-form',
                     ]) ?>
                     
                     <!-- Bulk Actions Bar -->
@@ -142,17 +142,17 @@ $this->Html->css('willow-admin', ['block' => true]);
                                     <?= $this->Form->button(__('Verify Selected'), [
                                         'class' => 'btn btn-warning',
                                         'formaction' => $this->Url->build(['action' => 'bulk-verify']),
-                                        'onclick' => 'return confirmBulkAction("verify");'
+                                        'onclick' => 'return confirmBulkAction("verify");',
                                     ]) ?>
                                     <?= $this->Form->button(__('Approve Selected'), [
                                         'class' => 'btn btn-success',
                                         'formaction' => $this->Url->build(['action' => 'bulk-approve']),
-                                        'onclick' => 'return confirmBulkAction("approve");'
+                                        'onclick' => 'return confirmBulkAction("approve");',
                                     ]) ?>
                                     <?= $this->Form->button(__('Reject Selected'), [
                                         'class' => 'btn btn-danger',
                                         'formaction' => $this->Url->build(['action' => 'bulk-reject']),
-                                        'onclick' => 'return confirmBulkAction("reject");'
+                                        'onclick' => 'return confirmBulkAction("reject");',
                                     ]) ?>
                                 </div>
                             </div>
@@ -175,23 +175,23 @@ $this->Html->css('willow-admin', ['block' => true]);
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($products as $product): ?>
+                                <?php foreach ($products as $product) : ?>
                                 <tr>
                                     <td>
                                         <?= $this->Form->checkbox('ids[]', [
                                             'value' => $product->id,
-                                            'class' => 'product-checkbox'
+                                            'class' => 'product-checkbox',
                                         ]) ?>
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <?php if ($product->image): ?>
+                                            <?php if ($product->image) : ?>
                                                 <img src="<?= h($product->image) ?>" alt="<?= h($product->alt_text) ?>" 
                                                      class="img-thumbnail mr-2" style="width: 40px; height: 40px; object-fit: cover;">
                                             <?php endif; ?>
                                             <div>
                                                 <strong><?= h($product->title) ?></strong>
-                                                <?php if ($product->featured): ?>
+                                                <?php if ($product->featured) : ?>
                                                     <span class="badge badge-warning ml-1"><?= __('Featured') ?></span>
                                                 <?php endif; ?>
                                                 <br>
@@ -201,18 +201,18 @@ $this->Html->css('willow-admin', ['block' => true]);
                                     </td>
                                     <td><?= h($product->manufacturer) ?></td>
                                     <td>
-                                        <?php if ($product->user): ?>
+                                        <?php if ($product->user) : ?>
                                             <span class="badge badge-secondary"><?= h($product->user->username) ?></span>
-                                        <?php else: ?>
+                                        <?php else : ?>
                                             <span class="text-muted">-</span>
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <?php if ($product->reliability_score && $product->reliability_score > 0): ?>
+                                        <?php if ($product->reliability_score && $product->reliability_score > 0) : ?>
                                             <span class="badge badge-info">
                                                 <?= number_format($product->reliability_score, 1) ?>/5.0
                                             </span>
-                                        <?php else: ?>
+                                        <?php else : ?>
                                             <span class="text-muted">-</span>
                                         <?php endif; ?>
                                     </td>
@@ -225,12 +225,12 @@ $this->Html->css('willow-admin', ['block' => true]);
                                             <?= $this->Html->link(
                                                 '<i class="fas fa-eye"></i>',
                                                 ['action' => 'view', $product->id],
-                                                ['class' => 'btn btn-sm btn-outline-primary', 'escape' => false, 'title' => __('View')]
+                                                ['class' => 'btn btn-sm btn-outline-primary', 'escape' => false, 'title' => __('View')],
                                             ) ?>
                                             <?= $this->Html->link(
                                                 '<i class="fas fa-edit"></i>',
                                                 ['action' => 'edit', $product->id],
-                                                ['class' => 'btn btn-sm btn-outline-secondary', 'escape' => false, 'title' => __('Edit')]
+                                                ['class' => 'btn btn-sm btn-outline-secondary', 'escape' => false, 'title' => __('Edit')],
                                             ) ?>
                                             
                                             <!-- Verify -->
@@ -241,8 +241,8 @@ $this->Html->css('willow-admin', ['block' => true]);
                                                     'class' => 'btn btn-sm btn-outline-warning',
                                                     'escape' => false,
                                                     'title' => __('Verify'),
-                                                    'confirm' => __('Are you sure you want to verify this product?')
-                                                ]
+                                                    'confirm' => __('Are you sure you want to verify this product?'),
+                                                ],
                                             ) ?>
                                             
                                             <!-- Approve -->
@@ -253,8 +253,8 @@ $this->Html->css('willow-admin', ['block' => true]);
                                                     'class' => 'btn btn-sm btn-outline-success',
                                                     'escape' => false,
                                                     'title' => __('Approve'),
-                                                    'confirm' => __('Are you sure you want to approve this product?')
-                                                ]
+                                                    'confirm' => __('Are you sure you want to approve this product?'),
+                                                ],
                                             ) ?>
                                             
                                             <!-- Reject -->
@@ -265,8 +265,8 @@ $this->Html->css('willow-admin', ['block' => true]);
                                                     'class' => 'btn btn-sm btn-outline-danger',
                                                     'escape' => false,
                                                     'title' => __('Reject'),
-                                                    'confirm' => __('Are you sure you want to reject this product?')
-                                                ]
+                                                    'confirm' => __('Are you sure you want to reject this product?'),
+                                                ],
                                             ) ?>
                                         </div>
                                     </td>
@@ -292,13 +292,13 @@ $this->Html->css('willow-admin', ['block' => true]);
                     <p class="text-muted">
                         <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
                     </p>
-                <?php else: ?>
+                <?php else : ?>
                     <div class="text-center py-4">
                         <p><?= __('No products pending review found.') ?></p>
                         <?= $this->Html->link(
                             __('View all products'),
                             ['action' => 'index'],
-                            ['class' => 'btn btn-primary']
+                            ['class' => 'btn btn-primary'],
                         ) ?>
                     </div>
                 <?php endif; ?>

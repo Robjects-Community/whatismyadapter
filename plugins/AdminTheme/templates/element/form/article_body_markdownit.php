@@ -37,23 +37,25 @@
             </button>
         </div>
         <div class="mb-3">
-            <?php echo $this->Form->control('markdown',
+            <?php echo $this->Form->control(
+                'markdown',
                 [
                     'id' => 'article-markdown',
                     'rows' => '30',
                     'class' => 'form-control' . ($this->Form->isFieldError('markdown') ? ' is-invalid' : ''),
                     'label' => false,
-                ]); ?>
-                <?php if ($this->Form->isFieldError('markdown')): ?>
+                ],
+            ); ?>
+                <?php if ($this->Form->isFieldError('markdown')) : ?>
                 <div class="invalid-feedback">
                     <?= $this->Form->error('markdown') ?>
                 </div>
-            <?php endif; ?>
+                <?php endif; ?>
         </div>
         <?php echo $this->Form->control('body', [
             'type' => 'textarea',
             'id' => 'article-body',
-            'style' => 'display: none;'
+            'style' => 'display: none;',
         ]); ?>
     </div>
     <div class="tab-pane" id="preview" role="tabpanel" aria-labelledby="preview-tab">

@@ -4,14 +4,14 @@
  * @var iterable<\App\Model\Entity\Image> $images
  */
 ?>
-<?php foreach ($images as $image): ?>
+<?php foreach ($images as $image) : ?>
     <div class="col-6 col-md-4 col-lg-3 image-item" data-image-id="<?= h($image->id) ?>">
         <div class="card h-100">
             <div class="position-relative">
                 <?= $this->Html->image($image->getImageUrlBySize('thumbnail'), [
                     'class' => 'card-img-top',
                     'style' => 'height: 120px; object-fit: cover;',
-                    'alt' => h($image->alt_text ?: $image->name)
+                    'alt' => h($image->alt_text ?: $image->name),
                 ]) ?>
                 <div class="position-absolute top-0 end-0 p-1">
                     <span class="badge bg-primary">

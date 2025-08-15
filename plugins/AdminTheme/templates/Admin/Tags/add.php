@@ -2,18 +2,18 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Tag $tag
- * @var \Cake\Collection\CollectionInterface|string[] $articles
+ * @var \Cake\Collection\CollectionInterface|array<string> $articles
  */
 ?>
-<?php if (!$tag->isNew()): ?>
-<?php
+<?php if (!$tag->isNew()) : ?>
+    <?php
     echo $this->element('actions_card', [
         'modelName' => 'Tag',
         'controllerName' => 'Tags',
         'entity' => $tag,
-        'entityDisplayName' => $tag->title
+        'entityDisplayName' => $tag->title,
     ]);
-?>
+    ?>
 <?php endif; ?>
 <div class="container mt-4">
     <div class="row">

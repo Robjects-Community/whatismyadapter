@@ -6,14 +6,14 @@
  * @var string $viewType
  */
 ?>
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('List Images'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Image'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-            <?php if ($galleryId): ?>
+            <?php if ($galleryId) : ?>
                 <?= $this->Html->link(__('Back to Gallery'), ['controller' => 'ImageGalleries', 'action' => 'manageImages', $galleryId], ['class' => 'side-nav-item']) ?>
             <?php endif; ?>
         </div>
@@ -24,7 +24,7 @@
             
             <?= $this->Form->create(null, [
                 'url' => ['controller' => 'ImageGalleries', 'action' => 'addImages', $galleryId],
-                'id' => 'add-images-form'
+                'id' => 'add-images-form',
             ]) ?>
             
             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -36,11 +36,12 @@
                     <?= $this->Form->button(__('Add Selected Images'), [
                         'class' => 'btn btn-primary',
                         'id' => 'submit-button',
-                        'disabled' => true
+                        'disabled' => true,
                     ]) ?>
-                    <?= $this->Html->link(__('Cancel'), 
-                        ['controller' => 'ImageGalleries', 'action' => 'manageImages', $galleryId], 
-                        ['class' => 'btn btn-secondary']
+                    <?= $this->Html->link(
+                        __('Cancel'),
+                        ['controller' => 'ImageGalleries', 'action' => 'manageImages', $galleryId],
+                        ['class' => 'btn btn-secondary'],
                     ) ?>
                 </div>
             </div>
@@ -57,13 +58,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($images as $image): ?>
+                        <?php foreach ($images as $image) : ?>
                         <tr>
                             <td>
                                 <?= $this->Form->checkbox('image_ids[]', [
                                     'value' => $image->id,
                                     'class' => 'image-checkbox form-check-input',
-                                    'hiddenField' => false
+                                    'hiddenField' => false,
                                 ]) ?>
                             </td>
                             <td>

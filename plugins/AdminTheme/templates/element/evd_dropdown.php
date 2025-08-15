@@ -6,24 +6,24 @@
         <ul class="dropdown-menu">
             <li>
                 <?= $this->Html->link(
-                    __('Edit'), 
-                    isset($controller) ? ['controller' => $controller, 'action' => 'edit', $model->id] : ['action' => 'edit', $model->id], 
-                    ['class' => 'dropdown-item']
+                    __('Edit'),
+                    isset($controller) ? ['controller' => $controller, 'action' => 'edit', $model->id] : ['action' => 'edit', $model->id],
+                    ['class' => 'dropdown-item'],
                 ) ?>
             </li>
             <li>
                 <?= $this->Html->link(
-                    __('View'), 
-                    isset($controller) ? ['controller' => $controller, 'action' => 'view', $model->id] : ['action' => 'view', $model->id], 
-                    ['class' => 'dropdown-item']
+                    __('View'),
+                    isset($controller) ? ['controller' => $controller, 'action' => 'view', $model->id] : ['action' => 'view', $model->id],
+                    ['class' => 'dropdown-item'],
                 ) ?>
             </li>
             <li><hr class="dropdown-divider"></li>
             <li>
                 <?= $this->Form->postLink(
-                    __('Delete'), 
-                    isset($controller) ? ['controller' => $controller, 'action' => 'delete', $model->id] : ['action' => 'delete', $model->id], 
-                    ['confirm' => __('Are you sure you want to delete {0}?', $model->{$display}), 'class' => 'dropdown-item text-danger']
+                    __('Delete'),
+                    isset($controller) ? ['controller' => $controller, 'action' => 'delete', $model->id] : ['action' => 'delete', $model->id],
+                    ['confirm' => __('Are you sure you want to delete {0}?', $model->{$display}), 'class' => 'dropdown-item text-danger'],
                 ) ?>
             </li>
         </ul>

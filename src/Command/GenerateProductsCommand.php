@@ -464,8 +464,8 @@ class GenerateProductsCommand extends Command
         // Slight price adjustment based on status (for realism)
         $multiplier = match ($status) {
             'approved' => rand(95, 105) / 100, // Approved products vary normally
-            'pending' => rand(90, 110) / 100,  // Pending might have more variation
-            'rejected' => rand(80, 95) / 100,  // Rejected might be slightly lower
+            'pending' => rand(90, 110) / 100, // Pending might have more variation
+            'rejected' => rand(80, 95) / 100, // Rejected might be slightly lower
         };
 
         return round($basePrice * $multiplier, 2);
@@ -480,9 +480,9 @@ class GenerateProductsCommand extends Command
     private function generateReliabilityScore(string $status): float
     {
         return match ($status) {
-            'approved' => rand(750, 1000) / 100,  // 7.5 to 10.0
-            'pending' => rand(0, 500) / 100,      // 0.0 to 5.0 (not yet verified)
-            'rejected' => rand(100, 400) / 100,   // 1.0 to 4.0 (failed verification)
+            'approved' => rand(750, 1000) / 100, // 7.5 to 10.0
+            'pending' => rand(0, 500) / 100, // 0.0 to 5.0 (not yet verified)
+            'rejected' => rand(100, 400) / 100, // 1.0 to 4.0 (failed verification)
         };
     }
 
@@ -620,7 +620,12 @@ class GenerateProductsCommand extends Command
 
         for ($i = 0; $i < $tagsToCreate; $i++) {
             $tag = $tagsTable->newEmptyEntity();
-            $tagTitle = $sampleTags[$i % count($sampleTags)] . ($i >= count($sampleTags) ? ' ' . (intval($i / count($sampleTags)) + 1) : '');
+            $tagTitle = $sampleTags[$i % count($sampleTags)]
+                . (
+                    $i >= count($sampleTags)
+                        ? ' ' . (intval($i / count($sampleTags)) + 1)
+                        : ''
+                );
             $tag->title = $tagTitle;
             $tag->description = "Sample tag: {$tagTitle}";
 

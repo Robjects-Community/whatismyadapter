@@ -4,7 +4,7 @@
  * @var iterable<\App\Model\Entity\User> $users
  */
 ?>
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <?php $activeFilter = $this->request->getQuery('status'); ?>
 <table class="table table-striped">
     <thead>
@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($users as $user): ?>
+      <?php foreach ($users as $user) : ?>
       <tr>
           <td>
             <?php if (!empty($user->image)) : ?>

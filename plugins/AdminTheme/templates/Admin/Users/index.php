@@ -4,7 +4,7 @@
  * @var iterable<\App\Model\Entity\User> $users
  */
 ?>
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <header class="py-3 mb-3 border-bottom">
     <div class="container-fluid d-flex align-items-center users">
       <div class="d-flex align-items-center me-auto">
@@ -15,29 +15,29 @@
               <?php $activeFilter = $this->request->getQuery('status');  ?>
               <li>
                 <?= $this->Html->link(
-                    __('All'), 
-                    ['action' => 'index'], 
+                    __('All'),
+                    ['action' => 'index'],
                     [
-                      'class' => 'dropdown-item' . (null === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === null ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
               <li>
                 <?= $this->Html->link(
-                    __('Active'), 
+                    __('Active'),
                     ['action' => 'index', '?' => ['status' => 1]],
                     [
-                      'class' => 'dropdown-item' . ('1' === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === '1' ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
               <li>
                 <?= $this->Html->link(
-                    __('Inactive'), 
+                    __('Inactive'),
                     ['action' => 'index', '?' => ['status' => 0]],
                     [
-                      'class' => 'dropdown-item' . ('0' === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === '0' ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
             </ul>
@@ -64,12 +64,12 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($users as $user): ?>
+      <?php foreach ($users as $user) : ?>
       <tr>
           <td>
             <?php if (!empty($user->image)) : ?>
             <div class="position-relative">
-              <?= $this->element('image/icon', ['model' => $user, 'icon' => $user->teenyImageUrl, 'preview' => $user->largeImageUrl]); ?>
+                <?= $this->element('image/icon', ['model' => $user, 'icon' => $user->teenyImageUrl, 'preview' => $user->largeImageUrl]); ?>
             </div>
             <?php endif; ?>
           </td>
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let url = `<?= $this->Url->build(['action' => 'index']) ?>`;
 
-            <?php if (null !== $activeFilter): ?>
+            <?php if ($activeFilter !== null) : ?>
             url += `?status=<?= urlencode($activeFilter) ?>`;
             <?php endif; ?>
 

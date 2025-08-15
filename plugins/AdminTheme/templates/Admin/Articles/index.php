@@ -14,29 +14,29 @@
               <?php $activeFilter = $this->request->getQuery('status'); ?>
               <li>
                 <?= $this->Html->link(
-                    __('All'), 
+                    __('All'),
                     ['action' => 'index'],
                     [
-                      'class' => 'dropdown-item' . (null === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === null ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
               <li>
                 <?= $this->Html->link(
-                    __('Un-Published'), 
+                    __('Un-Published'),
                     ['action' => 'index', '?' => ['status' => 0]],
                     [
-                      'class' => 'dropdown-item' . ('0' === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === '0' ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
               <li>
                 <?= $this->Html->link(
-                    __('Published'), 
+                    __('Published'),
                     ['action' => 'index', '?' => ['status' => 1]],
                     [
-                      'class' => 'dropdown-item' . ('1' === $activeFilter ? ' active' : '')
-                    ]
+                      'class' => 'dropdown-item' . ($activeFilter === '1' ? ' active' : ''),
+                    ],
                 ) ?>
               </li>
             </ul>
@@ -59,11 +59,11 @@
         <th scope="col"><?= $this->Paginator->sort('user_id', 'Author') ?></th>
         <th scope="col"><?= $this->Paginator->sort('title') ?></th>
 
-        <?php if (null === $activeFilter) :?>
+        <?php if ($activeFilter === null) :?>
         <th scope="col"><?= $this->Paginator->sort('is_published', 'Status') ?></th>
-        <?php elseif ('1' === $activeFilter) :?>
+        <?php elseif ($activeFilter === '1') :?>
         <th scope="col"><?= $this->Paginator->sort('published') ?></th>
-        <?php elseif ('0' === $activeFilter) :?>
+        <?php elseif ($activeFilter === '0') :?>
         <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
         <?php endif; ?>
 
@@ -71,60 +71,60 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($articles as $article): ?>
+      <?php foreach ($articles as $article) : ?>
       <tr>
         <td>
-          <?php if (!empty($article->image)) : ?>
+            <?php if (!empty($article->image)) : ?>
           <div class="position-relative">
-            <?= $this->element('image/icon',  ['model' => $article, 'icon' => $article->teenyImageUrl, 'preview' => $article->largeImageUrl ]); ?>
+                <?= $this->element('image/icon', ['model' => $article, 'icon' => $article->teenyImageUrl, 'preview' => $article->largeImageUrl ]); ?>
           </div>
-          <?php endif; ?>
+            <?php endif; ?>
         </td>
         <td>
-          <?php if (isset($article->_matchingData['Users']) && $article->_matchingData['Users']->username): ?>
-              <?= $this->Html->link(
-                  h($article->_matchingData['Users']->username),
-                  ['controller' => 'Users', 'action' => 'view', $article->_matchingData['Users']->id]
-              ) ?>
-          <?php else: ?>
-              <?= h(__('Unknown Author')) ?>
-          <?php endif; ?>
+            <?php if (isset($article->_matchingData['Users']) && $article->_matchingData['Users']->username) : ?>
+                <?= $this->Html->link(
+                    h($article->_matchingData['Users']->username),
+                    ['controller' => 'Users', 'action' => 'view', $article->_matchingData['Users']->id],
+                ) ?>
+            <?php else : ?>
+                <?= h(__('Unknown Author')) ?>
+            <?php endif; ?>
         </td>
         <td>
-          <?php if ($article->is_published == true): ?>
-              <?= $this->Html->link(
-                  html_entity_decode($article->title),
-                  [
+            <?php if ($article->is_published == true) : ?>
+                <?= $this->Html->link(
+                    html_entity_decode($article->title),
+                    [
                       'controller' => 'Articles',
                       'action' => 'view-by-slug',
                       'slug' => $article->slug,
-                      '_name' => 'article-by-slug'
-                  ],
-                  ['escape' => false]
-              );
-              ?>
-          <?php else: ?>
-              <?= $this->Html->link(
-                  html_entity_decode($article->title),
-                  [
+                      '_name' => 'article-by-slug',
+                    ],
+                    ['escape' => false],
+                );
+                ?>
+            <?php else : ?>
+                <?= $this->Html->link(
+                    html_entity_decode($article->title),
+                    [
                       'prefix' => 'Admin',
                       'controller' => 'Articles',
                       'action' => 'view',
-                      $article->id
-                  ],
-                  ['escape' => false]
-              ) ?>
-          <?php endif; ?>
+                      $article->id,
+                    ],
+                    ['escape' => false],
+                ) ?>
+            <?php endif; ?>
         </td>
-        <?php if (null === $activeFilter) :?>
+            <?php if ($activeFilter === null) :?>
         <td><?= $article->is_published ? '<span class="badge bg-success">' . __('Published') . '</span>' : '<span class="badge bg-warning">' . __('Un-Published') . '</span>'; ?></td>
-        <?php elseif ('1' === $activeFilter) :?>
+            <?php elseif ($activeFilter === '1') :?>
         <td><?= h($article->published) ?></td>
-        <?php elseif ('0' === $activeFilter) :?>
+            <?php elseif ($activeFilter === '0') :?>
         <td><?= h($article->modified) ?></td>
-        <?php endif; ?>
+            <?php endif; ?>
         <td>
-          <?= $this->element('evd_dropdown', ['model' => $article, 'display' => 'title']); ?>
+            <?= $this->element('evd_dropdown', ['model' => $article, 'display' => 'title']); ?>
         </td>
       </tr>
       <?php endforeach; ?>
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let url = `<?= $this->Url->build(['action' => 'index']) ?>`;
 
-            <?php if (null !== $activeFilter): ?>
+            <?php if ($activeFilter !== null) : ?>
             url += `?status=<?= urlencode($activeFilter) ?>`;
             <?php endif; ?>
 

@@ -4,7 +4,7 @@
  * @var iterable<\App\Model\Entity\Tag> $tags
  */
 ?>
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($tags as $tag): ?>
+    <?php foreach ($tags as $tag) : ?>
     <tr>
         <td>
           <?php if (!empty($tag->image)) : ?>
@@ -29,10 +29,10 @@
             <td><?= h($tag->slug) ?></td>
             <td>
               <?php if (!empty($tag->parent_tag)) : ?>
-                  <?= $this->Html->link(
-                      h($tag->parent_tag->title), 
-                      ['controller' => 'Tags', 'action' => 'view', $tag->parent_tag->id]
-                  ); ?>
+                    <?= $this->Html->link(
+                        h($tag->parent_tag->title),
+                        ['controller' => 'Tags', 'action' => 'view', $tag->parent_tag->id],
+                    ); ?>
               <?php endif; ?>
             </td>
         <td>

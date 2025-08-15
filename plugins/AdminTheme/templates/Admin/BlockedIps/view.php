@@ -9,9 +9,9 @@
         'modelName' => 'Blocked Ip',
         'controllerName' => 'Blocked Ips',
         'entity' => $blockedIp,
-        'entityDisplayName' => $blockedIp->ip_address
+        'entityDisplayName' => $blockedIp->ip_address,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">

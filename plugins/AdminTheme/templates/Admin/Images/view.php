@@ -4,15 +4,15 @@
  * @var \App\Model\Entity\Image $image
  */
 ?>
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <?php
     echo $this->element('actions_card', [
         'modelName' => 'Image',
         'controllerName' => 'Images',
         'entity' => $image,
-        'entityDisplayName' => $image->name
+        'entityDisplayName' => $image->name,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
@@ -25,14 +25,16 @@
                             <td><?= h($image->name) ?></td>
                         </tr>
                         <tr>
-                            <?php if (!empty($image->image)): ?>
+                            <?php if (!empty($image->image)) : ?>
                                 <div class="mb-3">
-                                <?= $this->Html->image(SettingsManager::read('ImageSizes.large', '200') . '/' . $image->image, 
+                                <?= $this->Html->image(
+                                    SettingsManager::read('ImageSizes.large', '200') . '/' . $image->image,
                                     [
                                         'pathPrefix' => 'files/Images/image/',
                                         'alt' => $image->alt_text,
                                         'class' => 'img-thumbnail',
-                                    ])?>
+                                    ],
+                                )?>
                                 </div>
                             <?php endif; ?>
                         </tr>

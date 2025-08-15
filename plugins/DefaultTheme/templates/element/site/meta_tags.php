@@ -1,5 +1,5 @@
 <?php use App\Utility\SettingsManager; ?>
-<?php if (isset($model)): ?>
+<?php if (isset($model)) : ?>
     <title><?= h($model->meta_title ?: $model->title) ?></title>
     <meta name="description" content="<?= h($model->meta_description ?: substr(strip_tags($model->description ?? $model->body ?? ''), 0, 160)) ?>">
     <meta name="keywords" content="<?= h($model->meta_keywords) ?>">
@@ -26,7 +26,7 @@
     <!-- Instagram -->
     <meta name="instagram:title" content="<?= h($model->meta_title ?: $model->title) ?>">
     <meta name="instagram:description" content="<?= h($model->instagram_description ?: $model->meta_description) ?>">
-<?php else: ?>
+<?php else : ?>
     <title><?= SettingsManager::read('SEO.siteStrapline') ?></title>
     <meta name="description" content="<?= SettingsManager::read('SEO.siteMetaDescription', 'Meta Description') ?>">
     <meta name="keywords" content="<?= SettingsManager::read('SEO.siteMetakeywords', 'Meta Keywords') ?>">

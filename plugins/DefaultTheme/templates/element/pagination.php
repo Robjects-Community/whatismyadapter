@@ -18,31 +18,31 @@ $this->Paginator->options([
             'tag' => $this->request->getQuery('tag'),
             'year' => $this->request->getQuery('year'),
             'month' => $this->request->getQuery('month'),
-        ])
-    ]
+        ]),
+    ],
 ]);
 ?>
-<?php if ($this->Paginator->total() > 1): ?>
+<?php if ($this->Paginator->total() > 1) : ?>
 <div class="pagination-wrapper my-5">
     <nav aria-label="<?= __('Article pagination') ?>" class="d-flex justify-content-center">
         <ul class="pagination pagination-lg shadow-sm">
             <?= $this->Paginator->prev('&laquo;', [
                 'escape' => false,
                 'class' => 'page-link',
-                'title' => __('Previous page')
+                'title' => __('Previous page'),
             ]) ?>
             <?= $this->Paginator->numbers([
-                'class' => 'page-link'
+                'class' => 'page-link',
             ]) ?>
             <?= $this->Paginator->next('&raquo;', [
                 'escape' => false,
                 'class' => 'page-link',
-                'title' => __('Next page')
+                'title' => __('Next page'),
             ]) ?>
         </ul>
     </nav>
     
-    <?php if ($this->Paginator->total() > 0): ?>
+    <?php if ($this->Paginator->total() > 0) : ?>
     <div class="pagination-info text-center mt-3">
         <small class="text-muted">
             <?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>

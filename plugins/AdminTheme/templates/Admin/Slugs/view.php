@@ -11,9 +11,9 @@
         'modelName' => 'Slug',
         'controllerName' => 'Slugs',
         'entity' => $slug,
-        'entityDisplayName' => $slug->slug
+        'entityDisplayName' => $slug->slug,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
@@ -29,7 +29,7 @@
                             };
 
                             // Only create link if it's a Tag or a published Article
-                            $showLink = $slug->model === 'Tags' || 
+                            $showLink = $slug->model === 'Tags' ||
                                 ($slug->model === 'Articles' && $relatedRecord->is_published);
 
                             if ($routeName && $showLink) {
@@ -41,8 +41,8 @@
                                     ],
                                     [
                                         'class' => 'text-decoration-none',
-                                        'target' => '_blank'
-                                    ]
+                                        'target' => '_blank',
+                                    ],
                                 );
                             } else {
                                 echo h($slug->slug);
@@ -68,23 +68,23 @@
                         <tr>
                             <th><?= __('Related Content') ?></th>
                             <td>
-                                <?php if ($relatedRecord): ?>
+                                <?php if ($relatedRecord) : ?>
                                     <?= $this->Html->link(
                                         h($relatedRecord->title),
                                         [
                                             'controller' => $slug->model,
                                             'action' => 'view',
-                                            $relatedRecord->id
+                                            $relatedRecord->id,
                                         ],
                                         [
                                             'class' => 'text-decoration-none',
-                                            'escape' => false
-                                        ]
+                                            'escape' => false,
+                                        ],
                                     ) ?>
-                                    <?php if ($slug->model === 'Articles' && !$relatedRecord->is_published): ?>
+                                    <?php if ($slug->model === 'Articles' && !$relatedRecord->is_published) : ?>
                                         <span class="badge bg-warning ms-2"><?= __('Not Published') ?></span>
                                     <?php endif; ?>
-                                <?php else: ?>
+                                <?php else : ?>
                                     <?= h($slug->foreign_key) ?>
                                 <?php endif; ?>
                             </td>
@@ -93,7 +93,7 @@
                             <th><?= __('Created') ?></th>
                             <td><?= h($slug->created) ?></td>
                         </tr>
-                        <?php if ($relatedRecord): ?>
+                        <?php if ($relatedRecord) : ?>
                         <tr>
                             <th><?= __('Preview') ?></th>
                             <td>
@@ -105,34 +105,34 @@
                                 };
 
                                 // Only show preview button if it's a Tag or a published Article
-                                $showPreview = $slug->model === 'Tags' || 
+                                $showPreview = $slug->model === 'Tags' ||
                                     ($slug->model === 'Articles' && $relatedRecord->is_published);
 
-                                if ($routeName && $showPreview) {
-                                    echo $this->Html->link(
-                                        __('View on site'),
-                                        [
-                                            '_name' => $routeName,
-                                            'slug' => $slug->slug,
-                                        ],
-                                        [
-                                            'class' => 'btn btn-sm btn-outline-primary',
-                                            'target' => '_blank'
-                                        ]
-                                    );
-                                } elseif ($slug->model === 'Articles') {
-                                    echo '<span class="text-muted">' . __('Not available until published') . '</span>';
-                                }
-                                ?>
+    if ($routeName && $showPreview) {
+        echo $this->Html->link(
+            __('View on site'),
+            [
+                '_name' => $routeName,
+                'slug' => $slug->slug,
+            ],
+            [
+                'class' => 'btn btn-sm btn-outline-primary',
+                'target' => '_blank',
+            ],
+        );
+    } elseif ($slug->model === 'Articles') {
+        echo '<span class="text-muted">' . __('Not available until published') . '</span>';
+    }
+    ?>
                             </td>
                         </tr>
                         <?php endif; ?>
-                        <?php if (!empty($relatedSlugs)): ?>
+                        <?php if (!empty($relatedSlugs)) : ?>
                         <tr>
                             <th><?= __('Other Slugs') ?></th>
                             <td>
                                 <ul class="list-unstyled mb-0">
-                                    <?php foreach ($relatedSlugs as $relatedSlug): ?>
+                                    <?php foreach ($relatedSlugs as $relatedSlug) : ?>
                                         <li>
                                             <?= h($relatedSlug->slug) ?>
                                             <small class="text-muted">

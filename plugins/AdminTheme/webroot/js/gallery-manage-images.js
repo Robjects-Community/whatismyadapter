@@ -2,7 +2,7 @@
  * Gallery Image Management
  * Handles drag-and-drop image ordering and removal for the manage images interface
  */
-(function() {
+(function () {
     'use strict';
 
     let sortableInstance = null;
@@ -11,7 +11,8 @@
     /**
      * Initialize the gallery image management
      */
-    function init(options) {
+    function init(options)
+    {
         config = Object.assign({
             galleryId: null,
             csrfToken: null,
@@ -27,7 +28,8 @@
     /**
      * Initialize Sortable.js for drag and drop
      */
-    function initializeSortable() {
+    function initializeSortable()
+    {
         const sortableElement = document.getElementById('sortable-images');
         if (!sortableElement || typeof Sortable === 'undefined') {
             return;
@@ -38,7 +40,7 @@
             ghostClass: 'sortable-ghost',
             chosenClass: 'sortable-chosen',
             dragClass: 'sortable-drag',
-            onEnd: function(evt) {
+            onEnd: function (evt) {
                 updateImageOrder();
             }
         });
@@ -47,8 +49,9 @@
     /**
      * Bind remove image button events
      */
-    function bindRemoveEvents() {
-        document.addEventListener('click', function(e) {
+    function bindRemoveEvents()
+    {
+        document.addEventListener('click', function (e) {
             if (e.target.classList.contains('remove-image')) {
                 e.preventDefault();
                 const imageId = e.target.getAttribute('data-image-id');
@@ -62,16 +65,20 @@
     /**
      * Update image order after drag and drop
      */
-    function updateImageOrder() {
+    function updateImageOrder()
+    {
         if (!config.updateOrderUrl) {
             console.warn('Update order URL not configured');
             return;
         }
 
         const sortableElement = document.getElementById('sortable-images');
-        if (!sortableElement) return;
+        if (!sortableElement) {
+            return;
+        }
 
-        const imageIds = Array.from(sortableElement.children).map(item => 
+        const imageIds = Array.from(sortableElement.children).map(
+            item =>
             item.getAttribute('data-image-id')
         );
 
@@ -105,7 +112,8 @@
     /**
      * Remove an image from the gallery
      */
-    function removeImage(imageId, buttonElement) {
+    function removeImage(imageId, buttonElement)
+    {
         if (!confirm(config.confirmMessage)) {
             return;
         }
@@ -145,7 +153,8 @@
     /**
      * Show a notification to the user
      */
-    function showNotification(message, type = 'info') {
+    function showNotification(message, type = 'info')
+    {
         // Use existing notification system if available, otherwise create simple alert
         if (window.showToast && typeof window.showToast === 'function') {
             window.showToast(message, type);
@@ -154,15 +163,15 @@
 
         // Fallback: create a simple notification
         const notification = document.createElement('div');
-        notification.className = `alert alert-${type === 'error' ? 'danger' : type} alert-dismissible fade show`;
+        notification.className = `alert alert - ${type === 'error' ? 'danger' : type} alert - dismissible fade show`;
         notification.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
         notification.innerHTML = `
             ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            < button type = "button" class = "btn-close" data - bs - dismiss = "alert" aria - label = "Close" > < / button >
         `;
-        
+
         document.body.appendChild(notification);
-        
+
         // Auto remove after 5 seconds
         setTimeout(() => {
             if (notification.parentNode) {
@@ -172,7 +181,7 @@
     }
 
     // Auto-initialize if window.GalleryManageConfig is available
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         if (window.GalleryManageConfig) {
             init(window.GalleryManageConfig);
         }

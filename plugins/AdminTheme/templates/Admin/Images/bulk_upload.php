@@ -12,9 +12,9 @@
         'modelName' => 'Image',
         'controllerName' => 'Images',
         'entity' => null,
-        'entityDisplayName' => __('Bulk Upload Images')
+        'entityDisplayName' => __('Bulk Upload Images'),
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">

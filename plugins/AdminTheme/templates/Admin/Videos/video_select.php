@@ -2,7 +2,7 @@
 /**
  * Video Picker - For selecting YouTube videos to insert into content
  * Modern layout with separated search form and results for smooth AJAX updates
- * 
+ *
  * @var \App\View\AppView $this
  * @var iterable $videos
  * @var string|null $searchTerm
@@ -31,14 +31,14 @@ $channelId = $channelId ?? 'your-api-key-here';
                            placeholder="<?= __('Search YouTube videos by title, description...') ?>"
                            value="<?= h($searchTerm) ?>"
                            autocomplete="off">
-                    <?php if ($searchTerm): ?>
+                    <?php if ($searchTerm) : ?>
                         <button class="btn btn-outline-secondary" type="button" id="clearVideoSearch">
                             <i class="fas fa-times"></i>
                         </button>
                     <?php endif; ?>
                 </div>
             </div>
-            <?php if ($channelId !== 'your-api-key-here'): ?>
+            <?php if ($channelId !== 'your-api-key-here') : ?>
             <div class="col-md-4">
                 <div class="form-check form-switch">
                     <input class="form-check-input" 
@@ -66,9 +66,9 @@ $channelId = $channelId ?? 'your-api-key-here';
 
     <!-- Dynamic Results Container (Gets replaced via AJAX) -->
     <div id="video-results" class="willow-results-container">
-        <?php if (!empty($videos)): ?>
+        <?php if (!empty($videos)) : ?>
             <div class="row g-3 p-3">
-                <?php foreach ($videos as $video): ?>
+                <?php foreach ($videos as $video) : ?>
                     <div class="col-md-6 col-lg-4">
                         <div class="card willow-picker-card h-100 shadow-sm">
                             <!-- Video Thumbnail -->
@@ -87,7 +87,7 @@ $channelId = $channelId ?? 'your-api-key-here';
                                 </div>
                                 
                                 <!-- Duration overlay (if available) -->
-                                <?php if (!empty($video['duration'])): ?>
+                                <?php if (!empty($video['duration'])) : ?>
                                 <div class="position-absolute bottom-0 end-0 m-2">
                                     <span class="badge bg-dark bg-opacity-75 small">
                                         <?= h($video['duration']) ?>
@@ -102,7 +102,7 @@ $channelId = $channelId ?? 'your-api-key-here';
                                     <?= h($this->Text->truncate($video['title'], 50)) ?>
                                 </h6>
                                 
-                                <?php if (!empty($video['description'])): ?>
+                                <?php if (!empty($video['description'])) : ?>
                                     <p class="card-text text-muted small mb-2">
                                         <?= h($this->Text->truncate($video['description'], 80, ['exact' => false])) ?>
                                     </p>
@@ -113,7 +113,7 @@ $channelId = $channelId ?? 'your-api-key-here';
                                         <i class="fab fa-youtube me-1"></i>
                                         YouTube
                                     </span>
-                                    <?php if (!empty($video['publishedAt'])): ?>
+                                    <?php if (!empty($video['publishedAt'])) : ?>
                                         <span>
                                             <?= date('M j, Y', strtotime($video['publishedAt'])) ?>
                                         </span>
@@ -135,11 +135,11 @@ $channelId = $channelId ?? 'your-api-key-here';
                     </div>
                 <?php endforeach; ?>
             </div>
-        <?php else: ?>
+        <?php else : ?>
             <!-- Beautiful Empty State -->
             <div class="willow-empty-state p-5">
                 <div class="text-center">
-                    <?php if ($searchTerm): ?>
+                    <?php if ($searchTerm) : ?>
                         <i class="fab fa-youtube fa-3x text-muted mb-3"></i>
                         <h5 class="text-muted mb-2"><?= __('No videos found') ?></h5>
                         <p class="text-muted mb-3">
@@ -149,7 +149,7 @@ $channelId = $channelId ?? 'your-api-key-here';
                             <i class="fas fa-times me-2"></i>
                             <?= __('Clear Search') ?>
                         </button>
-                    <?php else: ?>
+                    <?php else : ?>
                         <i class="fab fa-youtube fa-3x text-muted mb-3"></i>
                         <h5 class="text-muted mb-2"><?= __('Search for videos') ?></h5>
                         <p class="text-muted">

@@ -1,7 +1,7 @@
 <?php
 /**
  * Empty State Element
- * 
+ *
  * @var \App\View\AppView $this
  * @var array $options Configuration options
  */
@@ -41,19 +41,19 @@ switch ($config['type']) {
 <div class="<?= h($config['class']) ?>">
     <i class="<?= h($config['icon']) ?> <?= h($config['iconSize']) ?> <?= h($config['iconClass']) ?>"></i>
     
-    <?php if ($config['title']): ?>
+    <?php if ($config['title']) : ?>
         <h4 class="<?= h($config['titleClass']) ?>"><?= h($config['title']) ?></h4>
     <?php endif; ?>
     
-    <?php if ($config['message']): ?>
+    <?php if ($config['message']) : ?>
         <p class="<?= h($config['messageClass']) ?>"><?= h($config['message']) ?></p>
     <?php endif; ?>
     
-    <?php if ($config['actionText'] && $config['actionUrl']): ?>
+    <?php if ($config['actionText'] && $config['actionUrl']) : ?>
         <?= $this->Html->link(
             '<i class="fas fa-plus"></i> ' . h($config['actionText']),
             $config['actionUrl'],
-            ['class' => $config['actionClass'], 'escape' => false]
+            ['class' => $config['actionClass'], 'escape' => false],
         ) ?>
     <?php endif; ?>
 </div>

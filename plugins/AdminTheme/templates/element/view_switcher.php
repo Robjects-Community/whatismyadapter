@@ -1,7 +1,7 @@
 <?php
 /**
  * View Switcher Element
- * 
+ *
  * @var \App\View\AppView $this
  * @var string $currentView Current view type (list|grid)
  * @var array $queryParams Current query parameters to preserve
@@ -24,8 +24,8 @@ $queryParams = $queryParams ?? [];
         [
             'class' => 'btn ' . ($currentView === 'list' ? 'btn-primary' : 'btn-outline-secondary'),
             'escape' => false,
-            'title' => __('List View')
-        ]
+            'title' => __('List View'),
+        ],
     ) ?>
     <?= $this->Html->link(
         '<i class="fas fa-th"></i>' . ($config['showLabels'] ? ' ' . __('Grid') : ''),
@@ -33,7 +33,7 @@ $queryParams = $queryParams ?? [];
         [
             'class' => 'btn ' . ($currentView === 'grid' ? 'btn-primary' : 'btn-outline-secondary'),
             'escape' => false,
-            'title' => __('Grid View')
-        ]
+            'title' => __('Grid View'),
+        ],
     ) ?>
 </div>

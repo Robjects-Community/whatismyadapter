@@ -4,7 +4,7 @@ use App\Utility\FileUtility;
 
 /**
  * Image picker item element
- * 
+ *
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Image $item Image entity
  * @var array $pickerOptions Picker configuration
@@ -15,14 +15,16 @@ $item = $item ?? null;
 $pickerOptions = $pickerOptions ?? [];
 $viewType = $viewType ?? 'grid';
 
-if (!$item) return;
+if (!$item) {
+    return;
+}
 
 $imageUrl = $item->getImageUrl('thumbnail');
 $imageName = h($item->name);
 $imageAlt = h($item->alt_text ?: $item->name);
 ?>
 
-<?php if ($viewType === 'list'): ?>
+<?php if ($viewType === 'list') : ?>
     <div class="list-group-item list-group-item-action insert-image" 
          data-id="<?= $item->id ?>"
          data-src="<?= h($item->image) ?>"
@@ -36,7 +38,7 @@ $imageAlt = h($item->alt_text ?: $item->name);
                  style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
             <div class="flex-grow-1">
                 <h6 class="mb-1"><?= $imageName ?></h6>
-                <?php if ($item->alt_text): ?>
+                <?php if ($item->alt_text) : ?>
                     <small class="text-muted"><?= $imageAlt ?></small>
                 <?php endif; ?>
             </div>
@@ -45,7 +47,7 @@ $imageAlt = h($item->alt_text ?: $item->name);
             </div>
         </div>
     </div>
-<?php else: ?>
+<?php else : ?>
     <div class="card h-100 image-picker-card">
         <div class="card-body p-2 text-center">
             <img src="<?= $imageUrl ?>" 

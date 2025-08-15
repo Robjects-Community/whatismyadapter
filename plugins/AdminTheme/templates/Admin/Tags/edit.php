@@ -2,7 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Tag $tag
- * @var string[]|\Cake\Collection\CollectionInterface $articles
+ * @var \Cake\Collection\CollectionInterface|array<string> $articles
  */
 ?>
 <?php
@@ -10,9 +10,9 @@
         'modelName' => 'Tag',
         'controllerName' => 'Tags',
         'entity' => $tag,
-        'entityDisplayName' => $tag->title
+        'entityDisplayName' => $tag->title,
     ]);
-?>
+    ?>
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">

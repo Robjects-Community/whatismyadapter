@@ -13,7 +13,7 @@
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('List Images'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Image'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-            <?php if ($galleryId): ?>
+            <?php if ($galleryId) : ?>
                 <?= $this->Html->link(__('Back to Gallery'), ['controller' => 'ImageGalleries', 'action' => 'manageImages', $galleryId], ['class' => 'side-nav-item']) ?>
             <?php endif; ?>
         </div>
@@ -50,7 +50,7 @@
                     <?= $this->Form->button(__('Add Selected Images'), [
                         'class' => 'btn btn-primary',
                         'id' => 'submit-button',
-                        'disabled' => true
+                        'disabled' => true,
                     ]) ?>
                     <span id="selected-count" class="text-muted ms-2"><?= __('No images selected') ?></span>
                 </div>
@@ -59,22 +59,22 @@
         
         <?= $this->Form->create(null, [
             'url' => ['controller' => 'ImageGalleries', 'action' => 'addImages', $galleryId],
-            'id' => 'add-images-form'
+            'id' => 'add-images-form',
         ]) ?>
             
             <div id="ajax-target">
                 <div class="album py-5 bg-body-tertiary">
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            <?php foreach ($images as $image): ?>
+                            <?php foreach ($images as $image) : ?>
                                     <div class="col">
                                         <div class="card shadow-sm position-relative">
                                             <div class="form-check position-absolute top-0 start-0 m-2" style="z-index: 10;">
                                                 <?= $this->Form->checkbox('image_ids[]', [
-                                    'value' => $image->id,
-                                    'class' => 'image-checkbox form-check-input',
-                                    'id' => 'img-' . $image->id,
-                                    'hiddenField' => false
+                                                'value' => $image->id,
+                                                'class' => 'image-checkbox form-check-input',
+                                                'id' => 'img-' . $image->id,
+                                                'hiddenField' => false,
                                 ]) ?>
                                                 <label class="form-check-label visually-hidden" for="img-<?= h($image->id) ?>">
                                                     <?= __('Select {0}', h($image->name)) ?>
@@ -82,11 +82,13 @@
                                             </div>
                                             
                                             <?= $this->Html->image(
-                                                SettingsManager::read('ImageSizes.large') . '/' . $image->image, [
+                                                SettingsManager::read('ImageSizes.large') . '/' . $image->image,
+                                                [
                                                     'pathPrefix' => 'files/Images/image/',
                                                     'alt' => $image->alt_text,
-                                                    'class' => 'card-img-top'
-                                            ]) ?>
+                                                    'class' => 'card-img-top',
+                                                ],
+                                            ) ?>
                                             
                                             <div class="card-body">
                                                 <p class="card-text"><?= h($image->name) ?></p>

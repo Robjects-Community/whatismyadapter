@@ -2,10 +2,10 @@
     <div>
         <?= h($message) ?>
     </div>
-    <?php if (!empty($params['errors'])): ?>
+    <?php if (!empty($params['errors'])) : ?>
         <div>
             <ul>
-                <?php foreach ($params['errors'] as $error): ?>
+                <?php foreach ($params['errors'] as $error) : ?>
                     <li><?= h($error) ?></li>
                 <?php endforeach; ?>
             </ul>

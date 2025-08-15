@@ -4,14 +4,17 @@
  * @var array $cacheInfo
  */
 
-function sanitizeId($name) {
+function sanitizeId($name)
+{
     return preg_replace('/[^a-z0-9]/i', '_', $name);
 }
 
-function formatDateTime(?DateTime $dateTime): string {
+function formatDateTime(?DateTime $dateTime): string
+{
     if ($dateTime === null) {
         return __('Never');
     }
+
     return $dateTime->format('Y-m-d H:i:s');
 }
 ?>
@@ -40,7 +43,7 @@ function formatDateTime(?DateTime $dateTime): string {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($cacheInfo as $name => $info): ?>
+                            <?php foreach ($cacheInfo as $name => $info) : ?>
                                 <tr>
                                     <td><?= h($name) ?></td>
                                     <td><?= formatDateTime($info['last_cleared']) ?></td>
@@ -52,7 +55,7 @@ function formatDateTime(?DateTime $dateTime): string {
                                         <?= $this->Form->postLink(
                                             __('Clear'),
                                             ['action' => 'clear', urlencode($name)],
-                                            ['class' => 'btn btn-sm btn-warning', 'confirm' => __('Are you sure you want to clear {0}?', $name)]
+                                            ['class' => 'btn btn-sm btn-warning', 'confirm' => __('Are you sure you want to clear {0}?', $name)],
                                         ) ?>
                                     </td>
                                 </tr>
@@ -62,7 +65,7 @@ function formatDateTime(?DateTime $dateTime): string {
                                             <div class="card card-body">
                                                 <h6><?= __('Settings') ?></h6>
                                                 <ul class="list-unstyled">
-                                                    <?php foreach ($info['settings'] as $key => $value): ?>
+                                                    <?php foreach ($info['settings'] as $key => $value) : ?>
                                                         <li>
                                                             <strong><?= h($key) ?>:</strong> 
                                                             <?php

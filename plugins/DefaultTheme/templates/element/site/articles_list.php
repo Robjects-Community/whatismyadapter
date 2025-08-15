@@ -13,17 +13,17 @@
                 <div class="sidebar-image-container">
                     <a href="<?= $this->Url->build(['_name' => $article->kind . '-by-slug', 'slug' => $article->slug]) ?>">
                         <?= $this->element('image/icon', [
-                            'model' => $article, 
-                            'icon' => $article->tinyImageUrl, 
+                            'model' => $article,
+                            'icon' => $article->tinyImageUrl,
                             'preview' => false,
-                            'class' => 'sidebar-wrap-image'
+                            'class' => 'sidebar-wrap-image',
                         ]); ?>
                     </a>
                 </div>
                 <?php endif; ?>
                 
                 <div class="sidebar-text-wrap">
-                    <?php if (!empty($article->lede)): ?>
+                    <?php if (!empty($article->lede)) : ?>
                     <p class="sidebar-article-summary mb-1 text-body-secondary small"><?= $this->Text->truncate(strip_tags($article->lede), 80) ?></p>
                     <?php endif; ?>
                     
@@ -31,7 +31,7 @@
                 </div>
             </div>
             
-            <?php if ($article !== end($articles)): ?>
+            <?php if ($article !== end($articles)) : ?>
             <hr class="sidebar-article-separator my-2" />
             <?php endif; ?>
         </article>

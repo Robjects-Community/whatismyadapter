@@ -4,15 +4,15 @@
  * @var \App\Model\Entity\Slug $slug
  */
 ?>
-<?php if (!$slug->isNew()): ?>
-<?php
+<?php if (!$slug->isNew()) : ?>
+    <?php
     echo $this->element('actions_card', [
         'modelName' => 'Slug',
         'controllerName' => 'Slugs',
         'entity' => $slug,
-        'entityDisplayName' => $slug->slug
+        'entityDisplayName' => $slug->slug,
     ]);
-?>
+    ?>
 <?php endif; ?>
 <div class="container mt-4">
     <div class="row">
@@ -26,30 +26,30 @@
                     <fieldset>
                     <div class="mb-3">
                             <?php echo $this->Form->control('model', ['class' => 'form-control' . ($this->Form->isFieldError('model') ? ' is-invalid' : '')]); ?>
-                                                                                        <?php if ($this->Form->isFieldError('model')): ?>
+                                                                                        <?php if ($this->Form->isFieldError('model')) : ?>
                                 <div class="invalid-feedback">
-                                    <?= $this->Form->error('model') ?>
+                                                                                            <?= $this->Form->error('model') ?>
                                 </div>
-                            <?php endif; ?>
+                                                                                        <?php endif; ?>
                         </div>
                                         <div class="mb-3">
                             <?php echo $this->Form->control('foreign_key', ['class' => 'form-control' . ($this->Form->isFieldError('foreign_key') ? ' is-invalid' : '')]); ?>
-                                                                                        <?php if ($this->Form->isFieldError('foreign_key')): ?>
+                                                                                        <?php if ($this->Form->isFieldError('foreign_key')) : ?>
                                 <div class="invalid-feedback">
-                                    <?= $this->Form->error('foreign_key') ?>
+                                                                                            <?= $this->Form->error('foreign_key') ?>
                                 </div>
-                            <?php endif; ?>
+                                                                                        <?php endif; ?>
                         </div>
                                         <div class="mb-3">
                             <?php echo $this->Form->control('slug', ['class' => 'form-control' . ($this->Form->isFieldError('slug') ? ' is-invalid' : '')]); ?>
-                                                                                        <?php if ($this->Form->isFieldError('slug')): ?>
+                                                                                        <?php if ($this->Form->isFieldError('slug')) : ?>
                                 <div class="invalid-feedback">
-                                    <?= $this->Form->error('slug') ?>
+                                                                                            <?= $this->Form->error('slug') ?>
                                 </div>
-                            <?php endif; ?>
+                                                                                        <?php endif; ?>
                         </div>
                                         <div class="mb-3">
-                            <?php if ($this->Form->isFieldError('created')): ?>
+                            <?php if ($this->Form->isFieldError('created')) : ?>
                                 <div class="invalid-feedback">
                                     <?= $this->Form->error('created') ?>
                                 </div>

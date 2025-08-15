@@ -1,7 +1,7 @@
 <?php
 /**
  * Gallery Picker Search Results - AJAX response for gallery picker
- * 
+ *
  * @var \App\View\AppView $this
  * @var iterable $results Gallery results
  * @var string|null $search Current search term
@@ -15,15 +15,15 @@ $viewType = $viewType ?? 'grid';
 
 <!-- Gallery Grid (same as picker.php but without the search form) -->
 <div class="row" id="gallery-grid">
-    <?php if (!empty($results)): ?>
-        <?php foreach ($results as $gallery): ?>
+    <?php if (!empty($results)) : ?>
+        <?php foreach ($results as $gallery) : ?>
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card gallery-picker-card h-100">
                     <!-- Gallery Preview -->
                     <div class="gallery-preview">
-                        <?php if (!empty($gallery->images)): ?>
+                        <?php if (!empty($gallery->images)) : ?>
                             <div class="preview-grid">
-                                <?php foreach (array_slice($gallery->images, 0, 4) as $index => $image): ?>
+                                <?php foreach (array_slice($gallery->images, 0, 4) as $index => $image) : ?>
                                     <div class="preview-item preview-<?= $index + 1 ?>">
                                         <img src="<?= h($image->thumbnailImageUrl ?: $image->getImageUrlBySize('thumbnail')) ?>" 
                                              alt="<?= h($image->alt_text ?: $image->name) ?>"
@@ -31,7 +31,7 @@ $viewType = $viewType ?? 'grid';
                                     </div>
                                 <?php endforeach; ?>
                                 
-                                <?php if (count($gallery->images) > 4): ?>
+                                <?php if (count($gallery->images) > 4) : ?>
                                     <div class="preview-overlay">
                                         <span class="badge bg-dark">
                                             +<?= count($gallery->images) - 4 ?> <?= __('more') ?>
@@ -39,7 +39,7 @@ $viewType = $viewType ?? 'grid';
                                     </div>
                                 <?php endif; ?>
                             </div>
-                        <?php else: ?>
+                        <?php else : ?>
                             <div class="empty-preview">
                                 <i class="fas fa-images fa-3x text-muted"></i>
                                 <p class="text-muted mt-2"><?= __('Empty Gallery') ?></p>
@@ -50,7 +50,7 @@ $viewType = $viewType ?? 'grid';
                     <!-- Gallery Info -->
                     <div class="card-body">
                         <h6 class="card-title"><?= h($gallery->name) ?></h6>
-                        <?php if ($gallery->description): ?>
+                        <?php if ($gallery->description) : ?>
                             <p class="card-text text-muted small">
                                 <?= h(mb_substr($gallery->description, 0, 100)) ?>
                                 <?= mb_strlen($gallery->description) > 100 ? '...' : '' ?>
@@ -84,20 +84,20 @@ $viewType = $viewType ?? 'grid';
                 </div>
             </div>
         <?php endforeach; ?>
-    <?php else: ?>
+    <?php else : ?>
         <!-- Empty State -->
         <div class="col-12">
             <div class="text-center py-5">
                 <i class="fas fa-images fa-4x text-muted mb-3"></i>
                 <h5 class="text-muted"><?= __('No galleries found') ?></h5>
-                <?php if ($search): ?>
+                <?php if ($search) : ?>
                     <p class="text-muted">
                         <?= __('No galleries match your search for "{0}"', h($search)) ?>
                     </p>
                     <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('gallerySearch').value = ''; document.getElementById('gallerySearch').dispatchEvent(new Event('input'));">
                         <?= __('Clear Search') ?>
                     </button>
-                <?php else: ?>
+                <?php else : ?>
                     <p class="text-muted">
                         <?= __('Create some galleries first to insert them into your content.') ?>
                     </p>
@@ -108,7 +108,7 @@ $viewType = $viewType ?? 'grid';
 </div>
 
 <!-- Pagination -->
-<?php if ($this->Paginator->total() > $this->Paginator->param('perPage')): ?>
+<?php if ($this->Paginator->total() > $this->Paginator->param('perPage')) : ?>
     <div class="d-flex justify-content-center mt-4">
         <?= $this->element('pagination') ?>
     </div>

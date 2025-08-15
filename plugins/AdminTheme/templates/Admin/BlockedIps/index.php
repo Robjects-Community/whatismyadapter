@@ -28,7 +28,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($blockedIps as $blockedIp): ?>
+        <?php foreach ($blockedIps as $blockedIp) : ?>
         <tr>
             <td><?= h($blockedIp->ip_address) ?></td>
             <td><?= h($blockedIp->reason) ?></td>

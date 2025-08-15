@@ -3,8 +3,8 @@
   <html lang="<?= $this->request->getParam('lang', 'en') ?>" data-bs-theme="auto">
     <head>
     <?php if (!empty($consentData) && $consentData['analytics_consent']) :?>
-      <?= SettingsManager::read('Google.tagManagerHead', '') ?>
-      <?php endif; ?>
+        <?= SettingsManager::read('Google.tagManagerHead', '') ?>
+    <?php endif; ?>
       <?= $this->Html->script('willow-modal') ?>
       <?= $this->Html->script('DefaultTheme.color-modes') ?>
       <?= $this->Html->charset() ?>
@@ -20,13 +20,13 @@
       <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
       <?= $this->Html->scriptBlock(sprintf(
           'var csrfToken = %s;',
-          json_encode($this->request->getAttribute('csrfToken'))
+          json_encode($this->request->getAttribute('csrfToken')),
       )); ?>
       <?= $this->element('libraries/highlightjs'); ?>
   </head>
   <body>
       <?php if (!empty($consentData) && $consentData['marketing_consent']) :?>
-        <?= $this->element('site/facebook/sdk') ?>
+            <?= $this->element('site/facebook/sdk') ?>
       <?php endif; ?>
 
     <?= $this->element('site/bootstrap') ?>

@@ -1,11 +1,13 @@
 <?php
+declare(strict_types=1);
+
 namespace DefaultTheme\Controller\Component;
 
-use Cake\Controller\Component;
-use Cake\Event\EventInterface;
 use App\Utility\I18nManager;
 use App\Utility\SettingsManager;
+use Cake\Controller\Component;
 use Cake\Core\Configure;
+use Cake\Event\EventInterface;
 
 /**
  * FrontEndSiteComponent
@@ -25,8 +27,8 @@ class FrontEndSiteComponent extends Component
      */
     protected array $_defaultConfig = [
         'implementedEvents' => [
-            'Controller.beforeRender' => 'beforeRender'
-        ]
+            'Controller.beforeRender' => 'beforeRender',
+        ],
     ];
 
     /**
@@ -43,12 +45,12 @@ class FrontEndSiteComponent extends Component
     {
         $controller = $this->getController();
         $request = $controller->getRequest();
-        
+
         // Skip processing for admin routes
         if ($request->getParam('prefix') === 'Admin') {
             return;
         }
-        
+
         // Skip processing for certain user actions during tests
         if (Configure::read('debug') && $request->getParam('controller') === 'Users') {
             $skipActions = ['login', 'logout', 'register', 'edit', 'forgotPassword', 'resetPassword', 'confirmEmail'];
@@ -60,8 +62,9 @@ class FrontEndSiteComponent extends Component
                     'featuredArticles' => [],
                     'articleArchives' => [],
                     'siteLanguages' => I18nManager::getEnabledLanguages(),
-                    'selectedSiteLanguage' => $request->getParam('lang', 'en')
+                    'selectedSiteLanguage' => $request->getParam('lang', 'en'),
                 ]);
+
                 return;
             }
         }
@@ -71,27 +74,27 @@ class FrontEndSiteComponent extends Component
         $tagsTable = $controller->fetchTable('Tags');
 
         $menuPages = [];
-        switch(SettingsManager::read('SitePages.mainMenuShow', 'root')) {
-            case "root":
+        switch (SettingsManager::read('SitePages.mainMenuShow', 'root')) {
+            case 'root':
                 $menuPages = $articlesTable->getRootPages($cacheKey);
                 break;
-            case "selected":
+            case 'selected':
                 $menuPages = $articlesTable->getMainMenuPages($cacheKey);
                 break;
         }
 
         $rootTags = [];
-        switch(SettingsManager::read('SitePages.mainTagMenuShow', 'root')) {
-            case "root":
+        switch (SettingsManager::read('SitePages.mainTagMenuShow', 'root')) {
+            case 'root':
                 $rootTags = $tagsTable->getRootTags($cacheKey);
                 break;
-            case "selected":
+            case 'selected':
                 $rootTags = $tagsTable->getMainMenuTags($cacheKey);
                 break;
         }
 
         $featuredArticles = $articlesTable->getFeatured($cacheKey);
-        
+
         $articleArchives = $articlesTable->getArchiveDates($cacheKey);
 
         $privacyPolicyId = SettingsManager::read('SitePages.privacyPolicy', null);
@@ -101,19 +104,19 @@ class FrontEndSiteComponent extends Component
                 ->where(['id' => $privacyPolicyId])
                 ->cache($cacheKey . 'priv_page', 'content')
                 ->first();
-                
+
             if ($privacyPolicy) {
                 $controller->set('sitePrivacyPolicy', $privacyPolicy->toArray());
             }
         }
-        
+
         $controller->set(compact(
             'menuPages',
             'rootTags',
             'featuredArticles',
             'articleArchives',
         ));
-        
+
         $controller->set('siteLanguages', I18nManager::getEnabledLanguages());
         $controller->set('selectedSiteLanguage', $request->getParam('lang', 'en'));
     }

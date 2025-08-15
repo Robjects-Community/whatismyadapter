@@ -11,10 +11,10 @@
             <th scope="col"><?= $this->Paginator->sort('model', __('On')) ?></th>
             <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
             <th scope="col"><?= $this->Paginator->sort('content') ?></th>
-            <?php if (null === $activeFilter) :?>
+            <?php if ($activeFilter === null) :?>
             <th scope="col"><?= $this->Paginator->sort('display', __('Display')) ?></th>
             <?php endif; ?>
-            <?php if ('0' === $activeFilter || '1' === $activeFilter) :?>
+            <?php if ($activeFilter === '0' || $activeFilter === '1') :?>
             <th scope="col"><?= $this->Paginator->sort('is_inappropriate', __('Flagged')) ?></th>
             <?php endif; ?>
             <th scope="col"><?= $this->Paginator->sort('created') ?></th>
@@ -22,23 +22,23 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($comments as $comment): ?>
+      <?php foreach ($comments as $comment) : ?>
       <tr>
           <td><?= $comment->hasValue('article') ? $this->Html->link($comment->article->title, ['controller' => 'Articles', 'action' => 'view', $comment->article->id]) : '' ?></td>
           <td><?= $comment->hasValue('user') ? $this->Html->link($comment->user->username, ['controller' => 'Users', 'action' => 'view', $comment->user->id]) : '' ?></td>
           <td><?= substr(h($comment->content), 0, 30) . '...' ?></td>
           
-          <?php if (null === $activeFilter) :?>
+            <?php if ($activeFilter === null) :?>
             <td>
-              <?= $comment->display ? '<span class="badge bg-success">' . __('Yes') . '</span>' : '<span class="badge bg-warning">' . __('No') . '</span>'; ?>
+                <?= $comment->display ? '<span class="badge bg-success">' . __('Yes') . '</span>' : '<span class="badge bg-warning">' . __('No') . '</span>'; ?>
             </td>
-          <?php endif; ?>
+            <?php endif; ?>
 
-          <?php if ('0' === $activeFilter || '1' === $activeFilter) :?>
+            <?php if ($activeFilter === '0' || $activeFilter === '1') :?>
             <td>
-              <?= $comment->is_inappropriate ? '<span class="badge bg-warning">' . __('Yes') . '</span>' : '<span class="badge bg-success">' . __('No') . '</span>'; ?>
+                <?= $comment->is_inappropriate ? '<span class="badge bg-warning">' . __('Yes') . '</span>' : '<span class="badge bg-success">' . __('No') . '</span>'; ?>
             </td>
-          <?php endif; ?>
+            <?php endif; ?>
 
           <td><?= h($comment->created) ?></td>
           <td>

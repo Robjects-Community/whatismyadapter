@@ -2,13 +2,12 @@
 /**
  * Image Picker - For selecting images to insert into content
  * Modern layout with separated search form and results for smooth AJAX updates
- * 
+ *
  * @var \App\View\AppView $this
  * @var iterable<\App\Model\Entity\Image> $images
  * @var string|null $search Current search term
  */
 
-use App\Utility\SettingsManager;
 ?>
 
 <div id="image-gallery" class="willow-image-picker">
@@ -26,7 +25,7 @@ use App\Utility\SettingsManager;
                            placeholder="<?= __('Search images by name, alt text, keywords...') ?>"
                            value="<?= h($this->request->getQuery('search', '')) ?>"
                            autocomplete="off">
-                    <?php if ($this->request->getQuery('search')): ?>
+                    <?php if ($this->request->getQuery('search')) : ?>
                         <button class="btn btn-outline-secondary" type="button" id="clearImageSearch">
                             <i class="fas fa-times"></i>
                         </button>

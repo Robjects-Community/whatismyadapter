@@ -1,16 +1,18 @@
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <div class="flex-shrink-0 dropdown ms-auto">
     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <?php if (isset($profilePic)) : ?>
-            <?= $this->Html->image($profilePic, 
-            [
-                'pathPrefix' => '', 
+            <?= $this->Html->image(
+                $profilePic,
+                [
+                'pathPrefix' => '',
                 'class' => 'rounded-circle',
                 'width' => '32',
                 'height' => '32',
 
-            ])?>
-        <?php else: ?>
+                ],
+            )?>
+        <?php else : ?>
             <img src="/img/willow-icon.png" width="32" height="32" class="rounded-circle">
         <?php endif; ?>
     </a>

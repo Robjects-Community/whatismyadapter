@@ -42,11 +42,11 @@ class DefaultThemePlugin extends BasePlugin
         $routes->plugin(
             'DefaultTheme',
             ['path' => '/default-theme'],
-            function (RouteBuilder $builder) {
+            function (RouteBuilder $builder): void {
                 // Add custom routes here
 
                 $builder->fallbacks();
-            }
+            },
         );
         parent::routes($routes);
     }

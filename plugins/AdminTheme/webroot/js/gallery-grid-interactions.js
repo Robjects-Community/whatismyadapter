@@ -2,7 +2,7 @@
  * Gallery Grid Interactions
  * Handles preview hover effects, slideshow initialization, and PhotoSwipe integration
  */
-(function() {
+(function () {
     'use strict';
 
     let config = {};
@@ -10,7 +10,8 @@
     /**
      * Initialize gallery grid interactions
      */
-    function init(options = {}) {
+    function init(options = {})
+    {
         config = Object.assign({
             previewSelector: '.gallery-preview-overlay',
             playButtonSelector: '.gallery-play-button',
@@ -26,11 +27,11 @@
         }, options);
 
         initializePreviewInteractions(false);
-        
+
         if (config.enableLazyLoading) {
             initializeLazyLoading();
         }
-        
+
         if (config.enablePreloading) {
             initializeImagePreloading();
         }
@@ -39,7 +40,8 @@
     /**
      * Initialize preview interactions and effects
      */
-    function initializePreviewInteractions(isAjaxLoad = false) {
+    function initializePreviewInteractions(isAjaxLoad = false)
+    {
         if (config.enableHoverEffects) {
             initializeHoverEffects();
         }
@@ -57,13 +59,16 @@
     /**
      * Initialize hover effects for gallery previews
      */
-    function initializeHoverEffects() {
+    function initializeHoverEffects()
+    {
         const previews = document.querySelectorAll(config.previewSelector);
-        
+
         previews.forEach(container => {
             const playButton = container.querySelector(config.playButtonSelector);
-            
-            if (!playButton) return;
+
+            if (!playButton) {
+                return;
+            }
 
             // Check if already initialized to prevent duplicate handlers
             if (container.hasAttribute('data-gallery-initialized')) {
@@ -72,16 +77,16 @@
             container.setAttribute('data-gallery-initialized', 'true');
 
             // Add hover event listeners
-            container.addEventListener('mouseenter', function() {
+            container.addEventListener('mouseenter', function () {
                 playButton.style.display = 'block';
             });
-            
-            container.addEventListener('mouseleave', function() {
+
+            container.addEventListener('mouseleave', function () {
                 playButton.style.display = 'none';
             });
 
             // Add click handler for slideshow
-            container.addEventListener('click', function(e) {
+            container.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 const galleryId = extractGalleryId(container);
@@ -95,7 +100,8 @@
     /**
      * Extract gallery ID from container onclick attribute or data
      */
-    function extractGalleryId(container) {
+    function extractGalleryId(container)
+    {
         // Try to get from onclick attribute first (legacy support)
         const onclick = container.getAttribute('onclick');
         if (onclick) {
@@ -112,28 +118,29 @@
     /**
      * Start gallery slideshow by finding and clicking first image
      */
-    function startGallerySlideshow(galleryId) {
+    function startGallerySlideshow(galleryId)
+    {
         let galleryContainer = null;
-        
+
         // Look for the gallery container that contains this galleryId
         const galleryCards = document.querySelectorAll(config.galleryCardSelector);
-        
+
         for (let card of galleryCards) {
             // Look for preview overlay with matching data-gallery-id
-            const previewOverlay = card.querySelector(`[data-gallery-id="${galleryId}"]`);
+            const previewOverlay = card.querySelector(`[data - gallery - id = "${galleryId}"]`);
             if (previewOverlay) {
                 // Find the hidden photo gallery in the same card
                 galleryContainer = card.querySelector(config.photoGallerySelector);
                 break;
             }
         }
-        
+
         // If we found the gallery, try to start PhotoSwipe manually
         if (galleryContainer) {
             const firstImageLink = galleryContainer.querySelector(`${config.galleryItemSelector} a[href]`);
             if (firstImageLink) {
                 console.log('Starting gallery slideshow for:', galleryId);
-                
+
                 // Check if PhotoSwipe is available
                 if (window.PhotoSwipe) {
                     // Initialize PhotoSwipe manually for this hidden gallery
@@ -158,7 +165,7 @@
 
         // Fallback: redirect to view page
         const realGalleryId = galleryId.replace('gallery-', '');
-        const viewUrl = `/admin/image-galleries/view/${realGalleryId}`;
+        const viewUrl = ` / admin / image - galleries / view / ${realGalleryId}`;
         console.log('Falling back to view page:', viewUrl);
         window.location.href = viewUrl;
     }
@@ -166,7 +173,8 @@
     /**
      * Reinitialize PhotoSwipe galleries for AJAX-loaded content
      */
-    function reinitializePhotoSwipe() {
+    function reinitializePhotoSwipe()
+    {
         setTimeout(() => {
             if (window.PhotoSwipeGallery) {
                 console.log('Re-initializing PhotoSwipe galleries after AJAX load...');
@@ -187,7 +195,8 @@
     /**
      * Initialize Bootstrap popovers
      */
-    function initializePopovers() {
+    function initializePopovers()
+    {
         const popoverTriggerList = [].slice.call(document.querySelectorAll(config.popoverSelector));
         popoverTriggerList.map(function (popoverTriggerEl) {
             // Dispose existing popover to avoid duplicates
@@ -195,7 +204,7 @@
             if (existingPopover) {
                 existingPopover.dispose();
             }
-            
+
             return new bootstrap.Popover(popoverTriggerEl);
         });
     }
@@ -203,7 +212,8 @@
     /**
      * Initialize lazy loading for gallery images
      */
-    function initializeLazyLoading() {
+    function initializeLazyLoading()
+    {
         // Only proceed if IntersectionObserver is supported
         if (!('IntersectionObserver' in window)) {
             console.warn('IntersectionObserver not supported, skipping lazy loading');
@@ -211,7 +221,7 @@
         }
 
         const lazyImages = document.querySelectorAll('.gallery-preview-image[data-src], .gallery-image[data-src]');
-        
+
         if (lazyImages.length === 0) {
             // If no data-src attributes, look for images that could benefit from lazy loading
             initializeLazyLoadingForExistingImages();
@@ -223,7 +233,7 @@
                 if (entry.isIntersecting) {
                     const img = entry.target;
                     const src = img.dataset.src;
-                    
+
                     if (src) {
                         // Create a new image to preload
                         const newImg = new Image();
@@ -238,14 +248,14 @@
                             console.warn('Failed to load lazy image:', src);
                         };
                         newImg.src = src;
-                        
+
                         // Add loading class
                         img.classList.add('lazy-loading');
-                        
+
                         // Remove data-src to prevent reloading
                         delete img.dataset.src;
                     }
-                    
+
                     observer.unobserve(img);
                 }
             });
@@ -258,35 +268,37 @@
         lazyImages.forEach(img => {
             imageObserver.observe(img);
         });
-        
-        console.log(`Lazy loading initialized for ${lazyImages.length} images`);
+
+        console.log(`Lazy loading initialized for ${
+            lazyImages.length} images`);
     }
 
     /**
      * Initialize lazy loading for existing images (convert to lazy loading)
      */
-    function initializeLazyLoadingForExistingImages() {
+    function initializeLazyLoadingForExistingImages()
+    {
         const galleryImages = document.querySelectorAll('.gallery-preview-image, .gallery-image');
-        
+
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    
+
                     // Only process if not already processed
                     if (!img.classList.contains('lazy-processed')) {
                         img.classList.add('lazy-processed');
-                        
+
                         // Add fade-in effect
                         img.style.opacity = '0';
                         img.style.transition = 'opacity 0.3s ease';
-                        
+
                         // Trigger reflow and fade in
                         setTimeout(() => {
                             img.style.opacity = '1';
                         }, 50);
                     }
-                    
+
                     observer.unobserve(img);
                 }
             });
@@ -304,10 +316,11 @@
     /**
      * Initialize image preloading for better performance
      */
-    function initializeImagePreloading() {
+    function initializeImagePreloading()
+    {
         // Preload images that are likely to be viewed next
         const galleryItems = document.querySelectorAll(config.galleryItemSelector);
-        
+
         galleryItems.forEach((item, index) => {
             const link = item.querySelector('a[href]');
             if (link && index < 6) { // Preload first 6 images
@@ -325,7 +338,8 @@
     /**
      * Initialize PhotoSwipe for a hidden gallery
      */
-    function initializeHiddenGallery(galleryContainer, startIndex = 0) {
+    function initializeHiddenGallery(galleryContainer, startIndex = 0)
+    {
         if (!window.PhotoSwipe) {
             console.error('PhotoSwipe not available');
             return;
@@ -334,11 +348,11 @@
         // Parse gallery items like PhotoSwipeGallery does
         const items = [];
         const itemElements = galleryContainer.querySelectorAll(config.galleryItemSelector);
-        
+
         itemElements.forEach((itemEl) => {
             const link = itemEl.querySelector('a');
             const img = itemEl.querySelector('img');
-            
+
             if (link && img) {
                 const item = {
                     src: link.href,
@@ -378,9 +392,10 @@
     /**
      * Preload adjacent images for better PhotoSwipe performance
      */
-    function preloadAdjacentImages(currentIndex, items) {
+    function preloadAdjacentImages(currentIndex, items)
+    {
         const preloadIndexes = [currentIndex - 1, currentIndex + 1];
-        
+
         preloadIndexes.forEach(index => {
             if (index >= 0 && index < items.length) {
                 const img = new Image();
@@ -392,7 +407,8 @@
     /**
      * Clean up event listeners (useful for AJAX reloads)
      */
-    function cleanup() {
+    function cleanup()
+    {
         // Remove existing event listeners by cloning and replacing elements
         const previews = document.querySelectorAll(config.previewSelector);
         previews.forEach(container => {
@@ -404,13 +420,14 @@
     /**
      * Refresh interactions after content change (AJAX callback)
      */
-    function refresh() {
+    function refresh()
+    {
         cleanup();
         initializePreviewInteractions(true);
     }
 
     // Auto-initialize on DOM ready
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         // Check if we're on a gallery grid page
         if (document.querySelector('.gallery-preview-overlay')) {
             init();

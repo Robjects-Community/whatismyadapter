@@ -133,7 +133,7 @@
                     <h5 class="card-title mb-0"><?= __('Top Articles') ?></h5>
                 </div>
                 <div class="card-body">
-                    <?php if (!empty($topArticles) && $topArticles->count() > 0): ?>
+                    <?php if (!empty($topArticles) && $topArticles->count() > 0) : ?>
                         <!-- Desktop Table -->
                         <div class="table-responsive d-none d-md-block">
                             <table class="table table-hover">
@@ -145,7 +145,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($topArticles as $article): ?>
+                                    <?php foreach ($topArticles as $article) : ?>
                                     <tr>
                                         <td>
                                             <div class="text-truncate" style="max-width: 200px;" title="<?= h($article->article->title ?? 'N/A') ?>">
@@ -156,11 +156,11 @@
                                             <span class="badge bg-primary"><?= number_format($article->count) ?></span>
                                         </td>
                                         <td>
-                                            <?php if ($article->article): ?>
+                                            <?php if ($article->article) : ?>
                                                 <?= $this->Html->link(
                                                     '<i class="fas fa-chart-bar"></i>',
                                                     ['action' => 'pageViewStats', $article->article->id],
-                                                    ['class' => 'btn btn-sm btn-outline-primary', 'escape' => false, 'title' => __('View Stats')]
+                                                    ['class' => 'btn btn-sm btn-outline-primary', 'escape' => false, 'title' => __('View Stats')],
                                                 ) ?>
                                             <?php endif; ?>
                                         </td>
@@ -172,7 +172,7 @@
                         
                         <!-- Mobile Cards -->
                         <div class="d-md-none">
-                            <?php foreach ($topArticles as $article): ?>
+                            <?php foreach ($topArticles as $article) : ?>
                             <div class="card mb-2">
                                 <div class="card-body p-3">
                                     <div class="d-flex justify-content-between align-items-start">
@@ -180,11 +180,11 @@
                                             <h6 class="card-title mb-1"><?= h($article->article->title ?? 'N/A') ?></h6>
                                             <span class="badge bg-primary"><?= number_format($article->count) ?> <?= __('views') ?></span>
                                         </div>
-                                        <?php if ($article->article): ?>
+                                        <?php if ($article->article) : ?>
                                             <?= $this->Html->link(
                                                 '<i class="fas fa-chart-bar"></i>',
                                                 ['action' => 'pageViewStats', $article->article->id],
-                                                ['class' => 'btn btn-sm btn-outline-primary', 'escape' => false]
+                                                ['class' => 'btn btn-sm btn-outline-primary', 'escape' => false],
                                             ) ?>
                                         <?php endif; ?>
                                     </div>
@@ -192,7 +192,7 @@
                             </div>
                             <?php endforeach; ?>
                         </div>
-                    <?php else: ?>
+                    <?php else : ?>
                         <div class="alert alert-info"><?= __('No article data available for the selected period.') ?></div>
                     <?php endif; ?>
                 </div>
@@ -206,7 +206,7 @@
                     <h5 class="card-title mb-0"><?= __('Top Referrers') ?></h5>
                 </div>
                 <div class="card-body">
-                    <?php if (!empty($topReferrers)): ?>
+                    <?php if (!empty($topReferrers)) : ?>
                         <!-- Desktop Table -->
                         <div class="table-responsive d-none d-md-block">
                             <table class="table table-hover">
@@ -217,7 +217,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($topReferrers as $referrer): ?>
+                                    <?php foreach ($topReferrers as $referrer) : ?>
                                     <tr>
                                         <td>
                                             <div class="text-truncate" style="max-width: 200px;" title="<?= h($referrer['domain']) ?>">
@@ -235,7 +235,7 @@
                         
                         <!-- Mobile Cards -->
                         <div class="d-md-none">
-                            <?php foreach ($topReferrers as $referrer): ?>
+                            <?php foreach ($topReferrers as $referrer) : ?>
                             <div class="card mb-2">
                                 <div class="card-body p-3">
                                     <div class="d-flex justify-content-between align-items-center">
@@ -248,7 +248,7 @@
                             </div>
                             <?php endforeach; ?>
                         </div>
-                    <?php else: ?>
+                    <?php else : ?>
                         <div class="alert alert-info"><?= __('No referrer data available for the selected period.') ?></div>
                     <?php endif; ?>
                 </div>

@@ -1,7 +1,7 @@
 <?php
 /**
  * Reusable media picker container element
- * 
+ *
  * @var \App\View\AppView $this
  * @var iterable $results Items to display in picker
  * @var string|null $search Current search term
@@ -40,9 +40,9 @@ $emptyMessage = $pickerOptions['emptyMessage'] ?? __('No {0} found', $mediaType)
                     </div>
                 </form>
             </div>
-            <?php if (isset($pickerOptions['additionalControls'])): ?>
+            <?php if (isset($pickerOptions['additionalControls'])) : ?>
             <div class="col-auto">
-                <?php foreach ($pickerOptions['additionalControls'] as $control): ?>
+                <?php foreach ($pickerOptions['additionalControls'] as $control) : ?>
                     <?= $this->element($control['element'], $control['data'] ?? []) ?>
                 <?php endforeach; ?>
             </div>
@@ -55,33 +55,33 @@ $emptyMessage = $pickerOptions['emptyMessage'] ?? __('No {0} found', $mediaType)
          id="<?= $containerId ?>" 
          style="max-height: 60vh; overflow-y: auto;">
         
-        <?php if (empty($results)): ?>
+        <?php if (empty($results)) : ?>
             <div class="text-center p-5">
                 <i class="fas fa-search fa-2x text-muted mb-3"></i>
                 <p class="text-muted"><?= $emptyMessage ?></p>
-                <?php if (empty($search)): ?>
+                <?php if (empty($search)) : ?>
                     <small class="text-muted"><?= __('Enter a search term to find {0}', $mediaType) ?></small>
                 <?php endif; ?>
             </div>
-        <?php else: ?>
-            <?php if ($viewType === 'grid'): ?>
+        <?php else : ?>
+            <?php if ($viewType === 'grid') : ?>
                 <div class="row g-3 p-3">
-                    <?php foreach ($results as $result): ?>
+                    <?php foreach ($results as $result) : ?>
                     <div class="col-6 col-md-4 col-lg-3">
                         <?= $this->element("media/{$mediaType}_picker_item", [
                             'item' => $result,
-                            'pickerOptions' => $pickerOptions
+                            'pickerOptions' => $pickerOptions,
                         ]) ?>
                     </div>
                     <?php endforeach; ?>
                 </div>
-            <?php else: ?>
+            <?php else : ?>
                 <div class="list-group list-group-flush">
-                    <?php foreach ($results as $result): ?>
+                    <?php foreach ($results as $result) : ?>
                         <?= $this->element("media/{$mediaType}_picker_item", [
                             'item' => $result,
                             'pickerOptions' => $pickerOptions,
-                            'viewType' => 'list'
+                            'viewType' => 'list',
                         ]) ?>
                     <?php endforeach; ?>
                 </div>

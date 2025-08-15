@@ -2,7 +2,7 @@
 /**
  * Video Picker Results - Only the results portion for AJAX updates
  * This template is used when gallery_only=1 parameter is present to avoid modal flicker
- * 
+ *
  * @var \App\View\AppView $this
  * @var iterable $videos
  * @var string|null $searchTerm
@@ -12,9 +12,9 @@ $videos = $videos ?? [];
 $searchTerm = $searchTerm ?? '';
 ?>
 
-<?php if (!empty($videos)): ?>
+<?php if (!empty($videos)) : ?>
     <div class="row g-3 p-3">
-        <?php foreach ($videos as $video): ?>
+        <?php foreach ($videos as $video) : ?>
             <div class="col-md-6 col-lg-4">
                 <div class="card willow-picker-card h-100 shadow-sm">
                     <!-- Video Thumbnail -->
@@ -33,7 +33,7 @@ $searchTerm = $searchTerm ?? '';
                         </div>
                         
                         <!-- Duration overlay (if available) -->
-                        <?php if (!empty($video['duration'])): ?>
+                        <?php if (!empty($video['duration'])) : ?>
                         <div class="position-absolute bottom-0 end-0 m-2">
                             <span class="badge bg-dark bg-opacity-75 small">
                                 <?= h($video['duration']) ?>
@@ -48,7 +48,7 @@ $searchTerm = $searchTerm ?? '';
                             <?= h($this->Text->truncate($video['title'], 50)) ?>
                         </h6>
                         
-                        <?php if (!empty($video['description'])): ?>
+                        <?php if (!empty($video['description'])) : ?>
                             <p class="card-text text-muted small mb-2">
                                 <?= h($this->Text->truncate($video['description'], 80, ['exact' => false])) ?>
                             </p>
@@ -59,7 +59,7 @@ $searchTerm = $searchTerm ?? '';
                                 <i class="fab fa-youtube me-1"></i>
                                 YouTube
                             </span>
-                            <?php if (!empty($video['publishedAt'])): ?>
+                            <?php if (!empty($video['publishedAt'])) : ?>
                                 <span>
                                     <?= date('M j, Y', strtotime($video['publishedAt'])) ?>
                                 </span>
@@ -81,11 +81,11 @@ $searchTerm = $searchTerm ?? '';
             </div>
         <?php endforeach; ?>
     </div>
-<?php else: ?>
+<?php else : ?>
     <!-- Beautiful Empty State -->
     <div class="willow-empty-state p-5">
         <div class="text-center">
-            <?php if ($searchTerm): ?>
+            <?php if ($searchTerm) : ?>
                 <i class="fab fa-youtube fa-3x text-muted mb-3"></i>
                 <h5 class="text-muted mb-2"><?= __('No videos found') ?></h5>
                 <p class="text-muted mb-3">
@@ -95,7 +95,7 @@ $searchTerm = $searchTerm ?? '';
                     <i class="fas fa-times me-2"></i>
                     <?= __('Clear Search') ?>
                 </button>
-            <?php else: ?>
+            <?php else : ?>
                 <i class="fab fa-youtube fa-3x text-muted mb-3"></i>
                 <h5 class="text-muted mb-2"><?= __('Search for videos') ?></h5>
                 <p class="text-muted">

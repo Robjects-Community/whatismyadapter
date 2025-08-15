@@ -13,7 +13,7 @@
                 '_name' => 'home',
                 '?' => ['tag' => $tag->id],
             ],
-            ['class' => 'btn btn-outline btn-sm']
+            ['class' => 'btn btn-outline btn-sm'],
         ) ?>
     <?php endforeach; ?>
 <?php endif; ?>

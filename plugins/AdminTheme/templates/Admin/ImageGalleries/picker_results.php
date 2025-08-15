@@ -2,7 +2,7 @@
 /**
  * Gallery Picker Results - Only the results portion for AJAX updates
  * This template is used when gallery_only=1 parameter is present to avoid modal flicker
- * 
+ *
  * @var \App\View\AppView $this
  * @var iterable $results Gallery results
  * @var string|null $search Current search term
@@ -12,20 +12,20 @@ $results = $results ?? [];
 $search = $search ?? '';
 ?>
 
-<?php if (!empty($results)): ?>
+<?php if (!empty($results)) : ?>
     <div class="row g-3 p-3">
-        <?php foreach ($results as $gallery): ?>
+        <?php foreach ($results as $gallery) : ?>
             <div class="col-md-6 col-lg-4">
                 <div class="card willow-picker-card h-100 shadow-sm">
                     <!-- Gallery Preview -->
                     <div class="position-relative overflow-hidden" style="height: 180px;">
-                        <?php if (!empty($gallery->images)): ?>
-                            <?php if ($gallery->hasPreviewImage()): ?>
+                        <?php if (!empty($gallery->images)) : ?>
+                            <?php if ($gallery->hasPreviewImage()) : ?>
                                 <img src="<?= h($gallery->getPreviewImageUrl()) ?>" 
                                      alt="<?= h($gallery->name) ?>"
                                      class="img-fluid w-100 h-100"
                                      style="object-fit: cover;">
-                            <?php else: ?>
+                            <?php else : ?>
                                 <img src="<?= h($gallery->images[0]->getImageUrl('medium')) ?>" 
                                      alt="<?= h($gallery->name) ?>"
                                      class="img-fluid w-100 h-100"
@@ -45,7 +45,7 @@ $search = $search ?? '';
                                     <?= $gallery->is_published ? __('Published') : __('Draft') ?>
                                 </span>
                             </div>
-                        <?php else: ?>
+                        <?php else : ?>
                             <div class="d-flex align-items-center justify-content-center h-100 bg-light">
                                 <div class="text-center text-muted">
                                     <i class="fas fa-images fa-3x mb-2"></i>
@@ -59,7 +59,7 @@ $search = $search ?? '';
                     <div class="card-body">
                         <h6 class="card-title mb-2"><?= h($gallery->name) ?></h6>
                         
-                        <?php if ($gallery->description): ?>
+                        <?php if ($gallery->description) : ?>
                             <p class="card-text text-muted small mb-2">
                                 <?= h($this->Text->truncate($gallery->description, 80)) ?>
                             </p>
@@ -94,11 +94,11 @@ $search = $search ?? '';
             </div>
         <?php endforeach; ?>
     </div>
-<?php else: ?>
+<?php else : ?>
     <!-- Beautiful Empty State -->
     <div class="willow-empty-state p-5">
         <div class="text-center">
-            <?php if ($search): ?>
+            <?php if ($search) : ?>
                 <i class="fas fa-search fa-3x text-muted mb-3"></i>
                 <h5 class="text-muted mb-2"><?= __('No galleries found') ?></h5>
                 <p class="text-muted mb-3">
@@ -108,7 +108,7 @@ $search = $search ?? '';
                     <i class="fas fa-times me-2"></i>
                     <?= __('Clear Search') ?>
                 </button>
-            <?php else: ?>
+            <?php else : ?>
                 <i class="fas fa-images fa-3x text-muted mb-3"></i>
                 <h5 class="text-muted mb-2"><?= __('No galleries available') ?></h5>
                 <p class="text-muted">
@@ -120,7 +120,7 @@ $search = $search ?? '';
 <?php endif; ?>
 
 <!-- Pagination -->
-<?php if ($this->Paginator->total() > $this->Paginator->param('perPage')): ?>
+<?php if ($this->Paginator->total() > $this->Paginator->param('perPage')) : ?>
     <div class="d-flex justify-content-center p-3 border-top">
         <?= $this->element('pagination') ?>
     </div>

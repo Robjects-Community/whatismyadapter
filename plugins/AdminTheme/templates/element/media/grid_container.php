@@ -1,7 +1,7 @@
 <?php
 /**
  * Reusable media grid container element
- * 
+ *
  * @var \App\View\AppView $this
  * @var iterable $items Items to display in grid
  * @var array $emptyState Empty state configuration
@@ -22,11 +22,11 @@ $colClass = $gridOptions['colClass'] ?? 'col';
 ?>
 
 <div id="ajax-target">
-    <?php if (empty($items)): ?>
+    <?php if (empty($items)) : ?>
         <?= $this->element('empty_state', $emptyState) ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="<?= $gridClass ?>">
-            <?php foreach ($items as $item): ?>
+            <?php foreach ($items as $item) : ?>
             <div class="<?= $colClass ?>">
                 <?= $this->element($itemElement, array_merge(['item' => $item], $itemData)) ?>
             </div>

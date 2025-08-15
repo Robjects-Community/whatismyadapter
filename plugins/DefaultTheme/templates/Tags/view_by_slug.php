@@ -1,4 +1,4 @@
-<?php use App\Utility\SettingsManager; ?>
+<?php ?>
 <?php
 /**
  * @var \App\View\AppView $this
@@ -17,9 +17,9 @@
             <h3 class="card-title h5 mb-0"><?= __('Articles/Pages') ?></h3>
         </div>
         <div class="card-body">
-            <?php if (!empty($tag->articles)): ?>
+            <?php if (!empty($tag->articles)) : ?>
                 <ul class="list-group list-group-flush">
-                    <?php foreach ($tag->articles as $article): ?>
+                    <?php foreach ($tag->articles as $article) : ?>
                         <li class="list-group-item">
                             <div class="d-flex justify-content-between align-items-start">
                             <?php if (!empty($article->image)) : ?>
@@ -33,9 +33,9 @@
                                             htmlspecialchars_decode($article->title),
                                             [
                                                 '_name' => 'article-by-slug',
-                                                'slug' => $article->slug
+                                                'slug' => $article->slug,
                                             ],
-                                            ['class' => 'text-primary']
+                                            ['class' => 'text-primary'],
                                         ); ?>
                                     </h4>
                                     <small class="text-muted"><?= __('By') ?> <?= h($article->user->username) ?></small>
@@ -45,7 +45,7 @@
                         </li>
                     <?php endforeach; ?>
                 </ul>
-            <?php else: ?>
+            <?php else : ?>
                 <p class="card-text"><?= __('No articles found for this tag.') ?></p>
             <?php endif; ?>
         </div>
