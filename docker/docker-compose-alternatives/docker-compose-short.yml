@@ -1,0 +1,63 @@
+services:
+  # Web server with CakePHP
+  app:
+    image: shinsenter/cakephp5:latest
+    container_name: cakephp_app
+    ports:
+      - "8456:80"
+      - "8443:443"
+    volumes:
+      - app_data:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - app_network
+    restart: unless-stopped
+
+  # MySQL database service
+  db:
+    image: mysql:8.4
+    container_name: cakephp_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: cakephp_db
+      MYSQL_USER: cakephp_user
+      MYSQL_PASSWORD: password
+    ports:
+      - "12033:3306"
+    volumes:
+      - db_data:/var/lib/mysql  # Persist MySQL data
+    networks:
+      - app_network
+    restart: unless-stopped
+
+# Docker volumes for persistent storage
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      device: /var/lib/mysql
+      o: bind
+  app_data:
+    driver: local
+    driver_opts:
+      device: /var/www/html
+      o: bind
+  webadapters_db:
+    driver: local
+    driver_opts:
+      device: /var/lib/mysql
+      o: bind
+  webadapters_adminer:
+    driver: local
+    driver_opts:
+      device: /var/www/html/adminer
+      o: bind
+  webadapters_data:
+    driver: local
+    driver_opts:
+      device: /var/www/html/webadapters
+      o: bind
+networks:
+  app_network:
+    driver: bridge
