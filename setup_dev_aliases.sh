@@ -112,6 +112,3 @@ if [ "$QUIET_MODE" = false ]; then
     echo "Setup script finished."
     echo "IMPORTANT: Please run 'source $RC_FILE' or open a new terminal session to apply changes."
 fi
-# The "source '$RC_FILE'" at the end of the setup script *might* still trigger the syntax error
-# IF dev_aliases.txt is not clean when the setup script runs for the first time.
-# It's generally safer to instruct the user to source it manually after fixing dev_aliases.txt.

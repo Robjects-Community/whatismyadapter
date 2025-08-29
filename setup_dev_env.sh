@@ -83,7 +83,6 @@ else
         print_info "Removed .env file to use defaults"
     fi
 fi
-# Add after line 85 in setup_dev_env.sh
 print_step "Loading application environment variables..."
 if [ -f "config/.env" ]; then
     # Export variables from config/.env to make them available to docker-compose
