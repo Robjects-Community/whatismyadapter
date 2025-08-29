@@ -17,9 +17,9 @@ Aiming to answer the common problem of trying to find the connection adapter for
   - [Using `manage.sh`](#using-managesh)
   - [Using script aliases from `setup_dev_aliases.sh`](#using-script-aliases-from-setup_dev_aliasessh)
     - [Useful Aliases](#useful-aliases)
-    - [Useful Aliases](#useful-aliases-1)
     - [CakePHP Command Aliases](#cakephp-command-aliases)
     - [Using the Project Container](#using-the-project-container)
+  - [Extra Notes](#extra-notes)
 - [Troubleshooting](#troubleshooting)
   - [Useful Links](#useful-links)
   - [Contributing to Projects](#contributing-to-projects)
@@ -48,7 +48,7 @@ cd WhatIsMyAdaptor
 ./setup_dev_env.sh
 ```
 
-before finishing the script, you should be prompted to type the letter corresponding to your preferred options for the development environment setup, options include:
+before finishing the script, you should be prompted to type the letter **(w/b/r/m/c)** corresponding to your preferred options for the development environment setup, options include:
 
   - Wipe data: letter 'W'
   - Rebuild containers: letter 'B'
@@ -71,8 +71,8 @@ before finishing the script, you should be prompted to type the letter correspon
 
 ```bash
 # Clone the repository
-git clone git@github.com:matthewdeaves/willow.git
-cd willow/
+git clone https://github.com/Robjects-Community/WhatIsMyAdaptor.git
+cd WhatIsMyAdaptor
 
 # Test Docker Compose
 docker-compose up -d
@@ -95,7 +95,6 @@ docker-compose ps
 - **Redis Commander**: [http://localhost:8084](http://localhost:8084) (root/password)
 - **Jenkins**: [http://localhost:8081](http://localhost:8081) (start with `./setup_dev_env.sh --jenkins`)
 
-
 ---
 
 
@@ -117,29 +116,29 @@ source ./setup_dev_aliases.sh
 You should now be able to use the defined aliases in your terminal session, look at 'dev_aliases.txt' for more information on what aliases are available.
 
 ### Useful Aliases
-Once you have setup aliases, you can use them to run commands in the project container more easily. 
 Here are the following aliases that would help manage the project:
 
-### Useful Aliases
 - `willow_shell`: Run cake in the main project container
 - `willowcms_shell`: Get a bash shell in the main project container (alias for `willow_shell`)
 
 ### CakePHP Command Aliases
-- run project-specific cakephp commands
+Here are some useful aliases for running CakePHP commands:
+
 ```bash
 willow_shell 
 ```
 
 
-> Note:
-> - All cakephp commands should be run inside the project container unless pre-pending `willow_shell`
-> - running `willow_shell` is the equivalent as running `bin/cake` inside the container. Therefore, you can use `willow_shell` to run any cakephp command without having to enter the container manually.
+> Note: Running `willow_shell` is the equivalent as running `bin/cake` inside the container. Therefore, you can use `willow_shell` to run any cakephp command without having to enter `bin/cake` before every command.
 
 ### Using the Project Container
 
 1) Get into the main project container using `docker-compose exec [NAME_OF_YOUR_CONTAINER] /bin/bash` (or alias `willowcms_shell` after setting up aliases)
 2) Once in the container, run `bin/cake migrations migrate` to migrate the DB just like you would in a normal cakephp setup
 3) Terminal in the container and run `bin/cake migrations seed` to seed the DB 
+
+
+## Extra Notes
 
 > Note: The project doesn't contain any initial seed data as all seeding is already managed through commands in the `manage.sh` scripts. You will need to create your own seed files in the `config/Seeds` directory if you plan on using the seeding functionality according to the CakePHP documentation.
 
