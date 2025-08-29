@@ -17,8 +17,8 @@ Aiming to answer the common problem of trying to find the connection adapter for
   - [Using `manage.sh`](#using-managesh)
   - [Using script aliases from `setup_dev_aliases.sh`](#using-script-aliases-from-setup_dev_aliasessh)
     - [Useful Aliases](#useful-aliases)
-      - [Project Management Aliases](#project-management-aliases)
-      - [CakePHP Command Aliases](#cakephp-command-aliases)
+    - [Useful Aliases](#useful-aliases-1)
+    - [CakePHP Command Aliases](#cakephp-command-aliases)
     - [Using the Project Container](#using-the-project-container)
 - [Troubleshooting](#troubleshooting)
   - [Useful Links](#useful-links)
@@ -41,18 +41,25 @@ Aiming to answer the common problem of trying to find the connection adapter for
 Code below will install all necessary dependencies and set up the development environment.
 ```bash
 # Clone the repository
-git clone git@github.com:matthewdeaves/willow.git
-cd willow/
+git clone https://github.com/Robjects-Community/WhatIsMyAdaptor.git
+cd WhatIsMyAdaptor
 
 # Run the setup script
 ./setup_dev_env.sh
 ```
 
+before finishing the script, you should be prompted to type the letter corresponding to your preferred options for the development environment setup, options include:
 
+  - Wipe data: letter 'W'
+  - Rebuild containers: letter 'B'
+  - Restart services: letter 'R'
+  - Run migrations: letter 'M'
+  - Continue with the current setup: letter 'C'
 
 
 > Note: 
-> This assumes that you have already run `docker-compose up -d` or `docker compose up -d` to start the containers and that docker compose is set up correctly.
+> This quick start guide assumes that you have already run `docker-compose up -d` or `docker compose up -d` to start the containers and that docker compose is set up correctly.
+
 
 #### Quick Run - Fresh Installation
 
@@ -113,14 +120,11 @@ You should now be able to use the defined aliases in your terminal session, look
 Once you have setup aliases, you can use them to run commands in the project container more easily. 
 Here are the following aliases that would help manage the project:
 
-#### Project Management Aliases
+### Useful Aliases
+- `willow_shell`: Run cake in the main project container
+- `willowcms_shell`: Get a bash shell in the main project container (alias for `willow_shell`)
 
-- Get a bash shell in the main project container
-```bash
-willowcms_shell
-```
-
-#### CakePHP Command Aliases
+### CakePHP Command Aliases
 - run project-specific cakephp commands
 ```bash
 willow_shell 
