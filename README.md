@@ -8,6 +8,8 @@ Aiming to answer the common problem of trying to find the connection adapter for
 - [WhatIsMyAdaptor](#whatismyadaptor)
   - [Table of Contents](#table-of-contents)
   - [Instructions](#instructions)
+  - [Running the Code for Local Development](#running-the-code-for-local-development)
+  - [Useful Links](#useful-links)
   - [Contributing to Projects](#contributing-to-projects)
   - [License](#license)
 
@@ -28,25 +30,34 @@ Software setup:
 <!-- TODO: Describe the development setup of the project -->
 
 - [ Development Setup](#development-setup)
-  - Install necessary dependencies
-  - Set up your development environment 
-- Set up your environment variables in the `.env` file
-- Make sure to configure your database settings
 
 <!-- 4. Running the Code for Local Development -->
-<!-- TODO: Explain how to run the code for local development -->
+## Running the Code for Local Development
+After ensuring that docker is installed and running, you can start the application by running the docker-compose command:
+```bash
+docker-compose up -d
+```
 
-- [Running the Code for Local Development](#running-the-code-for-local-development)
-  - First build the Docker images: `docker-compose build`
-  - Once the images are built, you can start the containers and use the scripts to manage the project
-    - 
-  - Make sure to follow any additional setup instructions specific to the project
-  - Use `docker-compose up` to start the application
-  - Access the application at `http://localhost:8080`
+After the docker compose image is built from the 'docker-compose.yml' file, you can start the containers and use the scripts to manage the project
+
+Here are some useful scripts included in the project:
+  - 'setup.sh': Set up the project
+  - 'build.sh': Build the application
+  - 'setup_dev_env.sh': Set up the development environment
+  - 'setup_dev_aliases.sh': Set up development aliases
+  - 'manage.sh': Manage the application
+  - 'wait-for-it.sh': Wait for the application to be ready
 
 
+
+## Useful Links
+
+- [Docker Documentation](https://docs.docker.com/)
+- [Docker Compose Documentation](https://docs.docker.com/compose/)
+- [CakePHP Documentation](https://book.cakephp.org/5/en/index.html#/)
 
 ## Contributing to Projects
+Contributions are welcome! Please fork the repository and create a pull request with your changes. Make sure to follow the coding standards and include tests for any new features or bug fixes.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
