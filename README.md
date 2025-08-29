@@ -11,6 +11,8 @@ Aiming to answer the common problem of trying to find the connection adapter for
   - [Using `manage.sh`](#using-managesh)
   - [Using script aliases from `setup_dev_aliases.sh`](#using-script-aliases-from-setup_dev_aliasessh)
     - [Using Aliases](#using-aliases)
+      - [Project Management Aliases](#project-management-aliases)
+      - [CakePHP Command Aliases](#cakephp-command-aliases)
     - [Using the Project Container](#using-the-project-container)
   - [Running the Code for Local Development](#running-the-code-for-local-development)
   - [Useful Links](#useful-links)
@@ -43,18 +45,21 @@ and have added the necessary details needed in your specific .*rc file. Then run
 ```bash
 source ./setup_dev_aliases.sh
 ```
-You should now be able to use the defined aliases in your terminal session, look at 'willow-a
+You should now be able to use the defined aliases in your terminal session, look at 'dev_aliases.txt' for more information on what aliases are available.
 
 ### Using Aliases
 
 Once you have setup aliases, you can use them to run commands in the project container more easily. 
 Here are the following aliases that would help manage the project:
 
+#### Project Management Aliases
 
 - Get a bash shell in the main project container
 ```bash
 willowcms_shell
 ```
+
+#### CakePHP Command Aliases
 - run project-specific cakephp commands
 ```bash
 willow_shell     
