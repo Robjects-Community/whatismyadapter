@@ -1,1 +1,19 @@
-[]
+[
+    {
+        "id": "4352be42-e086-4fa2-b11d-95e48034173b",
+        "name": "site-image-assets",
+        "slug": "site-image-assets",
+        "description": "Assets fir unage",
+        "preview_image": "4352be42-e086-4fa2-b11d-95e48034173b.jpg",
+        "is_published": true,
+        "created_by": null,
+        "modified_by": null,
+        "meta_title": "Site Image Assets Gallery - Digital Asset Collection",
+        "meta_description": "Browse our comprehensive collection of site image assets and digital resources. A curated gallery of visual elements for web and digital applications.",
+        "meta_keywords": "site images assets digital resources web graphics visual elements digital assets media files",
+        "facebook_description": "Explore our collection of site image assets! A carefully curated gallery of digital resources and visual elements for your web projects.",
+        "linkedin_description": "Access our professional collection of site image assets and digital resources. This comprehensive gallery features carefully selected visual elements optimized for web and digital applications, perfect for businesses and creative professionals looking to enhance their digital presence.",
+        "instagram_description": "📸 Welcome to our Site Image Assets Gallery!\n\nYour one-stop destination for high-quality digital resources and visual elements. Perfect for web designers, developers, and creative professionals looking to enhance their digital projects.\n\nBrowse through our carefully curated collection of assets, optimized for various digital applications.\n\n#SiteAssets #DigitalResources #WebDesign #VisualElements #DigitalMedia #WebAssets #CreativeResources",
+        "twitter_description": "📸 Discover our site image assets gallery! A curated collection of digital resources and visual elements for your web projects. #DigitalAssets #WebDesign"
+    }
+]

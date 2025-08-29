@@ -1,1 +1,122 @@
-[]
+[
+    {
+        "id": "24425fdb-23e7-4537-92ec-f31723996da0",
+        "name": "Assortment of electronic cables and adapters",
+        "alt_text": "An image showing a collection of various electronic cables, adapters, and connectors, including USB, HDMI, and other types, arranged on a table in front of a person.",
+        "keywords": "electronics cables adapters connectors USB HDMI technology devices",
+        "image": "9b93ed5b-a535-4155-a18c-5638422b323a.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 153147,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "2a830d11-2bc1-421e-a72c-4e1ce412b0db",
+        "name": "Tangled Cables and Chargers",
+        "alt_text": "A cluttered desk with various cables, chargers, and power adapters in a disorganized manner, with a person's hands visible in the background, suggesting frustration or confusion with the technology setup.",
+        "keywords": "cables, chargers, power adapters, technology, clutter, disorganized, frustration",
+        "image": "9996a3ee-388f-45ec-aff0-0c89e828fc1f.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 189693,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "2b5efe38-0fb0-414c-aed7-3daedc0500e2",
+        "name": "Assortment of electronic cables and adapters",
+        "alt_text": "An image showing a variety of colorful electronic cables, cords, and adapters on a wooden table.",
+        "keywords": "cables cords adapters electronics technology assortment variety",
+        "image": "e41e23d3-ffa5-438b-a557-ef80a860ef0c.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 263831,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "5c78693d-6b35-40c3-a9a9-f914cc5cb679",
+        "name": "Tangled Cables",
+        "alt_text": "A collection of various white cables and connectors, including USB, lightning, and other types, arranged in a tangled mess on a wooden surface with a blurred person in the background.",
+        "keywords": "cables connectors usb lightning tangled mess technology electronics gadgets clutter",
+        "image": "139e6af1-4a77-4a7a-a3ab-d9480d030323.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 165352,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "60d290e3-f85c-43a5-a92e-9d3e5b16cc76",
+        "name": "Assortment of Charging Devices",
+        "alt_text": "A collection of various USB charging adapters and cables on a wooden surface.",
+        "keywords": "charging devices usb adapters cables electronics technology power",
+        "image": "5a2917a9-79b2-42c4-b777-3665887f58a4.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 172892,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "96815100-91b9-400b-bbae-15d931c372a0",
+        "name": "Assortment of Electronic Cables and Adapters",
+        "alt_text": "An image showing a collection of various electronic cables, adapters, and connectors, including USB, HDMI, and other types, arranged on a table in front of a person.",
+        "keywords": "electronics cables adapters connectors usb hdmi technology devices",
+        "image": "3c9e0367-b607-4551-87ca-2d6586491d38.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 153147,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "abbfc983-f52c-42f4-83f3-c539e4292e9c",
+        "name": "Assortment of electronic cables and adapters",
+        "alt_text": "An image showing a variety of colorful electronic cables, cords, and adapters on a wooden table.",
+        "keywords": "cables cords adapters electronics technology assortment variety",
+        "image": "cea7d49b-8762-411a-9c6a-b6f860b39049.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 263831,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "b30b947d-cfde-422d-8027-c6507865d2f4",
+        "name": "Tangled Cables and Chargers",
+        "alt_text": "A cluttered collection of various USB chargers, power adapters, and tangled cables on a wooden surface.",
+        "keywords": "cables chargers power adapters tangled electronics technology clutter",
+        "image": "ff9ac716-fafe-4780-9ab0-4edae6411af7.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 151226,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "be8d2543-bfe9-48d0-8e75-07ec56b27dfb",
+        "name": "Tangled Cables and Chargers",
+        "alt_text": "A cluttered arrangement of various USB chargers, power adapters, and tangled cables on a wooden surface.",
+        "keywords": "cables chargers power adapters tangled electronics technology clutter",
+        "image": "92bb074a-dcd6-4797-a985-ef996644bd1e.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 151226,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "cdb0da4d-f7b4-41fb-bc5b-3411a17eb020",
+        "name": "Tangled cables and electronics",
+        "alt_text": "An image showing a cluttered desk with various electronic cables, chargers, and adapters in a tangled mess, with a person's face blurred in the background.",
+        "keywords": "electronics cables chargers adapters tangled desk clutter",
+        "image": "e045eb8a-6aac-4f4e-bad8-5fcfe255f3dc.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 168410,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "db84d4a0-d841-4f74-b18c-bd38834a1830",
+        "name": "Assortment of electronic cables and chargers",
+        "alt_text": "An assortment of various electronic cables, chargers, and adapters in different colors and sizes, arranged on a wooden surface.",
+        "keywords": "cables, chargers, adapters, electronics, technology, assortment, variety, cords, wires, usb, power, devices",
+        "image": "c30deeb5-d5af-47f9-9230-a2c9794464c2.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 228817,
+        "mime": "image/jpeg"
+    },
+    {
+        "id": "e7194a94-f5d0-4c5a-878c-96a9ac094642",
+        "name": "Assortment of Charging Devices",
+        "alt_text": "A collection of various USB charging adapters and cables on a wooden surface.",
+        "keywords": "charging devices usb adapters cables electronics technology power",
+        "image": "8e0b95c5-8839-422d-b3c6-27b1af1249b8.jpg",
+        "dir": "webroot/files/Images/image/",
+        "size": 172892,
+        "mime": "image/jpeg"
+    }
+]

@@ -40,6 +40,11 @@
         "slug": "support"
     },
     {
+        "model": "Tags",
+        "foreign_key": "7e1cec2c-bf68-4c2f-96aa-473c8ab42295",
+        "slug": "product-tags"
+    },
+    {
         "model": "Products",
         "foreign_key": "d8e5b334-948c-4787-b435-4cd7377b53fa",
         "slug": "asus-high-performance-microphone"
@@ -248,6 +253,11 @@
         "model": "Articles",
         "foreign_key": "ed480b02-01ed-41ee-a780-31aafe0d10c5",
         "slug": "help-support-php"
+    },
+    {
+        "model": "ImageGalleries",
+        "foreign_key": "4352be42-e086-4fa2-b11d-95e48034173b",
+        "slug": "site-image-assets"
     },
     {
         "model": "Products",

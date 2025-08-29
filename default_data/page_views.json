@@ -1,5 +1,12 @@
 [
     {
+        "id": "9c50b7f8-24fe-4029-8c80-d93effd72c4d",
+        "article_id": "535a1ce4-b258-430a-ad57-fd194e86c73f",
+        "ip_address": "192.168.65.1",
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Safari/605.1.15",
+        "referer": "/en"
+    },
+    {
         "id": "ad9b4e3b-bca0-4bb6-91e4-25b73eab9c19",
         "article_id": "1f6de06e-1ca6-40fc-9d11-f31fdf618c99",
         "ip_address": "192.168.65.1",

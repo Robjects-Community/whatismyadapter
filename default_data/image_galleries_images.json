@@ -1,1 +1,58 @@
-[]
+[
+    {
+        "id": "07fda083-960b-4bd9-910b-fdf3684a3185",
+        "image_gallery_id": "4352be42-e086-4fa2-b11d-95e48034173b",
+        "image_id": "2a830d11-2bc1-421e-a72c-4e1ce412b0db",
+        "position": 6,
+        "caption": null
+    },
+    {
+        "id": "893c715e-dc38-442d-a804-c18295facaea",
+        "image_gallery_id": "4352be42-e086-4fa2-b11d-95e48034173b",
+        "image_id": "b30b947d-cfde-422d-8027-c6507865d2f4",
+        "position": 0,
+        "caption": null
+    },
+    {
+        "id": "942e78f2-150e-484e-8186-8681061f315f",
+        "image_gallery_id": "4352be42-e086-4fa2-b11d-95e48034173b",
+        "image_id": "96815100-91b9-400b-bbae-15d931c372a0",
+        "position": 3,
+        "caption": null
+    },
+    {
+        "id": "a5f42c0b-db73-41bc-9255-f49da6b0ce9c",
+        "image_gallery_id": "4352be42-e086-4fa2-b11d-95e48034173b",
+        "image_id": "e7194a94-f5d0-4c5a-878c-96a9ac094642",
+        "position": 2,
+        "caption": null
+    },
+    {
+        "id": "a74dbe64-0c85-48c5-837e-ad6551e7f05b",
+        "image_gallery_id": "4352be42-e086-4fa2-b11d-95e48034173b",
+        "image_id": "5c78693d-6b35-40c3-a9a9-f914cc5cb679",
+        "position": 5,
+        "caption": null
+    },
+    {
+        "id": "b2734079-c211-4a1e-8256-851a388e0fb9",
+        "image_gallery_id": "4352be42-e086-4fa2-b11d-95e48034173b",
+        "image_id": "db84d4a0-d841-4f74-b18c-bd38834a1830",
+        "position": 7,
+        "caption": null
+    },
+    {
+        "id": "dd156a6e-8489-4590-946c-fcdb433892a0",
+        "image_gallery_id": "4352be42-e086-4fa2-b11d-95e48034173b",
+        "image_id": "cdb0da4d-f7b4-41fb-bc5b-3411a17eb020",
+        "position": 4,
+        "caption": null
+    },
+    {
+        "id": "fdedd0f6-ddc3-4039-86f4-ac086f9df1ce",
+        "image_gallery_id": "4352be42-e086-4fa2-b11d-95e48034173b",
+        "image_id": "abbfc983-f52c-42f4-83f3-c539e4292e9c",
+        "position": 1,
+        "caption": null
+    }
+]

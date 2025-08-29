@@ -66,7 +66,7 @@
 
             <div class="p-4 mb-3 bg-body-tertiary rounded">
               <h4 class="fst-italic"><?= __('About') ?></h4>
-              <p class="mb-0"><?= __("Welcome to willowcms.app. This site uses Willow - a content management system I'm building in the open. Here you'll find development updates, feature highlights, and guides on using Willow for your own sites.") ?></p>
+              <p class="mb-0"><?= __("Welcome to willowcms.app. This site uses Willow - a content management system I'm building in the open. Here you'll find development updates, feature highlights, and guides on using the web app for your own sites.") ?></p>
             </div>
 
                 <?= $this->element('site/articles_list', ['articles' => $featuredArticles, 'title' => __('Featured posts')]) ?>

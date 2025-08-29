@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2025-08-28 23:39+0100\n"
+"POT-Creation-Date: 2025-08-29 16:45+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -4008,6 +4008,9 @@ msgid "About"
 msgstr ""
 
 #: ./plugins/DefaultTheme/templates/layout/article_index.php:69
+msgid "Welcome to willowcms.app. This site uses Willow - a content management system I'm building in the open. Here you'll find development updates, feature highlights, and guides on using the web app for your own sites."
+msgstr ""
+
 #: ./plugins/DefaultTheme/templates/layout/article_index.php:88
 msgid "Welcome to willowcms.app. This site uses Willow - a content management system I'm building in the open. Here you'll find development updates, feature highlights, and guides on using Willow for your own sites."
 msgstr ""
