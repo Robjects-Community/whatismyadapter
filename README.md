@@ -7,30 +7,32 @@ Aiming to answer the common problem of trying to find the connection adapter for
 
 - [WhatIsMyAdaptor](#whatismyadaptor)
   - [Table of Contents](#table-of-contents)
-- [Managing the Application](#managing-the-application)
+  - [Quick Start](#quick-start)
+  - [Managing the Application](#managing-the-application)
   - [Using `manage.sh`](#using-managesh)
   - [Using script aliases from `setup_dev_aliases.sh`](#using-script-aliases-from-setup_dev_aliasessh)
-    - [Using Aliases](#using-aliases)
+    - [Useful Aliases](#useful-aliases)
       - [Project Management Aliases](#project-management-aliases)
       - [CakePHP Command Aliases](#cakephp-command-aliases)
     - [Using the Project Container](#using-the-project-container)
-  - [Running the Code for Local Development](#running-the-code-for-local-development)
   - [Useful Links](#useful-links)
   - [Contributing to Projects](#contributing-to-projects)
   - [License](#license)
 
 
-
+## Quick Start
 Software setup:
+
 1) Install docker
 2) Clone repo
 3) cd into folder
-4) `docker-compose up -d`
+4) `docker-compose up -d` or `docker compose up -d`
 5) Wait for the containers to be fully up and running
-6) Run `./setup_dev_env.sh` to set up the project
-7) Run `./setup_dev_aliases.sh` to set up aliases for easier access to the containers
+6) After the containers are running, you can access the application at `http://localhost:8080`
+7) Run `./setup_dev_env.sh` to set up the project
+8) Run `./setup_dev_aliases.sh` to set up aliases for easier access to the containers
 
-# Managing the Application
+## Managing the Application
 
 ## Using `manage.sh`
 
@@ -47,8 +49,7 @@ source ./setup_dev_aliases.sh
 ```
 You should now be able to use the defined aliases in your terminal session, look at 'dev_aliases.txt' for more information on what aliases are available.
 
-### Using Aliases
-
+### Useful Aliases
 Once you have setup aliases, you can use them to run commands in the project container more easily. 
 Here are the following aliases that would help manage the project:
 
@@ -75,38 +76,11 @@ willow_shell
 2) Terminal in the container and run `bin/cake migrations migrate` once you are in the container to migrate the DB
 3) Terminal in the container and run `bin/cake migrations seed` to seed the DB
 
-
-
-<!-- 3. Development Setup of Project -->
-<!-- TODO: Describe the development setup of the project -->
-
-- [ Development Setup](#development-setup)
-
-<!-- 4. Running the Code for Local Development -->
-## Running the Code for Local Development
-After ensuring that docker is installed and running, you can start the application by running the docker-compose command:
-```bash
-docker-compose up -d
-```
-
-After the docker compose image is built from the 'docker-compose.yml' file, you can start the containers and use the scripts to manage the project
-
-Here are some useful scripts included in the project:
-
-- 'setup.sh': Set up the project
-- 'build.sh': Build the application
-- 'setup_dev_env.sh': Set up the development environment
-- 'setup_dev_aliases.sh': Set up development aliases
-- 'manage.sh': Manage the application
-- 'wait-for-it.sh': Wait for the application to be ready
-
-
-
 ## Useful Links
 
 - [Docker Documentation](https://docs.docker.com/)
 - [Docker Compose Documentation](https://docs.docker.com/compose/)
-- [CakePHP Documentation](https://book.cakephp.org/5/en/index.html#/)
+- [CakePHP Documentation (CakePHP5.X.X)](https://book.cakephp.org/5/en/index.html#/)
 
 ## Contributing to Projects
 Contributions are welcome! Please fork the repository and create a pull request with your changes. Make sure to follow the coding standards and include tests for any new features or bug fixes.
