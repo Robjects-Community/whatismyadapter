@@ -22,21 +22,29 @@ Software setup:
 5) terminal in the container and run `bin/cake migrations migrate` to migrate the DB
 6) terminal in the container and run `bin/cake migrations seed` to seed the DB
 
-<!-- 1. Setup of RPi Image -->
-<!-- TODO: Add detailed instructions for setting up the RPi image -->
-
-<!-- 2. Explanation of Project Contents and Structure -->
-<!-- TODO: Provide an explanation of the project contents and structure -->
 
 
 <!-- 3. Development Setup of Project -->
 <!-- TODO: Describe the development setup of the project -->
 
+- [ Development Setup](#development-setup)
+  - Install necessary dependencies
+  - Set up your development environment 
+- Set up your environment variables in the `.env` file
+- Make sure to configure your database settings
+
 <!-- 4. Running the Code for Local Development -->
 <!-- TODO: Explain how to run the code for local development -->
 
-<!-- 5. Putting the Website Online -->
-<!-- TODO: Outline the steps for putting the website online -->
+- [Running the Code for Local Development](#running-the-code-for-local-development)
+  - First build the Docker images: `docker-compose build`
+  - Once the images are built, you can start the containers and use the scripts to manage the project
+    - 
+  - Make sure to follow any additional setup instructions specific to the project
+  - Use `docker-compose up` to start the application
+  - Access the application at `http://localhost:8080`
+
+
 
 ## Contributing to Projects
 
