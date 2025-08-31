@@ -1,0 +1,9 @@
+parameters:
+    level: 5
+    treatPhpDocTypesAsCertain: false
+    bootstrapFiles:
+        - config/bootstrap.php
+    paths:
+        - src/
+    parallel:
+        maximumNumberOfProcesses: 1
