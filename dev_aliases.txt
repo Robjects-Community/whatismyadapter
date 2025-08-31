@@ -37,14 +37,52 @@ willowcms_exec() {
 alias willowcms_shell='docker compose exec -it willowcms /bin/sh'
 
 # Testing Commands
-# Usage: phpunit
-#        phpunit tests/TestCase/MyTest.php
-#        phpunit --filter testMyMethod tests/TestCase/MyTest.php
+# Usage:
+#   phpunit
+#   phpunit MyTest
+#   phpunit MyTest.php
+#   phpunit --filter testMyMethod MyTest
 phpunit() {
-    # 'php' is the command, 'vendor/bin/phpunit' and subsequent items are its arguments.
-    # The willowcms_exec function will handle this correctly.
     if [ "$#" -gt 0 ]; then
-        willowcms_exec php vendor/bin/phpunit "$@"
+        local -a args=("$@")
+        local last_i=$((${#args[@]} - 1))
+        local last="${args[$last_i]}"
+
+        # Only try to resolve when the last arg is not an option and has no path
+        case "$last" in
+            -*|*/*) : ;;
+            *)
+                local resolved=""
+                # Try common candidates
+                for cand in \
+                    "$last" \
+                    "tests/TestCase/$last" \
+                    "tests/TestCase/${last%.*}.php" \
+                    "tests/TestCase/${last%.*}Test.php"
+                do
+                    [ -f "$cand" ] && { resolved="$cand"; break; }
+                done
+                # Fallback to find
+                if [ -z "$resolved" ]; then
+                    if printf %s "$last" | grep -q '\.php$'; then
+                        resolved=$(find tests/TestCase -type f -name "$last" -print -quit 2>/dev/null)
+                    else
+                        resolved=$(find tests/TestCase -type f \( \
+                            -name "${last}Test.php" -o \
+                            -name "${last}.php" -o \
+                            -name "*${last}*Test.php" -o \
+                            -name "*${last}*.php" \
+                        \) -print -quit 2>/dev/null)
+                    fi
+                fi
+                if [ -n "$resolved" ]; then
+                    resolved="${resolved#./}"
+                    args[$last_i]="$resolved"
+                fi
+            ;;
+        esac
+
+        willowcms_exec php vendor/bin/phpunit "${args[@]}"
     else
         willowcms_exec php vendor/bin/phpunit
     fi
