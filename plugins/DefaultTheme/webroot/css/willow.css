@@ -1,0 +1,1254 @@
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+:root {
+    --background-color: #ffffff;
+    --text-color: #212529;
+    --code-bg: #f8f9fa;
+    --code-color: #212529;
+    --pre-bg: #f8f9fa;
+    --pre-border: #dee2e6;
+    --blockquote-border: #dee2e6;
+    --meta-color: #727272;
+    --table-header-bg: #f8f9fa;
+    --table-border: #dee2e6;
+    --blockquote-bg: rgba(0, 0, 0, 0.03);
+    --inline-code-color: #d63384;
+}
+
+[data-bs-theme="dark"] {
+    --background-color: #1e2124;
+    --text-color: #e9ecef;
+    --code-bg: #2d2d2d;
+    --code-color: #e9ecef;
+    --pre-bg: #1e1e1e;
+    --pre-border: #373b3e;
+    --blockquote-border: #373b3e;
+    --meta-color: #a0a0a0;
+    --table-header-bg: #2d2d2d;
+    --table-border: #373b3e;
+    --blockquote-bg: rgba(255, 255, 255, 0.05);
+    --inline-code-color: #e685b5;
+}
+
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.btn-bd-primary {
+  --bd-violet-bg: #712cf9;
+  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #6528e0;
+  --bs-btn-hover-border-color: #6528e0;
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #5a23c8;
+  --bs-btn-active-border-color: #5a23c8;
+}
+
+.bd-mode-toggle {
+  z-index: 1500;
+}
+
+/* Accessibility improvements */
+.visually-hidden-focusable:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0.5rem 1rem !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: nowrap !important;
+  z-index: 9999;
+}
+
+/* Focus indicators - only show on keyboard focus, not mouse clicks */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.nav-link:focus-visible,
+.list-group-item:focus-visible {
+  outline: 2px solid var(--bs-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Remove focus outline on mouse click for all links and interactive elements */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+.btn:focus:not(:focus-visible),
+.nav-link:focus:not(:focus-visible),
+.list-group-item:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Sidebar sections spacing */
+.sidebar-section {
+  background: var(--bs-body-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.sidebar-content {
+  position: relative;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar-content {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--bs-border-color);
+  }
+}
+
+.bd-mode-toggle .dropdown-menu .active .bi {
+  display: block !important;
+}
+
+/* Blog header and typography */
+.blog-header-logo {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+  font-size: 2.25rem;
+}
+
+.blog-header-logo:hover {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+}
+
+.flex-auto {
+  flex: 0 0 auto;
+}
+
+.h-250 { height: 250px; }
+@media (min-width: 768px) {
+  .h-md-250 { height: 250px; }
+}
+
+/* Pagination */
+.blog-pagination {
+  margin-bottom: 4rem;
+}
+
+.pagination-wrapper {
+  margin: 3rem 0;
+}
+
+.pagination-lg .page-link {
+  padding: 0.75rem 1rem;
+  font-size: 1.125rem;
+}
+
+.pagination .page-link {
+  border-radius: 0.5rem;
+  margin: 0 0.125rem;
+  transition: all 0.2s ease;
+}
+
+.pagination .page-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Blog posts */
+.blog-post {
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+/* Modern card-based article previews */
+.article-preview-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.article-preview-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.article-preview-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.article-meta {
+  font-size: 0.875rem;
+  color: var(--meta-color);
+  margin-bottom: 0.5rem;
+}
+
+.article-summary {
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.blog-post-meta {
+  margin-bottom: 1.25rem;
+  color: var(--meta-color);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.blog-post-meta .author {
+  font-weight: 500;
+}
+
+.blog-post-meta .date {
+  opacity: 0.8;
+}
+
+/* Login form */
+.form-signin {
+  max-width: 330px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Breadcrumbs */
+.breadcrumb {
+  margin-bottom: 0.2rem;
+}
+
+.breadcrumb-item {
+  font-size: 0.875rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">";
+}
+
+/* Enhanced Markdown content styles */
+.blog-post h1,
+.blog-post h2,
+.blog-post h3,
+.blog-post h4,
+.blog-post h5,
+.blog-post h6 {
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-color);
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.blog-post h1:first-child,
+.blog-post h2:first-child,
+.blog-post h3:first-child {
+  margin-top: 0;
+}
+
+.blog-post h1 { font-size: 2.5rem; }
+.blog-post h2 { font-size: 2rem; }
+.blog-post h3 { font-size: 1.75rem; }
+.blog-post h4 { font-size: 1.5rem; }
+.blog-post h5 { font-size: 1.25rem; }
+.blog-post h6 { font-size: 1.1rem; }
+
+.blog-post code {
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  background-color: var(--code-bg);
+  color: var(--inline-code-color);
+}
+
+.blog-post pre {
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+  background-color: var(--pre-bg);
+  border: 1px solid var(--pre-border);
+  overflow-x: auto;
+}
+
+.blog-post pre code {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  color: var(--code-color);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.blog-post blockquote {
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--blockquote-border);
+  background-color: var(--blockquote-bg);
+  font-style: italic;
+}
+
+.blog-post ul,
+.blog-post ol {
+  padding-left: 2rem;
+  margin: 1rem 0;
+}
+
+.blog-post li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-post table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  border: 1px solid var(--table-border);
+}
+
+.blog-post th,
+.blog-post td {
+  padding: 0.75rem;
+  border: 1px solid var(--table-border);
+}
+
+.blog-post th {
+  background-color: var(--table-header-bg);
+  font-weight: 600;
+}
+
+.blog-post tr:nth-child(even) {
+  background-color: var(--blockquote-bg);
+}
+
+.blog-post img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Article header styling */
+.article-header {
+  border-bottom: 1px solid var(--pre-border);
+  padding-bottom: 1.5rem;
+}
+
+.article-featured-image {
+  text-align: center;
+}
+
+.article-body {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+/* High specificity CSS alignment support for inline styles */
+/* Target any element with text-align inline styles */
+.article-body [style*="text-align: center"],
+.blog-post [style*="text-align: center"],
+.article-body .content-align-center,
+.blog-post .content-align-center {
+  text-align: center !important;
+}
+
+.article-body [style*="text-align: left"],
+.blog-post [style*="text-align: left"],
+.article-body .content-align-left,
+.blog-post .content-align-left {
+  text-align: left !important;
+}
+
+.article-body [style*="text-align: right"],
+.blog-post [style*="text-align: right"],
+.article-body .content-align-right,
+.blog-post .content-align-right {
+  text-align: right !important;
+}
+
+.article-body [style*="text-align: justify"],
+.blog-post [style*="text-align: justify"],
+.article-body .content-align-justify,
+.blog-post .content-align-justify {
+  text-align: justify !important;
+}
+
+/* High specificity image alignment for inline styles - exclude gallery images */
+.article-body [style*="text-align: center"]:not(.photo-gallery) img:not(.gallery-image),
+.blog-post [style*="text-align: center"]:not(.photo-gallery) img:not(.gallery-image),
+.article-body .content-align-center img:not(.gallery-image),
+.blog-post .content-align-center img:not(.gallery-image) {
+  display: block !important;
+  margin: 1.5rem auto !important;
+  max-width: 100%;
+  height: auto;
+}
+
+.article-body [style*="text-align: left"]:not(.photo-gallery) img:not(.gallery-image),
+.blog-post [style*="text-align: left"]:not(.photo-gallery) img:not(.gallery-image),
+.article-body .content-align-left img:not(.gallery-image),
+.blog-post .content-align-left img:not(.gallery-image) {
+  display: block !important;
+  margin: 1.5rem 0 !important;
+  max-width: 100%;
+  height: auto;
+}
+
+.article-body [style*="text-align: right"]:not(.photo-gallery) img:not(.gallery-image),
+.blog-post [style*="text-align: right"]:not(.photo-gallery) img:not(.gallery-image),
+.article-body .content-align-right img:not(.gallery-image),
+.blog-post .content-align-right img:not(.gallery-image) {
+  display: block !important;
+  margin: 1.5rem 0 1.5rem auto !important;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Phase 4: Responsive image enhancements and typography improvements */
+
+/* Responsive article images within content (fallback for non-aligned) - exclude gallery images */
+/* Only apply to images that are not inside aligned containers */
+.article-body img:not(.gallery-image) {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Default margin for images not in aligned containers */
+.article-body p:not([style*="text-align"]) img:not(.gallery-image) {
+  margin: 2rem auto;
+  display: block;
+}
+
+.article-body img:not(.gallery-image):hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* Enhanced responsive image handling - only apply when explicitly classed */
+.article-body img.img-responsive,
+.blog-post img.img-responsive {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Remove problematic gallery overrides - let photo-gallery.css handle gallery styling */
+
+/* Figure elements for better semantic structure */
+.article-body figure,
+.blog-post figure {
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.article-body figcaption,
+.blog-post figcaption {
+  font-size: 0.9rem;
+  color: var(--meta-color);
+  text-align: center;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Content alignment helper classes */
+.content-align-center {
+  text-align: center !important;
+}
+
+.content-align-left {
+  text-align: left !important;
+}
+
+.content-align-right {
+  text-align: right !important;
+}
+
+.content-align-justify {
+  text-align: justify !important;
+}
+
+/* Fallback rule for any missed center-aligned images in article content */
+.article-body *[style*="text-align: center"] img:not(.gallery-image),
+.article-body *[style*="text-align:center"] img:not(.gallery-image),
+.blog-post *[style*="text-align: center"] img:not(.gallery-image),
+.blog-post *[style*="text-align:center"] img:not(.gallery-image) {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Responsive image sizes for different viewports - exclude gallery images */
+@media (max-width: 576px) {
+  .article-body img:not(.gallery-image),
+  .blog-post img:not(.gallery-image) {
+    margin: 1rem auto;
+    border-radius: 6px;
+  }
+  
+  .article-body p[style*="text-align: center"]:not(.photo-gallery) img:not(.gallery-image),
+  .article-body p[style*="text-align:center"]:not(.photo-gallery) img:not(.gallery-image),
+  .blog-post p[style*="text-align: center"]:not(.photo-gallery) img:not(.gallery-image),
+  .blog-post p[style*="text-align:center"]:not(.photo-gallery) img:not(.gallery-image) {
+    margin: 1rem auto;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .article-body img:not(.gallery-image),
+  .blog-post img:not(.gallery-image) {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 769px) {
+  /* Floating images with text wrap on larger screens - exclude gallery images */
+  .article-body p[style*="text-align: left"]:not(.photo-gallery) img:not(.gallery-image),
+  .article-body p[style*="text-align:left"]:not(.photo-gallery) img:not(.gallery-image),
+  .blog-post p[style*="text-align: left"]:not(.photo-gallery) img:not(.gallery-image),
+  .blog-post p[style*="text-align:left"]:not(.photo-gallery) img:not(.gallery-image) {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+    max-width: 400px;
+    display: inline;
+  }
+  
+  .article-body p[style*="text-align: right"]:not(.photo-gallery) img:not(.gallery-image),
+  .article-body p[style*="text-align:right"]:not(.photo-gallery) img:not(.gallery-image),
+  .blog-post p[style*="text-align: right"]:not(.photo-gallery) img:not(.gallery-image),
+  .blog-post p[style*="text-align:right"]:not(.photo-gallery) img:not(.gallery-image) {
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+    max-width: 400px;
+    display: inline;
+  }
+}
+
+/* Typography improvements */
+.article-body,
+.blog-post {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+}
+
+.article-body p,
+.blog-post p {
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  hyphens: auto;
+  word-wrap: break-word;
+}
+
+.article-body h1, .article-body h2, .article-body h3,
+.blog-post h1, .blog-post h2, .blog-post h3 {
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+/* Better quote styling */
+.article-body blockquote,
+.blog-post blockquote {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 4px solid var(--bs-primary);
+  font-style: italic;
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin: 2rem 0;
+}
+
+.article-body blockquote::before,
+.blog-post blockquote::before {
+  content: '"';
+  position: absolute;
+  left: -0.5rem;
+  top: -0.5rem;
+  font-size: 3rem;
+  color: var(--bs-primary);
+  opacity: 0.3;
+}
+
+/* Print styles - exclude gallery images */
+@media print {
+  .article-body img:not(.gallery-image),
+  .blog-post img:not(.gallery-image) {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+    margin: 1rem 0 !important;
+    float: none !important;
+    display: block !important;
+  }
+  
+  .article-body,
+  .blog-post {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+}
+
+@media (min-width: 768px) {
+  .article-body img.align-left {
+    float: left;
+    max-width: 400px;
+    margin: 0 2rem 1rem 0;
+    display: inline;
+  }
+  
+  .article-body img.align-right {
+    float: right;
+    max-width: 400px;
+    margin: 0 0 1rem 2rem;
+    display: inline;
+  }
+}
+
+/* Remove problematic forced floats - use responsive classes instead */
+.article-content-wrapper > img,
+#article-body-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 768px) {
+  .article-content-wrapper > img.float-left,
+  #article-body-content img.float-left {
+    float: left;
+    max-width: 300px;
+    margin: 0 1.5rem 1rem 0;
+  }
+  
+  .article-content-wrapper > img.float-right,
+  #article-body-content img.float-right {
+    float: right;
+    max-width: 300px;
+    margin: 0 0 1rem 1.5rem;
+  }
+}
+
+/* Explicitly prevent floating on YouTube container */
+.youtube-embed {
+  float: none;
+  clear: both;
+}
+
+.clear-float {
+  clear: both;
+}
+
+.blog-post hr {
+  margin: 0.5rem;
+  border: 0;
+  border-top: 1px solid var(--pre-border);
+}
+
+.blog-post a {
+  color: var(--bs-link-color);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.blog-post a:hover {
+  color: var(--bs-link-hover-color);
+  border-bottom-color: currentColor;
+  text-decoration: none;
+}
+
+.blog-post p {
+  margin: 1.5rem 0;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Code block language label */
+.blog-post pre[class*="language-"]::before {
+  content: attr(class);
+  display: block;
+  background-color: var(--blockquote-bg);
+  padding: 0.3em 0.6em;
+  font-size: 0.8em;
+  color: var(--meta-color);
+  border-bottom: 1px solid var(--pre-border);
+  margin-bottom: 0.5em;
+  border-radius: 3px;
+}
+
+/* Syntax highlighting adjustments */
+[data-bs-theme="dark"] .hljs-string {
+  color: #add8e6 !important; /* Light blue for better contrast in dark mode */
+}
+
+.youtube-embed {
+  width: 100%;
+  max-width: 100%;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.youtube-placeholder,
+.youtube-player-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.youtube-placeholder img,
+.youtube-player-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.youtube-consent-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .youtube-embed {
+    margin: 2rem 0;
+  }
+}
+
+/* Modern responsive image handling */
+.blog-post .article-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .blog-post .article-content {
+    display: block;
+    overflow: hidden;
+  }
+  
+  .blog-post .article-content img {
+    float: left;
+    max-width: 250px;
+    height: auto;
+    margin: 0 1.5rem 1rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+}
+
+/* Mobile-first article text */
+.blog-post .article-text {
+  margin: 0;
+}
+
+.blog-post .article-text p {
+  margin-bottom: 1rem;
+}
+
+.blog-post .article-text p:first-child {
+  margin-top: 0;
+}
+
+/* Responsive image containers */
+.article-image-container {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.article-image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 768px) {
+  .article-image-inline {
+    float: left;
+    max-width: 300px;
+    margin: 0 1.5rem 1rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .article-image-right {
+    float: right;
+    max-width: 300px;
+    margin: 0 0 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+}
+
+/* New blog layout styles */
+.article-list-item {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.article-title {
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.article-meta {
+  font-size: 0.875rem;
+  color: var(--meta-color);
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.article-wrap-container {
+  margin-top: 1rem;
+  display: flow-root; /* Create new block formatting context but allow text wrapping */
+}
+
+.article-image-container {
+  float: left;
+  margin: 0 1.5rem 1rem 0;
+}
+
+.article-wrap-image {
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  border: none;
+  outline: none;
+  display: block;
+}
+
+.article-wrap-image:hover {
+  transform: scale(1.02);
+}
+
+.article-text-wrap {
+  line-height: 1.6;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.article-text-wrap p {
+  margin-bottom: 1rem;
+}
+
+/* Remove blue border from image links */
+.article-wrap-container a {
+  border: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.article-wrap-container a:focus-visible {
+  outline: 2px solid var(--bs-primary);
+  outline-offset: 2px;
+}
+
+.article-wrap-container a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.read-more-container {
+  text-align: right;
+  margin-top: 1rem;
+  clear: both;
+}
+
+.read-more-link {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.read-more-link:hover {
+  color: rgba(255,255,255,0.9);
+  background-color: rgba(255,255,255,0.1);
+  text-decoration: none;
+}
+
+.article-separator {
+  clear: both;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  margin: 0.5rem 0 0.125rem 0;
+  opacity: 0.6;
+}
+
+/* Sidebar article styles */
+.sidebar-articles-list {
+  padding: 0;
+}
+
+.sidebar-article-item {
+  padding: 0;
+}
+
+.sidebar-article-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-wrap-container {
+  display: flow-root;
+}
+
+.sidebar-image-container {
+  float: left;
+  margin: 0 0.75rem 0.5rem 0;
+}
+
+.sidebar-wrap-image {
+  max-width: 60px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  display: block;
+  border: none;
+  outline: none;
+}
+
+.sidebar-text-wrap {
+  line-height: 1.4;
+  text-align: left;
+}
+
+.sidebar-article-summary {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-article-meta {
+  font-size: 0.8rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.sidebar-article-separator {
+  clear: both;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  opacity: 0.5;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 767.98px) {
+  .article-image-float {
+    float: none;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 0 1rem 0;
+    display: block;
+  }
+  
+  .sidebar-article-image {
+    float: none;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 0 0.75rem 0;
+    display: block;
+  }
+  
+  .sidebar-article-item {
+    overflow: visible; /* Allow content to flow normally on mobile */
+  }
+  
+  .read-more-container {
+    text-align: left;
+    clear: none;
+  }
+  
+  /* Article index mobile layout - center image and disable text wrap */
+  .article-image-container {
+    float: none;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+  }
+  
+  .article-wrap-image {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+/* Tablet responsive adjustments */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .article-image-float {
+    max-width: min(240px, 25vw);
+  }
+}
+
+/* Breakpoint 3: Medium desktop (992px - 1199.98px) - Stop text wrapping */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .article-image-container {
+    float: none;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+  }
+  
+  .article-wrap-image {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+/* Breakpoint 4: Large desktop (1200px - 1399.98px) - Text wrap with max 400px image */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .article-image-container {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+  }
+  
+  .article-wrap-image {
+    max-width: 400px;
+    display: block;
+  }
+}
+
+/* Breakpoint 5: Extra large desktop (1400px+) - Text wrap with max 400px image */
+@media (min-width: 1400px) {
+  .article-image-container {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+  }
+  
+  .article-wrap-image {
+    max-width: 400px;
+    display: block;
+  }
+  
+  .article-image-float {
+    max-width: 320px;
+  }
+}
+/* Content image enhancements for better alignment */
+.article-body .content-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.article-body .content-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* Enhanced spacing for aligned content */
+.article-body .content-align-center {
+  text-align: center \!important;
+  margin: 1.5rem 0;
+}
+
+.article-body .content-align-left {
+  text-align: left \!important;
+  margin: 1.5rem 0;
+}
+
+.article-body .content-align-right {
+  text-align: right \!important;
+  margin: 1.5rem 0;
+}
+
+.article-body .content-align-justify {
+  text-align: justify \!important;
+  margin: 1.5rem 0;
+}
+
+/* Ensure images within aligned paragraphs follow alignment */
+.article-body .content-align-center .content-image {
+  display: block;
+  margin: 1.5rem auto;
+}
+
+.article-body .content-align-left .content-image {
+  display: block;
+  margin: 1.5rem 0 1.5rem 0;
+}
+
+.article-body .content-align-right .content-image {
+  display: block;
+  margin: 1.5rem 0 1.5rem auto;
+}
+
+/* Preserve spacing for empty aligned paragraphs */
+.article-body p[style*="text-align"]:empty,
+.article-body .content-align-center:empty,
+.article-body .content-align-left:empty,
+.article-body .content-align-right:empty {
+  height: 1.5rem;
+  margin: 0.75rem 0;
+}
+
+/* Apply Trumbowyg-like styling to article content */
+.article-body.trumbowyg-editor-visible {
+  min-height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Override Trumbowyg CSS that might interfere with our layout */
+.article-body.trumbowyg-editor-visible img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Ensure Trumbowyg alignment styles work */
+.trumbowyg-editor-visible [style*="text-align: center"],
+.trumbowyg-semantic [style*="text-align: center"] {
+  text-align: center !important;
+}
+
+.trumbowyg-editor-visible [style*="text-align: left"],
+.trumbowyg-semantic [style*="text-align: left"] {
+  text-align: left !important;
+}
+
+.trumbowyg-editor-visible [style*="text-align: right"],
+.trumbowyg-semantic [style*="text-align: right"] {
+  text-align: right !important;
+}
+
+.trumbowyg-editor-visible [style*="text-align: justify"],
+.trumbowyg-semantic [style*="text-align: justify"] {
+  text-align: justify !important;
+}
+
+/* FINAL OVERRIDE - Ensure alignment works on frontend */
+#article-body-content p[style*="text-align: center"],
+#article-body-content .content-align-center {
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+  clear: both !important;
+  margin: 1.5rem 0 !important;
+}
+
+#article-body-content p[style*="text-align: left"],
+#article-body-content .content-align-left {
+  text-align: left !important;
+  display: block !important;
+  width: 100% !important;
+  clear: both !important;
+  margin: 1.5rem 0 !important;
+}
+
+#article-body-content p[style*="text-align: right"],
+#article-body-content .content-align-right {
+  text-align: right !important;
+  display: block !important;
+  width: 100% !important;
+  clear: both !important;
+  margin: 1.5rem 0 !important;
+}
+
+#article-body-content p[style*="text-align: center"] img,
+#article-body-content .content-align-center img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  clear: both !important;
+}
+
+#article-body-content p[style*="text-align: right"] img,
+#article-body-content .content-align-right img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  clear: both !important;
+}
+
+#article-body-content p[style*="text-align: left"] img,
+#article-body-content .content-align-left img {
+  display: block !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  clear: both !important;
+}
+
