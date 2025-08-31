@@ -84,16 +84,18 @@ else
     fi
 fi
 print_step "Loading application environment variables..."
-if [ -f "config/.env" ]; then
-    # Export variables from config/.env to make them available to docker-compose
-    set -a  # Automatically export all variables
-    source config/.env
-    set +a  # Stop automatically exporting
-    print_success "Loaded environment variables from config/.env"
-else
-    print_error "config/.env file not found!"
-    exit 1
-fi
+# Load environment variables from config/.env - added code to base
+###### UNCOMMENT IF YOU WANT TO INCORPORATE CONFIG FOLDER
+# if [ -f "config/.env" ]; then
+#     # Export variables from config/.env to make them available to docker-compose
+#     set -a  # Automatically export all variables
+#     source config/.env
+#     set +a  # Stop automatically exporting
+#     print_success "Loaded environment variables from config/.env"
+# else
+#     print_error "config/.env file not found!"
+#     exit 1
+# fi
 # Service name for the main application container
 MAIN_APP_SERVICE="willowcms"
 # Path to the wait-for-it.sh script (used inside the main app container)
