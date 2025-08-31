@@ -24,6 +24,7 @@ Aiming to answer the common problem of trying to find the connection adapter for
   - [Useful Links](#useful-links)
   - [Contributing to Projects](#contributing-to-projects)
   - [License](#license)
+  - [Acknowledgements](#acknowledgements)
 
 
 ---
@@ -157,3 +158,16 @@ Contributions are welcome! Please fork the repository and create a pull request 
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+## Acknowledgements
+
+<!-- 
+### Special Thanks
+I want to give a huge shoutout to **Matthew** for his invaluable GitHub contributions to the base project.
+
+Developers like him make open-source projects thrive. He has been instrumental in helping me set up this project and navigate the complexities of Docker and CakePHP. Projects like these are exactly why I advocate great open-source and I plan on featuring him in an upcoming video. 
+
+Future project video coming soon! - Mike
+
+-->
