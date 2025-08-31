@@ -105,3 +105,6 @@ project_mysql_backups
 
 # CakePHP Book
 CakePHPBook.txt
+
+# default_data exports
+default_data

@@ -1,0 +1,125 @@
+/* Base markdown preview styles */
+#markdown-preview {
+    font-family: var(--bs-body-font-family);
+    line-height: 1.6;
+}
+
+/* Headings */
+#markdown-preview h1,
+#markdown-preview h2,
+#markdown-preview h3,
+#markdown-preview h4,
+#markdown-preview h5,
+#markdown-preview h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+/* Lists */
+#markdown-preview ul,
+#markdown-preview ol {
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+#markdown-preview li {
+    margin-bottom: 0.25rem;
+}
+
+/* Code blocks and inline code */
+#markdown-preview code {
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+#markdown-preview pre {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+#markdown-preview pre code {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+/* Light/Dark mode support */
+:root {
+    --md-code-bg: #f8f9fa;
+    --md-code-color: #212529;
+    --md-pre-bg: #f8f9fa;
+    --md-pre-border: #dee2e6;
+    --md-blockquote-border: #dee2e6;
+}
+
+[data-bs-theme="dark"] {
+    --md-code-bg: #2d2d2d;
+    --md-code-color: #e9ecef;
+    --md-pre-bg: #1e1e1e;
+    --md-pre-border: #373b3e;
+    --md-blockquote-border: #373b3e;
+}
+
+#markdown-preview code {
+    background-color: var(--md-code-bg);
+    color: var(--md-code-color);
+}
+
+#markdown-preview pre {
+    background-color: var(--md-pre-bg);
+    border: 1px solid var(--md-pre-border);
+}
+
+/* Blockquotes */
+#markdown-preview blockquote {
+    padding-left: 1rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--md-blockquote-border);
+}
+
+/* Links */
+#markdown-preview a {
+    color: var(--bs-link-color);
+    text-decoration: none;
+}
+
+#markdown-preview a:hover {
+    color: var(--bs-link-hover-color);
+    text-decoration: underline;
+}
+
+/* Tables */
+#markdown-preview table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+#markdown-preview th,
+#markdown-preview td {
+    padding: 0.5rem;
+    border: 1px solid var(--md-pre-border);
+}
+
+#markdown-preview th {
+    background-color: var(--md-code-bg);
+}
+
+/* Images */
+#markdown-preview img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+}
+
+/* Horizontal rules */
+#markdown-preview hr {
+    margin: 2rem 0;
+    border: 0;
+    border-top: 1px solid var(--md-pre-border);
+}
