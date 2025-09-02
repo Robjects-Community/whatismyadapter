@@ -1,0 +1,535 @@
+/**
+ * AdminTheme Layout CSS
+ * Core layout styles for the Willow CMS admin interface
+ */
+
+/* Layout Base */
+body.admin-layout {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.admin-header {
+  height: 60px;
+  min-height: 60px;
+  z-index: 1030;
+}
+
+.admin-container {
+  display: flex;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Sidebar Base Styles */
+.admin-sidebar {
+  width: 200px;
+  min-width: 200px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1020;
+  transition: width 0.3s ease, min-width 0.3s ease;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  position: relative;
+  left: 0;
+}
+
+.admin-sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Sidebar Collapsed State */
+.admin-sidebar.collapsed {
+  width: 60px !important;
+  min-width: 60px !important;
+  max-width: 60px !important;
+  position: relative;
+  left: 0;
+  overflow-y: auto !important;
+  overflow-x: visible !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100%;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.admin-sidebar.collapsed::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Main Content Area */
+.admin-main {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--bs-body-bg);
+  transition: margin-left 0.3s ease;
+  min-width: 0; /* Allows flex item to shrink below content size */
+}
+
+.admin-content {
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+  padding: 1rem 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-sidebar.collapsed .sidebar-content {
+  padding: 2px 0;
+  width: 60px;
+  overflow: visible;
+  margin: 0;
+  height: 100%;
+}
+
+.admin-sidebar.collapsed .list-group {
+  width: 60px;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-sidebar.collapsed .list-group-flush {
+  border: none;
+}
+
+/* Sidebar Headers */
+.sidebar-header {
+  background-color: transparent !important;
+  padding: 0.75rem 1rem 0.25rem;
+}
+
+.sidebar-header h6 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Sidebar Links */
+.sidebar-link {
+  padding: 0.75rem 1rem;
+  border: none !important;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-link:hover {
+  background-color: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary);
+}
+
+.sidebar-link.active {
+  background-color: var(--bs-primary) !important;
+  color: white !important;
+  border-radius: 0;
+}
+
+.sidebar-link.active:hover {
+  background-color: var(--bs-primary) !important;
+  color: white !important;
+}
+
+/* Collapsed sidebar hover states - no animation */
+.admin-sidebar.collapsed .sidebar-link:hover {
+  background-color: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary);
+  border-radius: 6px;
+  margin: 0 4px 0 4px;
+  width: 52px;
+  padding: 0;
+  line-height: 40px;
+  height: 40px;
+}
+
+.admin-sidebar.collapsed .sidebar-link.active {
+  background-color: var(--bs-primary);
+  color: white;
+  border-radius: 6px;
+  margin: 0 4px 0 4px;
+  width: 52px;
+  padding: 0;
+  line-height: 40px;
+  height: 40px;
+}
+
+/* Sidebar Icons */
+.sidebar-icon {
+  width: 1.25rem;
+  text-align: center;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
+.sidebar-text {
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Preload collapsed state - applies immediately without transition */
+.sidebar-preload-collapsed .admin-sidebar {
+  width: 60px !important;
+  min-width: 60px !important;
+  max-width: 60px !important;
+  transition: none !important;
+}
+
+.sidebar-preload-collapsed .admin-sidebar .sidebar-text {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.sidebar-preload-collapsed .admin-sidebar .sidebar-header {
+  display: none !important;
+}
+
+.sidebar-preload-collapsed .admin-sidebar .sidebar-link {
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  width: 60px !important;
+  display: block !important;
+  text-align: center !important;
+  position: relative !important;
+  line-height: 40px !important;
+  height: 40px !important;
+}
+
+.sidebar-preload-collapsed .admin-sidebar .sidebar-icon {
+  margin: 0 auto !important;
+  width: 60px !important;
+  text-align: center !important;
+  display: block !important;
+  font-size: 16px !important;
+  line-height: 40px !important;
+}
+
+.sidebar-preload-collapsed .admin-sidebar .list-group-item {
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  width: 60px !important;
+  display: block !important;
+  text-align: center !important;
+  line-height: 40px !important;
+  height: 40px !important;
+}
+
+/* Collapsed state */
+.admin-sidebar.collapsed .sidebar-text {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.admin-sidebar.collapsed .sidebar-header {
+  display: none !important;
+}
+
+.admin-sidebar.collapsed .sidebar-header h6 {
+  display: none;
+}
+
+.admin-sidebar.collapsed .sidebar-header::before {
+  display: none;
+}
+
+.admin-sidebar.collapsed .sidebar-link {
+  padding: 0;
+  margin-bottom: 0;
+  width: 60px;
+  display: block;
+  text-align: center;
+  position: relative;
+  line-height: 40px;
+  height: 40px;
+}
+
+.admin-sidebar.collapsed .sidebar-icon {
+  margin: 0 auto;
+  width: 60px;
+  text-align: center;
+  display: block;
+  font-size: 16px;
+  line-height: 40px;
+}
+
+/* Ensure all FontAwesome icons are centered - this targets icons inside sidebar-icon class */
+.admin-sidebar.collapsed .sidebar-icon.fa,
+.admin-sidebar.collapsed .sidebar-icon.fas,
+.admin-sidebar.collapsed .sidebar-icon.far,
+.admin-sidebar.collapsed .sidebar-icon.fab {
+  display: block !important;
+  font-size: 16px;
+  line-height: 40px;
+  margin: 0 auto;
+  text-align: center;
+  width: 60px;
+}
+
+.admin-sidebar.collapsed .list-group-item {
+  padding: 0;
+  margin-bottom: 0;
+  width: 60px;
+  display: block;
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+}
+
+/* Tooltip positioning for collapsed sidebar */
+.admin-sidebar.collapsed .sidebar-link[data-bs-toggle="tooltip"] {
+  cursor: pointer;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    display: none;
+  }
+  
+  .admin-main {
+    width: 100%;
+  }
+}
+
+/* Fix for mobile table overflow */
+.table-responsive {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Theme-specific adjustments */
+[data-bs-theme="dark"] .admin-sidebar {
+  background-color: var(--bs-dark) !important;
+  border-color: var(--bs-border-color) !important;
+}
+
+[data-bs-theme="dark"] .sidebar-link {
+  background-color: transparent;
+  color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] .sidebar-link:hover {
+  background-color: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary);
+}
+
+[data-bs-theme="dark"] .sidebar-link.active {
+  background-color: var(--bs-primary) !important;
+  color: white !important;
+}
+
+[data-bs-theme="dark"] .sidebar-link.active:hover {
+  background-color: var(--bs-primary) !important;
+  color: white !important;
+}
+
+[data-bs-theme="dark"] .sidebar-header h6 {
+  color: var(--bs-secondary);
+}
+
+[data-bs-theme="dark"] .admin-sidebar.collapsed .sidebar-header::before {
+  background-color: var(--bs-secondary);
+}
+
+[data-bs-theme="dark"] .admin-sidebar.collapsed .sidebar-link:hover {
+  background-color: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary);
+}
+
+/* Ensure Flash messages are visible */
+.alert {
+  margin-bottom: 1rem;
+}
+
+/* Better mobile navigation */
+.admin-header .container-fluid {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.offcanvas-body {
+  padding: 0;
+}
+
+/* Custom offcanvas width - make it more compact */
+.offcanvas.offcanvas-start {
+  width: 220px !important;
+  max-width: 75vw;
+}
+
+/* Ensure offcanvas content fits properly */
+.offcanvas .list-group-item {
+  white-space: nowrap;
+  padding: 0.75rem 1rem;
+}
+
+.offcanvas .sidebar-header {
+  padding: 0.75rem 1rem 0.25rem;
+}
+
+.offcanvas .sidebar-header h6 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+/* Improved accessibility */
+.sidebar-link:focus {
+  outline: 2px solid var(--bs-primary);
+  outline-offset: -2px;
+}
+
+/* Toggle button styling */
+#sidebarToggle {
+  transition: transform 0.3s ease;
+}
+
+#sidebarToggle:hover {
+  transform: scale(1.1);
+}
+
+/* Header layout adjustments */
+.admin-header .container-fluid {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Center the burger menu button better by adjusting the flex container */
+.admin-header .d-flex.align-items-center:first-child {
+  margin-left: -0.5rem;
+}
+
+/* Page actions floating styling */
+.page-actions-floating {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  z-index: 10;
+}
+
+.page-actions-floating .btn-group {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.page-actions-floating .btn {
+  border: none;
+  font-size: 0.875rem;
+  padding: 0.6rem 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.page-actions-floating .btn + .btn {
+  border-left: 1px solid rgba(255,255,255,0.3);
+}
+
+.page-actions-floating .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.page-actions-floating .btn:first-child {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.page-actions-floating .btn:last-child {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+/* Improved button color harmony */
+.page-actions-floating .btn-secondary {
+  background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+  border: none;
+  color: white;
+}
+
+.page-actions-floating .btn-primary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+  border: none;
+  color: white;
+}
+
+.page-actions-floating .btn-success {
+  background: linear-gradient(135deg, #198754 0%, #157347 100%);
+  border: none;
+  color: white;
+}
+
+.page-actions-floating .btn-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ffb302 100%);
+  border: none;
+  color: #212529;
+}
+
+.page-actions-floating .btn-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #bb2d3b 100%);
+  border: none;
+  color: white;
+}
+
+/* Responsive adjustments for page actions */
+@media (max-width: 767.98px) {
+  .page-actions-floating {
+    justify-content: center;
+  }
+  
+  .page-actions-floating .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    box-shadow: none;
+    border: none;
+  }
+  
+  .page-actions-floating .btn {
+    border-radius: 0.5rem !important;
+    margin-bottom: 0.25rem;
+    min-width: auto;
+  }
+
+  .page-actions-floating .btn + .btn {
+    border-left: none;
+  }
+}
+
+/* Dashboard and content layout improvements */
+.container-fluid {
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Ensure cards and content expand properly */
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row > * {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}

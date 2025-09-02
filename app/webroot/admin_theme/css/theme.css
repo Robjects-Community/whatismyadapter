@@ -1,0 +1,164 @@
+/* Theme Variables */
+:root {
+    /* Base colors */
+    --theme-bg: #ffffff;
+    --theme-text: #212529;
+    --theme-border: #dee2e6;
+    --theme-hover: #f8f9fa;
+    
+    /* Component colors */
+    --theme-sidebar-bg: #f8f9fa;
+    --theme-sidebar-text: #212529;
+    --theme-header-bg: #ffffff;
+    --theme-header-text: #212529;
+    
+    /* Interactive elements */
+    --theme-link-color: #0d6efd;
+    --theme-link-hover: #0a58ca;
+    --theme-button-primary: #0d6efd;
+    --theme-button-hover: #0b5ed7;
+    
+    /* Status colors */
+    --theme-success: rgb(72, 133, 102);
+    --theme-error: rgb(255, 0, 0);
+    --theme-warning: rgb(255, 153, 0);
+    
+    /* Code and pre elements */
+    --theme-code-bg: #f8f9fa;
+    --theme-code-text: #212529;
+    --theme-pre-bg: #f5f5f5;
+    --theme-pre-border: #dee2e6;
+}
+
+/* Dark theme variables */
+[data-bs-theme="dark"] {
+    /* Base colors */
+    --theme-bg: #212529;
+    --theme-text: #f8f9fa;
+    --theme-border: #495057;
+    --theme-hover: #343a40;
+    
+    /* Component colors */
+    --theme-sidebar-bg: #2b3035;
+    --theme-sidebar-text: #e9ecef;
+    --theme-header-bg: #343a40;
+    --theme-header-text: #f8f9fa;
+    
+    /* Interactive elements */
+    --theme-link-color: #6ea8fe;
+    --theme-link-hover: #8bb9fe;
+    --theme-button-primary: #0d6efd;
+    --theme-button-hover: #0b5ed7;
+    
+    /* Status colors remain the same for visibility */
+    --theme-success: rgb(72, 133, 102);
+    --theme-error: rgb(255, 0, 0);
+    --theme-warning: rgb(255, 153, 0);
+    
+    /* Code and pre elements */
+    --theme-code-bg: #2d2d2d;
+    --theme-code-text: #e9ecef;
+    --theme-pre-bg: #1e1e1e;
+    --theme-pre-border: #373b3e;
+}
+
+/* Base theme styles */
+body {
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+}
+
+/* Links */
+a {
+    color: var(--theme-link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--theme-link-hover);
+    text-decoration: none;
+}
+
+/* Borders and dividers */
+.border {
+    border-color: var(--theme-border) !important;
+}
+
+/* Code elements */
+pre, .pre {
+    background-color: var(--theme-pre-bg) !important;
+    border: 1px solid var(--theme-pre-border) !important;
+    color: var(--theme-code-text) !important;
+    padding: 1rem;
+}
+
+code, .code {
+    background-color: var(--theme-code-bg) !important;
+    color: var(--theme-code-text) !important;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+/* For code blocks within pre elements */
+pre code {
+    background-color: transparent !important;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* Status backgrounds */
+.bg-success {
+    background-color: var(--theme-success) !important;
+}
+
+.bg-error {
+    background-color: var(--theme-error) !important;
+}
+
+.bg-warning {
+    background-color: var(--theme-warning) !important;
+}
+
+/* Form controls */
+.form-control {
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+.form-control:focus {
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+    border-color: var(--theme-link-color);
+}
+
+/* Tables */
+.table {
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+.table th {
+    background-color: var(--theme-code-bg);
+}
+
+/* Cards */
+.card {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+}
+
+.card-header {
+    background-color: var(--theme-code-bg);
+    border-bottom-color: var(--theme-border);
+}
+
+/* Syntax highlighting adjustments */
+[data-bs-theme="dark"] .hljs-string {
+    color: #add8e6 !important; /* Light blue for better contrast in dark mode */
+}
+
+/* Syntax highlighting adjustments */
+[data-bs-theme="dark"] .hljs-regexp {
+    color: #00fff2 !important; /* Light green for better contrast in dark mode */
+}
