@@ -10,9 +10,9 @@ services:
     ports:
       - "7770:80"
     volumes:
-      - ./app:/var/www/html/
-      - ./docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
-      - ./logs/nginx:/var/log/nginx/
+      - app:/var/www/html/
+      - "${PROJECT_ROOT:-.}/docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php"
+      - "${PROJECT_ROOT:-.}/logs/nginx:/var/log/nginx/"
     environment:
       - APP_NAME=WillowCMS
       - DEBUG=true
@@ -73,7 +73,7 @@ services:
       - "7710:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - "${PROJECT_ROOT:-.}/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql"
 
   phpmyadmin:
     image: phpmyadmin
@@ -99,7 +99,7 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+      - "${PROJECT_ROOT:-.}/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml"
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
 
