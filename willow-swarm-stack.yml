@@ -11,15 +11,15 @@ services:
       - APP_ENCODING=UTF-8
       - APP_DEFAULT_LOCALE=en_GB
       - APP_DEFAULT_TIMEZONE=Europe/London
-      - SECURITY_SALT=your-production-salt-here
+      - SECURITY_SALT=developmentsalt
       - DB_HOST=mysql
       - DB_USERNAME=cms_user
-      - DB_PASSWORD=your-secure-password-here
+      - DB_PASSWORD=password
       - DB_DATABASE=cms
       - DB_PORT=3306
       - TEST_DB_HOST=mysql
       - TEST_DB_USERNAME=cms_user_test
-      - TEST_DB_PASSWORD=your-secure-password-here
+      - TEST_DB_PASSWORD=password
       - TEST_DB_DATABASE=cms_test
       - TEST_DB_PORT=3306
       - EMAIL_HOST=mailpit
@@ -30,17 +30,17 @@ services:
       - EMAIL_REPLY=admin@yourdomain.com
       - EMAIL_NOREPLY=noreply@yourdomain.com
       - REDIS_USERNAME=root
-      - REDIS_PASSWORD=your-redis-password-here
+      - REDIS_PASSWORD=root
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_DATABASE=0
-      - REDIS_URL=redis://root:your-redis-password-here@redis:6379/0
-      - REDIS_TEST_URL=redis://root:your-redis-password-here@redis:6379/0
-      - QUEUE_DEFAULT_URL=redis://root:your-redis-password-here@redis:6379/0
-      - QUEUE_TEST_URL=redis://root:your-redis-password-here@redis:6379/0
+      - REDIS_URL=redis://root:root@redis:6379/0
+      - REDIS_TEST_URL=redis://root:root@redis:6379/0
+      - QUEUE_DEFAULT_URL=redis://root:root@redis:6379/0
+      - QUEUE_TEST_URL=redis://root:root@redis:6379/0
       - EXPERIMENTAL_TESTS=Off
       - WILLOW_ADMIN_USERNAME=admin
-      - WILLOW_ADMIN_PASSWORD=your-admin-password-here
+      - WILLOW_ADMIN_PASSWORD=password
       - WILLOW_ADMIN_EMAIL=admin@yourdomain.com
       - APP_FULL_BASE_URL=http://localhost:7770
     networks:
@@ -70,19 +70,19 @@ services:
         parallelism: 1
         delay: 10s
         order: start-first
-      healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost/"]
-        interval: 30s
-        timeout: 10s
-        retries: 3
-        start_period: 60s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   mysql:
     image: mysql:8.4.3
     environment:
-      MYSQL_ROOT_PASSWORD: your-root-password-here
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: cms_user
-      MYSQL_PASSWORD: your-secure-password-here
+      MYSQL_PASSWORD: password
       MYSQL_DATABASE: cms
     ports:
       - "7710:3306"
@@ -106,12 +106,12 @@ services:
           memory: 512M
       restart_policy:
         condition: on-failure
-      healthcheck:
-        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pyour-root-password-here"]
-        interval: 30s
-        timeout: 10s
-        retries: 5
-        start_period: 60s
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
 
   phpmyadmin:
     image: phpmyadmin:latest
@@ -120,7 +120,7 @@ services:
     environment:
       - PMA_HOST=mysql
       - PMA_USER=root
-      - PMA_PASSWORD=your-root-password-here
+      - PMA_PASSWORD=password
       - UPLOAD_LIMIT=300M
     networks:
       - willow_network
@@ -194,7 +194,7 @@ services:
       - "7776:6379"
     volumes:
       - redis_data:/data
-    command: redis-server --requirepass your-redis-password-here
+    command: redis-server --requirepass root
     networks:
       - willow_network
     deploy:
@@ -210,20 +210,20 @@ services:
           memory: 64M
       restart_policy:
         condition: on-failure
-      healthcheck:
-        test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "your-redis-password-here", "ping"]
-        interval: 30s
-        timeout: 10s
-        retries: 3
+    healthcheck:
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "root", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   redis-commander:
     image: rediscommander/redis-commander:latest
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - REDIS_PASSWORD=your-redis-password-here
+      - REDIS_PASSWORD=root
       - HTTP_USER=admin
-      - HTTP_PASSWORD=your-redis-commander-password-here
+      - HTTP_PASSWORD=password
     ports:
       - "7774:8081"
     networks:
