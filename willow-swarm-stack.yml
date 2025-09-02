@@ -2,9 +2,9 @@ version: '3.9'
 
 services:
   willowcms:
-    image: willowcms:portainer
+    image: robjects/whatismyadapter_cms:swarm
     ports:
-      - "7770:80"
+      - "7870:80"
     environment:
       - APP_NAME=WillowCMS
       - DEBUG=false  # Set to false for production
@@ -42,7 +42,7 @@ services:
       - WILLOW_ADMIN_USERNAME=admin
       - WILLOW_ADMIN_PASSWORD=password
       - WILLOW_ADMIN_EMAIL=admin@yourdomain.com
-      - APP_FULL_BASE_URL=http://localhost:7770
+      - APP_FULL_BASE_URL=http://localhost:7870
     networks:
       - willow_network
     volumes:
@@ -57,11 +57,11 @@ services:
         constraints: [node.role == manager]
       resources:
         limits:
-          cpus: '2'
-          memory: 2G
+          cpus: '1.0'
+          memory: 1G
         reservations:
-          cpus: '0.5'
-          memory: 512M
+          cpus: '0.25'
+          memory: 256M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -85,7 +85,7 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_DATABASE: cms
     ports:
-      - "7710:3306"
+      - "7810:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       # Add init script if needed
@@ -99,11 +99,11 @@ services:
         constraints: [node.role == manager]
       resources:
         limits:
-          cpus: '2'
-          memory: 2G
+          cpus: '1.0'
+          memory: 1G
         reservations:
-          cpus: '0.5'
-          memory: 512M
+          cpus: '0.25'
+          memory: 256M
       restart_policy:
         condition: on-failure
     healthcheck:
@@ -116,7 +116,7 @@ services:
   phpmyadmin:
     image: phpmyadmin:latest
     ports:
-      - "7771:80"
+      - "7871:80"
     environment:
       - PMA_HOST=mysql
       - PMA_USER=root
@@ -139,9 +139,9 @@ services:
         condition: on-failure
 
   jenkins:
-    image: whatismyadaptor-jenkins:latest
+    image: robjects/whatismyadapter_jenkins:swarm
     ports:
-      - "7772:8080"
+      - "7872:8080"
     volumes:
       - jenkins_home:/var/jenkins_home
     environment:
@@ -154,19 +154,19 @@ services:
         constraints: [node.role == manager]
       resources:
         limits:
-          cpus: '2'
-          memory: 2G
+          cpus: '1.0'
+          memory: 1G
         reservations:
-          cpus: '0.5'
-          memory: 512M
+          cpus: '0.25'
+          memory: 256M
       restart_policy:
         condition: on-failure
 
   mailpit:
     image: axllent/mailpit:latest
     ports:
-      - "7725:1025"
-      - "7773:8025"
+      - "7825:1025"
+      - "7873:8025"
     volumes:
       - mailpit_data:/data
     environment:
@@ -191,7 +191,7 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "7776:6379"
+      - "7876:6379"
     volumes:
       - redis_data:/data
     command: redis-server --requirepass root
@@ -225,7 +225,7 @@ services:
       - HTTP_USER=admin
       - HTTP_PASSWORD=password
     ports:
-      - "7774:8081"
+      - "7874:8081"
     networks:
       - willow_network
     depends_on:
