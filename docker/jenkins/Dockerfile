@@ -50,4 +50,4 @@ ENV CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yaml
 COPY docker/jenkins/jenkins.yaml /var/jenkins_home/jenkins.yaml
 
 # Skip the initial setup wizard
-ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+ENV JAVA_OPTS=-Djenkins.install.runSetupWizard=false
