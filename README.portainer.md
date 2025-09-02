@@ -39,8 +39,8 @@ After deployment, access services at:
 
 ## 📋 What's Included
 
-- **WillowCMS**: `robjects/whatismyadapter_cms:swarm`
-- **Jenkins**: `robjects/whatismyadapter_jenkins:swarm`  
+- **WillowCMS**: `robjects/whatismyadapter_cms:portainer-swarm-build`
+- **Jenkins**: `robjects/whatismyadapter_jenkins:portainer-swarm-build`
 - **MySQL 8.4.3**: Database
 - **Redis 7**: Cache & queues
 - **phpMyAdmin**: Database management
