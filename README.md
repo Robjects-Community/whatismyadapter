@@ -68,6 +68,8 @@ before finishing the script, you should be prompted to type the letter **(w/b/r/
 3) cd into folder
 4) `docker-compose up -d` or `docker compose up -d`
 5) Wait for the containers to be fully up and running
+6) Then run setup_dev_env.sh
+7) Run the aliases script and feel free to use the scripts going forward! :)
 
 ```bash
 # Clone the repository
