@@ -67,13 +67,13 @@ if [[ "$(uname -m)" == "arm64" && "$(uname -s)" == "Darwin" ]]; then
     HOST_UID=$(id -u)
     HOST_GID=$(id -g)
     print_info "Detected Apple Silicon Mac - creating .env with UID:GID ${HOST_UID}:${HOST_GID}"
-    
+
     # Create/update .env file for docker-compose
     {
         echo "UID=${HOST_UID}"
         echo "GID=${HOST_GID}"
     } > .env
-    
+
     print_success "Created .env file for Apple Silicon compatibility"
 else
     print_info "Using default UID:GID (1000:1000) for Docker containers"
@@ -117,7 +117,7 @@ ${BOLD}OPTIONS:${RESET}
     ${GREEN}-j, --jenkins${RESET}           Include Jenkins service
     ${GREEN}-i, --i18n${RESET}              Load internationalisation data
     ${GREEN}-n, --no-interactive${RESET}    Skip interactive prompts (use with operation flags)
-    
+
 ${BOLD}OPERATIONS:${RESET}
     ${YELLOW}-w, --wipe${RESET}              Wipe Docker containers and volumes
     ${YELLOW}-b, --rebuild${RESET}           Rebuild Docker containers from scratch
@@ -128,16 +128,16 @@ ${BOLD}OPERATIONS:${RESET}
 ${BOLD}EXAMPLES:${RESET}
     # Normal startup with prompts
     $PROGNAME
-    
+
     # Start with Jenkins and i18n data
     $PROGNAME -j -i
-    
+
     # Rebuild containers without prompts
     $PROGNAME --rebuild --no-interactive
-    
+
     # Wipe and restart with Jenkins
     $PROGNAME --wipe -j
-    
+
     # Just run migrations
     $PROGNAME --migrate
 
@@ -205,9 +205,9 @@ else
     # Use GNU getopt for Linux
     TEMP=$(getopt -o hjinwbrmc -l help,jenkins,i18n,no-interactive,wipe,rebuild,restart,migrate,continue \
                   -n "$PROGNAME" -- "$@") || { show_help; exit 1; }
-    
+
     eval set -- "$TEMP"
-    
+
     while true; do
         case "$1" in
             -h|--help)
@@ -256,7 +256,7 @@ else
                 ;;
         esac
     done
-    
+
     # Check for any remaining arguments
     if [ "$#" -gt 0 ]; then
         print_error "Unknown arguments: $*"
@@ -273,12 +273,12 @@ check_docker_requirements() {
         print_error "Docker is not installed. Please install Docker first."
         exit 1
     fi
-    
+
     if ! command -v docker-compose &> /dev/null && ! docker compose version &> /dev/null; then
         print_error "Docker Compose is not installed. Please install Docker Compose first."
         exit 1
     fi
-    
+
     if ! docker info &> /dev/null; then
         print_error "Docker daemon is not running. Please start Docker first."
         exit 1
@@ -448,7 +448,7 @@ fi
 
 if [ "$TABLE_EXISTS_INITIAL" -eq 0 ]; then
     print_info "Subsequent container startup detected (database appears to be initialized)."
-    
+
     # If an operation was specified via command line, execute it
     if [ -n "$OPERATION" ]; then
         handle_operation "$OPERATION"
@@ -516,13 +516,13 @@ if [ "$TABLE_EXISTS_FINAL" -ne 0 ]; then # If table still does not exist (or com
     fi
 
     print_step "Importing default data (aiprompts, email_templates)..."
-    
+
     if docker compose exec "$MAIN_APP_SERVICE" bin/cake default_data_import aiprompts; then
         print_success "AI prompts imported"
     else
         print_warning "Failed to import AI prompts"
     fi
-    
+
     if docker compose exec "$MAIN_APP_SERVICE" bin/cake default_data_import email_templates; then
         print_success "Email templates imported"
     else
