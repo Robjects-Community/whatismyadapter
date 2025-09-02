@@ -58,7 +58,7 @@ before finishing the script, you should be prompted to type the letter **(w/b/r/
   - Continue with the current setup: letter 'C'
 
 
-> Note: 
+> Note:
 > This quick start guide assumes that you have already run `docker-compose up -d` or `docker compose up -d` to start the containers and that docker compose is set up correctly.
 
 
@@ -69,6 +69,8 @@ before finishing the script, you should be prompted to type the letter **(w/b/r/
 3) cd into folder
 4) `docker-compose up -d` or `docker compose up -d`
 5) Wait for the containers to be fully up and running
+6) Then run setup_dev_env.sh
+7) Run the aliases script and feel free to use the scripts going forward! :)
 
 ```bash
 # Clone the repository
@@ -109,7 +111,7 @@ This contains predefined commands for common tasks. Use `./manage.sh <command>` 
 
 ## Using script aliases from `setup_dev_aliases.sh`
 
-Ensure you have sourced the `setup_dev_aliases.sh` 
+Ensure you have sourced the `setup_dev_aliases.sh`
 and have added the necessary details needed in your specific .*rc file. Then run:
 ```bash
 source ./setup_dev_aliases.sh
@@ -126,7 +128,7 @@ Here are the following aliases that would help manage the project:
 Here are some useful aliases for running CakePHP commands:
 
 ```bash
-willow_shell 
+willow_shell
 ```
 
 
@@ -136,7 +138,7 @@ willow_shell
 
 1) Get into the main project container using `docker-compose exec [NAME_OF_YOUR_CONTAINER] /bin/bash` (or alias `willowcms_shell` after setting up aliases)
 2) Once in the container, run `bin/cake migrations migrate` to migrate the DB just like you would in a normal cakephp setup
-3) Terminal in the container and run `bin/cake migrations seed` to seed the DB 
+3) Terminal in the container and run `bin/cake migrations seed` to seed the DB
 
 
 ## Extra Notes
@@ -162,11 +164,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgements
 
-<!-- 
+<!--
 ### Special Thanks
 I want to give a huge shoutout to **Matthew** for his invaluable GitHub contributions to the base project.
 
-Developers like him make open-source projects thrive. He has been instrumental in helping me set up this project and navigate the complexities of Docker and CakePHP. Projects like these are exactly why I advocate great open-source and I plan on featuring him in an upcoming video. 
+Developers like him make open-source projects thrive. He has been instrumental in helping me set up this project and navigate the complexities of Docker and CakePHP. Projects like these are exactly why I advocate great open-source and I plan on featuring him in an upcoming video.
 
 Future project video coming soon! - Mike
 
