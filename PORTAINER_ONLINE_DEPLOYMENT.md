@@ -130,17 +130,50 @@ In Portainer → Stacks → your stack:
 - All services should show **green/healthy** status
 - Look for any error logs if services are failing
 
-### 4.2 Run Database Migrations
+### 4.2 Initialize CakePHP 5.x Application
 1. In Portainer → Stacks → your stack → **willowcms** container
 2. Click **Console** → **/bin/sh**
-3. Execute these commands:
-   ```bash
-   # Run database migrations
-   bin/cake migrations migrate
-   
-   # Clear application caches
-   bin/cake cache clear_all
-   ```
+3. Execute these **CakePHP 5.x commands** (following project dev_aliases.txt):
+
+```bash
+# Navigate to application directory
+cd /var/www/html
+
+# Check CakePHP version and status
+bin/cake --version
+
+# Run database migrations (CakePHP 5.x)
+bin/cake migrations migrate
+
+# Check migration status
+bin/cake migrations status
+
+# Clear all application caches (CakePHP 5.x)
+bin/cake cache clear_all
+
+# Verify plugin architecture (DefaultTheme for frontend, AdminTheme for admin)
+ls -la plugins/
+# Should show: DefaultTheme/ and AdminTheme/ directories
+
+# Check if composer dependencies are current
+composer --version
+composer check-platform-reqs
+```
+
+### 4.3 Verify Plugin Theme Architecture
+This project uses a **CakePHP 5.x plugin-based theme system**:
+
+```bash
+# Verify plugin structure
+ls -la plugins/DefaultTheme/    # Frontend theme
+ls -la plugins/AdminTheme/      # Admin interface theme
+
+# Check plugin configuration
+bin/cake plugin list
+
+# Verify routes are properly configured for admin prefix
+bin/cake routes show | grep admin
+```
 
 ## 🌐 Step 5: Access Your Application
 
@@ -162,7 +195,66 @@ In Portainer → Stacks → your stack:
    - Password: (your WILLOW_ADMIN_PASSWORD)
 3. Verify the admin dashboard loads
 
-## 📊 Step 6: Verify Log Integrity
+## 🌍 Step 6: CakePHP 5.x Development Commands (Post-Deployment)
+
+This project follows **CakePHP 5.x conventions** and includes custom development aliases (see `dev_aliases.txt`):
+
+### 6.1 Theme Plugin Architecture
+- **Frontend Theme**: `plugins/DefaultTheme/` - Public-facing site templates and assets
+- **Admin Theme**: `plugins/AdminTheme/` - Administrative interface templates and assets
+- **Route Structure**: Admin routes use `/admin` prefix, frontend uses plugin themes
+
+### 6.2 Essential CakePHP 5.x Commands (in willowcms container)
+
+```bash
+# Baking/Code Generation (CakePHP 5.x)
+bin/cake bake model ModelName         # Generate model
+bin/cake bake controller ControllerName --prefix Admin  # Admin controller
+bin/cake bake template ControllerName index  # Template for DefaultTheme
+
+# Database Operations
+bin/cake migrations status            # Check migration status
+bin/cake migrations migrate           # Run pending migrations  
+bin/cake migrations rollback          # Rollback last migration
+bin/cake bake migration CreateTableName  # Generate migration
+
+# Cache Management (follows dev_aliases.txt)
+bin/cake cache clear_all             # Clear all caches
+bin/cake cache clear _cake_model_    # Clear specific cache
+
+# Plugin Management
+bin/cake plugin list                 # List loaded plugins
+bin/cake plugin load PluginName      # Load plugin
+
+# Internationalization (i18n) - Project Custom Commands
+bin/cake i18n extract --paths src,plugins/DefaultTheme,plugins/AdminTheme
+bin/cake translate_i18n              # AI-powered translation (custom)
+bin/cake generate_po_files           # Generate PO files (custom)
+
+# Code Quality (following composer.json scripts)
+vendor/bin/phpunit --colors=always   # Run PHPUnit tests
+vendor/bin/phpcs --colors -p         # Code style check
+vendor/bin/phpcbf --colors -p        # Fix code style
+vendor/bin/phpstan analyze           # Static analysis
+
+# Queue Management (if using queues)
+bin/cake queue worker                # Start queue worker
+bin/cake queue worker --verbose      # Verbose queue worker
+```
+
+### 6.3 Project-Specific Features
+
+```bash
+# AI Integration Commands (custom to this project)
+bin/cake investigate_article         # Article analysis using AI
+bin/cake default_data_export         # Export default data
+
+# Check AI service integration
+bin/cake --help | grep -i translate # Show translation commands
+bin/cake --help | grep -i ai        # Show AI-related commands
+```
+
+## 📊 Step 7: Verify Log Integrity
 
 From the willowcms container console in Portainer:
 
