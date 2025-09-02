@@ -98,7 +98,7 @@ services:
       # - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
+      # - /var/run/docker.sock:/var/run/docker.sock
       - "${PROJECT_ROOT:-.}/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml"
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
@@ -136,7 +136,6 @@ services:
       - "7774:8081"
 
 volumes:
-  mysql_data:
   jenkins_home:
   mailpit_data:
   redis_data:
