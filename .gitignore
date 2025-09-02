@@ -7,6 +7,16 @@
 /tmp/*
 /vendor/*
 
+# app folder
+##########################
+app/config/app_local.php
+app/config/.env
+app/.env
+app/logs/*
+app/tmp/*
+app/vendor/*
+
+
 # Willow code_exports #
 #######################
 willow_cms_code.txt
@@ -48,6 +58,30 @@ willow_cms_code_Utilities.txt
 # Robots.txt #
 ##############
 /webroot/robots.txt.template
+
+# Willow specific files/folders (app) #
+#######################################
+/app/webroot/files/*
+!/app/webroot/files/Images
+/app/webroot/files/Images/*
+!/app/webroot/files/Images/image
+/app/webroot/files/Images/image/*
+!/app/webroot/files/Images/image/.gitkeep
+!/app/webroot/files/Users
+/app/webroot/files/Users/*
+!/app/webroot/files/Users/image
+/app/webroot/files/Users/image/*
+!/app/webroot/files/Users/image/.gitkeep
+!/app/webroot/files/Articles
+/app/webroot/files/Articles/*
+!/app/webroot/files/Articles/image
+/app/webroot/files/Articles/image/*
+!/app/webroot/files/Articles/image/.gitkeep
+/app/dump.rdb
+
+# Robots.txt (app) #
+####################
+/app/webroot/robots.txt.template
 
 # Willow Dev Env Setup #
 ########################
@@ -108,4 +142,3 @@ CakePHPBook.txt
 
 # default_data exports
 default_data
-WARP.md
