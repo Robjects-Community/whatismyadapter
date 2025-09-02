@@ -1,0 +1,142 @@
+services:
+
+  willowcms:
+    build:
+      context: .
+      dockerfile: docker/willowcms/Dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    ports:
+      - "7770:80"
+    volumes:
+      - ${PROJECT_ROOT:-.}/app:/var/www/html/
+      - "${PROJECT_ROOT:-.}/docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php"
+      - "${PROJECT_ROOT:-.}/logs/nginx:/var/log/nginx/"
+    environment:
+      - APP_NAME=WillowCMS
+      - DEBUG=true
+      - APP_ENCODING=UTF-8
+      - APP_DEFAULT_LOCALE=en_GB
+      - APP_DEFAULT_TIMEZONE=Europe/London
+      - SECURITY_SALT=developmentsalt
+      - DB_HOST=mysql
+      - DB_USERNAME=cms_user
+      - DB_PASSWORD=password
+      - DB_DATABASE=cms
+      - DB_PORT=3306
+      - TEST_DB_HOST=mysql
+      - TEST_DB_USERNAME=cms_user_test
+      - TEST_DB_PASSWORD=password
+      - TEST_DB_DATABASE=cms_test
+      - TEST_DB_PORT=3306
+      - EMAIL_HOST=mailpit
+      - EMAIL_PORT=1025
+      - EMAIL_TIMEOUT=30
+      - EMAIL_USERNAME=
+      - EMAIL_PASSWORD=
+      - EMAIL_REPLY=hello@willowcms.app
+      - EMAIL_NOREPLY=noreply@willowcms.app
+      - REDIS_USERNAME=root
+      - REDIS_PASSWORD=root
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+      - REDIS_URL=redis://root:root@redis:6379/0
+      - REDIS_TEST_URL=redis://root:root@redis:6379/0
+      - YOUTUBE_API_KEY=
+      - TRANSLATE_API_KEY=
+      - QUEUE_DEFAULT_URL=redis://root:root@redis:6379/0
+      - QUEUE_TEST_URL=redis://root:root@redis:6379/0
+      - EXPERIMENTAL_TESTS=Off
+      - WILLOW_ADMIN_USERNAME=admin
+      - WILLOW_ADMIN_PASSWORD=password
+      - WILLOW_ADMIN_EMAIL=admin@test.com
+      - APP_FULL_BASE_URL=http://localhost:7770
+    depends_on:
+      - mysql
+      - mailpit
+      - redis
+
+  mysql:
+    image: mysql:8.4.3
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: cms_user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: cms
+      DB_USERNAME: cms_user
+      DB_PASSWORD: password
+      DB_DATABASE: cms
+    ports:
+      - "7710:3306"
+    volumes:
+      - ${PROJECT_ROOT:-.}/mysql/mysql_data:/var/lib/mysql
+      - "${PROJECT_ROOT:-.}/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql"
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 7771:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+      - UPLOAD_LIMIT=300M
+    depends_on:
+      - mysql
+
+  jenkins:
+    build:
+      context: .
+      dockerfile: docker/jenkins/Dockerfile
+    privileged: true
+    user: root
+    ports:
+      - "7772:8080"
+      # - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      # - /var/run/docker.sock:/var/run/docker.sock
+      - "${PROJECT_ROOT:-.}/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml"
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "7725:1025"
+      - "7773:8025"
+    volumes:
+      - mailpit_data:/data
+    environment:
+      - MP_MAX_MESSAGES=5000
+      - MP_DATABASE=/data/mailpit.db
+      - MP_SMTP_AUTH_ACCEPT_ANY=1
+      - MP_SMTP_AUTH_ALLOW_INSECURE=1
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "7776:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --requirepass root
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=root
+      - HTTP_USER=root
+      - HTTP_PASSWORD=root
+    ports:
+      - "7774:8081"
+
+volumes:
+  jenkins_home:
+  mailpit_data:
+  redis_data:
+  app:
