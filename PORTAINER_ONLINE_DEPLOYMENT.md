@@ -178,6 +178,25 @@ shasum -a 256 --check checksums/latest.sha256
 
 ## 🚨 Troubleshooting
 
+### "no VNI provided" Network Error
+This error indicates Docker Swarm networking issues. **Two solutions**:
+
+**Option A: Use Standalone Docker Stack (Recommended)**
+```
+Compose path: deploy/portainer-stack-standalone.yml
+```
+This version uses bridge networking and works without Docker Swarm.
+
+**Option B: Initialize Docker Swarm (Advanced)**
+If you need Swarm features, initialize Swarm on your server:
+```bash
+# On your Docker host
+docker swarm init
+
+# Then use the original stack file:
+# Compose path: deploy/portainer-stack.yml
+```
+
 ### Services Won't Start
 ```bash
 # Check service logs in Portainer Console
@@ -185,6 +204,7 @@ shasum -a 256 --check checksums/latest.sha256
 # - Port conflicts
 # - Environment variable errors  
 # - Memory/CPU constraints
+# - Network driver issues (see VNI error above)
 ```
 
 ### Database Connection Issues

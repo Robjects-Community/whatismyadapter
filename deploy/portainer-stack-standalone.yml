@@ -1,13 +1,14 @@
 version: "3.8"
 
-# WhatIsMyAdaptor - Production Portainer Stack
-# This stack uses the pre-built images and follows CakePHP 5.x conventions
+# WhatIsMyAdaptor - Standalone Docker Stack (No Swarm Required)
+# This stack works with Portainer's standalone Docker environments
 # Repository: https://github.com/Robjects-Community/WhatIsMyAdaptor.git
 # Branch: dev_portainer_swarm
 
 services:
   willowcms:
     image: ${WILLOW_IMAGE:-robjects/whatismyadapter_cms:portainer-swarm-build}
+    container_name: willowcms
     environment:
       # Core Application Settings
       - APP_NAME=${APP_NAME:-WillowCMS}
@@ -84,33 +85,13 @@ services:
       retries: 3
       start_period: 60s
     
-    deploy:
-      replicas: ${WILLOWCMS_REPLICAS:-2}
-      placement:
-        constraints: 
-          - node.role == manager
-      resources:
-        limits:
-          cpus: '${WILLOWCMS_CPU_LIMIT:-1.0}'
-          memory: ${WILLOWCMS_MEMORY_LIMIT:-1G}
-        reservations:
-          cpus: '0.25'
-          memory: 256M
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-      update_config:
-        parallelism: 1
-        delay: 10s
-        order: start-first
-        failure_action: rollback
-    
+    restart: unless-stopped
     networks:
       - willow_network
 
   mysql:
     image: mysql:8.4.3
+    container_name: mysql
     platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change_me_root_password}
@@ -141,26 +122,13 @@ services:
       retries: 5
       start_period: 60s
     
-    deploy:
-      replicas: 1
-      placement:
-        constraints: 
-          - node.role == manager
-      resources:
-        limits:
-          cpus: '${MYSQL_CPU_LIMIT:-1.0}'
-          memory: ${MYSQL_MEMORY_LIMIT:-1G}
-        reservations:
-          cpus: '0.25'
-          memory: 256M
-      restart_policy:
-        condition: on-failure
-    
+    restart: unless-stopped
     networks:
       - willow_network
 
   phpmyadmin:
     image: phpmyadmin:latest
+    container_name: phpmyadmin
     environment:
       - PMA_HOST=mysql
       - PMA_USER=root
@@ -173,23 +141,13 @@ services:
     depends_on:
       - mysql
     
-    deploy:
-      replicas: 1
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-        reservations:
-          cpus: '0.1'
-          memory: 128M
-      restart_policy:
-        condition: on-failure
-    
+    restart: unless-stopped
     networks:
       - willow_network
 
   jenkins:
     image: ${JENKINS_IMAGE:-robjects/whatismyadapter_jenkins:portainer-swarm-build}
+    container_name: jenkins
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
     
@@ -199,26 +157,13 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
     
-    deploy:
-      replicas: 1
-      placement:
-        constraints: 
-          - node.role == manager
-      resources:
-        limits:
-          cpus: '${JENKINS_CPU_LIMIT:-1.0}'
-          memory: ${JENKINS_MEMORY_LIMIT:-1G}
-        reservations:
-          cpus: '0.25'
-          memory: 256M
-      restart_policy:
-        condition: on-failure
-    
+    restart: unless-stopped
     networks:
       - willow_network
 
   mailpit:
     image: axllent/mailpit:latest
+    container_name: mailpit
     environment:
       - MP_MAX_MESSAGES=5000
       - MP_DATABASE=/data/mailpit.db
@@ -232,23 +177,13 @@ services:
     volumes:
       - mailpit_data:/data
     
-    deploy:
-      replicas: 1
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 256M
-        reservations:
-          cpus: '0.1'
-          memory: 64M
-      restart_policy:
-        condition: on-failure
-    
+    restart: unless-stopped
     networks:
       - willow_network
 
   redis:
     image: redis:7-alpine
+    container_name: redis
     command: redis-server --requirepass ${REDIS_PASSWORD:-secure_redis_password_change_me}
     
     ports:
@@ -263,26 +198,13 @@ services:
       timeout: 10s
       retries: 3
     
-    deploy:
-      replicas: 1
-      placement:
-        constraints: 
-          - node.role == manager
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 256M
-        reservations:
-          cpus: '0.1'
-          memory: 64M
-      restart_policy:
-        condition: on-failure
-    
+    restart: unless-stopped
     networks:
       - willow_network
 
   redis-commander:
     image: rediscommander/redis-commander:latest
+    container_name: redis-commander
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -296,27 +218,14 @@ services:
     depends_on:
       - redis
     
-    deploy:
-      replicas: 1
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 256M
-        reservations:
-          cpus: '0.1'
-          memory: 64M
-      restart_policy:
-        condition: on-failure
-    
+    restart: unless-stopped
     networks:
       - willow_network
 
 networks:
   willow_network:
-    driver: overlay
-    attachable: true
-    driver_opts:
-      encrypted: "true"
+    driver: bridge
+    name: willow_network
 
 volumes:
   mysql_data:
