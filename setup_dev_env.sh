@@ -288,7 +288,7 @@ check_docker_requirements() {
 # Function to check if the main Docker container is running
 check_docker_status() {
     # Check if the main app service is running with an exact name match
-    if docker compose ps --services --filter "status=running" | grep -q "^${MAIN_APP_SERVICE}$"; then
+    if docker compose --env-file stack.env ps --services --filter "status=running" | grep -q "^${MAIN_APP_SERVICE}$"; then
         return 0  # Container is running
     else
         return 1  # Container is not running
@@ -307,7 +307,7 @@ start_docker_containers() {
     fi
     # SC2086: Double quote to prevent globbing and word splitting (services is intentionally unquoted here for splitting)
     # shellcheck disable=SC2086
-    if docker compose up -d $services; then
+    if docker compose --env-file stack.env up -d $services; then
         print_success "Docker containers started successfully"
     else
         print_error "Failed to start Docker containers"
@@ -336,7 +336,7 @@ fi
 ./"${WAIT_FOR_IT_FILENAME}" mysql:3306 -t 60 -- echo "MySQL is ready"
 EOF
 )
-    if docker compose exec "$MAIN_APP_SERVICE" bash -c "$wait_command_script"; then
+    if docker compose --env-file stack.env exec "$MAIN_APP_SERVICE" bash -c "$wait_command_script"; then
         print_success "MySQL is ready"
     else
         print_error "MySQL failed to become ready within timeout"
@@ -356,7 +356,7 @@ handle_operation() {
     case "$op" in
         wipe)
             print_step "Wiping Docker containers and volumes..."
-            if docker compose down -v --remove-orphans; then
+            if docker compose --env-file stack.env down -v --remove-orphans; then
                 print_success "Docker containers and volumes wiped"
                 start_and_wait_services
             else
@@ -366,9 +366,9 @@ handle_operation() {
             ;;
         rebuild)
             print_step "Rebuilding Docker containers..."
-            if docker compose down --remove-orphans && \
-               docker compose rm -f && \
-               docker compose build --no-cache; then
+            if docker compose --env-file stack.env down --remove-orphans && \
+               docker compose --env-file stack.env rm -f && \
+               docker compose --env-file stack.env build --no-cache; then
                 print_success "Docker containers rebuilt"
                 start_and_wait_services
             else
@@ -378,7 +378,7 @@ handle_operation() {
             ;;
         restart)
             print_step "Restarting Docker containers..."
-            if docker compose down --remove-orphans; then
+            if docker compose --env-file stack.env down --remove-orphans; then
                 start_and_wait_services
             else
                 print_error "Failed to restart Docker containers"
@@ -387,7 +387,7 @@ handle_operation() {
             ;;
         migrate)
             print_step "Running database migrations..."
-            if docker compose exec "$MAIN_APP_SERVICE" bin/cake migrations migrate; then
+            if docker compose exec --env-file stack.env "$MAIN_APP_SERVICE" bash -c 'cd /var/www/html && bin/cake migrations migrate'; then
                 print_success "Migrations completed successfully"
             else
                 print_error "Failed to run migrations"
@@ -430,7 +430,7 @@ else
 fi
 
 print_step "Installing/updating Composer dependencies..."
-if docker compose exec "$MAIN_APP_SERVICE" composer install --no-interaction --prefer-dist --optimize-autoloader; then
+if docker compose --env-file stack.env exec "$MAIN_APP_SERVICE" composer install --no-interaction --prefer-dist --optimize-autoloader; then
     print_success "Composer dependencies installed"
 else
     print_error "Failed to install Composer dependencies"
@@ -440,7 +440,7 @@ fi
 print_step "Checking if database has been set up (looking for 'settings' table)..."
 # docker compose exec exits with 0 if command succeeds, 1 if fails.
 # We assume bin/cake check_table_exists settings exits 0 if table exists, non-zero otherwise.
-if docker compose exec "$MAIN_APP_SERVICE" bin/cake check_table_exists settings 2>/dev/null; then
+if docker compose --env-file stack.env exec "$MAIN_APP_SERVICE" bin/cake check_table_exists settings 2>/dev/null; then
     TABLE_EXISTS_INITIAL=0 # True, table exists
 else
     TABLE_EXISTS_INITIAL=1 # False, table does not exist / command failed
@@ -470,7 +470,7 @@ fi
 
 # Re-check if database has been set up, as it might have been wiped.
 print_step "Re-checking if database has been set up..."
-if docker compose exec "$MAIN_APP_SERVICE" bin/cake check_table_exists settings 2>/dev/null; then
+if docker compose --env-file stack.env exec "$MAIN_APP_SERVICE" bin/cake check_table_exists settings 2>/dev/null; then
     TABLE_EXISTS_FINAL=0
 else
     TABLE_EXISTS_FINAL=1
@@ -499,7 +499,7 @@ if [ "$TABLE_EXISTS_FINAL" -ne 0 ]; then # If table still does not exist (or com
 
 
     print_step "Running database migrations..."
-    if docker compose exec "$MAIN_APP_SERVICE" bin/cake migrations migrate; then
+    if docker compose exec --env-file stack.env "$MAIN_APP_SERVICE" bash -c 'cd /var/www/html && bin/cake migrations migrate'; then
         print_success "Database migrations completed"
     else
         print_error "Failed to run database migrations"
@@ -507,7 +507,7 @@ if [ "$TABLE_EXISTS_FINAL" -ne 0 ]; then # If table still does not exist (or com
     fi
 
     print_step "Creating default admin user (admin@test.com / password)..."
-    if docker compose exec "$MAIN_APP_SERVICE" bin/cake create_user -u admin -p password -e admin@test.com -a 1; then
+    if docker compose exec --env-file stack.env "$MAIN_APP_SERVICE" bash -c 'cd /var/www/html && bin/cake create_user --email="admin@test.com" --username="admin" --password="password" --is_admin=true'; then
         print_success "Default admin user created"
         print_info "Login credentials: ${BOLD}admin@test.com${RESET} / ${BOLD}password${RESET}"
     else
@@ -517,13 +517,13 @@ if [ "$TABLE_EXISTS_FINAL" -ne 0 ]; then # If table still does not exist (or com
 
     print_step "Importing default data (aiprompts, email_templates)..."
 
-    if docker compose exec "$MAIN_APP_SERVICE" bin/cake default_data_import aiprompts; then
+    if docker compose --env-file stack.env exec "$MAIN_APP_SERVICE" bin/cake default_data_import aiprompts; then
         print_success "AI prompts imported"
     else
         print_warning "Failed to import AI prompts"
     fi
 
-    if docker compose exec "$MAIN_APP_SERVICE" bin/cake default_data_import email_templates; then
+    if docker compose --env-file stack.env exec "$MAIN_APP_SERVICE" bin/cake default_data_import email_templates; then
         print_success "Email templates imported"
     else
         print_warning "Failed to import email templates"
@@ -531,7 +531,7 @@ if [ "$TABLE_EXISTS_FINAL" -ne 0 ]; then # If table still does not exist (or com
 
     if [ "$LOAD_I18N" -eq 1 ]; then
         print_step "Loading internationalisation data..."
-        if docker compose exec "$MAIN_APP_SERVICE" bin/cake default_data_import internationalisations; then
+        if docker compose --env-file stack.env exec "$MAIN_APP_SERVICE" bin/cake default_data_import internationalisations; then
             print_success "Internationalisation data imported"
         else
             print_warning "Failed to import internationalisation data"
@@ -542,7 +542,7 @@ if [ "$TABLE_EXISTS_FINAL" -ne 0 ]; then # If table still does not exist (or com
 fi
 
 print_step "Clearing application cache..."
-if docker compose exec "$MAIN_APP_SERVICE" bin/cake cache clear_all; then
+if docker compose --env-file stack.env exec "$MAIN_APP_SERVICE" bin/cake cache clear_all; then
     print_success "Application cache cleared"
 else
     print_warning "Failed to clear application cache"
