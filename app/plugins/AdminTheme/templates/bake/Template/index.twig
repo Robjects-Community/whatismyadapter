@@ -1,0 +1,100 @@
+<?php
+/**
+ * @var \{{ namespace }}\View\AppView $this
+ * @var iterable<\{{ entityClass }}> ${{ pluralVar }}
+ */
+
+// Load search utility scripts
+$this->Html->script('AdminTheme.utils/search-handler', ['block' => true]);
+$this->Html->script('AdminTheme.utils/popover-manager', ['block' => true]); 
+?>
+
+<header class="py-3 mb-3 border-bottom">
+    <div class="container-fluid d-flex align-items-center">
+        <div class="d-flex align-items-center me-auto">
+            <!-- Status Filter -->
+            <?= $this->element('status_filter', [
+                'filters' => [
+                    'all' => ['label' => __('All'), 'params' => []],
+                    'filter1' => ['label' => __('Filter 1'), 'params' => ['status' => '0']],
+                    'filter2' => ['label' => __('Filter 2'), 'params' => ['status' => '1']],
+                ]
+            ]) ?>
+            
+            <!-- Search Form -->
+            <?= $this->element('search_form', [
+                'id' => '{{ singularVar }}-search-form',
+                'inputId' => '{{ singularVar }}Search',
+                'placeholder' => __('Search {{ pluralHumanName }}...'),
+                'class' => 'd-flex me-3 flex-grow-1'
+            ]) ?>
+        </div>
+        
+        <div class="flex-shrink-0">
+            <?= $this->Html->link(
+                '<i class="fas fa-plus"></i> ' . __('New {{ singularHumanName }}'),
+                ['action' => 'add'],
+                ['class' => 'btn btn-success', 'escape' => false]
+            ) ?>
+        </div>
+    </div>
+</header>
+<div id="ajax-target">
+  <table class="table table-striped">
+    <thead>
+        <tr>
+        {% for field in fields %}
+          <th scope="col"><?= $this->Paginator->sort('{{ field }}') ?></th>
+        {% endfor %}
+          <th scope="col"><?= __('Actions') ?></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach (${{ pluralVar }} as ${{ singularVar }}): ?>
+        <tr>
+      {% for field in fields %}
+      {% set isKey = false %}
+      {% if associations.BelongsTo is defined %}
+      {% for alias, details in associations.BelongsTo %}
+      {% if field == details.foreignKey %}
+      {% set isKey = true %}
+      <td><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}], ['class' => 'btn btn-link']) : '' ?></td>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% if isKey is not same as(true) %}
+      {% set columnData = Bake.columnData(field, schema) %}
+      {% set supportsLabel = Bake.enumSupportsLabel(field, schema) %}
+      {% if columnData.type starts with 'enum-' %}
+      <td><?= ${{ singularVar }}->{{ field }} === null ? '' : h(${{ singularVar }}->{{ field }}->{% if supportsLabel %}label(){% else %}value{% endif %}) ?></td>
+      {% elseif columnData.type not in ['integer', 'float', 'decimal', 'biginteger', 'smallinteger', 'tinyinteger'] %}
+      <td><?= h(${{ singularVar }}->{{ field }}) ?></td>
+      {% elseif columnData.null %}
+      <td><?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}) ?></td>
+      {% else %}
+      <td><?= $this->Number->format(${{ singularVar }}->{{ field }}) ?></td>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+      {% set pk = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}
+            <td>
+              <?= $this->element('evd_dropdown', ['model' => ${{ singularVar }}, 'display' => '{{ displayField }}']); ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  
+  <?= $this->element('pagination') ?>
+</div>
+
+<?php $this->Html->scriptStart(['block' => true]); ?>
+// Initialize search functionality using AdminTheme utility
+AdminTheme.SearchHandler.init({
+    searchInputId: '{{ singularVar }}Search',
+    resultsContainerId: '#ajax-target',
+    baseUrl: '<?= $this->Url->build(['action' => 'index']) ?>',
+    debounceDelay: 300
+});
+<?php $this->Html->scriptEnd(); ?>
+
