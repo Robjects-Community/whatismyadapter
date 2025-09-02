@@ -143,3 +143,13 @@ CakePHPBook.txt
 # default_data exports
 default_data
 WARP.md
+# Portainer Environment Files
+.env.portainer
+*.portainer.env
+
+# Backup files
+*.backup
+*.bak
+
+# Temporary deployment files
+docker-compose.override.yml
