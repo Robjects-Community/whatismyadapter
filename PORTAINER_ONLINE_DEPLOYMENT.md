@@ -56,7 +56,7 @@ python3 -c "import secrets, string; chars = string.ascii_letters + string.digits
    ```
    Repository URL: https://github.com/Robjects-Community/WhatIsMyAdaptor.git
    Repository reference: dev_portainer_swarm  
-   Compose path: deploy/portainer-stack.yml
+   Compose path: docker-compose.yml
    ```
 4. **Authentication**: Leave blank (public repository)
 
@@ -183,7 +183,7 @@ This error indicates Docker Swarm networking issues. **Two solutions**:
 
 **Option A: Use Standalone Docker Stack (Recommended)**
 ```
-Compose path: deploy/portainer-stack-standalone.yml
+Compose path: docker-compose.yml
 ```
 This version uses bridge networking and works without Docker Swarm.
 
@@ -193,8 +193,8 @@ If you need Swarm features, initialize Swarm on your server:
 # On your Docker host
 docker swarm init
 
-# Then use the original stack file:
-# Compose path: deploy/portainer-stack.yml
+# Then use the Swarm stack file:
+# Compose path: docker-swarm-stack.yml
 ```
 
 ### Services Won't Start

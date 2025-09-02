@@ -1,127 +1,250 @@
-services:
+version: "3.8"
 
+# WhatIsMyAdaptor - Main Docker Compose Stack
+# Works with: Docker Compose, Portainer (Standalone), Local Development
+# Repository: https://github.com/Robjects-Community/WhatIsMyAdaptor.git
+# 
+# PORTAINER DEPLOYMENT:
+# - Repository URL: https://github.com/Robjects-Community/WhatIsMyAdaptor.git
+# - Branch: dev_portainer_swarm
+# - Compose path: docker-compose.yml
+
+services:
   willowcms:
-    build:
-      context: .
-      dockerfile: docker/willowcms/Dockerfile
-      args:
-        - UID=${UID:-1000}
-        - GID=${GID:-1000}
-    ports: 
-      - "8080:80"
-    volumes:
-      - .:/var/www/html/
-      - ./docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
-      - ./logs/nginx:/var/log/nginx/
+    image: ${WILLOW_IMAGE:-robjects/whatismyadapter_cms:portainer-swarm-build}
+    container_name: willowcms
     environment:
-      - APP_NAME=WillowCMS
-      - DEBUG=true
+      # Core Application Settings
+      - APP_NAME=${APP_NAME:-WillowCMS}
+      - APP_FULL_BASE_URL=${APP_FULL_BASE_URL:-http://localhost:8080}
+      - DEBUG=${DEBUG:-false}
       - APP_ENCODING=UTF-8
       - APP_DEFAULT_LOCALE=en_GB
       - APP_DEFAULT_TIMEZONE=Europe/London
-      - SECURITY_SALT=developmentsalt
+      
+      # Security (REQUIRED - Change before deploying!)
+      - SECURITY_SALT=${SECURITY_SALT:-CHANGE_ME_BEFORE_DEPLOY}
+      
+      # Database Connection (follows your existing config/app_local.php structure)
       - DB_HOST=mysql
-      - DB_USERNAME=cms_user
-      - DB_PASSWORD=password
-      - DB_DATABASE=cms
+      - DB_USERNAME=${MYSQL_USER:-cms_user}
+      - DB_PASSWORD=${MYSQL_PASSWORD:-secure_password_change_me}
+      - DB_DATABASE=${MYSQL_DATABASE:-cms}
       - DB_PORT=3306
       - TEST_DB_HOST=mysql
-      - TEST_DB_USERNAME=cms_user_test
-      - TEST_DB_PASSWORD=password
-      - TEST_DB_DATABASE=cms_test
+      - TEST_DB_USERNAME=${MYSQL_TEST_USER:-cms_user_test}
+      - TEST_DB_PASSWORD=${MYSQL_PASSWORD:-secure_password_change_me}
+      - TEST_DB_DATABASE=${MYSQL_TEST_DATABASE:-cms_test}
       - TEST_DB_PORT=3306
+      
+      # Email Configuration (Mailpit for testing, SMTP for production)
       - EMAIL_HOST=mailpit
       - EMAIL_PORT=1025
       - EMAIL_TIMEOUT=30
       - EMAIL_USERNAME=
       - EMAIL_PASSWORD=
-      - EMAIL_REPLY=hello@willowcms.app
-      - EMAIL_NOREPLY=noreply@willowcms.app
+      - EMAIL_REPLY=${EMAIL_REPLY:-hello@willowcms.app}
+      - EMAIL_NOREPLY=${EMAIL_NOREPLY:-noreply@willowcms.app}
+      
+      # Redis Cache & Queue Configuration
       - REDIS_USERNAME=root
-      - REDIS_PASSWORD=root
-      - REDIS_HOST=127.0.0.1
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-secure_redis_password_change_me}
+      - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_DATABASE=0
-      - REDIS_URL=redis://root:root@127.0.0.1:6379/0
-      - REDIS_TEST_URL=redis://root:root@127.0.0.1:6379/0
-      - YOUTUBE_API_KEY=
-      - TRANSLATE_API_KEY=
-      - QUEUE_DEFAULT_URL=redis://root:root@127.0.0.1:6379/0
-      - QUEUE_TEST_URL=redis://root:root@127.0.0.1:6379/0
+      - REDIS_URL=redis://root:${REDIS_PASSWORD:-secure_redis_password_change_me}@redis:6379/0
+      - REDIS_TEST_URL=redis://root:${REDIS_PASSWORD:-secure_redis_password_change_me}@redis:6379/0
+      - QUEUE_DEFAULT_URL=redis://root:${REDIS_PASSWORD:-secure_redis_password_change_me}@redis:6379/0
+      - QUEUE_TEST_URL=redis://root:${REDIS_PASSWORD:-secure_redis_password_change_me}@redis:6379/0
+      
+      # Optional API Keys for AI features
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY:-}
+      - TRANSLATE_API_KEY=${TRANSLATE_API_KEY:-}
+      
+      # Admin User Configuration
+      - WILLOW_ADMIN_USERNAME=${WILLOW_ADMIN_USERNAME:-admin}
+      - WILLOW_ADMIN_PASSWORD=${WILLOW_ADMIN_PASSWORD:-change_me_admin_password}
+      - WILLOW_ADMIN_EMAIL=${WILLOW_ADMIN_EMAIL:-admin@yourdomain.com}
+      
+      # Feature Flags
       - EXPERIMENTAL_TESTS=Off
-      - WILLOW_ADMIN_USERNAME=admin
-      - WILLOW_ADMIN_PASSWORD=password
-      - WILLOW_ADMIN_EMAIL=admin@test.com
-      - APP_FULL_BASE_URL=http://localhost:8080
+    
+    volumes:
+      - willowcms_logs:/var/log/nginx
+      - app_tmp:/var/www/html/tmp
+      - app_uploads:/var/www/html/webroot/files
+    
+    ports:
+      - "${APP_HTTP_PORT:-8080}:80"
+    
+    depends_on:
+      - mysql
+      - redis
+      - mailpit
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    
+    restart: unless-stopped
+    networks:
+      - willow_network
 
   mysql:
     image: mysql:8.4.3
+    container_name: mysql
     platform: linux/amd64
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      DB_USERNAME: cms_user
-      DB_PASSWORD: password
-      DB_DATABASE: cms
-    ports:
-      - "3310:3306"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change_me_root_password}
+      MYSQL_USER: ${MYSQL_USER:-cms_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-secure_password_change_me}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-cms}
+      # Create test database and user automatically
+      MYSQL_TEST_DATABASE: ${MYSQL_TEST_DATABASE:-cms_test}
+      MYSQL_TEST_USER: ${MYSQL_TEST_USER:-cms_user_test}
+    
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --mysql-native-password=ON
+    
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # Initialize with test database creation script if available
+      - mysql_init:/docker-entrypoint-initdb.d
+    
+    ports:
+      - "${MYSQL_PORT:-3310}:3306"
+    
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-change_me_root_password}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    
+    restart: unless-stopped
+    networks:
+      - willow_network
 
   phpmyadmin:
-    image: phpmyadmin
-    ports:
-      - 8082:80
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
     environment:
       - PMA_HOST=mysql
       - PMA_USER=root
-      - PMA_PASSWORD=password
+      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-change_me_root_password}
       - UPLOAD_LIMIT=300M
+    
+    ports:
+      - "${PHPMYADMIN_PORT:-8082}:80"
+    
+    depends_on:
+      - mysql
+    
+    restart: unless-stopped
+    networks:
+      - willow_network
 
   jenkins:
-    build:
-      context: .
-      dockerfile: docker/jenkins/Dockerfile
-    privileged: true
-    user: root
-    ports:
-      - "8081:8080"
-      - "50000:50000"
-    volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+    image: ${JENKINS_IMAGE:-robjects/whatismyadapter_jenkins:portainer-swarm-build}
+    container_name: jenkins
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    
+    ports:
+      - "${JENKINS_PORT:-8081}:8080"
+    
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    
+    restart: unless-stopped
+    networks:
+      - willow_network
 
   mailpit:
     image: axllent/mailpit:latest
-    ports:
-      - "1125:1025"
-      - "8025:8025"
-    volumes:
-      - mailpit_data:/data
+    container_name: mailpit
     environment:
       - MP_MAX_MESSAGES=5000
       - MP_DATABASE=/data/mailpit.db
       - MP_SMTP_AUTH_ACCEPT_ANY=1
       - MP_SMTP_AUTH_ALLOW_INSECURE=1
+    
+    ports:
+      - "${MAILPIT_SMTP_PORT:-1125}:1025"  # SMTP
+      - "${MAILPIT_UI_PORT:-8025}:8025"    # Web UI
+    
+    volumes:
+      - mailpit_data:/data
+    
+    restart: unless-stopped
+    networks:
+      - willow_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    command: redis-server --requirepass ${REDIS_PASSWORD:-secure_redis_password_change_me}
+    
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    
+    volumes:
+      - redis_data:/data
+    
+    healthcheck:
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "${REDIS_PASSWORD:-secure_redis_password_change_me}", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    
+    restart: unless-stopped
+    networks:
+      - willow_network
 
   redis-commander:
     image: rediscommander/redis-commander:latest
+    container_name: redis-commander
     environment:
-      - REDIS_HOST=willowcms
+      - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - REDIS_PASSWORD=root
-      - HTTP_USER=root
-      - HTTP_PASSWORD=root
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-secure_redis_password_change_me}
+      - HTTP_USER=${REDIS_COMMANDER_USER:-admin}
+      - HTTP_PASSWORD=${REDIS_COMMANDER_PASSWORD:-admin_password_change_me}
+    
     ports:
-      - "8084:8081"
+      - "${REDIS_COMMANDER_PORT:-8084}:8081"
+    
     depends_on:
-      - willowcms
+      - redis
+    
+    restart: unless-stopped
+    networks:
+      - willow_network
+
+networks:
+  willow_network:
+    driver: bridge
+    name: willow_network
 
 volumes:
   mysql_data:
-  rabbitmq_data:
+    driver: local
+  mysql_init:
+    driver: local
   jenkins_home:
+    driver: local
   mailpit_data:
+    driver: local
+  redis_data:
+    driver: local
+  willowcms_logs:
+    driver: local
+  app_tmp:
+    driver: local
+  app_uploads:
+    driver: local

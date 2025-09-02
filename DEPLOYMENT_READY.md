@@ -11,7 +11,7 @@ Your WhatIsMyAdaptor application is now **100% ready** for deployment to any onl
 ### Repository Information
 - **Repository URL**: `https://github.com/Robjects-Community/WhatIsMyAdaptor.git`
 - **Branch**: `dev_portainer_swarm`
-- **Stack File**: `deploy/portainer-stack.yml`
+- **Stack File**: `docker-compose.yml`
 - **Status**: ✅ All files committed and pushed
 
 ### Pre-built Docker Images (Ready on Docker Hub)
@@ -30,7 +30,8 @@ Your WhatIsMyAdaptor application is now **100% ready** for deployment to any onl
 **→ [.env.portainer.example](.env.portainer.example)** - All required environment variables
 
 ### 🐳 Stack Configuration
-**→ [deploy/portainer-stack.yml](deploy/portainer-stack.yml)** - Production Docker Swarm stack
+**→ [docker-compose.yml](docker-compose.yml)** - Main Docker Compose stack (Standalone)
+**→ [docker-swarm-stack.yml](docker-swarm-stack.yml)** - Docker Swarm stack (Advanced)
 
 ---
 
@@ -42,7 +43,7 @@ Stack name: willowcms
 Build method: Repository
 Repository URL: https://github.com/Robjects-Community/WhatIsMyAdaptor.git
 Repository reference: dev_portainer_swarm
-Compose path: deploy/portainer-stack.yml
+Compose path: docker-compose.yml
 Authentication: None (public repo)
 ```
 
