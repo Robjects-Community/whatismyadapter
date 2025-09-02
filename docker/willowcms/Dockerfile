@@ -56,7 +56,7 @@ COPY docker/willowcms/config/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY docker/willowcms/config/nginx/nginx-cms.conf /etc/nginx/conf.d/default.conf
 
 # Configure PHP-FPM
-ENV PHP_INI_DIR /etc/php83
+ENV PHP_INI_DIR=/etc/php83
 COPY docker/willowcms/config/php/fpm-pool.conf ${PHP_INI_DIR}/php-fpm.d/www.conf
 COPY docker/willowcms/config/php/php.ini ${PHP_INI_DIR}/conf.d/custom.ini
 
@@ -68,8 +68,8 @@ RUN wget https://getcomposer.org/installer -O composer-setup.php && \
 # Configure supervisord
 COPY docker/willowcms/config/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-ARG UID
-ARG GID
+ARG UID=1000
+ARG GID=1000
  
 ENV UID=${UID}
 ENV GID=${GID}
