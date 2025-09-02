@@ -10,7 +10,7 @@ services:
     ports:
       - "7770:80"
     volumes:
-      - app:/var/www/html/
+      - ${PROJECT_ROOT:-.}/app:/var/www/html/
       - "${PROJECT_ROOT:-.}/docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php"
       - "${PROJECT_ROOT:-.}/logs/nginx:/var/log/nginx/"
     environment:
@@ -72,8 +72,8 @@ services:
     ports:
       - "7710:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
-      - "${PROJECT_ROOT:-.}/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - ${PROJECT_ROOT:-.}/mysql/mysql_data:/var/lib/mysql
+      - "${PROJECT_ROOT:-.}/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql"
 
   phpmyadmin:
     image: phpmyadmin
