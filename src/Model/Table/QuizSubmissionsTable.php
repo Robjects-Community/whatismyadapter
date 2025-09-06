@@ -46,7 +46,7 @@ class QuizSubmissionsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-        $this->addBehavior('Uuid', ['primaryKey' => false]); // Auto-generate UUIDs for new entities
+        // Note: UUID generation should be handled at the entity level or via database defaults
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',

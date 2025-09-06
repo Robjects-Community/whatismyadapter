@@ -212,16 +212,79 @@ return function (RouteBuilder $routes): void {
             ]
         );
         
-        // Quiz routes - Proper quiz functionality
+        // Quiz routes - AI-powered quiz functionality
         $builder->connect(
             '/quiz',
             [
                 'controller' => 'Quiz',
-                'action' => 'take'
+                'action' => 'index'
             ],
             [
                 'routeClass' => 'ADmad/I18n.I18nRoute',
-                '_name' => 'quiz-take',
+                '_name' => 'quiz-index',
+            ]
+        );
+        
+        $builder->connect(
+            '/quiz/akinator',
+            [
+                'controller' => 'Quiz',
+                'action' => 'akinator'
+            ],
+            [
+                'routeClass' => 'ADmad/I18n.I18nRoute',
+                '_name' => 'quiz-akinator',
+            ]
+        );
+        
+        $builder->connect(
+            '/quiz/comprehensive',
+            [
+                'controller' => 'Quiz',
+                'action' => 'comprehensive'
+            ],
+            [
+                'routeClass' => 'ADmad/I18n.I18nRoute',
+                '_name' => 'quiz-comprehensive',
+            ]
+        );
+        
+        $builder->connect(
+            '/quiz/submit',
+            [
+                'controller' => 'Quiz',
+                'action' => 'submit'
+            ],
+            [
+                'routeClass' => 'ADmad/I18n.I18nRoute',
+                '_name' => 'quiz-submit',
+                '_method' => 'POST'
+            ]
+        );
+        
+        $builder->connect(
+            '/quiz/result/{session_id}',
+            [
+                'controller' => 'Quiz',
+                'action' => 'result'
+            ],
+            [
+                'routeClass' => 'ADmad/I18n.I18nRoute',
+                '_name' => 'quiz-result',
+                'pass' => ['session_id']
+            ]
+        );
+        
+        // Legacy routes for backward compatibility
+        $builder->connect(
+            '/quiz/take',
+            [
+                'controller' => 'Quiz',
+                'action' => 'legacyTake'
+            ],
+            [
+                'routeClass' => 'ADmad/I18n.I18nRoute',
+                '_name' => 'quiz-take-legacy',
             ]
         );
         
@@ -229,11 +292,11 @@ return function (RouteBuilder $routes): void {
             '/quiz/preview',
             [
                 'controller' => 'Quiz',
-                'action' => 'preview'
+                'action' => 'legacyPreview'
             ],
             [
                 'routeClass' => 'ADmad/I18n.I18nRoute',
-                '_name' => 'quiz-preview',
+                '_name' => 'quiz-preview-legacy',
             ]
         );
         
@@ -255,7 +318,7 @@ return function (RouteBuilder $routes): void {
             '/products/quiz',
             [
                 'controller' => 'Quiz',
-                'action' => 'take'
+                'action' => 'index'
             ],
             [
                 'routeClass' => 'ADmad/I18n.I18nRoute',
@@ -379,6 +442,54 @@ return function (RouteBuilder $routes): void {
 
     // API routes
     $routes->prefix('Api', function (RouteBuilder $routes) {
+        // Set JSON extension for API routes
+        $routes->setExtensions(['json']);
+        
+        // Quiz API routes
+        $routes->connect('/quiz/akinator/start', [
+            'controller' => 'Quiz',
+            'action' => 'akinatorStart'
+        ], [
+            '_method' => 'POST'
+        ]);
+        
+        $routes->connect('/quiz/akinator/next', [
+            'controller' => 'Quiz',
+            'action' => 'akinatorNext'
+        ], [
+            '_method' => 'POST'
+        ]);
+        
+        $routes->connect('/quiz/akinator/result', [
+            'controller' => 'Quiz',
+            'action' => 'akinatorResult'
+        ], [
+            '_method' => 'GET'
+        ]);
+        
+        $routes->connect('/quiz/comprehensive/submit', [
+            'controller' => 'Quiz',
+            'action' => 'comprehensiveSubmit'
+        ], [
+            '_method' => 'POST'
+        ]);
+        
+        // Products API routes
+        $routes->connect('/products', [
+            'controller' => 'Products',
+            'action' => 'index'
+        ], [
+            '_method' => 'GET'
+        ]);
+        
+        $routes->connect('/products/{id}', [
+            'controller' => 'Products',
+            'action' => 'view'
+        ], [
+            '_method' => 'GET',
+            'pass' => ['id']
+        ]);
+        
         // Reliability API routes
         $routes->connect('/reliability/score', [
             'controller' => 'Reliability',

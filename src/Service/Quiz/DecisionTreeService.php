@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Service\Quiz;
 
 use App\Service\Quiz\AiProductMatcherService;
+use App\Service\Api\Anthropic\AnthropicApiService;
+use Cake\ORM\TableRegistry;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Log\LogTrait;
@@ -35,6 +37,11 @@ class DecisionTreeService
     private $productMatcher;
 
     /**
+     * AI service for intelligent question generation
+     */
+    private $aiService;
+
+    /**
      * Constructor
      * 
      * @param array $config Configuration options
@@ -50,6 +57,15 @@ class DecisionTreeService
 
         $this->loadDecisionTree();
         $this->productMatcher = new AiProductMatcherService();
+        
+        // Initialize AI service for smart question generation
+        try {
+            $this->aiService = new AnthropicApiService();
+            $this->log('AI service initialized for intelligent question generation', 'info');
+        } catch (\Exception $e) {
+            $this->log('AI service initialization failed, using fallback questions: ' . $e->getMessage(), 'warning');
+            $this->aiService = null;
+        }
     }
 
     /**
@@ -110,6 +126,20 @@ class DecisionTreeService
         // Validate session
         if (empty($state['session_id'])) {
             throw new \InvalidArgumentException('Invalid session state');
+        }
+
+        // Initialize missing state fields
+        if (!isset($state['question_count'])) {
+            $state['question_count'] = 0;
+        }
+        if (!isset($state['confidence'])) {
+            $state['confidence'] = 0.0;
+        }
+        if (!isset($state['visited_nodes'])) {
+            $state['visited_nodes'] = [];
+        }
+        if (!isset($state['answers'])) {
+            $state['answers'] = [];
         }
 
         // Update state with answer
@@ -202,10 +232,10 @@ class DecisionTreeService
      */
     private function loadDecisionTree(): void
     {
-        $cacheKey = 'akinator_tree_v1';
+        $cacheKey = 'akinator_tree_v2_multichoice';
         $cached = Cache::read($cacheKey, 'quiz');
         
-        if ($cached !== false) {
+        if ($cached !== false && is_array($cached)) {
             $this->tree = $cached;
             return;
         }
@@ -285,13 +315,15 @@ class DecisionTreeService
                 ],
                 'iphone' => [
                     'id' => 'iphone',
-                    'question' => __('Is it a newer iPhone (iPhone 15 or newer)?'),
-                    'type' => 'binary',
+                    'question' => __('Which iPhone model do you have?'),
+                    'type' => 'choice',
                     'options' => [
-                        ['id' => 'yes', 'label' => __('Yes')],
-                        ['id' => 'no', 'label' => __('No')],
+                        ['id' => 'iphone15_plus', 'label' => __('iPhone 15 or newer')],
+                        ['id' => 'iphone14_12', 'label' => __('iPhone 12-14')],
+                        ['id' => 'iphone11_older', 'label' => __('iPhone 11 or older')],
+                        ['id' => 'unsure', 'label' => __('Not sure')],
                     ],
-                    'weight' => 4,
+                    'weight' => 6,
                 ],
                 'android' => [
                     'id' => 'android',
@@ -332,8 +364,10 @@ class DecisionTreeService
                     'unsure' => 'apple_help',
                 ],
                 'iphone' => [
-                    'yes' => 'result', // iPhone 15+ with USB-C
-                    'no' => 'result',  // Older iPhone with Lightning
+                    'iphone15_plus' => 'result', // iPhone 15+ with USB-C
+                    'iphone14_12' => 'result',   // iPhone 12-14 with Lightning
+                    'iphone11_older' => 'result', // iPhone 11- with Lightning
+                    'unsure' => 'iphone_help',
                 ],
                 'android' => [
                     'usbc' => 'result',
@@ -345,6 +379,7 @@ class DecisionTreeService
                 'result',
                 'apple_help',
                 'android_help',
+                'iphone_help',
                 'dell_laptop',
                 'hp_laptop',
                 'lenovo_laptop',
@@ -382,8 +417,18 @@ class DecisionTreeService
      */
     private function getQuestionForNode(string $nodeId, array $state): ?array
     {
+        // Try AI service first for intelligent questions
+        if ($this->aiService && $nodeId === 'root') {
+            $aiQuestion = $this->generateAIQuestion($state);
+            if ($aiQuestion) {
+                return $aiQuestion;
+            }
+        }
+        
+        // Always fall back to static tree questions
         if (!isset($this->tree['nodes'][$nodeId])) {
-            return null;
+            // If no static tree question, generate a fallback
+            return $this->generateFallbackQuestion($state, []);
         }
 
         $node = $this->tree['nodes'][$nodeId];
@@ -394,6 +439,166 @@ class DecisionTreeService
             'type' => $node['type'],
             'options' => $node['options'] ?? [],
             'weight' => $node['weight'] ?? 1,
+        ];
+    }
+
+    /**
+     * Generate AI-powered question based on current state
+     * 
+     * @param array $state Current quiz state
+     * @return array|null Generated question
+     */
+    private function generateAIQuestion(array $state): ?array
+    {
+        try {
+            // Get remaining products based on current answers
+            $remainingProducts = $this->getRemainingProducts($state);
+            
+            if (empty($remainingProducts) || count($remainingProducts) <= 3) {
+                return null; // Should terminate
+            }
+            
+            // Use AI to generate the next question
+            $question = $this->aiService->generateNextQuestion($state, $remainingProducts);
+            
+            if ($question) {
+                $this->log('AI generated question: ' . $question['text'], 'debug');
+                return $question;
+            }
+            
+            // Fall back to predefined questions if AI fails
+            return $this->generateFallbackQuestion($state, $remainingProducts);
+            
+        } catch (\Exception $e) {
+            $this->log('Error generating AI question: ' . $e->getMessage(), 'error');
+            return $this->generateFallbackQuestion($state, []);
+        }
+    }
+
+    /**
+     * Get products that still match current answers
+     * 
+     * @param array $state Current quiz state
+     * @return array Remaining products
+     */
+    private function getRemainingProducts(array $state): array
+    {
+        try {
+            $Products = TableRegistry::getTableLocator()->get('Products');
+            $query = $Products->find()
+                ->where(['is_published' => true])
+                ->limit(1000); // Reasonable limit
+                
+            $products = $query->toArray();
+            
+            // Filter products based on current answers
+            if (!empty($state['answers'])) {
+                $products = array_filter($products, function($product) use ($state) {
+                    return $this->productMatchesAnswers($product, $state['answers']);
+                });
+            }
+            
+            return array_values($products);
+            
+        } catch (\Exception $e) {
+            $this->log('Error getting remaining products: ' . $e->getMessage(), 'error');
+            return [];
+        }
+    }
+
+    /**
+     * Check if product matches current answers
+     * 
+     * @param array $product Product data
+     * @param array $answers Current answers
+     * @return bool Whether product matches
+     */
+    private function productMatchesAnswers(array $product, array $answers): bool
+    {
+        foreach ($answers as $questionId => $answer) {
+            // Simple rule-based filtering based on answers
+            if (strpos($questionId, 'laptop') !== false) {
+                if ($answer === 'yes' && stripos($product['device_category'] ?? '', 'laptop') === false) {
+                    return false;
+                }
+                if ($answer === 'no' && stripos($product['device_category'] ?? '', 'laptop') !== false) {
+                    return false;
+                }
+            }
+            
+            if (strpos($questionId, 'apple') !== false) {
+                if ($answer === 'yes' && stripos($product['manufacturer'] ?? '', 'apple') === false) {
+                    return false;
+                }
+                if ($answer === 'no' && stripos($product['manufacturer'] ?? '', 'apple') !== false) {
+                    return false;
+                }
+            }
+            
+            if (strpos($questionId, 'usbc') !== false || strpos($questionId, 'usb-c') !== false) {
+                if ($answer === 'yes' && stripos($product['port_family'] ?? '', 'usbc') === false) {
+                    return false;
+                }
+                if ($answer === 'no' && stripos($product['port_family'] ?? '', 'usbc') !== false) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+
+    /**
+     * Generate fallback question when AI is not available
+     * 
+     * @param array $state Current state
+     * @param array $products Remaining products
+     * @return array|null Fallback question
+     */
+    private function generateFallbackQuestion(array $state, array $products): ?array
+    {
+        $questionCount = count($state['answers'] ?? []);
+        
+        // Predefined fallback questions
+        $fallbackQuestions = [
+            [
+                'text' => 'Do you need this adapter primarily for a laptop computer?',
+                'category' => 'device_type'
+            ],
+            [
+                'text' => 'Is your device made by Apple?',
+                'category' => 'manufacturer'
+            ],
+            [
+                'text' => 'Does your device use a USB-C port for charging?',
+                'category' => 'port_type'
+            ],
+            [
+                'text' => 'Do you need fast charging capabilities?',
+                'category' => 'features'
+            ],
+            [
+                'text' => 'Is portability important to you (small, lightweight adapter)?',
+                'category' => 'form_factor'
+            ]
+        ];
+
+        if ($questionCount < count($fallbackQuestions)) {
+            $question = $fallbackQuestions[$questionCount];
+        } else {
+            // Use a cycling approach or final question if we run out
+            $question = $fallbackQuestions[$questionCount % count($fallbackQuestions)];
+        }
+        
+        return [
+            'id' => 'fallback_' . $questionCount,
+            'text' => $question['text'],
+            'type' => 'binary',
+            'category' => $question['category'],
+            'options' => [
+                ['id' => 'yes', 'label' => 'Yes'],
+                ['id' => 'no', 'label' => 'No']
+            ]
         ];
     }
 

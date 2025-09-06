@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Service\Quiz;
 
-use App\Service\AnthropicApiService;
+use App\Service\Api\Anthropic\AnthropicApiService;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Log\LogTrait;
@@ -53,9 +53,11 @@ class AiProductMatcherService
 
         $this->productsTable = $this->getTableLocator()->get('Products');
         
+        // Initialize AI service if available and enabled
         if ($this->config['ai_enabled']) {
             try {
                 $this->aiService = new AnthropicApiService();
+                $this->log('AI service initialized successfully', 'info');
             } catch (\Exception $e) {
                 $this->log('AI service initialization failed: ' . $e->getMessage(), 'warning');
                 $this->aiService = null;

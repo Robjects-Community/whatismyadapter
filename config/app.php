@@ -186,6 +186,14 @@ return [
             'serialize' => true,
             'duration' => '+1 week',
         ],
+
+        'quiz' => [
+            'className' => FileEngine::class,
+            'prefix' => 'cms_quiz_',
+            'path' => CACHE . 'quiz' . DS,
+            'serialize' => true,
+            'duration' => '+1 hour',
+        ],
     ],
 
     /*

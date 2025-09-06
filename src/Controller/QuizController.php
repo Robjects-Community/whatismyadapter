@@ -3,25 +3,56 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Service\Quiz\AiProductMatcherService;
+use App\Service\Quiz\DecisionTreeService;
 use Cake\Core\Configure;
 use Cake\Event\EventInterface;
 use Cake\Http\Response;
 use Cake\ORM\TableRegistry;
+use Cake\Utility\Text;
 use Exception;
 
 /**
  * Quiz Controller
  * 
- * Interactive quiz to help users find suitable adapters and chargers
+ * AI-powered interactive quiz to help users find suitable adapters and chargers
+ * Supports both Akinator-style and comprehensive quiz modes
  *
  * @property \App\Model\Table\ProductsTable $Products
+ * @property \App\Model\Table\QuizSubmissionsTable $QuizSubmissions
  */
 class QuizController extends AppController
 {
     /**
+     * AI Product Matcher Service
+     */
+    private $productMatcher;
+
+    /**
+     * Decision Tree Service for Akinator mode
+     */
+    private $decisionTree;
+
+    /**
+     * Initialize method
+     */
+    public function initialize(): void
+    {
+        parent::initialize();
+        
+        // Initialize model tables
+        $this->Products = TableRegistry::getTableLocator()->get('Products');
+        $this->QuizSubmissions = TableRegistry::getTableLocator()->get('QuizSubmissions');
+        
+        // Initialize AI services
+        $this->productMatcher = new AiProductMatcherService();
+        $this->decisionTree = new DecisionTreeService();
+    }
+
+    /**
      * beforeFilter callback.
      *
-     * Allow unauthenticated access to all quiz actions
+     * Allow unauthenticated access to quiz actions
      *
      * @param \Cake\Event\EventInterface $event The event instance.
      * @return void
@@ -31,117 +62,368 @@ class QuizController extends AppController
         parent::beforeFilter($event);
 
         // Allow unauthenticated access to all quiz actions
-        $this->Authentication->addUnauthenticatedActions(['take', 'preview', 'submit']);
+        $this->Authentication->addUnauthenticatedActions([
+            'index', 'akinator', 'comprehensive', 'submit', 'result',
+            'take', 'preview' // Keep legacy actions for backward compatibility
+        ]);
     }
 
     /**
-     * Take method - Interactive quiz form
+     * Quiz index - Choose quiz type
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function take(): ?Response
+    public function index(): ?Response
     {
-        $config = $this->getQuizConfig();
-        
-        if ($this->request->is('post')) {
-            return $this->handleQuizSubmission($config);
+        // Check if quiz system is enabled
+        if (!Configure::read('Quiz.enabled')) {
+            $this->Flash->error(__('The quiz system is temporarily unavailable.'));
+            return $this->redirect(['controller' => 'Products', 'action' => 'index']);
         }
 
-        // Prepare quiz data for the view
-        $quizInfo = $config['quiz_info'] ?? [
-            'title' => 'Adapter Finder Quiz',
-            'description' => 'Find the perfect adapter for your needs',
-            'estimated_time' => '2-3 minutes'
-        ];
+        // Get quiz statistics for display
+        $stats = $this->getQuizStatistics();
         
-        $questions = $config['questions'] ?? [];
-        $display = $config['display'] ?? [];
-
-        $this->set(compact('config', 'quizInfo', 'questions', 'display'));
-        $this->set('_serialize', ['config', 'quizInfo', 'questions', 'display']);
+        // Get quiz configuration
+        $config = Configure::read('Quiz');
+        
+        $this->set([
+            'title' => __('Find Your Perfect Adapter'),
+            'akinator_enabled' => $config['akinator']['enabled'] ?? true,
+            'comprehensive_enabled' => $config['comprehensive']['enabled'] ?? true,
+            'stats' => $stats,
+        ]);
 
         return null;
     }
 
     /**
-     * Preview method - Read-only quiz preview
+     * Akinator-style quiz
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function preview(): ?Response
+    public function akinator(): ?Response
     {
-        $config = $this->getQuizConfig();
-        
-        // Prepare quiz data for preview (read-only)
-        $quizInfo = $config['quiz_info'] ?? [
-            'title' => 'Adapter Finder Quiz (Preview)',
-            'description' => 'Preview of the quiz questions',
-            'estimated_time' => '2-3 minutes'
-        ];
-        
-        $questions = $config['questions'] ?? [];
-        $display = $config['display'] ?? [];
-        $isPreview = true;
+        if (!Configure::read('Quiz.akinator.enabled')) {
+            $this->Flash->error(__('Akinator quiz is not available.'));
+            return $this->redirect(['action' => 'index']);
+        }
 
-        $this->set(compact('config', 'quizInfo', 'questions', 'display', 'isPreview'));
-        $this->set('_serialize', ['config', 'quizInfo', 'questions', 'display', 'isPreview']);
+        $this->set([
+            'title' => __('AI Adapter Genie'),
+            'description' => __('Answer a few questions and let our AI find the perfect adapter for you.'),
+            'max_questions' => Configure::read('Quiz.akinator.max_questions', 15),
+        ]);
 
         return null;
     }
 
     /**
-     * Submit method - Process quiz answers (AJAX endpoint)
+     * Comprehensive quiz form
      *
-     * @return \Cake\Http\Response|null|void JSON response
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function comprehensive(): ?Response
+    {
+        if (!Configure::read('Quiz.comprehensive.enabled')) {
+            $this->Flash->error(__('Comprehensive quiz is not available.'));
+            return $this->redirect(['action' => 'index']);
+        }
+
+        // Get dynamic form options
+        $manufacturers = $this->Products->find()
+            ->select(['manufacturer'])
+            ->where([
+                'manufacturer IS NOT' => null,
+                'manufacturer !=' => '',
+                'is_published' => true,
+            ])
+            ->distinct(['manufacturer'])
+            ->orderBy(['manufacturer' => 'ASC'])
+            ->limit(20)
+            ->toArray();
+
+        $deviceCategories = $this->Products->find()
+            ->select(['device_category'])
+            ->where([
+                'device_category IS NOT' => null,
+                'device_category !=' => '',
+                'is_published' => true,
+            ])
+            ->distinct(['device_category'])
+            ->orderBy(['device_category' => 'ASC'])
+            ->limit(20)
+            ->toArray();
+
+        $portTypes = $this->Products->find()
+            ->select(['port_family'])
+            ->where([
+                'port_family IS NOT' => null,
+                'port_family !=' => '',
+                'is_published' => true,
+            ])
+            ->distinct(['port_family'])
+            ->orderBy(['port_family' => 'ASC'])
+            ->limit(15)
+            ->toArray();
+
+        $this->set([
+            'title' => __('Comprehensive Adapter Finder'),
+            'description' => __('Tell us about your needs and we\'ll find the perfect adapter.'),
+            'manufacturers' => $manufacturers,
+            'deviceCategories' => $deviceCategories,
+            'portTypes' => $portTypes,
+            'steps' => Configure::read('Quiz.comprehensive.steps', 6),
+        ]);
+
+        return null;
+    }
+
+    /**
+     * Submit comprehensive quiz
+     *
+     * @return \Cake\Http\Response|null|void JSON response or redirect
      */
     public function submit(): ?Response
     {
-        if (!$this->request->is('post')) {
-            throw new \Cake\Http\Exception\MethodNotAllowedException('Only POST requests are allowed.');
-        }
+        $this->request->allowMethod(['post']);
 
-        $config = $this->getQuizConfig();
-        return $this->handleQuizSubmission($config);
+        try {
+            $answers = $this->request->getData('answers', []);
+            $quizType = $this->request->getData('quiz_type', 'comprehensive');
+            $sessionId = $this->request->getData('session_id') ?: Text::uuid();
+
+            // Validate answers
+            if (empty($answers)) {
+                throw new \InvalidArgumentException(__('No quiz answers provided.'));
+            }
+
+            // Get product recommendations
+            $results = $this->productMatcher->match($answers, [
+                'max_results' => Configure::read('Quiz.max_results', 10),
+                'confidence_threshold' => Configure::read('Quiz.confidence_threshold', 0.6),
+            ]);
+
+            // Save submission
+            $submission = $this->saveQuizSubmission($sessionId, $quizType, $answers, $results);
+
+            if ($this->request->is('ajax')) {
+                $response = [
+                    'success' => true,
+                    'submission_id' => $submission->id,
+                    'total_matches' => $results['total_matches'],
+                    'overall_confidence' => $results['overall_confidence'],
+                    'recommendations' => $this->formatProductRecommendations($results['products']),
+                    'processing_time' => $results['processing_time'],
+                    'method' => $results['method'],
+                ];
+
+                return $this->response
+                    ->withType('application/json')
+                    ->withStringBody(json_encode($response));
+            } else {
+                return $this->redirect([
+                    'action' => 'result',
+                    '?' => ['submission' => $submission->id]
+                ]);
+            }
+
+        } catch (\Exception $e) {
+            $this->log('Quiz submission error: ' . $e->getMessage(), 'error');
+            
+            if ($this->request->is('ajax')) {
+                $response = [
+                    'success' => false,
+                    'message' => __('Sorry, there was an error processing your quiz. Please try again.'),
+                    'error' => Configure::read('debug') ? $e->getMessage() : null,
+                ];
+
+                return $this->response
+                    ->withType('application/json')
+                    ->withStatus(500)
+                    ->withStringBody(json_encode($response));
+            } else {
+                $this->Flash->error(__('Sorry, there was an error processing your quiz. Please try again.'));
+                return $this->redirect(['action' => 'comprehensive']);
+            }
+        }
     }
 
     /**
-     * Get quiz configuration from database settings or fallback to default
+     * Display quiz results
      *
-     * @return array Quiz configuration
+     * @return \Cake\Http\Response|null|void Renders view
      */
-    private function getQuizConfig(): array
+    public function result(): ?Response
+    {
+        $submissionId = $this->request->getQuery('submission');
+        
+        if (!$submissionId) {
+            $this->Flash->error(__('Invalid quiz results request.'));
+            return $this->redirect(['action' => 'index']);
+        }
+
+        try {
+            $submission = $this->QuizSubmissions->get($submissionId, [
+                'contain' => ['Users']
+            ]);
+
+            // Get product details for recommendations
+            $productIds = $submission->matched_product_ids ?? [];
+            $products = [];
+            
+            if (!empty($productIds)) {
+                $products = $this->Products->find()
+                    ->where(['Products.id IN' => $productIds])
+                    ->contain(['Tags', 'Users'])
+                    ->toArray();
+            }
+
+            $this->set([
+                'submission' => $submission,
+                'products' => $products,
+                'confidence' => $submission->confidence_scores['overall'] ?? 0,
+                'title' => __('Your Adapter Recommendations'),
+            ]);
+
+            return null;
+
+        } catch (\Exception $e) {
+            $this->Flash->error(__('Quiz results not found or expired.'));
+            return $this->redirect(['action' => 'index']);
+        }
+    }
+
+    /**
+     * Legacy take method for backward compatibility
+     *
+     * @return \Cake\Http\Response Redirects to new comprehensive quiz
+     */
+    public function take(): ?Response
+    {
+        return $this->redirect(['action' => 'comprehensive']);
+    }
+
+    /**
+     * Legacy preview method for backward compatibility
+     *
+     * @return \Cake\Http\Response Redirects to index
+     */
+    public function preview(): ?Response
+    {
+        return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Get quiz statistics for display
+     *
+     * @return array Statistics data
+     */
+    private function getQuizStatistics(): array
     {
         try {
-            $settingsTable = TableRegistry::getTableLocator()->get('Settings');
-            
-            // Try to get quiz config from database
-            $quizConfigSetting = $settingsTable->find()
-                ->where(['category' => 'Products', 'key_name' => 'quiz_config_json'])
+            $totalSubmissions = $this->QuizSubmissions->find()->count();
+            $totalProducts = $this->Products->find()->where(['is_published' => true])->count();
+            $avgConfidence = $this->QuizSubmissions->find()
+                ->select(['avg_confidence' => 'AVG(JSON_EXTRACT(confidence_scores, "$.overall"))'])
                 ->first();
 
-            if ($quizConfigSetting && !empty($quizConfigSetting->value)) {
-                $dbConfig = json_decode($quizConfigSetting->value, true);
-                if ($dbConfig && is_array($dbConfig)) {
-                    return $this->normalizeDbConfig($dbConfig);
-                }
-            }
-        } catch (Exception $e) {
-            // Log error but continue with fallback
-            $this->log('Error loading quiz config from database: ' . $e->getMessage(), 'warning');
+            return [
+                'total_submissions' => $totalSubmissions,
+                'total_products' => $totalProducts,
+                'avg_confidence' => round(($avgConfidence->avg_confidence ?? 0) * 100, 1),
+            ];
+        } catch (\Exception $e) {
+            return [
+                'total_submissions' => 0,
+                'total_products' => 0,
+                'avg_confidence' => 0,
+            ];
         }
-
-        // Fallback to default configuration
-        $defaultConfig = Configure::read('Quiz.default');
-        if (!$defaultConfig) {
-            // Ultimate fallback - minimal quiz
-            return $this->getMinimalFallbackConfig();
-        }
-
-        return $defaultConfig;
     }
 
     /**
-     * Normalize database configuration to match expected format
+     * Save quiz submission to database
+     *
+     * @param string $sessionId Session ID
+     * @param string $quizType Quiz type
+     * @param array $answers User answers
+     * @param array $results Match results
+     * @return \App\Model\Entity\QuizSubmission Saved submission
+     */
+    private function saveQuizSubmission(string $sessionId, string $quizType, array $answers, array $results)
+    {
+        $identity = $this->getRequest()->getAttribute('identity');
+        
+        $submission = $this->QuizSubmissions->newEntity([
+            'user_id' => $identity ? $identity->id : null,
+            'session_id' => $sessionId,
+            'quiz_type' => $quizType,
+            'answers' => $answers,
+            'matched_product_ids' => array_map(function($p) {
+                return $p['product']->id;
+            }, $results['products']),
+            'confidence_scores' => [
+                'overall' => $results['overall_confidence'],
+                'method' => $results['method'],
+                'processing_time' => $results['processing_time'],
+            ],
+            'result_summary' => sprintf(
+                '%d products matched with %.1f%% confidence using %s method',
+                $results['total_matches'],
+                $results['overall_confidence'] * 100,
+                $results['method']
+            ),
+            'analytics' => [
+                'user_agent' => $this->request->getHeaderLine('User-Agent'),
+                'ip_address' => $this->request->clientIp(),
+                'timestamp' => time(),
+                'processing_time' => $results['processing_time'],
+                'method' => $results['method'],
+            ],
+        ]);
+
+        if (!$this->QuizSubmissions->save($submission)) {
+            throw new \RuntimeException('Failed to save quiz submission');
+        }
+
+        return $submission;
+    }
+
+    /**
+     * Format product recommendations for JSON response
+     *
+     * @param array $products Raw product recommendations
+     * @return array Formatted recommendations
+     */
+    private function formatProductRecommendations(array $products): array
+    {
+        $formatted = [];
+
+        foreach ($products as $item) {
+            $product = $item['product'];
+            
+            $formatted[] = [
+                'id' => $product->id,
+                'title' => $product->title,
+                'manufacturer' => $product->manufacturer,
+                'price' => $product->price ? number_format($product->price, 2) : null,
+                'currency' => $product->currency ?? 'USD',
+                'image_url' => $product->image ?? null,
+                'rating' => $product->numeric_rating,
+                'certified' => (bool)$product->is_certified,
+                'confidence_score' => round($item['confidence_score'] * 100, 1),
+                'explanation' => $item['explanation'] ?? '',
+                'match_reasons' => $item['match_reasons'] ?? [],
+                'url' => $this->Url->build(['controller' => 'Products', 'action' => 'view', $product->id]),
+            ];
+        }
+
+        return $formatted;
+    }
+
+    /**
+     * Normalize database configuration
      *
      * @param array $dbConfig Database configuration
      * @return array Normalized configuration
