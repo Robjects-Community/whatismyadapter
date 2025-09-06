@@ -155,6 +155,22 @@
     </div>
     <?php endif; ?>
 
+    <?php if ($kind == 'page' && SettingsManager::read('SitePages.footerMenuShow') == 'selected') : ?>
+    <div class="form-check">
+        <?php echo $this->Form->checkbox('footer_menu', [
+            'class' => 'form-check-input' . ($this->Form->isFieldError('footer_menu') ? ' is-invalid' : '')
+        ]); ?>
+        <label class="form-check-label" for="footer_menu">
+            <?= __('Footer Menu') ?>
+        </label>
+        <?php if ($this->Form->isFieldError('footer_menu')): ?>
+            <div class="invalid-feedback">
+                <?= $this->Form->error('footer_menu') ?>
+            </div>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
+
 </div>
 <div class="mb-3">
     <?php $parentId = $this->request->getQuery('parent_id'); ?>

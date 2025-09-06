@@ -119,6 +119,17 @@ class FrontEndSiteComponent extends Component
             }
         }
         
+        // Get footer menu pages based on settings
+        $footerMenuPages = [];
+        switch(SettingsManager::read('SitePages.footerMenuShow', 'selected')) {
+            case "root":
+                $footerMenuPages = $articlesTable->getRootPages($cacheKey);
+                break;
+            case "selected":
+                $footerMenuPages = $articlesTable->getFooterMenuPages($cacheKey);
+                break;
+        }
+        
 
         //////////////////////////////////// SET  functions for the templates, accessible in the views without the need to pass them explicitly to the controller ////////////////////
         // Set the view variables for the front-end site
@@ -126,6 +137,7 @@ class FrontEndSiteComponent extends Component
         // and can be used to render the menu, tags, featured articles, and archives.
         $controller->set(compact(
             'menuPages',
+            'footerMenuPages',
             'rootTags',
             'featuredArticles',
             'articleArchives',

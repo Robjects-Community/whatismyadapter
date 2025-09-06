@@ -15,6 +15,7 @@ use Cake\ORM\Entity;
  * @property string|null $lede
  * @property bool|null $featured
  * @property bool|null $main_menu
+ * @property bool|null $footer_menu
  * @property string|null $body
  * @property string|null $markdown
  * @property string|null $summary
@@ -62,6 +63,7 @@ class Article extends Entity
         'lede' => true,
         'featured' => true,
         'main_menu' => true,
+        'footer_menu' => true,
         'slug' => true,
         'body' => true,
         'markdown' => true,
