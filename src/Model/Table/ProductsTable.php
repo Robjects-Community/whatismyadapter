@@ -310,7 +310,178 @@ class ProductsTable extends Table
     }
 
     /**
-     * Get products by port compatibility
+     * Find products for quiz-based matching
+     * 
+     * @param array $answers Quiz answers from user
+     * @param array $constraints Additional filtering constraints
+     * @return Query
+     */
+    public function findForQuiz(array $answers = [], array $constraints = []): Query
+    {
+        $query = $this->find()
+            ->where(['Products.is_published' => true])
+            ->contain(['Users', 'Tags', 'ProductsReliability'])
+            ->orderBy(['Products.reliability_score' => 'DESC', 'Products.numeric_rating' => 'DESC']);
+
+        // Apply basic filters based on quiz answers
+        if (!empty($answers['device_type'])) {
+            $deviceType = strtolower($answers['device_type']);
+            $query->where([
+                'OR' => [
+                    'Products.device_category LIKE' => "%{$deviceType}%",
+                    'Products.title LIKE' => "%{$deviceType}%",
+                    'Products.description LIKE' => "%{$deviceType}%"
+                ]
+            ]);
+        }
+
+        if (!empty($answers['manufacturer'])) {
+            $query->where(['Products.manufacturer LIKE' => '%' . $answers['manufacturer'] . '%']);
+        }
+
+        if (!empty($answers['port_type'])) {
+            $query->where(['Products.port_family LIKE' => '%' . $answers['port_type'] . '%']);
+        }
+
+        if (!empty($answers['budget_range'])) {
+            if (is_array($answers['budget_range'])) {
+                $min = $answers['budget_range']['min'] ?? null;
+                $max = $answers['budget_range']['max'] ?? null;
+                if ($min) $query->where(['Products.price >=' => $min]);
+                if ($max) $query->where(['Products.price <=' => $max]);
+            }
+        }
+
+        if (!empty($answers['certification_required']) && $answers['certification_required'] === 'yes') {
+            $query->where(['Products.is_certified' => true]);
+        }
+
+        // Apply additional constraints
+        if (!empty($constraints['limit'])) {
+            $query->limit($constraints['limit']);
+        }
+
+        if (!empty($constraints['featured_only'])) {
+            $query->where(['Products.featured' => true]);
+        }
+
+        return $query;
+    }
+
+    /**
+     * Score products with AI-assisted matching
+     * 
+     * @param array $products List of products to score
+     * @param array $answers User quiz answers
+     * @return array Product IDs mapped to confidence scores
+     */
+    public function scoreWithAi(array $products, array $answers): array
+    {
+        $scores = [];
+        
+        foreach ($products as $product) {
+            $score = $this->calculateProductScore($product, $answers);
+            $scores[$product->id] = $score;
+        }
+
+        // Sort by score (highest first)
+        arsort($scores);
+        
+        return $scores;
+    }
+
+    /**
+     * Calculate individual product score based on quiz answers
+     * 
+     * @param \App\Model\Entity\Product $product
+     * @param array $answers
+     * @return float Score between 0.0 and 1.0
+     */
+    private function calculateProductScore($product, array $answers): float
+    {
+        $score = 0.0;
+        $totalWeight = 0.0;
+
+        // Device type matching (weight: 30%)
+        if (!empty($answers['device_type'])) {
+            $weight = 0.3;
+            $totalWeight += $weight;
+            
+            $deviceType = strtolower($answers['device_type']);
+            $productFields = [
+                strtolower($product->device_category ?? ''),
+                strtolower($product->title ?? ''),
+                strtolower($product->description ?? '')
+            ];
+            
+            foreach ($productFields as $field) {
+                if (str_contains($field, $deviceType)) {
+                    $score += $weight;
+                    break;
+                }
+            }
+        }
+
+        // Manufacturer matching (weight: 20%)
+        if (!empty($answers['manufacturer'])) {
+            $weight = 0.2;
+            $totalWeight += $weight;
+            
+            $manufacturer = strtolower($answers['manufacturer']);
+            $productManufacturer = strtolower($product->manufacturer ?? '');
+            
+            if (str_contains($productManufacturer, $manufacturer)) {
+                $score += $weight;
+            }
+        }
+
+        // Port type matching (weight: 25%)
+        if (!empty($answers['port_type'])) {
+            $weight = 0.25;
+            $totalWeight += $weight;
+            
+            $portType = strtolower($answers['port_type']);
+            $productPort = strtolower($product->port_family ?? '');
+            
+            if (str_contains($productPort, $portType)) {
+                $score += $weight;
+            }
+        }
+
+        // Price matching (weight: 15%)
+        if (!empty($answers['budget_range']) && $product->price) {
+            $weight = 0.15;
+            $totalWeight += $weight;
+            
+            if (is_array($answers['budget_range'])) {
+                $min = $answers['budget_range']['min'] ?? 0;
+                $max = $answers['budget_range']['max'] ?? 9999;
+                
+                if ($product->price >= $min && $product->price <= $max) {
+                    $score += $weight;
+                }
+            }
+        }
+
+        // Certification bonus (weight: 10%)
+        if (!empty($answers['certification_required'])) {
+            $weight = 0.1;
+            $totalWeight += $weight;
+            
+            if ($answers['certification_required'] === 'yes' && $product->is_certified) {
+                $score += $weight;
+            } elseif ($answers['certification_required'] === 'no') {
+                // No penalty for not requiring certification
+                $score += $weight * 0.5;
+            }
+        }
+
+        // Normalize score
+        return $totalWeight > 0 ? $score / $totalWeight : 0.0;
+    }
+
+    /**
+     * Get products needing normalization (prototype cleanup)
      */
     public function getByPortCompatibility(string $portFamily, string $formFactor = null): Query
     {

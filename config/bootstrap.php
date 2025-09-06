@@ -85,7 +85,7 @@ try {
     Configure::config('default', new PhpConfig());
     Configure::load('app', 'default', false);
     Configure::load('security', 'default', false); // The 'false' makes it so it won't throw an error if the file doesn't exist, though you likely want it to exist.
-    Configure::load('quiz', 'default', true); // Load quiz configuration with fallback
+    Configure::load('app_quiz', 'default', true); // Load quiz configuration with fallback
 } catch (\Exception $e) {
     exit($e->getMessage() . "\n");
 }
