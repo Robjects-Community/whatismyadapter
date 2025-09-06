@@ -733,3 +733,12 @@ default_data/products.json
 default_data/slugs.json
 default_data/system_logs.json
 docker/willowcms/config/nginx/logs/access.log
+docker/willowcms/config
+docker/github/app_local.php
+config/Migrations/schema-dump-default.lock
+docker/willowcms/config/nginx/nginx-cms.conf
+docker/willowcms/config/nginx/nginx.conf
+docker/willowcms/config/nginx/logs/access.log
+docker-bake.hcl
+composer.lock
+config/Migrations/schema-dump-default.lock
