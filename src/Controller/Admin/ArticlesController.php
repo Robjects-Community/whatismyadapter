@@ -36,6 +36,7 @@ class ArticlesController extends AppController
     public function treeIndex(): ?Response
     {
         $statusFilter = $this->request->getQuery('status');
+        $menuFilter = $this->request->getQuery('menu');
         $conditions = [
             'Articles.kind' => 'page',
         ];
@@ -44,6 +45,19 @@ class ArticlesController extends AppController
             $conditions['Articles.is_published'] = '1';
         } elseif ($statusFilter === '0') {
             $conditions['Articles.is_published'] = '0';
+        }
+
+        // Apply menu filter
+        if ($menuFilter === 'header') {
+            $conditions['Articles.main_menu'] = 1;
+        } elseif ($menuFilter === 'footer') {
+            $conditions['Articles.footer_menu'] = 1;
+        } elseif ($menuFilter === 'both') {
+            $conditions['Articles.main_menu'] = 1;
+            $conditions['Articles.footer_menu'] = 1;
+        } elseif ($menuFilter === 'none') {
+            $conditions['Articles.main_menu'] = 0;
+            $conditions['Articles.footer_menu'] = 0;
         }
 
         if ($this->request->is('ajax')) {
@@ -63,6 +77,8 @@ class ArticlesController extends AppController
                 'created',
                 'modified',
                 'is_published',
+                'main_menu',
+                'footer_menu',
             ]);
 
             $this->set(compact('articles'));
@@ -77,6 +93,8 @@ class ArticlesController extends AppController
             'modified',
             'view_count',
             'is_published',
+            'main_menu',
+            'footer_menu',
         ]);
         $this->set(compact('articles'));
 

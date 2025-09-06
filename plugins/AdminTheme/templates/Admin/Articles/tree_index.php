@@ -1,5 +1,6 @@
 <?php
 $activeFilter = $this->request->getQuery('status');
+$menuFilter = $this->request->getQuery('menu');
 if ($activeFilter === null) {
     $this->Html->script('https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js', ['block' => true]);
     $this->Html->script('articles_tree', ['block' => true]);
@@ -41,6 +42,56 @@ if ($activeFilter === null) {
               </li>
             </ul>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"><?= __('Menu') ?></a>
+            <ul class="dropdown-menu">
+              <li>
+                <?= $this->Html->link(
+                    __('All'), 
+                    ['action' => 'treeIndex', 'id' => '', '?' => array_filter(['status' => $activeFilter])], 
+                    [
+                      'class' => 'dropdown-item' . ($menuFilter === null ? ' active' : '')
+                    ]
+                ) ?>
+              </li>
+              <li>
+                <?= $this->Html->link(
+                    __('Header Menu'), 
+                    ['action' => 'treeIndex', 'id' => '', '?' => array_filter(['status' => $activeFilter, 'menu' => 'header'])], 
+                    [
+                      'class' => 'dropdown-item' . ($menuFilter === 'header' ? ' active' : '')
+                    ]
+                ) ?>
+              </li>
+              <li>
+                <?= $this->Html->link(
+                    __('Footer Menu'), 
+                    ['action' => 'treeIndex', 'id' => '', '?' => array_filter(['status' => $activeFilter, 'menu' => 'footer'])], 
+                    [
+                      'class' => 'dropdown-item' . ($menuFilter === 'footer' ? ' active' : '')
+                    ]
+                ) ?>
+              </li>
+              <li>
+                <?= $this->Html->link(
+                    __('Both Menus'), 
+                    ['action' => 'treeIndex', 'id' => '', '?' => array_filter(['status' => $activeFilter, 'menu' => 'both'])], 
+                    [
+                      'class' => 'dropdown-item' . ($menuFilter === 'both' ? ' active' : '')
+                    ]
+                ) ?>
+              </li>
+              <li>
+                <?= $this->Html->link(
+                    __('No Menu'), 
+                    ['action' => 'treeIndex', 'id' => '', '?' => array_filter(['status' => $activeFilter, 'menu' => 'none'])], 
+                    [
+                      'class' => 'dropdown-item' . ($menuFilter === 'none' ? ' active' : '')
+                    ]
+                ) ?>
+              </li>
+            </ul>
+          </li>
         </ul>
         <form class="d-flex-grow-1 me-3" role="search">
           <input id="pageSearch" type="search" class="form-control" placeholder="<?= __('Search Pages...') ?>" aria-label="Search">
@@ -73,9 +124,16 @@ document.addEventListener('DOMContentLoaded', function() {
         debounceTimer = setTimeout(() => {
             const searchTerm = this.value.trim();
             let url = `<?= $this->Url->build(['action' => 'treeIndex']) ?>`;
+            let params = [];
             <?php if (null !== $activeFilter): ?>
-            url += `?status=<?= urlencode($activeFilter) ?>`;
+            params.push('status=<?= urlencode($activeFilter) ?>');
             <?php endif; ?>
+            <?php if (null !== $menuFilter): ?>
+            params.push('menu=<?= urlencode($menuFilter) ?>');
+            <?php endif; ?>
+            if (params.length > 0) {
+                url += '?' + params.join('&');
+            }
             if (searchTerm.length > 0) {
                 url += (url.includes('?') ? '&' : '?') + `search=${encodeURIComponent(searchTerm)}`;
                 fetch(url, {

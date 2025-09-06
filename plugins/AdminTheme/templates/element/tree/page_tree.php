@@ -23,6 +23,18 @@
                     <span class="badge me-3 <?= $article->is_published ? 'bg-success' : 'bg-secondary' ?>">
                         <?= $article->is_published ? 'Published' : 'Unpublished' ?>
                     </span>
+                    <?php
+                    // Display menu status badges
+                    if ($article->main_menu && $article->footer_menu) {
+                        echo '<span class="badge bg-primary me-2" title="Appears in both header and footer menus">Both Menus</span>';
+                    } elseif ($article->main_menu) {
+                        echo '<span class="badge bg-info me-2" title="Appears in header menu">Header Menu</span>';
+                    } elseif ($article->footer_menu) {
+                        echo '<span class="badge bg-warning me-2" title="Appears in footer menu">Footer Menu</span>';
+                    } else {
+                        echo '<span class="badge bg-light text-dark me-2" title="Not in any menu">No Menu</span>';
+                    }
+                    ?>
                     <?= $this->Html->link(
                         '<span class="badge bg-info me-3">' . __('{0} Views', $article->view_count) . '</span>',
                         [
