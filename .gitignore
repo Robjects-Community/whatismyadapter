@@ -744,3 +744,4 @@ composer.lock
 config/Migrations/schema-dump-default.lock
 config/Migrations/schema-dump-default.lock
 config/Migrations/schema-dump-test.lock
+docker/willowcms/config/nginx/logs/access.log
