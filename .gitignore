@@ -732,3 +732,4 @@ default_data/products_use_case_scenarios.json
 default_data/products.json
 default_data/slugs.json
 default_data/system_logs.json
+docker/willowcms/config/nginx/logs/access.log
