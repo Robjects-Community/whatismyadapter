@@ -140,35 +140,57 @@
     <?php endif; ?>
 
     <?php if ($kind == 'page' && SettingsManager::read('SitePages.mainMenuShow') == 'selected') : ?>
-    <div class="form-check">
-        <?php echo $this->Form->checkbox('main_menu', [
-            'class' => 'form-check-input' . ($this->Form->isFieldError('main_menu') ? ' is-invalid' : '')
-        ]); ?>
-        <label class="form-check-label" for="main_menu">
-            <?= __('Main Menu') ?>
-        </label>
-        <?php if ($this->Form->isFieldError('main_menu')): ?>
-            <div class="invalid-feedback">
-                <?= $this->Form->error('main_menu') ?>
-            </div>
-        <?php endif; ?>
-    </div>
+        <?php 
+        // Check if this is a child page and if it inherits from parent
+        $isChildPage = !empty($article->parent_id);
+        $inheritedFromParent = false;
+        if ($isChildPage && isset($parentInheritance)) {
+            $inheritedFromParent = $parentInheritance['main_menu'] ?? false;
+        }
+        ?>
+        <div class="form-check<?php if($inheritedFromParent): ?> inherited-setting<?php endif; ?>">
+            <?php echo $this->Form->checkbox('main_menu', [
+                'class' => 'form-check-input' . ($this->Form->isFieldError('main_menu') ? ' is-invalid' : '')
+            ]); ?>
+            <label class="form-check-label" for="main_menu">
+                <?= __('Main Menu') ?>
+                <?php if($inheritedFromParent): ?>
+                    <small class="text-muted d-block">⬆️ <?= __('Inherited from parent page') ?></small>
+                <?php endif; ?>
+            </label>
+            <?php if ($this->Form->isFieldError('main_menu')): ?>
+                <div class="invalid-feedback">
+                    <?= $this->Form->error('main_menu') ?>
+                </div>
+            <?php endif; ?>
+        </div>
     <?php endif; ?>
 
     <?php if ($kind == 'page' && SettingsManager::read('SitePages.footerMenuShow') == 'selected') : ?>
-    <div class="form-check">
-        <?php echo $this->Form->checkbox('footer_menu', [
-            'class' => 'form-check-input' . ($this->Form->isFieldError('footer_menu') ? ' is-invalid' : '')
-        ]); ?>
-        <label class="form-check-label" for="footer_menu">
-            <?= __('Footer Menu') ?>
-        </label>
-        <?php if ($this->Form->isFieldError('footer_menu')): ?>
-            <div class="invalid-feedback">
-                <?= $this->Form->error('footer_menu') ?>
-            </div>
-        <?php endif; ?>
-    </div>
+        <?php 
+        // Check if this is a child page and if it inherits from parent
+        $isChildPage = !empty($article->parent_id);
+        $inheritedFromParentFooter = false;
+        if ($isChildPage && isset($parentInheritance)) {
+            $inheritedFromParentFooter = $parentInheritance['footer_menu'] ?? false;
+        }
+        ?>
+        <div class="form-check<?php if($inheritedFromParentFooter): ?> inherited-setting<?php endif; ?>">
+            <?php echo $this->Form->checkbox('footer_menu', [
+                'class' => 'form-check-input' . ($this->Form->isFieldError('footer_menu') ? ' is-invalid' : '')
+            ]); ?>
+            <label class="form-check-label" for="footer_menu">
+                <?= __('Footer Menu') ?>
+                <?php if($inheritedFromParentFooter): ?>
+                    <small class="text-muted d-block">⬆️ <?= __('Inherited from parent page') ?></small>
+                <?php endif; ?>
+            </label>
+            <?php if ($this->Form->isFieldError('footer_menu')): ?>
+                <div class="invalid-feedback">
+                    <?= $this->Form->error('footer_menu') ?>
+                </div>
+            <?php endif; ?>
+        </div>
     <?php endif; ?>
 
 </div>

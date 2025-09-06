@@ -252,10 +252,26 @@ class ArticlesController extends AppController
                 ->all();
         }
 
+        // Get parent inheritance data for menu settings (in case parent_id is set in query params)
+        $parentInheritance = [];
+        $parentId = $this->request->getQuery('parent_id');
+        if (!empty($parentId)) {
+            try {
+                $parent = $this->Articles->get($parentId);
+                $parentInheritance = [
+                    'main_menu' => $parent->main_menu ?? false,
+                    'footer_menu' => $parent->footer_menu ?? false,
+                    'parent_title' => $parent->title ?? ''
+                ];
+            } catch (RecordNotFoundException $e) {
+                // Parent not found, continue without inheritance data
+            }
+        }
+
         $users = $this->Articles->Users->find('list', limit: 200)->all();
         $tags = $this->Articles->Tags->find('list', limit: 200)->all();
         $token = $this->request->getAttribute('csrfToken');
-        $this->set(compact('article', 'users', 'tags', 'token', 'parentArticles'));
+        $this->set(compact('article', 'users', 'tags', 'token', 'parentArticles', 'parentInheritance'));
 
         return null;
     }
@@ -321,9 +337,20 @@ class ArticlesController extends AppController
                 ->all();
         }
 
+        // Get parent inheritance data for menu settings
+        $parentInheritance = [];
+        if (!empty($article->parent_id)) {
+            $parent = $this->Articles->get($article->parent_id);
+            $parentInheritance = [
+                'main_menu' => $parent->main_menu ?? false,
+                'footer_menu' => $parent->footer_menu ?? false,
+                'parent_title' => $parent->title ?? ''
+            ];
+        }
+
         $users = $this->Articles->Users->find('list', limit: 200)->all();
         $tags = $this->Articles->Tags->find('list', limit: 200)->all();
-        $this->set(compact('article', 'users', 'tags', 'parentArticles'));
+        $this->set(compact('article', 'users', 'tags', 'parentArticles', 'parentInheritance'));
 
         return null;
     }

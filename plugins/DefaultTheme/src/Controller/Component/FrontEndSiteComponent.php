@@ -85,7 +85,7 @@ class FrontEndSiteComponent extends Component
                 $menuPages = $articlesTable->getRootPages($cacheKey);
                 break;
             case "selected":
-                $menuPages = $articlesTable->getMainMenuPages($cacheKey);
+                $menuPages = $articlesTable->getMainMenuPagesWithChildren($cacheKey);
                 break;
         }
 
@@ -126,7 +126,7 @@ class FrontEndSiteComponent extends Component
                 $footerMenuPages = $articlesTable->getRootPages($cacheKey);
                 break;
             case "selected":
-                $footerMenuPages = $articlesTable->getFooterMenuPages($cacheKey);
+                $footerMenuPages = $articlesTable->getFooterMenuPagesWithChildren($cacheKey);
                 break;
         }
         

@@ -321,6 +321,45 @@ textarea.form-control {
     border-radius: 6px;
 }
 
+/* Inherited settings styling */
+.form-check.inherited-setting {
+    background: linear-gradient(135deg, var(--admin-info-bg) 0%, rgba(var(--admin-info-bg), 0.3) 100%);
+    border-left: 4px solid var(--admin-primary-bg);
+    position: relative;
+}
+
+.form-check.inherited-setting::before {
+    content: '👨‍👩‍👧‍👦';
+    position: absolute;
+    left: -0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    opacity: 0.7;
+}
+
+.form-check.inherited-setting .form-check-label {
+    font-style: italic;
+    position: relative;
+}
+
+.form-check.inherited-setting .form-check-label small {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--admin-info-text) !important;
+    background: rgba(var(--admin-primary-bg), 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(var(--admin-primary-bg), 0.2);
+    margin-top: 0.25rem;
+    display: inline-block;
+}
+
+.form-check.inherited-setting:hover {
+    background: linear-gradient(135deg, var(--admin-info-bg) 0%, rgba(var(--admin-info-bg), 0.5) 100%);
+    border-left-color: var(--admin-primary-hover-bg);
+}
+
 /* Enhanced actions card styling */
 .page-actions-floating {
     position: sticky;
