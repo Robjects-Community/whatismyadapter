@@ -7,18 +7,19 @@
     "require": {
         "php": ">=8.1 <8.4",
         "ext-redis": "*",
+        "admad/cakephp-i18n": "^3.1",
         "cakephp/authentication": "^3.1",
         "cakephp/cakephp": "^5.0",
         "cakephp/migrations": "^4.4",
         "cakephp/plugin-installer": "^2.0",
         "cakephp/queue": "^2.1",
         "enqueue/redis": "^0.10.19",
-        "josegonzalez/cakephp-upload": "^8.0",
+        "josegonzalez/cakephp-upload": "^8.1",
+        "josegonzalez/dotenv": "^4.0",
         "mobiledetect/mobiledetectlib": "^4.8.03",
         "mozex/anthropic-php": "^1.0",
         "predis/predis": "^1",
-        "symfony/http-client": "^5.4 || ^6.0 || ^7.0",
-        "josegonzalez/dotenv": "^4.0"
+        "symfony/http-client": "^5.4 || ^6.0 || ^7.0"
     },
     "require-dev": {
         "cakephp/bake": "^3.0.0",

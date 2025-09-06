@@ -1,13 +1,11 @@
 services:
   willowcms:
-    env_file:
-      - ./config/.env
-    image: docker.io/garzarobmdocker/willowcms:latest
+    image: ghcr.io/robjects-community/willow-willowcms:latest
     build:
       context: .
       dockerfile: docker/willowcms/Dockerfile
       args:
-        UID: ${UID:-1000} # Test
+        UID: ${UID:-1000}
         GID: ${GID:-1000}
     ports:
       - '8080:80'
@@ -55,26 +53,26 @@ services:
       - WILLOW_ADMIN_PASSWORD=${WILLOW_ADMIN_PASSWORD}
       - WILLOW_ADMIN_EMAIL=${WILLOW_ADMIN_EMAIL}
       - EXPERIMENTAL_TESTS=${EXPERIMENTAL_TESTS}
-
-  mysql:
     env_file:
       - ./config/.env
+
+  mysql:
     image: mysql:8.4.3
-    platform: linux/amd64
+    ports:
+      - '3310:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_DATABASE=${DB_DATABASE}
-    ports:
-      - "3310:3306"
-    volumes:
-      - ./docker/mysql/data:/var/lib/mysql
-      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
-
-  phpmyadmin:
     env_file:
       - ./config/.env
+    platform: linux/amd64
+
+  phpmyadmin:
     image: phpmyadmin
     ports:
       - '8082:80'
@@ -83,14 +81,14 @@ services:
       - PMA_USER=${PMA_USER}
       - PMA_PASSWORD=${PMA_PASSWORD}
       - UPLOAD_LIMIT=${UPLOAD_LIMIT}
+    env_file:
+      - ./config/.env
 
   jenkins:
     image: docker.io/garzarobmdocker/jenkins:latest
     build:
       context: .
       dockerfile: docker/jenkins/Dockerfile
-    privileged: true
-    user: root
     ports:
       - '8081:8080'
       - '50000:50000'
@@ -100,7 +98,8 @@ services:
       - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
     environment:
       - JAVA_OPTS=${JAVA_OPTS}
-
+    privileged: true
+    user: root
 
   mailpit:
     image: axllent/mailpit:latest
@@ -109,16 +108,18 @@ services:
       - '8025:8025'
     volumes:
       - mailpit_data:/data
-    env_file:
-      - ./config/.env
     environment:
       - MP_MAX_MESSAGES=${MP_MAX_MESSAGES}
       - MP_DATABASE=${MP_DATABASE}
       - MP_SMTP_AUTH_ACCEPT_ANY=${MP_SMTP_AUTH_ACCEPT_ANY}
       - MP_SMTP_AUTH_ALLOW_INSECURE=${MP_SMTP_AUTH_ALLOW_INSECURE}
+    env_file:
+      - ./config/.env
 
   redis-commander:
     image: rediscommander/redis-commander:latest
+    depends_on:
+      - willowcms
     ports:
       - '8084:8081'
     environment:
@@ -128,12 +129,10 @@ services:
       - REDIS_USERNAME=${REDIS_COMMANDER_USERNAME}
       - HTTP_USER=${HTTP_USER}
       - HTTP_PASSWORD=${HTTP_PASSWORD}
-    depends_on:
-      - willowcms
 
 volumes:
-  # mysql_data:
-  redis_data:
-  rabbitmq_data:
-  jenkins_home:
-  mailpit_data:
+  mysql_data: null
+  redis_data: null
+  rabbitmq_data: null
+  jenkins_home: null
+  mailpit_data: null

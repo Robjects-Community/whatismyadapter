@@ -4,8 +4,66 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7957e2411cf5c4da050dfdce110923c2",
+    "content-hash": "2e82ab1c33dce33ce1892e03bab352bd",
     "packages": [
+        {
+            "name": "admad/cakephp-i18n",
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ADmad/cakephp-i18n.git",
+                "reference": "e74dd8d8eeb6cd96e350cdc49384b7bfe7330cd9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ADmad/cakephp-i18n/zipball/e74dd8d8eeb6cd96e350cdc49384b7bfe7330cd9",
+                "reference": "e74dd8d8eeb6cd96e350cdc49384b7bfe7330cd9",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.1 || ^11.0"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "ADmad\\I18n\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ADmad",
+                    "homepage": "https://github.com/ADmad",
+                    "role": "Author"
+                }
+            ],
+            "description": "A CakePHP plugin for I18n related tools.",
+            "homepage": "https://github.com/ADmad/cakephp-i18n",
+            "keywords": [
+                "cakephp",
+                "i18n",
+                "messages",
+                "routing",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/ADmad/cakephp-i18n/issues",
+                "source": "https://github.com/ADmad/cakephp-i18n"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ADmad",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-12-07T19:23:33+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.13.1",
