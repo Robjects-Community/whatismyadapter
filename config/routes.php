@@ -438,6 +438,30 @@ return function (RouteBuilder $routes): void {
                 '_name' => 'cookie-consent',
             ]
         );
+        
+        // Test routes for admin login debugging
+        $builder->connect(
+            '/admin-test',
+            [
+                'controller' => 'LoginTest',
+                'action' => 'index'
+            ],
+            [
+                'routeClass' => 'ADmad/I18n.I18nRoute',
+                '_name' => 'admin-test',
+            ]
+        );
+        $builder->connect(
+            '/admin-test/login',
+            [
+                'controller' => 'LoginTest',
+                'action' => 'login'
+            ],
+            [
+                'routeClass' => 'ADmad/I18n.I18nRoute',
+                '_name' => 'admin-test-login',
+            ]
+        );
     });
 
     // API routes

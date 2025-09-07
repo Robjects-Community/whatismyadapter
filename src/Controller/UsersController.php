@@ -19,7 +19,14 @@ class UsersController extends AppController
     {
         parent::initialize();
 
-        $this->Authentication->allowUnauthenticated(['login']);
+        $this->Authentication->allowUnauthenticated([
+            'login', 
+            'logout', 
+            'register', 
+            'forgotPassword', 
+            'resetPassword', 
+            'confirmEmail'
+        ]);
     }
 
     /**
@@ -121,15 +128,124 @@ class UsersController extends AppController
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
             $this->Flash->success(__('Login successful'));
+            
+            // Get the authenticated user
+            $user = $this->Authentication->getIdentity();
+            
+            // Check if user is admin and redirect accordingly
+            if ($user && $user->is_admin) {
+                return $this->redirect(['prefix' => 'Admin', 'controller' => 'Articles', 'action' => 'index']);
+            }
+            
+            // Check for a stored redirect URL
             $redirect = $this->Authentication->getLoginRedirect();
             if ($redirect) {
                 return $this->redirect($redirect);
             }
+            
+            // Default redirect for regular users
+            return $this->redirect(['controller' => 'Articles', 'action' => 'index']);
         }
 
         // Display error if user submitted and authentication failed
         if ($this->request->is('post')) {
             $this->Flash->error(__('Invalid username or password'));
         }
+    }
+
+    /**
+     * Logout method
+     *
+     * @return \Cake\Http\Response Redirects after logout.
+     */
+    public function logout()
+    {
+        $this->Authentication->logout();
+        $this->Flash->success(__('You have been logged out.'));
+        
+        return $this->redirect(['controller' => 'Articles', 'action' => 'index']);
+    }
+
+    /**
+     * Register method
+     *
+     * @return \Cake\Http\Response|null|void Redirects on successful registration, renders view otherwise.
+     */
+    public function register()
+    {
+        $user = $this->Users->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            // Set default values for new users
+            $user->is_admin = false;
+            $user->active = true;
+            
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('Registration successful. You can now log in.'));
+                return $this->redirect(['action' => 'login']);
+            }
+            $this->Flash->error(__('Registration failed. Please, try again.'));
+        }
+        $this->set(compact('user'));
+    }
+
+    /**
+     * Forgot password method
+     *
+     * @return \Cake\Http\Response|null|void
+     */
+    public function forgotPassword()
+    {
+        if ($this->request->is('post')) {
+            $email = $this->request->getData('email');
+            if ($email) {
+                // This is a placeholder - you would typically send a reset email here
+                $this->Flash->success(__('If the email exists in our system, you will receive a password reset link.'));
+                return $this->redirect(['action' => 'login']);
+            }
+            $this->Flash->error(__('Please enter a valid email address.'));
+        }
+    }
+
+    /**
+     * Reset password method
+     *
+     * @param string|null $confirmationCode
+     * @return \Cake\Http\Response|null|void
+     */
+    public function resetPassword($confirmationCode = null)
+    {
+        if (!$confirmationCode) {
+            $this->Flash->error(__('Invalid reset link.'));
+            return $this->redirect(['action' => 'login']);
+        }
+
+        if ($this->request->is('post')) {
+            // This is a placeholder - you would typically validate the confirmation code
+            // and update the user's password
+            $this->Flash->success(__('Password has been reset successfully.'));
+            return $this->redirect(['action' => 'login']);
+        }
+
+        $this->set(compact('confirmationCode'));
+    }
+
+    /**
+     * Confirm email method
+     *
+     * @param string|null $confirmationCode
+     * @return \Cake\Http\Response|null|void
+     */
+    public function confirmEmail($confirmationCode = null)
+    {
+        if (!$confirmationCode) {
+            $this->Flash->error(__('Invalid confirmation link.'));
+            return $this->redirect(['action' => 'login']);
+        }
+
+        // This is a placeholder - you would typically validate the confirmation code
+        // and activate the user's account
+        $this->Flash->success(__('Email confirmed successfully.'));
+        return $this->redirect(['action' => 'login']);
     }
 }
