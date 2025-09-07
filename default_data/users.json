@@ -15,6 +15,21 @@
         "active": true
     },
     {
+        "id": "9ff47443-20b2-407b-b0f3-3bbfe4b3ca66",
+        "is_admin": true,
+        "email": "admin3@test.com",
+        "password": "$2y$10$NnM/hGop8YJMhVqmlEDiuOTWamKxxvxaMpdoyCVEDg6DNJw4NxVve",
+        "image": null,
+        "alt_text": null,
+        "keywords": null,
+        "name": null,
+        "dir": null,
+        "size": null,
+        "mime": null,
+        "username": "admin3",
+        "active": true
+    },
+    {
         "id": "c6727550-e9eb-42ee-93e6-d7716f905b03",
         "is_admin": true,
         "email": "admin2@test.com",

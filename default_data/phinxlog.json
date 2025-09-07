@@ -180,5 +180,12 @@
         "start_time": "2025-09-06T16:03:54+01:00",
         "end_time": "2025-09-06T16:03:54+01:00",
         "breakpoint": false
+    },
+    {
+        "version": 20250906190517,
+        "migration_name": "CreateQuizSubmissions",
+        "start_time": "2025-09-06T20:05:55+01:00",
+        "end_time": "2025-09-06T20:05:55+01:00",
+        "breakpoint": false
     }
 ]
