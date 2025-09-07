@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: willowcms-web
+  namespace: willowcms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: willowcms-web
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: willowcms-web
+    spec:
+      securityContext:
+        fsGroup: 0
+        runAsUser: 0
+      containers:
+        - name: willowcms
+          image: registry.digitalocean.com/whatismyadapter/willowcms:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: willowcms-config
+            - secretRef:
+                name: willowcms-secrets
+          env:
+            # Explicitly ensure Redis/Cake expected vars exist
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: willowcms-config
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: willowcms-config
+                  key: REDIS_PORT
+            - name: REDIS_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: willowcms-config
+                  key: REDIS_DATABASE
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: willowcms-secrets
+                  key: REDIS_URL
+            - name: QUEUE_DEFAULT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: willowcms-secrets
+                  key: QUEUE_DEFAULT_URL
+            - name: QUEUE_TEST_URL
+              valueFrom:
+                secretKeyRef:
+                  name: willowcms-secrets
+                  key: QUEUE_TEST_URL
+          volumeMounts:
+            - name: uploads
+              mountPath: /var/www/html/webroot/files
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 45
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: willowcms-files-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: willowcms-web
+  namespace: willowcms
+spec:
+  type: LoadBalancer
+  selector:
+    app: willowcms-web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
