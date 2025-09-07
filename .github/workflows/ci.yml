@@ -22,7 +22,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
         with:
           driver: cloud
-          endpoint: "garzarobmdocker/cloud-builder"
+          endpoint: "garzarobmdocker/cloud-builder_linux-amd64"
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
