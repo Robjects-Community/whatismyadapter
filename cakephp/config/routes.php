@@ -836,6 +836,39 @@ return function (RouteBuilder $routes): void {
             'pass' => ['model', 'id']
         ]);
         
+        // Deployment routes
+        $routes->connect('/deployment/choose-path', [
+            'controller' => 'Deployment',
+            'action' => 'choosePath'
+        ], [
+            'routeClass' => 'ADmad/I18n.I18nRoute',
+            '_name' => 'admin.deployment.choose-path'
+        ]);
+        
+        $routes->connect('/deployment/link-existing', [
+            'controller' => 'Deployment',
+            'action' => 'linkExisting'
+        ], [
+            'routeClass' => 'ADmad/I18n.I18nRoute',
+            '_name' => 'admin.deployment.link-existing'
+        ]);
+        
+        $routes->connect('/deployment/create-new', [
+            'controller' => 'Deployment',
+            'action' => 'createNew'
+        ], [
+            'routeClass' => 'ADmad/I18n.I18nRoute',
+            '_name' => 'admin.deployment.create-new'
+        ]);
+        
+        $routes->connect('/deployment/verify-connection', [
+            'controller' => 'Deployment',
+            'action' => 'verifyConnection'
+        ], [
+            'routeClass' => 'ADmad/I18n.I18nRoute',
+            '_name' => 'admin.deployment.verify-connection'
+        ]);
+
         // Admin Pages routes
         $routes->connect('/pages', [
             'controller' => 'Pages',
