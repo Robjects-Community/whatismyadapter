@@ -54,6 +54,7 @@ services:
       - WILLOW_ADMIN_EMAIL=admin@test.com
       - APP_FULL_BASE_URL=http://localhost:8080
       - OPENAI_API_KEY=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
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       #       # - APP_NAME=${APP_NAME}
       # - DEBUG=${DEBUG}
       # - APP_ENCODING=${APP_ENCODING}

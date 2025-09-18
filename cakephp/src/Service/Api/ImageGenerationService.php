@@ -64,7 +64,8 @@ class ImageGenerationService extends AbstractApiService
         // Initialize based on provider
         switch ($this->provider) {
             case self::PROVIDER_OPENAI:
-                $apiKey = SettingsManager::read('AI.imageGeneration.openaiApiKey', '');
+                // Priority order: environment variable, then database setting, then empty
+                $apiKey = env('OPENAI_API_KEY') ?: SettingsManager::read('AI.imageGeneration.openaiApiKey', '');
                 parent::__construct(new Client(), $apiKey, self::OPENAI_API_URL, '');
                 break;
             case self::PROVIDER_ANTHROPIC:

@@ -20,6 +20,7 @@ services:
       - DB_HOST=mysql
       - TEST_DB_HOST=mysql
       - REDIS_HOST=willowcms
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
 
 
   mysql:
@@ -131,6 +132,7 @@ services:
       - REDIS_HOST=willowcms
       # Queue config key to use from database
       - QUEUE_CONFIG_KEY=${QUEUE_CONFIG_KEY:-image_analysis}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     command: >
       sh -c "WAIT_CMD=\$$(php bin/get_queue_config.php \$${QUEUE_CONFIG_KEY} wait_command) &&
              READY_MSG=\$$(php bin/get_queue_config.php \$${QUEUE_CONFIG_KEY} ready_message) &&
