@@ -8,10 +8,15 @@ RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/80-retries && \
     echo 'Acquire::http::Timeout "60";' >> /etc/apt/apt.conf.d/80-retries && \
     echo 'Acquire::https::Timeout "60";' >> /etc/apt/apt.conf.d/80-retries
 
-# Update sources.list to use more reliable repository mirrors
-RUN cp /etc/apt/sources.list /etc/apt/sources.list.backup && \
-    sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
-    sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list
+# Setup apt sources with reliable mirrors (create if doesn't exist)
+RUN if [ -f /etc/apt/sources.list ]; then \
+        cp /etc/apt/sources.list /etc/apt/sources.list.backup && \
+        sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+        sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list; \
+    else \
+        echo "deb http://archive.debian.org/debian bookworm main" > /etc/apt/sources.list && \
+        echo "deb http://archive.debian.org/debian bookworm-updates main" >> /etc/apt/sources.list; \
+    fi
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y lsb-release curl software-properties-common wget
