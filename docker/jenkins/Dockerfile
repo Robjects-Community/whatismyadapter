@@ -3,6 +3,15 @@ FROM jenkins/jenkins:lts
 # Switch to root user to install additional packages
 USER root
 
+# Configure reliable DNS servers
+RUN echo 'nameserver 8.8.8.8' > /etc/resolv.conf && \
+    echo 'nameserver 8.8.4.4' >> /etc/resolv.conf && \
+    echo 'nameserver 1.1.1.1' >> /etc/resolv.conf
+
+# Update package sources to use reliable mirrors
+RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list
+
 # Install necessary packages
 RUN apt-get update && apt-get install -y lsb-release curl software-properties-common wget
 
@@ -25,14 +34,21 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Add Docker apt repository
-RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
-    https://download.docker.com/linux/debian/gpg
+# Add Docker apt repository with retry logic
+RUN for i in 1 2 3; do \
+        curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
+        https://download.docker.com/linux/debian/gpg && break || sleep 5; \
+    done
+
 RUN echo "deb [arch=$(dpkg --print-architecture) \
     signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
     https://download.docker.com/linux/debian \
     $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-RUN apt-get update && apt-get install -y docker-ce-cli
+    
+# Update package list and install Docker CLI with retry
+RUN for i in 1 2 3; do \
+        apt-get update && apt-get install -y docker-ce-cli && break || sleep 10; \
+    done
 
 # Switch back to jenkins user
 USER jenkins
