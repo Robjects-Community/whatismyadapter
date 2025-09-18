@@ -39,6 +39,11 @@ services:
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     env_file:
       - ./cakephp/config/.env
+    networks:
+      default:
+        aliases:
+          - mysql-db
+          - willow-db
 
   phpmyadmin:
     image: phpmyadmin:${PHPMYADMIN_IMAGE_TAG:-latest}
