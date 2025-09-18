@@ -3,13 +3,14 @@ FROM jenkins/jenkins:lts
 # Switch to root user to install additional packages
 USER root
 
-# Configure reliable DNS servers
-RUN echo 'nameserver 8.8.8.8' > /etc/resolv.conf && \
-    echo 'nameserver 8.8.4.4' >> /etc/resolv.conf && \
-    echo 'nameserver 1.1.1.1' >> /etc/resolv.conf
+# Configure apt to use reliable mirrors and handle network issues
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/80-retries && \
+    echo 'Acquire::http::Timeout "60";' >> /etc/apt/apt.conf.d/80-retries && \
+    echo 'Acquire::https::Timeout "60";' >> /etc/apt/apt.conf.d/80-retries
 
-# Update package sources to use reliable mirrors
-RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+# Update sources.list to use more reliable repository mirrors
+RUN cp /etc/apt/sources.list /etc/apt/sources.list.backup && \
+    sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
     sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list
 
 # Install necessary packages

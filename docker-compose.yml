@@ -65,6 +65,11 @@ services:
       - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
     environment:
       - JAVA_OPTS=${JAVA_OPTS:--Djenkins.install.runSetupWizard=false}
+    # Configure DNS for better network resolution
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+      - 1.1.1.1
 
   mailpit:
     image: axllent/mailpit:${MAILPIT_IMAGE_TAG:-latest}
