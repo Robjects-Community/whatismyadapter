@@ -900,3 +900,5 @@ docker/mailpit/data/mailpit.db-wal
 docker/mailpit/data/mailpit.db-shm
 docker/mailpit/data/mailpit.db-wal
 scp_to_remote.sh
+helper-files(use-only-if-you-get-lost)/scripts/scp_to_remote_simple.sh
+helper-files(use-only-if-you-get-lost)/scripts/scp_to_remote_backup.sh
