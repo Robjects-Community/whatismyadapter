@@ -143,12 +143,30 @@ class PagesController extends AppController
      */
     public function add(): ?Response
     {
+        // Check for page type from query parameters
+        $pageType = $this->request->getQuery('page_type', 'standard');
+        
+        // Redirect to choose type if no page type specified and not a POST request
+        if (!$this->request->is('post') && !$this->request->getQuery('page_type')) {
+            return $this->redirect(['action' => 'chooseType']);
+        }
+        
         $page = $this->Articles->newEmptyEntity();
+        
+        // Set default values based on page type
+        if (!$this->request->is('post')) {
+            $page->page_type = $pageType;
+            if ($pageType === 'link') {
+                $page->deployment_type = 'external_link';
+            }
+        }
         
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             $data['kind'] = 'page'; // Ensure this is a page
             $data['user_id'] = $this->request->getAttribute('identity')->id;
+            
+            // Asset files will be handled by AssetUploadBehavior automatically
             
             $page = $this->Articles->patchEntity($page, $data);
             
@@ -167,7 +185,7 @@ class PagesController extends AppController
             ->where(['kind' => 'page'])
             ->toArray();
 
-        $this->set(compact('page', 'existingSlugs'));
+        $this->set(compact('page', 'existingSlugs', 'pageType'));
 
         return null;
     }
@@ -295,6 +313,37 @@ class PagesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Choose page type - Selection interface for page creation
+     *
+     * Renders a selection interface allowing users to choose between:
+     * - Standard pages (CakePHP-controlled with file uploads)
+     * - Linked pages (external URL with optional static content)
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function chooseType(): ?Response
+    {
+        $this->request->allowMethod(['get']);
+        
+        // Check if this is an AJAX/modal request
+        $isModal = $this->request->is('ajax') || $this->request->getQuery('modal') == '1';
+        
+        if ($isModal) {
+            // For AJAX/modal requests, use a layout that doesn't include full page structure
+            $this->viewBuilder()->setLayout('ajax');
+        }
+        
+        // Set view variables for the template
+        $this->set([
+            'pageTitle' => __('Choose New Page Type'),
+            'isModal' => $isModal,
+            'backUrl' => $this->referer(['action' => 'index'])
+        ]);
+        
+        return null; // Allow CakePHP to render the template
     }
 
     /**
@@ -641,4 +690,5 @@ class PagesController extends AppController
 
         $this->set(compact('platforms', 'aiCosts', 'insights', 'timeline'));
     }
+
 }

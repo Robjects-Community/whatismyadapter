@@ -853,6 +853,14 @@ return function (RouteBuilder $routes): void {
             '_name' => 'admin.pages.cost-analysis'
         ]);
         
+        $routes->connect('/pages/choose-type', [
+            'controller' => 'Pages',
+            'action' => 'chooseType'
+        ], [
+            'routeClass' => 'ADmad/I18n.I18nRoute',
+            '_name' => 'admin.pages.choose-type'
+        ]);
+        
         $routes->connect('/pages/add', [
             'controller' => 'Pages',
             'action' => 'add'

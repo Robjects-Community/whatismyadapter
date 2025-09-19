@@ -82,6 +82,15 @@ class ArticlesTable extends Table
             'field' => 'image',
         ]);
 
+        // Add asset upload behavior for page assets
+        $this->addBehavior('AssetUpload', [
+            'base_path' => 'files/assets/',
+            'allowed_types' => ['js', 'css', 'html', 'htm'],
+            'max_file_size' => 5242880, // 5MB
+            'create_directory' => true,
+            'queue_processing' => true,
+        ]);
+
         $this->addBehavior('Translate', [
             'fields' => [
                 'title',
@@ -150,9 +159,70 @@ class ArticlesTable extends Table
             ->scalar('body')
             ->allowEmptyString('body');
 
+        // Page type validation
+        $validator
+            ->scalar('page_type')
+            ->inList('page_type', ['standard', 'link'], __('Page type must be either standard or link'))
+            ->allowEmptyString('page_type'); // Allow empty as it defaults to 'standard'
+
+        // External URL validation (required for linked pages)
+        $validator
+            ->scalar('external_url')
+            ->maxLength('external_url', 2048)
+            ->url('external_url', __('Please provide a valid URL'))
+            ->allowEmptyString('external_url');
+
+        // Static content validation
+        $validator
+            ->scalar('static_content')
+            ->allowEmptyString('static_content');
+
+        // Assets JSON validation
+        $validator
+            ->allowEmptyString('assets_json');
+
+        // Asset directory validation
+        $validator
+            ->scalar('asset_dir')
+            ->maxLength('asset_dir', 255)
+            ->allowEmptyString('asset_dir');
+
         $this->addOptionalImageValidation($validator, 'image');
 
+        // Add conditional validation for linked pages
+        $validator->add('external_url', 'requiredForLinked', [
+            'rule' => [$this, 'validateLinkedPageUrl'],
+            'message' => __('External URL is required for linked pages.')
+        ]);
+
+        // Asset files validation (for file uploads)
+        $validator
+            ->allowEmptyArray('asset_files');
+        
+        // Has assets validation
+        $validator
+            ->boolean('has_assets')
+            ->allowEmptyString('has_assets');
+
         return $validator;
+    }
+
+    /**
+     * Custom validation rule for external URL on linked pages
+     *
+     * @param mixed $value The value to validate
+     * @param array $context The validation context
+     * @return bool
+     */
+    public function validateLinkedPageUrl($value, array $context): bool
+    {
+        // If page_type is 'link', external_url must be provided
+        if (isset($context['data']['page_type']) && $context['data']['page_type'] === 'link') {
+            return !empty($value) && filter_var($value, FILTER_VALIDATE_URL) !== false;
+        }
+        
+        // For standard pages, external_url is optional
+        return true;
     }
 
     /**

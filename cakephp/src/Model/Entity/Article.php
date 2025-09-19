@@ -37,6 +37,11 @@ use Cake\ORM\Entity;
  * @property bool $published
  * @property bool $is_published
  * @property string|null $image
+ * @property string $page_type
+ * @property string|null $external_url
+ * @property string|null $static_content
+ * @property array|null $assets_json
+ * @property string|null $asset_dir
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Tag[] $tags
@@ -89,5 +94,11 @@ class Article extends Entity
         'linkedin_description' => true,
         'twitter_description' => true,
         'instagram_description' => true,
+        // Page type fields
+        'page_type' => true,
+        'external_url' => true,
+        'static_content' => true,
+        'assets_json' => true,
+        'asset_dir' => true,
     ];
 }
