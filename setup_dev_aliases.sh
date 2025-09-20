@@ -27,11 +27,11 @@ if [ "$QUIET_MODE" = false ]; then
 fi
 
 # Define the absolute path to dev_aliases.txt
-# This assumes setup_dev_aliases.sh is in the same directory as dev_aliases.txt
+# dev_aliases.txt is now located in the tools directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-ALIASES_FILE="$SCRIPT_DIR/dev_aliases.txt" # Absolute path to dev_aliases.txt
+ALIASES_FILE="$SCRIPT_DIR/tools/dev_aliases.txt" # Absolute path to dev_aliases.txt
 
-# Ensure dev_aliases.txt itself is clean (optional check, good practice)
+# Ensure tools/dev_aliases.txt itself is clean (optional check, good practice)
 if [ -f "$ALIASES_FILE" ]; then
     # Basic check for DOS line endings (not foolproof but a common issue)
     if grep -q $'\r' "$ALIASES_FILE"; then
@@ -50,7 +50,7 @@ if [ -f "$ALIASES_FILE" ]; then
     fi
 else
     if [ "$QUIET_MODE" = false ]; then
-        echo "ERROR: dev_aliases.txt not found at $ALIASES_FILE"
+        echo "ERROR: tools/dev_aliases.txt not found at $ALIASES_FILE"
     fi
     exit 1
 fi

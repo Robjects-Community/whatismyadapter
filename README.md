@@ -618,7 +618,7 @@ All root directory files are now fully documented in [📁 Root Directory Files 
 ./refactor_helper_files.sh
 
 # Load development shortcuts
-source dev_aliases.txt
+source tools/dev_aliases.txt
 ```
 
 ### **🛠️ Development Commands (After Reorganization)**
@@ -649,7 +649,7 @@ make help               # Show all available commands
 ### **🧰 Legacy Development Commands (Current Structure)**
 ```bash
 # Load development shortcuts first
-source dev_aliases.txt
+source tools/dev_aliases.txt
 
 # Container management
 docker_up               # Start all containers
@@ -775,6 +775,29 @@ docker system prune -f
 # Monitor resource usage
 docker stats
 ```
+
+---
+
+## 📚 Complete Documentation
+
+### **📋 Master Documentation Index**
+**⭐ [Full Documentation Index](docs/INDEX.md)** - Complete navigation for all project documentation
+
+### **🎯 Essential Documentation**
+- **🚀 [Developer Guide](docs/development/DEVELOPER_GUIDE.md)** - Comprehensive development setup and workflows
+- **🔥 [Refactoring Plan](docs/refactoring/REFACTORING_PLAN.md)** - Active refactoring roadmap (35% complete)
+- **✅ [Feature Status](docs/implementation/FEATURE_IMPLEMENTATION_STATUS.md)** - All admin interface features (100% complete)
+- **🔐 [Security Summary](docs/project-management/COMPLETE_REORGANIZATION_SUMMARY.md)** - Security implementation overview
+
+### **📚 Documentation Categories**
+- **📋 Project Management**: [Strategy](docs/project-management/MANAGEMENT_STRATEGY.md), [Organization Plan](docs/project-management/REPOSITORY_ORGANIZATION_PLAN.md), [Archiving Guide](docs/project-management/README_ARCHIVING.md)
+- **🔧 Implementation**: [Checklist](docs/implementation/IMPLEMENTATION_CHECKLIST.md), [Test Results](docs/implementation/TEST_EXECUTION_SUMMARY.md)
+- **🛠️ Development**: [Docker Environment](docs/development/DOCKER_ENVIRONMENT.md), [Troubleshooting](docs/development/TROUBLESHOOTING.md), [Procedures](docs/development/)
+- **🏗️ Architecture**: [Directory Structure](docs/architecture/DIRECTORY_STRUCTURE.md), [Legacy Planning](docs/architecture/LEGACY_REFACTORING_PLAN.md)
+
+### **📁 Project Organization**
+- **Tools**: [Development aliases](tools/dev_aliases.txt), [Warp configuration](tools/Warp.md), [Workspace settings](tools/willow.code-workspace)
+- **Archive**: [Historical documentation](docs/archive/), [AI implementation tracking](docs/archive/AI_METRICS_SUMMARY.md)
 
 ---
 
