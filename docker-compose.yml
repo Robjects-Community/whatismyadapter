@@ -26,6 +26,7 @@ services:
   mysql:
     image: mysql:${MYSQL_IMAGE_TAG:-8.4.3}
     platform: linux/amd64
+    # command: --mysql-native-password=ON --authentication-policy=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -93,61 +94,61 @@ services:
     depends_on:
       - willowcms
 
-  rabbitmq:
-    image: rabbitmq:${RABBITMQ_IMAGE_TAG:-3.13-management}
-    platform: linux/amd64
-    ports:
-      - "${RABBITMQ_PORT:-5672}:5672"       # AMQP port
-      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"  # Management UI
-    environment:
-      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER:-guest}
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD:-guest}
-      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_VHOST:-/}
-    healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_port_connectivity"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
-    restart: unless-stopped
+  # rabbitmq:
+  #   image: rabbitmq:${RABBITMQ_IMAGE_TAG:-3.13-management}
+  #   platform: linux/amd64
+  #   ports:
+  #     - "${RABBITMQ_PORT:-5672}:5672"       # AMQP port
+  #     - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"  # Management UI
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER:-guest}
+  #     - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD:-guest}
+  #     - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_VHOST:-/}
+  #   healthcheck:
+  #     test: ["CMD", "rabbitmq-diagnostics", "-q", "check_port_connectivity"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #     start_period: 30s
+  #   volumes:
+  #     - rabbitmq_data:/var/lib/rabbitmq
+  #   restart: unless-stopped
 
-  image-analysis-worker:
-    build:
-      context: .
-      dockerfile: docker/willowcms/Dockerfile
-      args:
-        - UID=${DOCKER_UID:-1000}
-        - GID=${DOCKER_GID:-1000}
-    volumes:
-      - ./cakephp:/var/www/html/
-      - ./docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
-    env_file:
-      - ./cakephp/config/.env
-    environment:
-      # Override specific Docker networking settings
-      - DB_HOST=mysql
-      - TEST_DB_HOST=mysql
-      - REDIS_HOST=willowcms
-      # Queue config key to use from database
-      - QUEUE_CONFIG_KEY=${QUEUE_CONFIG_KEY:-image_analysis}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-    command: >
-      sh -c "WAIT_CMD=\$$(php bin/get_queue_config.php \$${QUEUE_CONFIG_KEY} wait_command) &&
-             READY_MSG=\$$(php bin/get_queue_config.php \$${QUEUE_CONFIG_KEY} ready_message) &&
-             WORKER_CMD=\$$(php bin/get_queue_config.php \$${QUEUE_CONFIG_KEY} worker_command) &&
-             eval \$${WAIT_CMD} &&
-             echo \"\$${READY_MSG}\" &&
-             \$${WORKER_CMD}"
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-      willowcms:
-        condition: service_started
-      mysql:
-        condition: service_started
-    restart: unless-stopped
+  # image-analysis-worker:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/willowcms/Dockerfile
+  #     args:
+  #       - UID=${DOCKER_UID:-1000}
+  #       - GID=${DOCKER_GID:-1000}
+  #   volumes:
+  #     - ./cakephp:/var/www/html/
+  #     - ./docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
+  #   env_file:
+  #     - ./cakephp/config/.env
+  #   environment:
+  #     # Override specific Docker networking settings
+  #     - DB_HOST=mysql
+  #     - TEST_DB_HOST=mysql
+  #     - REDIS_HOST=willowcms
+  #     # Queue config key to use from database
+  #     - QUEUE_CONFIG_KEY=${QUEUE_CONFIG_KEY:-image_analysis}
+  #     - OPENAI_API_KEY=${OPENAI_API_KEY}
+  #   command: >
+  #     sh -c "WAIT_CMD=\$$(php bin/get_queue_config.php \$${QUEUE_CONFIG_KEY} wait_command) &&
+  #            READY_MSG=\$$(php bin/get_queue_config.php \$${QUEUE_CONFIG_KEY} ready_message) &&
+  #            WORKER_CMD=\$$(php bin/get_queue_config.php \$${QUEUE_CONFIG_KEY} worker_command) &&
+  #            eval \$${WAIT_CMD} &&
+  #            echo \"\$${READY_MSG}\" &&
+  #            \$${WORKER_CMD}"
+  #   depends_on:
+  #     rabbitmq:
+  #       condition: service_healthy
+  #     willowcms:
+  #       condition: service_started
+  #     mysql:
+  #       condition: service_started
+  #   restart: unless-stopped
 
 volumes:
   mysql_data:
