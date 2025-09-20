@@ -3,18 +3,18 @@ services:
   willowcms:
     build:
       context: .
-      dockerfile: docker/willowcms/Dockerfile
+      dockerfile: infrastructure/docker/willowcms/Dockerfile
       args:
         - UID=${DOCKER_UID:-1000}
         - GID=${DOCKER_GID:-1000}
     ports: 
       - "${WILLOW_HTTP_PORT:-8080}:80"
     volumes:
-      - ./cakephp:/var/www/html/
-      - ./docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
-      - ./docker/willowcms/config/nginx/logs:/var/log/nginx/
+      - ./app:/var/www/html/
+      - ./infrastructure/docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
+      - ./infrastructure/docker/willowcms/config/nginx/logs:/var/log/nginx/
     env_file:
-      - ./cakephp/config/.env
+      - ./app/config/.env
     environment:
       # Override specific Docker networking settings that may not be in .env
       DB_HOST: mysql
@@ -37,9 +37,9 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       # - mysql_data:/docker-entrypoint-initdb.d:ro
-      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./infrastructure/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     env_file:
-      - ./cakephp/config/.env
+      - ./app/config/.env
 
   phpmyadmin:
     image: phpmyadmin:${PHPMYADMIN_IMAGE_TAG:-latest}
@@ -54,7 +54,7 @@ services:
   jenkins:
     build:
       context: .
-      dockerfile: docker/jenkins/Dockerfile
+      dockerfile: infrastructure/docker/jenkins/Dockerfile
     privileged: true
     user: root
     ports:
@@ -63,7 +63,7 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+      - ./infrastructure/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
     environment:
       - JAVA_OPTS=${JAVA_OPTS:--Djenkins.install.runSetupWizard=false}
 
@@ -73,7 +73,7 @@ services:
       - "${MAILPIT_SMTP_PORT:-1125}:1025"
       - "${MAILPIT_HTTP_PORT:-8025}:8025"
     volumes:
-      - ./docker/mailpit/data:/data
+      - ./infrastructure/docker/mailpit/data:/data
       # - mailpit_data:/data
     environment:
       - MP_MAX_MESSAGES=${MP_MAX_MESSAGES:-5000}
@@ -117,15 +117,15 @@ services:
   # image-analysis-worker:
   #   build:
   #     context: .
-  #     dockerfile: docker/willowcms/Dockerfile
+  #     dockerfile: infrastructure/docker/willowcms/Dockerfile
   #     args:
   #       - UID=${DOCKER_UID:-1000}
   #       - GID=${DOCKER_GID:-1000}
   #   volumes:
-  #     - ./cakephp:/var/www/html/
-  #     - ./docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
+  #     - ./app:/var/www/html/
+  #     - ./infrastructure/docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
   #   env_file:
-  #     - ./cakephp/config/.env
+  #     - ./app/config/.env
   #   environment:
   #     # Override specific Docker networking settings
   #     - DB_HOST=mysql
@@ -160,7 +160,7 @@ volumes:
 #     image: ${WILLOWCMS_IMAGE:-ghcr.io/robjects-community/whatismyadapter_cms}:${WILLOWCMS_TAG:-pre-willowcms-beta}
 #     build:
 #       context: .
-#       dockerfile: docker/willowcms/Dockerfile
+#       dockerfile: infrastructure/docker/willowcms/Dockerfile
 #       args:
 #         UID: ${UID:-1000}
 #         GID: ${GID:-1000}
@@ -168,8 +168,8 @@ volumes:
 #       - '8080:80'
 #     volumes:
 #       - .:/var/www/html/
-#       - ./docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
-#       - ./docker/willowcms/config/nginx/logs:/var/log/nginx/
+#       - ./infrastructure/docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
+#       - ./infrastructure/docker/willowcms/config/nginx/logs:/var/log/nginx/
 #     environment:
 #       - APP_NAME=WillowCMS
 #       - DEBUG=true
@@ -253,7 +253,7 @@ volumes:
 #       - '3310:3306'
 #     volumes:
 #       - mysql_data:/var/lib/mysql
-#       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+#       - ./infrastructure/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
 #     environment:
 #       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
 #       - DB_USERNAME=${DB_USERNAME}
@@ -279,14 +279,14 @@ volumes:
 #     image: docker.io/garzarobmdocker/jenkins:latest
 #     build:
 #       context: .
-#       dockerfile: docker/jenkins/Dockerfile
+#       dockerfile: infrastructure/docker/jenkins/Dockerfile
 #     ports:
 #       - '8081:8080'
 #       - '50000:50000'
 #     volumes:
 #       - jenkins_home:/var/jenkins_home
 #       - /var/run/docker.sock:/var/run/docker.sock
-#       - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+#       - ./infrastructure/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
 #     environment:
 #       - JAVA_OPTS=${JAVA_OPTS}
 #     privileged: true
