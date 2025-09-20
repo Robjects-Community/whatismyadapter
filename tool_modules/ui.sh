@@ -45,6 +45,9 @@ show_menu() {
     echo "  14) Interactive shell on Willow CMS container"
     echo "  15) Host System Update & Docker Cleanup"
     echo
+    echo "File Management:"
+    echo "  25) File Management Menu (Refactor Helper Files, Permissions, etc.)"
+    echo
     echo "Docker Management:"
     echo "  16) View Docker Restart Documentation"
     echo "  17) Restart Docker Environment (Standard)"

@@ -121,9 +121,17 @@ dump_mysql_database() {
 load_database_from_backup() {
     echo "Loading Database from Backup..."
     local backup_source_dir="./project_mysql_backups"
+    local organized_backup_dir="./.backups"
 
-    if [ ! -d "${backup_source_dir}" ]; then
-        echo "Backup directory ${backup_source_dir} not found on host."
+    # Check both old and new backup locations
+    local primary_backup_dir="${backup_source_dir}"
+    if [ ! -d "${backup_source_dir}" ] && [ -d "${organized_backup_dir}" ]; then
+        echo "Primary backup directory ${backup_source_dir} not found, checking organized backups..."
+        primary_backup_dir="${organized_backup_dir}"
+    elif [ ! -d "${backup_source_dir}" ] && [ ! -d "${organized_backup_dir}" ]; then
+        echo "No backup directories found. Checked:"
+        echo "  - ${backup_source_dir}"
+        echo "  - ${organized_backup_dir}"
         return 1
     fi
 
@@ -139,12 +147,23 @@ load_database_from_backup() {
 
     # Get SQL files sorted by filename (newest first based on YYYYMMDD_HHMMSS timestamp)
     local files_found=()
-    while IFS= read -r file; do
-        # Only add if it's a regular file (not a directory, symlink, etc)
-        if [ -f "$file" ]; then
-            files_found+=("$file")
-        fi
-    done < <(find "${backup_source_dir}" -maxdepth 1 -name "*.sql" -type f -print0 | xargs -0 ls -1 2>/dev/null | sort -r)
+    
+    # Search in primary backup directory (with subdirectories if it's organized backups)
+    if [[ "${primary_backup_dir}" == *".backups"* ]]; then
+        # Search recursively in .backups for SQL files
+        while IFS= read -r file; do
+            if [ -f "$file" ]; then
+                files_found+=("$file")
+            fi
+        done < <(find "${primary_backup_dir}" -name "*.sql" -type f -print0 | xargs -0 ls -1 2>/dev/null | sort -r)
+    else
+        # Search only top level for traditional backup directory
+        while IFS= read -r file; do
+            if [ -f "$file" ]; then
+                files_found+=("$file")
+            fi
+        done < <(find "${primary_backup_dir}" -maxdepth 1 -name "*.sql" -type f -print0 | xargs -0 ls -1 2>/dev/null | sort -r)
+    fi
 
     local file_count="${#files_found[@]}"
     if [ "$file_count" -eq 0 ]; then
@@ -152,7 +171,7 @@ load_database_from_backup() {
         return 1
     fi
 
-    echo "Available backups from host directory ${backup_source_dir} (newest first):"
+    echo "Available backups from host directory ${primary_backup_dir} (newest first):"
     local i
     for i in "${!files_found[@]}"; do
         printf "  %s) %s\n" "$((i + 1))" "$(basename "${files_found[$i]}")"
@@ -284,20 +303,37 @@ load_database_from_backup() {
 clear_database_backups() {
     echo "Clear Database Backups..."
     local backup_source_dir="./project_mysql_backups"
+    local organized_backup_dir="./.backups"
 
-    if [ ! -d "${backup_source_dir}" ]; then
-        echo "Backup directory ${backup_source_dir} not found."
+    # Check both old and new backup locations
+    local primary_backup_dir="${backup_source_dir}"
+    if [ ! -d "${backup_source_dir}" ] && [ -d "${organized_backup_dir}" ]; then
+        echo "Primary backup directory ${backup_source_dir} not found, using organized backups..."
+        primary_backup_dir="${organized_backup_dir}"
+    elif [ ! -d "${backup_source_dir}" ] && [ ! -d "${organized_backup_dir}" ]; then
+        echo "No backup directories found."
         return 1
     fi
 
     # Get SQL files sorted by filename (newest first based on YYYYMMDD_HHMMSS timestamp)
     local files_found=()
-    while IFS= read -r file; do
-        # Only add if it's a regular file (not a directory, symlink, etc)
-        if [ -f "$file" ]; then
-            files_found+=("$file")
-        fi
-    done < <(find "${backup_source_dir}" -maxdepth 1 -name "*.sql" -type f -print0 | xargs -0 ls -1 2>/dev/null | sort -r)
+    
+    # Search in primary backup directory (with subdirectories if it's organized backups)
+    if [[ "${primary_backup_dir}" == *".backups"* ]]; then
+        # Search recursively in .backups for SQL files
+        while IFS= read -r file; do
+            if [ -f "$file" ]; then
+                files_found+=("$file")
+            fi
+        done < <(find "${primary_backup_dir}" -name "*.sql" -type f -print0 | xargs -0 ls -1 2>/dev/null | sort -r)
+    else
+        # Search only top level for traditional backup directory
+        while IFS= read -r file; do
+            if [ -f "$file" ]; then
+                files_found+=("$file")
+            fi
+        done < <(find "${primary_backup_dir}" -maxdepth 1 -name "*.sql" -type f -print0 | xargs -0 ls -1 2>/dev/null | sort -r)
+    fi
 
     local file_count="${#files_found[@]}"
     if [ "$file_count" -eq 0 ]; then
