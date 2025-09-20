@@ -3906,3 +3906,4 @@ infrastructure/docker/jenkins/jenkins_home/war/scripts/loading.js
 infrastructure/docker/jenkins/jenkins_home/war/scripts/redirect.js
 infrastructure/docker/jenkins/jenkins_home/war/scripts/sortable.js
 infrastructure/docker/jenkins/jenkins_home/war/scripts/utilities.js
+infrastructure/docker/jenkins/jenkins_home/queue.xml
