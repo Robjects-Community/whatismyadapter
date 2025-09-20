@@ -1,7 +1,47 @@
 #!/bin/bash
 
+#################################################
 # WillowCMS Repository Reorganization Script
-# This script safely reorganizes your WillowCMS project into a beautiful, maintainable structure
+#################################################
+#
+# 🎯 PURPOSE:
+# This script transforms your WillowCMS project from its current state into a clean, 
+# professional repository structure following modern development best practices.
+#
+# 🔄 WHAT IT DOES:
+# 1. Creates a comprehensive backup of your current project
+# 2. Reorganizes directories into a professional structure:
+#    • Renames 'cakephp/' to 'app/' for clarity
+#    • Moves Docker files to 'infrastructure/'
+#    • Organizes documentation in 'docs/'
+#    • Creates 'tools/' for development scripts
+#    • Sets up 'storage/' for backups and uploads
+# 3. Creates essential development files (Makefile, README.md, scripts)
+# 4. Updates file paths and configurations
+# 5. Generates development documentation
+#
+# ⚠️  BASIC VERSION DIFFERENCES:
+# This is the BASIC reorganization script that focuses on structure only.
+# For security-focused reorganization with data cleansing, use:
+# → './reorganize_willow_secure.sh' (recommended for production)
+#
+# 🚀 RESULT:
+# You'll get a clean, maintainable project structure with:
+# • Industry-standard directory organization
+# • Professional development workflow (Makefile commands)
+# • Comprehensive documentation
+# • Development tools and scripts
+# • Docker integration maintained
+#
+# 📋 BEFORE RUNNING:
+# • Ensure you're in the WillowCMS root directory
+# • Commit any uncommitted changes
+# • This script will create a backup automatically
+#
+# ⏱️  EXECUTION TIME: ~5-10 minutes
+# 💾 BACKUP: Automatically created as 'willow-backup-TIMESTAMP.tar.gz'
+#
+#################################################
 
 set -e  # Exit on any error
 

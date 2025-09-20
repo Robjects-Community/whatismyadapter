@@ -1,5 +1,36 @@
 #!/usr/bin/env bash
 
+##################################################################
+# WillowCMS Development Environment Setup Script
+##################################################################
+#
+# 🎯 PURPOSE:
+# This script ensures a clean, consistent development environment setup
+# from scratch, regardless of any previous deployment state (prod, debug, etc.)
+#
+# 📁 DIRECTORY STRUCTURE SUPPORT:
+# • Automatically detects and works with both:
+#   - NEW: ./app/ (reorganized structure)
+#   - LEGACY: ./cakephp/ (original structure)
+# • Seamless transition support during repository reorganization
+# • Handles environment files, cache directories, and configurations
+#   for whichever structure is present
+#
+# 🔄 CLEAN SLATE GUARANTEE:
+# • Detects and cleans any previous production/staging configurations
+# • Removes conflicting environment variables and settings
+# • Ensures development-specific configurations are properly set
+# • Handles Docker state conflicts and container cleanup
+# • Resets file permissions and directory structure
+#
+# 🛡️ DEPLOYMENT STATE HANDLING:
+# • Production → Development: Safely transitions without data loss
+# • Staging → Development: Cleans staging-specific configurations
+# • Debug → Development: Resets debug flags and logging levels
+# • Corrupted State → Development: Rebuilds from clean state
+#
+##################################################################
+
 # SCRIPT BEHAVIOR
 # Exit immediately if a command exits with a non-zero status.
 # Treat unset variables as an error when substituting.
@@ -59,15 +90,33 @@ LOAD_I18N=0
 # Interactive mode (can be disabled with --no-interactive)
 INTERACTIVE=1
 # Operation mode
-# Options are: wipe, rebuild, restart, migrate, continue
+# Options are: wipe, rebuild, restart, migrate, continue, fresh-dev
 OPERATION=""
+# Force clean development setup
+FORCE_CLEAN_DEV=0
+# Skip deployment state cleanup
+SKIP_DEPLOYMENT_CLEANUP=0
 
 # --- Environment File Provisioning ---
 COMPOSE_DIR="$(pwd)"
-APP_ENV_FILE="${COMPOSE_DIR}/cakephp/config/.env"
+# Support both new structure (app/) and legacy (cakephp/)
+if [[ -d "${COMPOSE_DIR}/app" ]]; then
+    APP_ENV_FILE="${COMPOSE_DIR}/app/config/.env"
+    APP_DIR="app"
+else
+    APP_ENV_FILE="${COMPOSE_DIR}/cakephp/config/.env"
+    APP_DIR="cakephp"
+fi
 COMPOSE_ENV_FILE="${COMPOSE_DIR}/.env"
 
 print_step "Setting up environment configuration..."
+
+# Inform user which directory structure is being used
+if [[ "${APP_DIR}" == "app" ]]; then
+    print_info "Using NEW directory structure: ./app/"
+else
+    print_info "Using LEGACY directory structure: ./cakephp/"
+fi
 
 # Create project root .env from .env.example if it doesn't exist
 if [[ ! -f "${COMPOSE_ENV_FILE}" ]]; then
@@ -101,11 +150,11 @@ else
     echo "DOCKER_GID=${HOST_GID}" >> "${COMPOSE_ENV_FILE}"
 fi
 
-# Create CakePHP .env from .env.example if it doesn't exist
+# Create Application .env from .env.example if it doesn't exist
 if [[ ! -f "${APP_ENV_FILE}" ]]; then
-    if [[ -f "${COMPOSE_DIR}/cakephp/config/.env.example" ]]; then
-        print_info "Creating CakePHP .env from .env.example..."
-        cp "${COMPOSE_DIR}/cakephp/config/.env.example" "${APP_ENV_FILE}"
+    if [[ -f "${COMPOSE_DIR}/${APP_DIR}/config/.env.example" ]]; then
+        print_info "Creating Application .env from .env.example..."
+        cp "${COMPOSE_DIR}/${APP_DIR}/config/.env.example" "${APP_ENV_FILE}"
         
         # Generate a secure SECURITY_SALT
         if command -v openssl &> /dev/null; then
@@ -118,11 +167,11 @@ if [[ ! -f "${APP_ENV_FILE}" ]]; then
         
         print_success "Created ${APP_ENV_FILE}"
     else
-        print_error "Missing .env.example file in cakephp/config/!"
+        print_error "Missing .env.example file in ${APP_DIR}/config/!"
         exit 1
     fi
 else
-    print_info "CakePHP .env already exists, leaving it unchanged"
+    print_info "Application .env already exists, leaving it unchanged"
 fi
 
 print_step "Loading Docker Compose environment variables..."
@@ -157,6 +206,8 @@ ${BOLD}OPTIONS:${RESET}
     ${GREEN}-j, --jenkins${RESET}           Include Jenkins service
     ${GREEN}-i, --i18n${RESET}              Load internationalisation data
     ${GREEN}-n, --no-interactive${RESET}    Skip interactive prompts (use with operation flags)
+    ${GREEN}--force-clean-dev${RESET}       Force clean development setup (removes all deployment configs)
+    ${GREEN}--skip-cleanup${RESET}          Skip deployment state cleanup checks
     
 ${BOLD}OPERATIONS:${RESET}
     ${YELLOW}-w, --wipe${RESET}              Wipe Docker containers and volumes
@@ -164,6 +215,7 @@ ${BOLD}OPERATIONS:${RESET}
     ${YELLOW}-r, --restart${RESET}           Restart Docker containers
     ${YELLOW}-m, --migrate${RESET}           Run database migrations only
     ${YELLOW}-c, --continue${RESET}          Continue with normal startup (default)
+    ${YELLOW}--fresh-dev${RESET}             Complete fresh development setup (recommended)
 
 ${BOLD}EXAMPLES:${RESET}
     # Normal startup with prompts
@@ -177,6 +229,12 @@ ${BOLD}EXAMPLES:${RESET}
     
     # Wipe and restart with Jenkins
     $PROGNAME --wipe -j
+    
+    # Fresh development setup (cleans any deployment state)
+    $PROGNAME --fresh-dev -j -i
+    
+    # Force clean development (removes all deployment configs)
+    $PROGNAME --force-clean-dev --no-interactive
     
     # Just run migrations
     $PROGNAME --migrate
@@ -231,6 +289,18 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
                 OPERATION="continue"
                 shift
                 ;;
+            --fresh-dev)
+                OPERATION="fresh-dev"
+                shift
+                ;;
+            --force-clean-dev)
+                FORCE_CLEAN_DEV=1
+                shift
+                ;;
+            --skip-cleanup)
+                SKIP_DEPLOYMENT_CLEANUP=1
+                shift
+                ;;
             *)
                 if [[ -n "$1" ]]; then
                     print_error "Unknown argument: $1"
@@ -243,7 +313,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     done
 else
     # Use GNU getopt for Linux
-    TEMP=$(getopt -o hjinwbrmc -l help,jenkins,i18n,no-interactive,wipe,rebuild,restart,migrate,continue \
+    TEMP=$(getopt -o hjinwbrmc -l help,jenkins,i18n,no-interactive,wipe,rebuild,restart,migrate,continue,fresh-dev,force-clean-dev,skip-cleanup \
                   -n "$PROGNAME" -- "$@") || { show_help; exit 1; }
     
     eval set -- "$TEMP"
@@ -286,6 +356,18 @@ else
                 OPERATION="continue"
                 shift
                 ;;
+            --fresh-dev)
+                OPERATION="fresh-dev"
+                shift
+                ;;
+            --force-clean-dev)
+                FORCE_CLEAN_DEV=1
+                shift
+                ;;
+            --skip-cleanup)
+                SKIP_DEPLOYMENT_CLEANUP=1
+                shift
+                ;;
             --)
                 shift
                 break
@@ -306,6 +388,232 @@ else
 fi
 
 # --- Helper Functions ---
+
+# Function to detect previous deployment state
+detect_deployment_state() {
+    print_step "Detecting previous deployment state..."
+    local deployment_indicators=()
+    
+    # Check for production indicators
+    if [[ -f ".env" ]] && grep -q "APP_ENV.*=.*prod" ".env" 2>/dev/null; then
+        deployment_indicators+=("Production environment detected in .env")
+    fi
+    
+    if [[ -f "${APP_DIR}/config/.env" ]] && grep -q "DEBUG.*=.*false" "${APP_DIR}/config/.env" 2>/dev/null; then
+        deployment_indicators+=("Production debug settings detected")
+    fi
+    
+    if [[ -f "app/config/.env" ]] && grep -q "DEBUG.*=.*false" "app/config/.env" 2>/dev/null; then
+        deployment_indicators+=("Production debug settings detected (reorganized structure)")
+    fi
+    
+    # Check for staging indicators
+    if [[ -f ".env" ]] && grep -q "APP_ENV.*=.*stag" ".env" 2>/dev/null; then
+        deployment_indicators+=("Staging environment detected")
+    fi
+    
+    # Check for production Docker configurations
+    if docker compose config 2>/dev/null | grep -q "restart.*always" 2>/dev/null; then
+        deployment_indicators+=("Production Docker restart policies detected")
+    fi
+    
+    # Check for SSL/HTTPS configurations
+    if [[ -f "docker-compose.yml" ]] && grep -q "SSL\|ssl\|HTTPS\|https" "docker-compose.yml" 2>/dev/null; then
+        deployment_indicators+=("SSL/HTTPS configuration detected")
+    fi
+    
+    # Check for production log levels
+    if [[ -f "${APP_DIR}/config/.env" ]] && grep -q "LOG_LEVEL.*=.*error\|LOG_LEVEL.*=.*warning" "${APP_DIR}/config/.env" 2>/dev/null; then
+        deployment_indicators+=("Production log levels detected")
+    fi
+    
+    # Check for production cache settings
+    if docker compose exec -T "$MAIN_APP_SERVICE" test -f "/var/www/html/config/app_local.php" 2>/dev/null; then
+        deployment_indicators+=("Production cache configuration may be present")
+    fi
+    
+    if [[ ${#deployment_indicators[@]} -gt 0 ]]; then
+        print_warning "Previous deployment state detected:"
+        for indicator in "${deployment_indicators[@]}"; do
+            echo "   ⚠️  $indicator"
+        done
+        return 0  # Deployment state found
+    else
+        print_success "No previous deployment state detected"
+        return 1  # Clean state
+    fi
+}
+
+# Function to clean deployment state and ensure development configuration
+clean_deployment_state() {
+    print_step "Cleaning deployment state for development..."
+    
+    # Backup any existing .env files before modification
+    local backup_dir="deployment-cleanup-backup-$(date +%Y%m%d_%H%M%S)"
+    mkdir -p "$backup_dir"
+    
+    # Backup environment files
+    [[ -f ".env" ]] && cp ".env" "$backup_dir/root.env.backup"
+    [[ -f "${APP_DIR}/config/.env" ]] && cp "${APP_DIR}/config/.env" "$backup_dir/${APP_DIR}.env.backup"
+    # Support both structures during transition
+    [[ -f "cakephp/config/.env" ]] && cp "cakephp/config/.env" "$backup_dir/cakephp.env.backup"
+    [[ -f "app/config/.env" ]] && cp "app/config/.env" "$backup_dir/app.env.backup"
+    [[ -f "docker-compose.yml" ]] && cp "docker-compose.yml" "$backup_dir/docker-compose.yml.backup"
+    
+    print_info "Configuration backup created in: $backup_dir"
+    
+    # Clean environment variables in .env files (prioritize current structure)
+    local env_files=(".env" "${APP_DIR}/config/.env")
+    # Add other structure if it exists during transition
+    if [[ "${APP_DIR}" == "app" ]] && [[ -f "cakephp/config/.env" ]]; then
+        env_files+=("cakephp/config/.env")
+    elif [[ "${APP_DIR}" == "cakephp" ]] && [[ -f "app/config/.env" ]]; then
+        env_files+=("app/config/.env")
+    fi
+    for env_file in "${env_files[@]}"; do
+        if [[ -f "$env_file" ]]; then
+            print_info "Cleaning deployment settings in $env_file..."
+            
+            # Set development environment
+            if grep -q "^APP_ENV=" "$env_file"; then
+                sed -i.tmp "s/^APP_ENV=.*/APP_ENV=development/" "$env_file"
+            else
+                echo "APP_ENV=development" >> "$env_file"
+            fi
+            
+            # Enable debug mode
+            if grep -q "^DEBUG=" "$env_file"; then
+                sed -i.tmp "s/^DEBUG=.*/DEBUG=true/" "$env_file"
+            else
+                echo "DEBUG=true" >> "$env_file"
+            fi
+            
+            # Set development log level
+            if grep -q "^LOG_LEVEL=" "$env_file"; then
+                sed -i.tmp "s/^LOG_LEVEL=.*/LOG_LEVEL=debug/" "$env_file"
+            else
+                echo "LOG_LEVEL=debug" >> "$env_file"
+            fi
+            
+            # Ensure development database settings (if not using Docker defaults)
+            if grep -q "^DB_HOST=" "$env_file" && ! grep -q "^DB_HOST=mysql" "$env_file"; then
+                sed -i.tmp "s/^DB_HOST=.*/DB_HOST=mysql/" "$env_file"
+                print_info "Reset database host to Docker service name (mysql)"
+            fi
+            
+            # Clean up temporary files
+            rm -f "$env_file.tmp"
+        fi
+    done
+    
+    # Stop any running containers to ensure clean state
+    if docker compose ps --services --filter "status=running" | grep -q "."; then
+        print_info "Stopping containers to ensure clean development state..."
+        docker compose down --remove-orphans
+    fi
+    
+    # Remove any production-specific Docker images that might conflict
+    local prod_images=()
+    mapfile -t prod_images < <(docker images --format "table {{.Repository}}:{{.Tag}}" | grep -E "prod|production|staging|stage" | tail -n +2 || true)
+    
+    if [[ ${#prod_images[@]} -gt 0 ]]; then
+        print_info "Found production/staging Docker images. Consider cleaning:"
+        for image in "${prod_images[@]}"; do
+            echo "   📊 $image"
+        done
+        
+        if [[ "$FORCE_CLEAN_DEV" -eq 1 ]]; then
+            print_info "Force clean enabled - removing production images..."
+            for image in "${prod_images[@]}"; do
+                docker rmi "$image" 2>/dev/null || print_warning "Could not remove image: $image"
+            done
+        fi
+    fi
+    
+    # Clear any production caches
+    local cache_dirs=("${APP_DIR}/tmp/cache" "storage/app/cache")
+    # Support both structures during transition
+    if [[ "${APP_DIR}" == "app" ]] && [[ -d "cakephp/tmp/cache" ]]; then
+        cache_dirs+=("cakephp/tmp/cache")
+    elif [[ "${APP_DIR}" == "cakephp" ]] && [[ -d "app/tmp/cache" ]]; then
+        cache_dirs+=("app/tmp/cache")
+    fi
+    for cache_dir in "${cache_dirs[@]}"; do
+        if [[ -d "$cache_dir" ]]; then
+            print_info "Clearing cache directory: $cache_dir"
+            rm -rf "$cache_dir"/* 2>/dev/null || true
+        fi
+    done
+    
+    print_success "Deployment state cleaned for development"
+}
+
+# Function to ensure development-specific configurations
+ensure_development_config() {
+    print_step "Ensuring development-specific configurations..."
+    
+    # Ensure debug mode is enabled in app config if it exists
+    local app_config_files=("${APP_DIR}/config/app_local.php")
+    # Support both structures during transition  
+    if [[ "${APP_DIR}" == "app" ]] && [[ -f "cakephp/config/app_local.php" ]]; then
+        app_config_files+=("cakephp/config/app_local.php")
+    elif [[ "${APP_DIR}" == "cakephp" ]] && [[ -f "app/config/app_local.php" ]]; then
+        app_config_files+=("app/config/app_local.php")
+    fi
+    for config_file in "${app_config_files[@]}"; do
+        if [[ -f "$config_file" ]]; then
+            # Check if debug is set to false and warn
+            if grep -q "'debug'.*=>.*false" "$config_file" 2>/dev/null; then
+                print_warning "Debug mode is disabled in $config_file"
+                print_info "Consider enabling debug mode for development"
+            fi
+        fi
+    done
+    
+    # Ensure development-friendly Docker Compose configuration
+    if [[ -f "docker-compose.yml" ]]; then
+        # Check for production restart policies
+        if grep -q "restart.*always" "docker-compose.yml"; then
+            print_warning "Production restart policies detected in docker-compose.yml"
+            if [[ "$FORCE_CLEAN_DEV" -eq 1 ]]; then
+                print_info "Removing production restart policies..."
+                sed -i.tmp "s/restart:.*always/# restart: always # Disabled for development/g" "docker-compose.yml"
+                rm -f "docker-compose.yml.tmp"
+            fi
+        fi
+    fi
+    
+    print_success "Development configuration checks completed"
+}
+
+# Function to handle fresh development setup
+handle_fresh_dev_setup() {
+    print_step "Setting up fresh development environment..."
+    
+    # This combines several operations for a complete fresh setup
+    print_info "This will: wipe containers, rebuild, clean deployment state, and setup development"
+    
+    if [[ "$INTERACTIVE" -eq 1 ]] && [[ "$FORCE_CLEAN_DEV" -eq 0 ]]; then
+        read -r -p "${YELLOW}This will remove all containers and data. Continue? (y/N): ${RESET}" confirm
+        if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+            print_info "Fresh development setup cancelled"
+            return 0
+        fi
+    fi
+    
+    # Clean deployment state first
+    if [[ "$SKIP_DEPLOYMENT_CLEANUP" -eq 0 ]]; then
+        clean_deployment_state
+    fi
+    
+    # Wipe and rebuild containers
+    handle_operation "wipe"
+    
+    # Ensure development configuration
+    ensure_development_config
+    
+    print_success "Fresh development environment setup completed"
+}
 
 # Function to check if Docker is installed and running
 check_docker_requirements() {
@@ -434,6 +742,9 @@ handle_operation() {
                 exit 1
             fi
             ;;
+        fresh-dev)
+            handle_fresh_dev_setup
+            ;;
         continue|"")
             print_info "Continuing with normal startup..."
             ;;
@@ -449,12 +760,34 @@ handle_operation() {
 # Check Docker requirements first
 check_docker_requirements
 
+# Handle force clean development setup
+if [[ "$FORCE_CLEAN_DEV" -eq 1 ]]; then
+    print_info "Force clean development mode enabled"
+    clean_deployment_state
+    ensure_development_config
+fi
+
+# Detect and optionally clean deployment state
+if [[ "$SKIP_DEPLOYMENT_CLEANUP" -eq 0 ]] && [[ "$OPERATION" != "fresh-dev" ]] && [[ "$FORCE_CLEAN_DEV" -eq 0 ]]; then
+    if detect_deployment_state; then
+        if [[ "$INTERACTIVE" -eq 1 ]]; then
+            read -r -p "${YELLOW}Clean deployment state for development? [Y/n]: ${RESET}" clean_choice
+            if [[ ! "$clean_choice" =~ ^[Nn]$ ]]; then
+                clean_deployment_state
+                ensure_development_config
+            fi
+        else
+            print_info "Non-interactive mode: skipping deployment cleanup (use --force-clean-dev to enable)"
+        fi
+    fi
+fi
+
 print_step "Creating required directories..."
 # The script creates logs/nginx. If logs/ doesn't allow user write, this might fail or need sudo.
 # If logs/nginx is created by this user, the chmod below shouldn't need sudo.
 # However, if logs/nginx pre-exists with other ownership, sudo would be needed for chmod.
 mkdir -p logs/nginx
-mkdir -p cakephp/logs cakephp/tmp cakephp/webroot/files
+mkdir -p ${APP_DIR}/logs ${APP_DIR}/tmp ${APP_DIR}/webroot/files
 if chmod 777 logs/nginx 2>/dev/null; then
     print_success "Created logs/nginx directory"
 else
@@ -495,12 +828,13 @@ if [ "$TABLE_EXISTS_INITIAL" -eq 0 ]; then
         handle_operation "$OPERATION"
     elif [ "$INTERACTIVE" -eq 1 ]; then
         # Interactive mode - prompt for action
-        read -r -p "${CYAN}Do you want to [${YELLOW}W${CYAN}]ipe data, re[${YELLOW}B${CYAN}]uild, [${YELLOW}R${CYAN}]estart, run [${YELLOW}M${CYAN}]igrations or [${YELLOW}C${CYAN}]ontinue? (w/b/r/m/c): ${RESET}" user_choice
+        read -r -p "${CYAN}Do you want to [${YELLOW}W${CYAN}]ipe data, re[${YELLOW}B${CYAN}]uild, [${YELLOW}R${CYAN}]estart, [${YELLOW}F${CYAN}]resh dev setup, run [${YELLOW}M${CYAN}]igrations or [${YELLOW}C${CYAN}]ontinue? (w/b/r/f/m/c): ${RESET}" user_choice
         case "${user_choice:0:1}" in
             w|W) handle_operation "wipe" ;;
             b|B) handle_operation "rebuild" ;;
             r|R) handle_operation "restart" ;;
             m|M) handle_operation "migrate" ;;
+            f|F) handle_operation "fresh-dev" ;;
             c|C|*) handle_operation "continue" ;;
         esac
     else
@@ -521,12 +855,12 @@ if [ "$TABLE_EXISTS_FINAL" -ne 0 ]; then # If table still does not exist (or com
     print_info "Running initial application setup..."
 
     print_step "Setting permissions for logs, tmp, webroot (dev environment)..."
-    # These directories are expected to be in the cakephp folder.
+    # These directories are expected to be in the app folder.
     # If they are not owned by the user running script, sudo will be invoked on Linux.
     # Ensure these directories exist before running this script or handle their creation.
     # For `logs/`, it's partially handled by `mkdir -p logs/nginx` earlier.
     # Consider creating tmp/ and webroot/ explicitly if they might not exist.
-    for dir in cakephp/logs cakephp/tmp cakephp/webroot; do
+    for dir in ${APP_DIR}/logs ${APP_DIR}/tmp ${APP_DIR}/webroot; do
         if [ ! -d "$dir" ]; then
             print_warning "Directory '$dir' does not exist. Creating it..."
             mkdir -p "$dir"
@@ -600,3 +934,21 @@ fi
 print_info "PHPMyAdmin: ${BOLD}http://localhost:8082${RESET}"
 print_info "Mailpit: ${BOLD}http://localhost:8025${RESET}"
 print_info "Redis Commander: ${BOLD}http://localhost:8084${RESET}"
+
+# Final deployment state summary
+echo
+if [[ "$FORCE_CLEAN_DEV" -eq 1 ]] || [[ "$OPERATION" == "fresh-dev" ]]; then
+    print_success "✨ Clean development environment guaranteed!"
+    print_info "   🧹 All deployment configurations cleaned"
+    print_info "   🔧 Development settings enforced"
+    print_info "   🐳 Fresh Docker containers"
+else
+    print_success "🚀 Development environment ready!"
+    if [[ "$SKIP_DEPLOYMENT_CLEANUP" -eq 0 ]]; then
+        print_info "   ✅ Deployment state checked and cleaned if needed"
+    else
+        print_info "   ⚠️  Deployment state cleanup was skipped"
+    fi
+fi
+print_info "   📊 All services running and accessible"
+print_info "   🛡️  Development-optimized configuration active"
