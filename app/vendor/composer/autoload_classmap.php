@@ -320,6 +320,7 @@ return array(
     'App\\Service\\Quiz\\DecisionTreeService' => $baseDir . '/src/Service/Quiz/DecisionTreeService.php',
     'App\\Service\\ReliabilityService' => $baseDir . '/src/Service/ReliabilityService.php',
     'App\\Service\\Search\\UnifiedSearchService' => $baseDir . '/src/Service/Search/UnifiedSearchService.php',
+    'App\\Service\\Settings\\SettingsService' => $baseDir . '/src/Service/Settings/SettingsService.php',
     'App\\Service\\WebpageExtractor' => $baseDir . '/src/Service/WebpageExtractor.php',
     'App\\Test\\Fixture\\AiMetricsFixture' => $baseDir . '/tests/Fixture/AiMetricsFixture.php',
     'App\\Test\\Fixture\\AipromptsFixture' => $baseDir . '/tests/Fixture/AipromptsFixture.php',

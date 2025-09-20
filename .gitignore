@@ -1044,3 +1044,5 @@ helper-files(use-only-if-you-get-lost)/willow-complete-presentation.zip/style.cs
 .warp/rules/phpunit-testing.md
 .warp/rules/terminal-echo.md
 infrastructure/docker/willowcms/config/nginx/logs/access.log
+app/logs/debug.log
+app/logs/error.log

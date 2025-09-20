@@ -915,6 +915,7 @@ class ComposerStaticInitebbe10126807141440169af3832cf8a3
         'App\\Service\\Quiz\\DecisionTreeService' => __DIR__ . '/../..' . '/src/Service/Quiz/DecisionTreeService.php',
         'App\\Service\\ReliabilityService' => __DIR__ . '/../..' . '/src/Service/ReliabilityService.php',
         'App\\Service\\Search\\UnifiedSearchService' => __DIR__ . '/../..' . '/src/Service/Search/UnifiedSearchService.php',
+        'App\\Service\\Settings\\SettingsService' => __DIR__ . '/../..' . '/src/Service/Settings/SettingsService.php',
         'App\\Service\\WebpageExtractor' => __DIR__ . '/../..' . '/src/Service/WebpageExtractor.php',
         'App\\Test\\Fixture\\AiMetricsFixture' => __DIR__ . '/../..' . '/tests/Fixture/AiMetricsFixture.php',
         'App\\Test\\Fixture\\AipromptsFixture' => __DIR__ . '/../..' . '/tests/Fixture/AipromptsFixture.php',
