@@ -22,7 +22,7 @@ fi
 # Check for dump files  
 dump_files=$(find . -name "*.dump" -not -path "./storage/backups/data-cleanse/*" 2>/dev/null)
 if [ -n "$dump_files" ]; then
-    echo "⚠️  WARNING: Database dump files found:"
+    echo "⚠️  WARNING: Database dump files found:"no
     echo "$dump_files" | sed 's/^/   /'
     sensitive_count=$((sensitive_count + 1))
 fi

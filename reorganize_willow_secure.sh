@@ -1,7 +1,92 @@
 #!/bin/bash
 
-# WillowCMS Secure Repository Reorganization Script
-# This script safely reorganizes your WillowCMS project with comprehensive data cleansing
+##################################################################
+# WillowCMS SECURE Repository Reorganization Script
+##################################################################
+#
+# 🔐 PURPOSE:
+# This script performs a SECURITY-FIRST transformation of your WillowCMS project,
+# reorganizing it into a professional structure while protecting sensitive data.
+# This is the RECOMMENDED script for production environments.
+#
+# 🛡️ SECURITY-FIRST APPROACH:
+# Unlike the basic reorganization script, this version:
+# ✅ SCANS for and REMOVES sensitive data files (SQL dumps, backups)
+# ✅ MOVES sensitive files to secure backup location (excluded from Git)
+# ✅ CREATES comprehensive .gitignore to prevent data leaks
+# ✅ CLEANSES default_data directory of real production data
+# ✅ IMPLEMENTS secure environment variable management
+# ✅ RUNS security verification checks
+# ✅ ENSURES no sensitive data is accidentally committed to Git
+#
+# 🔄 COMPREHENSIVE REORGANIZATION INCLUDES:
+# 1. **Pre-flight Security Check**: Ensures clean Git state
+# 2. **Complete Backup Creation**: Full project backup before changes
+# 3. **Data Cleansing Phase**: 🧹 Critical security step
+#    • Identifies and moves ALL sensitive files (*.sql, *.dump, *.backup)
+#    • Processes ~40+ different file patterns for sensitive content
+#    • Creates secure backup directory excluded from Git
+#    • Generates security placeholders and documentation
+# 4. **Professional Structure**: Same as basic script plus security layers
+# 5. **Secure Configuration**: Environment templates without secrets
+# 6. **Security Tools**: Creates security check scripts and commands
+# 7. **Git Security**: Comprehensive .gitignore with 50+ security patterns
+# 8. **Final Verification**: Runs security audit before completion
+#
+# 🎯 SENSITIVE DATA HANDLED:
+# • Database dumps (*.sql, *.dump)
+# • Backup files (*.backup, *.tar.gz, *.zip)
+# • Log files with potential sensitive data
+# • Default data with real production content
+# • Environment files with secrets (.env*)
+# • Temporary files and caches
+# • All project backup directories
+#
+# 🗂️ PROFESSIONAL STRUCTURE CREATED:
+# willow/
+# ├── app/                    # Main CakePHP app (was cakephp/)
+# │   └── config/environments/ # Secure config management
+# ├── infrastructure/         # Docker & infrastructure
+# ├── deploy/                 # Deployment configs
+# ├── docs/                   # Documentation
+# ├── tools/                  # Development tools + security scripts
+# │   └── scripts/           # Including security_check.sh
+# ├── storage/                # File storage
+# │   └── backups/data-cleanse/ # 🔒 SECURE: Your sensitive data backup
+# ├── assets/                 # Static assets
+# ├── Makefile               # Includes 'make security-check' command
+# └── README.md              # Security-focused documentation
+#
+# ⚠️  VS BASIC VERSION:
+# • Basic script: Structure-only reorganization, keeps all files as-is
+# • Secure script: COMPREHENSIVE data protection + professional structure
+# • Use SECURE version for: Production, sensitive data, team environments
+# • Use Basic version for: Personal projects with no sensitive data
+#
+# 📋 BEFORE RUNNING:
+# • Ensure you're in the WillowCMS root directory (with docker-compose.yml)
+# • Commit ALL changes to Git (script checks for clean state)
+# • Understand that sensitive files will be moved (safely backed up)
+# • Have ~15 minutes for complete execution
+#
+# 🔍 SECURITY VERIFICATION:
+# The script includes multiple security checks:
+# • Verifies no sensitive files remain in Git index
+# • Creates security-check command for ongoing monitoring
+# • Provides detailed security report upon completion
+#
+# ⏱️  EXECUTION TIME: ~10-15 minutes (includes security scanning)
+# 💾 BACKUPS CREATED: 
+# • Full project backup: 'willow-backup-TIMESTAMP.tar.gz'
+# • Sensitive data backup: 'storage/backups/data-cleanse/data-cleanse-backup-TIMESTAMP/'
+#
+# 🚀 AFTER COMPLETION:
+# • Run 'make security-check' to verify security
+# • Use 'make start' to test the reorganized application
+# • Review security documentation in README.md
+# • All sensitive data safely preserved in backups but excluded from Git
+#
+##################################################################
 
 set -e  # Exit on any error
 
