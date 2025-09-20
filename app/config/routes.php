@@ -540,6 +540,9 @@ return function (RouteBuilder $routes): void {
                 '_name' => 'admin-test-login',
             ]
         );
+        
+        // Enable fallbacks for this scope to handle conventional routing
+        $builder->fallbacks(DashedRoute::class);
     });
 
     // API routes
@@ -812,6 +815,14 @@ return function (RouteBuilder $routes): void {
         $routes->connect('/product-form-fields/reset-order', [
             'controller' => 'ProductFormFields',
             'action' => 'resetOrder'
+        ]);
+        
+        // AI Product Enhancement route
+        $routes->connect('/products/ai-suggest', [
+            'controller' => 'Products',
+            'action' => 'aiSuggest'
+        ], [
+            '_method' => 'POST'
         ]);
         // END OF PRODUCTS ROUTES
 

@@ -66337,3 +66337,1313 @@ Stack Trace:
 - ROOT/bin/cake.php:10
 - [main]:
 
+2025-09-20 10:33:30 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/js/willow-modal.js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/js/willow-modal.js',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/willow-modal.js?q=/js/willow-modal.js&
+Referer URL: http://localhost:8080/en
+Client IP: 192.168.65.1
+2025-09-20 10:33:30 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/js/youtube-gdpr.js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/js/youtube-gdpr.js',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/youtube-gdpr.js?q=/js/youtube-gdpr.js&
+Referer URL: http://localhost:8080/en
+Client IP: 192.168.65.1
+2025-09-20 10:34:28 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/js/willow-modal.js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/js/willow-modal.js',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/willow-modal.js?q=/js/willow-modal.js&
+Referer URL: http://localhost:8080/en/users/login
+Client IP: 192.168.65.1
+2025-09-20 10:34:28 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/js/youtube-gdpr.js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/js/youtube-gdpr.js',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/youtube-gdpr.js?q=/js/youtube-gdpr.js&
+Referer URL: http://localhost:8080/en/users/login
+Client IP: 192.168.65.1
+2025-09-20 10:35:56 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/js/willow-modal.js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/js/willow-modal.js',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/willow-modal.js?q=/js/willow-modal.js&
+Referer URL: http://localhost:8080/admin
+Client IP: 192.168.65.1
+2025-09-20 10:35:56 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/img/willow-icon.png` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/img/willow-icon.png',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /img/willow-icon.png?q=/img/willow-icon.png&
+Referer URL: http://localhost:8080/admin
+Client IP: 192.168.65.1
+2025-09-20 10:36:06 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/js/willow-modal.js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/js/willow-modal.js',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/willow-modal.js?q=/js/willow-modal.js&
+Referer URL: http://localhost:8080/admin/products/dashboard
+Client IP: 192.168.65.1
+2025-09-20 10:36:06 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/img/willow-icon.png` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/img/willow-icon.png',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /img/willow-icon.png?q=/img/willow-icon.png&
+Referer URL: http://localhost:8080/admin/products/dashboard
+Client IP: 192.168.65.1
+2025-09-20 10:36:06 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/img/willow-icon.png` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/img/willow-icon.png',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /img/willow-icon.png?q=/img/willow-icon.png&
+Referer URL: http://localhost:8080/admin/products/dashboard
+Client IP: 192.168.65.1
+2025-09-20 10:36:10 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/js/willow-modal.js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/js/willow-modal.js',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/willow-modal.js?q=/js/willow-modal.js&
+Referer URL: http://localhost:8080/admin/page-views/dashboard
+Client IP: 192.168.65.1
+2025-09-20 10:36:10 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/img/willow-icon.png` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/img/willow-icon.png',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /img/willow-icon.png?q=/img/willow-icon.png&
+Referer URL: http://localhost:8080/admin/page-views/dashboard
+Client IP: 192.168.65.1
+2025-09-20 10:37:01 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/js/willow-modal.js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/js/willow-modal.js',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/willow-modal.js?q=/js/willow-modal.js&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:01 error: [Cake\Routing\Exception\MissingRouteException] A route matching `/img/willow-icon.png` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 188
+Exception Attributes: array (
+  'url' => '/img/willow-icon.png',
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:197
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:96
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /img/willow-icon.png?q=/img/willow-icon.png&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:01 error: [Cake\Http\Exception\MissingControllerException] Controller class `Test_Case_2975.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Test_Case_2975.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/test_Case_2975.jpg?q=/admin/test_Case_2975.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:02 error: [Cake\Http\Exception\MissingControllerException] Controller class `Demo_Software_5150.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Demo_Software_5150.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/demo_Software_5150.jpg?q=/admin/demo_Software_5150.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:02 error: [Cake\Http\Exception\MissingControllerException] Controller class `Product_Watch_6894.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Product_Watch_6894.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/product_Watch_6894.jpg?q=/admin/product_Watch_6894.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:03 error: [Cake\Http\Exception\MissingControllerException] Controller class `Test_Adapter_7008.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Test_Adapter_7008.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/test_Adapter_7008.jpg?q=/admin/test_Adapter_7008.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:03 error: [Cake\Http\Exception\MissingControllerException] Controller class `Placeholder_Drive_5428.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Placeholder_Drive_5428.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/placeholder_Drive_5428.jpg?q=/admin/placeholder_Drive_5428.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:04 error: [Cake\Http\Exception\MissingControllerException] Controller class `Sample_Smartphone_7598.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Sample_Smartphone_7598.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/sample_Smartphone_7598.jpg?q=/admin/sample_Smartphone_7598.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:04 error: [Cake\Http\Exception\MissingControllerException] Controller class `Placeholder_Software_6832.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Placeholder_Software_6832.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/placeholder_Software_6832.jpg?q=/admin/placeholder_Software_6832.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:05 error: [Cake\Http\Exception\MissingControllerException] Controller class `Product_Mouse_7430.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Product_Mouse_7430.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/product_Mouse_7430.jpg?q=/admin/product_Mouse_7430.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:05 error: [Cake\Http\Exception\MissingControllerException] Controller class `Test_Microphone_1908.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Test_Microphone_1908.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/test_Microphone_1908.jpg?q=/admin/test_Microphone_1908.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:05 error: [Cake\Http\Exception\MissingControllerException] Controller class `Test_Cable_8833.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Test_Cable_8833.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/test_Cable_8833.jpg?q=/admin/test_Cable_8833.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:05 error: [Cake\Http\Exception\MissingControllerException] Controller class `Product_Software_4733.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Product_Software_4733.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/product_Software_4733.jpg?q=/admin/product_Software_4733.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:06 error: [Cake\Http\Exception\MissingControllerException] Controller class `Product_Cable_9785.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Product_Cable_9785.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/product_Cable_9785.jpg?q=/admin/product_Cable_9785.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:06 error: [Cake\Http\Exception\MissingControllerException] Controller class `Demo_Stand_8345.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Demo_Stand_8345.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/demo_Stand_8345.jpg?q=/admin/demo_Stand_8345.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:07 error: [Cake\Http\Exception\MissingControllerException] Controller class `Product_Smartphone_7158.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Product_Smartphone_7158.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/product_Smartphone_7158.jpg?q=/admin/product_Smartphone_7158.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:07 error: [Cake\Http\Exception\MissingControllerException] Controller class `Sample_Console_1933.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Sample_Console_1933.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/sample_Console_1933.jpg?q=/admin/sample_Console_1933.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:07 error: [Cake\Http\Exception\MissingControllerException] Controller class `Product_Watch_6271.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Product_Watch_6271.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/product_Watch_6271.jpg?q=/admin/product_Watch_6271.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:08 error: [Cake\Http\Exception\MissingControllerException] Controller class `Demo_Keyboard_1288.jpg` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Demo_Keyboard_1288.jpg',
+  'plugin' => NULL,
+  'prefix' => 'Admin',
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/demo_Keyboard_1288.jpg?q=/admin/demo_Keyboard_1288.jpg&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:08 error: [Cake\Routing\Exception\MissingRouteException] A route matching `array (
+  'controller' => 'Quiz',
+  'action' => 'preview',
+  'prefix' => false,
+  'plugin' => NULL,
+  '_ext' => NULL,
+)` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 317
+Exception Attributes: array (
+  'url' => 'array (
+  \'controller\' => \'Quiz\',
+  \'action\' => \'preview\',
+  \'prefix\' => false,
+  \'plugin\' => NULL,
+  \'_ext\' => NULL,
+)',
+  'context' => 
+  array (
+    '_scheme' => 'http',
+    '_host' => 'localhost',
+    '_port' => 8080,
+    '_base' => '',
+    'params' => 
+    array (
+      'pass' => 
+      array (
+      ),
+      'controller' => 'Products',
+      'action' => 'forms',
+      'prefix' => 'Admin',
+      'plugin' => NULL,
+      '_matchedRoute' => '/admin/products/forms',
+      '?' => 
+      array (
+        'q' => '/admin/products/forms',
+      ),
+      '_ext' => NULL,
+    ),
+  ),
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:454
+- CORE/src/View/Helper/UrlHelper.php:91
+- CORE/src/View/Helper/HtmlHelper.php:267
+- ROOT/plugins/AdminTheme/templates/Admin/Products/forms.php:512
+- CORE/src/View/View.php:1187
+- CORE/src/View/View.php:1144
+- CORE/src/View/View.php:785
+- CORE/src/Controller/Controller.php:712
+- CORE/src/Controller/Controller.php:516
+- CORE/src/Controller/ControllerFactory.php:166
+- CORE/src/Controller/ControllerFactory.php:141
+- CORE/src/Http/BaseApplication.php:362
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:70
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/products/forms?q=/admin/products/forms&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:37:13 error: [Cake\Routing\Exception\MissingRouteException] A route matching `array (
+  'controller' => 'Quiz',
+  'action' => 'preview',
+  'prefix' => false,
+  'plugin' => NULL,
+  '_ext' => NULL,
+)` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Routing/RouteCollection.php on line 317
+Exception Attributes: array (
+  'url' => 'array (
+  \'controller\' => \'Quiz\',
+  \'action\' => \'preview\',
+  \'prefix\' => false,
+  \'plugin\' => NULL,
+  \'_ext\' => NULL,
+)',
+  'context' => 
+  array (
+    '_scheme' => 'http',
+    '_host' => 'localhost',
+    '_port' => 8080,
+    '_base' => '',
+    'params' => 
+    array (
+      'pass' => 
+      array (
+      ),
+      'controller' => 'Products',
+      'action' => 'forms',
+      'prefix' => 'Admin',
+      'plugin' => NULL,
+      '_matchedRoute' => '/admin/products/forms',
+      '?' => 
+      array (
+        'q' => '/admin/products/forms',
+      ),
+      '_ext' => NULL,
+    ),
+  ),
+)
+Stack Trace:
+- CORE/src/Routing/Router.php:454
+- CORE/src/View/Helper/UrlHelper.php:91
+- CORE/src/View/Helper/HtmlHelper.php:267
+- ROOT/plugins/AdminTheme/templates/Admin/Products/forms.php:512
+- CORE/src/View/View.php:1187
+- CORE/src/View/View.php:1144
+- CORE/src/View/View.php:785
+- CORE/src/Controller/Controller.php:712
+- CORE/src/Controller/Controller.php:516
+- CORE/src/Controller/ControllerFactory.php:166
+- CORE/src/Controller/ControllerFactory.php:141
+- CORE/src/Http/BaseApplication.php:362
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:70
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /admin/products/forms?q=/admin/products/forms&
+Referer URL: http://localhost:8080/admin/products
+Client IP: 192.168.65.1
+2025-09-20 10:45:24 error: [Cake\Http\Exception\MissingControllerException] Controller class `Js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Js',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:77
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/willow-modal.js?q=/js/willow-modal.js&
+Referer URL: http://localhost:8080/admin/products/forms
+Client IP: 192.168.65.1
+2025-09-20 10:45:25 error: [Cake\Http\Exception\MissingControllerException] Controller class `Img` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Img',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:77
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /img/willow-icon.png?q=/img/willow-icon.png&
+Referer URL: http://localhost:8080/admin/products/forms
+Client IP: 192.168.65.1
+2025-09-20 10:54:26 error: [Cake\Http\Exception\MissingControllerException] Controller class `En` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'En',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:77
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:159
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:70
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /en/admin/products/forms?q=/en/admin/products/forms&
+Client IP: 192.168.65.1

@@ -26365,3 +26365,178 @@ Client IP: 192.168.65.1
 2025-09-20 00:34:42 debug: Reading migrations status for test...
 2025-09-20 00:35:05 debug: Reading migrations status for test...
 2025-09-20 00:35:22 debug: Reading migrations status for test...
+2025-09-20 10:33:30 debug: Since 5.0.0: Query::order() is deprecated. Use Query::orderBy() instead.
+/var/www/html/src/Controller/HomeController.php, line: 74
+You can disable all deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED`. Adding `src/Controller/HomeController.php` to `Error.ignoredDeprecationPaths` in your `config/app.php` config will mute deprecations from that file only. in /var/www/html/vendor/cakephp/cakephp/src/Core/functions.php on line 377
+Trace:
+Cake\Error\ErrorTrap->handleError() [internal], line ??
+/var/www/html/vendor/cakephp/cakephp/src/Core/functions.php /var/www/html/vendor/cakephp/cakephp/src/Core/functions.php, line 377
+/var/www/html/vendor/cakephp/cakephp/src/Database/Query.php /var/www/html/vendor/cakephp/cakephp/src/Database/Query.php, line 1171
+Cake\Database\Query->order() /var/www/html/src/Controller/HomeController.php, line 74
+App\Controller\HomeController->index() /var/www/html/vendor/cakephp/cakephp/src/Controller/Controller.php, line 505
+Cake\Controller\Controller->invokeAction() /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 166
+Cake\Controller\ControllerFactory->handle() /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 141
+Cake\Controller\ControllerFactory->invoke() /var/www/html/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 362
+Cake\Http\BaseApplication->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 86
+Cake\Http\Runner->handle() /var/www/html/src/Middleware/RateLimitMiddleware.php, line 148
+App\Middleware\RateLimitMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/src/Middleware/IpBlockerMiddleware.php, line 107
+App\Middleware\IpBlockerMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 169
+Cake\Http\Middleware\CsrfProtectionMiddleware->process() /var/www/html/src/Middleware/ApiCsrfMiddleware.php, line 48
+App\Middleware\ApiCsrfMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php, line 136
+Authorization\Middleware\AuthorizationMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php, line 106
+Authentication\Middleware\AuthenticationMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Middleware\BodyParserMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php, line 110
+ADmad\I18n\Middleware\I18nMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 117
+Cake\Routing\Middleware\RoutingMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 70
+Cake\Routing\Middleware\AssetMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 115
+Cake\Error\Middleware\ErrorHandlerMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+DebugKit\Middleware\DebugKitMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 60
+Cake\Http\Runner->run() /var/www/html/vendor/cakephp/cakephp/src/Http/Server.php, line 104
+Cake\Http\Server->run() /var/www/html/webroot/index.php, line 31
+[main]
+
+Request URL: /en?q=/en&
+Client IP: 192.168.65.1
+2025-09-20 10:33:30 debug: Since 5.0.0: Query::order() is deprecated. Use Query::orderBy() instead.
+/var/www/html/src/Controller/HomeController.php, line: 102
+You can disable all deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED`. Adding `src/Controller/HomeController.php` to `Error.ignoredDeprecationPaths` in your `config/app.php` config will mute deprecations from that file only. in /var/www/html/vendor/cakephp/cakephp/src/Core/functions.php on line 377
+Trace:
+Cake\Error\ErrorTrap->handleError() [internal], line ??
+/var/www/html/vendor/cakephp/cakephp/src/Core/functions.php /var/www/html/vendor/cakephp/cakephp/src/Core/functions.php, line 377
+/var/www/html/vendor/cakephp/cakephp/src/Database/Query.php /var/www/html/vendor/cakephp/cakephp/src/Database/Query.php, line 1171
+Cake\Database\Query->order() /var/www/html/src/Controller/HomeController.php, line 102
+App\Controller\HomeController->index() /var/www/html/vendor/cakephp/cakephp/src/Controller/Controller.php, line 505
+Cake\Controller\Controller->invokeAction() /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 166
+Cake\Controller\ControllerFactory->handle() /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 141
+Cake\Controller\ControllerFactory->invoke() /var/www/html/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 362
+Cake\Http\BaseApplication->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 86
+Cake\Http\Runner->handle() /var/www/html/src/Middleware/RateLimitMiddleware.php, line 148
+App\Middleware\RateLimitMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/src/Middleware/IpBlockerMiddleware.php, line 107
+App\Middleware\IpBlockerMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 169
+Cake\Http\Middleware\CsrfProtectionMiddleware->process() /var/www/html/src/Middleware/ApiCsrfMiddleware.php, line 48
+App\Middleware\ApiCsrfMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php, line 136
+Authorization\Middleware\AuthorizationMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php, line 106
+Authentication\Middleware\AuthenticationMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Middleware\BodyParserMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php, line 110
+ADmad\I18n\Middleware\I18nMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 117
+Cake\Routing\Middleware\RoutingMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 70
+Cake\Routing\Middleware\AssetMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 115
+Cake\Error\Middleware\ErrorHandlerMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+DebugKit\Middleware\DebugKitMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 60
+Cake\Http\Runner->run() /var/www/html/vendor/cakephp/cakephp/src/Http/Server.php, line 104
+Cake\Http\Server->run() /var/www/html/webroot/index.php, line 31
+[main]
+
+Request URL: /en?q=/en&
+Client IP: 192.168.65.1
+2025-09-20 10:33:30 debug: Since 5.0.0: Query::order() is deprecated. Use Query::orderBy() instead.
+/var/www/html/src/Controller/HomeController.php, line: 118
+You can disable all deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED`. Adding `src/Controller/HomeController.php` to `Error.ignoredDeprecationPaths` in your `config/app.php` config will mute deprecations from that file only. in /var/www/html/vendor/cakephp/cakephp/src/Core/functions.php on line 377
+Trace:
+Cake\Error\ErrorTrap->handleError() [internal], line ??
+/var/www/html/vendor/cakephp/cakephp/src/Core/functions.php /var/www/html/vendor/cakephp/cakephp/src/Core/functions.php, line 377
+/var/www/html/vendor/cakephp/cakephp/src/Database/Query.php /var/www/html/vendor/cakephp/cakephp/src/Database/Query.php, line 1171
+Cake\Database\Query->order() /var/www/html/src/Controller/HomeController.php, line 118
+App\Controller\HomeController->index() /var/www/html/vendor/cakephp/cakephp/src/Controller/Controller.php, line 505
+Cake\Controller\Controller->invokeAction() /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 166
+Cake\Controller\ControllerFactory->handle() /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 141
+Cake\Controller\ControllerFactory->invoke() /var/www/html/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 362
+Cake\Http\BaseApplication->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 86
+Cake\Http\Runner->handle() /var/www/html/src/Middleware/RateLimitMiddleware.php, line 148
+App\Middleware\RateLimitMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/src/Middleware/IpBlockerMiddleware.php, line 107
+App\Middleware\IpBlockerMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 169
+Cake\Http\Middleware\CsrfProtectionMiddleware->process() /var/www/html/src/Middleware/ApiCsrfMiddleware.php, line 48
+App\Middleware\ApiCsrfMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php, line 136
+Authorization\Middleware\AuthorizationMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php, line 106
+Authentication\Middleware\AuthenticationMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Middleware\BodyParserMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php, line 110
+ADmad\I18n\Middleware\I18nMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 117
+Cake\Routing\Middleware\RoutingMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 70
+Cake\Routing\Middleware\AssetMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 115
+Cake\Error\Middleware\ErrorHandlerMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+DebugKit\Middleware\DebugKitMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 60
+Cake\Http\Runner->run() /var/www/html/vendor/cakephp/cakephp/src/Http/Server.php, line 104
+Cake\Http\Server->run() /var/www/html/webroot/index.php, line 31
+[main]
+
+Request URL: /en?q=/en&
+Client IP: 192.168.65.1
+2025-09-20 10:33:30 debug: Since 5.0.0: Query::order() is deprecated. Use Query::orderBy() instead.
+/var/www/html/src/Controller/HomeController.php, line: 135
+You can disable all deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED`. Adding `src/Controller/HomeController.php` to `Error.ignoredDeprecationPaths` in your `config/app.php` config will mute deprecations from that file only. in /var/www/html/vendor/cakephp/cakephp/src/Core/functions.php on line 377
+Trace:
+Cake\Error\ErrorTrap->handleError() [internal], line ??
+/var/www/html/vendor/cakephp/cakephp/src/Core/functions.php /var/www/html/vendor/cakephp/cakephp/src/Core/functions.php, line 377
+/var/www/html/vendor/cakephp/cakephp/src/Database/Query.php /var/www/html/vendor/cakephp/cakephp/src/Database/Query.php, line 1171
+Cake\Database\Query->order() /var/www/html/src/Controller/HomeController.php, line 135
+App\Controller\HomeController->index() /var/www/html/vendor/cakephp/cakephp/src/Controller/Controller.php, line 505
+Cake\Controller\Controller->invokeAction() /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 166
+Cake\Controller\ControllerFactory->handle() /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 141
+Cake\Controller\ControllerFactory->invoke() /var/www/html/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 362
+Cake\Http\BaseApplication->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 86
+Cake\Http\Runner->handle() /var/www/html/src/Middleware/RateLimitMiddleware.php, line 148
+App\Middleware\RateLimitMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/src/Middleware/IpBlockerMiddleware.php, line 107
+App\Middleware\IpBlockerMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 169
+Cake\Http\Middleware\CsrfProtectionMiddleware->process() /var/www/html/src/Middleware/ApiCsrfMiddleware.php, line 48
+App\Middleware\ApiCsrfMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php, line 136
+Authorization\Middleware\AuthorizationMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php, line 106
+Authentication\Middleware\AuthenticationMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Middleware\BodyParserMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php, line 110
+ADmad\I18n\Middleware\I18nMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 117
+Cake\Routing\Middleware\RoutingMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 70
+Cake\Routing\Middleware\AssetMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 115
+Cake\Error\Middleware\ErrorHandlerMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+DebugKit\Middleware\DebugKitMiddleware->process() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 82
+Cake\Http\Runner->handle() /var/www/html/vendor/cakephp/cakephp/src/Http/Runner.php, line 60
+Cake\Http\Runner->run() /var/www/html/vendor/cakephp/cakephp/src/Http/Server.php, line 104
+Cake\Http\Server->run() /var/www/html/webroot/index.php, line 31
+[main]
+
+Request URL: /en?q=/en&
+Client IP: 192.168.65.1
+2025-09-20 10:49:12 debug: SettingsService: Merged quiz settings into Configure.Quiz
+2025-09-20 10:54:19 debug: SettingsService: Merged quiz settings into Configure.Quiz
+2025-09-20 10:54:26 debug: SettingsService: Merged quiz settings into Configure.Quiz

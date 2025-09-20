@@ -85,7 +85,7 @@ try {
     Configure::config('default', new PhpConfig());
     Configure::load('app', 'default', false);
     Configure::load('security', 'default', false); // The 'false' makes it so it won't throw an error if the file doesn't exist, though you likely want it to exist.
-    Configure::load('app_quiz', 'default', true); // Load quiz configuration with fallback
+    Configure::load('quiz', 'default', true); // Load quiz configuration with fallback
     
     // Load RabbitMQ queue configuration and merge it into existing config.
     try {
@@ -263,3 +263,37 @@ ServerRequest::addDetector('tablet', function ($request) {
 // and https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax
 //\Cake\I18n\FrozenDate::setToStringFormat('dd.MM.yyyy');
 //\Cake\I18n\FrozenTime::setToStringFormat('dd.MM.yyyy HH:mm');
+
+/*
+ * Merge database settings into Configure
+ * This allows dynamic settings to override config file defaults
+ */
+try {
+    // Only merge settings if we're not in CLI mode or if this is not during migration/schema commands
+    $skipSettingsMerge = (
+        PHP_SAPI === 'cli' && 
+        (in_array('migrations', $_SERVER['argv'] ?? []) || 
+         in_array('schema_cache', $_SERVER['argv'] ?? []) ||
+         in_array('cache', $_SERVER['argv'] ?? []))
+    );
+    
+    if (!$skipSettingsMerge) {
+        $settingsService = new \App\Service\Settings\SettingsService();
+        
+        // Only attempt merge if settings table exists (to avoid bootstrap errors during initial setup)
+        if ($settingsService->tableExists()) {
+            // Merge quiz settings from DB into Configure.Quiz
+            $settingsService->mergeIntoConfigure('quiz', 'Quiz');
+            
+            // Merge form settings from DB into Configure.Forms (if forms config exists)
+            if (Configure::check('Forms')) {
+                $settingsService->mergeIntoConfigure('forms', 'Forms');
+            }
+        }
+    }
+} catch (\Exception $e) {
+    // Log error but don't break bootstrap
+    if (class_exists('\Cake\Log\Log')) {
+        Log::error('Bootstrap: Failed to merge settings from database', ['error' => $e->getMessage()]);
+    }
+}

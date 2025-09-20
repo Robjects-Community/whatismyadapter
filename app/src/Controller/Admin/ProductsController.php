@@ -10,6 +10,8 @@ use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Http\Response;
 use Cake\ORM\TableRegistry;
 use Exception;
+use App\Service\Settings\SettingsService;
+use Cake\Core\Configure;
 
 class ProductsController extends AppController
 {
@@ -1105,164 +1107,63 @@ class ProductsController extends AppController
     }
 
     /**
-     * Forms Configuration method - Manage frontend product submission forms
+     * Forms Configuration method - Manage frontend product submission forms and quiz settings
      *
-     * This method provides an admin interface to configure frontend product submission forms.
-     * It allows admins to:
-     * - Enable/disable public product submissions
-     * - Configure form fields and validation
-     * - Set default status for user-submitted products
-     * - Manage submission workflow settings
-     * - Configure quiz-based adapter finder
+     * This method provides an admin interface with two tabs:
+     * Tab 1: Forms Configuration - product submission forms
+     * Tab 2: Quiz Settings - quiz-based adapter finder configuration
      *
      * @return \Cake\Http\Response|null
      */
     public function forms(): ?Response
     {
-        // Load settings for product forms configuration
-        $settingsTable = TableRegistry::getTableLocator()->get('Settings');
-
-        // Define schema for all product form settings
-        $settingsSchema = [
-            'enable_public_submissions' => [
-                'default' => '0',
-                'type' => 'bool',
-                'description' => 'Allow public users to submit products via frontend forms',
-            ],
-            'require_admin_approval' => [
-                'default' => '1',
-                'type' => 'bool',
-                'description' => 'Whether user-submitted products require admin approval before publication',
-            ],
-            'default_status' => [
-                'default' => 'pending',
-                'type' => 'select',
-                'options' => ['pending' => 'Pending Review', 'approved' => 'Approved', 'rejected' => 'Rejected'],
-                'description' => 'Default verification status for user-submitted products',
-            ],
-            'max_file_size' => [
-                'default' => '5',
-                'type' => 'numeric',
-                'description' => 'Maximum file size in MB for product image uploads',
-            ],
-            'allowed_file_types' => [
-                'default' => 'jpg,jpeg,png,gif,webp',
-                'type' => 'text',
-                'description' => 'Comma-separated list of allowed file extensions for product images',
-            ],
-            'required_fields' => [
-                'default' => 'title,description,manufacturer',
-                'type' => 'text',
-                'description' => 'Comma-separated list of required form fields',
-            ],
-            'notification_email' => [
-                'default' => '0',
-                'type' => 'text',
-                'description' => 'Email address to notify when new products are submitted (use 0 to disable)',
-            ],
-            'success_message' => [
-                'default' => 'Your product has been submitted and is awaiting review. ' .
-                    'Thank you for contributing to our adapter database!',
-                'type' => 'textarea',
-                'description' => 'Message shown to users after successful product submission',
-            ],
-            'quiz_enabled' => [
-                'default' => '0',
-                'type' => 'bool',
-                'description' => 'Enable quiz-based adapter finder to help users discover suitable adapters',
-            ],
-            'quiz_config_json' => [
-                'default' => '{}',
-                'type' => 'textarea',
-                'description' => 'JSON configuration for quiz questions, branching logic, and scoring algorithm',
-            ],
-            'quiz_results_page' => [
-                'default' => '0',
-                'type' => 'select-page',
-                'description' => 'Page to redirect users to after quiz completion (0 = disabled)',
-            ],
-        ];
-
-        // Get current form configuration settings
-        $formSettings = [];
-        foreach ($settingsSchema as $key => $schema) {
-            $setting = $settingsTable->find()
-                ->where(['category' => 'Products', 'key_name' => $key])
-                ->first();
-
-            if ($setting) {
-                $value = $setting->value;
-                // Convert bool values for template compatibility
-                if ($schema['type'] === 'bool') {
-                    $formSettings[$key] = $value === '1' || $value === 1 || $value === true ? 'true' : 'false';
-                } else {
-                    $formSettings[$key] = $value;
-                }
-            } else {
-                // Use default value
-                if ($schema['type'] === 'bool') {
-                    $formSettings[$key] = $schema['default'] === '1' ? 'true' : 'false';
-                } else {
-                    $formSettings[$key] = $schema['default'];
-                }
-            }
-        }
+        $settingsService = new SettingsService();
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
-
-            // Validate and save each setting
+            $formType = $data['form_type'] ?? 'forms'; // 'forms' or 'quiz'
+            
+            // Remove form_type from data to avoid saving it
+            unset($data['form_type']);
+            
             $savedSettings = 0;
             $failedSettings = [];
-
-            foreach ($data as $settingName => $settingValue) {
-                // Skip CSRF token and other non-setting fields
-                if (in_array($settingName, ['_csrfToken'])) {
-                    continue;
-                }
-
-                // Only process known settings
-                if (!isset($settingsSchema[$settingName])) {
-                    continue;
-                }
-
-                $schema = $settingsSchema[$settingName];
-
-                // Normalize value based on type
-                $normalizedValue = $this->normalizeSettingValue($settingValue, $schema);
-
-                // Find existing setting or create new one
-                $setting = $settingsTable->find()
-                    ->where(['category' => 'Products', 'key_name' => $settingName])
-                    ->first();
-
-                if (!$setting) {
-                    $setting = $settingsTable->newEmptyEntity();
-                    $setting->category = 'Products';
-                    $setting->key_name = $settingName;
-                    $setting->value_type = $schema['type'];
-                    $setting->description = $schema['description'];
-                    $setting->ordering = 100; // Default ordering
-
-                    // Set data field for select options if applicable
-                    if (isset($schema['options'])) {
-                        $setting->data = json_encode($schema['options']);
+            
+            if ($formType === 'forms') {
+                // Handle Forms Configuration Tab
+                foreach ($data as $settingName => $settingValue) {
+                    // Skip CSRF token and other non-setting fields
+                    if (in_array($settingName, ['_csrfToken'])) {
+                        continue;
+                    }
+                    
+                    if ($settingsService->set('forms', $settingName, $settingValue)) {
+                        $savedSettings++;
+                    } else {
+                        $failedSettings[] = $settingName;
                     }
                 }
-
-                $setting->value = (string)$normalizedValue;
-
-                if ($settingsTable->save($setting)) {
-                    $savedSettings++;
-                } else {
-                    $failedSettings[] = $settingName;
+            } elseif ($formType === 'quiz') {
+                // Handle Quiz Settings Tab
+                foreach ($data as $settingName => $settingValue) {
+                    // Skip CSRF token and other non-setting fields
+                    if (in_array($settingName, ['_csrfToken'])) {
+                        continue;
+                    }
+                    
+                    if ($settingsService->set('quiz', $settingName, $settingValue)) {
+                        $savedSettings++;
+                    } else {
+                        $failedSettings[] = $settingName;
+                    }
                 }
             }
 
             if ($savedSettings > 0) {
                 $this->clearContentCache();
+                $tabName = $formType === 'quiz' ? 'Quiz Settings' : 'Forms Configuration';
                 $this->Flash->success(
-                    __('Product form configuration has been updated. ({0} settings saved)', $savedSettings),
+                    __('Successfully updated {0} ({1} settings saved)', $tabName, $savedSettings)
                 );
             }
 
@@ -1272,6 +1173,29 @@ class ProductsController extends AppController
 
             return $this->redirect(['action' => 'forms']);
         }
+
+        // Load Forms configuration data
+        $formSettings = [
+            'enable_public_submissions' => $settingsService->get('forms', 'enable_public_submissions', false),
+            'require_admin_approval' => $settingsService->get('forms', 'require_admin_approval', true),
+            'default_status' => $settingsService->get('forms', 'default_status', 'pending'),
+            'max_file_size' => $settingsService->get('forms', 'max_file_size', 5),
+            'allowed_file_types' => $settingsService->get('forms', 'allowed_file_types', 'jpg,jpeg,png,gif,webp'),
+            'required_fields' => $settingsService->get('forms', 'required_fields', 'title,description,manufacturer'),
+            'notification_email' => $settingsService->get('forms', 'notification_email', ''),
+            'success_message' => $settingsService->get('forms', 'success_message', 'Your product has been submitted and is awaiting review. Thank you for contributing to our adapter database!'),
+        ];
+
+        // Load Quiz settings from Configure (which now includes DB overrides)
+        $quizSettings = [
+            'enabled' => Configure::read('Quiz.enabled'),
+            'max_results' => Configure::read('Quiz.max_results'),
+            'confidence_threshold' => Configure::read('Quiz.confidence_threshold'),
+            'akinator' => Configure::read('Quiz.akinator'),
+            'comprehensive' => Configure::read('Quiz.comprehensive'),
+            'result' => Configure::read('Quiz.result'),
+            'ai' => Configure::read('Quiz.ai'),
+        ];
 
         // Get statistics about user submissions
         $submissionStats = [
@@ -1298,15 +1222,168 @@ class ProductsController extends AppController
             ->limit(10)
             ->toArray();
 
-        // Load ProductFormFields for dynamic form management
-        $productFormFieldsTable = TableRegistry::getTableLocator()->get('ProductFormFields');
-        $productFormFields = $productFormFieldsTable->find('all')
-            ->orderBy(['display_order' => 'ASC'])
-            ->toArray();
-
-        $this->set(compact('formSettings', 'submissionStats', 'recentSubmissions', 'productFormFields'));
+        $this->set(compact('formSettings', 'quizSettings', 'submissionStats', 'recentSubmissions'));
 
         return null;
+    }
+
+    /**
+     * AI Suggest method - Provide AI-powered product enrichment suggestions
+     *
+     * Accepts minimal product input and returns enriched product data suggestions
+     * using the ProductEnrichmentService.
+     *
+     * @return \Cake\Http\Response JSON response with suggestions
+     */
+    public function aiSuggest(): Response
+    {
+        $this->request->allowMethod(['post']);
+
+        $input = $this->request->getData();
+        
+        // Basic validation of required fields
+        if (empty($input['title']) && empty($input['description'])) {
+            return $this->response
+                ->withType('application/json')
+                ->withStatus(400)
+                ->withStringBody(json_encode([
+                    'success' => false,
+                    'message' => 'Please provide at least a title or description'
+                ]));
+        }
+
+        try {
+            // For now, return mock suggestions until ProductEnrichmentService is implemented
+            $suggestions = [
+                'success' => true,
+                'suggestions' => [
+                    'manufacturer' => $this->suggestManufacturer($input),
+                    'device_category' => $this->suggestCategory($input),
+                    'description' => $this->enhanceDescription($input),
+                    'tags' => $this->suggestTags($input),
+                    'price_estimate' => $this->estimatePrice($input),
+                ]
+            ];
+
+            return $this->response
+                ->withType('application/json')
+                ->withStringBody(json_encode($suggestions));
+                
+        } catch (\Exception $e) {
+            $this->log('AI Suggest error: ' . $e->getMessage(), 'error');
+            
+            return $this->response
+                ->withType('application/json')
+                ->withStatus(500)
+                ->withStringBody(json_encode([
+                    'success' => false,
+                    'message' => 'An error occurred while generating suggestions'
+                ]));
+        }
+    }
+
+    /**
+     * Mock manufacturer suggestion (will be replaced with AI service)
+     */
+    private function suggestManufacturer(array $input): ?string
+    {
+        $title = strtolower($input['title'] ?? '');
+        $description = strtolower($input['description'] ?? '');
+        
+        $commonBrands = [
+            'apple' => 'Apple',
+            'samsung' => 'Samsung', 
+            'hp' => 'HP',
+            'dell' => 'Dell',
+            'lenovo' => 'Lenovo',
+            'asus' => 'ASUS',
+            'acer' => 'Acer',
+            'microsoft' => 'Microsoft',
+            'logitech' => 'Logitech',
+            'belkin' => 'Belkin',
+            'anker' => 'Anker',
+        ];
+        
+        foreach ($commonBrands as $keyword => $brand) {
+            if (strpos($title, $keyword) !== false || strpos($description, $keyword) !== false) {
+                return $brand;
+            }
+        }
+        
+        return null;
+    }
+
+    /**
+     * Mock category suggestion (will be replaced with AI service)
+     */
+    private function suggestCategory(array $input): ?string
+    {
+        $title = strtolower($input['title'] ?? '');
+        $description = strtolower($input['description'] ?? '');
+        
+        if (strpos($title, 'adapter') !== false || strpos($description, 'adapter') !== false) {
+            return 'Adapter';
+        }
+        if (strpos($title, 'cable') !== false || strpos($description, 'cable') !== false) {
+            return 'Cable';
+        }
+        if (strpos($title, 'charger') !== false || strpos($description, 'charger') !== false) {
+            return 'Charger';
+        }
+        
+        return null;
+    }
+
+    /**
+     * Mock description enhancement (will be replaced with AI service)
+     */
+    private function enhanceDescription(array $input): ?string
+    {
+        $existingDescription = $input['description'] ?? '';
+        
+        if (strlen($existingDescription) < 50) {
+            $title = $input['title'] ?? '';
+            return $existingDescription . ' This ' . strtolower($title) . ' offers reliable performance and compatibility.';
+        }
+        
+        return null;
+    }
+
+    /**
+     * Mock tags suggestion (will be replaced with AI service)
+     */
+    private function suggestTags(array $input): array
+    {
+        $title = strtolower($input['title'] ?? '');
+        $description = strtolower($input['description'] ?? '');
+        $text = $title . ' ' . $description;
+        
+        $tags = [];
+        if (strpos($text, 'usb') !== false) $tags[] = 'USB';
+        if (strpos($text, 'hdmi') !== false) $tags[] = 'HDMI';
+        if (strpos($text, 'ethernet') !== false) $tags[] = 'Ethernet';
+        if (strpos($text, 'wireless') !== false) $tags[] = 'Wireless';
+        if (strpos($text, 'bluetooth') !== false) $tags[] = 'Bluetooth';
+        
+        return $tags;
+    }
+
+    /**
+     * Mock price estimation (will be replaced with AI service)
+     */
+    private function estimatePrice(array $input): ?float
+    {
+        $title = strtolower($input['title'] ?? '');
+        
+        // Simple heuristics for price estimation
+        if (strpos($title, 'premium') !== false || strpos($title, 'pro') !== false) {
+            return 49.99;
+        }
+        if (strpos($title, 'basic') !== false || strpos($title, 'simple') !== false) {
+            return 9.99;
+        }
+        
+        return 19.99;
     }
 
     /**

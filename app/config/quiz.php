@@ -1,13 +1,98 @@
 <?php
 /**
- * Quiz Configuration
+ * Quiz System Configuration
  * 
- * Default quiz configuration for Adapter Finder Quiz.
- * This provides fallback configuration when database settings are not available.
+ * This file contains the default configuration for the AI-powered quiz system.
+ * These values can be overridden by database settings at runtime.
  */
 
 return [
     'Quiz' => [
+        // Global Quiz Settings
+        'enabled' => true,
+        'max_results' => 10,
+        'confidence_threshold' => 0.6,
+        
+        // Akinator-style Quiz
+        'akinator' => [
+            'enabled' => true,
+            'max_questions' => 15,
+            'confidence_goal' => 0.85,
+            'binary_threshold' => 0.7,
+        ],
+        
+        // Comprehensive Quiz
+        'comprehensive' => [
+            'enabled' => true,
+            'steps' => 6,
+            'require_all_steps' => false,
+            'validate_on_submit' => true,
+        ],
+        
+        // Result Display Options
+        'result' => [
+            'display' => [
+                'show_confidence' => true,
+                'show_specs' => true,
+                'show_explanation' => true,
+                'layout' => 'list', // list|grid
+                'max_per_page' => 10,
+            ],
+            'sorting' => [
+                'primary' => 'confidence', // confidence|price|rating
+                'direction' => 'desc', // asc|desc
+                'secondary' => 'rating',
+            ],
+        ],
+        
+        // AI Matching Configuration
+        'ai' => [
+            'method' => 'hybrid', // hybrid|bm25|semantic|rule_based
+            'providers' => [
+                'semantic' => [
+                    'provider' => 'openai', // openai|local|huggingface
+                    'model' => 'text-embedding-ada-002',
+                    'temperature' => 0.1,
+                    'max_tokens' => 1000,
+                ],
+                'chat' => [
+                    'provider' => 'openai',
+                    'model' => 'gpt-3.5-turbo',
+                    'temperature' => 0.3,
+                    'max_tokens' => 500,
+                ],
+            ],
+            'scoring' => [
+                'weights' => [
+                    'semantic' => 0.4,
+                    'keyword' => 0.3,
+                    'category' => 0.2,
+                    'specs' => 0.1,
+                ],
+                'boost' => [
+                    'verified' => 1.2,
+                    'popular' => 1.1,
+                    'recent' => 1.05,
+                ],
+            ],
+        ],
+        
+        // Analytics & Logging
+        'analytics' => [
+            'enabled' => true,
+            'track_submissions' => true,
+            'track_abandonment' => true,
+            'session_timeout' => 3600, // 1 hour
+        ],
+        
+        // Caching
+        'cache' => [
+            'enabled' => true,
+            'duration' => 1800, // 30 minutes
+            'key_prefix' => 'quiz_',
+        ],
+        
+        // Legacy configuration for existing quiz questions
         'default' => [
             'version' => 2,
             'quiz_info' => [

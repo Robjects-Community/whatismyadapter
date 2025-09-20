@@ -1,7 +1,8 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var array $formSettings Current form configuration settings
+ * @var array $formsSettings Current form configuration settings
+ * @var array $quizSettings Current quiz configuration settings
  * @var array $submissionStats Statistics about user submissions
  * @var array $recentSubmissions Recent user submissions
  * @var array $productFormFields Dynamic form fields from database
@@ -57,9 +58,11 @@ echo $this->element('AdminTheme.nav/products_tabs');
 
                     <?= $this->Form->create(null, [
                         'method' => 'post',
-                        'class' => 'needs-validation',
+                        'class' => 'needs-validation forms-config-form',
                         'novalidate' => true
                     ]) ?>
+                    
+                    <?= $this->Form->hidden('form_type', ['value' => 'forms']) ?>
 
                     <div class="row">
                         <!-- Public Submissions -->
@@ -71,7 +74,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                                 <div class="form-check form-switch">
                                     <?= $this->Form->checkbox('enable_public_submissions', [
                                         'value' => 'true',
-                                        'checked' => $formSettings['enable_public_submissions'] === 'true',
+                                        'checked' => $formsSettings['enable_public_submissions'] === 'true',
                                         'class' => 'form-check-input',
                                         'id' => 'enable_public_submissions'
                                     ]) ?>
@@ -91,7 +94,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                                 <div class="form-check form-switch">
                                     <?= $this->Form->checkbox('require_admin_approval', [
                                         'value' => 'true',
-                                        'checked' => $formSettings['require_admin_approval'] === 'true',
+                                        'checked' => $formsSettings['require_admin_approval'] === 'true',
                                         'class' => 'form-check-input',
                                         'id' => 'require_admin_approval'
                                     ]) ?>
@@ -115,7 +118,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                                     'approved' => __('Approved'),
                                     'rejected' => __('Rejected')
                                 ], [
-                                    'value' => $formSettings['default_status'],
+                                    'value' => $formsSettings['default_status'],
                                     'class' => 'form-select',
                                     'id' => 'default_status'
                                 ]) ?>
@@ -133,7 +136,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                                 ]) ?>
                                 <div class="input-group">
                                     <?= $this->Form->number('max_file_size', [
-                                        'value' => $formSettings['max_file_size'],
+                                        'value' => $formsSettings['max_file_size'],
                                         'class' => 'form-control',
                                         'min' => 1,
                                         'max' => 100,
@@ -155,7 +158,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                             'class' => 'form-label fw-bold'
                         ]) ?>
                         <?= $this->Form->text('allowed_file_types', [
-                            'value' => $formSettings['allowed_file_types'],
+                            'value' => $formsSettings['allowed_file_types'],
                             'class' => 'form-control',
                             'placeholder' => 'jpg,jpeg,png,gif,webp',
                             'id' => 'allowed_file_types'
@@ -171,7 +174,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                             'class' => 'form-label fw-bold'
                         ]) ?>
                         <?= $this->Form->text('required_fields', [
-                            'value' => $formSettings['required_fields'],
+                            'value' => $formsSettings['required_fields'],
                             'class' => 'form-control',
                             'placeholder' => 'title,description,manufacturer,price',
                             'id' => 'required_fields'
@@ -193,7 +196,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                             'class' => 'form-label fw-bold'
                         ]) ?>
                         <?= $this->Form->email('notification_email', [
-                            'value' => $formSettings['notification_email'],
+                            'value' => $formsSettings['notification_email'],
                             'class' => 'form-control',
                             'placeholder' => 'admin@example.com',
                             'id' => 'notification_email'
@@ -209,7 +212,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                             'class' => 'form-label fw-bold'
                         ]) ?>
                         <?= $this->Form->textarea('success_message', [
-                            'value' => $formSettings['success_message'],
+                            'value' => $formsSettings['success_message'],
                             'class' => 'form-control',
                             'rows' => 3,
                             'placeholder' => 'Your product has been submitted and is awaiting review.',
@@ -379,9 +382,10 @@ echo $this->element('AdminTheme.nav/products_tabs');
                     <?= $this->Form->create(null, [
                         'method' => 'post',
                         'class' => 'quiz-form needs-validation',
-                        'novalidate' => true,
-                        'data-tab' => 'quiz'
+                        'novalidate' => true
                     ]) ?>
+                    
+                    <?= $this->Form->hidden('form_type', ['value' => 'quiz']) ?>
                     
                     <div class="row">
                         <!-- Enable Quiz -->
@@ -393,7 +397,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                                 <div class="form-check form-switch form-switch-lg">
                                     <?= $this->Form->checkbox('quiz_enabled', [
                                         'value' => 'true',
-                                        'checked' => $formSettings['quiz_enabled'] === 'true',
+                                        'checked' => $quizSettings['quiz_enabled'] === 'true',
                                         'class' => 'form-check-input',
                                         'id' => 'quiz_enabled_tab'
                                     ]) ?>
@@ -415,7 +419,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                                     '0' => __('Show results inline (recommended)'),
                                     '1' => __('Redirect to dedicated page'),
                                 ], [
-                                    'value' => $formSettings['quiz_results_page'],
+                                    'value' => $quizSettings['quiz_results_page'],
                                     'class' => 'form-select',
                                     'id' => 'quiz_results_page_tab'
                                 ]) ?>
@@ -439,7 +443,7 @@ echo $this->element('AdminTheme.nav/products_tabs');
                         
                         <div class="position-relative">
                             <?= $this->Form->textarea('quiz_config_json', [
-                                'value' => $formSettings['quiz_config_json'],
+                                'value' => $quizSettings['quiz_config_json'],
                                 'class' => 'form-control font-monospace quiz-json-editor',
                                 'rows' => 12,
                                 'placeholder' => '{
@@ -569,143 +573,6 @@ echo $this->element('AdminTheme.nav/products_tabs');
         </div>
     </div>
 
-                    <div class="d-flex justify-content-end">
-                        <?= $this->Form->button(__('Save Configuration'), [
-                            'type' => 'submit',
-                            'class' => 'btn btn-primary btn-lg'
-                        ]) ?>
-                    </div>
-
-                    <?= $this->Form->end() ?>
-                </div>
-            </div>
-        </div>
-
-        <!-- Statistics Column -->
-        <div class="col-md-4">
-            <!-- Submission Statistics -->
-            <div class="card mb-4">
-                <div class="card-header bg-info text-white">
-                    <h6 class="mb-0">
-                        <i class="fas fa-chart-bar me-2"></i>
-                        <?= __('Submission Statistics') ?>
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <div class="row text-center">
-                        <div class="col-6">
-                            <div class="stat-item mb-3">
-                                <div class="stat-number text-primary fs-4 fw-bold">
-                                    <?= number_format($submissionStats['total_submissions']) ?>
-                                </div>
-                                <div class="stat-label text-muted small">
-                                    <?= __('Total Submissions') ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="stat-item mb-3">
-                                <div class="stat-number text-warning fs-4 fw-bold">
-                                    <?= number_format($submissionStats['pending_submissions']) ?>
-                                </div>
-                                <div class="stat-label text-muted small">
-                                    <?= __('Pending Review') ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="stat-item">
-                                <div class="stat-number text-success fs-4 fw-bold">
-                                    <?= number_format($submissionStats['approved_submissions']) ?>
-                                </div>
-                                <div class="stat-label text-muted small">
-                                    <?= __('Approved') ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="stat-item">
-                                <div class="stat-number text-danger fs-4 fw-bold">
-                                    <?= number_format($submissionStats['rejected_submissions']) ?>
-                                </div>
-                                <div class="stat-label text-muted small">
-                                    <?= __('Rejected') ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <?php if ($submissionStats['pending_submissions'] > 0): ?>
-                        <div class="mt-3">
-                            <?= $this->Html->link(
-                                __('Review Pending Products'),
-                                ['action' => 'pendingReview'],
-                                ['class' => 'btn btn-outline-warning btn-sm w-100']
-                            ) ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-
-            <!-- Recent Submissions -->
-            <div class="card">
-                <div class="card-header bg-secondary text-white">
-                    <h6 class="mb-0">
-                        <i class="fas fa-clock me-2"></i>
-                        <?= __('Recent Submissions') ?>
-                    </h6>
-                </div>
-                <div class="card-body p-0">
-                    <?php if (empty($recentSubmissions)): ?>
-                        <div class="p-3 text-center text-muted">
-                            <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
-                            <?= __('No user submissions yet') ?>
-                        </div>
-                    <?php else: ?>
-                        <div class="list-group list-group-flush">
-                            <?php foreach (array_slice($recentSubmissions, 0, 5) as $submission): ?>
-                                <div class="list-group-item">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-1">
-                                                <?= $this->Html->link(
-                                                    h($submission->title),
-                                                    ['action' => 'view', $submission->id],
-                                                    ['class' => 'text-decoration-none']
-                                                ) ?>
-                                            </h6>
-                                            <p class="mb-1 small text-muted">
-                                                <?= __('by {0}', h($submission->user->username ?? 'Unknown User')) ?>
-                                            </p>
-                                            <small class="text-muted">
-                                                <?= $submission->created->timeAgoInWords() ?>
-                                            </small>
-                                        </div>
-                                        <span class="badge <?= 
-                                            $submission->verification_status === 'approved' ? 'bg-success' : 
-                                            ($submission->verification_status === 'rejected' ? 'bg-danger' : 'bg-warning') 
-                                        ?>">
-                                            <?= ucfirst(h($submission->verification_status)) ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-
-                        <?php if (count($recentSubmissions) > 5): ?>
-                            <div class="card-footer text-center">
-                                <?= $this->Html->link(
-                                    __('View All Submissions'),
-                                    ['action' => 'index'],
-                                    ['class' => 'btn btn-outline-secondary btn-sm']
-                                ) ?>
-                            </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Configuration Guide -->
     <div class="row mt-4">
@@ -823,23 +690,149 @@ document.addEventListener('DOMContentLoaded', function() {
         }, false);
     });
 
-    // Interactive features
+    // Interactive features for forms tab
     const enableSubmissions = document.getElementById('enable_public_submissions');
     const requireApproval = document.getElementById('require_admin_approval');
     const defaultStatus = document.getElementById('default_status');
 
     function updateFormLogic() {
-        if (enableSubmissions.checked) {
-            requireApproval.closest('.col-md-6').style.opacity = '1';
-            defaultStatus.closest('.col-md-6').style.opacity = '1';
+        if (enableSubmissions && enableSubmissions.checked) {
+            if (requireApproval) requireApproval.closest('.col-md-6').style.opacity = '1';
+            if (defaultStatus) defaultStatus.closest('.col-md-6').style.opacity = '1';
         } else {
-            requireApproval.closest('.col-md-6').style.opacity = '0.5';
-            defaultStatus.closest('.col-md-6').style.opacity = '0.5';
+            if (requireApproval) requireApproval.closest('.col-md-6').style.opacity = '0.5';
+            if (defaultStatus) defaultStatus.closest('.col-md-6').style.opacity = '0.5';
         }
     }
 
-    enableSubmissions.addEventListener('change', updateFormLogic);
-    updateFormLogic(); // Initial state
+    if (enableSubmissions) {
+        enableSubmissions.addEventListener('change', updateFormLogic);
+        updateFormLogic(); // Initial state
+    }
+
+    // Quiz configuration features
+    const quizJsonTextarea = document.getElementById('quiz_config_json_tab');
+    const validateJsonBtn = document.getElementById('validateJsonBtn');
+    const resetQuizBtn = document.getElementById('resetQuizBtn');
+    const previewQuizBtn = document.getElementById('previewQuizBtn');
+
+    // JSON validation
+    if (validateJsonBtn && quizJsonTextarea) {
+        validateJsonBtn.addEventListener('click', function() {
+            const jsonContent = quizJsonTextarea.value.trim();
+            
+            if (!jsonContent) {
+                alert('Please enter JSON configuration first.');
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(jsonContent);
+                
+                // Basic structure validation
+                if (!parsed.questions || !Array.isArray(parsed.questions)) {
+                    throw new Error('Quiz must have a "questions" array');
+                }
+                
+                if (parsed.questions.length === 0) {
+                    throw new Error('Quiz must have at least one question');
+                }
+                
+                // Check each question has required fields
+                parsed.questions.forEach((q, i) => {
+                    if (!q.id || !q.question || !q.type) {
+                        throw new Error(`Question ${i + 1} is missing required fields (id, question, type)`);
+                    }
+                });
+                
+                // Success feedback
+                validateJsonBtn.innerHTML = '<i class="fas fa-check text-success me-1"></i>Valid!';
+                validateJsonBtn.classList.remove('btn-outline-secondary');
+                validateJsonBtn.classList.add('btn-outline-success');
+                
+                setTimeout(() => {
+                    validateJsonBtn.innerHTML = '<i class="fas fa-check me-1"></i>Validate';
+                    validateJsonBtn.classList.remove('btn-outline-success');
+                    validateJsonBtn.classList.add('btn-outline-secondary');
+                }, 2000);
+                
+            } catch (error) {
+                alert('JSON Validation Error:\n\n' + error.message);
+                validateJsonBtn.innerHTML = '<i class="fas fa-times text-danger me-1"></i>Invalid';
+                validateJsonBtn.classList.remove('btn-outline-secondary');
+                validateJsonBtn.classList.add('btn-outline-danger');
+                
+                setTimeout(() => {
+                    validateJsonBtn.innerHTML = '<i class="fas fa-check me-1"></i>Validate';
+                    validateJsonBtn.classList.remove('btn-outline-danger');
+                    validateJsonBtn.classList.add('btn-outline-secondary');
+                }, 3000);
+            }
+        });
+    }
+
+    // Reset quiz to default
+    if (resetQuizBtn && quizJsonTextarea) {
+        resetQuizBtn.addEventListener('click', function() {
+            if (confirm('Reset quiz configuration to default? This will overwrite your current settings.')) {
+                const defaultQuizConfig = {
+                    "title": "Find Your Perfect Product",
+                    "description": "Answer a few quick questions to get personalized recommendations",
+                    "questions": [
+                        {
+                            "id": "usage_type",
+                            "question": "What will you primarily use this for?",
+                            "type": "radio",
+                            "required": true,
+                            "options": {
+                                "work": "Work & Productivity",
+                                "personal": "Personal Use",
+                                "gaming": "Gaming & Entertainment"
+                            }
+                        },
+                        {
+                            "id": "budget_range",
+                            "question": "What's your budget range?",
+                            "type": "select",
+                            "required": true,
+                            "options": {
+                                "low": "Under $50",
+                                "medium": "$50 - $150",
+                                "high": "Over $150"
+                            }
+                        }
+                    ],
+                    "scoring": {
+                        "work+low": ["category:basic-adapters", "price:<50"],
+                        "work+medium": ["category:professional-adapters", "price:50-150"],
+                        "personal+low": ["category:basic-adapters", "tag:simple"],
+                        "gaming+high": ["category:gaming-adapters", "tag:high-performance"]
+                    }
+                };
+                quizJsonTextarea.value = JSON.stringify(defaultQuizConfig, null, 2);
+            }
+        });
+    }
+
+    // Tab switching enhancements
+    const formConfigTab = document.getElementById('form-config-tab');
+    const quizConfigTab = document.getElementById('quiz-config-tab');
+
+    // Save current tab state in localStorage
+    if (formConfigTab && quizConfigTab) {
+        const savedTab = localStorage.getItem('productsFormsActiveTab');
+        if (savedTab === 'quiz-config') {
+            quizConfigTab.click();
+        }
+
+        formConfigTab.addEventListener('click', function() {
+            localStorage.setItem('productsFormsActiveTab', 'form-config');
+        });
+
+        quizConfigTab.addEventListener('click', function() {
+            localStorage.setItem('productsFormsActiveTab', 'quiz-config');
+        });
+    }
 });
 </script>
 <?php $this->end(); ?>
