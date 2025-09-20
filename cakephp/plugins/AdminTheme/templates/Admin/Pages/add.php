@@ -37,6 +37,32 @@
                 </h5>
             </div>
             <div class="card-body">
+                <!-- URL Import Section -->
+                <div class="mb-4 p-3 bg-light rounded">
+                    <h6 class="mb-3">
+                        <i class="bi bi-globe me-2"></i>
+                        <?= __('Import from Website') ?>
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-link-45deg"></i></span>
+                                <input type="url" id="import-url" class="form-control" 
+                                       placeholder="<?= __('https://example.com/page-to-import') ?>">
+                                <button type="button" id="import-btn" class="btn btn-outline-primary">
+                                    <i class="bi bi-download me-1"></i><?= __('Import') ?>
+                                </button>
+                            </div>
+                            <div class="form-text">
+                                <?= __('Enter a URL to automatically extract title, content, and meta information.') ?>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="import-status" class="small"></div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <?= $this->Form->control('title', [
@@ -228,6 +254,122 @@
 
 <?php $this->Html->scriptStart(['block' => true]); ?>
 document.addEventListener('DOMContentLoaded', function() {
+    // URL Import functionality
+    const importBtn = document.getElementById('import-btn');
+    const importUrl = document.getElementById('import-url');
+    const importStatus = document.getElementById('import-status');
+    const titleInput = document.querySelector('input[name="title"]');
+    const bodyTextarea = document.querySelector('textarea[name="body"]');
+    const metaTitleInput = document.querySelector('input[name="meta_title"]');
+    const metaDescriptionTextarea = document.querySelector('textarea[name="meta_description"]');
+    const metaKeywordsInput = document.querySelector('input[name="meta_keywords"]');
+    
+    if (importBtn && importUrl) {
+        importBtn.addEventListener('click', async function() {
+            const url = importUrl.value.trim();
+            
+            if (!url) {
+                showImportStatus('Please enter a URL', 'danger');
+                return;
+            }
+            
+            if (!isValidUrl(url)) {
+                showImportStatus('Please enter a valid URL', 'danger');
+                return;
+            }
+            
+            try {
+                importBtn.disabled = true;
+                importBtn.innerHTML = '<i class="bi bi-hourglass-split me-1"></i><?= __('Importing...') ?>';
+                showImportStatus('Extracting content...', 'info');
+                
+                const response = await fetch('<?= $this->Url->build(['controller' => 'Pages', 'action' => 'extractWebpage', 'prefix' => 'Admin']) ?>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-Token': '<?= $this->request->getAttribute('csrfToken') ?>'
+                    },
+                    body: JSON.stringify({ url: url })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Populate form fields
+                    if (data.data.title && !titleInput.value) {
+                        titleInput.value = data.data.title;
+                        titleInput.dispatchEvent(new Event('input')); // Trigger slug generation
+                    }
+                    
+                    if (data.data.content && !bodyTextarea.value) {
+                        bodyTextarea.value = data.data.content;
+                        bodyTextarea.dispatchEvent(new Event('input')); // Trigger preview update
+                    }
+                    
+                    if (data.data.meta_title && !metaTitleInput.value) {
+                        metaTitleInput.value = data.data.meta_title;
+                        metaTitleInput.dispatchEvent(new Event('input')); // Trigger counter update
+                    }
+                    
+                    if (data.data.meta_description && !metaDescriptionTextarea.value) {
+                        metaDescriptionTextarea.value = data.data.meta_description;
+                        metaDescriptionTextarea.dispatchEvent(new Event('input')); // Trigger counter update
+                    }
+                    
+                    if (data.data.meta_keywords && !metaKeywordsInput.value) {
+                        metaKeywordsInput.value = data.data.meta_keywords;
+                    }
+                    
+                    showImportStatus('Content imported successfully!', 'success');
+                    importUrl.value = ''; // Clear the URL input
+                } else {
+                    showImportStatus(data.message || 'Failed to extract content', 'danger');
+                }
+                
+            } catch (error) {
+                console.error('Import error:', error);
+                showImportStatus('Error importing content: ' + error.message, 'danger');
+            } finally {
+                importBtn.disabled = false;
+                importBtn.innerHTML = '<i class="bi bi-download me-1"></i><?= __('Import') ?>';
+            }
+        });
+    }
+    
+    function isValidUrl(string) {
+        try {
+            new URL(string);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+    
+    function showImportStatus(message, type = 'info') {
+        const statusEl = document.getElementById('import-status');
+        statusEl.innerHTML = `<span class="text-${type}"><i class="bi bi-${getIconForType(type)} me-1"></i>${message}</span>`;
+        
+        // Auto-hide success/info messages after 5 seconds
+        if (type === 'success' || type === 'info') {
+            setTimeout(() => {
+                statusEl.innerHTML = '';
+            }, 5000);
+        }
+    }
+    
+    function getIconForType(type) {
+        switch (type) {
+            case 'success': return 'check-circle';
+            case 'danger': return 'exclamation-triangle';
+            case 'info': return 'info-circle';
+            default: return 'info-circle';
+        }
+    }
     // Auto-generate slug from title
     const titleInput = document.querySelector('[data-slug-source]');
     const slugInput = document.querySelector('[data-slug-target]');

@@ -126,6 +126,9 @@ class AppController extends Controller
         $consentData = $this->consentService->getConsentData($this->request);
         $this->set($consentData);
 
+        // Track last visited page for cookie consent redirection
+        $this->trackLastVisitedPage();
+
         $this->set('activeCtl', $this->request->getParam('controller'));
         $this->set('activeAct', $this->request->getParam('action'));
     }
@@ -148,5 +151,38 @@ class AppController extends Controller
             : Configure::read('Theme.default_theme', 'DefaultTheme');
 
         $this->viewBuilder()->setTheme($theme);
+    }
+
+    /**
+     * Track the last visited page for cookie consent redirection
+     *
+     * @return void
+     */
+    private function trackLastVisitedPage(): void
+    {
+        // Only track GET requests to avoid tracking form submissions
+        if (!$this->request->is('get')) {
+            return;
+        }
+
+        // Don't track cookie consent pages, admin pages, AJAX requests, or error pages
+        $controller = $this->request->getParam('controller');
+        $action = $this->request->getParam('action');
+        $isAdmin = $this->request->getParam('prefix') === 'Admin';
+        $isAjax = $this->request->is('ajax');
+        
+        if ($isAdmin || $isAjax || 
+            ($controller === 'CookieConsents') ||
+            ($controller === 'Users' && in_array($action, ['login', 'logout'])) ||
+            ($controller === 'Error')) {
+            return;
+        }
+
+        // Store the current URL in session
+        $session = $this->request->getSession();
+        if ($session->started()) {
+            $currentUrl = $this->request->getRequestTarget();
+            $session->write('lastVisitedPage', $currentUrl);
+        }
     }
 }

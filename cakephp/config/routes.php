@@ -627,7 +627,14 @@ return function (RouteBuilder $routes): void {
         ]);
         
         $routes->connect('/', ['controller' => 'Articles', 'action' => 'index', 'prefix' => 'Admin']);
-
+        
+        // Articles bulk action route
+        $routes->connect('/articles/bulk-action', [
+            'controller' => 'Articles',
+            'action' => 'bulkAction'
+        ], [
+            '_method' => 'POST'
+        ]);
 
         // AI Metrics routes
         $routes->connect('/ai-metrics/dashboard', [
@@ -878,6 +885,21 @@ return function (RouteBuilder $routes): void {
         $routes->connect('/pages/bulk-delete', [
             'controller' => 'Pages',
             'action' => 'bulkDelete'
+        ], [
+            'routeClass' => 'ADmad/I18n.I18nRoute'
+        ]);
+        
+        // Webpage extraction routes
+        $routes->connect('/pages/extract', [
+            'controller' => 'Pages',
+            'action' => 'extract'
+        ], [
+            'routeClass' => 'ADmad/I18n.I18nRoute'
+        ]);
+        
+        $routes->connect('/pages/extract-preview', [
+            'controller' => 'Pages',
+            'action' => 'extractPreview'
         ], [
             'routeClass' => 'ADmad/I18n.I18nRoute'
         ]);

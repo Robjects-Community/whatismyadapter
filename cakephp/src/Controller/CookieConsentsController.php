@@ -156,7 +156,9 @@ class CookieConsentsController extends AppController
                 $this->setResponse($this->getResponse()->withCookie($cookie));
                 $this->Flash->success(__('Your cookie preferences have been saved.'));
 
-                return $this->redirect(['action' => 'edit']);
+                // Redirect to the last visited page if available, otherwise back to cookie preferences
+                $redirectUrl = $this->getLastVisitedPage();
+                return $this->redirect($redirectUrl ?: ['action' => 'edit']);
             }
 
             $this->Flash->error(__('The cookie preferences could not be saved. Please, try again.'));
@@ -189,5 +191,64 @@ class CookieConsentsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Get the last visited page URL from session or HTTP referer
+     *
+     * @return string|null The URL to redirect to, or null if not available
+     */
+    private function getLastVisitedPage(): ?string
+    {
+        $session = $this->getRequest()->getSession();
+        
+        // First try to get from session (most reliable)
+        $lastPage = $session->read('lastVisitedPage');
+        if ($lastPage && $this->isValidRedirectUrl($lastPage)) {
+            // Clear from session to prevent reuse
+            $session->delete('lastVisitedPage');
+            return $lastPage;
+        }
+        
+        // Fallback to HTTP referer if available
+        $referer = $this->getRequest()->getHeaderLine('Referer');
+        if ($referer && $this->isValidRedirectUrl($referer)) {
+            return $referer;
+        }
+        
+        return null;
+    }
+
+    /**
+     * Check if a URL is valid for redirection (security check)
+     *
+     * @param string $url The URL to check
+     * @return bool True if the URL is safe for redirection
+     */
+    private function isValidRedirectUrl(string $url): bool
+    {
+        // Don't redirect to the cookie consent page itself
+        if (strpos($url, '/cookie-consents/edit') !== false) {
+            return false;
+        }
+        
+        // Don't redirect to login/logout/admin pages
+        $invalidPaths = ['/admin', '/login', '/logout', '/users/login', '/users/logout'];
+        foreach ($invalidPaths as $path) {
+            if (strpos($url, $path) !== false) {
+                return false;
+            }
+        }
+        
+        // Only allow relative URLs or URLs from the same domain
+        if (strpos($url, 'http') === 0) {
+            $parsed = parse_url($url);
+            $currentHost = $this->getRequest()->getEnv('HTTP_HOST');
+            if (!$parsed || (isset($parsed['host']) && $parsed['host'] !== $currentHost)) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 }

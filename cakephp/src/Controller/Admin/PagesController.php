@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Service\Ai\WebpageExtractionService;
 use Cake\Cache\Cache;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Http\Response;
@@ -417,6 +418,87 @@ class PagesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Extract webpage content using AI
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function extract(): ?Response
+    {
+        if ($this->request->is('post')) {
+            $url = $this->request->getData('url');
+            
+            if (empty($url)) {
+                $this->Flash->error(__('Please provide a valid URL.'));
+                return $this->redirect(['action' => 'add']);
+            }
+
+            $extractionService = new WebpageExtractionService();
+            $result = $extractionService->extractWebpage($url, [
+                'type' => 'article',
+                'audience' => 'general'
+            ]);
+
+            if (isset($result['error'])) {
+                $this->Flash->error(__('Failed to extract webpage: {0}', $result['error']));
+                return $this->redirect(['action' => 'add']);
+            }
+
+            // Create page from extracted data
+            $pageData = $extractionService->createPageFromExtraction($result, [
+                'auto_publish' => false
+            ]);
+
+            // Create new page entity
+            $page = $this->Articles->newEmptyEntity();
+            $pageData['kind'] = 'page';
+            $pageData['user_id'] = $this->request->getAttribute('identity')->id;
+            $page = $this->Articles->patchEntity($page, $pageData);
+
+            if ($this->Articles->save($page)) {
+                $this->clearContentCache();
+                $this->Flash->success(__('Page created successfully from extracted content.'));
+                return $this->redirect(['action' => 'edit', $page->id]);
+            } else {
+                $this->Flash->error(__('Failed to save the extracted page.'));
+            }
+        }
+
+        return $this->redirect(['action' => 'add']);
+    }
+
+    /**
+     * AJAX endpoint for webpage extraction preview
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function extractPreview(): ?Response
+    {
+        $this->request->allowMethod(['post']);
+        $this->viewBuilder()->setLayout('ajax');
+
+        $url = $this->request->getData('url');
+        if (empty($url)) {
+            $this->set(['success' => false, 'error' => 'URL is required']);
+            return null;
+        }
+
+        try {
+            $extractionService = new WebpageExtractionService();
+            $result = $extractionService->extractWebpage($url);
+
+            if (isset($result['error'])) {
+                $this->set(['success' => false, 'error' => $result['error']]);
+            } else {
+                $this->set(['success' => true, 'data' => $result['data']]);
+            }
+        } catch (Exception $e) {
+            $this->set(['success' => false, 'error' => $e->getMessage()]);
+        }
+
+        return null;
     }
 
     /**
