@@ -212,60 +212,52 @@ return function (RouteBuilder $routes): void {
             ]
         );
         
-        // Static pages routes
+        // Author pages routes
         $builder->connect(
             '/about-author',
             [
-                'controller' => 'Articles',
-                'action' => 'view-by-slug',
-                'slug' => 'about-author'
+                'controller' => 'Author',
+                'action' => 'about'
             ],
             [
                 'routeClass' => 'ADmad/I18n.I18nRoute',
-                '_name' => 'aboutAuthor',
-                'pass' => ['slug']
+                '_name' => 'aboutAuthor'
             ]
         );
         
         $builder->connect(
             '/hire-me',
             [
-                'controller' => 'Articles',
-                'action' => 'view-by-slug',
-                'slug' => 'hire-me'
+                'controller' => 'Author',
+                'action' => 'hireMe'
             ],
             [
                 'routeClass' => 'ADmad/I18n.I18nRoute',
-                '_name' => 'hireMe',
-                'pass' => ['slug']
+                '_name' => 'hireMe'
             ]
         );
         
         $builder->connect(
             '/follow-me',
             [
-                'controller' => 'Articles',
-                'action' => 'view-by-slug',
-                'slug' => 'follow-me'
+                'controller' => 'Author',
+                'action' => 'social'
             ],
             [
                 'routeClass' => 'ADmad/I18n.I18nRoute',
-                '_name' => 'followMe',
-                'pass' => ['slug']
+                '_name' => 'followMe'
             ]
         );
         
         $builder->connect(
             '/github',
             [
-                'controller' => 'Articles',
-                'action' => 'view-by-slug',
-                'slug' => 'github'
+                'controller' => 'Author',
+                'action' => 'github'
             ],
             [
                 'routeClass' => 'ADmad/I18n.I18nRoute',
-                '_name' => 'githubRepo',
-                'pass' => ['slug']
+                '_name' => 'githubRepo'
             ]
         );
         

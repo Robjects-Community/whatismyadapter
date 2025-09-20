@@ -23,23 +23,27 @@ echo $this->Html->meta('keywords', __('Follow, social media, Willow CMS, CakePHP
       <p class="lead"><?= __('Connect for updates about Willow CMS, CakePHP 5.x, and AI integrations.'); ?></p>
 
       <div class="list-group mb-4">
-        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-           href="https://github.com/matthewdeaves" rel="noopener" target="_blank">
-          <span>GitHub</span>
-          <span class="badge bg-dark"><?= __('@matthewdeaves'); ?></span>
-        </a>
+        <?php if (!empty($githubUrl)): ?>
+          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+             href="<?= h($githubUrl); ?>" rel="noopener" target="_blank">
+            <span>GitHub</span>
+            <span class="badge bg-dark"><?= h(basename($githubUrl)); ?></span>
+          </a>
+        <?php endif; ?>
 
-        <!-- Update these placeholders with real profile URLs in production -->
-        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-           href="#" rel="noopener">
-          <span>LinkedIn</span>
-          <span class="badge bg-secondary"><?= __('Add URL'); ?></span>
-        </a>
-        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-           href="#" rel="noopener">
-          <span>X / Twitter</span>
-          <span class="badge bg-secondary"><?= __('Add URL'); ?></span>
-        </a>
+        <?php if (!empty($linkedinUrl)): ?>
+          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+             href="<?= h($linkedinUrl); ?>" rel="noopener" target="_blank">
+            <span>LinkedIn</span>
+            <span class="badge bg-primary"><?= __('Connect'); ?></span>
+          </a>
+        <?php endif; ?>
+        
+        <?php if (empty($githubUrl) && empty($linkedinUrl)): ?>
+          <div class="list-group-item">
+            <p class="mb-0 text-muted"><?= __('Social media links can be configured in the admin settings.'); ?></p>
+          </div>
+        <?php endif; ?>
       </div>
 
       <?php

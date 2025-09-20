@@ -24,10 +24,26 @@
                 );
             ?>
         <?php endforeach ?>
+        
+        <!-- Author Pages -->
+        <?php 
+        // Get GitHub URL from settings
+        $githubUrl = \App\Utility\SettingsManager::read('Author.githubUrl', '');
+        $authorName = \App\Utility\SettingsManager::read('Author.fullName', '');
+        ?>
+        
+        <?php $url = $this->Html->Url->build(['_name' => 'aboutAuthor']); ?>
+        <?= $this->Html->link(__('About'), $url, [
+            'class' => 'nav-item nav-link link-body-emphasis fw-medium px-3' . (($currentUrl == $url) ? ' active' : ''),
+            'aria-current' => ($currentUrl == $url) ? 'page' : false
+        ]) ?>
+        
+        <?php if (!empty($githubUrl)): ?>
         <a class="nav-item nav-link link-body-emphasis fw-medium px-3" 
-           href="https://www.github.com/garzarobm/willow">
-           GitHub
+           href="<?= h($githubUrl); ?>" target="_blank" rel="noopener">
+           <?= __('GitHub'); ?>
         </a>
+        <?php endif; ?>
     </nav>
 </div>
 

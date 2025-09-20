@@ -1,6 +1,11 @@
 <?php
 /**
  * GitHub Repository
+ * Theme: DefaultTheme
+ * CakePHP 5.x
+ * 
+ * Variables available from controller:
+ * - $githubUrl: GitHub profile URL
  */
 $this->assign('title', __('GitHub Repository'));
 
@@ -26,11 +31,15 @@ echo $this->Html->meta('keywords', __('GitHub, Willow CMS, CakePHP 5, AI CMS, re
         <div class="card-body">
           <h2 class="h5 mb-3"><?= __('Quick links'); ?></h2>
           <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-dark" href="https://github.com/matthewdeaves/willow" target="_blank" rel="noopener"><?= __('Repository'); ?></a>
-            <a class="btn btn-outline-dark" href="https://github.com/matthewdeaves/willow/issues" target="_blank" rel="noopener"><?= __('Issues'); ?></a>
-            <a class="btn btn-outline-dark" href="https://github.com/matthewdeaves/willow/discussions" target="_blank" rel="noopener"><?= __('Discussions'); ?></a>
-            <a class="btn btn-outline-dark" href="https://github.com/matthewdeaves/willow/pulls" target="_blank" rel="noopener"><?= __('Pull Requests'); ?></a>
-            <a class="btn btn-outline-dark" href="https://github.com/matthewdeaves/willow/releases" target="_blank" rel="noopener"><?= __('Releases'); ?></a>
+            <?php if (!empty($githubUrl)): ?>
+              <a class="btn btn-dark" href="<?= h($githubUrl); ?>" target="_blank" rel="noopener"><?= __('Repository'); ?></a>
+              <a class="btn btn-outline-dark" href="<?= h($githubUrl); ?>/issues" target="_blank" rel="noopener"><?= __('Issues'); ?></a>
+              <a class="btn btn-outline-dark" href="<?= h($githubUrl); ?>/discussions" target="_blank" rel="noopener"><?= __('Discussions'); ?></a>
+              <a class="btn btn-outline-dark" href="<?= h($githubUrl); ?>/pulls" target="_blank" rel="noopener"><?= __('Pull Requests'); ?></a>
+              <a class="btn btn-outline-dark" href="<?= h($githubUrl); ?>/releases" target="_blank" rel="noopener"><?= __('Releases'); ?></a>
+            <?php else: ?>
+              <p class="text-muted"><?= __('GitHub URL can be configured in the admin settings.'); ?></p>
+            <?php endif; ?>
           </div>
         </div>
       </div>
@@ -38,10 +47,14 @@ echo $this->Html->meta('keywords', __('GitHub, Willow CMS, CakePHP 5, AI CMS, re
       <div class="card mb-4">
         <div class="card-body">
           <h2 class="h5 mb-3"><?= __('Clone'); ?></h2>
-          <pre class="mb-0"><code>git clone https://github.com/matthewdeaves/willow.git
-cd willow
+          <?php if (!empty($githubUrl)): ?>
+            <pre class="mb-0"><code>git clone <?= h($githubUrl); ?>.git
+cd <?= h(basename($githubUrl)); ?>
 ./setup_dev_env.sh
 </code></pre>
+          <?php else: ?>
+            <p class="text-muted"><?= __('Repository URL not configured.'); ?></p>
+          <?php endif; ?>
         </div>
       </div>
 

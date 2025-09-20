@@ -906,3 +906,4 @@ docker/mailpit/data/mailpit.db-wal
 cakephp/config/.env-demo.backup
 cakephp/config/Migrations/schema-dump-default.lock
 cakephp/config/Migrations/schema-dump-default.lock
+fix-url-pages.md
