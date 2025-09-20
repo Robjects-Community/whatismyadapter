@@ -12,6 +12,10 @@
 /cakephp/vendor/*
 /logs/*
 
+# CakePHP Migration Schema Dumps #
+##################################
+/cakephp/config/Migrations/schema-dump-default.lock
+
 # Willow code_exports #
 #######################
 willow_cms_code.txt
