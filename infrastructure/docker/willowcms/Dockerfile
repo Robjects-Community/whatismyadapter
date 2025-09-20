@@ -52,14 +52,14 @@ RUN echo "requirepass ${REDIS_PASSWORD}" >> /etc/redis.conf && \
     echo "user ${REDIS_USERNAME} on >${REDIS_PASSWORD} ~* +@all" >> /etc/redis.conf
 
 # Configure nginx - http
-COPY docker/willowcms/config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY infrastructure/docker/willowcms/config/nginx/nginx.conf /etc/nginx/nginx.conf
 # Configure nginx - default server
-COPY docker/willowcms/config/nginx/nginx-cms.conf /etc/nginx/conf.d/default.conf
+COPY infrastructure/docker/willowcms/config/nginx/nginx-cms.conf /etc/nginx/conf.d/default.conf
 
 # Configure PHP-FPM
 ENV PHP_INI_DIR /etc/php83
-COPY docker/willowcms/config/php/fpm-pool.conf ${PHP_INI_DIR}/php-fpm.d/www.conf
-COPY docker/willowcms/config/php/php.ini ${PHP_INI_DIR}/conf.d/custom.ini
+COPY infrastructure/docker/willowcms/config/php/fpm-pool.conf ${PHP_INI_DIR}/php-fpm.d/www.conf
+COPY infrastructure/docker/willowcms/config/php/php.ini ${PHP_INI_DIR}/conf.d/custom.ini
 
 # Install Composer
 RUN wget https://getcomposer.org/installer -O composer-setup.php && \
@@ -67,7 +67,7 @@ RUN wget https://getcomposer.org/installer -O composer-setup.php && \
     rm composer-setup.php
 
 # Configure supervisord
-COPY docker/willowcms/config/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY infrastructure/docker/willowcms/config/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 ARG UID
 ARG GID

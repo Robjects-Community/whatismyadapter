@@ -1,7 +1,30 @@
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins:lts-jdk17
 
-# Switch to root user to install additional packages
 USER root
+
+# Install Docker CLI and Docker Compose
+RUN apt-get update && apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release \
+    && curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && apt-get update \
+    && apt-get install -y docker-ce-cli docker-compose-plugin \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install additional tools
+RUN apt-get update && apt-get install -y \
+    git \
+    php8.1-cli \
+    php8.1-curl \
+    php8.1-mysql \
+    composer \
+    nodejs \
+    npm \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y lsb-release curl software-properties-common wget
@@ -38,7 +61,7 @@ RUN apt-get update && apt-get install -y docker-ce-cli
 USER jenkins
 
 # Copy the list of plugins to install
-COPY docker/jenkins/plugins.txt /usr/share/jenkins/ref/plugins.txt
+COPY infrastructure/docker/jenkins/plugins.txt /usr/share/jenkins/ref/plugins.txt
 
 # Install plugins
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
@@ -47,7 +70,7 @@ RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
 ENV CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yaml
 
 # Copy the Jenkins Configuration as Code YAML file
-COPY docker/jenkins/jenkins.yaml /var/jenkins_home/jenkins.yaml
+COPY infrastructure/docker/jenkins/jenkins.yaml /var/jenkins_home/jenkins.yaml
 
 # Skip the initial setup wizard
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
