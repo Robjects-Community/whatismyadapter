@@ -37,7 +37,7 @@ $navLinks = [
     ],
     'forms' => [
         'url' => ['controller' => 'Products', 'action' => 'forms', 'prefix' => 'Admin'],
-        'text' => __('Forms Configuration'),
+        'text' => __('Forms'),
         'icon' => 'fas fa-cogs',
     ],
 ];

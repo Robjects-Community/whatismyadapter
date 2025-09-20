@@ -50,6 +50,7 @@ class QuizController extends AppController
         // Initialize model tables
         $this->Products = TableRegistry::getTableLocator()->get('Products');
         $this->QuizSubmissions = TableRegistry::getTableLocator()->get('QuizSubmissions');
+        $this->Settings = TableRegistry::getTableLocator()->get('Settings');
 
         // Initialize AI services
         $this->productMatcher = new AiProductMatcherService();
@@ -112,17 +113,60 @@ class QuizController extends AppController
      */
     public function akinator(): ?Response
     {
-        if (!Configure::read('Quiz.akinator.enabled')) {
-            $this->Flash->error(__('Akinator quiz is not available.'));
-
-            return $this->redirect(['action' => 'index']);
+        // Load settings from database
+        $quizSettings = $this->Settings->getSettingValue('Quiz');
+        
+        // Check if Akinator quiz is enabled
+        $akinatorEnabled = $quizSettings['akinatorEnabled'] ?? true;
+        if (!$akinatorEnabled) {
+            $this->Flash->error(__('The interactive quiz is currently disabled.'));
+            return $this->redirect(['controller' => 'Products', 'action' => 'index']);
         }
 
-        $this->set([
-            'title' => __('AI Adapter Genie'),
-            'description' => __('Answer a few questions and let our AI find the perfect adapter for you.'),
-            'max_questions' => Configure::read('Quiz.akinator.max_questions', 15),
+        // Get quiz configuration from settings with fallbacks
+        $maxQuestions = (int)($quizSettings['maxQuestions'] ?? 10);
+        $confidenceThreshold = (int)($quizSettings['confidenceThreshold'] ?? 85) / 100; // Convert percentage to decimal
+        $minProductsThreshold = (int)($quizSettings['minProductsThreshold'] ?? 3);
+        $aiQuestionsEnabled = $quizSettings['aiQuestionsEnabled'] ?? true;
+        $resultLimit = (int)($quizSettings['resultLimit'] ?? 5);
+        $sessionTtl = (int)($quizSettings['sessionTtl'] ?? 3600);
+        $cacheEnabled = $quizSettings['cacheEnabled'] ?? true;
+        $analyticsEnabled = $quizSettings['analyticsEnabled'] ?? true;
+        $fallbackQuestionsEnabled = $quizSettings['fallbackQuestionsEnabled'] ?? true;
+
+        // Configure the decision tree service
+        Configure::write('Quiz.akinator', [
+            'max_questions' => $maxQuestions,
+            'confidence_threshold' => $confidenceThreshold,
+            'min_products_threshold' => $minProductsThreshold,
+            'cache_ttl' => $sessionTtl,
+            'ai_questions_enabled' => $aiQuestionsEnabled,
+            'result_limit' => $resultLimit,
+            'cache_enabled' => $cacheEnabled,
+            'analytics_enabled' => $analyticsEnabled,
+            'fallback_questions_enabled' => $fallbackQuestionsEnabled,
         ]);
+
+        // Set page metadata
+        $this->set([
+            'pageTitle' => __('Find Your Perfect Product'),
+            'pageDescription' => __('Answer a few quick questions to get personalized product recommendations tailored just for you'),
+            'quizConfig' => [
+                'max_questions' => $maxQuestions,
+                'confidence_threshold' => $confidenceThreshold,
+                'min_products_threshold' => $minProductsThreshold,
+                'ai_questions_enabled' => $aiQuestionsEnabled,
+                'result_limit' => $resultLimit,
+                'session_ttl' => $sessionTtl,
+            ],
+        ]);
+
+        // Log quiz access if analytics is enabled
+        if ($analyticsEnabled) {
+            $identity = $this->Authentication->getIdentity();
+            $userInfo = $identity ? $identity->email : 'anonymous';
+            $this->log('Akinator quiz accessed by ' . $userInfo, 'info');
+        }
 
         return null;
     }

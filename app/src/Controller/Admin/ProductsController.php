@@ -358,6 +358,21 @@ class ProductsController extends AppController
     }
 
     /**
+     * Forms Dashboard method - Overview of form-related features
+     *
+     * @return void
+     */
+    public function formsDashboard(): void
+    {
+        // For now, this method handles the route and loads the forms dashboard view
+        // Future implementation can include form-related statistics and data
+        $this->set([
+            'title' => __('Forms Dashboard'),
+            'subtitle' => __('Manage product forms and submissions')
+        ]);
+    }
+
+    /**
      * View method - Display single product details
      *
      * @param string|null $id Product id.
@@ -1107,11 +1122,24 @@ class ProductsController extends AppController
     }
 
     /**
-     * Forms Configuration method - Manage frontend product submission forms and quiz settings
+     * Legacy Forms route redirect - redirect to new admin structure
      *
-     * This method provides an admin interface with two tabs:
-     * Tab 1: Forms Configuration - product submission forms
-     * Tab 2: Quiz Settings - quiz-based adapter finder configuration
+     * @return \Cake\Http\Response
+     */
+    public function formsRedirect(): Response
+    {
+        $this->Flash->warning(
+            __('Forms configuration has moved to a new location. You have been redirected to the new Forms dashboard.')
+        );
+        
+        return $this->redirect(['action' => 'forms']);
+    }
+
+    /**
+     * Forms Configuration Dashboard - Main forms management page
+     *
+     * This is the main landing page for the Forms tab that provides an overview
+     * of all forms-related configuration options and statistics.
      *
      * @return \Cake\Http\Response|null
      */
@@ -1224,6 +1252,329 @@ class ProductsController extends AppController
 
         $this->set(compact('formSettings', 'quizSettings', 'submissionStats', 'recentSubmissions'));
 
+        return null;
+    }
+
+    /**
+     * Forms Quiz Configuration - Manage quiz-based adapter finder settings
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function formsQuiz(): ?Response
+    {
+        $settingsService = new SettingsService();
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $data = $this->request->getData();
+            
+            // Remove CSRF token and other non-setting fields
+            unset($data['_csrfToken']);
+            
+            $savedSettings = 0;
+            $failedSettings = [];
+            
+            // Handle Quiz Settings
+            foreach ($data as $settingName => $settingValue) {
+                if ($settingsService->set('quiz', $settingName, $settingValue)) {
+                    $savedSettings++;
+                } else {
+                    $failedSettings[] = $settingName;
+                }
+            }
+
+            if ($savedSettings > 0) {
+                $this->clearContentCache();
+                $this->Flash->success(
+                    __('Successfully updated Quiz Configuration ({0} settings saved)', $savedSettings)
+                );
+            }
+
+            if (!empty($failedSettings)) {
+                $this->Flash->error(__('Failed to save some settings: {0}', implode(', ', $failedSettings)));
+            }
+
+            return $this->redirect(['action' => 'formsQuiz']);
+        }
+
+        // Load Quiz settings from Configure (which now includes DB overrides)
+        $quizSettings = [
+            'enabled' => Configure::read('Quiz.enabled'),
+            'max_results' => Configure::read('Quiz.max_results'),
+            'confidence_threshold' => Configure::read('Quiz.confidence_threshold'),
+            'akinator' => Configure::read('Quiz.akinator'),
+            'comprehensive' => Configure::read('Quiz.comprehensive'),
+            'result' => Configure::read('Quiz.result'),
+            'ai' => Configure::read('Quiz.ai'),
+        ];
+
+        // Sample quiz templates data (for UI demonstration)
+        $quiz_templates = [
+            [
+                'id' => 1,
+                'name' => 'Connector Type Quiz',
+                'description' => 'Help users identify connectors based on visual characteristics',
+                'question_count' => 8,
+                'difficulty' => 'Easy',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Cable Compatibility Quiz',
+                'description' => 'Determine cable compatibility based on specifications',
+                'question_count' => 12,
+                'difficulty' => 'Medium',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Advanced Adapter Quiz',
+                'description' => 'Comprehensive quiz for technical specifications',
+                'question_count' => 20,
+                'difficulty' => 'Hard',
+            ],
+        ];
+
+        // Sample active quiz forms data (for UI demonstration)
+        $quiz_forms = [
+            [
+                'id' => 1,
+                'title' => 'USB Connector Quiz',
+                'description' => 'Interactive quiz to find the right USB connector',
+                'question_count' => 10,
+                'submission_count' => 145,
+                'average_score' => 87.3,
+                'is_active' => true,
+            ],
+            [
+                'id' => 2,
+                'title' => 'Audio Adapter Quiz',
+                'description' => 'Help find the correct audio adapter for your needs',
+                'question_count' => 8,
+                'submission_count' => 92,
+                'average_score' => 93.1,
+                'is_active' => true,
+            ],
+            [
+                'id' => 3,
+                'title' => 'Video Cable Quiz',
+                'description' => 'Comprehensive video cable compatibility quiz',
+                'question_count' => 15,
+                'submission_count' => 67,
+                'average_score' => 78.9,
+                'is_active' => false,
+            ],
+        ];
+
+        $this->set(compact('quizSettings', 'quiz_templates', 'quiz_forms'));
+        
+        return null;
+    }
+
+    /**
+     * Forms Customer Quiz Configuration - Customer-facing quiz settings
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function formsCustomerQuiz(): ?Response
+    {
+        $this->viewBuilder()->setTheme('AdminTheme');
+
+        // Default settings for customer quiz
+        $defaults = [
+            'enabled' => true,
+            'max_results' => 5,
+            'confidence_threshold' => 60,
+            'akinator' => [
+                'enabled' => true,
+                'max_questions' => 10
+            ],
+            'comprehensive' => [
+                'enabled' => true,
+                'steps' => 6
+            ],
+            'result' => [
+                'show_alternatives' => true,
+                'display_mode' => 'inline'
+            ],
+            'ai' => [
+                'enabled' => true,
+                'explanations' => true
+            ],
+            'analytics' => [
+                'enabled' => true,
+                'track_sessions' => true
+            ],
+            'session_timeout' => 30,
+            'cache_duration' => 3600
+        ];
+
+        // Handle reset to defaults
+        if ($this->request->is('get') && $this->request->getQuery('reset') === '1') {
+            Cache::write('customer_quiz_settings', $defaults);
+            $this->Flash->success(__('Customer quiz settings have been reset to defaults.'));
+            return $this->redirect(['action' => 'formsCustomerQuiz']);
+        }
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $data = $this->request->getData();
+            
+            // Remove CSRF token
+            unset($data['_csrfToken']);
+            
+            // Sanitize and cast types
+            $settings = [];
+            $settings['enabled'] = (bool)($data['enabled'] ?? false);
+            $settings['max_results'] = min(20, max(1, (int)($data['max_results'] ?? 5)));
+            $settings['confidence_threshold'] = min(100, max(0, (int)($data['confidence_threshold'] ?? 60)));
+            $settings['session_timeout'] = min(3600, max(5, (int)($data['session_timeout'] ?? 30)));
+            $settings['cache_duration'] = min(86400, max(300, (int)($data['cache_duration'] ?? 3600)));
+            
+            // Handle nested arrays
+            $settings['akinator'] = [
+                'enabled' => (bool)($data['akinator']['enabled'] ?? false),
+                'max_questions' => min(50, max(3, (int)($data['akinator']['max_questions'] ?? 10)))
+            ];
+            
+            $settings['comprehensive'] = [
+                'enabled' => (bool)($data['comprehensive']['enabled'] ?? false),
+                'steps' => min(20, max(3, (int)($data['comprehensive']['steps'] ?? 6)))
+            ];
+            
+            $settings['result'] = [
+                'show_alternatives' => (bool)($data['result']['show_alternatives'] ?? false),
+                'display_mode' => in_array($data['result']['display_mode'] ?? 'inline', ['inline', 'page']) 
+                    ? $data['result']['display_mode'] : 'inline'
+            ];
+            
+            $settings['ai'] = [
+                'enabled' => (bool)($data['ai']['enabled'] ?? false),
+                'explanations' => (bool)($data['ai']['explanations'] ?? false)
+            ];
+            
+            $settings['analytics'] = [
+                'enabled' => (bool)($data['analytics']['enabled'] ?? false),
+                'track_sessions' => (bool)($data['analytics']['track_sessions'] ?? false)
+            ];
+            
+            // Merge with defaults to ensure all keys are present
+            $finalSettings = array_replace_recursive($defaults, $settings);
+            
+            // Persist to cache
+            Cache::write('customer_quiz_settings', $finalSettings);
+            
+            if ($this->request->is('ajax')) {
+                return $this->response
+                    ->withType('application/json')
+                    ->withStringBody(json_encode([
+                        'success' => true,
+                        'message' => 'Customer quiz settings saved successfully.'
+                    ]));
+            } else {
+                $this->Flash->success(__('Customer quiz settings have been saved.'));
+                return $this->redirect(['action' => 'formsCustomerQuiz']);
+            }
+        }
+
+        // Load current settings from cache or use defaults
+        $quizSettings = Cache::read('customer_quiz_settings') ?: $defaults;
+        
+        // Sample quiz stats (placeholder data)
+        $quiz_stats = [
+            'total_sessions' => 1247,
+            'success_rate' => 87,
+            'avg_questions' => 3.2,
+            'avg_time' => 2.1
+        ];
+
+        $this->set(compact('quizSettings', 'quiz_stats'));
+        
+        return null;
+    }
+
+    /**
+     * Forms Fields Management - Dynamic form fields CRUD and AI suggestions
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function formsFields(): ?Response
+    {
+        // Load ProductFormFields table for managing dynamic fields
+        $productFormFields = TableRegistry::getTableLocator()->get('ProductFormFields');
+        
+        $fields = $productFormFields->find()
+            ->orderBy(['sort_order' => 'ASC', 'created' => 'ASC'])
+            ->toArray();
+            
+        // Get field statistics
+        $fieldStats = [
+            'total_fields' => count($fields),
+            'active_fields' => count(array_filter($fields, function($field) { return $field->is_active; })),
+            'ai_enabled_fields' => count(array_filter($fields, function($field) { return $field->ai_enabled; })),
+        ];
+        
+        $this->set(compact('fields', 'fieldStats'));
+        
+        return null;
+    }
+
+    /**
+     * Forms Statistics - Statistics and recent submissions display
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function formsStats(): ?Response
+    {
+        // Get comprehensive statistics about user submissions
+        $submissionStats = [
+            'total_submissions' => $this->Products->find()->where(['user_id IS NOT' => null])->count(),
+            'pending_submissions' => $this->Products->find()->where([
+                'user_id IS NOT' => null,
+                'verification_status' => 'pending',
+            ])->count(),
+            'approved_submissions' => $this->Products->find()->where([
+                'user_id IS NOT' => null,
+                'verification_status' => 'approved',
+            ])->count(),
+            'rejected_submissions' => $this->Products->find()->where([
+                'user_id IS NOT' => null,
+                'verification_status' => 'rejected',
+            ])->count(),
+        ];
+        
+        // Monthly submission trends (last 12 months)
+        $monthlyStats = [];
+        for ($i = 11; $i >= 0; $i--) {
+            $date = date('Y-m', strtotime("-{$i} months"));
+            $monthlyStats[$date] = $this->Products->find()
+                ->where([
+                    'user_id IS NOT' => null,
+                    'created >=' => date('Y-m-01', strtotime("-{$i} months")),
+                    'created <' => date('Y-m-01', strtotime("-" . ($i - 1) . " months")),
+                ])->count();
+        }
+
+        // Recent user submissions for detailed review
+        $recentSubmissions = $this->Products->find()
+            ->contain(['Users'])
+            ->where(['Products.user_id IS NOT' => null])
+            ->orderBy(['Products.created' => 'DESC'])
+            ->limit(25)
+            ->toArray();
+            
+        // Top contributing users
+        $topContributors = $this->Products->find()
+            ->select([
+                'Users.username',
+                'Users.id',
+                'submission_count' => $this->Products->find()->func()->count('Products.id'),
+            ])
+            ->leftJoinWith('Users')
+            ->where(['Products.user_id IS NOT' => null])
+            ->groupBy(['Users.id', 'Users.username'])
+            ->orderBy(['submission_count' => 'DESC'])
+            ->limit(10)
+            ->toArray();
+
+        $this->set(compact('submissionStats', 'monthlyStats', 'recentSubmissions', 'topContributors'));
+        
         return null;
     }
 

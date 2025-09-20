@@ -3,6 +3,8 @@ use App\Utility\SettingsManager;
 use Cake\Core\Configure;
 
 $session = $this->request->getSession();
+$activeCtl = $this->request->getParam('controller');
+$activeAct = $this->request->getParam('action');
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
@@ -252,6 +254,30 @@ $session = $this->request->getSession();
               'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($activeCtl == 'Products' && $activeAct == 'pendingReview') ? ' active' : ''),
               'escape' => false,
               'title' => __('Pending Review'),
+              'data-bs-toggle' => 'tooltip',
+              'data-bs-placement' => 'right'
+            ]
+          ) ?>
+          <!-- Product Forms Dashboard -->
+          <?= $this->Html->link(
+            '<i class="fas fa-clipboard-list sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Product Forms') . '</span>',
+            ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'forms'],
+            [
+              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($activeCtl == 'Products' && $activeAct == 'forms') ? ' active' : ''),
+              'escape' => false,
+              'title' => __('Product Forms Dashboard'),
+              'data-bs-toggle' => 'tooltip',
+              'data-bs-placement' => 'right'
+            ]
+          ) ?>
+          <!-- Product Quizzes -->
+          <?= $this->Html->link(
+            '<i class="fas fa-question-circle sidebar-icon"></i><span class="sidebar-text ms-2">' . __('Product Quizzes') . '</span>',
+            ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'formsQuiz'],
+            [
+              'class' => 'list-group-item list-group-item-action border-0 sidebar-link' . (($activeCtl == 'Products' && $activeAct == 'formsQuiz') ? ' active' : ''),
+              'escape' => false,
+              'title' => __('Product Quizzes'),
               'data-bs-toggle' => 'tooltip',
               'data-bs-placement' => 'right'
             ]
@@ -540,6 +566,24 @@ $session = $this->request->getSession();
             ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'pendingReview'],
             [
               'class' => 'list-group-item list-group-item-action border-0' . (($activeCtl == 'Products' && $activeAct == 'pendingReview') ? ' active' : ''),
+              'escape' => false
+            ]
+          ) ?>
+
+          <?= $this->Html->link(
+            '<i class="fas fa-clipboard-list me-2"></i>' . __('Product Forms'),
+            ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'formsDashboard'],
+            [
+              'class' => 'list-group-item list-group-item-action border-0' . (($activeCtl == 'Products' && $activeAct == 'formsDashboard') ? ' active' : ''),
+              'escape' => false
+            ]
+          ) ?>
+
+          <?= $this->Html->link(
+            '<i class="fas fa-question-circle me-2"></i>' . __('Product Quizzes'),
+            ['prefix' => 'Admin', 'controller' => 'Products', 'action' => 'formsQuiz'],
+            [
+              'class' => 'list-group-item list-group-item-action border-0' . (($activeCtl == 'Products' && $activeAct == 'formsQuiz') ? ' active' : ''),
               'escape' => false
             ]
           ) ?>

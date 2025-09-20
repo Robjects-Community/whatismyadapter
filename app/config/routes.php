@@ -664,11 +664,15 @@ return function (RouteBuilder $routes): void {
         $routes->connect('/products/dashboard', [
             'controller' => 'Products',
             'action' => 'dashboard'
+        ], [
+            '_name' => 'admin.products.dashboard'
         ]);
         // product admin references for all products (verified, unverified, featured, etc.)
         $routes->connect('/products', [
             'controller' => 'Products',
             'action' => 'index'
+        ], [
+            '_name' => 'admin.products.index'
         ]);
         // product admin references for all products (verified, unverified, featured, etc.) v2
         $routes->connect('/products/v2', [
@@ -705,6 +709,8 @@ return function (RouteBuilder $routes): void {
         $routes->connect('/products/pending-review', [
             'controller' => 'Products',
             'action' => 'pendingReview'
+        ], [
+            '_name' => 'admin.products.pending-review'
         ]);
         
         // Single-item moderation routes
@@ -748,9 +754,48 @@ return function (RouteBuilder $routes): void {
             'controller' => 'Products',
             'action' => 'bulkUpdateFields'
         ]);
+        // Legacy forms route - redirect to new admin structure
         $routes->connect('/products/forms', [
             'controller' => 'Products',
+            'action' => 'formsRedirect'
+        ], [
+            '_name' => 'admin.products.forms.legacy'
+        ]);
+        
+        // New Admin Product Management - Forms Tab routes
+        $routes->connect('/products/forms/dashboard', [
+            'controller' => 'Products',
             'action' => 'forms'
+        ], [
+            '_name' => 'admin.products.forms.dashboard'
+        ]);
+        
+        $routes->connect('/products/forms/quiz', [
+            'controller' => 'Products',
+            'action' => 'formsQuiz'
+        ], [
+            '_name' => 'admin.products.forms.quiz'
+        ]);
+        
+        $routes->connect('/products/forms/fields', [
+            'controller' => 'Products',
+            'action' => 'formsFields'
+        ], [
+            '_name' => 'admin.products.forms.fields'
+        ]);
+        
+        $routes->connect('/products/forms/stats', [
+            'controller' => 'Products',
+            'action' => 'formsStats'
+        ], [
+            '_name' => 'admin.products.forms.stats'
+        ]);
+        
+        $routes->connect('/products/forms-customer-quiz', [
+            'controller' => 'Products',
+            'action' => 'formsCustomerQuiz'
+        ], [
+            '_name' => 'admin.products.forms.customer-quiz'
         ]);
         $routes->connect('/products/add', [
             'controller' => 'Products',

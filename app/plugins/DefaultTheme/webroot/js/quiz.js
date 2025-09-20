@@ -37,12 +37,14 @@ class QuizModule {
                 this.currentState = startResponse.data;
                 this.displayAkinatorQuestion(startResponse.data.question || startResponse.data.first_question);
                 this.updateProgress(startResponse.data.confidence || 0, 1);
+                return true; // Return success
             } else {
                 throw new Error(startResponse.error?.message || 'Failed to start Akinator');
             }
         } catch (error) {
             console.error('Akinator initialization failed:', error);
             this.showError('Failed to start the quiz. Please try again.');
+            throw error; // Re-throw for the template to handle
         }
     }
 
@@ -179,10 +181,18 @@ class QuizModule {
             }
             
             // Show question display, hide others
-            questionDisplay.style.display = 'block';
-            questionDisplay.classList.add('active');
-            document.getElementById('results-display').style.display = 'none';
-            document.getElementById('loading-state').style.display = 'none';
+            if (questionDisplay) {
+                questionDisplay.style.display = 'block';
+                questionDisplay.classList.add('active');
+            }
+            const resultsDisplay = document.getElementById('results-display');
+            if (resultsDisplay) {
+                resultsDisplay.style.display = 'none';
+            }
+            const loadingState = document.getElementById('loading-state');
+            if (loadingState) {
+                loadingState.style.display = 'none';
+            }
         }
     }
 
@@ -725,16 +735,30 @@ class QuizModule {
      * Show loading state
      */
     showLoading() {
-        document.getElementById('loading-state').style.display = 'block';
-        document.querySelector('.question-display').style.display = 'none';
+        const loadingState = document.getElementById('loading-state');
+        const questionDisplay = document.querySelector('.question-display');
+        
+        if (loadingState) {
+            loadingState.style.display = 'block';
+        }
+        if (questionDisplay) {
+            questionDisplay.style.display = 'none';
+        }
     }
 
     /**
      * Hide loading state
      */
     hideLoading() {
-        document.getElementById('loading-state').style.display = 'none';
-        document.querySelector('.question-display').style.display = 'block';
+        const loadingState = document.getElementById('loading-state');
+        const questionDisplay = document.querySelector('.question-display');
+        
+        if (loadingState) {
+            loadingState.style.display = 'none';
+        }
+        if (questionDisplay) {
+            questionDisplay.style.display = 'block';
+        }
     }
 
     /**
@@ -851,5 +875,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Export for ES6 modules if needed
-export default QuizModule;
+// Export for ES6 modules if needed (commented out for non-module usage)
+// export default QuizModule;

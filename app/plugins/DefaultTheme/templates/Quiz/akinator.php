@@ -10,7 +10,7 @@ $this->assign('title', __('Akinator Product Quiz'));
 $this->Html->meta('description', __('Answer yes/no questions as our AI gradually narrows down to your perfect adapter match. Interactive and fun!'), ['block' => 'meta']);
 
 // Include the quiz JavaScript module
-$this->Html->script('DefaultTheme.quiz', ['block' => 'script']);
+$this->Html->script('quiz', ['block' => 'script']);
 ?>
 
 <div class="quiz-akinator">
@@ -372,40 +372,50 @@ $this->Html->script('DefaultTheme.quiz', ['block' => 'script']);
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, checking for quiz module...');
     
-    // Wait a bit for the quiz module to load
-    setTimeout(function() {
+    function tryInitialize(attempts = 0) {
         if (typeof window.initializeAkinator === 'function') {
             console.log('Quiz module found, initializing Akinator...');
             
             // Show the enhanced interface
-            document.getElementById('akinator-container').style.display = 'block';
+            const container = document.getElementById('akinator-container');
+            if (container) {
+                container.style.display = 'block';
+            }
             
             // Initialize the Akinator quiz
-            window.initializeAkinator().catch(function(error) {
+            window.initializeAkinator().then(function() {
+                console.log('Akinator initialization complete');
+            }).catch(function(error) {
                 console.error('Akinator initialization failed:', error);
-                showFallbackMessage();
+                console.error('Error stack:', error.stack);
+                // Don't show fallback message here - let the quiz module handle errors
+                // Only show fallback if the module itself is missing
             });
+        } else if (attempts < 10) {
+            console.log('Waiting for quiz module... attempt', attempts + 1);
+            setTimeout(() => tryInitialize(attempts + 1), 200);
         } else {
-            console.warn('Quiz module not available, showing fallback');
+            console.warn('Quiz module not available after waiting, showing fallback');
             showFallbackMessage();
         }
-    }, 500); // Wait 500ms for module to load
+    }
     
     function showFallbackMessage() {
         const container = document.getElementById('akinator-container');
         if (container) {
-            container.innerHTML = `
-                <div class="alert alert-warning text-center">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h5><?= __('Quiz Temporarily Unavailable') ?></h5>
-                    <p><?= __('The Akinator quiz is currently unavailable. Please try our comprehensive quiz instead.') ?></p>
-                    <a href="<?= $this->Url->build(['action' => 'comprehensive']) ?>" class="btn btn-primary">
-                        <?= __('Start Comprehensive Quiz') ?>
-                    </a>
-                </div>
-            `;
+            container.innerHTML = '<div class="alert alert-warning text-center">' +
+                '<i class="fas fa-exclamation-triangle"></i>' +
+                '<h5>Quiz Temporarily Unavailable</h5>' +
+                '<p>The Akinator quiz is currently unavailable. Please try our comprehensive quiz instead.</p>' +
+                '<a href="' + '<?= $this->Url->build(['action' => 'comprehensive']) ?>' + '" class="btn btn-primary">' +
+                    'Start Comprehensive Quiz' +
+                '</a>' +
+            '</div>';
             container.style.display = 'block';
         }
     }
+    
+    // Start trying to initialize
+    tryInitialize();
 });
 </script>
