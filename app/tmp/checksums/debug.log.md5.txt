@@ -1,0 +1,11 @@
+{
+    "file": "debug.log",
+    "algorithm": "md5",
+    "hash": "23f68528ce45c7e4d89fc30e5b0f0408",
+    "timestamp": "2025-09-06 19:44:31",
+    "file_stats": {
+        "size": 3156791,
+        "modified": 1757182361,
+        "permissions": "0755"
+    }
+}

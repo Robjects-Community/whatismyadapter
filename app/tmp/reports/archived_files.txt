@@ -1,0 +1,15 @@
+# PSR-4 Cleanup - Archived Files Report
+Generated on: Fri Sep  5 19:54:53 CDT 2025
+===========================================
+# Copy files archived:
+  src/Controller/ProductPageViewsController copy 2.php -> archive/psr4-excluded/20250905-195400/
+  src/Controller/ProductPageViewsController copy.php -> archive/psr4-excluded/20250905-195400/
+  src/Controller/ProductsController copy.php -> archive/psr4-excluded/20250905-195400/
+  src/Controller/ProductsTagsController copy.php -> archive/psr4-excluded/20250905-195400/
+  src/Controller/ProductsTranslationsController copy.php -> archive/psr4-excluded/20250905-195400/
+  tests/Fixture/ProductsFixture copy.php -> archive/psr4-excluded/20250905-195400/
+  tests/Fixture/ProductsTagsFixture copy.php -> archive/psr4-excluded/20250905-195400/
+
+# Versioned files archived:
+  src/Controller/ProductsController_v2.php -> archive/psr4-excluded/20250905-195400/
+  src/Model/Entity/Product_v1.php -> archive/psr4-excluded/20250905-195400/

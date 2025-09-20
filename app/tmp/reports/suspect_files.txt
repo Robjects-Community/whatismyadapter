@@ -1,0 +1,9 @@
+src/Controller/ProductPageViewsController copy 2.php
+src/Controller/ProductPageViewsController copy.php
+src/Controller/ProductsController copy.php
+src/Controller/ProductsController_v2.php
+src/Controller/ProductsTagsController copy.php
+src/Controller/ProductsTranslationsController copy.php
+src/Model/Entity/Product_v1.php
+tests/Fixture/ProductsFixture copy.php
+tests/Fixture/ProductsTagsFixture copy.php
