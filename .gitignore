@@ -912,3 +912,13 @@ helper-files-backup-20250920_011030.tar.gz
 
 # Data cleanse backups
 data-cleanse-backup-*/
+artifacts/structure-check.txt
+artifacts/autoload-check.txt
+artifacts/compose-validation.txt
+artifacts/composer-and-php.txt
+artifacts/docker-infrastructure-check.txt
+artifacts/env-info.txt
+artifacts/env-summary.txt
+artifacts/migrations-status.txt
+artifacts/services-list.txt
+artifacts/services-map.txt

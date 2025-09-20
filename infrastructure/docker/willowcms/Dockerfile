@@ -86,7 +86,7 @@ RUN deluser nobody 2>/dev/null || true && \
     adduser -u ${UID} -S -G nobody nobody
 
 # Copy CakePHP application files
-COPY --chown=nobody:nobody cakephp/ /var/www/html/
+COPY --chown=nobody:nobody app/ /var/www/html/
 
 # Make sure files/folders needed by the processes are accessible when they run under the nobody user
 RUN mkdir -p /var/www/html /var/www/html/tmp/archives /var/www/html/webroot/files/ImageGalleries/preview /run /var/lib/nginx /var/log/nginx && \
