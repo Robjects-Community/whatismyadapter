@@ -120,6 +120,10 @@ backups/
 deployment-clean*/
 data-cleanse-backup*/
 
+# Infrastructure Docker logs - organized by service
+infrastructure/docker/logs/*/*
+!infrastructure/docker/logs/*/.gitkeep
+
 # Prevent leaking secrets in helper files
 helper-files(use-only-if-you-get-lost)/docker-backups/
 
