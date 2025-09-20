@@ -30,13 +30,13 @@ class AddPageTypeFieldsToArticles extends BaseMigration
             'limit' => \Phinx\Db\Adapter\MysqlAdapter::TEXT_MEDIUM,
             'null' => true,
             'comment' => 'Static content for linked pages',
-            'after' => 'external_url'
+            'after' => 'body'
         ]);
         
         $table->addColumn('assets_json', 'json', [
             'null' => true,
             'comment' => 'JSON metadata for uploaded page assets',
-            'after' => 'deployment_meta'
+            'after' => 'static_content'
         ]);
         
         $table->addColumn('asset_dir', 'string', [
