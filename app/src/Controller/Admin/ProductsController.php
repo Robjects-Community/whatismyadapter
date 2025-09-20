@@ -1889,4 +1889,279 @@ class ProductsController extends AppController
 
         $this->log($logLine, 'info', ['scope' => 'admin_actions']);
     }
+
+    /**
+     * Quiz settings management
+     */
+    public function quizSettings()
+    {
+        $settingsService = new SettingsService();
+        
+        if ($this->request->is(['post', 'put'])) {
+            $data = $this->request->getData();
+            
+            // Validate and process the quiz configuration
+            if ($this->validateQuizSettings($data)) {
+                // Process the data structure to match config format
+                $processedData = $this->processQuizSettingsData($data);
+                
+                // Save to settings table
+                foreach ($processedData as $section => $settings) {
+                    foreach ($settings as $key => $value) {
+                        $settingKey = "Quiz.{$section}.{$key}";
+                        $settingsService->set('core', $settingKey, $value);
+                    }
+                }
+                
+                $this->Flash->success(__('Quiz settings saved successfully.'));
+                return $this->redirect(['action' => 'quizSettings']);
+            } else {
+                $this->Flash->error(__('Please correct the errors and try again.'));
+            }
+        }
+        
+        // Load current quiz settings with defaults
+        $currentSettings = Configure::read('Quiz');
+        
+        // Prepare settings for form display
+        $formData = $this->prepareQuizSettingsForForm($currentSettings);
+        
+        $this->set([
+            'quizSettings' => $currentSettings,
+            'formData' => $formData,
+            'title' => 'Quiz Settings',
+            'settingSections' => $this->getQuizSettingSections()
+        ]);
+    }
+
+    /**
+     * Validate quiz settings data
+     *
+     * @param array $data Form data
+     * @return bool Validation result
+     */
+    private function validateQuizSettings(array $data): bool
+    {
+        $errors = [];
+        
+        // Validate global settings
+        if (isset($data['max_results']) && (!is_numeric($data['max_results']) || $data['max_results'] < 1)) {
+            $errors[] = 'Maximum results must be a positive number';
+        }
+        
+        if (isset($data['confidence_threshold']) && 
+            (!is_numeric($data['confidence_threshold']) || 
+             $data['confidence_threshold'] < 0 || 
+             $data['confidence_threshold'] > 1)) {
+            $errors[] = 'Confidence threshold must be between 0 and 1';
+        }
+        
+        // Validate Akinator settings
+        if (isset($data['akinator']['max_questions']) && 
+            (!is_numeric($data['akinator']['max_questions']) || $data['akinator']['max_questions'] < 1)) {
+            $errors[] = 'Akinator max questions must be a positive number';
+        }
+        
+        // Validate comprehensive quiz settings
+        if (isset($data['comprehensive']['steps']) && 
+            (!is_numeric($data['comprehensive']['steps']) || $data['comprehensive']['steps'] < 1)) {
+            $errors[] = 'Comprehensive quiz steps must be a positive number';
+        }
+        
+        if (!empty($errors)) {
+            foreach ($errors as $error) {
+                $this->Flash->error(__($error));
+            }
+            return false;
+        }
+        
+        return true;
+    }
+
+    /**
+     * Process quiz settings data for saving
+     *
+     * @param array $data Raw form data
+     * @return array Processed data structure
+     */
+    private function processQuizSettingsData(array $data): array
+    {
+        $processed = [];
+        
+        // Global settings
+        if (isset($data['enabled'])) {
+            $processed['enabled'] = (bool)$data['enabled'];
+        }
+        
+        if (isset($data['max_results'])) {
+            $processed['max_results'] = (int)$data['max_results'];
+        }
+        
+        if (isset($data['confidence_threshold'])) {
+            $processed['confidence_threshold'] = (float)$data['confidence_threshold'];
+        }
+        
+        // Akinator settings
+        if (isset($data['akinator'])) {
+            $processed['akinator'] = [];
+            foreach ($data['akinator'] as $key => $value) {
+                if ($key === 'enabled' || $key === 'allow_unsure' || $key === 'dynamic_questions') {
+                    $processed['akinator'][$key] = (bool)$value;
+                } elseif (in_array($key, ['max_questions', 'time_limit'])) {
+                    $processed['akinator'][$key] = (int)$value;
+                } elseif (in_array($key, ['confidence_goal', 'binary_threshold'])) {
+                    $processed['akinator'][$key] = (float)$value;
+                } else {
+                    $processed['akinator'][$key] = $value;
+                }
+            }
+        }
+        
+        // Comprehensive quiz settings
+        if (isset($data['comprehensive'])) {
+            $processed['comprehensive'] = [];
+            foreach ($data['comprehensive'] as $key => $value) {
+                if (in_array($key, ['enabled', 'require_all_steps', 'validate_on_submit', 'allow_skip', 'progress_saving'])) {
+                    $processed['comprehensive'][$key] = (bool)$value;
+                } elseif (in_array($key, ['steps', 'time_limit'])) {
+                    $processed['comprehensive'][$key] = (int)$value;
+                } elseif ($key === 'question_types') {
+                    $processed['comprehensive'][$key] = is_array($value) ? $value : [$value];
+                } else {
+                    $processed['comprehensive'][$key] = $value;
+                }
+            }
+        }
+        
+        // Result display settings
+        if (isset($data['result'])) {
+            $processed['result'] = [];
+            if (isset($data['result']['display'])) {
+                foreach ($data['result']['display'] as $key => $value) {
+                    if (in_array($key, ['show_confidence', 'show_specs', 'show_explanation', 'show_similar', 
+                                       'show_alternatives', 'show_images', 'show_prices', 'show_ratings'])) {
+                        $processed['result']['display'][$key] = (bool)$value;
+                    } elseif ($key === 'max_per_page') {
+                        $processed['result']['display'][$key] = (int)$value;
+                    } else {
+                        $processed['result']['display'][$key] = $value;
+                    }
+                }
+            }
+        }
+        
+        return $processed;
+    }
+
+    /**
+     * Prepare quiz settings for form display
+     *
+     * @param array $settings Current settings
+     * @return array Form-ready data
+     */
+    private function prepareQuizSettingsForForm(array $settings): array
+    {
+        $formData = [];
+        
+        // Flatten nested structure for form binding
+        foreach ($settings as $section => $values) {
+            if (is_array($values)) {
+                foreach ($values as $key => $value) {
+                    if (is_array($value)) {
+                        foreach ($value as $subKey => $subValue) {
+                            $formData["{$section}_{$key}_{$subKey}"] = $subValue;
+                        }
+                    } else {
+                        $formData["{$section}_{$key}"] = $value;
+                    }
+                }
+            } else {
+                $formData[$section] = $values;
+            }
+        }
+        
+        return $formData;
+    }
+
+    /**
+     * Get quiz setting sections for organization
+     *
+     * @return array Setting sections with metadata
+     */
+    private function getQuizSettingSections(): array
+    {
+        return [
+            'global' => [
+                'title' => 'Global Quiz Settings',
+                'description' => 'Overall quiz system configuration',
+                'fields' => [
+                    'enabled' => ['type' => 'checkbox', 'label' => 'Enable Quiz System'],
+                    'max_results' => ['type' => 'number', 'label' => 'Maximum Results', 'min' => 1, 'max' => 50],
+                    'confidence_threshold' => ['type' => 'number', 'label' => 'Confidence Threshold', 'min' => 0, 'max' => 1, 'step' => 0.01]
+                ]
+            ],
+            'akinator' => [
+                'title' => 'Akinator-style Quiz',
+                'description' => 'AI-powered question flow based on user responses',
+                'fields' => [
+                    'enabled' => ['type' => 'checkbox', 'label' => 'Enable Akinator Quiz'],
+                    'max_questions' => ['type' => 'number', 'label' => 'Maximum Questions', 'min' => 5, 'max' => 50],
+                    'confidence_goal' => ['type' => 'number', 'label' => 'Target Confidence', 'min' => 0.5, 'max' => 1, 'step' => 0.05],
+                    'difficulty_level' => ['type' => 'select', 'label' => 'Difficulty Level', 'options' => [
+                        'easy' => 'Easy', 'normal' => 'Normal', 'hard' => 'Hard'
+                    ]],
+                    'allow_unsure' => ['type' => 'checkbox', 'label' => 'Allow "Not Sure" Answers'],
+                    'dynamic_questions' => ['type' => 'checkbox', 'label' => 'Dynamic Question Generation']
+                ]
+            ],
+            'comprehensive' => [
+                'title' => 'Comprehensive Quiz',
+                'description' => 'Multi-step guided quiz with all product categories',
+                'fields' => [
+                    'enabled' => ['type' => 'checkbox', 'label' => 'Enable Comprehensive Quiz'],
+                    'steps' => ['type' => 'number', 'label' => 'Number of Steps', 'min' => 3, 'max' => 20],
+                    'require_all_steps' => ['type' => 'checkbox', 'label' => 'Require All Steps'],
+                    'allow_skip' => ['type' => 'checkbox', 'label' => 'Allow Skipping Steps'],
+                    'progress_saving' => ['type' => 'checkbox', 'label' => 'Save Progress'],
+                    'time_limit' => ['type' => 'number', 'label' => 'Time Limit (seconds, 0 = no limit)', 'min' => 0]
+                ]
+            ],
+            'result' => [
+                'title' => 'Result Display',
+                'description' => 'How quiz results are presented to users',
+                'fields' => [
+                    'show_confidence' => ['type' => 'checkbox', 'label' => 'Show Confidence Scores'],
+                    'show_specs' => ['type' => 'checkbox', 'label' => 'Show Product Specifications'],
+                    'show_explanation' => ['type' => 'checkbox', 'label' => 'Show Match Explanation'],
+                    'show_similar' => ['type' => 'checkbox', 'label' => 'Show Similar Products'],
+                    'layout' => ['type' => 'select', 'label' => 'Display Layout', 'options' => [
+                        'list' => 'List', 'grid' => 'Grid', 'cards' => 'Cards'
+                    ]],
+                    'max_per_page' => ['type' => 'number', 'label' => 'Results Per Page', 'min' => 5, 'max' => 50]
+                ]
+            ],
+            'analytics' => [
+                'title' => 'Analytics & Tracking',
+                'description' => 'Quiz usage analytics and user behavior tracking',
+                'fields' => [
+                    'enabled' => ['type' => 'checkbox', 'label' => 'Enable Analytics'],
+                    'track_submissions' => ['type' => 'checkbox', 'label' => 'Track Quiz Submissions'],
+                    'track_abandonment' => ['type' => 'checkbox', 'label' => 'Track Quiz Abandonment'],
+                    'track_time' => ['type' => 'checkbox', 'label' => 'Track Completion Time'],
+                    'retention_days' => ['type' => 'number', 'label' => 'Data Retention (days)', 'min' => 1, 'max' => 365]
+                ]
+            ],
+            'security' => [
+                'title' => 'Security Settings',
+                'description' => 'Rate limiting and input validation',
+                'fields' => [
+                    'rate_limiting_enabled' => ['type' => 'checkbox', 'label' => 'Enable Rate Limiting'],
+                    'max_attempts' => ['type' => 'number', 'label' => 'Max Attempts per Window', 'min' => 1, 'max' => 20],
+                    'window_minutes' => ['type' => 'number', 'label' => 'Rate Limit Window (minutes)', 'min' => 1, 'max' => 60],
+                    'csrf_protection' => ['type' => 'checkbox', 'label' => 'CSRF Protection'],
+                    'input_sanitization' => ['type' => 'checkbox', 'label' => 'Input Sanitization']
+                ]
+            ]
+        ];
+    }
 }

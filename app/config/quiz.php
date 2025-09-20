@@ -19,6 +19,9 @@ return [
             'max_questions' => 15,
             'confidence_goal' => 0.85,
             'binary_threshold' => 0.7,
+            'difficulty_level' => 'normal', // easy|normal|hard
+            'allow_unsure' => true,
+            'dynamic_questions' => true,
         ],
         
         // Comprehensive Quiz
@@ -27,6 +30,10 @@ return [
             'steps' => 6,
             'require_all_steps' => false,
             'validate_on_submit' => true,
+            'question_types' => ['multiple_choice', 'checkbox', 'range', 'text'],
+            'allow_skip' => true,
+            'progress_saving' => true,
+            'time_limit' => 0, // seconds, 0 = no limit
         ],
         
         // Result Display Options
@@ -35,13 +42,25 @@ return [
                 'show_confidence' => true,
                 'show_specs' => true,
                 'show_explanation' => true,
-                'layout' => 'list', // list|grid
+                'show_similar' => true,
+                'show_alternatives' => true,
+                'layout' => 'list', // list|grid|cards
                 'max_per_page' => 10,
+                'show_images' => true,
+                'show_prices' => true,
+                'show_ratings' => true,
             ],
             'sorting' => [
-                'primary' => 'confidence', // confidence|price|rating
+                'primary' => 'confidence', // confidence|price|rating|name
                 'direction' => 'desc', // asc|desc
                 'secondary' => 'rating',
+                'allow_user_sort' => true,
+            ],
+            'filters' => [
+                'enable_price_filter' => true,
+                'enable_brand_filter' => true,
+                'enable_rating_filter' => true,
+                'minimum_confidence' => 0.3,
             ],
         ],
         
@@ -82,7 +101,22 @@ return [
             'enabled' => true,
             'track_submissions' => true,
             'track_abandonment' => true,
+            'track_time' => true,
+            'track_user_path' => true,
+            'track_errors' => true,
             'session_timeout' => 3600, // 1 hour
+            'retention_days' => 90,
+            'privacy' => [
+                'anonymize_ip' => true,
+                'store_user_agent' => false,
+                'track_personal_data' => false,
+            ],
+            'reports' => [
+                'quiz_completion_rate' => true,
+                'popular_paths' => true,
+                'common_dropoff_points' => true,
+                'result_accuracy' => true,
+            ],
         ],
         
         // Caching
@@ -90,6 +124,75 @@ return [
             'enabled' => true,
             'duration' => 1800, // 30 minutes
             'key_prefix' => 'quiz_',
+            'adapters' => [
+                'redis' => true,
+                'file' => true,
+                'memory' => false,
+            ],
+        ],
+        
+        // Security Settings
+        'security' => [
+            'rate_limiting' => [
+                'enabled' => true,
+                'max_attempts' => 5,
+                'window_minutes' => 15,
+                'block_duration' => 60, // minutes
+            ],
+            'csrf_protection' => true,
+            'input_sanitization' => true,
+            'max_input_length' => 1000,
+            'allowed_file_types' => ['jpg', 'jpeg', 'png'],
+            'max_file_size' => 5242880, // 5MB
+        ],
+        
+        // Validation Rules
+        'validation' => [
+            'strict_mode' => false,
+            'required_fields' => ['device_type', 'manufacturer'],
+            'min_questions_answered' => 2,
+            'custom_rules' => [],
+        ],
+        
+        // User Experience Settings
+        'ux' => [
+            'auto_save' => [
+                'enabled' => true,
+                'interval' => 30, // seconds
+            ],
+            'progress_indicator' => [
+                'show' => true,
+                'type' => 'bar', // bar|steps|percentage
+            ],
+            'navigation' => [
+                'show_back_button' => true,
+                'show_skip_button' => true,
+                'confirm_before_exit' => true,
+            ],
+            'accessibility' => [
+                'screen_reader' => true,
+                'keyboard_navigation' => true,
+                'high_contrast' => false,
+            ],
+            'mobile_optimization' => [
+                'responsive_design' => true,
+                'touch_friendly' => true,
+                'swipe_navigation' => true,
+            ],
+        ],
+        
+        // Debug & Development
+        'debug' => [
+            'enabled' => false,
+            'log_level' => 'error', // debug|info|warning|error
+            'show_scoring_details' => false,
+            'show_ai_reasoning' => false,
+            'performance_monitoring' => false,
+            'test_mode' => [
+                'enabled' => false,
+                'mock_ai_responses' => false,
+                'force_specific_results' => [],
+            ],
         ],
         
         // Legacy configuration for existing quiz questions
