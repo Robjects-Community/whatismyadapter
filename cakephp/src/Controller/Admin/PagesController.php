@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 use App\Service\Ai\WebpageExtractionService;
+use App\Service\WebpageExtractor;
 use Cake\Cache\Cache;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Http\Response;
@@ -498,6 +499,50 @@ class PagesController extends AppController
             $this->set(['success' => false, 'error' => $e->getMessage()]);
         }
 
+        return null;
+    }
+
+    /**
+     * Extract webpage content AJAX endpoint
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function extractWebpage(): ?Response
+    {
+        $this->request->allowMethod(['post']);
+        $this->viewBuilder()->setClassName('Json');
+        
+        if (!$this->request->is('ajax')) {
+            throw new \Cake\Http\Exception\BadRequestException('AJAX request required');
+        }
+        
+        $url = $this->request->getData('url');
+        if (empty($url)) {
+            $this->set([
+                'success' => false,
+                'message' => 'URL is required',
+                'data' => []
+            ]);
+            $this->viewBuilder()->setOption('serialize', ['success', 'message', 'data']);
+            return null;
+        }
+        
+        try {
+            $extractor = new WebpageExtractor();
+            $result = $extractor->extractContent($url);
+            
+            $this->set($result);
+            $this->viewBuilder()->setOption('serialize', ['success', 'message', 'data']);
+            
+        } catch (Exception $e) {
+            $this->set([
+                'success' => false,
+                'message' => 'Error extracting content: ' . $e->getMessage(),
+                'data' => []
+            ]);
+            $this->viewBuilder()->setOption('serialize', ['success', 'message', 'data']);
+        }
+        
         return null;
     }
 
