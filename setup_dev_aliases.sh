@@ -114,4 +114,4 @@ if [ "$QUIET_MODE" = false ]; then
 fi
 # The "source '$RC_FILE'" at the end of the setup script *might* still trigger the syntax error
 # IF dev_aliases.txt is not clean when the setup script runs for the first time.
-# It's generally safer to instruct the user to source it manually after fixing dev_aliases.txt.
+# It's generally safer to instruct the user to source it manually after fixing dev_aliases.txt.alias willow:archive="bash scripts/archive/create_final_archive.sh"
