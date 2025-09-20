@@ -11,6 +11,8 @@
 /cakephp/tmp/*
 /cakephp/vendor/*
 /logs/*
+/app/tmp/*
+app/tmp/*
 
 # CakePHP Migration Schema Dumps #
 ##################################
@@ -112,6 +114,11 @@ yarn-error.log
 project_files_backups
 project_mysql_backups
 backups/
+
+# Organized backup directory
+.backups/
+deployment-clean*/
+data-cleanse-backup*/
 
 # Prevent leaking secrets in helper files
 helper-files(use-only-if-you-get-lost)/docker-backups/
