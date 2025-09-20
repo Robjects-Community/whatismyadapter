@@ -94,13 +94,60 @@
                     </div>
                 </div>
 
+                <!-- File Upload Section -->
+                <div class="mb-4 p-3 bg-light rounded">
+                    <h6 class="mb-3">
+                        <i class="bi bi-upload me-2"></i>
+                        <?= __('Upload Files for Page Content') ?>
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="file-upload-area border-2 border-dashed rounded p-4 text-center mb-3" 
+                                 id="file-upload-area" 
+                                 style="border-color: #dee2e6; background: #f8f9fa;">
+                                <i class="bi bi-cloud-upload display-4 text-muted mb-2"></i>
+                                <p class="text-muted mb-2"><?= __('Drag and drop your HTML, CSS, or JavaScript files here') ?></p>
+                                <p class="small text-muted mb-3"><?= __('or') ?></p>
+                                <input type="file" id="file-input" class="d-none" multiple accept=".html,.css,.js,.htm">
+                                <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('file-input').click()">
+                                    <i class="bi bi-folder-plus me-1"></i><?= __('Browse Files') ?>
+                                </button>
+                            </div>
+                            <div class="form-text mb-3">
+                                <?= __('Supported formats: HTML, CSS, JavaScript. Maximum size: 5MB per file.') ?>
+                            </div>
+                            
+                            <!-- Uploaded Files Display -->
+                            <div id="uploaded-files" class="d-none">
+                                <h6 class="mb-2"><?= __('Uploaded Files') ?></h6>
+                                <div id="files-list" class="list-group mb-3"></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="button" id="merge-files" class="btn btn-success btn-sm">
+                                            <i class="bi bi-puzzle me-1"></i><?= __('Merge into Page Content') ?>
+                                        </button>
+                                        <button type="button" id="clear-files" class="btn btn-outline-danger btn-sm ms-2">
+                                            <i class="bi bi-trash me-1"></i><?= __('Clear All') ?>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6 text-end">
+                                        <button type="button" id="preview-files" class="btn btn-outline-info btn-sm">
+                                            <i class="bi bi-eye me-1"></i><?= __('Preview Combined') ?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <?= $this->Form->control('body', [
                         'type' => 'textarea',
                         'label' => ['text' => __('Page Content'), 'class' => 'form-label'],
                         'class' => 'form-control',
                         'rows' => 15,
-                        'placeholder' => __('Write your page content here. You can use HTML tags.')
+                        'placeholder' => __('Write your page content here. You can use HTML tags or merge uploaded files.')
                     ]) ?>
                     <div class="form-text">
                         <?= __('HTML is allowed. Use the preview function to see how your content will look.') ?>
@@ -484,6 +531,339 @@ document.addEventListener('DOMContentLoaded', function() {
             event.stopPropagation();
         }
         form.classList.add('was-validated');
+    });
+    
+    // File Upload Functionality
+    const fileUploadArea = document.getElementById('file-upload-area');
+    const fileInput = document.getElementById('file-input');
+    const uploadedFilesDiv = document.getElementById('uploaded-files');
+    const filesList = document.getElementById('files-list');
+    const mergeFilesBtn = document.getElementById('merge-files');
+    const clearFilesBtn = document.getElementById('clear-files');
+    const previewFilesBtn = document.getElementById('preview-files');
+    
+    let uploadedFiles = [];
+    
+    // Drag and drop functionality
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        fileUploadArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+        fileUploadArea.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        fileUploadArea.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight(e) {
+        fileUploadArea.style.borderColor = '#007bff';
+        fileUploadArea.style.backgroundColor = '#e7f3ff';
+    }
+    
+    function unhighlight(e) {
+        fileUploadArea.style.borderColor = '#dee2e6';
+        fileUploadArea.style.backgroundColor = '#f8f9fa';
+    }
+    
+    fileUploadArea.addEventListener('drop', handleDrop, false);
+    fileInput.addEventListener('change', handleFileSelect, false);
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles(files);
+    }
+    
+    function handleFileSelect(e) {
+        const files = e.target.files;
+        handleFiles(files);
+    }
+    
+    function handleFiles(files) {
+        [...files].forEach(processFile);
+    }
+    
+    function processFile(file) {
+        // Validate file type
+        const allowedTypes = ['text/html', 'text/css', 'application/javascript', 'text/javascript'];
+        const allowedExtensions = ['.html', '.htm', '.css', '.js'];
+        const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+        
+        if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExtension)) {
+            showFileError(`Invalid file type: ${file.name}. Only HTML, CSS, and JavaScript files are allowed.`);
+            return;
+        }
+        
+        // Validate file size (5MB limit)
+        const maxSize = 5 * 1024 * 1024;
+        if (file.size > maxSize) {
+            showFileError(`File too large: ${file.name}. Maximum size is 5MB.`);
+            return;
+        }
+        
+        // Check if file already exists
+        if (uploadedFiles.find(f => f.name === file.name)) {
+            showFileError(`File already uploaded: ${file.name}`);
+            return;
+        }
+        
+        // Read file content
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const content = e.target.result;
+            const fileObj = {
+                name: file.name,
+                type: getFileType(file.name),
+                content: content,
+                size: file.size
+            };
+            
+            uploadedFiles.push(fileObj);
+            updateFilesDisplay();
+        };
+        reader.readAsText(file);
+    }
+    
+    function getFileType(filename) {
+        const extension = filename.split('.').pop().toLowerCase();
+        switch (extension) {
+            case 'html':
+            case 'htm':
+                return 'html';
+            case 'css':
+                return 'css';
+            case 'js':
+                return 'javascript';
+            default:
+                return 'text';
+        }
+    }
+    
+    function showFileError(message) {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-danger alert-dismissible fade show mt-2';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        fileUploadArea.parentNode.insertBefore(alertDiv, fileUploadArea.nextSibling);
+        
+        // Auto-dismiss after 5 seconds
+        setTimeout(() => {
+            if (alertDiv.parentNode) {
+                alertDiv.remove();
+            }
+        }, 5000);
+    }
+    
+    function updateFilesDisplay() {
+        if (uploadedFiles.length === 0) {
+            uploadedFilesDiv.classList.add('d-none');
+            return;
+        }
+        
+        uploadedFilesDiv.classList.remove('d-none');
+        filesList.innerHTML = '';
+        
+        uploadedFiles.forEach((file, index) => {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+            
+            const fileInfo = document.createElement('div');
+            fileInfo.innerHTML = `
+                <i class="bi bi-${getFileIcon(file.type)} me-2"></i>
+                <strong>${file.name}</strong>
+                <small class="text-muted ms-2">(${formatFileSize(file.size)} - ${file.type})</small>
+            `;
+            
+            const actions = document.createElement('div');
+            actions.innerHTML = `
+                <button type="button" class="btn btn-sm btn-outline-info me-1" onclick="previewFile(${index})">
+                    <i class="bi bi-eye"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile(${index})">
+                    <i class="bi bi-trash"></i>
+                </button>
+            `;
+            
+            fileItem.appendChild(fileInfo);
+            fileItem.appendChild(actions);
+            filesList.appendChild(fileItem);
+        });
+    }
+    
+    function getFileIcon(type) {
+        switch (type) {
+            case 'html': return 'filetype-html';
+            case 'css': return 'filetype-css';
+            case 'javascript': return 'filetype-js';
+            default: return 'file-earmark-text';
+        }
+    }
+    
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    // Global functions for button actions
+    window.previewFile = function(index) {
+        const file = uploadedFiles[index];
+        const modal = document.createElement('div');
+        modal.className = 'modal fade';
+        modal.innerHTML = `
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="bi bi-${getFileIcon(file.type)} me-2"></i>${file.name}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <pre><code class="language-${file.type}" style="white-space: pre-wrap; word-break: break-all;">${escapeHtml(file.content)}</code></pre>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __('Close') ?></button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        const bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
+        modal.addEventListener('hidden.bs.modal', () => modal.remove());
+    };
+    
+    window.removeFile = function(index) {
+        uploadedFiles.splice(index, 1);
+        updateFilesDisplay();
+    };
+    
+    // Merge files into page content
+    mergeFilesBtn.addEventListener('click', function() {
+        if (uploadedFiles.length === 0) return;
+        
+        const bodyTextarea = document.querySelector('textarea[name="body"]');
+        let mergedContent = bodyTextarea.value || '';
+        
+        // Sort files by type (HTML first, then CSS, then JS)
+        const sortedFiles = [...uploadedFiles].sort((a, b) => {
+            const order = { html: 0, css: 1, javascript: 2 };
+            return (order[a.type] || 3) - (order[b.type] || 3);
+        });
+        
+        let htmlContent = '';
+        let cssContent = '';
+        let jsContent = '';
+        
+        sortedFiles.forEach(file => {
+            switch (file.type) {
+                case 'html':
+                    htmlContent += file.content + '\n\n';
+                    break;
+                case 'css':
+                    cssContent += file.content + '\n\n';
+                    break;
+                case 'javascript':
+                    jsContent += file.content + '\n\n';
+                    break;
+            }
+        });
+        
+        // Build combined content
+        let combinedContent = mergedContent;
+        
+        if (cssContent.trim()) {
+            combinedContent += '\n\n<style>\n' + cssContent.trim() + '\n</style>';
+        }
+        
+        if (htmlContent.trim()) {
+            combinedContent += '\n\n' + htmlContent.trim();
+        }
+        
+        if (jsContent.trim()) {
+            combinedContent += '\n\n<script>\n' + jsContent.trim() + '\n</script>';
+        }
+        
+        bodyTextarea.value = combinedContent;
+        bodyTextarea.dispatchEvent(new Event('input')); // Trigger preview update
+        
+        // Show success message
+        const successDiv = document.createElement('div');
+        successDiv.className = 'alert alert-success alert-dismissible fade show mt-2';
+        successDiv.innerHTML = `
+            Files merged successfully! Check the Page Content area and preview.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        uploadedFilesDiv.appendChild(successDiv);
+        
+        setTimeout(() => {
+            if (successDiv.parentNode) {
+                successDiv.remove();
+            }
+        }, 3000);
+    });
+    
+    // Clear all files
+    clearFilesBtn.addEventListener('click', function() {
+        if (confirm('<?= __('Are you sure you want to clear all uploaded files?') ?>')) {
+            uploadedFiles = [];
+            updateFilesDisplay();
+            fileInput.value = '';
+        }
+    });
+    
+    // Preview combined files
+    previewFilesBtn.addEventListener('click', function() {
+        if (uploadedFiles.length === 0) return;
+        
+        // Create a temporary combined preview
+        let htmlContent = '';
+        let cssContent = '';
+        let jsContent = '';
+        
+        uploadedFiles.forEach(file => {
+            switch (file.type) {
+                case 'html':
+                    htmlContent += file.content + '\n';
+                    break;
+                case 'css':
+                    cssContent += file.content + '\n';
+                    break;
+                case 'javascript':
+                    jsContent += file.content + '\n';
+                    break;
+            }
+        });
+        
+        const combinedHtml = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <title>File Preview</title>
+                ${cssContent ? `<style>${cssContent}</style>` : ''}
+            </head>
+            <body>
+                ${htmlContent}
+                ${jsContent ? `<script>${jsContent}</script>` : ''}
+            </body>
+            </html>
+        `;
+        
+        // Open in new window
+        const previewWindow = window.open('', '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+        previewWindow.document.write(combinedHtml);
+        previewWindow.document.close();
     });
     
     // Initialize
