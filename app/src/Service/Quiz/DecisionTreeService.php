@@ -77,48 +77,66 @@ class DecisionTreeService
     }
 
     /**
-     * Start a new Akinator session
+     * Start a new Akinator session with batch-based questions
      *
      * @param array $context Optional context information
-     * @return array Initial question and session data
+     * @return array Initial batch of questions and session data
      */
     public function start(array $context = []): array
     {
         $sessionId = Text::uuid();
 
-        // Initialize session state
-        $state = [
+        // Initialize user profile for intelligent question generation
+        $userProfile = [
             'session_id' => $sessionId,
-            'current_node' => 'root',
             'answers' => [],
-            'visited_nodes' => ['root'],
-            'question_count' => 0,
-            'confidence' => 0.0,
+            'preferences' => [],
+            'follow_ups' => [],
             'context' => $context,
             'started_at' => time(),
         ];
 
-        // Get first question
-        $firstQuestion = $this->getQuestionForNode('root', $state);
+        // Generate first batch of 4 strategic questions
+        $questionBatch = $this->questionStrategy->generateQuestionBatch($userProfile, 0);
 
-        if (!$firstQuestion) {
-            throw new RuntimeException('Unable to load first question from decision tree');
-        }
+        // Create session state
+        $state = [
+            'session_id' => $sessionId,
+            'user_profile' => $userProfile,
+            'current_batch' => 0,
+            'questions_in_batch' => $questionBatch['questions'],
+            'current_question_index' => 0,
+            'batch_answers' => [],
+            'all_answers' => [],
+            'confidence' => 0.0,
+            'stage' => $questionBatch['stage'],
+            'available_products_count' => $questionBatch['available_products_count'],
+            'started_at' => time(),
+        ];
 
         // Store session state
         $this->storeSessionState($sessionId, $state);
 
-        $this->log("Akinator session started: {$sessionId}", 'info');
+        $this->log(sprintf(
+            'Akinator session started: %s with %d questions in first batch (stage: %s, available products: %d)',
+            $sessionId,
+            count($questionBatch['questions']),
+            $questionBatch['stage'],
+            $questionBatch['available_products_count']
+        ), 'info');
 
         return [
             'session_id' => $sessionId,
-            'question' => $firstQuestion,
-            'progress' => [
-                'current' => 1,
-                'total' => $this->config['max_questions'],
-                'percentage' => 0,
+            'question' => $questionBatch['questions'][0], // Return first question in batch
+            'batch_info' => [
+                'current_batch' => $questionBatch['batch_number'] + 1,
+                'total_batches' => 3,
+                'questions_in_batch' => count($questionBatch['questions']),
+                'current_question_in_batch' => 1,
             ],
+            'progress' => $questionBatch['progress'],
             'confidence' => 0.0,
+            'stage' => $questionBatch['stage'],
         ];
     }
 
