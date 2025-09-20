@@ -139,9 +139,16 @@ class QuizController extends AppController
                 throw new BadRequestException(__('Missing required parameters: session_id and answer.'));
             }
 
-            // Ensure state has session_id
-            if (empty($state['session_id'])) {
-                $state['session_id'] = $sessionId;
+            // Try to load stored state first, then merge with provided state
+            $storedState = $this->decisionTree->getStoredState($sessionId);
+            if ($storedState) {
+                // Merge stored state with any provided state updates
+                $state = array_merge($storedState, $state);
+            } else {
+                // Ensure state has session_id
+                if (empty($state['session_id'])) {
+                    $state['session_id'] = $sessionId;
+                }
             }
 
             $result = $this->decisionTree->next($state, $answer);

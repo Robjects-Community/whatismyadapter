@@ -1046,3 +1046,4 @@ helper-files(use-only-if-you-get-lost)/willow-complete-presentation.zip/style.cs
 infrastructure/docker/willowcms/config/nginx/logs/access.log
 app/logs/debug.log
 app/logs/error.log
+.warpindexingignore

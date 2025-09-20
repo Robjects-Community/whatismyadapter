@@ -84,7 +84,7 @@ class AiProductMatcherService
 
             // Check cache first
             $cached = Cache::read($cacheKey, 'quiz');
-            if ($cached !== false) {
+            if ($cached !== false && is_array($cached)) {
                 $this->log("Quiz match served from cache: {$cacheKey}", 'info');
 
                 return $cached;

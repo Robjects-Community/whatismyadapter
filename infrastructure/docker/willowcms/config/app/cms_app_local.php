@@ -84,4 +84,54 @@ return [
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL'),
         ],
     ],
+
+    /*
+     * Quiz System Configuration
+     * Settings for the AI-powered Akinator-style quiz
+     */
+    'QuizSystem' => [
+        // Global quiz system settings
+        'enabled' => true,
+        'ai_enabled' => true,
+        'confidence_threshold' => 0.6,
+        'max_results' => 5,
+        'enable_analytics' => true,
+        
+        // Akinator-specific settings  
+        'akinator' => [
+            'enabled' => true,
+            'max_questions' => 10,
+            'confidence_threshold' => 0.85, // 85%
+            'min_products_threshold' => 3,
+            'ai_questions_enabled' => true,
+            'result_limit' => 5,
+            'session_ttl' => 3600, // 1 hour
+            'cache_enabled' => true,
+            'analytics_enabled' => true,
+            'fallback_questions_enabled' => true,
+        ],
+        
+        // Comprehensive quiz settings
+        'comprehensive' => [
+            'enabled' => true,
+            'steps' => 6,
+            'result_limit' => 5,
+            'analytics_enabled' => true,
+        ],
+    ],
+
+    /*
+     * Cache configuration for Quiz
+     */
+    'Cache' => [
+        'quiz' => [
+            'className' => 'Cake\Cache\Engine\RedisEngine',
+            'duration' => '+1 hours',
+            'prefix' => 'willow_quiz_',
+            'host' => env('REDIS_HOST', 'willowcms'),
+            'port' => env('REDIS_PORT', 6379),
+            'password' => env('REDIS_PASSWORD', 'root'),
+            'database' => 1, // Use database 1 for quiz cache
+        ],
+    ],
 ];

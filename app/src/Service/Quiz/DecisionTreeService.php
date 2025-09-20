@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Service\Quiz;
 
 use App\Service\Api\Anthropic\AnthropicApiService;
+use App\Service\Quiz\QuestionStrategyService;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Log\LogTrait;
@@ -43,6 +44,11 @@ class DecisionTreeService
     private ?AnthropicApiService $aiService;
 
     /**
+     * Question strategy service for batch-based question generation
+     */
+    private QuestionStrategyService $questionStrategy;
+
+    /**
      * Constructor
      *
      * @param array $config Configuration options
@@ -58,6 +64,7 @@ class DecisionTreeService
 
         $this->loadDecisionTree();
         $this->productMatcher = new AiProductMatcherService();
+        $this->questionStrategy = new QuestionStrategyService();
 
         // Initialize AI service for smart question generation
         try {
@@ -142,6 +149,9 @@ class DecisionTreeService
         if (!isset($state['answers'])) {
             $state['answers'] = [];
         }
+        if (!isset($state['current_node'])) {
+            $state['current_node'] = 'root';
+        }
 
         // Update state with answer
         $state['answers'][$state['current_node']] = $answer;
@@ -224,6 +234,28 @@ class DecisionTreeService
         }
 
         return $state;
+    }
+
+    /**
+     * Get stored state for session
+     *
+     * @param string $sessionId Session identifier
+     * @return array|null Stored state or null if not found
+     */
+    public function getStoredState(string $sessionId): ?array
+    {
+        try {
+            $cacheKey = 'akinator_session_' . $sessionId;
+            $cached = Cache::read($cacheKey, 'quiz');
+            
+            if ($cached !== false && is_array($cached)) {
+                return $cached;
+            }
+        } catch (Exception $e) {
+            $this->log('Failed to retrieve stored state: ' . $e->getMessage(), 'error');
+        }
+        
+        return null;
     }
 
     /**
