@@ -44,6 +44,9 @@ docker exec -i "$CONTAINER_NAME" bash -c "cat > /tmp/import_products.php << 'EOF
 <?php
 declare(strict_types=1);
 
+// Load Composer autoloader first
+require '/var/www/html/vendor/autoload.php';
+
 // Bootstrap CakePHP
 require '/var/www/html/config/bootstrap.php';
 
@@ -56,7 +59,7 @@ use Cake\I18n\FrozenTime;
 \$productsTable = TableRegistry::getTableLocator()->get('Products');
 
 // Parse CSV
-\$csvFile = '/var/www/html/tools/data/products_whatismyadapter.csv';
+\$csvFile = '/var/www/html/tmp/products_whatismyadapter.csv';
 if (!file_exists(\$csvFile)) {
     echo \"ERROR: CSV file not found at \$csvFile\\n\";
     exit(1);
