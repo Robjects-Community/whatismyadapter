@@ -401,4 +401,80 @@ class ArticlesController extends AppController
 
         $this->redirect(['action' => $action]);
     }
+
+    /**
+     * Bulk operations on articles (publish, unpublish, delete)
+     *
+     * @return \Cake\Http\Response|null JSON response
+     */
+    public function bulkAction(): ?Response
+    {
+        $this->request->allowMethod(['post']);
+        
+        $action = $this->request->getData('bulk_action');
+        $selectedIds = $this->request->getData('selected_ids', []);
+        
+        if (empty($selectedIds) || empty($action)) {
+            return $this->response->withType('application/json')
+                ->withStringBody(json_encode([
+                    'success' => false,
+                    'message' => __('Please select items and an action')
+                ]));
+        }
+        
+        $successCount = 0;
+        $totalCount = count($selectedIds);
+        $message = '';
+        
+        try {
+            switch ($action) {
+                case 'publish':
+                    $successCount = $this->Articles->updateAll(
+                        ['is_published' => true, 'published' => date('Y-m-d H:i:s')],
+                        ['id IN' => $selectedIds]
+                    );
+                    $message = __('Published {0} of {1} articles', $successCount, $totalCount);
+                    break;
+                    
+                case 'unpublish':
+                    $successCount = $this->Articles->updateAll(
+                        ['is_published' => false],
+                        ['id IN' => $selectedIds]
+                    );
+                    $message = __('Unpublished {0} of {1} articles', $successCount, $totalCount);
+                    break;
+                    
+                case 'delete':
+                    $successCount = $this->Articles->deleteAll(['id IN' => $selectedIds]);
+                    $message = __('Deleted {0} of {1} articles', $successCount, $totalCount);
+                    break;
+                    
+                default:
+                    return $this->response->withType('application/json')
+                        ->withStringBody(json_encode([
+                            'success' => false,
+                            'message' => __('Invalid action')
+                        ]));
+            }
+            
+            // Clear cache after bulk operations
+            $this->clearContentCache();
+            
+            $this->Flash->success($message);
+            
+            return $this->response->withType('application/json')
+                ->withStringBody(json_encode([
+                    'success' => true,
+                    'message' => $message,
+                    'updated_count' => $successCount
+                ]));
+                
+        } catch (Exception $e) {
+            return $this->response->withType('application/json')
+                ->withStringBody(json_encode([
+                    'success' => false,
+                    'message' => __('Error performing bulk action: {0}', $e->getMessage())
+                ]));
+        }
+    }
 }
