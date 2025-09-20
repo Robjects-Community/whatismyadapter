@@ -514,7 +514,10 @@ clean_deployment_state() {
     
     # Remove any production-specific Docker images that might conflict
     local prod_images=()
-    mapfile -t prod_images < <(docker images --format "table {{.Repository}}:{{.Tag}}" | grep -E "prod|production|staging|stage" | tail -n +2 || true)
+    # Use compatible alternative to mapfile for broader shell support
+    while IFS= read -r line; do
+        [[ -n "$line" ]] && prod_images+=("$line")
+    done < <(docker images --format "table {{.Repository}}:{{.Tag}}" | grep -E "prod|production|staging|stage" | tail -n +2 || true)
     
     if [[ ${#prod_images[@]} -gt 0 ]]; then
         print_info "Found production/staging Docker images. Consider cleaning:"

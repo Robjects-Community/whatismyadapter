@@ -62,6 +62,12 @@
 ### Active Refactoring
 - **[Refactoring Plan](refactoring/REFACTORING_PLAN.md)** - ⭐ **Main refactoring roadmap (35% complete)**
 - **[Helper Files Refactoring Plan](refactoring/HELPER_FILES_REFACTORING_PLAN.md)** - Legacy helper file cleanup
+- **[Refactor Helper Files Integration](REFACTOR_HELPER_FILES.md)** - Integration guide and access information
+- **[File Management](FILE_MANAGEMENT.md)** - File organization and refactoring utilities
+- **[Tools Organization](TOOLS_ORGANIZATION.md)** - Organized tools directory structure and usage
+- **[Backup Organization](BACKUP_ORGANIZATION.md)** - Centralized backup system and security
+- **[File Reorganization](FILE_REORGANIZATION.md)** - Root directory cleanup and file organization
+- **[Quick Security Check](QUICK_SECURITY_CHECK.md)** - Security verification tool location and usage
 
 ### Architecture Documentation
 - **[Directory Structure](architecture/DIRECTORY_STRUCTURE.md)** - Project organization guidelines

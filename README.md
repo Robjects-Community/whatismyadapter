@@ -1,4 +1,4 @@
-# 🌟 WillowCMS - Professional Content Management System
+****# 🌟 WillowCMS - Professional Content Management System
 
 > **Enterprise-grade CakePHP 5.x CMS with Security-First Architecture and Complete Admin Interface**
 
@@ -95,7 +95,7 @@ Your WillowCMS root directory contains various files serving different purposes.
 - **Purpose**: General project management and utility script
 - **Features**: Project maintenance tasks and administrative functions
 
-#### **`./quick_security_check.sh`** 🔐 *Security Validation*
+#### **`tools/security/quick_security_check.sh`** 🔐 *Security Validation*
 - **Purpose**: Rapid security scan to detect sensitive data exposure
 - **Usage**: Run before every commit to ensure no secrets are accidentally committed
 - **Checks**: Environment files, SQL dumps, backup files, credentials
@@ -106,13 +106,13 @@ Your WillowCMS root directory contains various files serving different purposes.
 
 ### 🏗️ **Reorganization & Refactoring Scripts**
 
-#### **`./reorganize_willow_secure.sh`** 🔐 *Secure Reorganization*
+#### **`tools/deployment/reorganize_willow_secure.sh`** 🔐 *Secure Reorganization*
 - **Purpose**: Complete project restructuring with data security focus
 - **Features**: Moves sensitive data to secure backup, implements professional structure
 - **Safety**: Creates full backup before any changes
 - **Output**: Transforms project into enterprise-grade organization
 
-#### **`./reorganize_willow.sh`** *Basic Reorganization*
+#### **`tools/deployment/reorganize_willow.sh`** *Basic Reorganization*
 - **Purpose**: Standard project restructuring without security focus
 - **Usage**: Alternative to secure version for simple reorganization
 
@@ -312,7 +312,7 @@ app/ (Main CakePHP Application)
 ### **Security Commands**
 ```bash
 # Quick security check (run before every commit)
-./quick_security_check.sh
+tools/security/quick_security_check.sh
 
 # Comprehensive security scan
 make security-check
@@ -333,10 +333,10 @@ sha256sum -c app/logs/*.sha256
 ./run_dev_env.sh                # Handles everything automatically
 
 # 🔍 Check security (run before commits)
-./quick_security_check.sh       # Verify no sensitive data
+tools/security/quick_security_check.sh   # Verify no sensitive data
 
 # 🏗️ Reorganize project (one-time transformation)
-./reorganize_willow_secure.sh   # Security-focused reorganization
+tools/deployment/reorganize_willow_secure.sh   # Security-focused reorganization
 ```
 
 #### **Daily Development (if reorganized):**
@@ -380,7 +380,7 @@ git checkout -b feature/amazing-feature
 phpunit --filter YourNewFeature
 
 # 3. Quality assurance
-./quick_security_check.sh     # Security verification
+tools/security/quick_security_check.sh  # Security verification
 composer_cs_fix               # Fix code style
 
 # 4. Integration
@@ -484,7 +484,7 @@ app/tests/
 
 #### **Option 1: Quick Security Check (30 seconds)**
 ```bash
-./quick_security_check.sh
+tools/security/quick_security_check.sh
 # ✅ Verify no sensitive data in repository
 # ✅ Safe to run anytime
 # ✅ Use before every commit
@@ -492,7 +492,7 @@ app/tests/
 
 #### **Option 2: Complete Secure Reorganization (15 minutes)** ⭐ **RECOMMENDED**
 ```bash
-./reorganize_willow_secure.sh
+tools/deployment/reorganize_willow_secure.sh
 # 🔐 CLEANSES all sensitive data (*.sql, *.dump, backups)
 # 🏗️ Creates professional directory structure
 # 🛡️ Implements comprehensive security measures
@@ -515,7 +515,7 @@ Follow the detailed implementation checklist for complete control.
 ##### **Option 1: Complete Secure Reorganization** ⭐ *Recommended*
 ```bash
 # Execute comprehensive transformation (15 minutes)
-./reorganize_willow_secure.sh
+tools/deployment/reorganize_willow_secure.sh
 
 # Features:
 # ✅ Data cleansing and security
@@ -606,13 +606,13 @@ All root directory files are now fully documented in [📁 Root Directory Files 
 ./run_dev_env.sh --jenkins --i18n
 
 # Security verification (use before commits)
-./quick_security_check.sh
+tools/security/quick_security_check.sh
 ```
 
 ### **📈 Project Management Commands**
 ```bash
 # Transform your project (security-focused)
-./reorganize_willow_secure.sh
+tools/deployment/reorganize_willow_secure.sh
 
 # Helper files cleanup only
 ./refactor_helper_files.sh
@@ -679,7 +679,7 @@ phpstan_analyse         # Static analysis
 composer_cs_check          # Check code style
 composer_cs_fix            # Fix code style issues
 phpstan_analyse            # Static analysis
-./quick_security_check.sh  # Security verification
+tools/quick_security_check.sh  # Security verification
 
 # Testing
 wt all                     # Run all tests
@@ -730,10 +730,10 @@ willowcms_exec chmod -R 777 tmp logs webroot
 #### **Security Verification Failed**
 ```bash
 # Check what sensitive files were detected
-./quick_security_check.sh
+tools/security/quick_security_check.sh
 
 # Clean sensitive data (recommended)
-./reorganize_willow_secure.sh
+tools/deployment/reorganize_willow_secure.sh
 ```
 
 #### **Can't Access Admin Interface**
@@ -750,7 +750,7 @@ cake_shell  # then run: create_user -u admin -p password -e admin@test.com -a 1
 ```bash
 # Complete health verification
 ./run_dev_env.sh --migrate    # Ensure database is up to date
-./quick_security_check.sh     # Verify security status
+tools/security/quick_security_check.sh  # Verify security status
 make test                     # Run tests (if reorganized)
 # OR
 wt all                        # Run tests (legacy structure)
@@ -821,14 +821,14 @@ docker stats
 ./run_dev_env.sh
 
 # Option 2: Transform to enterprise structure (recommended)
-./reorganize_willow_secure.sh
+tools/deployment/reorganize_willow_secure.sh
 
 # Option 3: Just verify security status
-./quick_security_check.sh
+tools/security/quick_security_check.sh
 ```
 
 #### **Production Deployment:**
-1. **Security verification**: `./quick_security_check.sh` ✅
+1. **Security verification**: `tools/security/quick_security_check.sh` ✅
 2. **Run comprehensive tests**: `make test` or `wt all` ✅
 3. **Verify log integrity**: Working checksum system ✅
 4. **Database backups**: Automated backup system ✅

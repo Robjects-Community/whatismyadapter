@@ -995,3 +995,48 @@ infrastructure/docker/mailpit/data/mailpit.db-wal
 app/logs/debug.log
 app/logs/error.log
 app/logs/debug.log
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/Product_v1.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductPageViewsController copy 2.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductPageViewsController copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsController copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsController_v2.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsFixture copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsTagsController copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsTagsFixture copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsTranslationsController copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/willow-evolution-presentation.zip/app.js
+helper-files(use-only-if-you-get-lost)/archive-files/willow-evolution-presentation.zip/index.html
+helper-files(use-only-if-you-get-lost)/archive-files/willow-evolution-presentation.zip/style.css
+helper-files(use-only-if-you-get-lost)/docker-backups/email-configs/env-file-based/docker-compose-env-file-gmail-20250917_111938.yml
+helper-files(use-only-if-you-get-lost)/docker-backups/email-configs/env-file-based/README.md
+helper-files(use-only-if-you-get-lost)/docker-backups/email-configs/hardcoded-vars/README.md
+helper-files(use-only-if-you-get-lost)/willow-complete-presentation.zip/app.js
+helper-files(use-only-if-you-get-lost)/willow-complete-presentation.zip/index.html
+helper-files(use-only-if-you-get-lost)/willow-complete-presentation.zip/style.css
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/Product_v1.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductPageViewsController copy 2.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductPageViewsController copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsController copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsController_v2.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsFixture copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsTagsController copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsTagsFixture copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/archive/psr4-excluded/20250905-195400/ProductsTranslationsController copy.php
+helper-files(use-only-if-you-get-lost)/archive-files/willow-evolution-presentation.zip/app.js
+helper-files(use-only-if-you-get-lost)/archive-files/willow-evolution-presentation.zip/index.html
+helper-files(use-only-if-you-get-lost)/archive-files/willow-evolution-presentation.zip/style.css
+helper-files(use-only-if-you-get-lost)/docker-backups/email-configs/env-file-based/docker-compose-env-file-gmail-20250917_111938.yml
+helper-files(use-only-if-you-get-lost)/docker-backups/email-configs/env-file-based/README.md
+helper-files(use-only-if-you-get-lost)/docker-backups/email-configs/hardcoded-vars/README.md
+helper-files(use-only-if-you-get-lost)/willow-complete-presentation.zip/app.js
+helper-files(use-only-if-you-get-lost)/willow-complete-presentation.zip/index.html
+helper-files(use-only-if-you-get-lost)/willow-complete-presentation.zip/style.css
+.warp
+.warp/init_warp_project.sh
+.warp/warp_project.yaml
+.warp/rules/cakephp-development.md
+.warp/rules/docker-compose.md
+.warp/rules/docker-security.md
+.warp/rules/phpunit-testing.md
+.warp/rules/terminal-echo.md
+infrastructure/docker/willowcms/config/nginx/logs/access.log
