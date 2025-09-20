@@ -12,21 +12,33 @@ services:
     volumes:
       - ./app:/var/www/html/
       - ./infrastructure/docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
-      - ./infrastructure/docker/willowcms/config/nginx/logs:/var/log/nginx/
+      - ./infrastructure/docker/logs/willowcms/nginx:/var/log/nginx/
+      - ./infrastructure/docker/logs/willowcms/app:/var/www/html/logs/
     env_file:
-      - ./app/config/.env
+      - ./.env
     environment:
       # Override specific Docker networking settings that may not be in .env
       DB_HOST: mysql
       TEST_DB_HOST: mysql
       REDIS_HOST: willowcms
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      # Logging configuration from .env
+      LOG_DEBUG_PATH: ${LOG_DEBUG_PATH:-/var/www/html/logs}
+      LOG_ERROR_PATH: ${LOG_ERROR_PATH:-/var/www/html/logs}
+      LOG_QUERIES_PATH: ${LOG_QUERIES_PATH:-/var/www/html/logs}
+      LOG_ADMIN_ACTIONS_PATH: ${LOG_ADMIN_ACTIONS_PATH:-/var/www/html/logs}
+      LOG_DEBUG_FILE: ${LOG_DEBUG_FILE:-debug}
+      LOG_ERROR_FILE: ${LOG_ERROR_FILE:-error}
+      LOG_QUERIES_FILE: ${LOG_QUERIES_FILE:-queries}
+      LOG_ADMIN_ACTIONS_FILE: ${LOG_ADMIN_ACTIONS_FILE:-bulk_actions}
+      LOG_DEBUG_LEVELS: ${LOG_DEBUG_LEVELS:-notice,info,debug}
+      LOG_ERROR_LEVELS: ${LOG_ERROR_LEVELS:-warning,error,critical,alert,emergency}
 
 
   mysql:
     image: mysql:${MYSQL_IMAGE_TAG:-8.0}
     platform: linux/amd64
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password --log-error=/var/log/mysql/error.log --slow-query-log=1 --slow-query-log-file=/var/log/mysql/slow.log --general-log=1 --general-log-file=/var/log/mysql/query.log
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -38,6 +50,7 @@ services:
       - mysql_data:/var/lib/mysql
       # - mysql_data:/docker-entrypoint-initdb.d:ro
       - ./infrastructure/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./infrastructure/docker/logs/mysql:/var/log/mysql
     env_file:
       - ./app/config/.env
 
@@ -64,6 +77,7 @@ services:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - ./infrastructure/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+      - ./infrastructure/docker/logs/jenkins:/var/log/jenkins
     environment:
       - JAVA_OPTS=${JAVA_OPTS:--Djenkins.install.runSetupWizard=false}
 
@@ -75,6 +89,7 @@ services:
     volumes:
       - ./infrastructure/docker/mailpit/data:/data
       # - mailpit_data:/data
+      - ./infrastructure/docker/logs/mailpit:/var/log/mailpit
     environment:
       - MP_MAX_MESSAGES=${MP_MAX_MESSAGES:-5000}
       - MP_DATABASE=${MP_DATABASE:-/data/mailpit.db}
