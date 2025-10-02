@@ -1025,6 +1025,8 @@ class ComposerStaticInitebbe10126807141440169af3832cf8a3
         'App\\Test\\TestCase\\Smoke\\EnvironmentTest' => __DIR__ . '/../..' . '/tests/TestCase/Smoke/EnvironmentTest.php',
         'App\\Test\\TestCase\\Utility\\SettingsManagerTest' => __DIR__ . '/../..' . '/tests/TestCase/Utility/SettingsManagerTest.php',
         'App\\Test\\TestCase\\View\\Cell\\GalleryCellTest' => __DIR__ . '/../..' . '/tests/TestCase/View/Cell/GalleryCellTest.php',
+        'App\\Test\\TestCase\\WillowControllerTestCase' => __DIR__ . '/../..' . '/tests/TestCase/WillowControllerTestCase.php',
+        'App\\Test\\TestCase\\WillowTestCase' => __DIR__ . '/../..' . '/tests/TestCase/WillowTestCase.php',
         'App\\Test\\Traits\\SecurityMiddlewareTestTrait' => __DIR__ . '/../..' . '/tests/Traits/SecurityMiddlewareTestTrait.php',
         'App\\Utility\\ArchiveExtractor' => __DIR__ . '/../..' . '/src/Utility/ArchiveExtractor.php',
         'App\\Utility\\DatabaseUtility' => __DIR__ . '/../..' . '/src/Utility/DatabaseUtility.php',

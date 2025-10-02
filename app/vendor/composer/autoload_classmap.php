@@ -430,6 +430,8 @@ return array(
     'App\\Test\\TestCase\\Smoke\\EnvironmentTest' => $baseDir . '/tests/TestCase/Smoke/EnvironmentTest.php',
     'App\\Test\\TestCase\\Utility\\SettingsManagerTest' => $baseDir . '/tests/TestCase/Utility/SettingsManagerTest.php',
     'App\\Test\\TestCase\\View\\Cell\\GalleryCellTest' => $baseDir . '/tests/TestCase/View/Cell/GalleryCellTest.php',
+    'App\\Test\\TestCase\\WillowControllerTestCase' => $baseDir . '/tests/TestCase/WillowControllerTestCase.php',
+    'App\\Test\\TestCase\\WillowTestCase' => $baseDir . '/tests/TestCase/WillowTestCase.php',
     'App\\Test\\Traits\\SecurityMiddlewareTestTrait' => $baseDir . '/tests/Traits/SecurityMiddlewareTestTrait.php',
     'App\\Utility\\ArchiveExtractor' => $baseDir . '/src/Utility/ArchiveExtractor.php',
     'App\\Utility\\DatabaseUtility' => $baseDir . '/src/Utility/DatabaseUtility.php',
