@@ -5391,3 +5391,10 @@ app/webroot/default_theme/css/willow.css
 app/webroot/default_theme/js/color-modes.js
 app/webroot/img/head-white-bqck.png
 app/webroot/js/reliability-scorer.js
+app/logs/database_log_errors.log.md5
+app/logs/database_log_errors.log.sha256
+app/logs/debug.log.md5
+app/logs/debug.log.sha256
+app/logs/error.log.md5
+app/logs/error.log.sha256
+app/logserror.log

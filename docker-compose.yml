@@ -19,7 +19,7 @@ services:
       DB_USERNAME: ${MYSQL_USER}
       DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       TEST_DB_HOST: mysql
-      REDIS_HOST: willowcms
+      REDIS_HOST: redis
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       LOG_DEBUG_PATH: ${LOG_DEBUG_PATH:-/var/www/html/logs}
       LOG_ERROR_PATH: ${LOG_ERROR_PATH:-/var/www/html/logs}
@@ -31,6 +31,35 @@ services:
       LOG_ADMIN_ACTIONS_FILE: ${LOG_ADMIN_ACTIONS_FILE:-bulk_actions}
       LOG_DEBUG_LEVELS: ${LOG_DEBUG_LEVELS:-notice,info,debug}
       LOG_ERROR_LEVELS: ${LOG_ERROR_LEVELS:-warning,error,critical,alert,emergency}
+    depends_on:
+      redis:
+        condition: service_healthy
+      mysql:
+        condition: service_started
+    env_file:
+      - ./.env
+
+  redis:
+    build:
+      context: .
+      dockerfile: docker/redis/Dockerfile
+      args:
+        REDIS_TAG: ${REDIS_TAG:-7.2-alpine}
+    image: willow-redis:${REDIS_TAG:-7.2-alpine}
+    environment:
+      TZ: ${APP_DEFAULT_TIMEZONE:-America/Chicago}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_APPENDONLY: ${REDIS_APPENDONLY:-yes}
+      REDIS_SAVE: ${REDIS_SAVE:-"900 1 300 10 60 10000"}
+      REDIS_DATA_DIR: /data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$REDIS_PASSWORD\" ping | grep PONG"]
+      interval: ${REDIS_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${REDIS_HEALTHCHECK_TIMEOUT:-3s}
+      retries: ${REDIS_HEALTHCHECK_RETRIES:-5}
+    volumes:
+      - ${REDIS_DATA_VOLUME:-redis-data:/data}
+    restart: on-failure:5
     env_file:
       - ./.env
 
@@ -41,12 +70,13 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./infrastructure/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./infrastructure/docker/logs/mysql:/var/log/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_INNODB_LOG_FILE_SIZE: ${MYSQL_INNODB_LOG_FILE_SIZE:-256M}
+      MYSQL_INNODB_BUFFER_POOL_SIZE: ${MYSQL_INNODB_BUFFER_POOL_SIZE:-256M}
     env_file:
       - ./.env
     command: '--default-authentication-plugin=mysql_native_password --log-error=/var/log/mysql/error.log --slow-query-log=1 --slow-query-log-file=/var/log/mysql/slow.log --general-log=1 --general-log-file=/var/log/mysql/query.log'
@@ -65,23 +95,6 @@ services:
     env_file:
       - ./.env
 
-  jenkins:
-    build:
-      context: .
-      dockerfile: infrastructure/docker/jenkins/Dockerfile
-    ports:
-      - ${JENKINS_HTTP_PORT:-8081}:8080
-      - ${JENKINS_AGENT_PORT:-50000}:50000
-    volumes:
-      - ./infrastructure/docker/jenkins/jenkins_home:/var/jenkins_home:rw
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./infrastructure/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
-      - ./infrastructure/docker/logs/jenkins:/var/log/jenkins
-    environment:
-      - JAVA_OPTS=${JAVA_OPTS:--Djenkins.install.runSetupWizard=true}
-    privileged: true
-    user: root
-
   mailpit:
     image: axllent/mailpit:${MAILPIT_IMAGE_TAG:-latest}
     ports:
@@ -99,17 +112,19 @@ services:
   redis-commander:
     image: rediscommander/redis-commander:${REDIS_COMMANDER_IMAGE_TAG:-latest}
     depends_on:
-      - willowcms
+      redis:
+        condition: service_healthy
     ports:
       - ${REDIS_COMMANDER_HTTP_PORT:-8084}:8081
     environment:
-      - REDIS_HOST=${REDIS_HOST:-willowcms}
+      - REDIS_HOST=redis
       - REDIS_PORT=${REDIS_PORT:-6379}
-      - REDIS_PASSWORD=root
-      - HTTP_USER=root
-      - HTTP_PASSWORD=root
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - HTTP_USER=${REDIS_COMMANDER_USERNAME:-root}
+      - HTTP_PASSWORD=${REDIS_COMMANDER_PASSWORD:-root}
 
 volumes:
   mysql_data: null
+  redis-data: null
   rabbitmq_data: null
   mailpit_data: null

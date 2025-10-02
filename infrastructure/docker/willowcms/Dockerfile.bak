@@ -1,5 +1,4 @@
-# FROM alpine:3.22
-FROM robjects/dhi-php-mirror-robjects:8.3-alpine3.22-dev
+FROM alpine:3.22
 
 # Setup document root
 WORKDIR /var/www/html
@@ -31,7 +30,6 @@ RUN apk add --no-cache \
     php83-xmlwriter \
     php83-pecl-imagick \
     php83-pcntl \
-    php83-pecl-msgpack \
     php83-redis \
     php83-zip \
     php83-pdo_mysql \
@@ -42,15 +40,11 @@ RUN apk add --no-cache \
     php83-pdo_sqlite \
     php83-simplexml \
     php83-pecl-xdebug \
-    python3 \
-    py3-pip \
+    supervisor \
     wget \
     unzip \
     bash && \
     rm -rf /var/cache/apk/*
-
-# Remove Python3 and pip since we don't need supervisor anymore
-# (keeping it minimal)
 
 # Configure Redis
 RUN echo "requirepass ${REDIS_PASSWORD}" >> /etc/redis.conf && \
@@ -67,34 +61,16 @@ ENV PHP_INI_DIR /etc/php83
 COPY infrastructure/docker/willowcms/config/php/fpm-pool.conf ${PHP_INI_DIR}/php-fpm.d/www.conf
 COPY infrastructure/docker/willowcms/config/php/php.ini ${PHP_INI_DIR}/conf.d/custom.ini
 
-# Configure PHP extensions for the base image PHP installation
-# Point to Alpine package extension modules
-# Note: igbinary and msgpack must be loaded before redis since redis depends on them
-RUN echo "extension=/usr/lib/php83/modules/igbinary.so" > /opt/php-8.3/etc/php/conf.d/igbinary.ini && \
-    echo "extension=/usr/lib/php83/modules/msgpack.so" > /opt/php-8.3/etc/php/conf.d/msgpack.ini && \
-    echo "extension=/usr/lib/php83/modules/redis.so" > /opt/php-8.3/etc/php/conf.d/redis.ini && \
-    echo "extension=/usr/lib/php83/modules/imagick.so" > /opt/php-8.3/etc/php/conf.d/imagick.ini && \
-    echo "extension=/usr/lib/php83/modules/pdo_mysql.so" > /opt/php-8.3/etc/php/conf.d/pdo_mysql.ini && \
-    echo "extension=/usr/lib/php83/modules/mysqli.so" > /opt/php-8.3/etc/php/conf.d/mysqli.ini
-
 # Install Composer
-RUN mkdir -p /usr/local/bin && \
-    wget https://getcomposer.org/installer -O composer-setup.php && \
+RUN wget https://getcomposer.org/installer -O composer-setup.php && \
     php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
     rm composer-setup.php
 
-# Create startup script
-RUN echo '#!/bin/bash' > /usr/local/bin/start-services.sh && \
-    echo 'set -e' >> /usr/local/bin/start-services.sh && \
-    echo 'echo "Starting services as user: $(whoami)"' >> /usr/local/bin/start-services.sh && \
-    echo 'echo "Starting PHP-FPM..."' >> /usr/local/bin/start-services.sh && \
-    echo 'php-fpm83 -F &' >> /usr/local/bin/start-services.sh && \
-    echo 'echo "Starting Nginx..."' >> /usr/local/bin/start-services.sh && \
-    echo 'exec nginx -g "daemon off;"' >> /usr/local/bin/start-services.sh && \
-    chmod +x /usr/local/bin/start-services.sh
+# Configure supervisord
+COPY infrastructure/docker/willowcms/config/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-ARG UID=1000
-ARG GID=1000
+ARG UID
+ARG GID
 
 ENV UID=${UID}
 ENV GID=${GID}
@@ -113,9 +89,8 @@ RUN deluser nobody 2>/dev/null || true && \
 COPY --chown=nobody:nobody app/ /var/www/html/
 
 # Make sure files/folders needed by the processes are accessible when they run under the nobody user
-RUN mkdir -p /var/www/html /var/www/html/tmp/archives /var/www/html/webroot/files/ImageGalleries/preview /run /var/lib/nginx /var/log/nginx /tmp/redis && \
-    chown -R nobody:nobody /var/www/html /run /var/lib/nginx /var/log/nginx /tmp/redis && \
-    chmod 755 /usr/local/bin/start-services.sh
+RUN mkdir -p /var/www/html /var/www/html/tmp/archives /var/www/html/webroot/files/ImageGalleries/preview /run /var/lib/nginx /var/log/nginx && \
+    chown -R nobody:nobody /var/www/html /run /var/lib/nginx /var/log/nginx
 
 # Switch to use a non-root user from here on
 USER nobody
@@ -123,8 +98,8 @@ USER nobody
 # Expose the port nginx is reachable on
 EXPOSE 80
 
-# Start services
-CMD ["/usr/local/bin/start-services.sh"]
+# Supervisord will start FPM
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 # Configure a healthcheck to validate that everything is up&running
 HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:80/fpm-ping || exit 1
