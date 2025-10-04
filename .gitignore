@@ -13730,3 +13730,5 @@ tools/backup/app_backups/checksums.txt
 
 # Ignore legacy cakephp directory (use ./app/ instead)
 cakephp/
+portainer-stacks/stack.env
+PORTAINER_ENV_VARIABLES.txt
