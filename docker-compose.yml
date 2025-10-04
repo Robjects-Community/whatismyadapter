@@ -1,12 +1,7 @@
 services:
   willowcms:
     platform: linux/amd64
-    build:
-      context: .
-      dockerfile: infrastructure/docker/dhi_cms/Dockerfile
-      args:
-        - UID=${DOCKER_UID:-1000}
-        - GID=${DOCKER_GID:-1000}
+    image: ${WILLOWCMS_IMAGE:-garzarobmdocker/willowcms:pre-willowcms-beta}
     ports:
       - ${WILLOW_HTTP_PORT:-8080}:80
     volumes:
