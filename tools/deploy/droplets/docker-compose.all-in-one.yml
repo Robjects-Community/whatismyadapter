@@ -1,0 +1,581 @@
+# ===================================================================
+# WILLOW CMS DROPLET DEPLOYMENT - ALL-IN-ONE MODE
+# ===================================================================
+# Cost-optimized compose file for DigitalOcean droplets with:
+# - Self-hosted MySQL database (on attached volume)
+# - Self-hosted Redis cache  
+# - Spaces for file storage
+# - No hardcoded secrets (follows security rules)
+# ===================================================================
+
+version: '3.8'
+
+services:
+  # ===================================================================
+  # MYSQL DATABASE SERVICE (Self-hosted)
+  # ===================================================================
+  mysql:
+    image: mysql:${MYSQL_IMAGE_TAG:-8.0}
+    container_name: willowcms-mysql
+    hostname: mysql
+    restart: unless-stopped
+    
+    # Resource limits for MySQL
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+          cpus: '1.0'
+        reservations:
+          memory: 1g
+          cpus: '0.5'
+    
+    # Port mapping (internal only by default)
+    ports:
+      - "127.0.0.1:${MYSQL_EXTERNAL_PORT:-3306}:${INTERNAL_MYSQL_PORT:-3306}"
+    
+    # Volume mapping (use attached DO volume)
+    volumes:
+      - ${MYSQL_DATA_PATH:-/mnt/mysql-data}:/var/lib/mysql:rw
+      - ${HOST_CONFIG_PATH:-/opt/willow/config}/mysql/my.cnf:/etc/mysql/conf.d/willowcms.cnf:ro
+      - ${HOST_LOGS_PATH:-/var/log/willow}/mysql:/var/log/mysql:rw
+    
+    # Environment variables (from .env files)
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-cms}
+      - MYSQL_USER=${MYSQL_USER:-cms_user}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_INNODB_BUFFER_POOL_SIZE=${MYSQL_INNODB_BUFFER_POOL_SIZE:-1G}
+      - MYSQL_INNODB_LOG_FILE_SIZE=${MYSQL_INNODB_LOG_FILE_SIZE:-256M}
+      - TZ=${APP_DEFAULT_TIMEZONE:-UTC}
+    
+    # MySQL startup command with performance tuning
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --log-error=/var/log/mysql/error.log
+      --slow-query-log=1
+      --slow-query-log-file=/var/log/mysql/slow.log
+      --general-log=0
+      --innodb-buffer-pool-size=${MYSQL_INNODB_BUFFER_POOL_SIZE:-1G}
+      --innodb-log-file-size=${MYSQL_INNODB_LOG_FILE_SIZE:-256M}
+      --innodb-flush-log-at-trx-commit=2
+      --innodb-flush-method=O_DIRECT
+      --max-connections=200
+      --thread-cache-size=16
+      --query-cache-type=1
+      --query-cache-size=128M
+      --tmp-table-size=128M
+      --max-heap-table-size=128M
+    
+    # Health check
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p${MYSQL_ROOT_PASSWORD} || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    
+    # Security
+    security_opt:
+      - no-new-privileges:true
+    
+    # Resource limits
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Network
+    networks:
+      - willow-network
+
+  # ===================================================================
+  # REDIS CACHE SERVICE (Self-hosted)
+  # ===================================================================
+  redis:
+    build:
+      context: ../../..
+      dockerfile: docker/redis/Dockerfile
+      args:
+        REDIS_TAG: ${REDIS_TAG:-7.2-alpine}
+    image: willow-redis:${REDIS_TAG:-7.2-alpine}
+    container_name: willowcms-redis
+    hostname: redis
+    restart: unless-stopped
+    
+    # Resource limits for Redis
+    deploy:
+      resources:
+        limits:
+          memory: ${REDIS_MAXMEMORY:-512mb}
+          cpus: '0.5'
+        reservations:
+          memory: 256m
+          cpus: '0.1'
+    
+    # Port mapping (internal only by default)  
+    ports:
+      - "127.0.0.1:${REDIS_EXTERNAL_PORT:-6379}:${INTERNAL_REDIS_PORT:-6379}"
+    
+    # Volume mapping
+    volumes:
+      - ${HOST_DATA_PATH:-/opt/willow/data}/redis:/data:rw
+      - ${HOST_CONFIG_PATH:-/opt/willow/config}/redis/redis.conf:/etc/redis/redis.conf:ro
+    
+    # Environment variables
+    environment:
+      - TZ=${APP_DEFAULT_TIMEZONE:-UTC}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_APPENDONLY=${REDIS_APPENDONLY:-yes}
+      - REDIS_SAVE=${REDIS_SAVE:-"900 1 300 10 60 10000"}
+      - REDIS_MAXMEMORY=${REDIS_MAXMEMORY:-512mb}
+      - REDIS_MAXMEMORY_POLICY=${REDIS_MAXMEMORY_POLICY:-allkeys-lru}
+      - REDIS_DATA_DIR=/data
+    
+    # Health check
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$REDIS_PASSWORD\" ping | grep PONG"]
+      interval: ${REDIS_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${REDIS_HEALTHCHECK_TIMEOUT:-3s}
+      retries: ${REDIS_HEALTHCHECK_RETRIES:-5}
+      start_period: 20s
+    
+    # Security
+    security_opt:
+      - no-new-privileges:true
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "3"
+    
+    # Network
+    networks:
+      - willow-network
+
+  # ===================================================================
+  # MAIN APPLICATION SERVICE
+  # ===================================================================
+  willowcms:
+    build:
+      context: ../../..
+      dockerfile: infrastructure/docker/willowcms/Dockerfile
+      args:
+        - UID=${DOCKER_UID:-1001}
+        - GID=${DOCKER_GID:-1001}
+        - BUILD_ENV=${APP_ENV:-production}
+    container_name: willowcms-app
+    hostname: willowcms
+    restart: unless-stopped
+    
+    # Resource limits for application
+    deploy:
+      resources:
+        limits:
+          memory: ${APP_MEMORY_LIMIT:-2g}
+          cpus: '2.0'
+        reservations:
+          memory: ${APP_MEMORY_RESERVATION:-1g}
+          cpus: '0.5'
+    
+    # Port mapping
+    ports:
+      - "${EXTERNAL_HTTP_PORT:-80}:${INTERNAL_HTTP_PORT:-80}"
+      - "${EXTERNAL_HTTPS_PORT:-443}:443"
+    
+    # Volume mappings
+    volumes:
+      - ${HOST_DATA_PATH:-/opt/willow/app}:/var/www/html:cached
+      - ${HOST_CONFIG_PATH:-/opt/willow/config}/app_local.php:/var/www/html/config/app_local.php:ro
+      - ${HOST_LOGS_PATH:-/var/log/willow}/nginx:/var/log/nginx:rw
+      - ${HOST_LOGS_PATH:-/var/log/willow}/app:/var/www/html/logs:rw
+      - ${HOST_UPLOADS_PATH:-/opt/willow/uploads}:/var/www/html/webroot/uploads:rw
+    
+    # Environment variables
+    environment:
+      # Application settings
+      - APP_ENV=${APP_ENV:-production}
+      - DEBUG=${DEBUG:-false}
+      - APP_NAME=${APP_NAME:-WillowCMS}
+      - APP_DEFAULT_TIMEZONE=${APP_DEFAULT_TIMEZONE:-UTC}
+      - APP_FULL_BASE_URL=${APP_FULL_BASE_URL}
+      - SECURITY_SALT=${SECURITY_SALT}
+      - TRUSTED_PROXIES=${TRUSTED_PROXIES:-*}
+      - FORCE_HTTPS=${FORCE_HTTPS:-true}
+      
+      # Database connection (self-hosted)
+      - DB_HOST=mysql
+      - DB_USERNAME=${DB_USERNAME:-cms_user}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE:-cms}
+      - DB_PORT=${DB_PORT:-3306}
+      
+      # Redis connection (self-hosted)
+      - REDIS_HOST=redis
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_DATABASE=${REDIS_DATABASE:-0}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:${REDIS_PORT:-6379}/${REDIS_DATABASE:-0}
+      
+      # Spaces configuration
+      - SPACES_ENDPOINT=${SPACES_ENDPOINT}
+      - SPACES_REGION=${SPACES_REGION}
+      - SPACES_BUCKET=${SPACES_BUCKET}
+      - SPACES_KEY=${SPACES_KEY}
+      - SPACES_SECRET=${SPACES_SECRET}
+      - SPACES_BASE_URL=${SPACES_BASE_URL}
+      - SPACES_CDN_URL=${SPACES_CDN_URL}
+      
+      # Email configuration
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT:-587}
+      - EMAIL_USERNAME=${EMAIL_USERNAME}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - EMAIL_TIMEOUT=${EMAIL_TIMEOUT:-30}
+      - EMAIL_REPLY=${EMAIL_REPLY}
+      - EMAIL_NOREPLY=${EMAIL_NOREPLY}
+      
+      # API keys
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DIGITAL_OCEAN_KEY=${DIGITAL_OCEAN_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
+      - TRANSLATE_API_KEY=${TRANSLATE_API_KEY}
+      
+      # Queue configuration
+      - QUEUE_DEFAULT_URL=redis://:${REDIS_PASSWORD}@redis:${REDIS_PORT:-6379}/1
+      - QUEUE_TEST_URL=redis://:${REDIS_PASSWORD}@redis:${REDIS_PORT:-6379}/2
+      
+      # Logging configuration
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_DEBUG_LEVELS=${LOG_DEBUG_LEVELS}
+      - LOG_ERROR_LEVELS=${LOG_ERROR_LEVELS}
+      - LOG_DEBUG_PATH=${LOG_DEBUG_PATH:-/var/www/html/logs}
+      - LOG_ERROR_PATH=${LOG_ERROR_PATH:-/var/www/html/logs}
+      - LOG_QUERIES_PATH=${LOG_QUERIES_PATH:-/var/www/html/logs}
+      - LOG_ADMIN_ACTIONS_PATH=${LOG_ADMIN_ACTIONS_PATH:-/var/www/html/logs}
+      - LOG_DEBUG_FILE=${LOG_DEBUG_FILE:-debug}
+      - LOG_ERROR_FILE=${LOG_ERROR_FILE:-error}
+      - LOG_QUERIES_FILE=${LOG_QUERIES_FILE:-queries}
+      - LOG_ADMIN_ACTIONS_FILE=${LOG_ADMIN_ACTIONS_FILE:-bulk_actions}
+      
+      # Performance settings
+      - PHP_MAX_CHILDREN=${PHP_MAX_CHILDREN:-12}
+      - PHP_START_SERVERS=${PHP_START_SERVERS:-3}
+      - PHP_MIN_SPARE_SERVERS=${PHP_MIN_SPARE_SERVERS:-2}
+      - PHP_MAX_SPARE_SERVERS=${PHP_MAX_SPARE_SERVERS:-6}
+      - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-256M}
+      - PHP_OPCACHE_MEMORY_CONSUMPTION=${PHP_OPCACHE_MEMORY_CONSUMPTION:-128}
+      - PHP_OPCACHE_MAX_ACCELERATED_FILES=${PHP_OPCACHE_MAX_ACCELERATED_FILES:-10000}
+      - PHP_REALPATH_CACHE_SIZE=${PHP_REALPATH_CACHE_SIZE:-2048K}
+      - PHP_REALPATH_CACHE_TTL=${PHP_REALPATH_CACHE_TTL:-120}
+    
+    # Health check
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost${HEALTH_CHECK_PATH:-/healthz} || exit 1"]
+      interval: ${HEALTH_CHECK_INTERVAL:-30s}
+      timeout: ${HEALTH_CHECK_TIMEOUT:-10s}
+      retries: ${HEALTH_CHECK_RETRIES:-3}
+      start_period: ${HEALTH_CHECK_START_PERIOD:-60s}
+    
+    # Dependencies
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    
+    # Security settings
+    security_opt:
+      - no-new-privileges:true
+    
+    # Resource limits
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Network
+    networks:
+      - willow-network
+
+  # ===================================================================
+  # BACKGROUND WORKER SERVICE
+  # ===================================================================
+  willowcms-worker:
+    build:
+      context: ../../..
+      dockerfile: infrastructure/docker/willowcms/Dockerfile
+      args:
+        - UID=${DOCKER_UID:-1001}
+        - GID=${DOCKER_GID:-1001}
+        - BUILD_ENV=${APP_ENV:-production}
+    container_name: willowcms-worker
+    hostname: willowcms-worker
+    restart: unless-stopped
+    
+    # Resource limits for worker
+    deploy:
+      resources:
+        limits:
+          memory: ${WORKER_MEMORY_LIMIT:-1g}
+          cpus: '1.0'
+        reservations:
+          memory: ${WORKER_MEMORY_RESERVATION:-512m}
+          cpus: '0.25'
+    
+    # Worker command
+    command: ["bin/cake", "queue", "run", "--max-jobs=${QUEUE_MAX_JOBS:-1000}", "--max-runtime=${QUEUE_MAX_RUNTIME:-3600}"]
+    
+    # Volume mappings
+    volumes:
+      - ${HOST_DATA_PATH:-/opt/willow/app}:/var/www/html:cached
+      - ${HOST_CONFIG_PATH:-/opt/willow/config}/app_local.php:/var/www/html/config/app_local.php:ro
+      - ${HOST_LOGS_PATH:-/var/log/willow}/worker:/var/www/html/logs:rw
+    
+    # Environment variables (subset of main app)
+    environment:
+      # Application settings
+      - APP_ENV=${APP_ENV:-production}
+      - DEBUG=${DEBUG:-false}
+      - APP_NAME=${APP_NAME:-WillowCMS}
+      - SECURITY_SALT=${SECURITY_SALT}
+      
+      # Database connection
+      - DB_HOST=mysql
+      - DB_USERNAME=${DB_USERNAME:-cms_user}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE:-cms}
+      - DB_PORT=${DB_PORT:-3306}
+      
+      # Redis connection
+      - REDIS_HOST=redis
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:${REDIS_PORT:-6379}/${REDIS_DATABASE:-0}
+      
+      # Queue configuration
+      - QUEUE_DEFAULT_URL=redis://:${REDIS_PASSWORD}@redis:${REDIS_PORT:-6379}/1
+      - QUEUE_TEST_URL=redis://:${REDIS_PASSWORD}@redis:${REDIS_PORT:-6379}/2
+      
+      # API keys
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DIGITAL_OCEAN_KEY=${DIGITAL_OCEAN_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      
+      # Spaces configuration
+      - SPACES_ENDPOINT=${SPACES_ENDPOINT}
+      - SPACES_REGION=${SPACES_REGION}
+      - SPACES_BUCKET=${SPACES_BUCKET}
+      - SPACES_KEY=${SPACES_KEY}
+      - SPACES_SECRET=${SPACES_SECRET}
+      
+      # Worker performance settings
+      - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-512M}
+      - PHP_MAX_EXECUTION_TIME=${PHP_MAX_EXECUTION_TIME:-300}
+    
+    # Health check for worker
+    healthcheck:
+      test: ["CMD-SHELL", "ps aux | grep -v grep | grep 'bin/cake queue run' || exit 1"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    
+    # Dependencies
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      willowcms:
+        condition: service_started
+    
+    # Security settings
+    security_opt:
+      - no-new-privileges:true
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Network
+    networks:
+      - willow-network
+
+  # ===================================================================
+  # CRON SCHEDULER SERVICE
+  # ===================================================================
+  willowcms-scheduler:
+    image: alpine:3.18
+    container_name: willowcms-scheduler
+    hostname: willowcms-scheduler
+    restart: unless-stopped
+    
+    # Resource limits for scheduler
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+          cpus: '0.1'
+        reservations:
+          memory: 64m
+    
+    # Volume mappings for scripts
+    volumes:
+      - ${HOST_DATA_PATH:-/opt/willow/app}:/opt/willow:ro
+      - ${HOST_BACKUP_PATH:-/opt/willow/backups}:/opt/willow/backups:rw
+      - ${HOST_LOGS_PATH:-/var/log/willow}/scheduler:/var/log/scheduler:rw
+    
+    # Environment variables
+    environment:
+      - APP_ENV=${APP_ENV:-production}
+      - BACKUP_SCHEDULE=${BACKUP_SCHEDULE:-"0 2 * * *"}
+      - BACKUP_RETENTION_DAYS=${BACKUP_RETENTION_DAYS:-30}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - SPACES_KEY=${SPACES_KEY}
+      - SPACES_SECRET=${SPACES_SECRET}
+      - SPACES_BUCKET=${SPACES_BUCKET}
+    
+    # Install cron and run
+    command: >
+      sh -c "
+      apk add --no-cache curl dcron mysql-client redis &&
+      echo '${BACKUP_SCHEDULE} /opt/willow/tools/backup/backup-db-to-spaces.sh >> /var/log/scheduler/backup.log 2>&1' > /etc/cron.d/willowcms &&
+      echo '0 * * * * /opt/willow/tools/security/verify-log-integrity.sh >> /var/log/scheduler/integrity.log 2>&1' >> /etc/cron.d/willowcms &&
+      chmod 600 /etc/cron.d/willowcms &&
+      crond -f -d 8"
+    
+    # Dependencies
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    
+    # Security
+    security_opt:
+      - no-new-privileges:true
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
+    
+    # Network
+    networks:
+      - willow-network
+
+  # ===================================================================
+  # SSL CERTIFICATE SERVICE (Let's Encrypt)
+  # ===================================================================
+  certbot:
+    image: certbot/certbot:v2.7.4
+    container_name: willowcms-certbot
+    restart: "no"
+    
+    # Volume for certificates
+    volumes:
+      - ${HOST_DATA_PATH:-/opt/willow}/ssl/certbot/conf:/etc/letsencrypt:rw
+      - ${HOST_DATA_PATH:-/opt/willow}/ssl/certbot/www:/var/www/certbot:rw
+    
+    # Environment
+    environment:
+      - SSL_EMAIL=${SSL_EMAIL}
+      - SSL_STAGING=${SSL_STAGING:-false}
+      - SSL_RSA_KEY_SIZE=${SSL_RSA_KEY_SIZE:-4096}
+    
+    # Command for certificate generation
+    command: >
+      sh -c "
+      if [ \"${SSL_STAGING}\" = \"true\" ]; then
+        STAGING_FLAG=\"--staging\"
+      else
+        STAGING_FLAG=\"\"
+      fi;
+      certbot certonly --webroot --webroot-path=/var/www/certbot
+      --email ${SSL_EMAIL} --agree-tos --no-eff-email
+      --rsa-key-size ${SSL_RSA_KEY_SIZE}
+      $STAGING_FLAG
+      -d $(echo ${APP_FULL_BASE_URL} | sed 's|https\?://||')
+      || echo 'Certificate already exists or failed to generate'
+      "
+    
+    # Security
+    security_opt:
+      - no-new-privileges:true
+    
+    # Network
+    networks:
+      - willow-network
+
+# ===================================================================
+# NETWORKS
+# ===================================================================
+networks:
+  willow-network:
+    name: ${NETWORK_NAME:-willow_network}
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+# ===================================================================
+# VOLUMES (External volumes for persistence)
+# ===================================================================
+volumes:
+  mysql-data:
+    external: true
+    name: willowcms-mysql-data
+  redis-data:
+    external: true
+    name: willowcms-redis-data
+  ssl-certificates:
+    external: true
+    name: willowcms-ssl-certs
+  backup-data:
+    external: true  
+    name: willowcms-backups
+
+# ===================================================================
+# DEPLOYMENT NOTES
+# ===================================================================
+# 1. Create and attach DigitalOcean Volume for MySQL:
+#    doctl compute volume create willowcms-mysql-data --region nyc1 --size 50GiB --fs-type ext4
+#    Mount at /mnt/mysql-data with proper permissions
+# 2. Copy .env.droplet.example to .env.droplet and configure for all-in-one mode
+# 3. Copy stack.env.example to stack.env with production secrets  
+# 4. Create external volumes:
+#    docker volume create willowcms-redis-data
+#    docker volume create willowcms-ssl-certs
+#    docker volume create willowcms-backups
+# 5. Deploy with: docker compose --env-file .env.droplet --env-file stack.env -f docker-compose.all-in-one.yml up -d
+# 6. Configure 2-4GB swap space for memory protection
+# 7. Set up log rotation and monitoring
+# 8. Schedule regular backups to Spaces
+# ===================================================================

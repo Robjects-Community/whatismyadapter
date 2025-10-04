@@ -1,0 +1,387 @@
+# ===================================================================
+# WILLOW CMS DROPLET DEPLOYMENT - MANAGED DATABASE MODE
+# ===================================================================
+# Production-ready compose file for DigitalOcean droplets using:
+# - Managed MySQL database
+# - Managed Redis cache  
+# - Spaces for file storage
+# - No hardcoded secrets (follows security rules)
+# ===================================================================
+
+version: '3.8'
+
+services:
+  # ===================================================================
+  # MAIN APPLICATION SERVICE
+  # ===================================================================
+  willowcms:
+    build:
+      context: ../../..
+      dockerfile: infrastructure/docker/willowcms/Dockerfile
+      args:
+        - UID=${DOCKER_UID:-1001}
+        - GID=${DOCKER_GID:-1001}
+        - BUILD_ENV=${APP_ENV:-production}
+    container_name: willowcms-app
+    hostname: willowcms
+    restart: unless-stopped
+    
+    # Resource limits for production
+    deploy:
+      resources:
+        limits:
+          memory: ${APP_MEMORY_LIMIT:-2g}
+          cpus: '2.0'
+        reservations:
+          memory: ${APP_MEMORY_RESERVATION:-1g}
+          cpus: '0.5'
+    
+    # Port mapping (internal container port to host)
+    ports:
+      - "${EXTERNAL_HTTP_PORT:-80}:${INTERNAL_HTTP_PORT:-80}"
+      - "${EXTERNAL_HTTPS_PORT:-443}:443"
+    
+    # Volume mappings (no hardcoded paths)
+    volumes:
+      - ${HOST_DATA_PATH:-/opt/willow/app}:/var/www/html:cached
+      - ${HOST_CONFIG_PATH:-/opt/willow/config}/app_local.php:/var/www/html/config/app_local.php:ro
+      - ${HOST_LOGS_PATH:-/var/log/willow}/nginx:/var/log/nginx:rw
+      - ${HOST_LOGS_PATH:-/var/log/willow}/app:/var/www/html/logs:rw
+      - ${HOST_UPLOADS_PATH:-/opt/willow/uploads}:/var/www/html/webroot/uploads:rw
+    
+    # Environment variables (all from .env files)
+    environment:
+      # Application settings
+      - APP_ENV=${APP_ENV:-production}
+      - DEBUG=${DEBUG:-false}
+      - APP_NAME=${APP_NAME:-WillowCMS}
+      - APP_DEFAULT_TIMEZONE=${APP_DEFAULT_TIMEZONE:-UTC}
+      - APP_FULL_BASE_URL=${APP_FULL_BASE_URL}
+      - SECURITY_SALT=${SECURITY_SALT}
+      - TRUSTED_PROXIES=${TRUSTED_PROXIES:-*}
+      - FORCE_HTTPS=${FORCE_HTTPS:-true}
+      
+      # Database connection (managed database)
+      - DATABASE_URL=${DATABASE_URL}
+      
+      # Redis connection (managed Redis)
+      - REDIS_URL=${REDIS_URL}
+      - REDIS_HOST=${REDIS_HOST:-managed-redis}
+      - REDIS_PORT=${REDIS_PORT:-25061}
+      - REDIS_DATABASE=${REDIS_DATABASE:-0}
+      
+      # Spaces configuration
+      - SPACES_ENDPOINT=${SPACES_ENDPOINT}
+      - SPACES_REGION=${SPACES_REGION}
+      - SPACES_BUCKET=${SPACES_BUCKET}
+      - SPACES_KEY=${SPACES_KEY}
+      - SPACES_SECRET=${SPACES_SECRET}
+      - SPACES_BASE_URL=${SPACES_BASE_URL}
+      - SPACES_CDN_URL=${SPACES_CDN_URL}
+      
+      # Email configuration
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT:-587}
+      - EMAIL_USERNAME=${EMAIL_USERNAME}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - EMAIL_TIMEOUT=${EMAIL_TIMEOUT:-30}
+      - EMAIL_REPLY=${EMAIL_REPLY}
+      - EMAIL_NOREPLY=${EMAIL_NOREPLY}
+      
+      # API keys
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DIGITAL_OCEAN_KEY=${DIGITAL_OCEAN_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
+      - TRANSLATE_API_KEY=${TRANSLATE_API_KEY}
+      
+      # Queue configuration
+      - QUEUE_DEFAULT_URL=${QUEUE_DEFAULT_URL}
+      - QUEUE_TEST_URL=${QUEUE_TEST_URL}
+      
+      # Logging configuration
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_DEBUG_LEVELS=${LOG_DEBUG_LEVELS}
+      - LOG_ERROR_LEVELS=${LOG_ERROR_LEVELS}
+      - LOG_DEBUG_PATH=${LOG_DEBUG_PATH:-/var/www/html/logs}
+      - LOG_ERROR_PATH=${LOG_ERROR_PATH:-/var/www/html/logs}
+      - LOG_QUERIES_PATH=${LOG_QUERIES_PATH:-/var/www/html/logs}
+      - LOG_ADMIN_ACTIONS_PATH=${LOG_ADMIN_ACTIONS_PATH:-/var/www/html/logs}
+      - LOG_DEBUG_FILE=${LOG_DEBUG_FILE:-debug}
+      - LOG_ERROR_FILE=${LOG_ERROR_FILE:-error}
+      - LOG_QUERIES_FILE=${LOG_QUERIES_FILE:-queries}
+      - LOG_ADMIN_ACTIONS_FILE=${LOG_ADMIN_ACTIONS_FILE:-bulk_actions}
+      
+      # Performance settings
+      - PHP_MAX_CHILDREN=${PHP_MAX_CHILDREN:-16}
+      - PHP_START_SERVERS=${PHP_START_SERVERS:-4}
+      - PHP_MIN_SPARE_SERVERS=${PHP_MIN_SPARE_SERVERS:-2}
+      - PHP_MAX_SPARE_SERVERS=${PHP_MAX_SPARE_SERVERS:-8}
+      - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-256M}
+      - PHP_OPCACHE_MEMORY_CONSUMPTION=${PHP_OPCACHE_MEMORY_CONSUMPTION:-256}
+      - PHP_OPCACHE_MAX_ACCELERATED_FILES=${PHP_OPCACHE_MAX_ACCELERATED_FILES:-20000}
+      - PHP_REALPATH_CACHE_SIZE=${PHP_REALPATH_CACHE_SIZE:-4096K}
+      - PHP_REALPATH_CACHE_TTL=${PHP_REALPATH_CACHE_TTL:-120}
+    
+    # Health check configuration
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost${HEALTH_CHECK_PATH:-/healthz} || exit 1"]
+      interval: ${HEALTH_CHECK_INTERVAL:-30s}
+      timeout: ${HEALTH_CHECK_TIMEOUT:-10s}
+      retries: ${HEALTH_CHECK_RETRIES:-3}
+      start_period: ${HEALTH_CHECK_START_PERIOD:-40s}
+    
+    # Security settings
+    security_opt:
+      - no-new-privileges:true
+    
+    # Resource limits
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Network configuration
+    networks:
+      - willow-network
+
+  # ===================================================================
+  # BACKGROUND WORKER SERVICE
+  # ===================================================================
+  willowcms-worker:
+    build:
+      context: ../../..
+      dockerfile: infrastructure/docker/willowcms/Dockerfile
+      args:
+        - UID=${DOCKER_UID:-1001}
+        - GID=${DOCKER_GID:-1001}
+        - BUILD_ENV=${APP_ENV:-production}
+    container_name: willowcms-worker
+    hostname: willowcms-worker
+    restart: unless-stopped
+    
+    # Resource limits for worker
+    deploy:
+      resources:
+        limits:
+          memory: ${WORKER_MEMORY_LIMIT:-1g}
+          cpus: '1.0'
+        reservations:
+          memory: ${WORKER_MEMORY_RESERVATION:-512m}
+          cpus: '0.25'
+    
+    # Worker command
+    command: ["bin/cake", "queue", "run", "--max-jobs=${QUEUE_MAX_JOBS:-1000}", "--max-runtime=${QUEUE_MAX_RUNTIME:-3600}"]
+    
+    # Volume mappings (same as main app)
+    volumes:
+      - ${HOST_DATA_PATH:-/opt/willow/app}:/var/www/html:cached
+      - ${HOST_CONFIG_PATH:-/opt/willow/config}/app_local.php:/var/www/html/config/app_local.php:ro
+      - ${HOST_LOGS_PATH:-/var/log/willow}/worker:/var/www/html/logs:rw
+    
+    # Environment variables (same as main app)
+    environment:
+      # Application settings
+      - APP_ENV=${APP_ENV:-production}
+      - DEBUG=${DEBUG:-false}
+      - APP_NAME=${APP_NAME:-WillowCMS}
+      - SECURITY_SALT=${SECURITY_SALT}
+      
+      # Database connection
+      - DATABASE_URL=${DATABASE_URL}
+      
+      # Redis connection
+      - REDIS_URL=${REDIS_URL}
+      
+      # Queue configuration
+      - QUEUE_DEFAULT_URL=${QUEUE_DEFAULT_URL}
+      - QUEUE_TEST_URL=${QUEUE_TEST_URL}
+      
+      # API keys
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DIGITAL_OCEAN_KEY=${DIGITAL_OCEAN_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      
+      # Spaces configuration
+      - SPACES_ENDPOINT=${SPACES_ENDPOINT}
+      - SPACES_REGION=${SPACES_REGION}
+      - SPACES_BUCKET=${SPACES_BUCKET}
+      - SPACES_KEY=${SPACES_KEY}
+      - SPACES_SECRET=${SPACES_SECRET}
+      
+      # Worker performance settings
+      - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-512M}
+      - PHP_MAX_EXECUTION_TIME=${PHP_MAX_EXECUTION_TIME:-300}
+    
+    # Health check for worker
+    healthcheck:
+      test: ["CMD-SHELL", "ps aux | grep -v grep | grep 'bin/cake queue run' || exit 1"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    
+    # Security settings
+    security_opt:
+      - no-new-privileges:true
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Network
+    networks:
+      - willow-network
+    
+    # Dependency
+    depends_on:
+      - willowcms
+
+  # ===================================================================
+  # CRON SCHEDULER SERVICE
+  # ===================================================================
+  willowcms-scheduler:
+    image: alpine:3.18
+    container_name: willowcms-scheduler
+    hostname: willowcms-scheduler
+    restart: unless-stopped
+    
+    # Resource limits for scheduler
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+          cpus: '0.1'
+        reservations:
+          memory: 64m
+    
+    # Volume mappings for scripts
+    volumes:
+      - ${HOST_DATA_PATH:-/opt/willow/app}:/opt/willow:ro
+      - ${HOST_BACKUP_PATH:-/opt/willow/backups}:/opt/willow/backups:rw
+      - ${HOST_LOGS_PATH:-/var/log/willow}/scheduler:/var/log/scheduler:rw
+      - ./crontab:/etc/cron.d/willowcms:ro
+    
+    # Environment variables
+    environment:
+      - APP_ENV=${APP_ENV:-production}
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - BACKUP_SCHEDULE=${BACKUP_SCHEDULE:-"0 2 * * *"}
+      - BACKUP_RETENTION_DAYS=${BACKUP_RETENTION_DAYS:-30}
+      - SPACES_KEY=${SPACES_KEY}
+      - SPACES_SECRET=${SPACES_SECRET}
+      - SPACES_BUCKET=${SPACES_BUCKET}
+    
+    # Install cron and run
+    command: >
+      sh -c "
+      apk add --no-cache curl dcron &&
+      echo '${BACKUP_SCHEDULE} /opt/willow/tools/backup/backup-db-to-spaces.sh >> /var/log/scheduler/backup.log 2>&1' > /etc/cron.d/willowcms &&
+      echo '0 * * * * /opt/willow/tools/security/verify-log-integrity.sh >> /var/log/scheduler/integrity.log 2>&1' >> /etc/cron.d/willowcms &&
+      chmod 600 /etc/cron.d/willowcms &&
+      crond -f -d 8"
+    
+    # Security
+    security_opt:
+      - no-new-privileges:true
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
+    
+    # Network
+    networks:
+      - willow-network
+
+  # ===================================================================
+  # SSL CERTIFICATE SERVICE (Let's Encrypt)
+  # ===================================================================
+  certbot:
+    image: certbot/certbot:v2.7.4
+    container_name: willowcms-certbot
+    restart: "no"
+    
+    # Volume for certificates
+    volumes:
+      - ${HOST_DATA_PATH:-/opt/willow}/ssl/certbot/conf:/etc/letsencrypt:rw
+      - ${HOST_DATA_PATH:-/opt/willow}/ssl/certbot/www:/var/www/certbot:rw
+    
+    # Environment
+    environment:
+      - SSL_EMAIL=${SSL_EMAIL}
+      - SSL_STAGING=${SSL_STAGING:-false}
+      - SSL_RSA_KEY_SIZE=${SSL_RSA_KEY_SIZE:-4096}
+    
+    # Command for certificate generation
+    command: >
+      sh -c "
+      if [ \"${SSL_STAGING}\" = \"true\" ]; then
+        STAGING_FLAG=\"--staging\"
+      else
+        STAGING_FLAG=\"\"
+      fi;
+      certbot certonly --webroot --webroot-path=/var/www/certbot
+      --email ${SSL_EMAIL} --agree-tos --no-eff-email
+      --rsa-key-size ${SSL_RSA_KEY_SIZE}
+      $STAGING_FLAG
+      -d $(echo ${APP_FULL_BASE_URL} | sed 's|https\?://||')
+      || echo 'Certificate already exists or failed to generate'
+      "
+    
+    # Security
+    security_opt:
+      - no-new-privileges:true
+    
+    # Network
+    networks:
+      - willow-network
+
+# ===================================================================
+# NETWORKS
+# ===================================================================
+networks:
+  willow-network:
+    name: ${NETWORK_NAME:-willow_network}
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+# ===================================================================
+# VOLUMES (External volumes managed outside compose)
+# ===================================================================
+volumes:
+  ssl-certificates:
+    external: true
+    name: willowcms-ssl-certs
+  backup-data:
+    external: true  
+    name: willowcms-backups
+
+# ===================================================================
+# DEPLOYMENT NOTES
+# ===================================================================
+# 1. Copy .env.droplet.example to .env.droplet and fill in values
+# 2. Copy stack.env.example to stack.env with production secrets
+# 3. Create external volumes before deployment:
+#    docker volume create willowcms-ssl-certs
+#    docker volume create willowcms-backups  
+# 4. Deploy with: docker compose --env-file .env.droplet --env-file stack.env up -d
+# 5. Generate SSL certificates: docker compose exec certbot certbot renew
+# 6. Set up log rotation and monitoring
+# ===================================================================
