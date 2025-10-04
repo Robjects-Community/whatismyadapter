@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.manifest.v1+json",
+  "artifactType": "application/vnd.willowcms.config.v1+json",
+  "config": {
+    "mediaType": "application/vnd.oci.image.config.v1+json",
+    "digest": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "size": 2,
+    "data": "{}"
+  },
+  "layers": [
+    {
+      "mediaType": "application/vnd.willowcms.nginx.config.v1+tar+gzip",
+      "digest": "sha256:placeholder",
+      "size": 0,
+      "annotations": {
+        "org.opencontainers.image.title": "WillowCMS Nginx Configuration",
+        "org.opencontainers.image.description": "Nginx server configuration template for CakePHP 5.x",
+        "willowcms.config.type": "nginx",
+        "willowcms.config.version": "1.0.0"
+      }
+    },
+    {
+      "mediaType": "application/vnd.willowcms.php.config.v1+tar+gzip",
+      "digest": "sha256:placeholder",
+      "size": 0,
+      "annotations": {
+        "org.opencontainers.image.title": "WillowCMS PHP Configuration",
+        "org.opencontainers.image.description": "PHP 8.3 and PHP-FPM configuration files",
+        "willowcms.config.type": "php",
+        "willowcms.config.version": "8.3.0"
+      }
+    },
+    {
+      "mediaType": "application/vnd.willowcms.healthcheck.v1+tar+gzip",
+      "digest": "sha256:placeholder",
+      "size": 0,
+      "annotations": {
+        "org.opencontainers.image.title": "WillowCMS Health Check Scripts",
+        "org.opencontainers.image.description": "Container health monitoring and log verification utilities",
+        "willowcms.config.type": "healthcheck",
+        "willowcms.config.version": "1.0.0"
+      }
+    },
+    {
+      "mediaType": "application/vnd.willowcms.sbom.v1+json",
+      "digest": "sha256:placeholder",
+      "size": 0,
+      "annotations": {
+        "org.opencontainers.image.title": "WillowCMS SBOM",
+        "org.opencontainers.image.description": "Software Bill of Materials",
+        "willowcms.config.type": "sbom",
+        "willowcms.config.version": "1.0.0"
+      }
+    }
+  ],
+  "annotations": {
+    "org.opencontainers.image.title": "WillowCMS Configuration Artifact",
+    "org.opencontainers.image.description": "Runtime configuration bundle for WillowCMS containers",
+    "org.opencontainers.image.version": "${VERSION:-latest}",
+    "org.opencontainers.image.created": "${BUILD_DATE}",
+    "org.opencontainers.image.source": "https://github.com/robjects-community/willowcms",
+    "org.opencontainers.image.revision": "${GIT_COMMIT}",
+    "org.opencontainers.image.vendor": "Robjects Community",
+    "org.opencontainers.image.licenses": "MIT",
+    "org.opencontainers.image.documentation": "https://docs.willowcms.app/docker/oci-artifacts",
+    "willowcms.artifact.type": "configuration-bundle",
+    "willowcms.artifact.includes": "nginx,php,healthcheck,sbom",
+    "willowcms.php.version": "8.3",
+    "willowcms.nginx.version": "latest",
+    "willowcms.cakephp.version": "5.x"
+  }
+}

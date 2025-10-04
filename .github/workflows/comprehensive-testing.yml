@@ -1,0 +1,507 @@
+name: 🧪 WillowCMS Comprehensive Testing
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+env:
+  CI: true
+  COVERAGE_THRESHOLD: 80
+  PERFORMANCE_THRESHOLD: 500
+  MAX_PARALLEL_JOBS: 4
+
+jobs:
+  # Environment Setup and Validation
+  setup:
+    name: 🏗️ Environment Setup
+    runs-on: ubuntu-latest
+    outputs:
+      cache-key: ${{ steps.cache-key.outputs.key }}
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 🔧 Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: 🧬 Generate cache key
+        id: cache-key
+        run: |
+          echo "key=docker-${{ hashFiles('docker-compose.yml', 'infrastructure/docker/**') }}" >> $GITHUB_OUTPUT
+          
+      - name: 💾 Cache Docker images
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ steps.cache-key.outputs.key }}
+          restore-keys: |
+            docker-${{ hashFiles('docker-compose.yml') }}
+            docker-
+            
+      - name: 🚀 Build and start services
+        run: |
+          ./run_dev_env.sh --ci
+          
+      - name: ⏳ Wait for services
+        run: |
+          timeout 300 bash -c '
+            until docker compose exec -T willowcms php bin/cake --help >/dev/null 2>&1; do
+              echo "Waiting for WillowCMS to be ready..."
+              sleep 10
+            done
+          '
+          
+      - name: 🗄️ Run database migrations
+        run: |
+          docker compose exec -T willowcms php bin/cake migrations migrate
+          
+      - name: ✅ Verify environment
+        run: |
+          docker compose ps
+          docker compose exec -T willowcms php bin/cake --version
+          docker compose exec -T mysql mysql -u root -ppassword -e "SHOW DATABASES;"
+
+  # Parallel Component Testing
+  test-controllers:
+    name: 🎮 Controller Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 💾 Restore Docker cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ needs.setup.outputs.cache-key }}
+          
+      - name: 🚀 Start services
+        run: ./run_dev_env.sh --ci
+        
+      - name: ⏳ Wait for readiness
+        run: |
+          timeout 180 bash -c '
+            until docker compose exec -T willowcms php bin/cake --help >/dev/null 2>&1; do
+              sleep 5
+            done
+          '
+          
+      - name: 🧪 Run controller tests
+        run: |
+          ./tools/testing/run_tests.sh \
+            --component=Controller \
+            --thread=${{ github.run_id }}_controllers \
+            --coverage \
+            --verbose
+            
+      - name: 📊 Upload coverage reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: controller-coverage
+          path: |
+            coverage_*/**
+            app/tmp/tests/**
+            
+      - name: 🧹 Cleanup
+        if: always()
+        run: |
+          ./tools/testing/cleanup_thread.sh ${{ github.run_id }}_controllers || true
+
+  test-models:
+    name: 🗃️ Model Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 💾 Restore Docker cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ needs.setup.outputs.cache-key }}
+          
+      - name: 🚀 Start services
+        run: ./run_dev_env.sh --ci
+        
+      - name: ⏳ Wait for readiness
+        run: |
+          timeout 180 bash -c '
+            until docker compose exec -T willowcms php bin/cake --help >/dev/null 2>&1; do
+              sleep 5
+            done
+          '
+          
+      - name: 🧪 Run model tests
+        run: |
+          ./tools/testing/run_tests.sh \
+            --component=Model \
+            --thread=${{ github.run_id }}_models \
+            --coverage \
+            --verbose
+            
+      - name: 📊 Upload coverage reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: model-coverage
+          path: |
+            coverage_*/**
+            app/tmp/tests/**
+            
+      - name: 🧹 Cleanup
+        if: always()
+        run: |
+          ./tools/testing/cleanup_thread.sh ${{ github.run_id }}_models || true
+
+  test-services:
+    name: 🔧 Service Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 💾 Restore Docker cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ needs.setup.outputs.cache-key }}
+          
+      - name: 🚀 Start services
+        run: ./run_dev_env.sh --ci
+        
+      - name: ⏳ Wait for readiness
+        run: |
+          timeout 180 bash -c '
+            until docker compose exec -T willowcms php bin/cake --help >/dev/null 2>&1; do
+              sleep 5
+            done
+          '
+          
+      - name: 🧪 Run service tests
+        run: |
+          ./tools/testing/run_tests.sh \
+            --component=Service \
+            --thread=${{ github.run_id }}_services \
+            --coverage \
+            --verbose
+            
+      - name: 📊 Upload coverage reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: service-coverage
+          path: |
+            coverage_*/**
+            app/tmp/tests/**
+            
+      - name: 🧹 Cleanup
+        if: always()
+        run: |
+          ./tools/testing/cleanup_thread.sh ${{ github.run_id }}_services || true
+
+  # Security Testing
+  test-security:
+    name: 🔒 Security Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 💾 Restore Docker cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ needs.setup.outputs.cache-key }}
+          
+      - name: 🚀 Start services
+        run: ./run_dev_env.sh --ci
+        
+      - name: ⏳ Wait for readiness
+        run: |
+          timeout 180 bash -c '
+            until docker compose exec -T willowcms php bin/cake --help >/dev/null 2>&1; do
+              sleep 5
+            done
+          '
+          
+      - name: 🛡️ Run security tests
+        run: |
+          ./tools/testing/run_tests.sh \
+            --component=Security \
+            --thread=${{ github.run_id }}_security \
+            --verbose
+            
+      - name: 🔍 Security scan with CodeQL
+        uses: github/codeql-action/analyze@v2
+        with:
+          languages: php
+          
+      - name: 📊 Upload security reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: security-reports
+          path: |
+            app/tmp/tests/**
+            security_reports/**
+            
+      - name: 🧹 Cleanup
+        if: always()
+        run: |
+          ./tools/testing/cleanup_thread.sh ${{ github.run_id }}_security || true
+
+  # Performance Testing
+  test-performance:
+    name: ⚡ Performance Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 💾 Restore Docker cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ needs.setup.outputs.cache-key }}
+          
+      - name: 🚀 Start services
+        run: ./run_dev_env.sh --ci
+        
+      - name: ⏳ Wait for readiness
+        run: |
+          timeout 180 bash -c '
+            until docker compose exec -T willowcms php bin/cake --help >/dev/null 2>&1; do
+              sleep 5
+            done
+          '
+          
+      - name: 📈 Run performance tests
+        run: |
+          ./tools/testing/run_tests.sh \
+            --component=Performance \
+            --thread=${{ github.run_id }}_performance \
+            --verbose
+            
+      - name: 📊 Upload performance reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: performance-reports
+          path: |
+            app/tmp/tests/performance_*.json
+            performance_reports/**
+            
+      - name: 🧹 Cleanup
+        if: always()
+        run: |
+          ./tools/testing/cleanup_thread.sh ${{ github.run_id }}_performance || true
+
+  # Integration Testing
+  test-integration:
+    name: 🔗 Integration Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 💾 Restore Docker cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ needs.setup.outputs.cache-key }}
+          
+      - name: 🚀 Start services
+        run: ./run_dev_env.sh --ci
+        
+      - name: ⏳ Wait for readiness
+        run: |
+          timeout 180 bash -c '
+            until docker compose exec -T willowcms php bin/cake --help >/dev/null 2>&1; do
+              sleep 5
+            done
+          '
+          
+      - name: 🔄 Run integration tests
+        run: |
+          ./tools/testing/run_tests.sh \
+            --filter=RoutingTest \
+            --thread=${{ github.run_id }}_integration \
+            --verbose
+            
+      - name: 🧪 Run end-to-end tests
+        run: |
+          # Add any additional E2E tests here
+          docker compose exec -T willowcms php bin/cake test --coverage-html coverage_e2e
+          
+      - name: 📊 Upload integration reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: integration-reports
+          path: |
+            coverage_e2e/**
+            app/tmp/tests/**
+            
+      - name: 🧹 Cleanup
+        if: always()
+        run: |
+          ./tools/testing/cleanup_thread.sh ${{ github.run_id }}_integration || true
+
+  # Final Analysis and Reporting
+  analyze-results:
+    name: 📊 Test Analysis
+    runs-on: ubuntu-latest
+    needs: [test-controllers, test-models, test-services, test-security, test-performance, test-integration]
+    if: always()
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 📥 Download all artifacts
+        uses: actions/download-artifact@v3
+        
+      - name: 📊 Generate comprehensive report
+        run: |
+          mkdir -p ci_reports
+          
+          # Combine coverage reports
+          echo "📈 Combining coverage reports..."
+          find . -name "coverage_*" -type d | head -5
+          
+          # Generate summary report
+          cat > ci_reports/test_summary.md << EOF
+          # 🧪 WillowCMS Test Results Summary
+          
+          **Run ID:** ${{ github.run_id }}
+          **Commit:** ${{ github.sha }}
+          **Branch:** ${{ github.ref_name }}
+          **Date:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          
+          ## 📊 Test Coverage
+          
+          | Component | Status | Coverage |
+          |-----------|--------|----------|
+          | Controllers | ${{ needs.test-controllers.result }} | TBD |
+          | Models | ${{ needs.test-models.result }} | TBD |
+          | Services | ${{ needs.test-services.result }} | TBD |
+          | Security | ${{ needs.test-security.result }} | N/A |
+          | Performance | ${{ needs.test-performance.result }} | N/A |
+          | Integration | ${{ needs.test-integration.result }} | TBD |
+          
+          ## 🎯 Results Summary
+          
+          - **Controllers:** ${{ needs.test-controllers.result }}
+          - **Models:** ${{ needs.test-models.result }}
+          - **Services:** ${{ needs.test-services.result }}
+          - **Security:** ${{ needs.test-security.result }}
+          - **Performance:** ${{ needs.test-performance.result }}
+          - **Integration:** ${{ needs.test-integration.result }}
+          
+          ## 📈 Next Steps
+          
+          $(if [ "${{ needs.test-controllers.result }}" != "success" ] || 
+               [ "${{ needs.test-models.result }}" != "success" ] || 
+               [ "${{ needs.test-services.result }}" != "success" ] ||
+               [ "${{ needs.test-security.result }}" != "success" ] ||
+               [ "${{ needs.test-performance.result }}" != "success" ] ||
+               [ "${{ needs.test-integration.result }}" != "success" ]; then
+            echo "❌ **Action Required:** Some tests failed. Review individual test reports."
+          else
+            echo "✅ **All Tests Passed:** Ready for deployment!"
+          fi)
+          
+          EOF
+          
+      - name: 📊 Upload final reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: final-test-reports
+          path: |
+            ci_reports/**
+            
+      - name: 💬 Comment PR (if applicable)
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('ci_reports/test_summary.md', 'utf8');
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: summary
+            });
+
+  # Deployment readiness check
+  deployment-check:
+    name: 🚀 Deployment Readiness
+    runs-on: ubuntu-latest
+    needs: [analyze-results]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - name: ✅ All tests passed
+        if: |
+          needs.test-controllers.result == 'success' &&
+          needs.test-models.result == 'success' &&
+          needs.test-services.result == 'success' &&
+          needs.test-security.result == 'success' &&
+          needs.test-performance.result == 'success' &&
+          needs.test-integration.result == 'success'
+        run: |
+          echo "🎉 All tests passed! WillowCMS is ready for deployment."
+          echo "deployment_ready=true" >> $GITHUB_OUTPUT
+          
+      - name: ❌ Tests failed
+        if: |
+          needs.test-controllers.result != 'success' ||
+          needs.test-models.result != 'success' ||
+          needs.test-services.result != 'success' ||
+          needs.test-security.result != 'success' ||
+          needs.test-performance.result != 'success' ||
+          needs.test-integration.result != 'success'
+        run: |
+          echo "❌ Some tests failed. Deployment blocked."
+          echo "deployment_ready=false" >> $GITHUB_OUTPUT
+          exit 1
+
+# Cleanup job (always runs)
+  cleanup:
+    name: 🧹 Cleanup
+    runs-on: ubuntu-latest
+    needs: [analyze-results]
+    if: always()
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        
+      - name: 🧹 Clean up resources
+        run: |
+          echo "🧹 Cleaning up CI resources..."
+          # Cleanup any remaining Docker resources
+          docker system prune -af || true
+          
+          echo "✅ Cleanup complete"
