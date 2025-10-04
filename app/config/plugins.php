@@ -23,5 +23,4 @@ return [
         'onlyDev' => true,
         'optional' => true,
     ],
-    'ContactManager' => [],
 ];
