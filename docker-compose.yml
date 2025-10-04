@@ -1,5 +1,6 @@
 services:
   willowcms:
+    platform: ${DOCKER_PLATFORM:-linux/arm64}
     build:
       context: .
       dockerfile: infrastructure/docker/willowcms/Dockerfile
@@ -17,7 +18,7 @@ services:
       DB_HOST: mysql
       DB_DATABASE: ${MYSQL_DATABASE}
       DB_USERNAME: ${MYSQL_USER}
-      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
       TEST_DB_HOST: mysql
       REDIS_HOST: redis
       OPENAI_API_KEY: ${OPENAI_API_KEY}
@@ -40,6 +41,7 @@ services:
       - ./.env
 
   redis:
+    platform: ${DOCKER_PLATFORM:-linux/arm64}
     build:
       context: .
       dockerfile: docker/redis/Dockerfile
@@ -50,7 +52,7 @@ services:
       TZ: ${APP_DEFAULT_TIMEZONE:-America/Chicago}
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       REDIS_APPENDONLY: ${REDIS_APPENDONLY:-yes}
-      REDIS_SAVE: ${REDIS_SAVE:-"900 1 300 10 60 10000"}
+      REDIS_SAVE: ${REDIS_SAVE:-900 1 300 10 60 10000}
       REDIS_DATA_DIR: /data
     healthcheck:
       test: ["CMD-SHELL", "redis-cli -a \"$REDIS_PASSWORD\" ping | grep PONG"]
@@ -64,6 +66,7 @@ services:
       - ./.env
 
   mysql:
+    platform: ${DOCKER_PLATFORM:-linux/arm64}
     image: mysql:${MYSQL_IMAGE_TAG:-8.0}
     ports:
       - ${MYSQL_PORT:-3310}:3306
@@ -82,6 +85,7 @@ services:
     command: '--default-authentication-plugin=mysql_native_password --log-error=/var/log/mysql/error.log --slow-query-log=1 --slow-query-log-file=/var/log/mysql/slow.log --general-log=1 --general-log-file=/var/log/mysql/query.log'
 
   phpmyadmin:
+    platform: ${DOCKER_PLATFORM:-linux/arm64}
     image: phpmyadmin:${PHPMYADMIN_IMAGE_TAG:-latest}
     depends_on:
       - mysql
@@ -96,6 +100,7 @@ services:
       - ./.env
 
   mailpit:
+    platform: ${DOCKER_PLATFORM:-linux/arm64}
     image: axllent/mailpit:${MAILPIT_IMAGE_TAG:-latest}
     ports:
       - ${MAILPIT_SMTP_PORT:-1125}:1025
@@ -110,6 +115,8 @@ services:
       - MP_SMTP_AUTH_ALLOW_INSECURE=${MP_SMTP_AUTH_ALLOW_INSECURE:-1}
 
   redis-commander:
+    # No ARM64 support - uses Rosetta 2 emulation on Apple Silicon
+    platform: linux/amd64
     image: rediscommander/redis-commander:${REDIS_COMMANDER_IMAGE_TAG:-latest}
     depends_on:
       redis:

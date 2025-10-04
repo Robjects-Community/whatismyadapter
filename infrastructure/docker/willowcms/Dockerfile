@@ -1,5 +1,9 @@
+# Multi-platform build support
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+
 # FROM alpine:3.22
-FROM robjects/dhi-php-mirror-robjects:8.3-alpine3.22-dev
+FROM --platform=${TARGETPLATFORM:-linux/arm64} robjects/dhi-php-mirror-robjects:8.3-alpine3.22-dev
 
 # Setup document root
 WORKDIR /var/www/html

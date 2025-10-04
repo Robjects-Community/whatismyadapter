@@ -1,6 +1,10 @@
+# Multi-platform build support
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+
 # Build arg allows pinning via compose
 ARG REDIS_TAG=7.2-alpine
-FROM redis:${REDIS_TAG}
+FROM --platform=${TARGETPLATFORM:-linux/arm64} redis:${REDIS_TAG}
 
 # Copy config and guard script
 COPY docker/redis/redis.conf /usr/local/etc/redis/redis.conf
