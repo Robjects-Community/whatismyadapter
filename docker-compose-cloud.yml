@@ -18,6 +18,7 @@ services:
     #     - UID=${DOCKER_UID:-1034}
     #     - GID=${DOCKER_GID:-100}
     image: ${WILLOWCMS_IMAGE:-garzarobmdocker/willowcms:pre-willowcms-beta}
+    user: 1034:100
     pull_policy: always
     security_opt:
       - no-new-privileges:true
