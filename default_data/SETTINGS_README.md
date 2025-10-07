@@ -120,7 +120,14 @@ Total categories: 18
 ### Google (4 settings)
 
 **tagManagerHead** (`textarea`)
-- Default: ``
+- Default: `<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>`
 - The Google Tag Manager <head> tag is a JavaScript snippet placed in the <head> section that loads the GTM container and enables tag management without direct code modifications.
 
 **translateApiKey** (`text`)
@@ -353,7 +360,7 @@ Total categories: 18
 
 **siteMetaDescription** (`textarea`)
 - Default: `Default site meta description`
-- No description
+- The site meta description is a brief summary of your website's content and purpose. It appears in search engine results below the page title and URL, providing potential visitors with a snapshot of what your site offers. Craft a compelling and informative description to encourage clicks and improve search engine optimization (SEO).
 
 **siteStrapline** (`textarea`)
 - Default: `Welcome to Willow CMS`
@@ -391,8 +398,8 @@ Total categories: 18
 
 ### SitePages (4 settings)
 
-**mainMenuShow** (`unknown`)
-- Default: ``
+**mainMenuShow** (`select`)
+- Default: `root`
 - Should the main menu show all root pages or only selected pages?
 
 **footerMenuShow** (`select`)

@@ -165,7 +165,8 @@
         "key_name": "articleDisplayMode",
         "value": "summary",
         "value_type": "select",
-        "description": "This setting controls if articles on the blog index show their Summary or Body text."
+        "description": "This setting controls if articles on the blog index show their Summary or Body text.",
+        "data": "{\n  \"summary\": \"Summary\",\n  \"body\": \"Body Text\"\n}"
     },
     {
         "ordering": "1",
@@ -190,7 +191,8 @@
         "key_name": "editor",
         "value": "trumbowyg",
         "value_type": "select",
-        "description": "Chose your default editor for posts and pages content. Trumbowyg is good for HTML whilst Markdown-It supports Markdown."
+        "description": "Chose your default editor for posts and pages content. Trumbowyg is good for HTML whilst Markdown-It supports Markdown.",
+        "data": "{\n  \"trumbowyg\": \"Trumbowyg\",\n  \"tinymce\": \"TinyMCE\"\n}"
     },
     {
         "ordering": "0",
@@ -211,7 +213,8 @@
         "value_obscure": "1",
         "description": "The Google Tag Manager <head> tag is a JavaScript snippet placed in the <head> section that loads the GTM container and enables tag management without direct code modifications.",
         "data": null,
-        "column_width": "8"
+        "column_width": "8",
+        "value": "<!-- Google tag (gtag.js) -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'G-XXXXXXXXXX');\n</script>"
     },
     {
         "ordering": "3",
@@ -712,7 +715,7 @@
         "value_type": "select-page",
         "value_obscure": "0",
         "description": "Page to redirect users to after quiz completion (0 = disabled)",
-        "data": null,
+        "data": "",
         "column_width": "3"
     },
     {
@@ -811,7 +814,8 @@
         "value_type": "textarea",
         "value_obscure": "0",
         "data": null,
-        "column_width": "4"
+        "column_width": "4",
+        "description": "The site meta description is a brief summary of your website's content and purpose. It appears in search engine results below the page title and URL, providing potential visitors with a snapshot of what your site offers. Craft a compelling and informative description to encourage clicks and improve search engine optimization (SEO)."
     },
     {
         "ordering": "3",
@@ -905,7 +909,10 @@
         "ordering": "2",
         "category": "SitePages",
         "key_name": "mainMenuShow",
-        "description": "Should the main menu show all root pages or only selected pages?"
+        "description": "Should the main menu show all root pages or only selected pages?",
+        "value": "root",
+        "value_type": "select",
+        "data": "{\n  \"root\": \"Top Level Pages\",\n  \"selected\": \"Selected Pages\"\n}"
     },
     {
         "ordering": "4",
@@ -914,7 +921,8 @@
         "value": "selected",
         "value_type": "select",
         "value_obscure": "0",
-        "description": "Should the footer menu show all root pages or only selected pages?"
+        "description": "Should the footer menu show all root pages or only selected pages?",
+        "data": "{\"root\": \"Top Level Pages\", \"selected\": \"Selected Pages\"}"
     },
     {
         "category": "SitePages",
@@ -929,7 +937,8 @@
         "key_name": "mainTagMenuShow",
         "value": "root",
         "value_type": "select",
-        "description": "Should the main tag menu show all root tags or only selected tags?"
+        "description": "Should the main tag menu show all root tags or only selected tags?",
+        "data": "{\n  \"root\": \"Top Level Tags\",\n  \"selected\": \"Selected Tags\"\n}"
     },
     {
         "ordering": "1",
@@ -1197,16 +1206,18 @@
         "value_type": "select",
         "value_obscure": "0",
         "description": "This setting determines the default language for the admin area, allowing users to select languages such as French or German.",
-        "column_width": "2"
+        "column_width": "2",
+        "data": "{\n  \"de_DE\": \"German\",\n  \"fr_FR\": \"French\",\n  \"es_ES\": \"Spanish\",\n  \"it_IT\": \"Italian\",\n  \"pt_PT\": \"Portuguese\",\n  \"nl_NL\": \"Dutch\",\n  \"pl_PL\": \"Polish\",\n  \"ru_RU\": \"Russian\",\n  \"sv_SE\": \"Swedish\",\n  \"da_DK\": \"Danish\",\n  \"fi_FI\": \"Finnish\",\n  \"no_NO\": \"Norwegian\",\n  \"el_GR\": \"Greek\",\n  \"tr_TR\": \"Turkish\",\n  \"cs_CZ\": \"Czech\",\n  \"hu_HU\": \"Hungarian\",\n  \"ro_RO\": \"Romanian\",\n  \"sk_SK\": \"Slovak\",\n  \"sl_SI\": \"Slovenian\",\n  \"bg_BG\": \"Bulgarian\",\n  \"hr_HR\": \"Croatian\",\n  \"et_EE\": \"Estonian\",\n  \"lv_LV\": \"Latvian\",\n  \"lt_LT\": \"Lithuanian\",\n  \"en_GB\": \"English (UK)\"\n}"
     },
     {
-        "ordering": "0",
+        "ordering": "1",
         "category": "i18n",
         "key_name": "provider",
         "value": "google",
         "value_type": "select",
         "value_obscure": "0",
         "description": "This setting is used for updating the built-in translations for the Willow CMS interface. Options include Google or Anthropic, with Google generally providing better translations. For auto translation of your website content, see the Translations section to enable languages.",
-        "column_width": "2"
+        "column_width": "2",
+        "data": "{\n  \"google\": \"Google\",\n  \"anthropic\": \"Anthropic\"\n}"
     }
 ]
