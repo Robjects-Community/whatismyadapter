@@ -1,0 +1,10 @@
+services:
+  willowcms:
+    image: willowcms:synology
+    build:
+      context: .
+      dockerfile: deployment/dockerfiles/Dockerfile.synology-nas
+      args:
+        - UID=1034
+        - GID=100
+    user: '1034:100'

@@ -3,7 +3,7 @@ services:
     image: ${WILLOWCMS_IMAGE:-willowcms}:${TAG:-latest}
     build:
       context: .
-      dockerfile: infrastructure/docker/willowcms/Dockerfile
+      dockerfile: deployment/dockerfiles/Dockerfile.local-dev
       args:
         - UID=${DOCKER_UID:-1034}
         - GID=${DOCKER_GID:-100}
@@ -220,6 +220,5 @@ volumes:
 
 networks:
   willowcms_network:
-    driver: overlay
+    driver: bridge
     name: ${NETWORK_NAME:-willowcms_network}
-    attachable: true
