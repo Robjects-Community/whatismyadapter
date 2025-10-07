@@ -101,7 +101,6 @@ The following folders were **completely removed** as they are no longer needed:
 │   ├── docker-compose-portainer-deploy.yml
 │   ├── docker-compose-portainer-template.yml
 │   ├── docker-compose-previous.yml
-│   ├── docker-compose-stack.yml
 │   ├── docker-compose.override.yml.example
 │   ├── docker-compose.prod.yml.bk
 │   ├── docker-compose.prod.yml.fixed
@@ -114,9 +113,9 @@ The following folders were **completely removed** as they are no longer needed:
 
 ### **Files Archived**
 - **Environment Files**: 5 old .env backups
-- **Docker Compose Files**: 11 old/duplicate compose files
+- **Docker Compose Files**: 10 old/duplicate compose files
 - **Deployment Backups**: 2 historical backup folders
-- **Total**: 18 archived items
+- **Total**: 17 archived items
 
 ---
 
@@ -135,8 +134,6 @@ The following folders were **completely removed** as they are no longer needed:
 #### **Management Scripts**
 - `run_dev_env.sh` - Development environment runner
 - `manage.sh` - Main management script
-- `deploy-swarm.sh` - Docker Swarm deployment
-- `validate-stack.sh` - Stack validation
 - `wait-for-it.sh` - Service wait utility
 
 #### **Documentation**
