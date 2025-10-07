@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Middleware;
 
 use App\Service\LogChecksumService;
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Log\Log;
 use Cake\Queue\QueueManager;
@@ -58,15 +59,14 @@ class LogIntegrityMiddleware implements MiddlewareInterface
     private function verifyLogIntegrityIfNeeded(): void
     {
         $cacheKey = self::CACHE_KEY_PREFIX . 'last_verification';
-        $cache = cache('default');
 
-        $lastVerification = $cache->get($cacheKey, 0);
+        $lastVerification = Cache::read($cacheKey, 'default') ?? 0;
         $currentTime = time();
 
         // Check if we need to verify (based on interval)
         if ($currentTime - $lastVerification >= self::VERIFICATION_INTERVAL) {
             $this->performLogIntegrityCheck();
-            $cache->set($cacheKey, $currentTime);
+            Cache::write($cacheKey, $currentTime, 'default');
         }
     }
 
@@ -248,7 +248,6 @@ class LogIntegrityMiddleware implements MiddlewareInterface
      */
     private function setCriticalAlertFlag(array $report): void
     {
-        $cache = cache('default');
         $alertData = [
             'level' => 'critical',
             'message' => 'Log file integrity compromised',
@@ -257,7 +256,7 @@ class LogIntegrityMiddleware implements MiddlewareInterface
             'expires' => time() + (24 * 3600), // 24 hours
         ];
 
-        $cache->set('log_integrity_critical_alert', $alertData, '+24 hours');
+        Cache::write('log_integrity_critical_alert', $alertData, 'default');
     }
 
     /**
@@ -268,11 +267,9 @@ class LogIntegrityMiddleware implements MiddlewareInterface
      */
     private function storeVerificationResults(array $report): void
     {
-        $cache = cache('default');
-
         // Store last 10 verification results
         $historyKey = self::CACHE_KEY_PREFIX . 'history';
-        $history = $cache->get($historyKey, []);
+        $history = Cache::read($historyKey, 'default') ?? [];
 
         // Add current result
         $history[] = [
@@ -286,7 +283,7 @@ class LogIntegrityMiddleware implements MiddlewareInterface
             $history = array_slice($history, -10);
         }
 
-        $cache->set($historyKey, $history, '+7 days');
+        Cache::write($historyKey, $history, 'default');
     }
 
     /**
@@ -296,9 +293,7 @@ class LogIntegrityMiddleware implements MiddlewareInterface
      */
     public static function getVerificationHistory(): array
     {
-        $cache = cache('default');
-
-        return $cache->get(self::CACHE_KEY_PREFIX . 'history', []);
+        return Cache::read(self::CACHE_KEY_PREFIX . 'history', 'default') ?? [];
     }
 
     /**
@@ -308,8 +303,7 @@ class LogIntegrityMiddleware implements MiddlewareInterface
      */
     public static function getCriticalAlert(): ?array
     {
-        $cache = cache('default');
-        $alert = $cache->get('log_integrity_critical_alert');
+        $alert = Cache::read('log_integrity_critical_alert', 'default');
 
         if ($alert && $alert['expires'] > time()) {
             return $alert;
@@ -325,7 +319,6 @@ class LogIntegrityMiddleware implements MiddlewareInterface
      */
     public static function clearCriticalAlert(): void
     {
-        $cache = cache('default');
-        $cache->delete('log_integrity_critical_alert');
+        Cache::delete('log_integrity_critical_alert', 'default');
     }
 }

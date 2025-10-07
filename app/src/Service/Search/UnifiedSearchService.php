@@ -157,12 +157,12 @@ class UnifiedSearchService
                 'Articles' => function ($q) {
                     return $q->where(['is_published' => true])
                         ->contain(['Users'])
-                        ->order(['created' => 'DESC']);
+                        ->orderBy(['created' => 'DESC']);
                 },
                 'Products' => function ($q) {
                     return $q->where(['is_published' => true])
                         ->contain(['Users'])
-                        ->order(['created' => 'DESC']);
+                        ->orderBy(['created' => 'DESC']);
                 },
             ])
             ->first();

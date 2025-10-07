@@ -64,13 +64,16 @@ class ArticlesController extends AppController
         // Get the main articles feed
         try {
             $query = $this->Articles->find()
+                ->contain(['Users'])
                 ->where(['Articles.is_published' => true])
-                ->order(['Articles.created' => 'DESC']);
+                ->orderBy(['Articles.created' => 'DESC']);
                 
             $articles = $this->paginate($query);
         } catch (\Exception $e) {
             // Fallback to basic query if associations don't exist
-            $query = $this->Articles->find()->order(['Articles.created' => 'DESC']);
+            $query = $this->Articles->find()
+                ->contain(['Users'])
+                ->orderBy(['Articles.created' => 'DESC']);
             $articles = $this->paginate($query);
         }
 
@@ -79,8 +82,9 @@ class ArticlesController extends AppController
         if ($homepageFeeds['featured_articles']) {
             try {
                 $featuredArticles = $this->Articles->find()
+                    ->contain(['Users'])
                     ->where(['Articles.is_published' => true])
-                    ->order(['Articles.created' => 'DESC'])
+                    ->orderBy(['Articles.created' => 'DESC'])
                     ->limit(3)
                     ->all();
             } catch (\Exception $e) {
@@ -97,7 +101,7 @@ class ArticlesController extends AppController
                 $recentProducts = $productsTable->find()
                     ->contain(['Images'])
                     ->where(['Products.status' => 'active'])
-                    ->order([
+                    ->orderBy([
                         'Products.rel_score' => 'DESC',
                         'Products.created' => 'DESC'
                     ])
@@ -116,7 +120,7 @@ class ArticlesController extends AppController
                 $recentGalleries = $galleriesTable->find()
                     ->contain(['Images'])
                     ->where(['ImageGalleries.is_published' => true])
-                    ->order(['ImageGalleries.created' => 'DESC'])
+                    ->orderBy(['ImageGalleries.created' => 'DESC'])
                     ->limit(4)
                     ->all();
             } catch (\Exception $e) {
@@ -129,7 +133,7 @@ class ArticlesController extends AppController
         try {
             $tagsTable = $this->fetchTable('Tags');
             $popularTags = $tagsTable->find()
-                ->order(['Tags.article_count' => 'DESC'])
+                ->orderBy(['Tags.article_count' => 'DESC'])
                 ->limit(15)
                 ->all();
         } catch (\Exception $e) {

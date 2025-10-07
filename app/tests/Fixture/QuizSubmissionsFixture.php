@@ -11,6 +11,50 @@ use Cake\TestSuite\Fixture\TestFixture;
 class QuizSubmissionsFixture extends TestFixture
 {
     /**
+     * Table name
+     *
+     * @var string
+     */
+    public string $table = 'quiz_submissions';
+
+    /**
+     * Fields
+     *
+     * @var array<string, mixed>
+     */
+    public array $fields = [
+        'id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null],
+        'user_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null],
+        'session_id' => ['type' => 'string', 'length' => 64, 'null' => false, 'default' => null],
+        'quiz_type' => ['type' => 'string', 'length' => 20, 'null' => false, 'default' => 'comprehensive'],
+        'answers' => ['type' => 'json', 'null' => false, 'default' => null],
+        'matched_product_ids' => ['type' => 'json', 'null' => true, 'default' => null],
+        'confidence_scores' => ['type' => 'json', 'null' => true, 'default' => null],
+        'result_summary' => ['type' => 'text', 'null' => true, 'default' => null],
+        'analytics' => ['type' => 'json', 'null' => true, 'default' => null],
+        'created' => ['type' => 'datetime', 'null' => false, 'default' => null],
+        'modified' => ['type' => 'datetime', 'null' => false, 'default' => null],
+        'created_by' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null],
+        'modified_by' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null],
+        '_indexes' => [
+            'user_id' => ['type' => 'index', 'columns' => ['user_id']],
+            'session_id' => ['type' => 'index', 'columns' => ['session_id']],
+            'quiz_type' => ['type' => 'index', 'columns' => ['quiz_type']],
+            'created' => ['type' => 'index', 'columns' => ['created']],
+        ],
+        '_constraints' => [
+            'primary' => ['type' => 'primary', 'columns' => ['id']],
+        ],
+    ];
+
+    /**
+     * Records
+     *
+     * @var array<array<string, mixed>>
+     */
+    public array $records = [];
+
+    /**
      * Init method
      *
      * @return void
@@ -19,21 +63,73 @@ class QuizSubmissionsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'ece21d30-1fc3-4b87-8c5f-0955db51ae57',
-                'user_id' => '17358ca9-e87d-490b-8173-321f9ca5090d',
-                'session_id' => 'Lorem ipsum dolor sit amet',
-                'quiz_type' => 'Lorem ipsum dolor ',
-                'answers' => '',
-                'matched_product_ids' => '',
-                'confidence_scores' => '',
-                'result_summary' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'analytics' => '',
-                'created' => '2025-10-07 15:13:32',
-                'modified' => '2025-10-07 15:13:32',
-                'created_by' => '363bdd97-5a97-4877-9a15-16bd9ad48481',
-                'modified_by' => 'f376ea1c-802b-43ea-95e4-edef9f97718a',
+                'id' => 'quiz-sub-0001-0000-0000-000000000001',
+                'user_id' => 'user-0001-0000-0000-000000000001', // admin user
+                'session_id' => 'session-123-abc',
+                'quiz_type' => 'comprehensive',
+                'answers' => json_encode([
+                    'question_1' => 'answer_a',
+                    'question_2' => 'answer_b',
+                ]),
+                'matched_product_ids' => json_encode(['prod-0001-0000-0000-000000000001']),
+                'confidence_scores' => json_encode(['prod-0001-0000-0000-000000000001' => 0.85]),
+                'result_summary' => 'Based on your answers, we recommend Product 1.',
+                'analytics' => json_encode([
+                    'time_taken' => 120,
+                    'completed' => true,
+                ]),
+                'created' => '2024-01-01 10:00:00',
+                'modified' => '2024-01-01 10:00:00',
+                'created_by' => 'user-0001-0000-0000-000000000001',
+                'modified_by' => 'user-0001-0000-0000-000000000001',
+            ],
+            [
+                'id' => 'quiz-sub-0002-0000-0000-000000000002',
+                'user_id' => 'user-0002-0000-0000-000000000002', // regular user
+                'session_id' => 'session-456-def',
+                'quiz_type' => 'quick',
+                'answers' => json_encode([
+                    'question_1' => 'answer_c',
+                ]),
+                'matched_product_ids' => json_encode(['prod-0002-0000-0000-000000000002']),
+                'confidence_scores' => json_encode(['prod-0002-0000-0000-000000000002' => 0.72]),
+                'result_summary' => 'Based on your answers, we recommend Product 2.',
+                'analytics' => json_encode([
+                    'time_taken' => 60,
+                    'completed' => true,
+                ]),
+                'created' => '2024-01-02 11:00:00',
+                'modified' => '2024-01-02 11:00:00',
+                'created_by' => 'user-0002-0000-0000-000000000002',
+                'modified_by' => 'user-0002-0000-0000-000000000002',
+            ],
+            [
+                'id' => 'quiz-sub-0003-0000-0000-000000000003',
+                'user_id' => null, // Anonymous submission
+                'session_id' => 'session-789-ghi',
+                'quiz_type' => 'comprehensive',
+                'answers' => json_encode([
+                    'question_1' => 'answer_a',
+                    'question_2' => 'answer_d',
+                    'question_3' => 'answer_b',
+                ]),
+                'matched_product_ids' => json_encode(['prod-0001-0000-0000-000000000001', 'prod-0002-0000-0000-000000000002']),
+                'confidence_scores' => json_encode([
+                    'prod-0001-0000-0000-000000000001' => 0.65,
+                    'prod-0002-0000-0000-000000000002' => 0.78,
+                ]),
+                'result_summary' => 'Based on your answers, we recommend Product 1 and Product 2.',
+                'analytics' => json_encode([
+                    'time_taken' => 180,
+                    'completed' => true,
+                ]),
+                'created' => '2024-01-03 12:00:00',
+                'modified' => '2024-01-03 12:00:00',
+                'created_by' => null,
+                'modified_by' => null,
             ],
         ];
+
         parent::init();
     }
 }

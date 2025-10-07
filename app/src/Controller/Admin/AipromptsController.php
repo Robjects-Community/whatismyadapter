@@ -67,7 +67,7 @@ class AipromptsController extends AppController
             $query->where(['Aiprompts.category LIKE' => '%' . $category . '%']);
         }
 
-        $query->order(['Aiprompts.modified' => 'DESC', 'Aiprompts.id' => 'DESC']);
+        $query->orderBy(['Aiprompts.modified' => 'DESC', 'Aiprompts.id' => 'DESC']);
 
         $aiprompts = $this->paginate($query);
         if ($this->request->is('ajax')) {

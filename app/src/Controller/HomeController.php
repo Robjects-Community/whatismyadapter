@@ -71,7 +71,7 @@ class HomeController extends AppController
                             'Articles.featured' => true
                         ])
                         ->contain(['Users'])
-                        ->order(['Articles.published' => 'DESC'])
+                        ->orderBy(['Articles.published' => 'DESC'])
                         ->limit($featuredLimit);
                     $featuredArticles = $featuredQuery->toArray();
                 } catch (\Exception $e) {
@@ -80,7 +80,7 @@ class HomeController extends AppController
                         $featuredQuery = $articlesTable->find('all')
                             ->where(['Articles.is_published' => true])
                             ->contain(['Users'])
-                            ->order(['Articles.published' => 'DESC'])
+                            ->orderBy(['Articles.published' => 'DESC'])
                             ->limit($featuredLimit);
                         $featuredArticles = $featuredQuery->toArray();
                     } catch (\Exception $e2) {
@@ -99,7 +99,7 @@ class HomeController extends AppController
                     $latestQuery = $articlesTable->find('all')
                         ->where(['Articles.is_published' => true])
                         ->contain(['Users'])
-                        ->order(['Articles.published' => 'DESC'])
+                        ->orderBy(['Articles.published' => 'DESC'])
                         ->limit($latestLimit);
                     $latestArticles = $latestQuery->toArray();
                 } catch (\Exception $e) {
@@ -115,7 +115,7 @@ class HomeController extends AppController
             if ($productsEnabled && $productsTable) {
                 try {
                     $productsQuery = $productsTable->find('all')
-                        ->order(['Products.created' => 'DESC'])
+                        ->orderBy(['Products.created' => 'DESC'])
                         ->limit($productsLimit);
                     $latestProducts = $productsQuery->toArray();
                 } catch (\Exception $e) {
@@ -132,7 +132,7 @@ class HomeController extends AppController
             if ($tagsEnabled && $tagsTable) {
                 try {
                     $tagsQuery = $tagsTable->find('all')
-                        ->order(['Tags.id' => 'DESC'])
+                        ->orderBy(['Tags.id' => 'DESC'])
                         ->limit($tagsLimit);
                     $popularTags = $tagsQuery->toArray();
                 } catch (\Exception $e) {

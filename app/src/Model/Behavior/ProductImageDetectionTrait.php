@@ -391,6 +391,6 @@ trait ProductImageDetectionTrait
         return $this->findProductsNeedingImages()
             ->limit($limit)
             ->offset($offset)
-            ->order(['id' => 'ASC']); // Consistent ordering for batching
+            ->orderBy(['id' => 'ASC']); // Consistent ordering for batching
     }
 }

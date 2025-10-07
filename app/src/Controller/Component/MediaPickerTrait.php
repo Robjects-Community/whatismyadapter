@@ -142,7 +142,15 @@ trait MediaPickerTrait
      */
     protected function getRequestLimit(int $default = 12, int $max = 24): int
     {
-        return min((int)$this->request->getQuery('limit', $default), $max);
+        $limit = (int)$this->request->getQuery('limit', $default);
+        
+        // Ensure limit is positive
+        if ($limit <= 0) {
+            $limit = $default;
+        }
+        
+        // Cap at maximum limit
+        return min($limit, $max);
     }
 
     /**
@@ -153,6 +161,13 @@ trait MediaPickerTrait
      */
     protected function getRequestPage(int $default = 1): int
     {
-        return (int)$this->request->getQuery('page', $default);
+        $page = (int)$this->request->getQuery('page', $default);
+        
+        // Ensure page is positive
+        if ($page <= 0) {
+            $page = $default;
+        }
+        
+        return $page;
     }
 }

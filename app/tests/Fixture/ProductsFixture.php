@@ -11,6 +11,375 @@ use Cake\TestSuite\Fixture\TestFixture;
 class ProductsFixture extends TestFixture
 {
     /**
+     * Table name
+     *
+     * @var string
+     */
+    public string $table = 'products';
+
+    /**
+     * Table schema
+     *
+     * @var array
+     */
+    public array $fields = [
+        'id' => [
+                'type' => 'string',
+                'length' => 36,
+                'null' => false,
+            ],
+            'user_id' => [
+                'type' => 'string',
+                'length' => 36,
+                'null' => true,
+            ],
+            'article_id' => [
+                'type' => 'string',
+                'length' => 36,
+                'null' => true,
+            ],
+            'parent_id' => [
+                'type' => 'string',
+                'length' => 36,
+                'null' => true,
+            ],
+            'lft' => [
+                'type' => 'integer',
+                'null' => true,
+            ],
+            'rght' => [
+                'type' => 'integer',
+                'null' => true,
+            ],
+            'kind' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'title' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'slug' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'description' => [
+                'type' => 'text',
+                'null' => true,
+            ],
+            'manufacturer' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'model_number' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'price' => [
+                'type' => 'decimal',
+                'length' => 10,
+                'precision' => 2,
+                'null' => true,
+            ],
+            'currency' => [
+                'type' => 'string',
+                'length' => 3,
+                'null' => true,
+            ],
+            'image' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'alt_text' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'capability_name' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'capability_category' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'technical_specifications' => [
+                'type' => 'text',
+                'null' => true,
+            ],
+            'testing_standard' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'certifying_organization' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'capability_value' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'numeric_rating' => [
+                'type' => 'decimal',
+                'length' => 5,
+                'precision' => 2,
+                'null' => true,
+            ],
+            'is_certified' => [
+                'type' => 'boolean',
+                'null' => true,
+            ],
+            'certification_date' => [
+                'type' => 'date',
+                'null' => true,
+            ],
+            'parent_category_name' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'category_description' => [
+                'type' => 'text',
+                'null' => true,
+            ],
+            'category_icon' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'display_order' => [
+                'type' => 'integer',
+                'null' => true,
+            ],
+            'port_type_name' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'endpoint_position' => [
+                'type' => 'string',
+                'length' => 50,
+                'null' => true,
+            ],
+            'is_detachable' => [
+                'type' => 'boolean',
+                'null' => true,
+            ],
+            'adapter_functionality' => [
+                'type' => 'text',
+                'null' => true,
+            ],
+            'physical_spec_name' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'spec_value' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'numeric_value' => [
+                'type' => 'decimal',
+                'length' => 10,
+                'precision' => 2,
+                'null' => true,
+            ],
+            'device_category' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'device_brand' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'device_model' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'compatibility_level' => [
+                'type' => 'string',
+                'length' => 50,
+                'null' => true,
+            ],
+            'compatibility_notes' => [
+                'type' => 'text',
+                'null' => true,
+            ],
+            'performance_rating' => [
+                'type' => 'decimal',
+                'length' => 5,
+                'precision' => 2,
+                'null' => true,
+            ],
+            'verification_date' => [
+                'type' => 'date',
+                'null' => true,
+            ],
+            'verified_by' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'user_reported_rating' => [
+                'type' => 'decimal',
+                'length' => 5,
+                'precision' => 2,
+                'null' => true,
+            ],
+            'spec_type' => [
+                'type' => 'string',
+                'length' => 50,
+                'null' => true,
+            ],
+            'measurement_unit' => [
+                'type' => 'string',
+                'length' => 50,
+                'null' => true,
+            ],
+            'spec_description' => [
+                'type' => 'text',
+                'null' => true,
+            ],
+            'port_family' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'form_factor' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'connector_gender' => [
+                'type' => 'string',
+                'length' => 20,
+                'null' => true,
+            ],
+            'pin_count' => [
+                'type' => 'integer',
+                'null' => true,
+            ],
+            'max_voltage' => [
+                'type' => 'decimal',
+                'length' => 10,
+                'precision' => 2,
+                'null' => true,
+            ],
+            'max_current' => [
+                'type' => 'decimal',
+                'length' => 10,
+                'precision' => 2,
+                'null' => true,
+            ],
+            'data_pin_count' => [
+                'type' => 'integer',
+                'null' => true,
+            ],
+            'power_pin_count' => [
+                'type' => 'integer',
+                'null' => true,
+            ],
+            'ground_pin_count' => [
+                'type' => 'integer',
+                'null' => true,
+            ],
+            'electrical_shielding' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'durability_cycles' => [
+                'type' => 'integer',
+                'null' => true,
+            ],
+            'introduced_date' => [
+                'type' => 'date',
+                'null' => true,
+            ],
+            'deprecated_date' => [
+                'type' => 'date',
+                'null' => true,
+            ],
+            'physical_specs_summary' => [
+                'type' => 'string',
+                'length' => 255,
+                'null' => true,
+            ],
+            'prototype_notes' => [
+                'type' => 'text',
+                'null' => true,
+            ],
+            'needs_normalization' => [
+                'type' => 'boolean',
+                'null' => true,
+            ],
+            'is_published' => [
+                'type' => 'boolean',
+                'null' => true,
+            ],
+            'featured' => [
+                'type' => 'boolean',
+                'null' => true,
+            ],
+            'verification_status' => [
+                'type' => 'string',
+                'length' => 50,
+                'null' => true,
+            ],
+            'reliability_score' => [
+                'type' => 'decimal',
+                'length' => 5,
+                'precision' => 2,
+                'null' => true,
+            ],
+            'view_count' => [
+                'type' => 'integer',
+                'null' => false,
+                'default' => 0,
+            ],
+            'created' => [
+                'type' => 'datetime',
+                'null' => false,
+            ],
+            'modified' => [
+                'type' => 'datetime',
+                'null' => false,
+            ],
+            'created_by' => [
+                'type' => 'string',
+                'length' => 36,
+                'null' => true,
+            ],
+            'modified_by' => [
+                'type' => 'string',
+                'length' => 36,
+                'null' => true,
+            ],
+        '_constraints' => [
+            'primary' => [
+                'type' => 'primary',
+                'columns' => ['id'],
+            ],
+        ],
+    ];
+
+
+    /**
      * Init method
      *
      * @return void
@@ -32,8 +401,8 @@ class ProductsFixture extends TestFixture
                 'manufacturer' => 'Lorem ipsum dolor sit amet',
                 'model_number' => 'Lorem ipsum dolor sit amet',
                 'price' => 1.5,
-                'currency' => '',
-                'image' => '',
+                'currency' => 'USD',
+                'image' => 'product.jpg',
                 'alt_text' => 'Lorem ipsum dolor sit amet',
                 'capability_name' => 'Lorem ipsum dolor sit amet',
                 'capability_category' => 'Lorem ipsum dolor sit amet',

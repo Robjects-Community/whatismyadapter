@@ -3,49 +3,67 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
+use App\Model\Entity\User;
+use Cake\ORM\TableRegistry;
+
 /**
  * Authentication Test Trait
  * 
  * Provides helper methods for testing authenticated and unauthenticated scenarios
  * in controller integration tests.
+ * 
+ * This trait works with CakePHP's Authentication and Authorization plugins.
+ * It properly loads User entities from fixtures and stores them in the session
+ * so they can be retrieved by the Authentication component.
  */
 trait AuthenticationTestTrait
 {
     /**
      * Mock an authenticated regular user
      *
-     * @param int $userId User ID to authenticate
-     * @param string $role User role
+     * @param string $userId User ID to authenticate (defaults to regular user UUID from UsersFixture)
+     * @param string $role User role (defaults to 'user')
      * @return void
      */
-    protected function mockAuthenticatedUser(int $userId = 1, string $role = 'user'): void
+    protected function mockAuthenticatedUser(string $userId = '91d91e66-5d90-412b-aeaa-4d51fa110795', string $role = 'user'): void
     {
+        // Load the actual User entity from the database (populated by fixtures)
+        $usersTable = TableRegistry::getTableLocator()->get('Users');
+        $user = $usersTable->get($userId);
+        
+        // Ensure the role is set correctly
+        if ($user->role !== $role) {
+            $user->role = $role;
+            $usersTable->save($user);
+        }
+        
+        // Store the FULL User entity in session - Authentication plugin expects an entity object
+        // that implements IdentityInterface, not just an array
         $this->session([
-            'Auth' => [
-                'id' => $userId,
-                'role' => $role,
-                'email' => "user{$userId}@example.com",
-                'active' => true,
-            ]
+            'Auth' => $user
         ]);
     }
 
     /**
      * Mock an authenticated admin user with full privileges
      *
-     * @param int $userId Admin user ID
+     * @param string $userId Admin user ID (defaults to admin UUID from UsersFixture)
      * @return void
      */
-    protected function mockAdminUser(int $userId = 1): void
+    protected function mockAdminUser(string $userId = '90d91e66-5d90-412b-aeaa-4d51fa110794'): void
     {
+        // Load the actual User entity from the database
+        $usersTable = TableRegistry::getTableLocator()->get('Users');
+        $user = $usersTable->get($userId);
+        
+        // Ensure admin permissions are set
+        $user->role = 'admin';
+        $user->is_admin = true;
+        $usersTable->save($user);
+        
+        // Store the FULL User entity in session - Authentication plugin expects an entity object
         $this->session([
-            'Auth' => [
-                'id' => $userId,
-                'role' => 'admin',
-                'email' => "admin{$userId}@example.com",
-                'active' => true,
-                'can_access_admin' => true,
-            ]
+            'Auth' => $user
         ]);
     }
 
@@ -103,12 +121,13 @@ trait AuthenticationTestTrait
 
     /**
      * Assert response code is one of the expected codes
+     * Note: Use this instead of assertResponseCode() when checking multiple possible codes
      *
      * @param array|int $expectedCodes Expected HTTP status codes
      * @param string $message Custom assertion message
      * @return void
      */
-    protected function assertResponseCode($expectedCodes, string $message = ''): void
+    protected function assertResponseCodeIn($expectedCodes, string $message = ''): void
     {
         $expectedCodes = (array)$expectedCodes;
         $actualCode = $this->_response->getStatusCode();

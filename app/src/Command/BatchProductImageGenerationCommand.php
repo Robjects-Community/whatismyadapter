@@ -234,7 +234,7 @@ class BatchProductImageGenerationCommand extends Command
             $query = $query->limit($options['limit']);
         }
 
-        return $query->order(['id' => 'ASC']); // Consistent ordering
+        return $query->orderBy(['id' => 'ASC']); // Consistent ordering
     }
 
     /**

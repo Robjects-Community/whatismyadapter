@@ -25,8 +25,8 @@ class ProductsController extends AppController
         parent::initialize();
 
         // Disable CSRF protection for API endpoints
-        $this->getEventManager()->off($this->Csrf);
-
+        // CSRF is disabled via ApiCsrfMiddleware for /api routes
+        
         // Set JSON response type
         $this->viewBuilder()->setClassName('Json');
         $this->set('_serialize', true);

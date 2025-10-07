@@ -29,7 +29,15 @@
 
     <testsuites>
         <testsuite name="app">
-            <directory>tests/TestCase/</directory>
+            <file>tests/TestCase/Middleware/RateLimitMiddlewareTest.php</file>
+            <file>tests/TestCase/Service/Api/AiMetricsServiceTest.php</file>
+            <file>tests/TestCase/Service/Api/RateLimitServiceTest.php</file>
+            <file>tests/TestCase/Service/LogChecksumServiceTest.php</file>
+            <file>tests/TestCase/Service/LogChecksumServiceMoreTest.php</file>
+            <file>tests/TestCase/Model/Table/AiMetricsTableSqliteTest.php</file>
+            <file>tests/TestCase/Model/Table/CommentsTableSqliteTest.php</file>
+            <file>tests/TestCase/Model/Table/EmailTemplatesTableSqliteTest.php</file>
+            <file>tests/TestCase/Controller/Admin/AiMetricsControllerSqliteTest.php</file>
         </testsuite>
     </testsuites>
 

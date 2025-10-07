@@ -11,6 +11,91 @@ use Cake\TestSuite\Fixture\TestFixture;
 class ProductsReliabilityLogsFixture extends TestFixture
 {
     /**
+     * Table name
+     *
+     * @var string
+     */
+    public string $table = 'products_reliability_logs';
+
+    /**
+     * Table schema
+     *
+     * @var array
+     */
+    public array $fields = [
+        'id' => [
+            'type' => 'string',
+            'length' => 36,
+            'null' => false,
+        ],
+        'model' => [
+            'type' => 'string',
+            'length' => 255,
+            'null' => false,
+        ],
+        'foreign_key' => [
+            'type' => 'string',
+            'length' => 36,
+            'null' => false,
+        ],
+        'from_total_score' => [
+            'type' => 'decimal',
+            'length' => 5,
+            'precision' => 2,
+            'null' => true,
+        ],
+        'to_total_score' => [
+            'type' => 'decimal',
+            'length' => 5,
+            'precision' => 2,
+            'null' => true,
+        ],
+        'from_field_scores_json' => [
+            'type' => 'text',
+            'null' => true,
+        ],
+        'to_field_scores_json' => [
+            'type' => 'text',
+            'null' => true,
+        ],
+        'source' => [
+            'type' => 'string',
+            'length' => 255,
+            'null' => true,
+        ],
+        'actor_user_id' => [
+            'type' => 'string',
+            'length' => 36,
+            'null' => true,
+        ],
+        'actor_service' => [
+            'type' => 'string',
+            'length' => 255,
+            'null' => true,
+        ],
+        'message' => [
+            'type' => 'text',
+            'null' => true,
+        ],
+        'checksum_sha256' => [
+            'type' => 'string',
+            'length' => 64,
+            'null' => true,
+        ],
+        'created' => [
+            'type' => 'datetime',
+            'null' => false,
+        ],
+        '_constraints' => [
+            'primary' => [
+                'type' => 'primary',
+                'columns' => ['id'],
+            ],
+        ],
+    ];
+
+
+    /**
      * Init method
      *
      * @return void
@@ -30,7 +115,7 @@ class ProductsReliabilityLogsFixture extends TestFixture
                 'actor_user_id' => '2b7bad29-c856-4513-b1fa-d1fa7de6c22a',
                 'actor_service' => 'Lorem ipsum dolor sit amet',
                 'message' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'checksum_sha256' => '',
+                'checksum_sha256' => 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
                 'created' => '2025-10-07 15:13:20',
             ],
         ];

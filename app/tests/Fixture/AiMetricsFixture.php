@@ -10,7 +10,7 @@ class AiMetricsFixture extends TestFixture
     public string $table = 'ai_metrics';
 
     // Use legacy $fields for broad compatibility with Fixture manager
-    protected array $fields = [
+    public array $fields = [
         'id' => ['type' => 'uuid', 'null' => false],
         'task_type' => ['type' => 'string', 'length' => 50, 'null' => false],
         'execution_time_ms' => ['type' => 'integer', 'null' => true],

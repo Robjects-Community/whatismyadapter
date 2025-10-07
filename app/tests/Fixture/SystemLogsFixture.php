@@ -10,6 +10,24 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class SystemLogsFixture extends TestFixture
 {
+    public string $table = 'system_logs';
+
+    public array $fields = [
+        'id' => ['type' => 'uuid', 'null' => false],
+        'level' => ['type' => 'string', 'length' => 50, 'null' => false],
+        'message' => ['type' => 'text', 'null' => false],
+        'context' => ['type' => 'text', 'null' => true],
+        'group_name' => ['type' => 'string', 'length' => 255, 'null' => true],
+        'created' => ['type' => 'datetime', 'null' => false],
+        '_constraints' => [
+            'primary' => ['type' => 'primary', 'columns' => ['id']],
+        ],
+        '_indexes' => [
+            'level_idx' => ['type' => 'index', 'columns' => ['level']],
+            'created_idx' => ['type' => 'index', 'columns' => ['created']],
+        ],
+    ];
+
     /**
      * Init method
      *

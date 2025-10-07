@@ -49,9 +49,9 @@ class QuizController extends AppController
     {
         parent::initialize();
 
-        // Initialize model tables
-        $this->Products = TableRegistry::getTableLocator()->get('Products');
-        $this->QuizSubmissions = TableRegistry::getTableLocator()->get('QuizSubmissions');
+        // Initialize model tables using fetchTable()
+        $this->fetchTable('Products');
+        $this->fetchTable('QuizSubmissions');
 
         // JSON responses are handled via view class
 
@@ -210,7 +210,7 @@ class QuizController extends AppController
             }
 
             // Look up the submission
-            $submission = $this->QuizSubmissions->find()
+            $submission = $this->fetchTable('QuizSubmissions')->find()
                 ->where(['session_id' => $sessionId])
                 ->orderBy(['created' => 'DESC'])
                 ->first();
@@ -224,7 +224,7 @@ class QuizController extends AppController
             $products = [];
 
             if (!empty($productIds)) {
-                $products = $this->Products->find()
+                $products = $this->fetchTable('Products')->find()
                     ->where(['Products.id IN' => $productIds])
                     ->contain(['Tags', 'Users'])
                     ->toArray();
@@ -409,7 +409,7 @@ class QuizController extends AppController
     ): QuizSubmission {
         $identity = $this->getRequest()->getAttribute('identity');
 
-        $submission = $this->QuizSubmissions->newEntity([
+        $submission = $this->fetchTable('QuizSubmissions')->newEntity([
             'user_id' => $identity ? $identity->id : null,
             'session_id' => $sessionId,
             'quiz_type' => $quizType,
@@ -438,7 +438,7 @@ class QuizController extends AppController
             ],
         ]);
 
-        if (!$this->QuizSubmissions->save($submission)) {
+        if (!$this->fetchTable('QuizSubmissions')->save($submission)) {
             throw new RuntimeException('Failed to save quiz submission');
         }
 

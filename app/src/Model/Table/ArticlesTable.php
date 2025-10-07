@@ -543,10 +543,24 @@ class ArticlesTable extends Table
      */
     public function getArchiveDates(string $cacheKey): array
     {
+        $connection = $this->getConnection();
+        $driver = $connection->getDriver();
+        
+        // Use database-agnostic date extraction
+        if ($driver instanceof \Cake\Database\Driver\Sqlite) {
+            // SQLite uses strftime
+            $yearExpr = "CAST(strftime('%Y', published) AS INTEGER)";
+            $monthExpr = "CAST(strftime('%m', published) AS INTEGER)";
+        } else {
+            // MySQL/MariaDB use YEAR() and MONTH()
+            $yearExpr = 'YEAR(published)';
+            $monthExpr = 'MONTH(published)';
+        }
+        
         $query = $this->find()
             ->select([
-                'year' => 'YEAR(published)',
-                'month' => 'MONTH(published)',
+                'year' => $yearExpr,
+                'month' => $monthExpr,
             ])
             ->where([
                 'Articles.is_published' => 1,

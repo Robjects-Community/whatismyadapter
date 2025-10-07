@@ -350,7 +350,7 @@ class AiProductMatcherService
             if (is_array($answers['budget_range'])) {
                 $min = $answers['budget_range']['min'] ?? 0;
                 $max = $answers['budget_range']['max'] ?? 999;
-                $profile[] = "Budget: $${min} - $${max}";
+                $profile[] = "Budget: \${$min} - \${$max}";
             } else {
                 $profile[] = 'Budget: ' . $answers['budget_range'];
             }
