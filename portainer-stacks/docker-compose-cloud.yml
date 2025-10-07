@@ -19,7 +19,6 @@ services:
     volumes:
       - /volume1/docker/whatismyadapter/app:/var/www/html:rw
       - /volume1/docker/whatismyadapter/logs:/var/www/html/logs:rw
-      - /volume1/docker/whatismyadapter/nginx-logs:/var/log/nginx:rw
       - /volume1/docker/whatismyadapter/tmp:/var/www/html/tmp:rw
     user: "${DOCKER_UID:-1034}:${DOCKER_GID:-100}"
     environment:
@@ -90,7 +89,7 @@ services:
     environment:
       - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
     healthcheck:
-      test: ["CMD-SHELL", "redis-cli -a \"$REDIS_PASSWORD\" ping | grep PONG"]
+      test: ["CMD-SHELL", 'redis-cli -a "$REDIS_PASSWORD" ping | grep PONG']
       interval: 10s
       timeout: 3s
       retries: 5
