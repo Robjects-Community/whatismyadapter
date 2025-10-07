@@ -15,7 +15,6 @@
 #
 # Usage: ./branch-cleanup.sh [OPTIONS]
 #
-
 set -euo pipefail
 
 # ============================================================================
@@ -191,12 +190,11 @@ analyze_branches() {
     local current_branch
     current_branch=$(git branch --show-current)
     
-    # Categorize all branches
-    declare -A categories
-    categories[merged]=()
-    categories[stale]=()
-    categories[active]=()
-    categories[protected]=()
+    # Initialize category arrays (bash 3.2 compatible)
+    local merged_branches=()
+    local stale_branches=()
+    local active_branches=()
+    local protected_branches=()
     
     # Analyze each local branch
     while IFS= read -r branch; do
@@ -209,7 +207,7 @@ analyze_branches() {
         
         # Check if protected
         if is_protected_branch "$branch"; then
-            categories[protected]+=("$branch")
+            protected_branches+=("$branch")
             continue
         fi
         
@@ -225,11 +223,11 @@ analyze_branches() {
         
         # Categorize
         if $is_merged; then
-            categories[merged]+=("$branch")
+            merged_branches+=("$branch")
         elif [[ "$days_old" -ge "$STALE_DAYS" ]]; then
-            categories[stale]+=("$branch")
+            stale_branches+=("$branch")
         else
-            categories[active]+=("$branch")
+            active_branches+=("$branch")
         fi
         
     done < <(git branch --format='%(refname:short)')
@@ -248,9 +246,9 @@ analyze_branches() {
         echo ""
         
         # Protected branches
-        echo "PROTECTED BRANCHES (never delete): ${#categories[protected][@]}"
+        echo "PROTECTED BRANCHES (never delete): ${#protected_branches[@]}"
         echo "────────────────────────────────────────────────────────────────"
-        for branch in "${categories[protected][@]}"; do
+        for branch in "${protected_branches[@]}"; do
             local author=$(get_branch_author "$branch")
             local date=$(get_branch_date "$branch")
             echo "  • $branch"
@@ -259,9 +257,9 @@ analyze_branches() {
         echo ""
         
         # Merged branches
-        echo "MERGED BRANCHES (safe to delete): ${#categories[merged][@]}"
+        echo "MERGED BRANCHES (safe to delete): ${#merged_branches[@]}"
         echo "────────────────────────────────────────────────────────────────"
-        for branch in "${categories[merged][@]}"; do
+        for branch in "${merged_branches[@]}"; do
             local author=$(get_branch_author "$branch")
             local date=$(get_branch_date "$branch")
             local days=$(get_days_since_last_commit "$branch")
@@ -271,9 +269,9 @@ analyze_branches() {
         echo ""
         
         # Stale branches
-        echo "STALE BRANCHES (${STALE_DAYS}+ days, not merged): ${#categories[stale][@]}"
+        echo "STALE BRANCHES (${STALE_DAYS}+ days, not merged): ${#stale_branches[@]}"
         echo "────────────────────────────────────────────────────────────────"
-        for branch in "${categories[stale][@]}"; do
+        for branch in "${stale_branches[@]}"; do
             local author=$(get_branch_author "$branch")
             local date=$(get_branch_date "$branch")
             local days=$(get_days_since_last_commit "$branch")
@@ -285,9 +283,9 @@ analyze_branches() {
         echo ""
         
         # Active branches
-        echo "ACTIVE BRANCHES (recent, not merged): ${#categories[active][@]}"
+        echo "ACTIVE BRANCHES (recent, not merged): ${#active_branches[@]}"
         echo "────────────────────────────────────────────────────────────────"
-        for branch in "${categories[active][@]}"; do
+        for branch in "${active_branches[@]}"; do
             local author=$(get_branch_author "$branch")
             local date=$(get_branch_date "$branch")
             local days=$(get_days_since_last_commit "$branch")
@@ -301,10 +299,10 @@ analyze_branches() {
         echo "SUMMARY"
         echo "────────────────────────────────────────────────────────────────"
         echo "  Total Branches: $(git branch | wc -l | tr -d ' ')"
-        echo "  Protected: ${#categories[protected][@]}"
-        echo "  Merged (deletable): ${#categories[merged][@]}"
-        echo "  Stale (review): ${#categories[stale][@]}"
-        echo "  Active: ${#categories[active][@]}"
+        echo "  Protected: ${#protected_branches[@]}"
+        echo "  Merged (deletable): ${#merged_branches[@]}"
+        echo "  Stale (review): ${#stale_branches[@]}"
+        echo "  Active: ${#active_branches[@]}"
         echo ""
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         
@@ -313,8 +311,8 @@ analyze_branches() {
     log_success "Analysis complete. Report saved to: ${REPORT_FILE}"
     
     # Return categories for cleanup operations
-    echo "${categories[merged][@]}" > "${CONFIG_DIR}/merged-branches.tmp"
-    echo "${categories[stale][@]}" > "${CONFIG_DIR}/stale-branches.tmp"
+    printf "%s\n" "${merged_branches[@]}" > "${CONFIG_DIR}/merged-branches.tmp" 2>/dev/null || touch "${CONFIG_DIR}/merged-branches.tmp"
+    printf "%s\n" "${stale_branches[@]}" > "${CONFIG_DIR}/stale-branches.tmp" 2>/dev/null || touch "${CONFIG_DIR}/stale-branches.tmp"
 }
 
 # ============================================================================

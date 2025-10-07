@@ -67,10 +67,12 @@ Configure::write('App.defaultConnection', 'test');
 
 // Create schema for data-only fixtures (CakePHP 5) using SchemaLoader
 // Ensures tables exist before TestFixture reflects schema
-$schemaFile = $root . '/tests/schema/ai_metrics.php';
-if (file_exists($schemaFile)) {
+$schemaDir = $root . '/tests/schema';
+if (is_dir($schemaDir)) {
     $loader = new \Cake\TestSuite\Fixture\SchemaLoader();
-    $loader->loadInternalFile($schemaFile, 'test');
+    foreach (glob($schemaDir . '/*.php') as $schemaFile) {
+        $loader->loadInternalFile($schemaFile, 'test');
+    }
 }
 
 // Force test env settings
