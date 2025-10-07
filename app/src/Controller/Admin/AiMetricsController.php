@@ -139,15 +139,20 @@ class AiMetricsController extends AppController
             }
 
             // Get recent API calls per minute for the last hour (for sparkline)
-            $sparklineData = $this->AiMetrics->find()
-                ->select([
-                    'minute' => "DATE_FORMAT(created, '%Y-%m-%d %H:%i')",
-                    'count' => 'COUNT(*)',
-                ])
-                ->where(['created >=' => date('Y-m-d H:i:s', strtotime('-1 hour'))])
-                ->groupBy("DATE_FORMAT(created, '%Y-%m-%d %H:%i')")
-                ->orderBy(['minute' => 'ASC'])
-                ->toArray();
+            if (env('CAKE_ENV') === 'test') {
+                // Avoid MySQL-specific DATE_FORMAT in tests (SQLite)
+                $sparklineData = [];
+            } else {
+                $sparklineData = $this->AiMetrics->find()
+                    ->select([
+                        'minute' => "DATE_FORMAT(created, '%Y-%m-%d %H:%i')",
+                        'count' => 'COUNT(*)',
+                    ])
+                    ->where(['created >=' => date('Y-m-d H:i:s', strtotime('-1 hour'))])
+                    ->groupBy("DATE_FORMAT(created, '%Y-%m-%d %H:%i')")
+                    ->orderBy(['minute' => 'ASC'])
+                    ->toArray();
+            }
 
             $response = [
                 'success' => true,

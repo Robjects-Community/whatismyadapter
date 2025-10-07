@@ -14,15 +14,6 @@ class AiMetricsControllerSqliteTest extends TestCase
 
     protected array $fixtures = ['app.AiMetrics'];
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        // The application bootstrap performs a MySQL-specific information_schema check
-        // in I18nManager::setEnabledLanguages(). On SQLite this fails and breaks
-        // IntegrationTestTrait requests. To keep the suite passing until we add a
-        // test-friendly guard in I18nManager, skip these integration tests.
-        $this->markTestSkipped('Skipping integration tests: I18nManager DB check requires MySQL. I can add a small test guard to skip DB checks under CAKE_ENV=test.');
-    }
 
     protected function loginAsAdmin(): void
     {

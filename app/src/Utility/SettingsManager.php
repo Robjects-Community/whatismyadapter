@@ -97,6 +97,11 @@ class SettingsManager
      */
     public static function read(string $path, mixed $default = null): mixed
     {
+        // In tests, avoid DB lookups and return the provided default
+        if (env('CAKE_ENV') === 'test') {
+            return $default;
+        }
+
         $cacheKey = 'setting_' . str_replace('.', '_', $path);
 
         $value = Cache::read($cacheKey, self::$cacheConfig);

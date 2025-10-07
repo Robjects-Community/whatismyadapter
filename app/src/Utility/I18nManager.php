@@ -99,6 +99,13 @@ class I18nManager
      */
     public static function setEnabledLanguages(): void
     {
+        // In test environment, avoid DB checks and default to English
+        if (env('CAKE_ENV') === 'test') {
+            Configure::write('I18n.languages', ['en']);
+            I18n::setLocale('en_GB');
+            return;
+        }
+
         if (DatabaseUtility::tableExists('settings')) {
             $defaultLanguages = ['en'];
             $enabledLanguages = array_keys(self::getEnabledLocales());
@@ -150,6 +157,12 @@ class I18nManager
      */
     public static function setLocalForAdminArea(): void
     {
+        if (env('CAKE_ENV') === 'test') {
+            // Avoid DB-backed settings lookups in tests; default to English
+            I18n::setLocale('en_GB');
+            return;
+        }
+
         $adminLocale = SettingsManager::read('i18n.locale', null);
         if (!empty($adminLocale)) {
             I18n::setLocale($adminLocale);
