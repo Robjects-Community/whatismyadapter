@@ -25,6 +25,17 @@ alias cake-clear-cache='docker compose exec willowcms php bin/cake cache clear_a
 alias phpunit-test='docker compose exec willowcms php vendor/bin/phpunit'
 alias phpunit-mvc='docker compose exec willowcms php vendor/bin/phpunit --filter mvc'
 
+# PHPUnit with HTML coverage generation
+alias phpunit-coverage='docker compose exec willowcms php vendor/bin/phpunit --coverage-html /var/www/html/webroot/coverage'
+alias phpunit-coverage-text='docker compose exec willowcms php vendor/bin/phpunit --coverage-text'
+alias phpunit-coverage-clover='docker compose exec willowcms php vendor/bin/phpunit --coverage-clover /var/www/html/webroot/coverage.xml'
+
+# Open coverage report in browser (macOS/Linux)
+alias coverage-open='open http://localhost:8080/coverage/ 2>/dev/null || xdg-open http://localhost:8080/coverage/ 2>/dev/null'
+
+# Clean coverage reports
+alias coverage-clean='docker compose exec willowcms rm -rf /var/www/html/webroot/coverage'
+
 # General development shortcuts
 alias ll='ls -la'
 alias la='ls -A'

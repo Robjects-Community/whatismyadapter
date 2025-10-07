@@ -1,0 +1,162 @@
+name: Tests & Coverage
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: PHPUnit Tests & Code Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          
+      - name: Set up environment file
+        run: |
+          cp .env.example .env
+          echo "OPENAI_API_KEY=" >> .env
+          echo "ANTHROPIC_API_KEY=" >> .env
+          
+      - name: Start Docker Compose services
+        run: |
+          docker compose up -d
+          echo "Waiting for services to be healthy..."
+          
+      - name: Wait for MySQL to be ready
+        run: |
+          timeout=60
+          until docker compose exec -T mysql mysqladmin ping -h localhost --silent || [ $timeout -eq 0 ]; do
+            echo "Waiting for MySQL... ($timeout seconds left)"
+            sleep 2
+            ((timeout-=2))
+          done
+          
+          if [ $timeout -eq 0 ]; then
+            echo "MySQL failed to start"
+            docker compose logs mysql
+            exit 1
+          fi
+          echo "MySQL is ready!"
+          
+      - name: Wait for Redis to be ready
+        run: |
+          timeout=30
+          until docker compose exec -T redis redis-cli ping | grep PONG || [ $timeout -eq 0 ]; do
+            echo "Waiting for Redis... ($timeout seconds left)"
+            sleep 2
+            ((timeout-=2))
+          done
+          
+          if [ $timeout -eq 0 ]; then
+            echo "Redis failed to start"
+            docker compose logs redis
+            exit 1
+          fi
+          echo "Redis is ready!"
+          
+      - name: Wait for WillowCMS to be ready
+        run: |
+          timeout=60
+          until docker compose exec -T willowcms php -v > /dev/null 2>&1 || [ $timeout -eq 0 ]; do
+            echo "Waiting for WillowCMS... ($timeout seconds left)"
+            sleep 2
+            ((timeout-=2))
+          done
+          
+          if [ $timeout -eq 0 ]; then
+            echo "WillowCMS failed to start"
+            docker compose logs willowcms
+            exit 1
+          fi
+          echo "WillowCMS is ready!"
+          
+      - name: Display service status
+        run: docker compose ps
+        
+      - name: Run database migrations
+        run: |
+          docker compose exec -T willowcms bin/cake migrations migrate
+          
+      - name: Verify Xdebug is enabled for coverage
+        run: |
+          echo "Checking Xdebug configuration..."
+          docker compose exec -T willowcms php -v
+          docker compose exec -T willowcms php -m | grep xdebug
+          docker compose exec -T willowcms php -i | grep "xdebug.mode"
+          
+      - name: Run PHPUnit tests with coverage
+        run: |
+          echo "Running PHPUnit tests with code coverage..."
+          docker compose exec -T willowcms php vendor/bin/phpunit \
+            --coverage-html /var/www/html/webroot/coverage \
+            --coverage-text \
+            --testdox
+            
+      - name: Run PHPStan static analysis
+        continue-on-error: true
+        run: |
+          echo "Running PHPStan analysis..."
+          docker compose exec -T willowcms composer stan || echo "PHPStan found issues (non-blocking)"
+          
+      - name: Run PHP CodeSniffer
+        continue-on-error: true
+        run: |
+          echo "Running PHP CodeSniffer..."
+          docker compose exec -T willowcms composer cs-check || echo "PHPCS found issues (non-blocking)"
+          
+      - name: Copy coverage report from container
+        if: always()
+        run: |
+          echo "Copying coverage reports..."
+          docker compose cp willowcms:/var/www/html/webroot/coverage ./coverage-report || echo "No coverage report to copy"
+          
+      - name: Upload coverage report as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage-report/
+          retention-days: 7
+          if-no-files-found: warn
+          
+      - name: Generate test summary
+        if: always()
+        run: |
+          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### PHPUnit Tests" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Tests completed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Code Coverage" >> $GITHUB_STEP_SUMMARY
+          echo "📊 Coverage report available in artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Code Quality" >> $GITHUB_STEP_SUMMARY
+          echo "- PHPStan: Static analysis completed" >> $GITHUB_STEP_SUMMARY
+          echo "- PHPCS: Code standards check completed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📥 Download the coverage report artifact to view detailed results" >> $GITHUB_STEP_SUMMARY
+          
+      - name: Display service logs on failure
+        if: failure()
+        run: |
+          echo "=== WillowCMS Logs ==="
+          docker compose logs willowcms
+          echo "=== MySQL Logs ==="
+          docker compose logs mysql
+          echo "=== Redis Logs ==="
+          docker compose logs redis
+          
+      - name: Cleanup
+        if: always()
+        run: |
+          docker compose down -v
+          docker system prune -f

@@ -100,6 +100,12 @@ willow_cms_code_Utilities.txt
 # Code Coverage Report #
 ########################
 /cakephp/webroot/coverage
+/app/webroot/coverage/
+/app/webroot/coverage.xml
+*.coverage
+coverage/
+coverage.xml
+coverage-report/
 
 # Willow specific files/folders #
 #################################
