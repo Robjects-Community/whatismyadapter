@@ -26201,3 +26201,5 @@ archive/old-configs/docker-compose.override.yml.example
 archive/old-configs/docker-compose.yml.backup-20251004_014248
 archive/old-configs/docker-compose.override.yml.example
 archive/old-configs/docker-compose.yml.backup-20251004_014248
+app/config/Migrations/schema-dump-default.lock
+tmp
