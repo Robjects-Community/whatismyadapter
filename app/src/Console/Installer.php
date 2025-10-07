@@ -144,11 +144,13 @@ class Installer
                 return;
             }
 
-            $res = chmod($path, $worldWritable);
+            // Suppress errors and check if chmod is allowed (e.g., in Docker containers)
+            $res = @chmod($path, $worldWritable);
             if ($res) {
                 $io->write('Permissions set on ' . $path);
             } else {
-                $io->write('Failed to set permissions on ' . $path);
+                // Only warn, don't fail - permissions may be handled by Docker/host
+                $io->write('<comment>Warning: Unable to set permissions on ' . $path . ' (may be handled by container/host)</comment>');
             }
         };
 
