@@ -9,15 +9,7 @@ use Cake\TestSuite\TestCase;
 
 class RateLimitServiceTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        Cache::setConfig('rate_limit', [
-            'className' => 'Array',
-            'prefix' => 'test_rl_',
-            'serialize' => true,
-        ]);
-    }
+    // No special setup required
 
     public function testEnforceLimitRespectsHourlyLimit(): void
     {
@@ -27,13 +19,16 @@ class RateLimitServiceTest extends TestCase
         // phpcs:enable
 
         $svc = new RateLimitService(\App\Test\TestCase\Service\Api\FakeSettings::class);
+        // Use a unique service key to avoid collisions with other tests
+        $service = 'anthropic_' . substr(md5((string)microtime(true)), 0, 6);
+        $svc->resetUsage($service);
 
-        $this->assertTrue($svc->enforceLimit('anthropic'));
-        $this->assertTrue($svc->enforceLimit('anthropic'));
+        $this->assertTrue($svc->enforceLimit($service));
+        $this->assertTrue($svc->enforceLimit($service));
         // Third should exceed limit
-        $this->assertFalse($svc->enforceLimit('anthropic'));
+        $this->assertFalse($svc->enforceLimit($service));
 
-        $usage = $svc->getCurrentUsage('anthropic');
+        $usage = $svc->getCurrentUsage($service);
         $this->assertSame(2, $usage['limit']);
         $this->assertGreaterThanOrEqual(2, $usage['current']);
     }
@@ -46,6 +41,10 @@ class RateLimitServiceTest extends TestCase
         // phpcs:enable
 
         $svc = new RateLimitService(\App\Test\TestCase\Service\Api\FakeSettings2::class);
+
+        // Ensure clean slate for this test
+        $svc->resetUsage('anthropic');
+        $svc->resetUsage('google');
 
         // Simulate some usage
         $svc->enforceLimit('anthropic');

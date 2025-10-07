@@ -14,36 +14,22 @@ use Psr\Http\Message\ResponseInterface;
 
 class RateLimitMiddlewareTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        // Use in-memory cache for rate_limit to avoid filesystem/io and isolate tests
-        Cache::setConfig('rate_limit', [
-            'className' => 'Array',
-            'prefix' => 'test_rl_',
-            'serialize' => true,
-        ]);
-    }
-
-    protected function tearDown(): void
-    {
-        Cache::delete('rate_limit', 'rate_limit');
-        parent::tearDown();
-    }
+    // No special setup/teardown required for cache in these starter tests
 
     public function testAllowsRequestsUnderLimit(): void
     {
+        $uniqueRoute = '/test-' . substr(md5((string)microtime(true)), 0, 8);
         $middleware = new RateLimitMiddleware([
             'enabled' => true,
             'defaultLimit' => 5,
             'defaultPeriod' => 60,
             'routes' => [
-                '/test' => ['limit' => 5, 'period' => 60],
+                $uniqueRoute => ['limit' => 5, 'period' => 60],
             ],
         ]);
 
-        $request = (new ServerRequest(['url' => '/test']))
-            ->withAttribute('clientIp', '127.0.0.1');
+        $request = (new ServerRequest(['url' => $uniqueRoute]))
+            ->withAttribute('clientIp', '10.0.0.5');
         $handler = new class implements RequestHandlerInterface {
             public function handle(\Psr\Http\Message\ServerRequestInterface $request): ResponseInterface
             {
@@ -61,17 +47,18 @@ class RateLimitMiddlewareTest extends TestCase
 
     public function testBlocksWhenLimitExceeded(): void
     {
+        $uniqueRoute = '/test-' . substr(md5((string)microtime(true)), 0, 8);
         $middleware = new RateLimitMiddleware([
             'enabled' => true,
             'defaultLimit' => 2,
             'defaultPeriod' => 60,
             'routes' => [
-                '/test' => ['limit' => 2, 'period' => 60],
+                $uniqueRoute => ['limit' => 2, 'period' => 60],
             ],
         ]);
 
-        $request = (new ServerRequest(['url' => '/test']))
-            ->withAttribute('clientIp', '192.168.0.1');
+        $request = (new ServerRequest(['url' => $uniqueRoute]))
+            ->withAttribute('clientIp', '10.0.0.6');
         $handler = new class implements RequestHandlerInterface {
             public function handle(\Psr\Http\Message\ServerRequestInterface $request): ResponseInterface
             {
@@ -95,7 +82,7 @@ class RateLimitMiddlewareTest extends TestCase
         ]);
 
         $request = (new ServerRequest(['url' => '/anything']))
-            ->withAttribute('clientIp', '10.0.0.1');
+            ->withAttribute('clientIp', '10.0.0.7');
         $handler = new class implements RequestHandlerInterface {
             public function handle(\Psr\Http\Message\ServerRequestInterface $request): ResponseInterface
             {
