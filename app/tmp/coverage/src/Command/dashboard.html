@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Command</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../index.html">/var/www/html</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Command</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#21">App\Command\BatchImageGenerationCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#28">App\Command\BatchProductImageGenerationCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CheckTableExistsCommand.php.html#15">App\Command\CheckTableExistsCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CreateUserCommand.php.html#17">App\Command\CreateUserCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultDataExportCommand.php.html#23">App\Command\DefaultDataExportCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultDataImportCommand.php.html#26">App\Command\DefaultDataImportCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#23">App\Command\ExportCodeCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#18">App\Command\GenerateArticlesCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GeneratePoFilesCommand.php.html#19">App\Command\GeneratePoFilesCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#25">App\Command\GenerateProductsCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImportProductsCommand.php.html#19">App\Command\ImportProductsCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InsertSampleDataCommand.php.html#20">App\Command\InsertSampleDataCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InvestigateArticleCommand.php.html#54">App\Command\InvestigateArticleCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LoadDefault18nCommand.php.html#17">App\Command\LoadDefault18nCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#24">App\Command\LogChecksumCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityCommand.php.html#20">App\Command\ReliabilityCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ResizeImagesCommand.php.html#20">App\Command\ResizeImagesCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SendTestEmailCommand.php.html#15">App\Command\SendTestEmailCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SimulateAiActivityCommand.php.html#17">App\Command\SimulateAiActivityCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TestPasswordResetCommand.php.html#18">App\Command\TestPasswordResetCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TestRateLimitCommand.php.html#16">App\Command\TestRateLimitCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateI18nCommand.php.html#18">App\Command\TranslateI18nCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VerifyBulkLogsCommand.php.html#15">App\Command\VerifyBulkLogsCommand</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="LogChecksumCommand.php.html#24">App\Command\LogChecksumCommand</a></td><td class="text-right">4290</td></tr>
+       <tr><td><a href="DefaultDataImportCommand.php.html#26">App\Command\DefaultDataImportCommand</a></td><td class="text-right">3660</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#25">App\Command\GenerateProductsCommand</a></td><td class="text-right">2256</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#28">App\Command\BatchProductImageGenerationCommand</a></td><td class="text-right">1892</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#23">App\Command\ExportCodeCommand</a></td><td class="text-right">1892</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#21">App\Command\BatchImageGenerationCommand</a></td><td class="text-right">1640</td></tr>
+       <tr><td><a href="ReliabilityCommand.php.html#20">App\Command\ReliabilityCommand</a></td><td class="text-right">992</td></tr>
+       <tr><td><a href="DefaultDataExportCommand.php.html#23">App\Command\DefaultDataExportCommand</a></td><td class="text-right">930</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#18">App\Command\GenerateArticlesCommand</a></td><td class="text-right">870</td></tr>
+       <tr><td><a href="ImportProductsCommand.php.html#19">App\Command\ImportProductsCommand</a></td><td class="text-right">650</td></tr>
+       <tr><td><a href="VerifyBulkLogsCommand.php.html#15">App\Command\VerifyBulkLogsCommand</a></td><td class="text-right">650</td></tr>
+       <tr><td><a href="CreateUserCommand.php.html#17">App\Command\CreateUserCommand</a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="InsertSampleDataCommand.php.html#20">App\Command\InsertSampleDataCommand</a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="LoadDefault18nCommand.php.html#17">App\Command\LoadDefault18nCommand</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="InvestigateArticleCommand.php.html#54">App\Command\InvestigateArticleCommand</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="ResizeImagesCommand.php.html#20">App\Command\ResizeImagesCommand</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="SimulateAiActivityCommand.php.html#17">App\Command\SimulateAiActivityCommand</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="TestPasswordResetCommand.php.html#18">App\Command\TestPasswordResetCommand</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="GeneratePoFilesCommand.php.html#19">App\Command\GeneratePoFilesCommand</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="TestRateLimitCommand.php.html#16">App\Command\TestRateLimitCommand</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="TranslateI18nCommand.php.html#18">App\Command\TranslateI18nCommand</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="SendTestEmailCommand.php.html#15">App\Command\SendTestEmailCommand</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="CheckTableExistsCommand.php.html#15">App\Command\CheckTableExistsCommand</a></td><td class="text-right">12</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#33"><abbr title="App\Command\BatchImageGenerationCommand::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#45"><abbr title="App\Command\BatchImageGenerationCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#97"><abbr title="App\Command\BatchImageGenerationCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#240"><abbr title="App\Command\BatchImageGenerationCommand::findCandidateArticles">findCandidateArticles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#275"><abbr title="App\Command\BatchImageGenerationCommand::displayCandidateArticles">displayCandidateArticles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#305"><abbr title="App\Command\BatchImageGenerationCommand::displayResults">displayResults</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#329"><abbr title="App\Command\BatchImageGenerationCommand::displayStatistics">displayStatistics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#367"><abbr title="App\Command\BatchImageGenerationCommand::isValidDate">isValidDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#56"><abbr title="App\Command\BatchProductImageGenerationCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#121"><abbr title="App\Command\BatchProductImageGenerationCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#166"><abbr title="App\Command\BatchProductImageGenerationCommand::parseOptions">parseOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#197"><abbr title="App\Command\BatchProductImageGenerationCommand::buildProductQuery">buildProductQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#249"><abbr title="App\Command\BatchProductImageGenerationCommand::displayStatistics">displayStatistics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#294"><abbr title="App\Command\BatchProductImageGenerationCommand::processProductsBatch">processProductsBatch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#369"><abbr title="App\Command\BatchProductImageGenerationCommand::processBatch">processBatch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#424"><abbr title="App\Command\BatchProductImageGenerationCommand::getQueuePriority">getQueuePriority</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#438"><abbr title="App\Command\BatchProductImageGenerationCommand::getCommandName">getCommandName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#451"><abbr title="App\Command\BatchProductImageGenerationCommand::displayHelp">displayHelp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CheckTableExistsCommand.php.html#23"><abbr title="App\Command\CheckTableExistsCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CheckTableExistsCommand.php.html#42"><abbr title="App\Command\CheckTableExistsCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CreateUserCommand.php.html#27"><abbr title="App\Command\CreateUserCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CreateUserCommand.php.html#74"><abbr title="App\Command\CreateUserCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CreateUserCommand.php.html#133"><abbr title="App\Command\CreateUserCommand::createUser">createUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CreateUserCommand.php.html#192"><abbr title="App\Command\CreateUserCommand::updateUserPassword">updateUserPassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultDataExportCommand.php.html#31"><abbr title="App\Command\DefaultDataExportCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultDataExportCommand.php.html#63"><abbr title="App\Command\DefaultDataExportCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultDataExportCommand.php.html#142"><abbr title="App\Command\DefaultDataExportCommand::_exportAllTables">_exportAllTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultDataExportCommand.php.html#183"><abbr title="App\Command\DefaultDataExportCommand::exportTableData">exportTableData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultDataImportCommand.php.html#34"><abbr title="App\Command\DefaultDataImportCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultDataImportCommand.php.html#69"><abbr title="App\Command\DefaultDataImportCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultDataImportCommand.php.html#173"><abbr title="App\Command\DefaultDataImportCommand::importTableData">importTableData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DefaultDataImportCommand.php.html#335"><abbr title="App\Command\DefaultDataImportCommand::toggleMySqlForeignKeyChecks">toggleMySqlForeignKeyChecks</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#38"><abbr title="App\Command\ExportCodeCommand::getDirectoryTypeMappings">getDirectoryTypeMappings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#71"><abbr title="App\Command\ExportCodeCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#105"><abbr title="App\Command\ExportCodeCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#283"><abbr title="App\Command\ExportCodeCommand::writeMetadata">writeMetadata</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#308"><abbr title="App\Command\ExportCodeCommand::writeSectionHeader">writeSectionHeader</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#325"><abbr title="App\Command\ExportCodeCommand::writeSectionFooter">writeSectionFooter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#343"><abbr title="App\Command\ExportCodeCommand::writeFileContent">writeFileContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#35"><abbr title="App\Command\GenerateArticlesCommand::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#48"><abbr title="App\Command\GenerateArticlesCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#68"><abbr title="App\Command\GenerateArticlesCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#120"><abbr title="App\Command\GenerateArticlesCommand::ensureTopLevelTags">ensureTopLevelTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#164"><abbr title="App\Command\GenerateArticlesCommand::generateArticle">generateArticle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#230"><abbr title="App\Command\GenerateArticlesCommand::generateRandomText">generateRandomText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#287"><abbr title="App\Command\GenerateArticlesCommand::loadAdminUser">loadAdminUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GeneratePoFilesCommand.php.html#28"><abbr title="App\Command\GeneratePoFilesCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GeneratePoFilesCommand.php.html#71"><abbr title="App\Command\GeneratePoFilesCommand::generatePoContent">generatePoContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#91"><abbr title="App\Command\GenerateProductsCommand::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#105"><abbr title="App\Command\GenerateProductsCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#164"><abbr title="App\Command\GenerateProductsCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#265"><abbr title="App\Command\GenerateProductsCommand::parseStatusDistribution">parseStatusDistribution</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#324"><abbr title="App\Command\GenerateProductsCommand::generateProduct">generateProduct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#424"><abbr title="App\Command\GenerateProductsCommand::generateProductDescription">generateProductDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#460"><abbr title="App\Command\GenerateProductsCommand::generatePrice">generatePrice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#493"><abbr title="App\Command\GenerateProductsCommand::generateReliabilityScore">generateReliabilityScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#508"><abbr title="App\Command\GenerateProductsCommand::generateImageReference">generateImageReference</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#525"><abbr title="App\Command\GenerateProductsCommand::generateRandomDate">generateRandomDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#540"><abbr title="App\Command\GenerateProductsCommand::selectRandomTags">selectRandomTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#574"><abbr title="App\Command\GenerateProductsCommand::getRandomItem">getRandomItem</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#585"><abbr title="App\Command\GenerateProductsCommand::loadUsers">loadUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#616"><abbr title="App\Command\GenerateProductsCommand::ensureTags">ensureTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImportProductsCommand.php.html#33"><abbr title="App\Command\ImportProductsCommand::defaultName">defaultName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImportProductsCommand.php.html#43"><abbr title="App\Command\ImportProductsCommand::getDescription">getDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImportProductsCommand.php.html#55"><abbr title="App\Command\ImportProductsCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImportProductsCommand.php.html#78"><abbr title="App\Command\ImportProductsCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InsertSampleDataCommand.php.html#25"><abbr title="App\Command\InsertSampleDataCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InsertSampleDataCommand.php.html#47"><abbr title="App\Command\InsertSampleDataCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InsertSampleDataCommand.php.html#136"><abbr title="App\Command\InsertSampleDataCommand::generateSampleData">generateSampleData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InvestigateArticleCommand.php.html#66"><abbr title="App\Command\InvestigateArticleCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InvestigateArticleCommand.php.html#103"><abbr title="App\Command\InvestigateArticleCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LoadDefault18nCommand.php.html#26"><abbr title="App\Command\LoadDefault18nCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LoadDefault18nCommand.php.html#92"><abbr title="App\Command\LoadDefault18nCommand::parsePoFile">parsePoFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#34"><abbr title="App\Command\LogChecksumCommand::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#46"><abbr title="App\Command\LogChecksumCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#81"><abbr title="App\Command\LogChecksumCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#115"><abbr title="App\Command\LogChecksumCommand::generateChecksums">generateChecksums</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#143"><abbr title="App\Command\LogChecksumCommand::verifyChecksums">verifyChecksums</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#193"><abbr title="App\Command\LogChecksumCommand::generateReport">generateReport</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#215"><abbr title="App\Command\LogChecksumCommand::createBackup">createBackup</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#254"><abbr title="App\Command\LogChecksumCommand::parseAlgorithms">parseAlgorithms</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#268"><abbr title="App\Command\LogChecksumCommand::displayResults">displayResults</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#312"><abbr title="App\Command\LogChecksumCommand::displayVerificationTable">displayVerificationTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#350"><abbr title="App\Command\LogChecksumCommand::displayDetailedVerificationResults">displayDetailedVerificationResults</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#395"><abbr title="App\Command\LogChecksumCommand::displayIntegrityReport">displayIntegrityReport</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#438"><abbr title="App\Command\LogChecksumCommand::getStatusIcon">getStatusIcon</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#455"><abbr title="App\Command\LogChecksumCommand::getStatusDisplayText">getStatusDisplayText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#474"><abbr title="App\Command\LogChecksumCommand::getAlgorithmResultIcon">getAlgorithmResultIcon</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#491"><abbr title="App\Command\LogChecksumCommand::getOverallStatusDisplay">getOverallStatusDisplay</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#508"><abbr title="App\Command\LogChecksumCommand::formatFileSize">formatFileSize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#528"><abbr title="App\Command\LogChecksumCommand::formatDuration">formatDuration</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityCommand.php.html#28"><abbr title="App\Command\ReliabilityCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityCommand.php.html#72"><abbr title="App\Command\ReliabilityCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityCommand.php.html#84"><abbr title="App\Command\ReliabilityCommand::recalculate">recalculate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityCommand.php.html#219"><abbr title="App\Command\ReliabilityCommand::verifyLogs">verifyLogs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ResizeImagesCommand.php.html#70"><abbr title="App\Command\ResizeImagesCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ResizeImagesCommand.php.html#87"><abbr title="App\Command\ResizeImagesCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ResizeImagesCommand.php.html#125"><abbr title="App\Command\ResizeImagesCommand::createImage">createImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SendTestEmailCommand.php.html#29"><abbr title="App\Command\SendTestEmailCommand::defaultName">defaultName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SendTestEmailCommand.php.html#39"><abbr title="App\Command\SendTestEmailCommand::getDescription">getDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SendTestEmailCommand.php.html#51"><abbr title="App\Command\SendTestEmailCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SendTestEmailCommand.php.html#69"><abbr title="App\Command\SendTestEmailCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SimulateAiActivityCommand.php.html#26"><abbr title="App\Command\SimulateAiActivityCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SimulateAiActivityCommand.php.html#51"><abbr title="App\Command\SimulateAiActivityCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TestPasswordResetCommand.php.html#32"><abbr title="App\Command\TestPasswordResetCommand::defaultName">defaultName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TestPasswordResetCommand.php.html#42"><abbr title="App\Command\TestPasswordResetCommand::getDescription">getDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TestPasswordResetCommand.php.html#53"><abbr title="App\Command\TestPasswordResetCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TestPasswordResetCommand.php.html#71"><abbr title="App\Command\TestPasswordResetCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TestRateLimitCommand.php.html#24"><abbr title="App\Command\TestRateLimitCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TestRateLimitCommand.php.html#48"><abbr title="App\Command\TestRateLimitCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TestRateLimitCommand.php.html#103"><abbr title="App\Command\TestRateLimitCommand::getBaseUrl">getBaseUrl</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TestRateLimitCommand.php.html#113"><abbr title="App\Command\TestRateLimitCommand::generateRandomIp">generateRandomIp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateI18nCommand.php.html#34"><abbr title="App\Command\TranslateI18nCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateI18nCommand.php.html#72"><abbr title="App\Command\TranslateI18nCommand::queueBatch">queueBatch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VerifyBulkLogsCommand.php.html#25"><abbr title="App\Command\VerifyBulkLogsCommand::buildOptionParser">buildOptionParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VerifyBulkLogsCommand.php.html#59"><abbr title="App\Command\VerifyBulkLogsCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VerifyBulkLogsCommand.php.html#148"><abbr title="App\Command\VerifyBulkLogsCommand::verifyLogLine">verifyLogLine</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VerifyBulkLogsCommand.php.html#214"><abbr title="App\Command\VerifyBulkLogsCommand::repairLogFile">repairLogFile</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="DefaultDataImportCommand.php.html#173"><abbr title="App\Command\DefaultDataImportCommand::importTableData">importTableData</abbr></a></td><td class="text-right">1122</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#105"><abbr title="App\Command\ExportCodeCommand::execute">execute</abbr></a></td><td class="text-right">992</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#97"><abbr title="App\Command\BatchImageGenerationCommand::execute">execute</abbr></a></td><td class="text-right">506</td></tr>
+       <tr><td><a href="ImportProductsCommand.php.html#78"><abbr title="App\Command\ImportProductsCommand::execute">execute</abbr></a></td><td class="text-right">506</td></tr>
+       <tr><td><a href="DefaultDataImportCommand.php.html#69"><abbr title="App\Command\DefaultDataImportCommand::execute">execute</abbr></a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="ReliabilityCommand.php.html#219"><abbr title="App\Command\ReliabilityCommand::verifyLogs">verifyLogs</abbr></a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#164"><abbr title="App\Command\GenerateProductsCommand::execute">execute</abbr></a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="InsertSampleDataCommand.php.html#47"><abbr title="App\Command\InsertSampleDataCommand::execute">execute</abbr></a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="ReliabilityCommand.php.html#84"><abbr title="App\Command\ReliabilityCommand::recalculate">recalculate</abbr></a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="DefaultDataExportCommand.php.html#63"><abbr title="App\Command\DefaultDataExportCommand::execute">execute</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#249"><abbr title="App\Command\BatchProductImageGenerationCommand::displayStatistics">displayStatistics</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="CreateUserCommand.php.html#74"><abbr title="App\Command\CreateUserCommand::execute">execute</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="InvestigateArticleCommand.php.html#103"><abbr title="App\Command\InvestigateArticleCommand::execute">execute</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="LoadDefault18nCommand.php.html#92"><abbr title="App\Command\LoadDefault18nCommand::parsePoFile">parsePoFile</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#294"><abbr title="App\Command\BatchProductImageGenerationCommand::processProductsBatch">processProductsBatch</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="DefaultDataExportCommand.php.html#183"><abbr title="App\Command\DefaultDataExportCommand::exportTableData">exportTableData</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#324"><abbr title="App\Command\GenerateProductsCommand::generateProduct">generateProduct</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#350"><abbr title="App\Command\LogChecksumCommand::displayDetailedVerificationResults">displayDetailedVerificationResults</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="VerifyBulkLogsCommand.php.html#59"><abbr title="App\Command\VerifyBulkLogsCommand::execute">execute</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="VerifyBulkLogsCommand.php.html#148"><abbr title="App\Command\VerifyBulkLogsCommand::verifyLogLine">verifyLogLine</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="DefaultDataExportCommand.php.html#142"><abbr title="App\Command\DefaultDataExportCommand::_exportAllTables">_exportAllTables</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#230"><abbr title="App\Command\GenerateArticlesCommand::generateRandomText">generateRandomText</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#268"><abbr title="App\Command\LogChecksumCommand::displayResults">displayResults</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="DefaultDataImportCommand.php.html#335"><abbr title="App\Command\DefaultDataImportCommand::toggleMySqlForeignKeyChecks">toggleMySqlForeignKeyChecks</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#68"><abbr title="App\Command\GenerateArticlesCommand::execute">execute</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#265"><abbr title="App\Command\GenerateProductsCommand::parseStatusDistribution">parseStatusDistribution</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#312"><abbr title="App\Command\LogChecksumCommand::displayVerificationTable">displayVerificationTable</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="SimulateAiActivityCommand.php.html#51"><abbr title="App\Command\SimulateAiActivityCommand::execute">execute</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#197"><abbr title="App\Command\BatchProductImageGenerationCommand::buildProductQuery">buildProductQuery</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#369"><abbr title="App\Command\BatchProductImageGenerationCommand::processBatch">processBatch</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#120"><abbr title="App\Command\GenerateArticlesCommand::ensureTopLevelTags">ensureTopLevelTags</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#81"><abbr title="App\Command\LogChecksumCommand::execute">execute</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#143"><abbr title="App\Command\LogChecksumCommand::verifyChecksums">verifyChecksums</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#215"><abbr title="App\Command\LogChecksumCommand::createBackup">createBackup</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ResizeImagesCommand.php.html#125"><abbr title="App\Command\ResizeImagesCommand::createImage">createImage</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="VerifyBulkLogsCommand.php.html#214"><abbr title="App\Command\VerifyBulkLogsCommand::repairLogFile">repairLogFile</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#275"><abbr title="App\Command\BatchImageGenerationCommand::displayCandidateArticles">displayCandidateArticles</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#121"><abbr title="App\Command\BatchProductImageGenerationCommand::execute">execute</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#395"><abbr title="App\Command\LogChecksumCommand::displayIntegrityReport">displayIntegrityReport</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ResizeImagesCommand.php.html#87"><abbr title="App\Command\ResizeImagesCommand::execute">execute</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="TestPasswordResetCommand.php.html#71"><abbr title="App\Command\TestPasswordResetCommand::execute">execute</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="TranslateI18nCommand.php.html#34"><abbr title="App\Command\TranslateI18nCommand::execute">execute</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#305"><abbr title="App\Command\BatchImageGenerationCommand::displayResults">displayResults</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#164"><abbr title="App\Command\GenerateArticlesCommand::generateArticle">generateArticle</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="GeneratePoFilesCommand.php.html#28"><abbr title="App\Command\GeneratePoFilesCommand::execute">execute</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#540"><abbr title="App\Command\GenerateProductsCommand::selectRandomTags">selectRandomTags</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#616"><abbr title="App\Command\GenerateProductsCommand::ensureTags">ensureTags</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="LoadDefault18nCommand.php.html#26"><abbr title="App\Command\LoadDefault18nCommand::execute">execute</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#528"><abbr title="App\Command\LogChecksumCommand::formatDuration">formatDuration</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#240"><abbr title="App\Command\BatchImageGenerationCommand::findCandidateArticles">findCandidateArticles</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="CreateUserCommand.php.html#192"><abbr title="App\Command\CreateUserCommand::updateUserPassword">updateUserPassword</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#283"><abbr title="App\Command\ExportCodeCommand::writeMetadata">writeMetadata</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#343"><abbr title="App\Command\ExportCodeCommand::writeFileContent">writeFileContent</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="InsertSampleDataCommand.php.html#136"><abbr title="App\Command\InsertSampleDataCommand::generateSampleData">generateSampleData</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#508"><abbr title="App\Command\LogChecksumCommand::formatFileSize">formatFileSize</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TestRateLimitCommand.php.html#48"><abbr title="App\Command\TestRateLimitCommand::execute">execute</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#329"><abbr title="App\Command\BatchImageGenerationCommand::displayStatistics">displayStatistics</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="BatchImageGenerationCommand.php.html#367"><abbr title="App\Command\BatchImageGenerationCommand::isValidDate">isValidDate</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="BatchProductImageGenerationCommand.php.html#166"><abbr title="App\Command\BatchProductImageGenerationCommand::parseOptions">parseOptions</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CheckTableExistsCommand.php.html#42"><abbr title="App\Command\CheckTableExistsCommand::execute">execute</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CreateUserCommand.php.html#133"><abbr title="App\Command\CreateUserCommand::createUser">createUser</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#308"><abbr title="App\Command\ExportCodeCommand::writeSectionHeader">writeSectionHeader</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ExportCodeCommand.php.html#325"><abbr title="App\Command\ExportCodeCommand::writeSectionFooter">writeSectionFooter</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="GenerateArticlesCommand.php.html#287"><abbr title="App\Command\GenerateArticlesCommand::loadAdminUser">loadAdminUser</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="GeneratePoFilesCommand.php.html#71"><abbr title="App\Command\GeneratePoFilesCommand::generatePoContent">generatePoContent</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="GenerateProductsCommand.php.html#585"><abbr title="App\Command\GenerateProductsCommand::loadUsers">loadUsers</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#115"><abbr title="App\Command\LogChecksumCommand::generateChecksums">generateChecksums</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="LogChecksumCommand.php.html#193"><abbr title="App\Command\LogChecksumCommand::generateReport">generateReport</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="SendTestEmailCommand.php.html#69"><abbr title="App\Command\SendTestEmailCommand::execute">execute</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.26</a> and <a href="https://phpunit.de/">PHPUnit 10.5.55</a> at Tue Oct 7 15:04:30 CDT 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([23,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([118,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,40,"<a href=\"BatchImageGenerationCommand.php.html#21\">App\\Command\\BatchImageGenerationCommand<\/a>"],[0,43,"<a href=\"BatchProductImageGenerationCommand.php.html#28\">App\\Command\\BatchProductImageGenerationCommand<\/a>"],[0,3,"<a href=\"CheckTableExistsCommand.php.html#15\">App\\Command\\CheckTableExistsCommand<\/a>"],[0,17,"<a href=\"CreateUserCommand.php.html#17\">App\\Command\\CreateUserCommand<\/a>"],[0,30,"<a href=\"DefaultDataExportCommand.php.html#23\">App\\Command\\DefaultDataExportCommand<\/a>"],[0,60,"<a href=\"DefaultDataImportCommand.php.html#26\">App\\Command\\DefaultDataImportCommand<\/a>"],[0,43,"<a href=\"ExportCodeCommand.php.html#23\">App\\Command\\ExportCodeCommand<\/a>"],[0,29,"<a href=\"GenerateArticlesCommand.php.html#18\">App\\Command\\GenerateArticlesCommand<\/a>"],[0,6,"<a href=\"GeneratePoFilesCommand.php.html#19\">App\\Command\\GeneratePoFilesCommand<\/a>"],[0,47,"<a href=\"GenerateProductsCommand.php.html#25\">App\\Command\\GenerateProductsCommand<\/a>"],[0,25,"<a href=\"ImportProductsCommand.php.html#19\">App\\Command\\ImportProductsCommand<\/a>"],[0,17,"<a href=\"InsertSampleDataCommand.php.html#20\">App\\Command\\InsertSampleDataCommand<\/a>"],[0,12,"<a href=\"InvestigateArticleCommand.php.html#54\">App\\Command\\InvestigateArticleCommand<\/a>"],[0,15,"<a href=\"LoadDefault18nCommand.php.html#17\">App\\Command\\LoadDefault18nCommand<\/a>"],[0,65,"<a href=\"LogChecksumCommand.php.html#24\">App\\Command\\LogChecksumCommand<\/a>"],[0,31,"<a href=\"ReliabilityCommand.php.html#20\">App\\Command\\ReliabilityCommand<\/a>"],[0,12,"<a href=\"ResizeImagesCommand.php.html#20\">App\\Command\\ResizeImagesCommand<\/a>"],[0,5,"<a href=\"SendTestEmailCommand.php.html#15\">App\\Command\\SendTestEmailCommand<\/a>"],[0,8,"<a href=\"SimulateAiActivityCommand.php.html#17\">App\\Command\\SimulateAiActivityCommand<\/a>"],[0,8,"<a href=\"TestPasswordResetCommand.php.html#18\">App\\Command\\TestPasswordResetCommand<\/a>"],[0,6,"<a href=\"TestRateLimitCommand.php.html#16\">App\\Command\\TestRateLimitCommand<\/a>"],[0,6,"<a href=\"TranslateI18nCommand.php.html#18\">App\\Command\\TranslateI18nCommand<\/a>"],[0,25,"<a href=\"VerifyBulkLogsCommand.php.html#15\">App\\Command\\VerifyBulkLogsCommand<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"BatchImageGenerationCommand.php.html#33\">App\\Command\\BatchImageGenerationCommand::initialize<\/a>"],[0,1,"<a href=\"BatchImageGenerationCommand.php.html#45\">App\\Command\\BatchImageGenerationCommand::buildOptionParser<\/a>"],[0,22,"<a href=\"BatchImageGenerationCommand.php.html#97\">App\\Command\\BatchImageGenerationCommand::execute<\/a>"],[0,3,"<a href=\"BatchImageGenerationCommand.php.html#240\">App\\Command\\BatchImageGenerationCommand::findCandidateArticles<\/a>"],[0,5,"<a href=\"BatchImageGenerationCommand.php.html#275\">App\\Command\\BatchImageGenerationCommand::displayCandidateArticles<\/a>"],[0,4,"<a href=\"BatchImageGenerationCommand.php.html#305\">App\\Command\\BatchImageGenerationCommand::displayResults<\/a>"],[0,2,"<a href=\"BatchImageGenerationCommand.php.html#329\">App\\Command\\BatchImageGenerationCommand::displayStatistics<\/a>"],[0,2,"<a href=\"BatchImageGenerationCommand.php.html#367\">App\\Command\\BatchImageGenerationCommand::isValidDate<\/a>"],[0,1,"<a href=\"BatchProductImageGenerationCommand.php.html#56\">App\\Command\\BatchProductImageGenerationCommand::buildOptionParser<\/a>"],[0,5,"<a href=\"BatchProductImageGenerationCommand.php.html#121\">App\\Command\\BatchProductImageGenerationCommand::execute<\/a>"],[0,2,"<a href=\"BatchProductImageGenerationCommand.php.html#166\">App\\Command\\BatchProductImageGenerationCommand::parseOptions<\/a>"],[0,6,"<a href=\"BatchProductImageGenerationCommand.php.html#197\">App\\Command\\BatchProductImageGenerationCommand::buildProductQuery<\/a>"],[0,11,"<a href=\"BatchProductImageGenerationCommand.php.html#249\">App\\Command\\BatchProductImageGenerationCommand::displayStatistics<\/a>"],[0,9,"<a href=\"BatchProductImageGenerationCommand.php.html#294\">App\\Command\\BatchProductImageGenerationCommand::processProductsBatch<\/a>"],[0,6,"<a href=\"BatchProductImageGenerationCommand.php.html#369\">App\\Command\\BatchProductImageGenerationCommand::processBatch<\/a>"],[0,1,"<a href=\"BatchProductImageGenerationCommand.php.html#424\">App\\Command\\BatchProductImageGenerationCommand::getQueuePriority<\/a>"],[0,1,"<a href=\"BatchProductImageGenerationCommand.php.html#438\">App\\Command\\BatchProductImageGenerationCommand::getCommandName<\/a>"],[0,1,"<a href=\"BatchProductImageGenerationCommand.php.html#451\">App\\Command\\BatchProductImageGenerationCommand::displayHelp<\/a>"],[0,1,"<a href=\"CheckTableExistsCommand.php.html#23\">App\\Command\\CheckTableExistsCommand::buildOptionParser<\/a>"],[0,2,"<a href=\"CheckTableExistsCommand.php.html#42\">App\\Command\\CheckTableExistsCommand::execute<\/a>"],[0,1,"<a href=\"CreateUserCommand.php.html#27\">App\\Command\\CreateUserCommand::buildOptionParser<\/a>"],[0,11,"<a href=\"CreateUserCommand.php.html#74\">App\\Command\\CreateUserCommand::execute<\/a>"],[0,2,"<a href=\"CreateUserCommand.php.html#133\">App\\Command\\CreateUserCommand::createUser<\/a>"],[0,3,"<a href=\"CreateUserCommand.php.html#192\">App\\Command\\CreateUserCommand::updateUserPassword<\/a>"],[0,1,"<a href=\"DefaultDataExportCommand.php.html#31\">App\\Command\\DefaultDataExportCommand::buildOptionParser<\/a>"],[0,12,"<a href=\"DefaultDataExportCommand.php.html#63\">App\\Command\\DefaultDataExportCommand::execute<\/a>"],[0,8,"<a href=\"DefaultDataExportCommand.php.html#142\">App\\Command\\DefaultDataExportCommand::_exportAllTables<\/a>"],[0,9,"<a href=\"DefaultDataExportCommand.php.html#183\">App\\Command\\DefaultDataExportCommand::exportTableData<\/a>"],[0,1,"<a href=\"DefaultDataImportCommand.php.html#34\">App\\Command\\DefaultDataImportCommand::buildOptionParser<\/a>"],[0,19,"<a href=\"DefaultDataImportCommand.php.html#69\">App\\Command\\DefaultDataImportCommand::execute<\/a>"],[0,33,"<a href=\"DefaultDataImportCommand.php.html#173\">App\\Command\\DefaultDataImportCommand::importTableData<\/a>"],[0,7,"<a href=\"DefaultDataImportCommand.php.html#335\">App\\Command\\DefaultDataImportCommand::toggleMySqlForeignKeyChecks<\/a>"],[0,1,"<a href=\"ExportCodeCommand.php.html#38\">App\\Command\\ExportCodeCommand::getDirectoryTypeMappings<\/a>"],[0,1,"<a href=\"ExportCodeCommand.php.html#71\">App\\Command\\ExportCodeCommand::buildOptionParser<\/a>"],[0,31,"<a href=\"ExportCodeCommand.php.html#105\">App\\Command\\ExportCodeCommand::execute<\/a>"],[0,3,"<a href=\"ExportCodeCommand.php.html#283\">App\\Command\\ExportCodeCommand::writeMetadata<\/a>"],[0,2,"<a href=\"ExportCodeCommand.php.html#308\">App\\Command\\ExportCodeCommand::writeSectionHeader<\/a>"],[0,2,"<a href=\"ExportCodeCommand.php.html#325\">App\\Command\\ExportCodeCommand::writeSectionFooter<\/a>"],[0,3,"<a href=\"ExportCodeCommand.php.html#343\">App\\Command\\ExportCodeCommand::writeFileContent<\/a>"],[0,1,"<a href=\"GenerateArticlesCommand.php.html#35\">App\\Command\\GenerateArticlesCommand::initialize<\/a>"],[0,1,"<a href=\"GenerateArticlesCommand.php.html#48\">App\\Command\\GenerateArticlesCommand::buildOptionParser<\/a>"],[0,7,"<a href=\"GenerateArticlesCommand.php.html#68\">App\\Command\\GenerateArticlesCommand::execute<\/a>"],[0,6,"<a href=\"GenerateArticlesCommand.php.html#120\">App\\Command\\GenerateArticlesCommand::ensureTopLevelTags<\/a>"],[0,4,"<a href=\"GenerateArticlesCommand.php.html#164\">App\\Command\\GenerateArticlesCommand::generateArticle<\/a>"],[0,8,"<a href=\"GenerateArticlesCommand.php.html#230\">App\\Command\\GenerateArticlesCommand::generateRandomText<\/a>"],[0,2,"<a href=\"GenerateArticlesCommand.php.html#287\">App\\Command\\GenerateArticlesCommand::loadAdminUser<\/a>"],[0,4,"<a href=\"GeneratePoFilesCommand.php.html#28\">App\\Command\\GeneratePoFilesCommand::execute<\/a>"],[0,2,"<a href=\"GeneratePoFilesCommand.php.html#71\">App\\Command\\GeneratePoFilesCommand::generatePoContent<\/a>"],[0,1,"<a href=\"GenerateProductsCommand.php.html#91\">App\\Command\\GenerateProductsCommand::initialize<\/a>"],[0,1,"<a href=\"GenerateProductsCommand.php.html#105\">App\\Command\\GenerateProductsCommand::buildOptionParser<\/a>"],[0,13,"<a href=\"GenerateProductsCommand.php.html#164\">App\\Command\\GenerateProductsCommand::execute<\/a>"],[0,7,"<a href=\"GenerateProductsCommand.php.html#265\">App\\Command\\GenerateProductsCommand::parseStatusDistribution<\/a>"],[0,9,"<a href=\"GenerateProductsCommand.php.html#324\">App\\Command\\GenerateProductsCommand::generateProduct<\/a>"],[0,1,"<a href=\"GenerateProductsCommand.php.html#424\">App\\Command\\GenerateProductsCommand::generateProductDescription<\/a>"],[0,1,"<a href=\"GenerateProductsCommand.php.html#460\">App\\Command\\GenerateProductsCommand::generatePrice<\/a>"],[0,1,"<a href=\"GenerateProductsCommand.php.html#493\">App\\Command\\GenerateProductsCommand::generateReliabilityScore<\/a>"],[0,1,"<a href=\"GenerateProductsCommand.php.html#508\">App\\Command\\GenerateProductsCommand::generateImageReference<\/a>"],[0,1,"<a href=\"GenerateProductsCommand.php.html#525\">App\\Command\\GenerateProductsCommand::generateRandomDate<\/a>"],[0,4,"<a href=\"GenerateProductsCommand.php.html#540\">App\\Command\\GenerateProductsCommand::selectRandomTags<\/a>"],[0,1,"<a href=\"GenerateProductsCommand.php.html#574\">App\\Command\\GenerateProductsCommand::getRandomItem<\/a>"],[0,2,"<a href=\"GenerateProductsCommand.php.html#585\">App\\Command\\GenerateProductsCommand::loadUsers<\/a>"],[0,4,"<a href=\"GenerateProductsCommand.php.html#616\">App\\Command\\GenerateProductsCommand::ensureTags<\/a>"],[0,1,"<a href=\"ImportProductsCommand.php.html#33\">App\\Command\\ImportProductsCommand::defaultName<\/a>"],[0,1,"<a href=\"ImportProductsCommand.php.html#43\">App\\Command\\ImportProductsCommand::getDescription<\/a>"],[0,1,"<a href=\"ImportProductsCommand.php.html#55\">App\\Command\\ImportProductsCommand::buildOptionParser<\/a>"],[0,22,"<a href=\"ImportProductsCommand.php.html#78\">App\\Command\\ImportProductsCommand::execute<\/a>"],[0,1,"<a href=\"InsertSampleDataCommand.php.html#25\">App\\Command\\InsertSampleDataCommand::buildOptionParser<\/a>"],[0,13,"<a href=\"InsertSampleDataCommand.php.html#47\">App\\Command\\InsertSampleDataCommand::execute<\/a>"],[0,3,"<a href=\"InsertSampleDataCommand.php.html#136\">App\\Command\\InsertSampleDataCommand::generateSampleData<\/a>"],[0,1,"<a href=\"InvestigateArticleCommand.php.html#66\">App\\Command\\InvestigateArticleCommand::buildOptionParser<\/a>"],[0,11,"<a href=\"InvestigateArticleCommand.php.html#103\">App\\Command\\InvestigateArticleCommand::execute<\/a>"],[0,4,"<a href=\"LoadDefault18nCommand.php.html#26\">App\\Command\\LoadDefault18nCommand::execute<\/a>"],[0,11,"<a href=\"LoadDefault18nCommand.php.html#92\">App\\Command\\LoadDefault18nCommand::parsePoFile<\/a>"],[0,1,"<a href=\"LogChecksumCommand.php.html#34\">App\\Command\\LogChecksumCommand::initialize<\/a>"],[0,1,"<a href=\"LogChecksumCommand.php.html#46\">App\\Command\\LogChecksumCommand::buildOptionParser<\/a>"],[0,6,"<a href=\"LogChecksumCommand.php.html#81\">App\\Command\\LogChecksumCommand::execute<\/a>"],[0,2,"<a href=\"LogChecksumCommand.php.html#115\">App\\Command\\LogChecksumCommand::generateChecksums<\/a>"],[0,6,"<a href=\"LogChecksumCommand.php.html#143\">App\\Command\\LogChecksumCommand::verifyChecksums<\/a>"],[0,2,"<a href=\"LogChecksumCommand.php.html#193\">App\\Command\\LogChecksumCommand::generateReport<\/a>"],[0,6,"<a href=\"LogChecksumCommand.php.html#215\">App\\Command\\LogChecksumCommand::createBackup<\/a>"],[0,1,"<a href=\"LogChecksumCommand.php.html#254\">App\\Command\\LogChecksumCommand::parseAlgorithms<\/a>"],[0,8,"<a href=\"LogChecksumCommand.php.html#268\">App\\Command\\LogChecksumCommand::displayResults<\/a>"],[0,7,"<a href=\"LogChecksumCommand.php.html#312\">App\\Command\\LogChecksumCommand::displayVerificationTable<\/a>"],[0,9,"<a href=\"LogChecksumCommand.php.html#350\">App\\Command\\LogChecksumCommand::displayDetailedVerificationResults<\/a>"],[0,5,"<a href=\"LogChecksumCommand.php.html#395\">App\\Command\\LogChecksumCommand::displayIntegrityReport<\/a>"],[0,1,"<a href=\"LogChecksumCommand.php.html#438\">App\\Command\\LogChecksumCommand::getStatusIcon<\/a>"],[0,1,"<a href=\"LogChecksumCommand.php.html#455\">App\\Command\\LogChecksumCommand::getStatusDisplayText<\/a>"],[0,1,"<a href=\"LogChecksumCommand.php.html#474\">App\\Command\\LogChecksumCommand::getAlgorithmResultIcon<\/a>"],[0,1,"<a href=\"LogChecksumCommand.php.html#491\">App\\Command\\LogChecksumCommand::getOverallStatusDisplay<\/a>"],[0,3,"<a href=\"LogChecksumCommand.php.html#508\">App\\Command\\LogChecksumCommand::formatFileSize<\/a>"],[0,4,"<a href=\"LogChecksumCommand.php.html#528\">App\\Command\\LogChecksumCommand::formatDuration<\/a>"],[0,1,"<a href=\"ReliabilityCommand.php.html#28\">App\\Command\\ReliabilityCommand::buildOptionParser<\/a>"],[0,1,"<a href=\"ReliabilityCommand.php.html#72\">App\\Command\\ReliabilityCommand::execute<\/a>"],[0,13,"<a href=\"ReliabilityCommand.php.html#84\">App\\Command\\ReliabilityCommand::recalculate<\/a>"],[0,16,"<a href=\"ReliabilityCommand.php.html#219\">App\\Command\\ReliabilityCommand::verifyLogs<\/a>"],[0,1,"<a href=\"ResizeImagesCommand.php.html#70\">App\\Command\\ResizeImagesCommand::buildOptionParser<\/a>"],[0,5,"<a href=\"ResizeImagesCommand.php.html#87\">App\\Command\\ResizeImagesCommand::execute<\/a>"],[0,6,"<a href=\"ResizeImagesCommand.php.html#125\">App\\Command\\ResizeImagesCommand::createImage<\/a>"],[0,1,"<a href=\"SendTestEmailCommand.php.html#29\">App\\Command\\SendTestEmailCommand::defaultName<\/a>"],[0,1,"<a href=\"SendTestEmailCommand.php.html#39\">App\\Command\\SendTestEmailCommand::getDescription<\/a>"],[0,1,"<a href=\"SendTestEmailCommand.php.html#51\">App\\Command\\SendTestEmailCommand::buildOptionParser<\/a>"],[0,2,"<a href=\"SendTestEmailCommand.php.html#69\">App\\Command\\SendTestEmailCommand::execute<\/a>"],[0,1,"<a href=\"SimulateAiActivityCommand.php.html#26\">App\\Command\\SimulateAiActivityCommand::buildOptionParser<\/a>"],[0,7,"<a href=\"SimulateAiActivityCommand.php.html#51\">App\\Command\\SimulateAiActivityCommand::execute<\/a>"],[0,1,"<a href=\"TestPasswordResetCommand.php.html#32\">App\\Command\\TestPasswordResetCommand::defaultName<\/a>"],[0,1,"<a href=\"TestPasswordResetCommand.php.html#42\">App\\Command\\TestPasswordResetCommand::getDescription<\/a>"],[0,1,"<a href=\"TestPasswordResetCommand.php.html#53\">App\\Command\\TestPasswordResetCommand::buildOptionParser<\/a>"],[0,5,"<a href=\"TestPasswordResetCommand.php.html#71\">App\\Command\\TestPasswordResetCommand::execute<\/a>"],[0,1,"<a href=\"TestRateLimitCommand.php.html#24\">App\\Command\\TestRateLimitCommand::buildOptionParser<\/a>"],[0,3,"<a href=\"TestRateLimitCommand.php.html#48\">App\\Command\\TestRateLimitCommand::execute<\/a>"],[0,1,"<a href=\"TestRateLimitCommand.php.html#103\">App\\Command\\TestRateLimitCommand::getBaseUrl<\/a>"],[0,1,"<a href=\"TestRateLimitCommand.php.html#113\">App\\Command\\TestRateLimitCommand::generateRandomIp<\/a>"],[0,5,"<a href=\"TranslateI18nCommand.php.html#34\">App\\Command\\TranslateI18nCommand::execute<\/a>"],[0,1,"<a href=\"TranslateI18nCommand.php.html#72\">App\\Command\\TranslateI18nCommand::queueBatch<\/a>"],[0,1,"<a href=\"VerifyBulkLogsCommand.php.html#25\">App\\Command\\VerifyBulkLogsCommand::buildOptionParser<\/a>"],[0,9,"<a href=\"VerifyBulkLogsCommand.php.html#59\">App\\Command\\VerifyBulkLogsCommand::execute<\/a>"],[0,9,"<a href=\"VerifyBulkLogsCommand.php.html#148\">App\\Command\\VerifyBulkLogsCommand::verifyLogLine<\/a>"],[0,6,"<a href=\"VerifyBulkLogsCommand.php.html#214\">App\\Command\\VerifyBulkLogsCommand::repairLogFile<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

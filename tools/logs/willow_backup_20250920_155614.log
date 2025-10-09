@@ -1,0 +1,8 @@
+[2025-09-20 15:56:14] Loading environment from /Volumes/1TB_DAVINCI/docker/willow/tools/scp_backup.env
+[2025-09-20 15:56:14] Environment successfully loaded from .env file
+[2025-09-20 15:56:14] Source: /Volumes/1TB_DAVINCI/docker/willow
+[2025-09-20 15:56:14] Remote: willowcms@209.38.48.84:/home/willowcms/willow (port 22)
+[2025-09-20 15:56:15] Estimated size: 10G
+[2025-09-20 15:56:15] Creating compressed archive with zstd: /Volumes/1TB_DAVINCI/docker/willow/tools/archives/willow_20250920_155615.tar.zst
+/*stdin*\            : 94.21%   (  19.7 GiB =>   18.5 GiB, /Volumes/1TB_DAVINCI/docker/willow/tools/archives/willow_20250920_155615.tar.zst) 
+[2025-09-20 16:17:48] SHA256: 5cff52c90694d6d447d812691e11573f3c02258c255c921d0b58adb08e170311

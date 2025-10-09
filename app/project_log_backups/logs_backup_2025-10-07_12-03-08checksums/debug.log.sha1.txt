@@ -1,0 +1,11 @@
+{
+    "file": "debug.log",
+    "algorithm": "sha1",
+    "hash": "594f962e4af9f360799745cd12dd6146a7683d73",
+    "timestamp": "2025-09-06 19:44:31",
+    "file_stats": {
+        "size": 3156791,
+        "modified": 1757182361,
+        "permissions": "0755"
+    }
+}

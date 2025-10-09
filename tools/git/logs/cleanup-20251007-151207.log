@@ -1,0 +1,15 @@
+[0;36mℹ[0m  Running analysis first...
+[0;36mℹ[0m  Analyzing branches...
+[0;32m✓[0m  Analysis complete. Report saved to: /Volumes/1TB_DAVINCI/docker/willow/tools/git/reports/branch-analysis-20251007-151207.txt
+[0;36mℹ[0m  Processing merged branches...
+[0;32m✓[0m  Created backup tag: backup/chore-organize-tests-20251007-151207
+[0;32m✓[0m  Deleted: chore/organize-tests (backup: [0;32m✓[0m  Created backup tag: backup/chore-organize-tests-20251007-151207
+backup/chore-organize-tests-20251007-151207)
+[0;32m✓[0m  Created backup tag: backup/chore-vendor-cleanup-20251007-151207
+[0;32m✓[0m  Deleted: chore/vendor-cleanup (backup: [0;32m✓[0m  Created backup tag: backup/chore-vendor-cleanup-20251007-151207
+backup/chore-vendor-cleanup-20251007-151207)
+[0;32m✓[0m  Created backup tag: backup/feat-quiz-routing-admin-tabs-ai-20251007-151207
+[0;32m✓[0m  Deleted: feat/quiz-routing-admin-tabs-ai (backup: [0;32m✓[0m  Created backup tag: backup/feat-quiz-routing-admin-tabs-ai-20251007-151207
+backup/feat-quiz-routing-admin-tabs-ai-20251007-151207)
+[0;32m✓[0m  Operation complete!
+[0;36mℹ[0m  Log file: /Volumes/1TB_DAVINCI/docker/willow/tools/git/logs/cleanup-20251007-151207.log

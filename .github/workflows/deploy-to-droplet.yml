@@ -16,6 +16,7 @@ env:
   APP_KEY: ${{ secrets.APP_KEY }}
   MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
   JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
 
 jobs:
   deploy:
@@ -52,12 +53,20 @@ jobs:
         MYSQL_ROOT_PASSWORD=${{ env.MYSQL_ROOT_PASSWORD }}
         APP_KEY=${{ env.APP_KEY }}
         JWT_SECRET=${{ env.JWT_SECRET }}
+        REDIS_PASSWORD=${{ env.REDIS_PASSWORD }}
         APP_ENV=production
         APP_DEBUG=false
         APP_URL=http://${{ env.DROPLET_IP }}
         DOCKER_PLATFORM=linux/amd64
         USER_ID=1000
         GROUP_ID=1000
+        # CakePHP Database Config
+        DB_HOST=db
+        DB_PORT=3306
+        # Redis Config
+        REDIS_HOST=redis
+        REDIS_PORT=6379
+        REDIS_DATABASE=0
         EOF
     
     # Step 4: Make scripts executable

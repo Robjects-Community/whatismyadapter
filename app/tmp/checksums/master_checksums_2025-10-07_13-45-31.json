@@ -1,0 +1,30 @@
+{
+    "generated_at": "2025-10-07 13:45:31",
+    "log_directory": "\/var\/www\/html\/logs\/",
+    "algorithms_used": [
+        "sha256",
+        "md5",
+        "sha1"
+    ],
+    "total_files": 2,
+    "checksums": {
+        "database_log_errors.log": {
+            "sha256": "cf6a003253d45a0e63db85aa5a11205a5f88d94e2ca5f1817ddb8da7666571da",
+            "md5": "9c0f8f4936533284bf1152841bdf7a63",
+            "file_stats": {
+                "size": 2970,
+                "modified": 1759862731,
+                "permissions": "0644"
+            }
+        },
+        "test_checksum.log": {
+            "sha256": "f20bb757432bc5e8316cf3e4776f89c9a8cf27d972f9b606180127750de6e087",
+            "md5": "7466e0b5ea7f3a4a657be8d75556cb17",
+            "file_stats": {
+                "size": 13,
+                "modified": 1759862731,
+                "permissions": "0644"
+            }
+        }
+    }
+}

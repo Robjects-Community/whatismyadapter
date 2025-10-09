@@ -1,0 +1,222 @@
+╔════════════════════════════════════════════════════════════════╗
+║         Branch Analysis Report                                 ║
+║         Generated: Tue Oct  7 15:12:15 CDT 2025                         ║
+╚════════════════════════════════════════════════════════════════╝
+
+Current Branch: portainer-stack
+Project: WillowCMS
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PROTECTED BRANCHES (never delete): 6
+────────────────────────────────────────────────────────────────
+  • demo
+    Author: Mike | Last: 2025-09-19 18:14:49 -0500
+  • main
+    Author: Mike | Last: 2025-09-20 01:41:31 -0500
+  • main-clean
+    Author: Mike | Last: 2025-10-04 04:10:38 -0500
+  • main-prototype
+    Author: Mike | Last: 2025-09-02 21:12:12 -0500
+  • main-server
+    Author: Mike | Last: 2025-09-17 02:03:11 -0500
+  • master
+    Author: Mike | Last: 2025-09-17 02:03:17 -0500
+
+MERGED BRANCHES (safe to delete): 3
+────────────────────────────────────────────────────────────────
+  • chore/organize-tests
+    Author: Mike | Age: 3 days | Last: 2025-10-03 22:32:33 -0500
+  • chore/vendor-cleanup
+    Author: Mike | Age: 3 days | Last: 2025-10-03 22:40:19 -0500
+  • feat/quiz-routing-admin-tabs-ai
+    Author: Mike | Age: 17 days | Last: 2025-09-20 15:07:58 -0500
+
+STALE BRANCHES (28+ days, not merged): 53
+────────────────────────────────────────────────────────────────
+  • 1.5.0-beta
+    Author: mndeaves | Age: 123 days | Unique commits: YES
+    Last: 2025-06-06 17:23:05 +0100
+  • chore/psr4-autoload-cleanup
+    Author: Mike | Age: 31 days | Unique commits: YES
+    Last: 2025-09-05 21:10:58 -0500
+  • dev
+    Author: Mike | Age: 88 days | Unique commits: YES
+    Last: 2025-07-11 00:44:37 -0500
+  • dev-feat-product-full-field-listing_DATABASE_POST_MIGRATION_FILE-v2
+    Author: Mike | Age: 36 days | Unique commits: YES
+    Last: 2025-08-31 18:19:42 -0500
+  • dev-feat-product-full-field-listing_DATABASE_PRE_MIGRATION_FILE-v1
+    Author: Mike | Age: 36 days | Unique commits: YES
+    Last: 2025-08-31 17:19:52 -0500
+  • dev-feat-product-full-field-listing_UI_ONLY
+    Author: Mike | Age: 36 days | Unique commits: YES
+    Last: 2025-08-31 16:25:07 -0500
+  • dev-feat-product-full-field-listing_UI_ONLY-v0
+    Author: Mike | Age: 36 days | Unique commits: YES
+    Last: 2025-08-31 16:52:48 -0500
+  • dev-feat-product-reliability
+    Author: Mike | Age: 36 days | Unique commits: YES
+    Last: 2025-08-31 16:25:07 -0500
+  • dev-main
+    Author: Mike | Age: 54 days | Unique commits: YES
+    Last: 2025-08-13 20:08:59 -0500
+  • feat/add-footer-tabs
+    Author: Mike | Age: 31 days | Unique commits: YES
+    Last: 2025-09-06 11:20:49 -0500
+  • feat/deploy-ocean
+    Author: Mike | Age: 30 days | Unique commits: YES
+    Last: 2025-09-06 23:23:44 -0500
+  • feat/quiz-option-2
+    Author: Mike | Age: 30 days | Unique commits: YES
+    Last: 2025-09-07 04:13:32 -0500
+  • feature-add-customized-forms
+    Author: Mike | Age: 63 days | Unique commits: YES
+    Last: 2025-08-04 20:27:39 -0500
+  • feature/pre-refactored-cakephp-directory
+    Author: Mike | Age: 28 days | Unique commits: YES
+    Last: 2025-09-09 11:59:53 -0500
+  • feature/product-system-v2_migration-phase1-MIGRATED
+    Author: Mike | Age: 68 days | Unique commits: YES
+    Last: 2025-07-31 06:06:44 -0500
+  • feature/product-system-v2_product-mvc-phase2
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 07:48:35 -0500
+  • feature/product-system-v2_product-mvc-phase2-BACKUP
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 07:48:35 -0500
+  • feature/product-system-v2_product-mvc-phase3_CONTROLLER
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 08:13:00 -0500
+  • feature/product-system-v2_product-mvc-phase3_CONTROLLER-NO-TESTS
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 11:56:43 -0500
+  • feature/reorganize-cakephp-structure
+    Author: Mike | Age: 28 days | Unique commits: YES
+    Last: 2025-09-09 09:54:18 -0500
+  • feature/social-static-pages
+    Author: Mike | Age: 29 days | Unique commits: YES
+    Last: 2025-09-08 01:02:24 -0500
+  • feature/test-env-setup
+    Author: Mike | Age: 29 days | Unique commits: YES
+    Last: 2025-09-07 23:51:56 -0500
+  • fix/admin-products-forms-settings
+    Author: Mike | Age: 38 days | Unique commits: YES
+    Last: 2025-08-29 16:31:22 -0500
+  • fix/admin-products-forms-settings-1
+    Author: Mike | Age: 38 days | Unique commits: YES
+    Last: 2025-08-29 16:59:09 -0500
+  • fix/admin-products-forms-settings-2
+    Author: Mike | Age: 38 days | Unique commits: YES
+    Last: 2025-08-29 16:59:09 -0500
+  • fix/admin-products-forms-settings-3
+    Author: Mike | Age: 38 days | Unique commits: YES
+    Last: 2025-08-29 18:20:05 -0500
+  • fix/admin-products-forms-settings-4
+    Author: Mike | Age: 38 days | Unique commits: YES
+    Last: 2025-08-29 18:20:41 -0500
+  • fix/admin-products-forms-settings-5_NEW_PRODUCT_TABLE
+    Author: Mike | Age: 38 days | Unique commits: YES
+    Last: 2025-08-29 19:05:37 -0500
+  • fix/admin-products-forms-settings-6_NEW_PRODUCT_TABLE_POST_MIGRATION
+    Author: Mike | Age: 37 days | Unique commits: YES
+    Last: 2025-08-31 14:30:31 -0500
+  • fix/admin-products-reliability-score_v0
+    Author: Mike | Age: 36 days | Unique commits: YES
+    Last: 2025-08-31 16:25:07 -0500
+  • fix/guard-constant-defines-paths-php
+    Author: Mike | Age: 31 days | Unique commits: YES
+    Last: 2025-09-06 07:59:45 -0500
+  • fix/user-identity-return-type
+    Author: Mike | Age: 28 days | Unique commits: YES
+    Last: 2025-09-09 11:58:13 -0500
+  • git-merge/simple-product-phase6_product-v2
+    Author: Mike | Age: 62 days | Unique commits: YES
+    Last: 2025-08-06 14:50:43 -0500
+  • product-v2-MVC
+    Author: Mike | Age: 60 days | Unique commits: YES
+    Last: 2025-08-07 15:35:08 -0500
+  • product-v2-UNSTABLE
+    Author: Mike | Age: 60 days | Unique commits: YES
+    Last: 2025-08-07 15:35:08 -0500
+  • simple-products-final-phase
+    Author: Mike | Age: 54 days | Unique commits: YES
+    Last: 2025-08-14 11:57:08 -0500
+  • simple-products-phase0_BASE-TEMPLATE
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 12:19:15 -0500
+  • simple-products-phase1
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 12:27:55 -0500
+  • simple-products-phase1.2
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 12:38:08 -0500
+  • simple-products-phase2
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 12:46:07 -0500
+  • simple-products-phase3
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 12:49:40 -0500
+  • simple-products-phase4
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 12:52:15 -0500
+  • simple-products-phase5
+    Author: Mike | Age: 64 days | Unique commits: YES
+    Last: 2025-08-04 12:56:29 -0500
+  • simple-products-phase6
+    Author: Mike | Age: 60 days | Unique commits: YES
+    Last: 2025-08-07 15:46:28 -0500
+  • simple-products-phase6-STABLE
+    Author: Mike | Age: 54 days | Unique commits: YES
+    Last: 2025-08-14 00:18:55 -0500
+  • v1.4.0-beta
+    Author: Mike | Age: 61 days | Unique commits: YES
+    Last: 2025-08-07 01:21:58 -0500
+  • heads/v1.5.0-beta
+    Author: Mike | Age: 54 days | Unique commits: YES
+    Last: 2025-08-14 11:57:08 -0500
+  • v1.5.0-dev
+    Author: Mike | Age: 53 days | Unique commits: YES
+    Last: 2025-08-14 15:16:00 -0500
+  • v1.5.1-dev
+    Author: Mike | Age: 53 days | Unique commits: YES
+    Last: 2025-08-14 22:57:21 -0500
+  • v1.6.0-dev
+    Author: Mike | Age: 53 days | Unique commits: YES
+    Last: 2025-08-14 22:57:21 -0500
+  • heads/v1.6.0-dev-UNSTABLE_&_UNTESTED
+    Author: Mike | Age: 39 days | Unique commits: YES
+    Last: 2025-08-28 17:58:31 -0500
+  • v1.6.0-dev-latest
+    Author: Mike | Age: 38 days | Unique commits: YES
+    Last: 2025-08-29 15:30:58 -0500
+  • v1.6.0-dev-latest_UNTESTED
+    Author: Mike | Age: 39 days | Unique commits: YES
+    Last: 2025-08-29 10:46:49 -0500
+
+ACTIVE BRANCHES (recent, not merged): 6
+────────────────────────────────────────────────────────────────
+  • chore/remove-contactmanager
+    Author: Mike | Age: 20 days | Last: 2025-09-17 06:44:11 -0500
+  • droplet-deploy
+    Author: Mike | Age: 3 days | Last: 2025-10-03 22:49:06 -0500
+  • feat/add-front-end-pages
+    Author: Mike | Age: 20 days | Last: 2025-09-17 05:32:05 -0500
+  • feat/admin-page-deployment-and-uploads
+    Author: Mike | Age: 19 days | Last: 2025-09-17 23:03:03 -0500
+  • main-stashed
+    Author: Mike | Age: 17 days | Last: 2025-09-19 21:28:30 -0500
+  • origin/mian-stashed
+    Author: Matthew Deaves | Age: 17 days | Last: 2025-09-19 21:47:17 -0500
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SUMMARY
+────────────────────────────────────────────────────────────────
+  Total Branches: 69
+  Protected: 6
+  Merged (deletable): 3
+  Stale (review): 53
+  Active: 6
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -1,0 +1,16 @@
+[
+    {"name": "deployment-cleanup-backup-0001-20250920_164734", "number": "0001", "timestamp": "20250920_164734", "size_kb": 20, "checksum": "29532e1d8f7cc75ef804abc185c90a532ad600c40f4fe2b6fa1f9c97448742d7"},
+    {"name": "deployment-cleanup-backup-0002-20250920_173433", "number": "0002", "timestamp": "20250920_173433", "size_kb": 20, "checksum": "4c3d55619a6d955ba0d12f514446bc3d25c7db0f2b88d4f89208aee6175ab9ef"},
+    {"name": "deployment-cleanup-backup-0003-20251001_161022", "number": "0003", "timestamp": "20251001_161022", "size_kb": 20, "checksum": "3422de875383fa8c7317fcddb06f777e1cd558abba284241c7e333dc994c0a10"},
+    {"name": "deployment-cleanup-backup-0004-20251001_165441", "number": "0004", "timestamp": "20251001_165441", "size_kb": 20, "checksum": "26e6e6ef57162d597701fee0ca76453f7b4afa0b21f4cd1876bf4e7cf8885477"},
+    {"name": "deployment-cleanup-backup-0005-20251001_165510", "number": "0005", "timestamp": "20251001_165510", "size_kb": 20, "checksum": "4ef3a2e6330911c3545366c83ae09b53240bb70a5e5f448adc7b006d246c362b"},
+    {"name": "deployment-cleanup-backup-0006-20251001_172245", "number": "0006", "timestamp": "20251001_172245", "size_kb": 20, "checksum": "d18285c70518ea58fd2d047fde0979f6efd10c0c2e99cbacdc3b9c23539d50ae"},
+    {"name": "deployment-cleanup-backup-0007-20251001_172422", "number": "0007", "timestamp": "20251001_172422", "size_kb": 20, "checksum": "46f2543ff261caa16089891fbdf36d9cc28560330937855ae30e0c3e5b5ccdeb"},
+    {"name": "deployment-cleanup-backup-0008-20251001_180150", "number": "0008", "timestamp": "20251001_180150", "size_kb": 20, "checksum": "5cc4811d0056db95994ea2f1a13eaef7cf79c027cf543b3fa084721dd310456d"},
+    {"name": "deployment-cleanup-backup-0009-20251001_181542", "number": "0009", "timestamp": "20251001_181542", "size_kb": 20, "checksum": "88acfdf5b24cd390d3bbacc02b3266c6223bdb09760df7288bc019ba4e83d7c7"},
+    {"name": "deployment-cleanup-backup-0010-20251001_183807", "number": "0010", "timestamp": "20251001_183807", "size_kb": 20, "checksum": "9dce7dc6f557b9ac2933b3c8d73fc104720196538f74fe920ca84bcc08ece984"},
+    {"name": "deployment-cleanup-backup-0011-20251001_183857", "number": "0011", "timestamp": "20251001_183857", "size_kb": 20, "checksum": "f97f61aa91b51821417f4f3db27591f7cb1d041b9aad032779003f766b57d555"},
+    {"name": "deployment-cleanup-backup-0012-20251001_185057", "number": "0012", "timestamp": "20251001_185057", "size_kb": 20, "checksum": "38f9a3a46e4106168285730ca6eca3c48461a82de050c891dfdfe8d6d628c75e"},
+    {"name": "deployment-cleanup-backup-0013-20251001_185320", "number": "0013", "timestamp": "20251001_185320", "size_kb": 20, "checksum": "401507852427e9e53bde9c9cbc38f10bf3ca30361c0bce82d1ddde3d44bf945f"},
+    {"name": "deployment-cleanup-backup-0014-20251002_072115", "number": "0014", "timestamp": "20251002_072115", "size_kb": 28, "checksum": "2f8642f267b7b129127ae844bade3119bce78a02bc12e3c05e8bd653d7a23e17"}
+]

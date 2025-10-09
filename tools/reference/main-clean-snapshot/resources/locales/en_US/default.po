@@ -1,0 +1,787 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2025-07-16 04:00+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ./src/Command/GenerateArticlesCommand.php:52
+msgid "Number of articles to generate"
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:55
+msgid "Delete all articles before generating new ones"
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:73
+msgid "All articles have been deleted."
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:80
+msgid "Generating {0} articles..."
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:93
+msgid "Generated article: {0}"
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:96
+msgid "Failed to generate article: {0}"
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:100
+#: ./src/Command/GenerateArticlesCommand.php:153
+msgid "Error in {0}: {1}"
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:107
+msgid "Generated {0} articles successfully."
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:109
+msgid "Failed to generate {0} articles."
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:135
+msgid "Creating {0} new top-level tags..."
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:147
+msgid "Created tag: {0}"
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:149
+msgid "Failed to create tag: {0}"
+msgstr ""
+
+#: ./src/Command/GenerateArticlesCommand.php:299
+msgid "No admin user found."
+msgstr ""
+
+#: ./src/Controller/Admin/AipromptsController.php:81
+#: ./src/Controller/Admin/AipromptsController.php:105
+msgid "The aiprompt has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/AipromptsController.php:85
+#: ./src/Controller/Admin/AipromptsController.php:109
+msgid "The aiprompt could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/AipromptsController.php:128
+msgid "The aiprompt has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/AipromptsController.php:130
+msgid "The aiprompt could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/ArticlesController.php:208
+#: ./src/Controller/Admin/PageViewsController.php:66
+#: ./src/Controller/Admin/PageViewsController.php:101
+#: ./src/Controller/Admin/PageViewsController.php:141
+#: ./src/Controller/ArticlesController.php:209
+#: ./src/Controller/ArticlesController.php:256
+msgid "Article not found"
+msgstr ""
+
+#: ./src/Controller/Admin/ArticlesController.php:235
+#: ./src/Controller/Admin/ArticlesController.php:301
+msgid "The article has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/ArticlesController.php:244
+#: ./src/Controller/Admin/ArticlesController.php:310
+msgid "The article could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/ArticlesController.php:345
+msgid "The article has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/ArticlesController.php:347
+msgid "The article could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/BlockedIpsController.php:82
+#: ./src/Controller/Admin/BlockedIpsController.php:107
+msgid "The blocked ip has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/BlockedIpsController.php:86
+#: ./src/Controller/Admin/BlockedIpsController.php:111
+msgid "The blocked ip could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/BlockedIpsController.php:130
+msgid "The blocked ip has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/BlockedIpsController.php:133
+msgid "The blocked ip could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/CacheController.php:45
+msgid "All caches have been cleared successfully."
+msgstr ""
+
+#: ./src/Controller/Admin/CacheController.php:47
+msgid "Some caches were cleared, but the following failed: {0}"
+msgstr ""
+
+#: ./src/Controller/Admin/CacheController.php:75
+msgid "{0} cache has been cleared successfully."
+msgstr ""
+
+#: ./src/Controller/Admin/CacheController.php:77
+msgid "{0} cache could not be cleared."
+msgstr ""
+
+#: ./src/Controller/Admin/CacheController.php:80
+msgid "{0} cache configuration does not exist."
+msgstr ""
+
+#: ./src/Controller/Admin/CommentsController.php:113
+msgid "The comment has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/CommentsController.php:117
+msgid "The comment could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/CommentsController.php:142
+msgid "The comment has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/CommentsController.php:144
+msgid "The comment could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/EmailTemplatesController.php:95
+#: ./src/Controller/Admin/EmailTemplatesController.php:122
+msgid "The email template has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/EmailTemplatesController.php:99
+#: ./src/Controller/Admin/EmailTemplatesController.php:126
+msgid "The email template could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/EmailTemplatesController.php:159
+msgid "The email template has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/EmailTemplatesController.php:161
+msgid "The email template could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/EmailTemplatesController.php:221
+msgid "Email sent successfully."
+msgstr ""
+
+#: ./src/Controller/Admin/EmailTemplatesController.php:223
+msgid "Email sent successfully to: {0}. Template: {1}, Subject: {2}"
+msgstr ""
+
+#: ./src/Controller/Admin/EmailTemplatesController.php:232
+msgid "Failed to send email. Please check your email configuration."
+msgstr ""
+
+#: ./src/Controller/Admin/EmailTemplatesController.php:234
+msgid "Failed to send email to: {0}"
+msgstr ""
+
+#: ./src/Controller/Admin/EmailTemplatesController.php:239
+#: ./src/Controller/Admin/EmailTemplatesController.php:241
+msgid "Error sending email: {0}"
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:132
+#: ./src/Controller/Admin/ImageGalleriesController.php:166
+msgid "The image gallery could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:161
+msgid "The image gallery has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:186
+msgid "The image gallery has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:188
+msgid "The image gallery could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:238
+#: ./src/Controller/Admin/ImageGalleriesController.php:248
+msgid "No images selected"
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:281
+#: ./src/Controller/Admin/ImageGalleriesController.php:292
+msgid "Added {0} images to gallery"
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:294
+msgid "No new images were added (they may already be in the gallery)"
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:323
+msgid "Image not found in gallery"
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:335
+msgid "Image removed from gallery"
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:340
+msgid "Failed to remove image from gallery"
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:364
+msgid "Invalid data provided"
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:378
+msgid "Image order updated"
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:383
+msgid "Failed to update image order"
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:472
+msgid "The image gallery has been {0}."
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:487
+msgid "Gallery {0} with {1} image(s) uploaded successfully."
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:493
+msgid "Gallery {0} with {1} image(s) uploaded. {2} failed to upload."
+msgstr ""
+
+#: ./src/Controller/Admin/ImageGalleriesController.php:500
+msgid "Gallery {0}, but all {1} image(s) failed to upload."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:167
+#: ./src/Controller/Admin/ImagesController.php:285
+msgid "The image has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:171
+#: ./src/Controller/Admin/ImagesController.php:289
+msgid "The image could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:202
+msgid "An unexpected error occurred."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:207
+msgid "No file was uploaded or file key \"image\" is missing."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:225
+msgid "Image \"{0}\" uploaded successfully."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:259
+msgid "Failed to process the uploaded file."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:308
+msgid "The image has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:310
+msgid "The image could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:332
+msgid "Image could not be deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:337
+msgid "No image ID provided."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:346
+msgid "Image \"{0}\" deleted successfully from server."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:350
+msgid "The image database record could not be deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:358
+msgid "Image not found."
+msgstr ""
+
+#: ./src/Controller/Admin/ImagesController.php:362
+msgid "An unexpected error occurred while deleting the image."
+msgstr ""
+
+#: ./src/Controller/Admin/InternationalisationsController.php:96
+#: ./src/Controller/Admin/InternationalisationsController.php:123
+msgid "The internationalisation has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/InternationalisationsController.php:100
+#: ./src/Controller/Admin/InternationalisationsController.php:127
+msgid "The internationalisation could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/InternationalisationsController.php:146
+msgid "The internationalisation has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/InternationalisationsController.php:148
+msgid "The internationalisation could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/PageViewsController.php:176
+msgid "An error occurred while processing your request."
+msgstr ""
+
+#: ./src/Controller/Admin/SettingsController.php:90
+msgid "Setting not found: {0}.{1}"
+msgstr ""
+
+#: ./src/Controller/Admin/SettingsController.php:100
+msgid "Error saving {0}.{1}: {2}"
+msgstr ""
+
+#: ./src/Controller/Admin/SettingsController.php:108
+msgid "The settings have been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/SettingsController.php:112
+msgid "Some settings could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/SlugsController.php:133
+msgid "(Deleted)"
+msgstr ""
+
+#: ./src/Controller/Admin/SlugsController.php:148
+msgid "(Error loading)"
+msgstr ""
+
+#: ./src/Controller/Admin/SlugsController.php:204
+msgid "The related {0} record (ID: {1}) could not be found."
+msgstr ""
+
+#: ./src/Controller/Admin/SlugsController.php:217
+msgid "Unable to load related {0} record."
+msgstr ""
+
+#: ./src/Controller/Admin/SlugsController.php:265
+#: ./src/Controller/Admin/SlugsController.php:316
+msgid "The slug has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/SlugsController.php:269
+#: ./src/Controller/Admin/SlugsController.php:320
+msgid "The slug could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/SlugsController.php:283
+msgid "Unable to load related records for {0}."
+msgstr ""
+
+#: ./src/Controller/Admin/SlugsController.php:344
+msgid "The slug has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/SlugsController.php:346
+msgid "The slug could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/SystemLogsController.php:130
+msgid "All logs have been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/SystemLogsController.php:132
+msgid "Unable to delete all logs."
+msgstr ""
+
+#: ./src/Controller/Admin/SystemLogsController.php:137
+msgid "All logs with level {0} have been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/SystemLogsController.php:139
+msgid "Unable to delete logs with level {0}."
+msgstr ""
+
+#: ./src/Controller/Admin/SystemLogsController.php:144
+msgid "All logs in group {0} have been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/SystemLogsController.php:146
+msgid "Unable to delete logs in group {0}."
+msgstr ""
+
+#: ./src/Controller/Admin/SystemLogsController.php:152
+msgid "The log has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/SystemLogsController.php:154
+msgid "Unable to delete the log."
+msgstr ""
+
+#: ./src/Controller/Admin/TagsController.php:187
+#: ./src/Controller/Admin/TagsController.php:218
+msgid "The tag has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/TagsController.php:191
+#: ./src/Controller/Admin/TagsController.php:222
+msgid "The tag could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/TagsController.php:251
+msgid "The tag has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/TagsController.php:253
+msgid "The tag could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/UsersController.php:107
+#: ./src/Controller/Admin/UsersController.php:153
+msgid "The user has been saved."
+msgstr ""
+
+#: ./src/Controller/Admin/UsersController.php:111
+#: ./src/Controller/Admin/UsersController.php:157
+msgid "The user could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/UsersController.php:140
+msgid "You cannot remove your own admin status."
+msgstr ""
+
+#: ./src/Controller/Admin/UsersController.php:146
+msgid "You cannot disable your own account."
+msgstr ""
+
+#: ./src/Controller/Admin/UsersController.php:178
+msgid "No deleting your own account."
+msgstr ""
+
+#: ./src/Controller/Admin/UsersController.php:183
+msgid "The user has been deleted."
+msgstr ""
+
+#: ./src/Controller/Admin/UsersController.php:185
+msgid "The user could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/Admin/VideosController.php:75
+msgid "Error fetching videos: {0}"
+msgstr ""
+
+#: ./src/Controller/AppController.php:105
+msgid "Access denied. You must be logged in as an admin to view this page."
+msgstr ""
+
+#: ./src/Controller/ArticlesController.php:302
+msgid "You must be logged in to add a comment."
+msgstr ""
+
+#: ./src/Controller/ArticlesController.php:314
+msgid "Article not found."
+msgstr ""
+
+#: ./src/Controller/ArticlesController.php:323
+msgid "Comments are not enabled"
+msgstr ""
+
+#: ./src/Controller/ArticlesController.php:332
+msgid "Your comment has been added."
+msgstr ""
+
+#: ./src/Controller/ArticlesController.php:334
+msgid "Unable to add your comment."
+msgstr ""
+
+#: ./src/Controller/CookieConsentsController.php:79
+msgid "Your cookie preferences have been saved."
+msgstr ""
+
+#: ./src/Controller/CookieConsentsController.php:101
+msgid "Your cookie preferences could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/RssController.php:73
+#: ./src/Controller/RssController.php:85
+msgid "Latest Articles from {0}"
+msgstr ""
+
+#: ./src/Controller/RssController.php:75
+msgid "Latest articles and updates from our website"
+msgstr ""
+
+#: ./src/Controller/RssController.php:103
+msgid "Articles"
+msgstr ""
+
+#: ./src/Controller/TagsController.php:69
+msgid "Tag not found"
+msgstr ""
+
+#: ./src/Controller/UsersController.php:72
+msgid "Invalid username or password"
+msgstr ""
+
+#: ./src/Controller/UsersController.php:195
+msgid "Registration successful. Please check your email for confirmation."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:199
+msgid "Registration successful, but there was an issue creating the confirmation link."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:205
+msgid "Registration failed. Please, try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:246
+msgid "Failed to send confirmation email message: {0}"
+msgstr ""
+
+#: ./src/Controller/UsersController.php:269
+msgid "We were unable to find that account."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:282
+msgid "Your account has been updated."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:284
+msgid "Your account could not be updated."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:312
+msgid "Your account has been confirmed. You can now log in."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:316
+msgid "There was an issue confirming your account. Please try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:321
+msgid "Invalid confirmation code."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:355
+#: ./src/Controller/UsersController.php:362
+msgid "If your email is registered, you will receive a link to reset your password."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:397
+msgid "Failed to send password reset email: {0}"
+msgstr ""
+
+#: ./src/Controller/UsersController.php:421
+msgid "Invalid or expired password reset link."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:437
+msgid "Your password has been reset. Please log in with your new password."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:441
+msgid "There was an issue resetting your password. Please try again."
+msgstr ""
+
+#: ./src/Http/Exception/TooManyRequestsException.php:30
+msgid "Too Many Requests"
+msgstr ""
+
+#: ./src/Job/SendEmailJob.php:57
+msgid "Email template not found: {0}"
+msgstr ""
+
+#: ./src/Middleware/IpBlockerMiddleware.php:60
+msgid "Access Denied: Unable to verify request origin."
+msgstr ""
+
+#: ./src/Middleware/IpBlockerMiddleware.php:82
+msgid "Access Denied: Your IP address has been blocked due to suspicious activity."
+msgstr ""
+
+#: ./src/Middleware/IpBlockerMiddleware.php:101
+msgid "Access Denied: Suspicious request detected."
+msgstr ""
+
+#: ./src/Middleware/RateLimitMiddleware.php:141
+msgid "Too many requests. Please try again later."
+msgstr ""
+
+#: ./src/Middleware/RateLimitMiddleware.php:228
+msgid "Rate limit exceeded for IP: {0}"
+msgstr ""
+
+#: ./src/Model/Behavior/ImageValidationTrait.php:52
+msgid "Please upload only images (jpeg, png, gif)."
+msgstr ""
+
+#: ./src/Model/Behavior/ImageValidationTrait.php:53
+msgid "Image must be less than 10MB."
+msgstr ""
+
+#: ./src/Model/Behavior/ImageValidationTrait.php:54
+msgid "An image file is required."
+msgstr ""
+
+#: ./src/Model/Behavior/SlugBehavior.php:66
+msgid "This slug is already in use."
+msgstr ""
+
+#: ./src/Model/Entity/ImageGallery.php:103
+msgid "Published"
+msgstr ""
+
+#: ./src/Model/Entity/ImageGallery.php:103
+msgid "Un-Published"
+msgstr ""
+
+#: ./src/Model/Table/InternationalisationsTable.php:69
+msgid "This message_id must be unique for the given locale."
+msgstr ""
+
+#: ./src/Model/Table/SettingsTable.php:83
+msgid "Invalid type"
+msgstr ""
+
+#: ./src/Model/Table/SettingsTable.php:87
+msgid "A value is required"
+msgstr ""
+
+#: ./src/Model/Table/SettingsTable.php:92
+msgid "The value must be a number."
+msgstr ""
+
+#: ./src/Model/Table/SettingsTable.php:95
+msgid "The value must be 0 or 1."
+msgstr ""
+
+#: ./src/Model/Table/SettingsTable.php:98
+msgid "The value must not be empty."
+msgstr ""
+
+#: ./src/Model/Table/SettingsTable.php:103
+msgid "Invalid value for the specified type."
+msgstr ""
+
+#: ./src/Model/Table/SlugsTable.php:127
+msgid "The slug must be URL-safe (only lowercase letters, numbers, and hyphens)"
+msgstr ""
+
+#: ./src/Model/Table/SlugsTable.php:144
+msgid "This slug is already in use for this model type."
+msgstr ""
+
+#: ./src/Model/Table/UsersTable.php:63
+#: ./src/Model/Table/UsersTable.php:105
+msgid "Password must be at least 8 characters long"
+msgstr ""
+
+#: ./src/Model/Table/UsersTable.php:66
+#: ./src/Model/Table/UsersTable.php:73
+msgid "Required"
+msgstr ""
+
+#: ./src/Service/ImageProcessingService.php:378
+msgid "No images were processed successfully."
+msgstr ""
+
+#: ./src/Service/ImageProcessingService.php:382
+msgid "Successfully processed {0} image(s)."
+msgstr ""
+
+#: ./src/Service/ImageProcessingService.php:385
+msgid "Successfully processed {0} of {1} image(s). {2} had errors."
+msgstr ""
+
+#: ./src/Service/IpSecurityService.php:261
+msgid "IP address blocked: {0} for {1}"
+msgstr ""
+
+#: ./src/Service/IpSecurityService.php:289
+msgid "IP address unblocked: {0}"
+msgstr ""
+
+#: ./src/Service/IpSecurityService.php:330
+msgid "Suspicious request detected: {0}"
+msgstr ""
+
+#: ./src/Service/IpSecurityService.php:386
+msgid "Multiple suspicious requests detected"
+msgstr ""
+
+#: ./src/Service/IpSecurityService.php:401
+msgid "Repeat offender: Multiple suspicious requests detected"
+msgstr ""
+
+#: ./templates/element/shared_photo_gallery.php:23
+msgid "Gallery Images"
+msgstr ""
+
+#: ./templates/element/shared_photo_gallery.php:33
+msgid "images"
+msgstr ""
+
+#: ./templates/element/shared_photo_gallery.php:78
+#: ./templates/element/shared_photo_gallery.php:106
+msgid "Manage Images"
+msgstr ""
+
+#: ./templates/element/shared_photo_gallery.php:84
+#: ./templates/element/shared_photo_gallery.php:112
+msgid "Add More Images"
+msgstr ""
+
+#: ./templates/element/shared_photo_gallery.php:94
+#: ./templates/element/shared_photo_gallery.php:120
+msgid "Click any image to view slideshow"
+msgstr ""
+
+#: ./templates/element/shared_photo_gallery.php:95
+msgid "Press spacebar or use controls to play automatically"
+msgstr ""
+
+#: ./templates/element/shared_photo_gallery.php:130
+msgid "No images in this gallery"
+msgstr ""
+
+#: ./templates/element/shared_photo_gallery.php:131
+msgid "Add some images to get started"
+msgstr ""
+
+#: ./templates/element/shared_photo_gallery.php:136
+msgid "Add Images"
+msgstr ""
+
+#: ./templates/layout/error.php:36
+msgid "Back"
+msgstr ""
+
+#: ./vendor/cakephp/cakephp/src/View/Helper/PaginatorHelper.php:1178
+msgid "View"
+msgstr ""
+

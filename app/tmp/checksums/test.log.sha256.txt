@@ -1,0 +1,11 @@
+{
+    "file": "test.log",
+    "algorithm": "sha256",
+    "hash": "01ae5f379b916608dad4528184e630b7f7d7fc87dc628f542d5788692badf559",
+    "timestamp": "2025-10-09 01:42:56",
+    "file_stats": {
+        "size": 4098,
+        "modified": 1759879573,
+        "permissions": "0644"
+    }
+}

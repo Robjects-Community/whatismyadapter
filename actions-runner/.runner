@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 21,
+  "agentName": "mikey",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus7.actions.githubusercontent.com/3ddQovuyKY9yDGZwRrNmGOPvQEat4ewvYaP6IrUzHqtQQ2upxV/",
+  "gitHubUrl": "https://github.com/garzarobm/willow",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}

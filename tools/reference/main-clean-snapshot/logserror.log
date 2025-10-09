@@ -1,0 +1,1875 @@
+2025-09-30 16:34:25 error: [Cake\Http\Exception\MissingControllerException] Controller class `Js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Js',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:77
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/willow-modal.js?q=/js/willow-modal.js&
+Referer URL: http://localhost:8080/en
+Client IP: 192.168.65.1
+2025-09-30 16:34:26 error: [Cake\Http\Exception\MissingControllerException] Controller class `Js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Js',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:77
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/youtube-gdpr.js?q=/js/youtube-gdpr.js&
+Referer URL: http://localhost:8080/en
+Client IP: 192.168.65.1
+2025-09-30 16:34:27 error: [Cake\Http\Exception\MissingControllerException] Controller class `AppleTouchIconPrecomposed.png` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'AppleTouchIconPrecomposed.png',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:159
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /apple-touch-icon-precomposed.png?q=/apple-touch-icon-precomposed.png&
+Client IP: 192.168.65.1
+2025-09-30 16:34:28 error: [Cake\Http\Exception\MissingControllerException] Controller class `AppleTouchIcon.png` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'AppleTouchIcon.png',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:320
+- CORE/src/Controller/ControllerFactory.php:75
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:159
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /apple-touch-icon.png?q=/apple-touch-icon.png&
+Client IP: 192.168.65.1
+2025-09-30 16:34:29 error: [Cake\Http\Exception\MissingControllerException] Controller class `Js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Js',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:77
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/willow-modal.js?q=/js/willow-modal.js&
+Referer URL: http://localhost:8080/en/users/login
+Client IP: 192.168.65.1
+2025-09-30 16:34:29 error: [Cake\Http\Exception\MissingControllerException] Controller class `Js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Js',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:77
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/youtube-gdpr.js?q=/js/youtube-gdpr.js&
+Referer URL: http://localhost:8080/en/users/login
+Client IP: 192.168.65.1
+2025-09-30 16:34:33 error: [Cake\Http\Exception\MissingControllerException] Controller class `Js` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Js',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:77
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /js/willow-modal.js?q=/js/willow-modal.js&
+Referer URL: http://localhost:8080/admin
+Client IP: 192.168.65.1
+2025-09-30 16:34:33 error: [Cake\Http\Exception\MissingControllerException] Controller class `Img` could not be found. in /var/www/html/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php on line 335
+Exception Attributes: array (
+  'controller' => 'Img',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Stack Trace:
+- CORE/src/Controller/ControllerFactory.php:77
+- CORE/src/Http/BaseApplication.php:360
+- CORE/src/Http/Runner.php:86
+- APP/Middleware/RateLimitMiddleware.php:148
+- CORE/src/Http/Runner.php:82
+- APP/Middleware/IpBlockerMiddleware.php:107
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/CsrfProtectionMiddleware.php:169
+- APP/Middleware/ApiCsrfMiddleware.php:48
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authorization/src/Middleware/AuthorizationMiddleware.php:136
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/authentication/src/Middleware/AuthenticationMiddleware.php:106
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Middleware/BodyParserMiddleware.php:157
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/admad/cakephp-i18n/src/Middleware/I18nMiddleware.php:110
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/RoutingMiddleware.php:117
+- CORE/src/Http/Runner.php:82
+- CORE/src/Routing/Middleware/AssetMiddleware.php:79
+- CORE/src/Http/Runner.php:82
+- CORE/src/Error/Middleware/ErrorHandlerMiddleware.php:115
+- CORE/src/Http/Runner.php:82
+- ROOT/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php:60
+- CORE/src/Http/Runner.php:82
+- CORE/src/Http/Runner.php:60
+- CORE/src/Http/Server.php:104
+- ROOT/webroot/index.php:31
+- [main]:
+
+Request URL: /img/willow-icon.png?q=/img/willow-icon.png&
+Referer URL: http://localhost:8080/admin
+Client IP: 192.168.65.1
+2025-10-01 16:10:07 error: Bootstrap: Failed to merge settings from database
+2025-10-01 16:10:07 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 16:10:08 error: Bootstrap: Failed to merge settings from database
+2025-10-01 16:10:08 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 16:10:09 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 16:11:34 error: Bootstrap: Failed to merge settings from database
+2025-10-01 16:11:34 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 16:11:34 error: Bootstrap: Failed to merge settings from database
+2025-10-01 16:11:34 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 16:11:35 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:21:47 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:21:47 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:21:48 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:21:48 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:21:49 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Driver.php:253
+- CORE/src/Database/Driver.php:396
+- CORE/src/Database/Driver.php:293
+- CORE/src/Database/Connection.php:268
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Connection.php:268
+- APP/Utility/DatabaseUtility.php:40
+- APP/Utility/I18nManager.php:102
+- APP/Application.php:84
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:23:27 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:23:27 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:23:28 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:23:28 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:23:29 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:25:45 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:25:45 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:25:45 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:25:45 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:25:47 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:29:40 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:29:40 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:29:40 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:29:40 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:29:41 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:31:00 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:31:01 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:31:01 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:31:01 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:31:02 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:39:13 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:39:13 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:39:13 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:39:13 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:39:15 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:45:29 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:45:29 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:45:30 error: Bootstrap: Failed to merge settings from database
+2025-10-01 17:45:30 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+2025-10-01 17:45:31 error: [Cake\Database\Exception\MissingConnectionException] Connection to Mysql could not be established: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 203
+Exception Attributes: array (
+  'driver' => 'Mysql',
+  'reason' => 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve',
+)
+Stack Trace:
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+
+Caused by: [PDOException] PDO::__construct(): php_network_getaddresses: getaddrinfo for mysql failed: Name does not resolve in /var/www/html/vendor/cakephp/cakephp/src/Database/Driver.php on line 192
+Stack Trace:
+- CORE/src/Database/Driver.php:192
+- CORE/src/Core/Retry/CommandRetry.php:71
+- CORE/src/Database/Driver.php:201
+- CORE/src/Database/Driver/Mysql.php:158
+- CORE/src/Database/Schema/SchemaDialect.php:60
+- CORE/src/Database/Driver/Mysql.php:204
+- CORE/src/Database/Schema/Collection.php:97
+- CORE/src/Database/Schema/Collection.php:72
+- CORE/src/Database/Schema/CachedCollection.php:74
+- ROOT/config/log_config.php:32
+- APP/Application.php:67
+- CORE/src/Console/CommandRunner.php:190
+- CORE/src/Console/CommandRunner.php:137
+- ROOT/bin/cake.php:10
+- [main]:
+

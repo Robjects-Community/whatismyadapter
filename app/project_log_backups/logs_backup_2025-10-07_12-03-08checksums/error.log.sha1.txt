@@ -1,0 +1,11 @@
+{
+    "file": "error.log",
+    "algorithm": "sha1",
+    "hash": "5375f2267d2c938ec50960781f749788c3d1332d",
+    "timestamp": "2025-09-06 19:44:31",
+    "file_stats": {
+        "size": 88744,
+        "modified": 1757184228,
+        "permissions": "0644"
+    }
+}

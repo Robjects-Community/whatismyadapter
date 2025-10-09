@@ -1,0 +1,11 @@
+{
+    "file": "restart-environment.log",
+    "algorithm": "sha1",
+    "hash": "51a88cb2e8922fcc47ac7a7cfc0bc9df76db1673",
+    "timestamp": "2025-09-06 19:44:31",
+    "file_stats": {
+        "size": 76,
+        "modified": 1757158559,
+        "permissions": "0755"
+    }
+}

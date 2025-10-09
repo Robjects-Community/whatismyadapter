@@ -1,0 +1,348 @@
+/**
+ * Funding Banner CSS for robjects-community
+ * 
+ * This file provides styling for the funding/sponsorship banner component.
+ * Designed to be flexible and responsive with customizable CSS variables.
+ * 
+ * CSS Variables for easy customization:
+ * --funding-banner-bg: Background color
+ * --funding-banner-text: Text color
+ * --funding-banner-progress-bg: Progress bar background
+ * --funding-banner-progress-fill: Progress bar fill color
+ * --funding-banner-button-bg: Button background color
+ * --funding-banner-button-hover: Button hover background
+ */
+
+:root {
+    /* Color scheme - Customize these for your brand */
+    --funding-banner-bg: #2e3440;
+    --funding-banner-text: #ffffff;
+    --funding-banner-progress-bg: rgba(255, 255, 255, 0.2);
+    --funding-banner-progress-fill: #02a8e2;
+    --funding-banner-button-bg: #027ba7;
+    --funding-banner-button-hover: #015471;
+    --funding-banner-success: #4caf50;
+    --funding-banner-warning: #ff9800;
+    --funding-banner-danger: #f44336;
+    
+    /* Spacing */
+    --funding-banner-padding: 0.75rem 1rem;
+    --funding-banner-gap: 1rem;
+    
+    /* Typography */
+    --funding-banner-font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --funding-banner-font-size: 14px;
+    --funding-banner-font-weight-bold: 600;
+    
+    /* Border radius */
+    --funding-banner-radius: 4px;
+    --funding-banner-progress-radius: 3px;
+}
+
+/* Main banner container */
+.robjects-funding-banner {
+    background: var(--funding-banner-bg);
+    color: var(--funding-banner-text);
+    padding: var(--funding-banner-padding);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: var(--funding-banner-font-family);
+    font-size: var(--funding-banner-font-size);
+    width: 100%;
+    position: relative;
+    z-index: 100;
+}
+
+/* Position modifiers */
+.robjects-funding-banner.top {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.robjects-funding-banner.bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Reset box-sizing for all banner elements */
+.robjects-funding-banner *,
+.robjects-funding-banner *::before,
+.robjects-funding-banner *::after {
+    box-sizing: border-box;
+}
+
+/* Inner container */
+.robjects-funding-banner__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--funding-banner-gap);
+    flex-wrap: wrap;
+}
+
+/* Content wrapper */
+.robjects-funding-banner__content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Desktop view */
+.robjects-funding-banner__desktop-view {
+    display: flex;
+    align-items: center;
+    gap: var(--funding-banner-gap);
+}
+
+/* Mobile view (hidden by default) */
+.robjects-funding-banner__mobile-view {
+    display: none;
+}
+
+/* Amount displays */
+.robjects-funding-banner__amount {
+    font-size: var(--funding-banner-font-size);
+    font-weight: var(--funding-banner-font-weight-bold);
+    white-space: nowrap;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Progress section */
+.robjects-funding-banner__progress-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Progress header */
+.robjects-funding-banner__progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 4px;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 0.2s forwards;
+}
+
+/* Progress bar container */
+.robjects-funding-banner__progress-bar {
+    height: 6px;
+    border-radius: var(--funding-banner-progress-radius);
+    background: var(--funding-banner-progress-bg);
+    overflow: hidden;
+    margin: 4px 0;
+    position: relative;
+}
+
+/* Progress bar fill */
+.robjects-funding-banner__progress-fill {
+    height: 100%;
+    background: var(--funding-banner-progress-fill);
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: var(--funding-banner-progress-radius);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated shimmer effect on progress bar */
+.robjects-funding-banner__progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+/* Mobile-specific rows */
+.robjects-funding-banner__amounts-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+}
+
+.robjects-funding-banner__meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-top: 0.25rem;
+}
+
+/* Call to action text */
+.robjects-funding-banner__cta {
+    font-weight: var(--funding-banner-font-weight-bold);
+    opacity: 0.9;
+}
+
+/* Sponsor button */
+.robjects-funding-banner__button {
+    background: var(--funding-banner-button-bg) !important;
+    color: var(--funding-banner-text) !important;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--funding-banner-radius);
+    border: none;
+    font-weight: var(--funding-banner-font-weight-bold);
+    font-size: var(--funding-banner-font-size);
+    text-decoration: none;
+    white-space: nowrap;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 0.4s forwards;
+}
+
+.robjects-funding-banner__button:hover {
+    background: var(--funding-banner-button-hover) !important;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.robjects-funding-banner__button:active {
+    transform: translateY(0);
+}
+
+/* Progress states */
+.robjects-funding-banner__progress-fill[data-state="success"] {
+    background: var(--funding-banner-success);
+}
+
+.robjects-funding-banner__progress-fill[data-state="warning"] {
+    background: var(--funding-banner-warning);
+}
+
+.robjects-funding-banner__progress-fill[data-state="danger"] {
+    background: var(--funding-banner-danger);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    to {
+        left: 100%;
+    }
+}
+
+/* Loading state */
+.robjects-funding-banner.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.robjects-funding-banner.loading .robjects-funding-banner__progress-fill::after {
+    animation-duration: 1s;
+}
+
+/* Error state */
+.robjects-funding-banner.error {
+    background: var(--funding-banner-danger);
+}
+
+/* Responsive breakpoints */
+
+/* Tablet (700px and below) */
+@media (max-width: 700px) {
+    .robjects-funding-banner__desktop-view {
+        display: none;
+    }
+    
+    .robjects-funding-banner__mobile-view {
+        display: block;
+    }
+    
+    .robjects-funding-banner__progress-bar {
+        margin: 6px 0;
+    }
+    
+    .robjects-funding-banner {
+        padding: 0.65rem 1rem;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .robjects-funding-banner__container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+    
+    .robjects-funding-banner__button {
+        width: 100%;
+        padding: 0.5rem;
+    }
+    
+    .robjects-funding-banner {
+        font-size: 13px;
+    }
+    
+    .robjects-funding-banner__amount {
+        font-size: 13px;
+    }
+}
+
+/* Small mobile (320px and below) */
+@media (max-width: 320px) {
+    .robjects-funding-banner__meta-row {
+        flex-direction: column;
+        gap: 0.25rem;
+        text-align: center;
+    }
+    
+    .robjects-funding-banner__amounts-row {
+        font-size: 12px;
+    }
+    
+    .robjects-funding-banner {
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .robjects-funding-banner {
+        --funding-banner-bg: #1e2127;
+        --funding-banner-progress-bg: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Print styles */
+@media print {
+    .robjects-funding-banner {
+        display: none;
+    }
+}
+
+/* Accessibility improvements */
+.robjects-funding-banner__button:focus {
+    outline: 2px solid var(--funding-banner-progress-fill);
+    outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .robjects-funding-banner {
+        border: 2px solid var(--funding-banner-text);
+    }
+    
+    .robjects-funding-banner__progress-bar {
+        border: 1px solid var(--funding-banner-text);
+    }
+}

@@ -1,27 +1,58 @@
 services:
-  # Simple nginx web server for now
-  web:
-    image: nginx:alpine
-    container_name: willow-web-prod
+  # WillowCMS CakePHP Application
+  willowcms:
+    build:
+      context: ~/willow/
+      dockerfile: infrastructure/docker/willowcms/Dockerfile
+      args:
+        UID: ${USER_ID:-1000}
+        GID: ${GROUP_ID:-1000}
+    container_name: willow-app-prod
     platform: linux/amd64
     restart: unless-stopped
     ports:
       - "80:80"
     depends_on:
       - db
+      - redis
     volumes:
-      - ./html:/usr/share/nginx/html:ro
+      - app_data:/var/www/html/tmp:rw
+      - app_logs:/var/www/html/logs:rw
+      - app_uploads:/var/www/html/webroot/files:rw
+      - ./app:/var/www/html/:rw
     environment:
+      - APP_NAME=WillowCMS Production
+      - DEBUG=false
       - APP_ENV=${APP_ENV:-production}
       - APP_URL=${APP_URL}
+      - APP_ENCODING=UTF-8
+      - APP_DEFAULT_LOCALE=en_US
+      - APP_DEFAULT_TIMEZONE=UTC
+      - SECURITY_SALT=${APP_KEY}
+      # Database Configuration
+      - DB_HOST=db
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_PORT=3306
+      # Redis Configuration
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      - REDIS_DATABASE=0
+      # Email Configuration (using local SMTP for now)
+      - EMAIL_HOST=localhost
+      - EMAIL_PORT=587
+      - EMAIL_USERNAME=
+      - EMAIL_PASSWORD=
     networks:
       - willow_network
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 30s
+      start_period: 60s
 
   db:
     image: mariadb:11.4-noble
@@ -93,6 +124,15 @@ volumes:
     driver: local
   
   redis_data:
+    driver: local
+    
+  app_data:
+    driver: local
+    
+  app_logs:
+    driver: local
+    
+  app_uploads:
     driver: local
 
 networks:

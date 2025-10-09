@@ -1,0 +1,304 @@
+# 🐳 Docker Compose Override Template for Willow CMS
+# ============================================
+#
+# This is a template for docker-compose.override.yml which allows you to customize
+# the Docker environment for local development without modifying the main
+# docker-compose.yml file.
+#
+# 📝 USAGE:
+# 1. Copy this file to docker-compose.override.yml
+# 2. Uncomment and modify the sections you need
+# 3. Run `docker compose up -d` to apply changes
+#
+# ⚠️  IMPORTANT:
+# - Never commit docker-compose.override.yml to version control
+# - Add docker-compose.override.yml to your .gitignore
+# - This file is automatically loaded by Docker Compose when present
+#
+# 📚 Documentation: https://docs.docker.com/compose/override/
+
+version: '3.8'
+
+services:
+  # ========================================
+  # 🌐 Main Application Service (willowcms)
+  # ========================================
+  willowcms:
+    # 🔧 Environment Variables Override
+    # Uncomment to override environment variables
+    # environment:
+    #   - DEBUG=true
+    #   - APP_DEFAULT_LOCALE=es_ES
+    #   - ANTHROPIC_API_KEY=your_dev_api_key_here
+    #   - GOOGLE_TRANSLATE_API_KEY=your_dev_translate_key
+    #   - AI_ENABLED=true
+    #   - TRANSLATION_ENABLED=true
+    
+    # 📁 Additional Volume Mounts
+    # Uncomment to add custom volume mounts
+    # volumes:
+    #   # Mount local configuration files
+    #   - ./config/local.php:/var/www/html/config/local.php:ro
+    #   
+    #   # Mount custom theme development
+    #   - ./custom-theme:/var/www/html/plugins/CustomTheme:cached
+    #   
+    #   # Mount logs to host for easier debugging
+    #   - ./local-logs:/var/www/html/logs:cached
+    #   
+    #   # Mount custom uploads directory
+    #   - ./local-uploads:/var/www/html/webroot/uploads:cached
+    
+    # 🌐 Port Mapping Override
+    # Uncomment to change the port mapping
+    # ports:
+    #   - "8080:80"  # Default
+    #   - "9080:80"  # Alternative port
+    
+    # 💻 Resource Limits for Development
+    # Uncomment to limit resource usage
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '2.0'
+    #       memory: 2G
+    #     reservations:
+    #       memory: 512M
+
+  # ========================================
+  # 🗄️ Database Service (mysql)
+  # ========================================
+  mysql:
+    # 🔧 Environment Variables Override
+    # Uncomment to override database configuration
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=custom_root_password
+    #   - MYSQL_DATABASE=custom_cms_db
+    #   - MYSQL_USER=custom_cms_user
+    #   - MYSQL_PASSWORD=custom_password
+    
+    # 🌐 Port Mapping for External Access
+    # Uncomment to expose MySQL port to host
+    # ports:
+    #   - "3310:3306"  # External:Internal
+    #   # WARNING: Only do this for development, never in production
+    
+    # 📁 Custom Configuration
+    # Uncomment to mount custom MySQL configuration
+    # volumes:
+    #   - ./config/mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf:ro
+    
+    # 🔧 MySQL Configuration Override
+    # Uncomment to override MySQL settings
+    # command: >
+    #   --character-set-server=utf8mb4
+    #   --collation-server=utf8mb4_unicode_ci
+    #   --innodb-buffer-pool-size=512M
+    #   --max-connections=200
+
+  # ========================================
+  # 🚀 Redis Service Override
+  # ========================================
+  # Uncomment to add Redis service customizations
+  # redis:
+  #   # 🌐 Port Mapping for External Access
+  #   ports:
+  #     - "6379:6379"  # Expose Redis port
+  #   
+  #   # 📁 Persistent Data Volume
+  #   volumes:
+  #     - redis_data:/data
+  #   
+  #   # 🔧 Redis Configuration
+  #   command: >
+  #     --appendonly yes
+  #     --maxmemory 256mb
+  #     --maxmemory-policy allkeys-lru
+
+  # ========================================
+  # 🔍 Development Services
+  # ========================================
+  
+  # 📊 phpMyAdmin Service Override
+  phpmyadmin:
+    # 🔧 Environment Override
+    # Uncomment to customize phpMyAdmin
+    # environment:
+    #   - PMA_HOST=mysql
+    #   - PMA_USER=root
+    #   - PMA_PASSWORD=password
+    #   - UPLOAD_LIMIT=512M
+    #   - MEMORY_LIMIT=512M
+    
+    # 🌐 Alternative Port
+    # ports:
+    #   - "8082:80"  # Default
+    #   - "9082:80"  # Alternative port
+
+  # 📧 Mailpit Service Override
+  mailpit:
+    # 🌐 Alternative Ports
+    # ports:
+    #   - "8025:8025"  # Default web interface
+    #   - "1025:1025"  # Default SMTP
+    #   - "9025:8025"  # Alternative web interface
+
+  # 🔧 Redis Commander (Optional)
+  # Uncomment to add Redis management interface
+  # redis-commander:
+  #   image: rediscommander/redis-commander:latest
+  #   environment:
+  #     - REDIS_HOSTS=local:redis:6379
+  #     - HTTP_USER=admin
+  #     - HTTP_PASSWORD=admin123
+  #   ports:
+  #     - "8084:8081"
+  #   depends_on:
+  #     - redis
+  #   networks:
+  #     - willowcms
+
+  # 🏗️ Jenkins CI/CD (Optional)
+  # Uncomment to add Jenkins for continuous integration
+  # jenkins:
+  #   image: jenkins/jenkins:lts
+  #   user: root
+  #   environment:
+  #     - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+  #   volumes:
+  #     - jenkins_home:/var/jenkins_home
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - ./jenkins/plugins.txt:/usr/share/jenkins/ref/plugins.txt
+  #   ports:
+  #     - "8081:8080"
+  #     - "50000:50000"
+  #   networks:
+  #     - willowcms
+
+# ========================================
+# 📁 Additional Volumes
+# ========================================
+volumes:
+  # Uncomment to define additional volumes
+  # redis_data:
+  #   driver: local
+  # jenkins_home:
+  #   driver: local
+  # custom_mysql_data:
+  #   driver: local
+
+# ========================================
+# 🌐 Additional Networks
+# ========================================
+networks:
+  # Uncomment to define additional networks
+  # development:
+  #   driver: bridge
+  #   ipam:
+  #     config:
+  #       - subnet: 172.20.0.0/16
+  # external_network:
+  #   external: true
+
+# ========================================
+# 📋 Common Development Scenarios
+# ========================================
+
+# 🔧 SCENARIO 1: Theme Development
+# Uncomment willowcms volumes section above and add:
+# - ./my-custom-theme:/var/www/html/plugins/MyCustomTheme:cached
+
+# 🔧 SCENARIO 2: Database Development
+# Uncomment mysql ports section to expose MySQL to host tools
+
+# 🔧 SCENARIO 3: API Development
+# Add custom environment variables for API endpoints:
+# environment:
+#   - EXTERNAL_API_URL=http://localhost:3000
+#   - API_DEBUG_MODE=true
+
+# 🔧 SCENARIO 4: Performance Testing
+# Add resource limits to simulate production constraints
+
+# 🔧 SCENARIO 5: Multi-Developer Setup
+# Change port mappings to avoid conflicts:
+# willowcms ports: "8081:80"
+# phpmyadmin ports: "8083:80"
+
+# ========================================
+# 🚀 Production-Like Environment
+# ========================================
+# For testing production-like setup locally:
+#
+# willowcms:
+#   environment:
+#     - DEBUG=false
+#     - APP_ENV=production
+#     - SESSION_TIMEOUT=7200
+#   deploy:
+#     resources:
+#       limits:
+#         cpus: '1.0'
+#         memory: 1G
+#
+# mysql:
+#   command: >
+#     --character-set-server=utf8mb4
+#     --collation-server=utf8mb4_unicode_ci
+#     --innodb-buffer-pool-size=256M
+#     --max-connections=100
+
+# ========================================
+# 🧪 Testing Environment
+# ========================================
+# For automated testing setup:
+#
+# willowcms:
+#   environment:
+#     - APP_ENV=test
+#     - DEBUG=true
+#     - DATABASE_TEST_URL=mysql://test_user:test_pass@mysql:3306/test_cms
+#
+# mysql:
+#   environment:
+#     - MYSQL_DATABASE=test_cms
+#     - MYSQL_USER=test_user
+#     - MYSQL_PASSWORD=test_pass
+
+# ========================================
+# 🔒 Security Considerations
+# ========================================
+# 
+# 1. Never expose database ports in production
+# 2. Use strong passwords for all services
+# 3. Limit resource usage to prevent DoS
+# 4. Use read-only volumes where possible
+# 5. Regularly update service images
+# 6. Monitor logs for security issues
+#
+# Example secure configuration:
+# mysql:
+#   environment:
+#     - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_root_password
+#   secrets:
+#     - mysql_root_password
+# 
+# secrets:
+#   mysql_root_password:
+#     file: ./secrets/mysql_root_password.txt
+
+# ========================================
+# 📖 Additional Resources
+# ========================================
+#
+# 📚 Docker Compose Documentation:
+# https://docs.docker.com/compose/
+#
+# 🔧 Willow CMS Docker Guide:
+# docs/docker-restart-guide.md
+#
+# 🛠️ CakePHP Configuration:
+# https://book.cakephp.org/5/en/development/configuration.html
+#
+# 🐳 Docker Best Practices:
+# https://docs.docker.com/develop/best-practices/

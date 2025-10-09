@@ -1,0 +1,194 @@
+{
+  "platforms": [
+    {
+      "id": "kind-local",
+      "name": "Kind (Local)",
+      "category": "zero-cost",
+      "monthly_cost": 0,
+      "yearly_cost": 0,
+      "ten_year_cost": 0,
+      "difficulty": "Very Low",
+      "experience_needed": "Basic",
+      "scalability": "None",
+      "pros": [
+        "True $0 cost for development",
+        "Perfect for local testing",
+        "No external dependencies",
+        "Great for learning CakePHP"
+      ],
+      "cons": [
+        "No production capabilities",
+        "No external access",
+        "Limited to development only",
+        "No real-world traffic simulation"
+      ],
+      "best_for": "Local development & testing",
+      "color_class": "success",
+      "icon": "fas fa-laptop-code"
+    },
+    {
+      "id": "digital-ocean",
+      "name": "DigitalOcean Droplet",
+      "category": "low-cost",
+      "monthly_cost": 7,
+      "yearly_cost": 84,
+      "ten_year_cost": 840,
+      "difficulty": "Low",
+      "experience_needed": "Basic-Intermediate",
+      "scalability": "Manual",
+      "pros": [
+        "Excellent value for money",
+        "Simple, predictable pricing",
+        "Good for small-medium workloads",
+        "Easy scaling options",
+        "Great documentation and community"
+      ],
+      "cons": [
+        "Manual scaling required",
+        "Basic monitoring",
+        "Need to manage server updates"
+      ],
+      "best_for": "Simple production deployment",
+      "color_class": "primary",
+      "recommended": true,
+      "icon": "fab fa-digital-ocean"
+    },
+    {
+      "id": "docker-compose",
+      "name": "Docker Compose",
+      "category": "low-cost",
+      "monthly_cost": 8,
+      "yearly_cost": 96,
+      "ten_year_cost": 960,
+      "difficulty": "Low",
+      "experience_needed": "Basic-Intermediate",
+      "scalability": "Manual",
+      "pros": [
+        "Simple multi-container deployment",
+        "Easy dev to production transition",
+        "Perfect for queue workers",
+        "Version controlled infrastructure",
+        "Works great with existing Docker setup"
+      ],
+      "cons": [
+        "Limited scaling capabilities",
+        "No built-in orchestration",
+        "Manual health monitoring"
+      ],
+      "best_for": "Multi-container applications",
+      "color_class": "primary",
+      "icon": "fab fa-docker"
+    },
+    {
+      "id": "kubernetes-do",
+      "name": "Kubernetes (DigitalOcean)",
+      "category": "moderate-cost",
+      "monthly_cost": 25,
+      "yearly_cost": 300,
+      "ten_year_cost": 3000,
+      "difficulty": "High",
+      "experience_needed": "Advanced",
+      "scalability": "Auto",
+      "pros": [
+        "Production-ready orchestration",
+        "Excellent scaling capabilities",
+        "Industry standard",
+        "Auto-healing and rolling updates",
+        "Great for microservices"
+      ],
+      "cons": [
+        "Complexity overhead",
+        "Requires Kubernetes expertise",
+        "Higher costs",
+        "Learning curve is steep"
+      ],
+      "best_for": "High-traffic applications",
+      "color_class": "warning",
+      "icon": "fas fa-dharmachakra"
+    },
+    {
+      "id": "github-actions",
+      "name": "GitHub Actions CI/CD",
+      "category": "low-cost",
+      "monthly_cost": 7,
+      "yearly_cost": 84,
+      "ten_year_cost": 840,
+      "difficulty": "Medium",
+      "experience_needed": "Intermediate",
+      "scalability": "Auto (CI/CD)",
+      "pros": [
+        "Free tier for public repositories",
+        "Integrated with GitHub workflow",
+        "Automated deployment capabilities",
+        "Great for continuous deployment"
+      ],
+      "cons": [
+        "May require self-hosted runner",
+        "Usage limits on free tier",
+        "Complex for advanced workflows"
+      ],
+      "best_for": "Automated CI/CD pipelines",
+      "color_class": "info",
+      "icon": "fab fa-github"
+    },
+    {
+      "id": "heroku",
+      "name": "Heroku",
+      "category": "expensive",
+      "monthly_cost": 51,
+      "yearly_cost": 612,
+      "ten_year_cost": 6120,
+      "difficulty": "Low",
+      "experience_needed": "Basic",
+      "scalability": "Auto",
+      "pros": [
+        "Simple deployment process",
+        "Managed platform",
+        "Easy to get started",
+        "Built-in CI/CD"
+      ],
+      "cons": [
+        "Very expensive for resources provided",
+        "Limited customization",
+        "Vendor lock-in",
+        "Performance limitations"
+      ],
+      "best_for": "Rapid prototyping",
+      "color_class": "error",
+      "icon": "fas fa-cube"
+    }
+  ],
+  "ai_costs": {
+    "anthropic_claude": 20,
+    "estimated_monthly": 250,
+    "estimated_yearly": 3000,
+    "openai_gpt4": 60
+  },
+  "insights": [
+    "Infrastructure costs are minimal compared to AI API usage",
+    "Focus optimization efforts on AI prompt efficiency rather than server costs",
+    "Even expensive platforms cost less than AI APIs over 10 years",
+    "Platform choice has minimal impact on total cost of ownership (TCO)",
+    "Start simple with DigitalOcean, scale to Kubernetes only when needed"
+  ],
+  "timeline": {
+    "phase_1": {
+      "title": "Phase 1: Development & Testing (Months 1-6)",
+      "description": "Start with local Kind development, then move to DigitalOcean Droplet",
+      "cost_range": [0, 42],
+      "platforms": ["kind-local", "digital-ocean"]
+    },
+    "phase_2": {
+      "title": "Phase 2: Production Deployment (Months 7-12)",
+      "description": "Docker Compose on DigitalOcean with GitHub Actions CI/CD",
+      "cost_range": [84, 168],
+      "platforms": ["docker-compose", "github-actions"]
+    },
+    "phase_3": {
+      "title": "Phase 3: Scale When Needed (Years 2-10)",
+      "description": "Continue with Docker Compose or upgrade to Kubernetes",
+      "cost_range": [960, 3000],
+      "platforms": ["docker-compose", "kubernetes-do"]
+    }
+  }
+}

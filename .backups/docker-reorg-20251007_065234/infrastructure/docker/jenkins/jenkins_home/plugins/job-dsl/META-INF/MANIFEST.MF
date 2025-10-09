@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 17
+Specification-Title: Job DSL
+Specification-Version: 1.93
+Implementation-Title: Job DSL
+Implementation-Version: 1.93
+Group-Id: org.jenkins-ci.plugins
+Artifact-Id: job-dsl
+Short-Name: job-dsl
+Long-Name: Job DSL
+Url: https://github.com/jenkinsci/job-dsl-plugin
+Compatible-Since-Version: 1.81
+Plugin-Version: 1.93
+Hudson-Version: 2.479.3
+Jenkins-Version: 2.479.3
+Plugin-Dependencies: configuration-as-code:1963.v24e046127a_3f;resolutio
+ n:=optional,branch-api:2.1217.v43d8b_b_d8b_2c7,cloudbees-folder:6.1023.
+ v4fcb_72152519,config-file-provider:988.v0461fcc2b_9d1;resolution:=opti
+ onal,script-security:1373.vb_b_4a_a_c26fa_00,structs:350.v3b_30f09f2363
+ ,vsphere-cloud:2.27;resolution:=optional
+Plugin-Developers: Justin Ryan:quidryan:jryan@netflix.com,Andrew Harmel-
+ Law:andrewharmellaw:andrew@harmel-law.com,Daniel Spilker:daspilker:mail
+ @daniel-spilker.com,Jamie Tanna:jamietanna:jenkins@jamietanna.co.uk,Mat
+ t Sheehan:sheehan:mr.sheehan@gmail.com
+Plugin-License-Name: Apache License, Version 2.0
+Plugin-License-Url: https://www.apache.org/licenses/LICENSE-2.0.txt
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/job-dsl-plugi
+ n.git
+Plugin-ScmTag: job-dsl-1.93
+Plugin-ScmUrl: https://github.com/jenkinsci/job-dsl-plugin
+Implementation-Build: 1396312dd87d4afd024f479c7619dcb1ec724baf
+

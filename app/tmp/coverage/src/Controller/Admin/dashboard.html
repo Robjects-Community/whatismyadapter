@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Controller/Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../../_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../../_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../../_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../../index.html">/var/www/html</a></li>
+         <li class="breadcrumb-item"><a href="../../index.html">src</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">Controller</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AdminCrudController.php.html#19">App\Controller\Admin\AdminCrudController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AipromptsController.php.html#14">App\Controller\Admin\AipromptsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesController.php.html#19">App\Controller\Admin\ArticlesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#15">App\Controller\Admin\BlockedIpsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#15">App\Controller\Admin\CableCapabilitiesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheController.php.html#17">App\Controller\Admin\CacheController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentsController.php.html#20">App\Controller\Admin\CommentsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#23">App\Controller\Admin\EmailTemplatesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#13">App\Controller\Admin\HomepageFeedsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#17">App\Controller\Admin\ImageGalleriesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#18">App\Controller\Admin\ImageGalleriesControllerRefactored</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#18">App\Controller\Admin\ImageGenerationController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#23">App\Controller\Admin\ImagesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#14">App\Controller\Admin\InternationalisationsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsController.php.html#22">App\Controller\Admin\PageViewsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#24">App\Controller\Admin\PagesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#17">App\Controller\Admin\ProductFormFieldsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#22">App\Controller\Admin\ProductPageViewsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#16">App\Controller\Admin\ProductsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#18">App\Controller\Admin\QueueConfigurationsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityController.php.html#23">App\Controller\Admin\ReliabilityController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingsController.php.html#19">App\Controller\Admin\SettingsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlugsController.php.html#20">App\Controller\Admin\SlugsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SystemLogsController.php.html#16">App\Controller\Admin\SystemLogsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsController.php.html#18">App\Controller\Admin\TagsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#17">App\Controller\Admin\UsersController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VideosController.php.html#14">App\Controller\Admin\VideosController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#15">App\Controller\Admin\AdminSearchTrait</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#17">App\Controller\Admin\AiMetricsController</a></td><td class="text-right">40%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ProductsController.php.html#16">App\Controller\Admin\ProductsController</a></td><td class="text-right">84390</td></tr>
+       <tr><td><a href="ArticlesController.php.html#19">App\Controller\Admin\ArticlesController</a></td><td class="text-right">2352</td></tr>
+       <tr><td><a href="PagesController.php.html#24">App\Controller\Admin\PagesController</a></td><td class="text-right">1980</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#18">App\Controller\Admin\QueueConfigurationsController</a></td><td class="text-right">1980</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#17">App\Controller\Admin\ImageGalleriesController</a></td><td class="text-right">1806</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#19">App\Controller\Admin\AdminCrudController</a></td><td class="text-right">1560</td></tr>
+       <tr><td><a href="ImagesController.php.html#23">App\Controller\Admin\ImagesController</a></td><td class="text-right">1260</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#17">App\Controller\Admin\ProductFormFieldsController</a></td><td class="text-right">1260</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#13">App\Controller\Admin\HomepageFeedsController</a></td><td class="text-right">930</td></tr>
+       <tr><td><a href="SlugsController.php.html#20">App\Controller\Admin\SlugsController</a></td><td class="text-right">870</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#23">App\Controller\Admin\EmailTemplatesController</a></td><td class="text-right">756</td></tr>
+       <tr><td><a href="UsersController.php.html#17">App\Controller\Admin\UsersController</a></td><td class="text-right">756</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#18">App\Controller\Admin\ImageGenerationController</a></td><td class="text-right">702</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#15">App\Controller\Admin\AdminSearchTrait</a></td><td class="text-right">650</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#18">App\Controller\Admin\ImageGalleriesControllerRefactored</a></td><td class="text-right">600</td></tr>
+       <tr><td><a href="PageViewsController.php.html#22">App\Controller\Admin\PageViewsController</a></td><td class="text-right">552</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#22">App\Controller\Admin\ProductPageViewsController</a></td><td class="text-right">552</td></tr>
+       <tr><td><a href="TagsController.php.html#18">App\Controller\Admin\TagsController</a></td><td class="text-right">506</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#15">App\Controller\Admin\CableCapabilitiesController</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="SystemLogsController.php.html#16">App\Controller\Admin\SystemLogsController</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="AipromptsController.php.html#14">App\Controller\Admin\AipromptsController</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="CacheController.php.html#17">App\Controller\Admin\CacheController</a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="CommentsController.php.html#20">App\Controller\Admin\CommentsController</a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="ReliabilityController.php.html#23">App\Controller\Admin\ReliabilityController</a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#14">App\Controller\Admin\InternationalisationsController</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#15">App\Controller\Admin\BlockedIpsController</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="VideosController.php.html#14">App\Controller\Admin\VideosController</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#17">App\Controller\Admin\AiMetricsController</a></td><td class="text-right">155</td></tr>
+       <tr><td><a href="SettingsController.php.html#19">App\Controller\Admin\SettingsController</a></td><td class="text-right">132</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AdminCrudController.php.html#69"><abbr title="App\Controller\Admin\AdminCrudController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#80"><abbr title="App\Controller\Admin\AdminCrudController::setupModelClass">setupModelClass</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#87"><abbr title="App\Controller\Admin\AdminCrudController::clearCache">clearCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#102"><abbr title="App\Controller\Admin\AdminCrudController::buildIndexQuery">buildIndexQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#136"><abbr title="App\Controller\Admin\AdminCrudController::applyStatusFilter">applyStatusFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#161"><abbr title="App\Controller\Admin\AdminCrudController::applySearchFilter">applySearchFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#181"><abbr title="App\Controller\Admin\AdminCrudController::handleAjaxResponse">handleAjaxResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#197"><abbr title="App\Controller\Admin\AdminCrudController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#227"><abbr title="App\Controller\Admin\AdminCrudController::modifyIndexQuery">modifyIndexQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#239"><abbr title="App\Controller\Admin\AdminCrudController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#258"><abbr title="App\Controller\Admin\AdminCrudController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#298"><abbr title="App\Controller\Admin\AdminCrudController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#340"><abbr title="App\Controller\Admin\AdminCrudController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#362"><abbr title="App\Controller\Admin\AdminCrudController::modifyDataBeforeSave">modifyDataBeforeSave</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#373"><abbr title="App\Controller\Admin\AdminCrudController::getAdditionalFormData">getAdditionalFormData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#384"><abbr title="App\Controller\Admin\AdminCrudController::getSuccessMessage">getSuccessMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#402"><abbr title="App\Controller\Admin\AdminCrudController::getErrorMessage">getErrorMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#419"><abbr title="App\Controller\Admin\AdminCrudController::getEntityDisplayName">getEntityDisplayName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#434"><abbr title="App\Controller\Admin\AdminCrudController::getRedirectLocation">getRedirectLocation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#22"><abbr title="App\Controller\Admin\AiMetricsController::dashboard">dashboard</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#203"><abbr title="App\Controller\Admin\AiMetricsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#248"><abbr title="App\Controller\Admin\AiMetricsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#259"><abbr title="App\Controller\Admin\AiMetricsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#281"><abbr title="App\Controller\Admin\AiMetricsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#303"><abbr title="App\Controller\Admin\AiMetricsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AipromptsController.php.html#21"><abbr title="App\Controller\Admin\AipromptsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AipromptsController.php.html#91"><abbr title="App\Controller\Admin\AipromptsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AipromptsController.php.html#102"><abbr title="App\Controller\Admin\AipromptsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AipromptsController.php.html#126"><abbr title="App\Controller\Admin\AipromptsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AipromptsController.php.html#150"><abbr title="App\Controller\Admin\AipromptsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesController.php.html#26"><abbr title="App\Controller\Admin\ArticlesController::clearContentCache">clearContentCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesController.php.html#36"><abbr title="App\Controller\Admin\ArticlesController::treeIndex">treeIndex</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesController.php.html#110"><abbr title="App\Controller\Admin\ArticlesController::updateTree">updateTree</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesController.php.html#132"><abbr title="App\Controller\Admin\ArticlesController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesController.php.html#214"><abbr title="App\Controller\Admin\ArticlesController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesController.php.html#237"><abbr title="App\Controller\Admin\ArticlesController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesController.php.html#304"><abbr title="App\Controller\Admin\ArticlesController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesController.php.html#383"><abbr title="App\Controller\Admin\ArticlesController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesController.php.html#410"><abbr title="App\Controller\Admin\ArticlesController::bulkAction">bulkAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#22"><abbr title="App\Controller\Admin\BlockedIpsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#64"><abbr title="App\Controller\Admin\BlockedIpsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#75"><abbr title="App\Controller\Admin\BlockedIpsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#100"><abbr title="App\Controller\Admin\BlockedIpsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#125"><abbr title="App\Controller\Admin\BlockedIpsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#20"><abbr title="App\Controller\Admin\CableCapabilitiesController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#30"><abbr title="App\Controller\Admin\CableCapabilitiesController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#57"><abbr title="App\Controller\Admin\CableCapabilitiesController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#73"><abbr title="App\Controller\Admin\CableCapabilitiesController::category">category</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#102"><abbr title="App\Controller\Admin\CableCapabilitiesController::certified">certified</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#120"><abbr title="App\Controller\Admin\CableCapabilitiesController::search">search</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#150"><abbr title="App\Controller\Admin\CableCapabilitiesController::analytics">analytics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#176"><abbr title="App\Controller\Admin\CableCapabilitiesController::export">export</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#219"><abbr title="App\Controller\Admin\CableCapabilitiesController::returnToProducts">returnToProducts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheController.php.html#24"><abbr title="App\Controller\Admin\CacheController::clearAll">clearAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheController.php.html#67"><abbr title="App\Controller\Admin\CacheController::clear">clear</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheController.php.html#92"><abbr title="App\Controller\Admin\CacheController::getCacheInfo">getCacheInfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheController.php.html#117"><abbr title="App\Controller\Admin\CacheController::getLastClearedTime">getLastClearedTime</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheController.php.html#130"><abbr title="App\Controller\Admin\CacheController::updateLastClearedTime">updateLastClearedTime</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentsController.php.html#29"><abbr title="App\Controller\Admin\CommentsController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentsController.php.html#40"><abbr title="App\Controller\Admin\CommentsController::clearContentCache">clearContentCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentsController.php.html#50"><abbr title="App\Controller\Admin\CommentsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentsController.php.html#90"><abbr title="App\Controller\Admin\CommentsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentsController.php.html#103"><abbr title="App\Controller\Admin\CommentsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentsController.php.html#132"><abbr title="App\Controller\Admin\CommentsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#30"><abbr title="App\Controller\Admin\EmailTemplatesController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#75"><abbr title="App\Controller\Admin\EmailTemplatesController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#86"><abbr title="App\Controller\Admin\EmailTemplatesController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#113"><abbr title="App\Controller\Admin\EmailTemplatesController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#139"><abbr title="App\Controller\Admin\EmailTemplatesController::htmlToPlainText">htmlToPlainText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#154"><abbr title="App\Controller\Admin\EmailTemplatesController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#174"><abbr title="App\Controller\Admin\EmailTemplatesController::sendEmail">sendEmail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#268"><abbr title="App\Controller\Admin\EmailTemplatesController::prepareEmailVariables">prepareEmailVariables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#305"><abbr title="App\Controller\Admin\EmailTemplatesController::generateLink">generateLink</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#20"><abbr title="App\Controller\Admin\HomepageFeedsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#52"><abbr title="App\Controller\Admin\HomepageFeedsController::configure">configure</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#93"><abbr title="App\Controller\Admin\HomepageFeedsController::preview">preview</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#108"><abbr title="App\Controller\Admin\HomepageFeedsController::reset">reset</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#142"><abbr title="App\Controller\Admin\HomepageFeedsController::_getFeedStatistics">_getFeedStatistics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#218"><abbr title="App\Controller\Admin\HomepageFeedsController::_getFeedConfigurations">_getFeedConfigurations</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#278"><abbr title="App\Controller\Admin\HomepageFeedsController::_saveSetting">_saveSetting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#26"><abbr title="App\Controller\Admin\ImageGalleriesController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#102"><abbr title="App\Controller\Admin\ImageGalleriesController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#120"><abbr title="App\Controller\Admin\ImageGalleriesController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#147"><abbr title="App\Controller\Admin\ImageGalleriesController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#181"><abbr title="App\Controller\Admin\ImageGalleriesController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#201"><abbr title="App\Controller\Admin\ImageGalleriesController::manageImages">manageImages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#227"><abbr title="App\Controller\Admin\ImageGalleriesController::addImages">addImages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#307"><abbr title="App\Controller\Admin\ImageGalleriesController::removeImage">removeImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#354"><abbr title="App\Controller\Admin\ImageGalleriesController::updateImageOrder">updateImageOrder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#398"><abbr title="App\Controller\Admin\ImageGalleriesController::picker">picker</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#469"><abbr title="App\Controller\Admin\ImageGalleriesController::_processUploadsAndSetFlash">_processUploadsAndSetFlash</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#27"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::setupModelClass">setupModelClass</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#65"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#104"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::modifyIndexQuery">modifyIndexQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#120"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#142"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::modifyDataBeforeSave">modifyDataBeforeSave</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#160"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::getAdditionalFormData">getAdditionalFormData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#173"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::getRedirectLocation">getRedirectLocation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#198"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::manageImages">manageImages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#225"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::addImages">addImages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#297"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::_processUploadsAndSetFlash">_processUploadsAndSetFlash</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#30"><abbr title="App\Controller\Admin\ImageGenerationController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#44"><abbr title="App\Controller\Admin\ImageGenerationController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#83"><abbr title="App\Controller\Admin\ImageGenerationController::statistics">statistics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#103"><abbr title="App\Controller\Admin\ImageGenerationController::batch">batch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#126"><abbr title="App\Controller\Admin\ImageGenerationController::processBatch">processBatch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#169"><abbr title="App\Controller\Admin\ImageGenerationController::config">config</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#183"><abbr title="App\Controller\Admin\ImageGenerationController::getArticlesNeedingImages">getArticlesNeedingImages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#214"><abbr title="App\Controller\Admin\ImageGenerationController::getRateLimitStatus">getRateLimitStatus</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#234"><abbr title="App\Controller\Admin\ImageGenerationController::getConfigurationStatus">getConfigurationStatus</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#262"><abbr title="App\Controller\Admin\ImageGenerationController::getMonthlyStatistics">getMonthlyStatistics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#278"><abbr title="App\Controller\Admin\ImageGenerationController::getProviderStatistics">getProviderStatistics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#30"><abbr title="App\Controller\Admin\ImagesController::viewClasses">viewClasses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#40"><abbr title="App\Controller\Admin\ImagesController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#93"><abbr title="App\Controller\Admin\ImagesController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#115"><abbr title="App\Controller\Admin\ImagesController::imageSelect">imageSelect</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#161"><abbr title="App\Controller\Admin\ImagesController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#184"><abbr title="App\Controller\Admin\ImagesController::bulkUpload">bulkUpload</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#279"><abbr title="App\Controller\Admin\ImagesController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#303"><abbr title="App\Controller\Admin\ImagesController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#325"><abbr title="App\Controller\Admin\ImagesController::deleteUploadedImage">deleteUploadedImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImagesController.php.html#379"><abbr title="App\Controller\Admin\ImagesController::picker">picker</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#21"><abbr title="App\Controller\Admin\InternationalisationsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#76"><abbr title="App\Controller\Admin\InternationalisationsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#87"><abbr title="App\Controller\Admin\InternationalisationsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#114"><abbr title="App\Controller\Admin\InternationalisationsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#141"><abbr title="App\Controller\Admin\InternationalisationsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsController.php.html#42"><abbr title="App\Controller\Admin\PageViewsController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsController.php.html#58"><abbr title="App\Controller\Admin\PageViewsController::pageViewStats">pageViewStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsController.php.html#93"><abbr title="App\Controller\Admin\PageViewsController::viewRecords">viewRecords</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsController.php.html#126"><abbr title="App\Controller\Admin\PageViewsController::filterStats">filterStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsController.php.html#189"><abbr title="App\Controller\Admin\PageViewsController::dashboard">dashboard</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsController.php.html#274"><abbr title="App\Controller\Admin\PageViewsController::getBrowserStats">getBrowserStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsController.php.html#302"><abbr title="App\Controller\Admin\PageViewsController::extractBrowser">extractBrowser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsController.php.html#329"><abbr title="App\Controller\Admin\PageViewsController::getHourlyDistribution">getHourlyDistribution</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsController.php.html#359"><abbr title="App\Controller\Admin\PageViewsController::getTopReferrers">getTopReferrers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#36"><abbr title="App\Controller\Admin\PagesController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#47"><abbr title="App\Controller\Admin\PagesController::clearContentCache">clearContentCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#57"><abbr title="App\Controller\Admin\PagesController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#129"><abbr title="App\Controller\Admin\PagesController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#146"><abbr title="App\Controller\Admin\PagesController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#184"><abbr title="App\Controller\Admin\PagesController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#229"><abbr title="App\Controller\Admin\PagesController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#252"><abbr title="App\Controller\Admin\PagesController::bulkActions">bulkActions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#307"><abbr title="App\Controller\Admin\PagesController::createConnectPages">createConnectPages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#429"><abbr title="App\Controller\Admin\PagesController::extract">extract</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#478"><abbr title="App\Controller\Admin\PagesController::extractPreview">extractPreview</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#510"><abbr title="App\Controller\Admin\PagesController::extractWebpage">extractWebpage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#559"><abbr title="App\Controller\Admin\PagesController::costAnalysis">costAnalysis</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#24"><abbr title="App\Controller\Admin\ProductFormFieldsController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#35"><abbr title="App\Controller\Admin\ProductFormFieldsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#51"><abbr title="App\Controller\Admin\ProductFormFieldsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#65"><abbr title="App\Controller\Admin\ProductFormFieldsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#100"><abbr title="App\Controller\Admin\ProductFormFieldsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#127"><abbr title="App\Controller\Admin\ProductFormFieldsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#149"><abbr title="App\Controller\Admin\ProductFormFieldsController::reorder">reorder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#241"><abbr title="App\Controller\Admin\ProductFormFieldsController::toggleAi">toggleAi</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#282"><abbr title="App\Controller\Admin\ProductFormFieldsController::testAi">testAi</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#326"><abbr title="App\Controller\Admin\ProductFormFieldsController::resetOrder">resetOrder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#42"><abbr title="App\Controller\Admin\ProductPageViewsController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#58"><abbr title="App\Controller\Admin\ProductPageViewsController::pageViewStats">pageViewStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#93"><abbr title="App\Controller\Admin\ProductPageViewsController::viewRecords">viewRecords</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#126"><abbr title="App\Controller\Admin\ProductPageViewsController::filterStats">filterStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#189"><abbr title="App\Controller\Admin\ProductPageViewsController::dashboard">dashboard</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#274"><abbr title="App\Controller\Admin\ProductPageViewsController::getBrowserStats">getBrowserStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#302"><abbr title="App\Controller\Admin\ProductPageViewsController::extractBrowser">extractBrowser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#329"><abbr title="App\Controller\Admin\ProductPageViewsController::getHourlyDistribution">getHourlyDistribution</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#359"><abbr title="App\Controller\Admin\ProductPageViewsController::getTopReferrers">getTopReferrers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#23"><abbr title="App\Controller\Admin\ProductsController::dashboard">dashboard</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#80"><abbr title="App\Controller\Admin\ProductsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#170"><abbr title="App\Controller\Admin\ProductsController::pendingReview">pendingReview</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#278"><abbr title="App\Controller\Admin\ProductsController::index2">index2</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#365"><abbr title="App\Controller\Admin\ProductsController::formsDashboard">formsDashboard</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#382"><abbr title="App\Controller\Admin\ProductsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#409"><abbr title="App\Controller\Admin\ProductsController::view2">view2</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#434"><abbr title="App\Controller\Admin\ProductsController::add2">add2</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#487"><abbr title="App\Controller\Admin\ProductsController::edit2">edit2</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#552"><abbr title="App\Controller\Admin\ProductsController::addBeautiful">addBeautiful</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#604"><abbr title="App\Controller\Admin\ProductsController::aiScore">aiScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#624"><abbr title="App\Controller\Admin\ProductsController::calculateProductScore">calculateProductScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#718"><abbr title="App\Controller\Admin\ProductsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#771"><abbr title="App\Controller\Admin\ProductsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#836"><abbr title="App\Controller\Admin\ProductsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#857"><abbr title="App\Controller\Admin\ProductsController::verify">verify</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#876"><abbr title="App\Controller\Admin\ProductsController::toggleFeatured">toggleFeatured</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#900"><abbr title="App\Controller\Admin\ProductsController::togglePublished">togglePublished</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#924"><abbr title="App\Controller\Admin\ProductsController::approve">approve</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#947"><abbr title="App\Controller\Admin\ProductsController::reject">reject</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#969"><abbr title="App\Controller\Admin\ProductsController::hasSignificantChanges">hasSignificantChanges</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#977"><abbr title="App\Controller\Admin\ProductsController::queueJob">queueJob</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#987"><abbr title="App\Controller\Admin\ProductsController::clearContentCache">clearContentCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#997"><abbr title="App\Controller\Admin\ProductsController::bulkVerify">bulkVerify</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1031"><abbr title="App\Controller\Admin\ProductsController::bulkApprove">bulkApprove</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1080"><abbr title="App\Controller\Admin\ProductsController::bulkReject">bulkReject</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1129"><abbr title="App\Controller\Admin\ProductsController::formsRedirect">formsRedirect</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1146"><abbr title="App\Controller\Admin\ProductsController::forms">forms</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1263"><abbr title="App\Controller\Admin\ProductsController::formsQuiz">formsQuiz</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1376"><abbr title="App\Controller\Admin\ProductsController::formsCustomerQuiz">formsCustomerQuiz</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1497"><abbr title="App\Controller\Admin\ProductsController::formsFields">formsFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1523"><abbr title="App\Controller\Admin\ProductsController::formsStats">formsStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1589"><abbr title="App\Controller\Admin\ProductsController::aiSuggest">aiSuggest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1639"><abbr title="App\Controller\Admin\ProductsController::suggestManufacturer">suggestManufacturer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1670"><abbr title="App\Controller\Admin\ProductsController::suggestCategory">suggestCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1691"><abbr title="App\Controller\Admin\ProductsController::enhanceDescription">enhanceDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1706"><abbr title="App\Controller\Admin\ProductsController::suggestTags">suggestTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1725"><abbr title="App\Controller\Admin\ProductsController::estimatePrice">estimatePrice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1746"><abbr title="App\Controller\Admin\ProductsController::getSettingDescription">getSettingDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1771"><abbr title="App\Controller\Admin\ProductsController::normalizeSettingValue">normalizeSettingValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1837"><abbr title="App\Controller\Admin\ProductsController::bulkEdit">bulkEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1885"><abbr title="App\Controller\Admin\ProductsController::bulkVerifyInternal">bulkVerifyInternal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1901"><abbr title="App\Controller\Admin\ProductsController::bulkApproveInternal">bulkApproveInternal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1935"><abbr title="App\Controller\Admin\ProductsController::bulkRejectInternal">bulkRejectInternal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#1970"><abbr title="App\Controller\Admin\ProductsController::bulkTogglePublished">bulkTogglePublished</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#2016"><abbr title="App\Controller\Admin\ProductsController::bulkToggleFeatured">bulkToggleFeatured</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#2061"><abbr title="App\Controller\Admin\ProductsController::bulkDelete">bulkDelete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#2120"><abbr title="App\Controller\Admin\ProductsController::bulkUpdateFields">bulkUpdateFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#2201"><abbr title="App\Controller\Admin\ProductsController::validateProductIds">validateProductIds</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#2220"><abbr title="App\Controller\Admin\ProductsController::logBulkAction">logBulkAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#2247"><abbr title="App\Controller\Admin\ProductsController::quizSettings">quizSettings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#2294"><abbr title="App\Controller\Admin\ProductsController::validateQuizSettings">validateQuizSettings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#2338"><abbr title="App\Controller\Admin\ProductsController::processQuizSettingsData">processQuizSettingsData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#2413"><abbr title="App\Controller\Admin\ProductsController::prepareQuizSettingsForForm">prepareQuizSettingsForForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductsController.php.html#2442"><abbr title="App\Controller\Admin\ProductsController::getQuizSettingSections">getQuizSettingSections</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#25"><abbr title="App\Controller\Admin\QueueConfigurationsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#76"><abbr title="App\Controller\Admin\QueueConfigurationsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#87"><abbr title="App\Controller\Admin\QueueConfigurationsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#120"><abbr title="App\Controller\Admin\QueueConfigurationsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#153"><abbr title="App\Controller\Admin\QueueConfigurationsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#173"><abbr title="App\Controller\Admin\QueueConfigurationsController::sync">sync</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#191"><abbr title="App\Controller\Admin\QueueConfigurationsController::healthCheck">healthCheck</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#220"><abbr title="App\Controller\Admin\QueueConfigurationsController::healthCheckAll">healthCheckAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#249"><abbr title="App\Controller\Admin\QueueConfigurationsController::checkQueueHealth">checkQueueHealth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#304"><abbr title="App\Controller\Admin\QueueConfigurationsController::checkRabbitMQHealth">checkRabbitMQHealth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#324"><abbr title="App\Controller\Admin\QueueConfigurationsController::checkRedisHealth">checkRedisHealth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#358"><abbr title="App\Controller\Admin\QueueConfigurationsController::updateQueueConfigFile">updateQueueConfigFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#432"><abbr title="App\Controller\Admin\QueueConfigurationsController::buildQueueUrl">buildQueueUrl</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityController.php.html#33"><abbr title="App\Controller\Admin\ReliabilityController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityController.php.html#76"><abbr title="App\Controller\Admin\ReliabilityController::recalc">recalc</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityController.php.html#131"><abbr title="App\Controller\Admin\ReliabilityController::verifyChecksums">verifyChecksums</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingsController.php.html#30"><abbr title="App\Controller\Admin\SettingsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingsController.php.html#71"><abbr title="App\Controller\Admin\SettingsController::saveSettings">saveSettings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlugsController.php.html#37"><abbr title="App\Controller\Admin\SlugsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlugsController.php.html#180"><abbr title="App\Controller\Admin\SlugsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlugsController.php.html#249"><abbr title="App\Controller\Admin\SlugsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlugsController.php.html#307"><abbr title="App\Controller\Admin\SlugsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlugsController.php.html#339"><abbr title="App\Controller\Admin\SlugsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SystemLogsController.php.html#29"><abbr title="App\Controller\Admin\SystemLogsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SystemLogsController.php.html#102"><abbr title="App\Controller\Admin\SystemLogsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SystemLogsController.php.html#123"><abbr title="App\Controller\Admin\SystemLogsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsController.php.html#25"><abbr title="App\Controller\Admin\TagsController::clearContentCache">clearContentCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsController.php.html#35"><abbr title="App\Controller\Admin\TagsController::treeIndex">treeIndex</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsController.php.html#89"><abbr title="App\Controller\Admin\TagsController::updateTree">updateTree</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsController.php.html#115"><abbr title="App\Controller\Admin\TagsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsController.php.html#166"><abbr title="App\Controller\Admin\TagsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsController.php.html#179"><abbr title="App\Controller\Admin\TagsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsController.php.html#210"><abbr title="App\Controller\Admin\TagsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsController.php.html#244"><abbr title="App\Controller\Admin\TagsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#25"><abbr title="App\Controller\Admin\UsersController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#39"><abbr title="App\Controller\Admin\UsersController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#92"><abbr title="App\Controller\Admin\UsersController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#103"><abbr title="App\Controller\Admin\UsersController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#137"><abbr title="App\Controller\Admin\UsersController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#188"><abbr title="App\Controller\Admin\UsersController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#212"><abbr title="App\Controller\Admin\UsersController::login">login</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#254"><abbr title="App\Controller\Admin\UsersController::logout">logout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VideosController.php.html#23"><abbr title="App\Controller\Admin\VideosController::videoSelect">videoSelect</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#39"><abbr title="App\Controller\Admin\AdminSearchTrait::buildSearchQuery">buildSearchQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#100"><abbr title="App\Controller\Admin\AdminSearchTrait::modifySearchQuery">modifySearchQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#111"><abbr title="App\Controller\Admin\AdminSearchTrait::getStatusField">getStatusField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#142"><abbr title="App\Controller\Admin\AdminSearchTrait::executeSearch">executeSearch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#168"><abbr title="App\Controller\Admin\AdminSearchTrait::search">search</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#187"><abbr title="App\Controller\Admin\AdminSearchTrait::getSearchQuery">getSearchQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#195"><abbr title="App\Controller\Admin\AdminSearchTrait::renderSearchForm">renderSearchForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#64"><abbr title="App\Controller\Admin\AiMetricsController::realtimeData">realtimeData</abbr></a></td><td class="text-right">74%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ProductsController.php.html#2338"><abbr title="App\Controller\Admin\ProductsController::processQuizSettingsData">processQuizSettingsData</abbr></a></td><td class="text-right">506</td></tr>
+       <tr><td><a href="ProductsController.php.html#624"><abbr title="App\Controller\Admin\ProductsController::calculateProductScore">calculateProductScore</abbr></a></td><td class="text-right">420</td></tr>
+       <tr><td><a href="ProductsController.php.html#1771"><abbr title="App\Controller\Admin\ProductsController::normalizeSettingValue">normalizeSettingValue</abbr></a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="ProductsController.php.html#2294"><abbr title="App\Controller\Admin\ProductsController::validateQuizSettings">validateQuizSettings</abbr></a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="ProductsController.php.html#2120"><abbr title="App\Controller\Admin\ProductsController::bulkUpdateFields">bulkUpdateFields</abbr></a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#149"><abbr title="App\Controller\Admin\ProductFormFieldsController::reorder">reorder</abbr></a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="ProductsController.php.html#1146"><abbr title="App\Controller\Admin\ProductsController::forms">forms</abbr></a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="SlugsController.php.html#37"><abbr title="App\Controller\Admin\SlugsController::index">index</abbr></a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#39"><abbr title="App\Controller\Admin\AdminSearchTrait::buildSearchQuery">buildSearchQuery</abbr></a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="VideosController.php.html#23"><abbr title="App\Controller\Admin\VideosController::videoSelect">videoSelect</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="ProductsController.php.html#1837"><abbr title="App\Controller\Admin\ProductsController::bulkEdit">bulkEdit</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="ArticlesController.php.html#304"><abbr title="App\Controller\Admin\ArticlesController::edit">edit</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="SystemLogsController.php.html#123"><abbr title="App\Controller\Admin\SystemLogsController::delete">delete</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="ArticlesController.php.html#36"><abbr title="App\Controller\Admin\ArticlesController::treeIndex">treeIndex</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#52"><abbr title="App\Controller\Admin\HomepageFeedsController::configure">configure</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#225"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::addImages">addImages</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="SettingsController.php.html#71"><abbr title="App\Controller\Admin\SettingsController::saveSettings">saveSettings</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="ArticlesController.php.html#237"><abbr title="App\Controller\Admin\ArticlesController::add">add</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ArticlesController.php.html#410"><abbr title="App\Controller\Admin\ArticlesController::bulkAction">bulkAction</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#227"><abbr title="App\Controller\Admin\ImageGalleriesController::addImages">addImages</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ProductsController.php.html#80"><abbr title="App\Controller\Admin\ProductsController::index">index</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ProductsController.php.html#170"><abbr title="App\Controller\Admin\ProductsController::pendingReview">pendingReview</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ProductsController.php.html#278"><abbr title="App\Controller\Admin\ProductsController::index2">index2</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#136"><abbr title="App\Controller\Admin\AdminCrudController::applyStatusFilter">applyStatusFilter</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#469"><abbr title="App\Controller\Admin\ImageGalleriesController::_processUploadsAndSetFlash">_processUploadsAndSetFlash</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="ImagesController.php.html#184"><abbr title="App\Controller\Admin\ImagesController::bulkUpload">bulkUpload</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="PagesController.php.html#57"><abbr title="App\Controller\Admin\PagesController::index">index</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="PagesController.php.html#252"><abbr title="App\Controller\Admin\PagesController::bulkActions">bulkActions</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="ProductsController.php.html#1031"><abbr title="App\Controller\Admin\ProductsController::bulkApprove">bulkApprove</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="ProductsController.php.html#1080"><abbr title="App\Controller\Admin\ProductsController::bulkReject">bulkReject</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="ProductsController.php.html#1376"><abbr title="App\Controller\Admin\ProductsController::formsCustomerQuiz">formsCustomerQuiz</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="ProductsController.php.html#1670"><abbr title="App\Controller\Admin\ProductsController::suggestCategory">suggestCategory</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="ProductsController.php.html#2061"><abbr title="App\Controller\Admin\ProductsController::bulkDelete">bulkDelete</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#358"><abbr title="App\Controller\Admin\QueueConfigurationsController::updateQueueConfigFile">updateQueueConfigFile</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="ReliabilityController.php.html#131"><abbr title="App\Controller\Admin\ReliabilityController::verifyChecksums">verifyChecksums</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="AipromptsController.php.html#21"><abbr title="App\Controller\Admin\AipromptsController::index">index</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#108"><abbr title="App\Controller\Admin\HomepageFeedsController::reset">reset</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#26"><abbr title="App\Controller\Admin\ImageGalleriesController::index">index</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#126"><abbr title="App\Controller\Admin\ImageGenerationController::processBatch">processBatch</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ImagesController.php.html#325"><abbr title="App\Controller\Admin\ImagesController::deleteUploadedImage">deleteUploadedImage</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ProductsController.php.html#487"><abbr title="App\Controller\Admin\ProductsController::edit2">edit2</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ProductsController.php.html#771"><abbr title="App\Controller\Admin\ProductsController::edit">edit</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ProductsController.php.html#1263"><abbr title="App\Controller\Admin\ProductsController::formsQuiz">formsQuiz</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ProductsController.php.html#1706"><abbr title="App\Controller\Admin\ProductsController::suggestTags">suggestTags</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ProductsController.php.html#2413"><abbr title="App\Controller\Admin\ProductsController::prepareQuizSettingsForForm">prepareQuizSettingsForForm</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#432"><abbr title="App\Controller\Admin\QueueConfigurationsController::buildQueueUrl">buildQueueUrl</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="SlugsController.php.html#180"><abbr title="App\Controller\Admin\SlugsController::view">view</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="UsersController.php.html#137"><abbr title="App\Controller\Admin\UsersController::edit">edit</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="UsersController.php.html#212"><abbr title="App\Controller\Admin\UsersController::login">login</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#102"><abbr title="App\Controller\Admin\AdminCrudController::buildIndexQuery">buildIndexQuery</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="CacheController.php.html#24"><abbr title="App\Controller\Admin\CacheController::clearAll">clearAll</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#174"><abbr title="App\Controller\Admin\EmailTemplatesController::sendEmail">sendEmail</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#268"><abbr title="App\Controller\Admin\EmailTemplatesController::prepareEmailVariables">prepareEmailVariables</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#20"><abbr title="App\Controller\Admin\HomepageFeedsController::index">index</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#142"><abbr title="App\Controller\Admin\HomepageFeedsController::_getFeedStatistics">_getFeedStatistics</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#147"><abbr title="App\Controller\Admin\ImageGalleriesController::edit">edit</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ImagesController.php.html#40"><abbr title="App\Controller\Admin\ImagesController::index">index</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="PageViewsController.php.html#126"><abbr title="App\Controller\Admin\PageViewsController::filterStats">filterStats</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="PagesController.php.html#307"><abbr title="App\Controller\Admin\PagesController::createConnectPages">createConnectPages</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="PagesController.php.html#429"><abbr title="App\Controller\Admin\PagesController::extract">extract</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#126"><abbr title="App\Controller\Admin\ProductPageViewsController::filterStats">filterStats</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ProductsController.php.html#1725"><abbr title="App\Controller\Admin\ProductsController::estimatePrice">estimatePrice</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ProductsController.php.html#2201"><abbr title="App\Controller\Admin\ProductsController::validateProductIds">validateProductIds</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ProductsController.php.html#2247"><abbr title="App\Controller\Admin\ProductsController::quizSettings">quizSettings</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#87"><abbr title="App\Controller\Admin\QueueConfigurationsController::add">add</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#120"><abbr title="App\Controller\Admin\QueueConfigurationsController::edit">edit</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#249"><abbr title="App\Controller\Admin\QueueConfigurationsController::checkQueueHealth">checkQueueHealth</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="SlugsController.php.html#249"><abbr title="App\Controller\Admin\SlugsController::add">add</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="SystemLogsController.php.html#29"><abbr title="App\Controller\Admin\SystemLogsController::index">index</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="TagsController.php.html#35"><abbr title="App\Controller\Admin\TagsController::treeIndex">treeIndex</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="TagsController.php.html#115"><abbr title="App\Controller\Admin\TagsController::index">index</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="UsersController.php.html#103"><abbr title="App\Controller\Admin\UsersController::add">add</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#195"><abbr title="App\Controller\Admin\AdminSearchTrait::renderSearchForm">renderSearchForm</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#161"><abbr title="App\Controller\Admin\AdminCrudController::applySearchFilter">applySearchFilter</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ArticlesController.php.html#132"><abbr title="App\Controller\Admin\ArticlesController::index">index</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ArticlesController.php.html#383"><abbr title="App\Controller\Admin\ArticlesController::delete">delete</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#176"><abbr title="App\Controller\Admin\CableCapabilitiesController::export">export</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="CacheController.php.html#67"><abbr title="App\Controller\Admin\CacheController::clear">clear</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="CommentsController.php.html#50"><abbr title="App\Controller\Admin\CommentsController::index">index</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="CommentsController.php.html#103"><abbr title="App\Controller\Admin\CommentsController::edit">edit</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#305"><abbr title="App\Controller\Admin\EmailTemplatesController::generateLink">generateLink</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#354"><abbr title="App\Controller\Admin\ImageGalleriesController::updateImageOrder">updateImageOrder</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#65"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::index">index</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#183"><abbr title="App\Controller\Admin\ImageGenerationController::getArticlesNeedingImages">getArticlesNeedingImages</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#214"><abbr title="App\Controller\Admin\ImageGenerationController::getRateLimitStatus">getRateLimitStatus</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ImagesController.php.html#379"><abbr title="App\Controller\Admin\ImagesController::picker">picker</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#21"><abbr title="App\Controller\Admin\InternationalisationsController::index">index</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="PagesController.php.html#478"><abbr title="App\Controller\Admin\PagesController::extractPreview">extractPreview</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="PagesController.php.html#510"><abbr title="App\Controller\Admin\PagesController::extractWebpage">extractWebpage</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#65"><abbr title="App\Controller\Admin\ProductFormFieldsController::add">add</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#282"><abbr title="App\Controller\Admin\ProductFormFieldsController::testAi">testAi</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductsController.php.html#434"><abbr title="App\Controller\Admin\ProductsController::add2">add2</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductsController.php.html#552"><abbr title="App\Controller\Admin\ProductsController::addBeautiful">addBeautiful</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductsController.php.html#718"><abbr title="App\Controller\Admin\ProductsController::add">add</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductsController.php.html#1589"><abbr title="App\Controller\Admin\ProductsController::aiSuggest">aiSuggest</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductsController.php.html#1639"><abbr title="App\Controller\Admin\ProductsController::suggestManufacturer">suggestManufacturer</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductsController.php.html#1970"><abbr title="App\Controller\Admin\ProductsController::bulkTogglePublished">bulkTogglePublished</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductsController.php.html#2016"><abbr title="App\Controller\Admin\ProductsController::bulkToggleFeatured">bulkToggleFeatured</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ReliabilityController.php.html#76"><abbr title="App\Controller\Admin\ReliabilityController::recalc">recalc</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="UsersController.php.html#39"><abbr title="App\Controller\Admin\UsersController::index">index</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#64"><abbr title="App\Controller\Admin\AiMetricsController::realtimeData">realtimeData</abbr></a></td><td class="text-right">13</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#258"><abbr title="App\Controller\Admin\AdminCrudController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#298"><abbr title="App\Controller\Admin\AdminCrudController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#203"><abbr title="App\Controller\Admin\AiMetricsController::index">index</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#259"><abbr title="App\Controller\Admin\AiMetricsController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#281"><abbr title="App\Controller\Admin\AiMetricsController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AipromptsController.php.html#102"><abbr title="App\Controller\Admin\AipromptsController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AipromptsController.php.html#126"><abbr title="App\Controller\Admin\AipromptsController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#22"><abbr title="App\Controller\Admin\BlockedIpsController::index">index</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#75"><abbr title="App\Controller\Admin\BlockedIpsController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#100"><abbr title="App\Controller\Admin\BlockedIpsController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#219"><abbr title="App\Controller\Admin\CableCapabilitiesController::returnToProducts">returnToProducts</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="CommentsController.php.html#132"><abbr title="App\Controller\Admin\CommentsController::delete">delete</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#30"><abbr title="App\Controller\Admin\EmailTemplatesController::index">index</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#86"><abbr title="App\Controller\Admin\EmailTemplatesController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#113"><abbr title="App\Controller\Admin\EmailTemplatesController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="HomepageFeedsController.php.html#278"><abbr title="App\Controller\Admin\HomepageFeedsController::_saveSetting">_saveSetting</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#120"><abbr title="App\Controller\Admin\ImageGalleriesController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#307"><abbr title="App\Controller\Admin\ImageGalleriesController::removeImage">removeImage</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#173"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::getRedirectLocation">getRedirectLocation</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#44"><abbr title="App\Controller\Admin\ImageGenerationController::index">index</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImagesController.php.html#115"><abbr title="App\Controller\Admin\ImagesController::imageSelect">imageSelect</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImagesController.php.html#161"><abbr title="App\Controller\Admin\ImagesController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImagesController.php.html#279"><abbr title="App\Controller\Admin\ImagesController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#87"><abbr title="App\Controller\Admin\InternationalisationsController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#114"><abbr title="App\Controller\Admin\InternationalisationsController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="PageViewsController.php.html#93"><abbr title="App\Controller\Admin\PageViewsController::viewRecords">viewRecords</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="PageViewsController.php.html#189"><abbr title="App\Controller\Admin\PageViewsController::dashboard">dashboard</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="PageViewsController.php.html#302"><abbr title="App\Controller\Admin\PageViewsController::extractBrowser">extractBrowser</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="PagesController.php.html#146"><abbr title="App\Controller\Admin\PagesController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="PagesController.php.html#184"><abbr title="App\Controller\Admin\PagesController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#100"><abbr title="App\Controller\Admin\ProductFormFieldsController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#241"><abbr title="App\Controller\Admin\ProductFormFieldsController::toggleAi">toggleAi</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#326"><abbr title="App\Controller\Admin\ProductFormFieldsController::resetOrder">resetOrder</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#93"><abbr title="App\Controller\Admin\ProductPageViewsController::viewRecords">viewRecords</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#189"><abbr title="App\Controller\Admin\ProductPageViewsController::dashboard">dashboard</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#302"><abbr title="App\Controller\Admin\ProductPageViewsController::extractBrowser">extractBrowser</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductsController.php.html#876"><abbr title="App\Controller\Admin\ProductsController::toggleFeatured">toggleFeatured</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductsController.php.html#900"><abbr title="App\Controller\Admin\ProductsController::togglePublished">togglePublished</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductsController.php.html#997"><abbr title="App\Controller\Admin\ProductsController::bulkVerify">bulkVerify</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductsController.php.html#1901"><abbr title="App\Controller\Admin\ProductsController::bulkApproveInternal">bulkApproveInternal</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductsController.php.html#1935"><abbr title="App\Controller\Admin\ProductsController::bulkRejectInternal">bulkRejectInternal</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#25"><abbr title="App\Controller\Admin\QueueConfigurationsController::index">index</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#324"><abbr title="App\Controller\Admin\QueueConfigurationsController::checkRedisHealth">checkRedisHealth</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReliabilityController.php.html#33"><abbr title="App\Controller\Admin\ReliabilityController::view">view</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="SlugsController.php.html#307"><abbr title="App\Controller\Admin\SlugsController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TagsController.php.html#179"><abbr title="App\Controller\Admin\TagsController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TagsController.php.html#210"><abbr title="App\Controller\Admin\TagsController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="UsersController.php.html#188"><abbr title="App\Controller\Admin\UsersController::delete">delete</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#111"><abbr title="App\Controller\Admin\AdminSearchTrait::getStatusField">getStatusField</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#87"><abbr title="App\Controller\Admin\AdminCrudController::clearCache">clearCache</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#181"><abbr title="App\Controller\Admin\AdminCrudController::handleAjaxResponse">handleAjaxResponse</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#197"><abbr title="App\Controller\Admin\AdminCrudController::index">index</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminCrudController.php.html#340"><abbr title="App\Controller\Admin\AdminCrudController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#22"><abbr title="App\Controller\Admin\AiMetricsController::dashboard">dashboard</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AiMetricsController.php.html#303"><abbr title="App\Controller\Admin\AiMetricsController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AipromptsController.php.html#150"><abbr title="App\Controller\Admin\AipromptsController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ArticlesController.php.html#110"><abbr title="App\Controller\Admin\ArticlesController::updateTree">updateTree</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ArticlesController.php.html#214"><abbr title="App\Controller\Admin\ArticlesController::view">view</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="BlockedIpsController.php.html#125"><abbr title="App\Controller\Admin\BlockedIpsController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#120"><abbr title="App\Controller\Admin\CableCapabilitiesController::search">search</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CableCapabilitiesController.php.html#150"><abbr title="App\Controller\Admin\CableCapabilitiesController::analytics">analytics</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CacheController.php.html#92"><abbr title="App\Controller\Admin\CacheController::getCacheInfo">getCacheInfo</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CacheController.php.html#117"><abbr title="App\Controller\Admin\CacheController::getLastClearedTime">getLastClearedTime</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EmailTemplatesController.php.html#154"><abbr title="App\Controller\Admin\EmailTemplatesController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#181"><abbr title="App\Controller\Admin\ImageGalleriesController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImageGalleriesController.php.html#398"><abbr title="App\Controller\Admin\ImageGalleriesController::picker">picker</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImageGalleriesControllerRefactored.php.html#142"><abbr title="App\Controller\Admin\ImageGalleriesControllerRefactored::modifyDataBeforeSave">modifyDataBeforeSave</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#103"><abbr title="App\Controller\Admin\ImageGenerationController::batch">batch</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImageGenerationController.php.html#234"><abbr title="App\Controller\Admin\ImageGenerationController::getConfigurationStatus">getConfigurationStatus</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImagesController.php.html#303"><abbr title="App\Controller\Admin\ImagesController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="InternationalisationsController.php.html#141"><abbr title="App\Controller\Admin\InternationalisationsController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PageViewsController.php.html#58"><abbr title="App\Controller\Admin\PageViewsController::pageViewStats">pageViewStats</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PageViewsController.php.html#274"><abbr title="App\Controller\Admin\PageViewsController::getBrowserStats">getBrowserStats</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PageViewsController.php.html#329"><abbr title="App\Controller\Admin\PageViewsController::getHourlyDistribution">getHourlyDistribution</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PageViewsController.php.html#359"><abbr title="App\Controller\Admin\PageViewsController::getTopReferrers">getTopReferrers</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PagesController.php.html#229"><abbr title="App\Controller\Admin\PagesController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductFormFieldsController.php.html#127"><abbr title="App\Controller\Admin\ProductFormFieldsController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#58"><abbr title="App\Controller\Admin\ProductPageViewsController::pageViewStats">pageViewStats</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#274"><abbr title="App\Controller\Admin\ProductPageViewsController::getBrowserStats">getBrowserStats</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#329"><abbr title="App\Controller\Admin\ProductPageViewsController::getHourlyDistribution">getHourlyDistribution</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductPageViewsController.php.html#359"><abbr title="App\Controller\Admin\ProductPageViewsController::getTopReferrers">getTopReferrers</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductsController.php.html#382"><abbr title="App\Controller\Admin\ProductsController::view">view</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductsController.php.html#409"><abbr title="App\Controller\Admin\ProductsController::view2">view2</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductsController.php.html#836"><abbr title="App\Controller\Admin\ProductsController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductsController.php.html#924"><abbr title="App\Controller\Admin\ProductsController::approve">approve</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductsController.php.html#947"><abbr title="App\Controller\Admin\ProductsController::reject">reject</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductsController.php.html#1523"><abbr title="App\Controller\Admin\ProductsController::formsStats">formsStats</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductsController.php.html#1691"><abbr title="App\Controller\Admin\ProductsController::enhanceDescription">enhanceDescription</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#153"><abbr title="App\Controller\Admin\QueueConfigurationsController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#173"><abbr title="App\Controller\Admin\QueueConfigurationsController::sync">sync</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#191"><abbr title="App\Controller\Admin\QueueConfigurationsController::healthCheck">healthCheck</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="QueueConfigurationsController.php.html#220"><abbr title="App\Controller\Admin\QueueConfigurationsController::healthCheckAll">healthCheckAll</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="SettingsController.php.html#30"><abbr title="App\Controller\Admin\SettingsController::index">index</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="SlugsController.php.html#339"><abbr title="App\Controller\Admin\SlugsController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TagsController.php.html#89"><abbr title="App\Controller\Admin\TagsController::updateTree">updateTree</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TagsController.php.html#244"><abbr title="App\Controller\Admin\TagsController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminSearchTrait.php.html#142"><abbr title="App\Controller\Admin\AdminSearchTrait::executeSearch">executeSearch</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.26</a> and <a href="https://phpunit.de/">PHPUnit 10.5.55</a> at Tue Oct 7 15:04:30 CDT 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../../_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../../_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../../_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([28,0,0,0,0,1,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([273,0,0,0,0,0,0,0,1,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,39,"<a href=\"AdminCrudController.php.html#19\">App\\Controller\\Admin\\AdminCrudController<\/a>"],[40.60606060606061,25,"<a href=\"AiMetricsController.php.html#17\">App\\Controller\\Admin\\AiMetricsController<\/a>"],[0,15,"<a href=\"AipromptsController.php.html#14\">App\\Controller\\Admin\\AipromptsController<\/a>"],[0,48,"<a href=\"ArticlesController.php.html#19\">App\\Controller\\Admin\\ArticlesController<\/a>"],[0,12,"<a href=\"BlockedIpsController.php.html#15\">App\\Controller\\Admin\\BlockedIpsController<\/a>"],[0,16,"<a href=\"CableCapabilitiesController.php.html#15\">App\\Controller\\Admin\\CableCapabilitiesController<\/a>"],[0,14,"<a href=\"CacheController.php.html#17\">App\\Controller\\Admin\\CacheController<\/a>"],[0,14,"<a href=\"CommentsController.php.html#20\">App\\Controller\\Admin\\CommentsController<\/a>"],[0,27,"<a href=\"EmailTemplatesController.php.html#23\">App\\Controller\\Admin\\EmailTemplatesController<\/a>"],[0,30,"<a href=\"HomepageFeedsController.php.html#13\">App\\Controller\\Admin\\HomepageFeedsController<\/a>"],[0,42,"<a href=\"ImageGalleriesController.php.html#17\">App\\Controller\\Admin\\ImageGalleriesController<\/a>"],[0,24,"<a href=\"ImageGalleriesControllerRefactored.php.html#18\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored<\/a>"],[0,26,"<a href=\"ImageGenerationController.php.html#18\">App\\Controller\\Admin\\ImageGenerationController<\/a>"],[0,35,"<a href=\"ImagesController.php.html#23\">App\\Controller\\Admin\\ImagesController<\/a>"],[0,13,"<a href=\"InternationalisationsController.php.html#14\">App\\Controller\\Admin\\InternationalisationsController<\/a>"],[0,23,"<a href=\"PageViewsController.php.html#22\">App\\Controller\\Admin\\PageViewsController<\/a>"],[0,44,"<a href=\"PagesController.php.html#24\">App\\Controller\\Admin\\PagesController<\/a>"],[0,35,"<a href=\"ProductFormFieldsController.php.html#17\">App\\Controller\\Admin\\ProductFormFieldsController<\/a>"],[0,23,"<a href=\"ProductPageViewsController.php.html#22\">App\\Controller\\Admin\\ProductPageViewsController<\/a>"],[0,290,"<a href=\"ProductsController.php.html#16\">App\\Controller\\Admin\\ProductsController<\/a>"],[0,44,"<a href=\"QueueConfigurationsController.php.html#18\">App\\Controller\\Admin\\QueueConfigurationsController<\/a>"],[0,14,"<a href=\"ReliabilityController.php.html#23\">App\\Controller\\Admin\\ReliabilityController<\/a>"],[0,11,"<a href=\"SettingsController.php.html#19\">App\\Controller\\Admin\\SettingsController<\/a>"],[0,29,"<a href=\"SlugsController.php.html#20\">App\\Controller\\Admin\\SlugsController<\/a>"],[0,16,"<a href=\"SystemLogsController.php.html#16\">App\\Controller\\Admin\\SystemLogsController<\/a>"],[0,22,"<a href=\"TagsController.php.html#18\">App\\Controller\\Admin\\TagsController<\/a>"],[0,27,"<a href=\"UsersController.php.html#17\">App\\Controller\\Admin\\UsersController<\/a>"],[0,12,"<a href=\"VideosController.php.html#14\">App\\Controller\\Admin\\VideosController<\/a>"],[0,25,"<a href=\"AdminSearchTrait.php.html#15\">App\\Controller\\Admin\\AdminSearchTrait<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"AdminCrudController.php.html#69\">App\\Controller\\Admin\\AdminCrudController::initialize<\/a>"],[0,0,"<a href=\"AdminCrudController.php.html#80\">App\\Controller\\Admin\\AdminCrudController::setupModelClass<\/a>"],[0,2,"<a href=\"AdminCrudController.php.html#87\">App\\Controller\\Admin\\AdminCrudController::clearCache<\/a>"],[0,5,"<a href=\"AdminCrudController.php.html#102\">App\\Controller\\Admin\\AdminCrudController::buildIndexQuery<\/a>"],[0,7,"<a href=\"AdminCrudController.php.html#136\">App\\Controller\\Admin\\AdminCrudController::applyStatusFilter<\/a>"],[0,4,"<a href=\"AdminCrudController.php.html#161\">App\\Controller\\Admin\\AdminCrudController::applySearchFilter<\/a>"],[0,2,"<a href=\"AdminCrudController.php.html#181\">App\\Controller\\Admin\\AdminCrudController::handleAjaxResponse<\/a>"],[0,2,"<a href=\"AdminCrudController.php.html#197\">App\\Controller\\Admin\\AdminCrudController::index<\/a>"],[0,1,"<a href=\"AdminCrudController.php.html#227\">App\\Controller\\Admin\\AdminCrudController::modifyIndexQuery<\/a>"],[0,1,"<a href=\"AdminCrudController.php.html#239\">App\\Controller\\Admin\\AdminCrudController::view<\/a>"],[0,3,"<a href=\"AdminCrudController.php.html#258\">App\\Controller\\Admin\\AdminCrudController::add<\/a>"],[0,3,"<a href=\"AdminCrudController.php.html#298\">App\\Controller\\Admin\\AdminCrudController::edit<\/a>"],[0,2,"<a href=\"AdminCrudController.php.html#340\">App\\Controller\\Admin\\AdminCrudController::delete<\/a>"],[0,1,"<a href=\"AdminCrudController.php.html#362\">App\\Controller\\Admin\\AdminCrudController::modifyDataBeforeSave<\/a>"],[0,1,"<a href=\"AdminCrudController.php.html#373\">App\\Controller\\Admin\\AdminCrudController::getAdditionalFormData<\/a>"],[0,1,"<a href=\"AdminCrudController.php.html#384\">App\\Controller\\Admin\\AdminCrudController::getSuccessMessage<\/a>"],[0,1,"<a href=\"AdminCrudController.php.html#402\">App\\Controller\\Admin\\AdminCrudController::getErrorMessage<\/a>"],[0,1,"<a href=\"AdminCrudController.php.html#419\">App\\Controller\\Admin\\AdminCrudController::getEntityDisplayName<\/a>"],[0,1,"<a href=\"AdminCrudController.php.html#434\">App\\Controller\\Admin\\AdminCrudController::getRedirectLocation<\/a>"],[0,2,"<a href=\"AiMetricsController.php.html#22\">App\\Controller\\Admin\\AiMetricsController::dashboard<\/a>"],[74.44444444444444,11,"<a href=\"AiMetricsController.php.html#64\">App\\Controller\\Admin\\AiMetricsController::realtimeData<\/a>"],[0,3,"<a href=\"AiMetricsController.php.html#203\">App\\Controller\\Admin\\AiMetricsController::index<\/a>"],[0,1,"<a href=\"AiMetricsController.php.html#248\">App\\Controller\\Admin\\AiMetricsController::view<\/a>"],[0,3,"<a href=\"AiMetricsController.php.html#259\">App\\Controller\\Admin\\AiMetricsController::add<\/a>"],[0,3,"<a href=\"AiMetricsController.php.html#281\">App\\Controller\\Admin\\AiMetricsController::edit<\/a>"],[0,2,"<a href=\"AiMetricsController.php.html#303\">App\\Controller\\Admin\\AiMetricsController::delete<\/a>"],[0,6,"<a href=\"AipromptsController.php.html#21\">App\\Controller\\Admin\\AipromptsController::index<\/a>"],[0,1,"<a href=\"AipromptsController.php.html#91\">App\\Controller\\Admin\\AipromptsController::view<\/a>"],[0,3,"<a href=\"AipromptsController.php.html#102\">App\\Controller\\Admin\\AipromptsController::add<\/a>"],[0,3,"<a href=\"AipromptsController.php.html#126\">App\\Controller\\Admin\\AipromptsController::edit<\/a>"],[0,2,"<a href=\"AipromptsController.php.html#150\">App\\Controller\\Admin\\AipromptsController::delete<\/a>"],[0,1,"<a href=\"ArticlesController.php.html#26\">App\\Controller\\Admin\\ArticlesController::clearContentCache<\/a>"],[0,9,"<a href=\"ArticlesController.php.html#36\">App\\Controller\\Admin\\ArticlesController::treeIndex<\/a>"],[0,2,"<a href=\"ArticlesController.php.html#110\">App\\Controller\\Admin\\ArticlesController::updateTree<\/a>"],[0,4,"<a href=\"ArticlesController.php.html#132\">App\\Controller\\Admin\\ArticlesController::index<\/a>"],[0,2,"<a href=\"ArticlesController.php.html#214\">App\\Controller\\Admin\\ArticlesController::view<\/a>"],[0,8,"<a href=\"ArticlesController.php.html#237\">App\\Controller\\Admin\\ArticlesController::add<\/a>"],[0,10,"<a href=\"ArticlesController.php.html#304\">App\\Controller\\Admin\\ArticlesController::edit<\/a>"],[0,4,"<a href=\"ArticlesController.php.html#383\">App\\Controller\\Admin\\ArticlesController::delete<\/a>"],[0,8,"<a href=\"ArticlesController.php.html#410\">App\\Controller\\Admin\\ArticlesController::bulkAction<\/a>"],[0,3,"<a href=\"BlockedIpsController.php.html#22\">App\\Controller\\Admin\\BlockedIpsController::index<\/a>"],[0,1,"<a href=\"BlockedIpsController.php.html#64\">App\\Controller\\Admin\\BlockedIpsController::view<\/a>"],[0,3,"<a href=\"BlockedIpsController.php.html#75\">App\\Controller\\Admin\\BlockedIpsController::add<\/a>"],[0,3,"<a href=\"BlockedIpsController.php.html#100\">App\\Controller\\Admin\\BlockedIpsController::edit<\/a>"],[0,2,"<a href=\"BlockedIpsController.php.html#125\">App\\Controller\\Admin\\BlockedIpsController::delete<\/a>"],[0,1,"<a href=\"CableCapabilitiesController.php.html#20\">App\\Controller\\Admin\\CableCapabilitiesController::initialize<\/a>"],[0,1,"<a href=\"CableCapabilitiesController.php.html#30\">App\\Controller\\Admin\\CableCapabilitiesController::index<\/a>"],[0,1,"<a href=\"CableCapabilitiesController.php.html#57\">App\\Controller\\Admin\\CableCapabilitiesController::view<\/a>"],[0,1,"<a href=\"CableCapabilitiesController.php.html#73\">App\\Controller\\Admin\\CableCapabilitiesController::category<\/a>"],[0,1,"<a href=\"CableCapabilitiesController.php.html#102\">App\\Controller\\Admin\\CableCapabilitiesController::certified<\/a>"],[0,2,"<a href=\"CableCapabilitiesController.php.html#120\">App\\Controller\\Admin\\CableCapabilitiesController::search<\/a>"],[0,2,"<a href=\"CableCapabilitiesController.php.html#150\">App\\Controller\\Admin\\CableCapabilitiesController::analytics<\/a>"],[0,4,"<a href=\"CableCapabilitiesController.php.html#176\">App\\Controller\\Admin\\CableCapabilitiesController::export<\/a>"],[0,3,"<a href=\"CableCapabilitiesController.php.html#219\">App\\Controller\\Admin\\CableCapabilitiesController::returnToProducts<\/a>"],[0,5,"<a href=\"CacheController.php.html#24\">App\\Controller\\Admin\\CacheController::clearAll<\/a>"],[0,4,"<a href=\"CacheController.php.html#67\">App\\Controller\\Admin\\CacheController::clear<\/a>"],[0,2,"<a href=\"CacheController.php.html#92\">App\\Controller\\Admin\\CacheController::getCacheInfo<\/a>"],[0,2,"<a href=\"CacheController.php.html#117\">App\\Controller\\Admin\\CacheController::getLastClearedTime<\/a>"],[0,1,"<a href=\"CacheController.php.html#130\">App\\Controller\\Admin\\CacheController::updateLastClearedTime<\/a>"],[0,1,"<a href=\"CommentsController.php.html#29\">App\\Controller\\Admin\\CommentsController::initialize<\/a>"],[0,1,"<a href=\"CommentsController.php.html#40\">App\\Controller\\Admin\\CommentsController::clearContentCache<\/a>"],[0,4,"<a href=\"CommentsController.php.html#50\">App\\Controller\\Admin\\CommentsController::index<\/a>"],[0,1,"<a href=\"CommentsController.php.html#90\">App\\Controller\\Admin\\CommentsController::view<\/a>"],[0,4,"<a href=\"CommentsController.php.html#103\">App\\Controller\\Admin\\CommentsController::edit<\/a>"],[0,3,"<a href=\"CommentsController.php.html#132\">App\\Controller\\Admin\\CommentsController::delete<\/a>"],[0,3,"<a href=\"EmailTemplatesController.php.html#30\">App\\Controller\\Admin\\EmailTemplatesController::index<\/a>"],[0,1,"<a href=\"EmailTemplatesController.php.html#75\">App\\Controller\\Admin\\EmailTemplatesController::view<\/a>"],[0,3,"<a href=\"EmailTemplatesController.php.html#86\">App\\Controller\\Admin\\EmailTemplatesController::add<\/a>"],[0,3,"<a href=\"EmailTemplatesController.php.html#113\">App\\Controller\\Admin\\EmailTemplatesController::edit<\/a>"],[0,1,"<a href=\"EmailTemplatesController.php.html#139\">App\\Controller\\Admin\\EmailTemplatesController::htmlToPlainText<\/a>"],[0,2,"<a href=\"EmailTemplatesController.php.html#154\">App\\Controller\\Admin\\EmailTemplatesController::delete<\/a>"],[0,5,"<a href=\"EmailTemplatesController.php.html#174\">App\\Controller\\Admin\\EmailTemplatesController::sendEmail<\/a>"],[0,5,"<a href=\"EmailTemplatesController.php.html#268\">App\\Controller\\Admin\\EmailTemplatesController::prepareEmailVariables<\/a>"],[0,4,"<a href=\"EmailTemplatesController.php.html#305\">App\\Controller\\Admin\\EmailTemplatesController::generateLink<\/a>"],[0,5,"<a href=\"HomepageFeedsController.php.html#20\">App\\Controller\\Admin\\HomepageFeedsController::index<\/a>"],[0,9,"<a href=\"HomepageFeedsController.php.html#52\">App\\Controller\\Admin\\HomepageFeedsController::configure<\/a>"],[0,1,"<a href=\"HomepageFeedsController.php.html#93\">App\\Controller\\Admin\\HomepageFeedsController::preview<\/a>"],[0,6,"<a href=\"HomepageFeedsController.php.html#108\">App\\Controller\\Admin\\HomepageFeedsController::reset<\/a>"],[0,5,"<a href=\"HomepageFeedsController.php.html#142\">App\\Controller\\Admin\\HomepageFeedsController::_getFeedStatistics<\/a>"],[0,1,"<a href=\"HomepageFeedsController.php.html#218\">App\\Controller\\Admin\\HomepageFeedsController::_getFeedConfigurations<\/a>"],[0,3,"<a href=\"HomepageFeedsController.php.html#278\">App\\Controller\\Admin\\HomepageFeedsController::_saveSetting<\/a>"],[0,6,"<a href=\"ImageGalleriesController.php.html#26\">App\\Controller\\Admin\\ImageGalleriesController::index<\/a>"],[0,1,"<a href=\"ImageGalleriesController.php.html#102\">App\\Controller\\Admin\\ImageGalleriesController::view<\/a>"],[0,3,"<a href=\"ImageGalleriesController.php.html#120\">App\\Controller\\Admin\\ImageGalleriesController::add<\/a>"],[0,5,"<a href=\"ImageGalleriesController.php.html#147\">App\\Controller\\Admin\\ImageGalleriesController::edit<\/a>"],[0,2,"<a href=\"ImageGalleriesController.php.html#181\">App\\Controller\\Admin\\ImageGalleriesController::delete<\/a>"],[0,1,"<a href=\"ImageGalleriesController.php.html#201\">App\\Controller\\Admin\\ImageGalleriesController::manageImages<\/a>"],[0,8,"<a href=\"ImageGalleriesController.php.html#227\">App\\Controller\\Admin\\ImageGalleriesController::addImages<\/a>"],[0,3,"<a href=\"ImageGalleriesController.php.html#307\">App\\Controller\\Admin\\ImageGalleriesController::removeImage<\/a>"],[0,4,"<a href=\"ImageGalleriesController.php.html#354\">App\\Controller\\Admin\\ImageGalleriesController::updateImageOrder<\/a>"],[0,2,"<a href=\"ImageGalleriesController.php.html#398\">App\\Controller\\Admin\\ImageGalleriesController::picker<\/a>"],[0,7,"<a href=\"ImageGalleriesController.php.html#469\">App\\Controller\\Admin\\ImageGalleriesController::_processUploadsAndSetFlash<\/a>"],[0,1,"<a href=\"ImageGalleriesControllerRefactored.php.html#27\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored::setupModelClass<\/a>"],[0,4,"<a href=\"ImageGalleriesControllerRefactored.php.html#65\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored::index<\/a>"],[0,1,"<a href=\"ImageGalleriesControllerRefactored.php.html#104\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored::modifyIndexQuery<\/a>"],[0,1,"<a href=\"ImageGalleriesControllerRefactored.php.html#120\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored::view<\/a>"],[0,2,"<a href=\"ImageGalleriesControllerRefactored.php.html#142\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored::modifyDataBeforeSave<\/a>"],[0,1,"<a href=\"ImageGalleriesControllerRefactored.php.html#160\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored::getAdditionalFormData<\/a>"],[0,3,"<a href=\"ImageGalleriesControllerRefactored.php.html#173\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored::getRedirectLocation<\/a>"],[0,1,"<a href=\"ImageGalleriesControllerRefactored.php.html#198\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored::manageImages<\/a>"],[0,9,"<a href=\"ImageGalleriesControllerRefactored.php.html#225\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored::addImages<\/a>"],[0,1,"<a href=\"ImageGalleriesControllerRefactored.php.html#297\">App\\Controller\\Admin\\ImageGalleriesControllerRefactored::_processUploadsAndSetFlash<\/a>"],[0,1,"<a href=\"ImageGenerationController.php.html#30\">App\\Controller\\Admin\\ImageGenerationController::initialize<\/a>"],[0,3,"<a href=\"ImageGenerationController.php.html#44\">App\\Controller\\Admin\\ImageGenerationController::index<\/a>"],[0,1,"<a href=\"ImageGenerationController.php.html#83\">App\\Controller\\Admin\\ImageGenerationController::statistics<\/a>"],[0,2,"<a href=\"ImageGenerationController.php.html#103\">App\\Controller\\Admin\\ImageGenerationController::batch<\/a>"],[0,6,"<a href=\"ImageGenerationController.php.html#126\">App\\Controller\\Admin\\ImageGenerationController::processBatch<\/a>"],[0,1,"<a href=\"ImageGenerationController.php.html#169\">App\\Controller\\Admin\\ImageGenerationController::config<\/a>"],[0,4,"<a href=\"ImageGenerationController.php.html#183\">App\\Controller\\Admin\\ImageGenerationController::getArticlesNeedingImages<\/a>"],[0,4,"<a href=\"ImageGenerationController.php.html#214\">App\\Controller\\Admin\\ImageGenerationController::getRateLimitStatus<\/a>"],[0,2,"<a href=\"ImageGenerationController.php.html#234\">App\\Controller\\Admin\\ImageGenerationController::getConfigurationStatus<\/a>"],[0,1,"<a href=\"ImageGenerationController.php.html#262\">App\\Controller\\Admin\\ImageGenerationController::getMonthlyStatistics<\/a>"],[0,1,"<a href=\"ImageGenerationController.php.html#278\">App\\Controller\\Admin\\ImageGenerationController::getProviderStatistics<\/a>"],[0,1,"<a href=\"ImagesController.php.html#30\">App\\Controller\\Admin\\ImagesController::viewClasses<\/a>"],[0,5,"<a href=\"ImagesController.php.html#40\">App\\Controller\\Admin\\ImagesController::index<\/a>"],[0,1,"<a href=\"ImagesController.php.html#93\">App\\Controller\\Admin\\ImagesController::view<\/a>"],[0,3,"<a href=\"ImagesController.php.html#115\">App\\Controller\\Admin\\ImagesController::imageSelect<\/a>"],[0,3,"<a href=\"ImagesController.php.html#161\">App\\Controller\\Admin\\ImagesController::add<\/a>"],[0,7,"<a href=\"ImagesController.php.html#184\">App\\Controller\\Admin\\ImagesController::bulkUpload<\/a>"],[0,3,"<a href=\"ImagesController.php.html#279\">App\\Controller\\Admin\\ImagesController::edit<\/a>"],[0,2,"<a href=\"ImagesController.php.html#303\">App\\Controller\\Admin\\ImagesController::delete<\/a>"],[0,6,"<a href=\"ImagesController.php.html#325\">App\\Controller\\Admin\\ImagesController::deleteUploadedImage<\/a>"],[0,4,"<a href=\"ImagesController.php.html#379\">App\\Controller\\Admin\\ImagesController::picker<\/a>"],[0,4,"<a href=\"InternationalisationsController.php.html#21\">App\\Controller\\Admin\\InternationalisationsController::index<\/a>"],[0,1,"<a href=\"InternationalisationsController.php.html#76\">App\\Controller\\Admin\\InternationalisationsController::view<\/a>"],[0,3,"<a href=\"InternationalisationsController.php.html#87\">App\\Controller\\Admin\\InternationalisationsController::add<\/a>"],[0,3,"<a href=\"InternationalisationsController.php.html#114\">App\\Controller\\Admin\\InternationalisationsController::edit<\/a>"],[0,2,"<a href=\"InternationalisationsController.php.html#141\">App\\Controller\\Admin\\InternationalisationsController::delete<\/a>"],[0,1,"<a href=\"PageViewsController.php.html#42\">App\\Controller\\Admin\\PageViewsController::initialize<\/a>"],[0,2,"<a href=\"PageViewsController.php.html#58\">App\\Controller\\Admin\\PageViewsController::pageViewStats<\/a>"],[0,3,"<a href=\"PageViewsController.php.html#93\">App\\Controller\\Admin\\PageViewsController::viewRecords<\/a>"],[0,5,"<a href=\"PageViewsController.php.html#126\">App\\Controller\\Admin\\PageViewsController::filterStats<\/a>"],[0,3,"<a href=\"PageViewsController.php.html#189\">App\\Controller\\Admin\\PageViewsController::dashboard<\/a>"],[0,2,"<a href=\"PageViewsController.php.html#274\">App\\Controller\\Admin\\PageViewsController::getBrowserStats<\/a>"],[0,3,"<a href=\"PageViewsController.php.html#302\">App\\Controller\\Admin\\PageViewsController::extractBrowser<\/a>"],[0,2,"<a href=\"PageViewsController.php.html#329\">App\\Controller\\Admin\\PageViewsController::getHourlyDistribution<\/a>"],[0,2,"<a href=\"PageViewsController.php.html#359\">App\\Controller\\Admin\\PageViewsController::getTopReferrers<\/a>"],[0,1,"<a href=\"PagesController.php.html#36\">App\\Controller\\Admin\\PagesController::initialize<\/a>"],[0,1,"<a href=\"PagesController.php.html#47\">App\\Controller\\Admin\\PagesController::clearContentCache<\/a>"],[0,7,"<a href=\"PagesController.php.html#57\">App\\Controller\\Admin\\PagesController::index<\/a>"],[0,1,"<a href=\"PagesController.php.html#129\">App\\Controller\\Admin\\PagesController::view<\/a>"],[0,3,"<a href=\"PagesController.php.html#146\">App\\Controller\\Admin\\PagesController::add<\/a>"],[0,3,"<a href=\"PagesController.php.html#184\">App\\Controller\\Admin\\PagesController::edit<\/a>"],[0,2,"<a href=\"PagesController.php.html#229\">App\\Controller\\Admin\\PagesController::delete<\/a>"],[0,7,"<a href=\"PagesController.php.html#252\">App\\Controller\\Admin\\PagesController::bulkActions<\/a>"],[0,5,"<a href=\"PagesController.php.html#307\">App\\Controller\\Admin\\PagesController::createConnectPages<\/a>"],[0,5,"<a href=\"PagesController.php.html#429\">App\\Controller\\Admin\\PagesController::extract<\/a>"],[0,4,"<a href=\"PagesController.php.html#478\">App\\Controller\\Admin\\PagesController::extractPreview<\/a>"],[0,4,"<a href=\"PagesController.php.html#510\">App\\Controller\\Admin\\PagesController::extractWebpage<\/a>"],[0,1,"<a href=\"PagesController.php.html#559\">App\\Controller\\Admin\\PagesController::costAnalysis<\/a>"],[0,1,"<a href=\"ProductFormFieldsController.php.html#24\">App\\Controller\\Admin\\ProductFormFieldsController::initialize<\/a>"],[0,1,"<a href=\"ProductFormFieldsController.php.html#35\">App\\Controller\\Admin\\ProductFormFieldsController::index<\/a>"],[0,1,"<a href=\"ProductFormFieldsController.php.html#51\">App\\Controller\\Admin\\ProductFormFieldsController::view<\/a>"],[0,4,"<a href=\"ProductFormFieldsController.php.html#65\">App\\Controller\\Admin\\ProductFormFieldsController::add<\/a>"],[0,3,"<a href=\"ProductFormFieldsController.php.html#100\">App\\Controller\\Admin\\ProductFormFieldsController::edit<\/a>"],[0,2,"<a href=\"ProductFormFieldsController.php.html#127\">App\\Controller\\Admin\\ProductFormFieldsController::delete<\/a>"],[0,13,"<a href=\"ProductFormFieldsController.php.html#149\">App\\Controller\\Admin\\ProductFormFieldsController::reorder<\/a>"],[0,3,"<a href=\"ProductFormFieldsController.php.html#241\">App\\Controller\\Admin\\ProductFormFieldsController::toggleAi<\/a>"],[0,4,"<a href=\"ProductFormFieldsController.php.html#282\">App\\Controller\\Admin\\ProductFormFieldsController::testAi<\/a>"],[0,3,"<a href=\"ProductFormFieldsController.php.html#326\">App\\Controller\\Admin\\ProductFormFieldsController::resetOrder<\/a>"],[0,1,"<a href=\"ProductPageViewsController.php.html#42\">App\\Controller\\Admin\\ProductPageViewsController::initialize<\/a>"],[0,2,"<a href=\"ProductPageViewsController.php.html#58\">App\\Controller\\Admin\\ProductPageViewsController::pageViewStats<\/a>"],[0,3,"<a href=\"ProductPageViewsController.php.html#93\">App\\Controller\\Admin\\ProductPageViewsController::viewRecords<\/a>"],[0,5,"<a href=\"ProductPageViewsController.php.html#126\">App\\Controller\\Admin\\ProductPageViewsController::filterStats<\/a>"],[0,3,"<a href=\"ProductPageViewsController.php.html#189\">App\\Controller\\Admin\\ProductPageViewsController::dashboard<\/a>"],[0,2,"<a href=\"ProductPageViewsController.php.html#274\">App\\Controller\\Admin\\ProductPageViewsController::getBrowserStats<\/a>"],[0,3,"<a href=\"ProductPageViewsController.php.html#302\">App\\Controller\\Admin\\ProductPageViewsController::extractBrowser<\/a>"],[0,2,"<a href=\"ProductPageViewsController.php.html#329\">App\\Controller\\Admin\\ProductPageViewsController::getHourlyDistribution<\/a>"],[0,2,"<a href=\"ProductPageViewsController.php.html#359\">App\\Controller\\Admin\\ProductPageViewsController::getTopReferrers<\/a>"],[0,1,"<a href=\"ProductsController.php.html#23\">App\\Controller\\Admin\\ProductsController::dashboard<\/a>"],[0,8,"<a href=\"ProductsController.php.html#80\">App\\Controller\\Admin\\ProductsController::index<\/a>"],[0,8,"<a href=\"ProductsController.php.html#170\">App\\Controller\\Admin\\ProductsController::pendingReview<\/a>"],[0,8,"<a href=\"ProductsController.php.html#278\">App\\Controller\\Admin\\ProductsController::index2<\/a>"],[0,1,"<a href=\"ProductsController.php.html#365\">App\\Controller\\Admin\\ProductsController::formsDashboard<\/a>"],[0,2,"<a href=\"ProductsController.php.html#382\">App\\Controller\\Admin\\ProductsController::view<\/a>"],[0,2,"<a href=\"ProductsController.php.html#409\">App\\Controller\\Admin\\ProductsController::view2<\/a>"],[0,4,"<a href=\"ProductsController.php.html#434\">App\\Controller\\Admin\\ProductsController::add2<\/a>"],[0,6,"<a href=\"ProductsController.php.html#487\">App\\Controller\\Admin\\ProductsController::edit2<\/a>"],[0,4,"<a href=\"ProductsController.php.html#552\">App\\Controller\\Admin\\ProductsController::addBeautiful<\/a>"],[0,1,"<a href=\"ProductsController.php.html#604\">App\\Controller\\Admin\\ProductsController::aiScore<\/a>"],[0,20,"<a href=\"ProductsController.php.html#624\">App\\Controller\\Admin\\ProductsController::calculateProductScore<\/a>"],[0,4,"<a href=\"ProductsController.php.html#718\">App\\Controller\\Admin\\ProductsController::add<\/a>"],[0,6,"<a href=\"ProductsController.php.html#771\">App\\Controller\\Admin\\ProductsController::edit<\/a>"],[0,2,"<a href=\"ProductsController.php.html#836\">App\\Controller\\Admin\\ProductsController::delete<\/a>"],[0,1,"<a href=\"ProductsController.php.html#857\">App\\Controller\\Admin\\ProductsController::verify<\/a>"],[0,3,"<a href=\"ProductsController.php.html#876\">App\\Controller\\Admin\\ProductsController::toggleFeatured<\/a>"],[0,3,"<a href=\"ProductsController.php.html#900\">App\\Controller\\Admin\\ProductsController::togglePublished<\/a>"],[0,2,"<a href=\"ProductsController.php.html#924\">App\\Controller\\Admin\\ProductsController::approve<\/a>"],[0,2,"<a href=\"ProductsController.php.html#947\">App\\Controller\\Admin\\ProductsController::reject<\/a>"],[0,1,"<a href=\"ProductsController.php.html#969\">App\\Controller\\Admin\\ProductsController::hasSignificantChanges<\/a>"],[0,1,"<a href=\"ProductsController.php.html#977\">App\\Controller\\Admin\\ProductsController::queueJob<\/a>"],[0,1,"<a href=\"ProductsController.php.html#987\">App\\Controller\\Admin\\ProductsController::clearContentCache<\/a>"],[0,3,"<a href=\"ProductsController.php.html#997\">App\\Controller\\Admin\\ProductsController::bulkVerify<\/a>"],[0,7,"<a href=\"ProductsController.php.html#1031\">App\\Controller\\Admin\\ProductsController::bulkApprove<\/a>"],[0,7,"<a href=\"ProductsController.php.html#1080\">App\\Controller\\Admin\\ProductsController::bulkReject<\/a>"],[0,1,"<a href=\"ProductsController.php.html#1129\">App\\Controller\\Admin\\ProductsController::formsRedirect<\/a>"],[0,13,"<a href=\"ProductsController.php.html#1146\">App\\Controller\\Admin\\ProductsController::forms<\/a>"],[0,6,"<a href=\"ProductsController.php.html#1263\">App\\Controller\\Admin\\ProductsController::formsQuiz<\/a>"],[0,7,"<a href=\"ProductsController.php.html#1376\">App\\Controller\\Admin\\ProductsController::formsCustomerQuiz<\/a>"],[0,1,"<a href=\"ProductsController.php.html#1497\">App\\Controller\\Admin\\ProductsController::formsFields<\/a>"],[0,2,"<a href=\"ProductsController.php.html#1523\">App\\Controller\\Admin\\ProductsController::formsStats<\/a>"],[0,4,"<a href=\"ProductsController.php.html#1589\">App\\Controller\\Admin\\ProductsController::aiSuggest<\/a>"],[0,4,"<a href=\"ProductsController.php.html#1639\">App\\Controller\\Admin\\ProductsController::suggestManufacturer<\/a>"],[0,7,"<a href=\"ProductsController.php.html#1670\">App\\Controller\\Admin\\ProductsController::suggestCategory<\/a>"],[0,2,"<a href=\"ProductsController.php.html#1691\">App\\Controller\\Admin\\ProductsController::enhanceDescription<\/a>"],[0,6,"<a href=\"ProductsController.php.html#1706\">App\\Controller\\Admin\\ProductsController::suggestTags<\/a>"],[0,5,"<a href=\"ProductsController.php.html#1725\">App\\Controller\\Admin\\ProductsController::estimatePrice<\/a>"],[0,1,"<a href=\"ProductsController.php.html#1746\">App\\Controller\\Admin\\ProductsController::getSettingDescription<\/a>"],[0,19,"<a href=\"ProductsController.php.html#1771\">App\\Controller\\Admin\\ProductsController::normalizeSettingValue<\/a>"],[0,11,"<a href=\"ProductsController.php.html#1837\">App\\Controller\\Admin\\ProductsController::bulkEdit<\/a>"],[0,1,"<a href=\"ProductsController.php.html#1885\">App\\Controller\\Admin\\ProductsController::bulkVerifyInternal<\/a>"],[0,3,"<a href=\"ProductsController.php.html#1901\">App\\Controller\\Admin\\ProductsController::bulkApproveInternal<\/a>"],[0,3,"<a href=\"ProductsController.php.html#1935\">App\\Controller\\Admin\\ProductsController::bulkRejectInternal<\/a>"],[0,4,"<a href=\"ProductsController.php.html#1970\">App\\Controller\\Admin\\ProductsController::bulkTogglePublished<\/a>"],[0,4,"<a href=\"ProductsController.php.html#2016\">App\\Controller\\Admin\\ProductsController::bulkToggleFeatured<\/a>"],[0,7,"<a href=\"ProductsController.php.html#2061\">App\\Controller\\Admin\\ProductsController::bulkDelete<\/a>"],[0,15,"<a href=\"ProductsController.php.html#2120\">App\\Controller\\Admin\\ProductsController::bulkUpdateFields<\/a>"],[0,5,"<a href=\"ProductsController.php.html#2201\">App\\Controller\\Admin\\ProductsController::validateProductIds<\/a>"],[0,1,"<a href=\"ProductsController.php.html#2220\">App\\Controller\\Admin\\ProductsController::logBulkAction<\/a>"],[0,5,"<a href=\"ProductsController.php.html#2247\">App\\Controller\\Admin\\ProductsController::quizSettings<\/a>"],[0,16,"<a href=\"ProductsController.php.html#2294\">App\\Controller\\Admin\\ProductsController::validateQuizSettings<\/a>"],[0,22,"<a href=\"ProductsController.php.html#2338\">App\\Controller\\Admin\\ProductsController::processQuizSettingsData<\/a>"],[0,6,"<a href=\"ProductsController.php.html#2413\">App\\Controller\\Admin\\ProductsController::prepareQuizSettingsForForm<\/a>"],[0,1,"<a href=\"ProductsController.php.html#2442\">App\\Controller\\Admin\\ProductsController::getQuizSettingSections<\/a>"],[0,3,"<a href=\"QueueConfigurationsController.php.html#25\">App\\Controller\\Admin\\QueueConfigurationsController::index<\/a>"],[0,1,"<a href=\"QueueConfigurationsController.php.html#76\">App\\Controller\\Admin\\QueueConfigurationsController::view<\/a>"],[0,5,"<a href=\"QueueConfigurationsController.php.html#87\">App\\Controller\\Admin\\QueueConfigurationsController::add<\/a>"],[0,5,"<a href=\"QueueConfigurationsController.php.html#120\">App\\Controller\\Admin\\QueueConfigurationsController::edit<\/a>"],[0,2,"<a href=\"QueueConfigurationsController.php.html#153\">App\\Controller\\Admin\\QueueConfigurationsController::delete<\/a>"],[0,2,"<a href=\"QueueConfigurationsController.php.html#173\">App\\Controller\\Admin\\QueueConfigurationsController::sync<\/a>"],[0,2,"<a href=\"QueueConfigurationsController.php.html#191\">App\\Controller\\Admin\\QueueConfigurationsController::healthCheck<\/a>"],[0,2,"<a href=\"QueueConfigurationsController.php.html#220\">App\\Controller\\Admin\\QueueConfigurationsController::healthCheckAll<\/a>"],[0,5,"<a href=\"QueueConfigurationsController.php.html#249\">App\\Controller\\Admin\\QueueConfigurationsController::checkQueueHealth<\/a>"],[0,1,"<a href=\"QueueConfigurationsController.php.html#304\">App\\Controller\\Admin\\QueueConfigurationsController::checkRabbitMQHealth<\/a>"],[0,3,"<a href=\"QueueConfigurationsController.php.html#324\">App\\Controller\\Admin\\QueueConfigurationsController::checkRedisHealth<\/a>"],[0,7,"<a href=\"QueueConfigurationsController.php.html#358\">App\\Controller\\Admin\\QueueConfigurationsController::updateQueueConfigFile<\/a>"],[0,6,"<a href=\"QueueConfigurationsController.php.html#432\">App\\Controller\\Admin\\QueueConfigurationsController::buildQueueUrl<\/a>"],[0,3,"<a href=\"ReliabilityController.php.html#33\">App\\Controller\\Admin\\ReliabilityController::view<\/a>"],[0,4,"<a href=\"ReliabilityController.php.html#76\">App\\Controller\\Admin\\ReliabilityController::recalc<\/a>"],[0,7,"<a href=\"ReliabilityController.php.html#131\">App\\Controller\\Admin\\ReliabilityController::verifyChecksums<\/a>"],[0,2,"<a href=\"SettingsController.php.html#30\">App\\Controller\\Admin\\SettingsController::index<\/a>"],[0,9,"<a href=\"SettingsController.php.html#71\">App\\Controller\\Admin\\SettingsController::saveSettings<\/a>"],[0,13,"<a href=\"SlugsController.php.html#37\">App\\Controller\\Admin\\SlugsController::index<\/a>"],[0,6,"<a href=\"SlugsController.php.html#180\">App\\Controller\\Admin\\SlugsController::view<\/a>"],[0,5,"<a href=\"SlugsController.php.html#249\">App\\Controller\\Admin\\SlugsController::add<\/a>"],[0,3,"<a href=\"SlugsController.php.html#307\">App\\Controller\\Admin\\SlugsController::edit<\/a>"],[0,2,"<a href=\"SlugsController.php.html#339\">App\\Controller\\Admin\\SlugsController::delete<\/a>"],[0,5,"<a href=\"SystemLogsController.php.html#29\">App\\Controller\\Admin\\SystemLogsController::index<\/a>"],[0,1,"<a href=\"SystemLogsController.php.html#102\">App\\Controller\\Admin\\SystemLogsController::view<\/a>"],[0,10,"<a href=\"SystemLogsController.php.html#123\">App\\Controller\\Admin\\SystemLogsController::delete<\/a>"],[0,1,"<a href=\"TagsController.php.html#25\">App\\Controller\\Admin\\TagsController::clearContentCache<\/a>"],[0,5,"<a href=\"TagsController.php.html#35\">App\\Controller\\Admin\\TagsController::treeIndex<\/a>"],[0,2,"<a href=\"TagsController.php.html#89\">App\\Controller\\Admin\\TagsController::updateTree<\/a>"],[0,5,"<a href=\"TagsController.php.html#115\">App\\Controller\\Admin\\TagsController::index<\/a>"],[0,1,"<a href=\"TagsController.php.html#166\">App\\Controller\\Admin\\TagsController::view<\/a>"],[0,3,"<a href=\"TagsController.php.html#179\">App\\Controller\\Admin\\TagsController::add<\/a>"],[0,3,"<a href=\"TagsController.php.html#210\">App\\Controller\\Admin\\TagsController::edit<\/a>"],[0,2,"<a href=\"TagsController.php.html#244\">App\\Controller\\Admin\\TagsController::delete<\/a>"],[0,1,"<a href=\"UsersController.php.html#25\">App\\Controller\\Admin\\UsersController::beforeFilter<\/a>"],[0,4,"<a href=\"UsersController.php.html#39\">App\\Controller\\Admin\\UsersController::index<\/a>"],[0,1,"<a href=\"UsersController.php.html#92\">App\\Controller\\Admin\\UsersController::view<\/a>"],[0,5,"<a href=\"UsersController.php.html#103\">App\\Controller\\Admin\\UsersController::add<\/a>"],[0,6,"<a href=\"UsersController.php.html#137\">App\\Controller\\Admin\\UsersController::edit<\/a>"],[0,3,"<a href=\"UsersController.php.html#188\">App\\Controller\\Admin\\UsersController::delete<\/a>"],[0,6,"<a href=\"UsersController.php.html#212\">App\\Controller\\Admin\\UsersController::login<\/a>"],[0,1,"<a href=\"UsersController.php.html#254\">App\\Controller\\Admin\\UsersController::logout<\/a>"],[0,12,"<a href=\"VideosController.php.html#23\">App\\Controller\\Admin\\VideosController::videoSelect<\/a>"],[0,13,"<a href=\"AdminSearchTrait.php.html#39\">App\\Controller\\Admin\\AdminSearchTrait::buildSearchQuery<\/a>"],[0,1,"<a href=\"AdminSearchTrait.php.html#100\">App\\Controller\\Admin\\AdminSearchTrait::modifySearchQuery<\/a>"],[0,3,"<a href=\"AdminSearchTrait.php.html#111\">App\\Controller\\Admin\\AdminSearchTrait::getStatusField<\/a>"],[0,2,"<a href=\"AdminSearchTrait.php.html#142\">App\\Controller\\Admin\\AdminSearchTrait::executeSearch<\/a>"],[0,1,"<a href=\"AdminSearchTrait.php.html#168\">App\\Controller\\Admin\\AdminSearchTrait::search<\/a>"],[0,0,"<a href=\"AdminSearchTrait.php.html#187\">App\\Controller\\Admin\\AdminSearchTrait::getSearchQuery<\/a>"],[0,5,"<a href=\"AdminSearchTrait.php.html#195\">App\\Controller\\Admin\\AdminSearchTrait::renderSearchForm<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

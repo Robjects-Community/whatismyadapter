@@ -1,0 +1,15 @@
+[mysqld]
+# Enable mysql_native_password plugin for compatibility with older applications
+mysql-native-password=ON
+default-authentication-plugin=mysql_native_password
+
+# Character set and collation
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
+
+# MySQL 8.0+ compatibility settings
+sql_mode=STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+# Performance tuning
+innodb_buffer_pool_size=256M
+innodb_log_file_size=64M

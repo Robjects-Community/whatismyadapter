@@ -1,0 +1,183 @@
+# Multi-stage build for WillowCMS Production
+# Stage 1: Build and Dependencies
+FROM alpine:3.20 AS builder
+
+# Install build dependencies
+RUN apk add --no-cache \
+    git \
+    curl \
+    php83 \
+    php83-phar \
+    php83-openssl \
+    php83-curl \
+    php83-json \
+    php83-mbstring \
+    php83-tokenizer \
+    php83-zip \
+    php83-dom \
+    php83-xmlreader \
+    php83-xmlwriter \
+    unzip \
+    wget
+
+# Install Composer
+RUN wget https://getcomposer.org/installer -O composer-setup.php && \
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
+    rm composer-setup.php && \
+    composer --version
+
+# Set working directory
+WORKDIR /app
+
+# Copy composer files first for better layer caching
+COPY app/composer.json app/composer.lock* ./
+
+# Configure Composer for production
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_NO_INTERACTION=1
+ENV COMPOSER_MEMORY_LIMIT=-1
+
+# Install dependencies with production optimizations
+RUN composer install \
+    --no-dev \
+    --optimize-autoloader \
+    --no-scripts \
+    --no-interaction \
+    --prefer-dist \
+    --no-progress
+
+# Copy application source
+COPY app/ .
+
+# Run Composer scripts (post-install, etc.)
+RUN composer run-script post-install-cmd || true
+
+# Stage 2: Runtime
+FROM alpine:3.20 AS runtime
+
+# Install runtime dependencies
+RUN apk add --no-cache \
+    redis \
+    curl \
+    imagemagick \
+    nginx \
+    mysql-client \
+    php83 \
+    php83-ctype \
+    php83-curl \
+    php83-dom \
+    php83-fileinfo \
+    php83-fpm \
+    php83-gd \
+    php83-intl \
+    php83-mbstring \
+    php83-mysqli \
+    php83-opcache \
+    php83-openssl \
+    php83-phar \
+    php83-session \
+    php83-tokenizer \
+    php83-xml \
+    php83-xmlreader \
+    php83-xmlwriter \
+    php83-pecl-imagick \
+    php83-pcntl \
+    php83-redis \
+    php83-zip \
+    php83-pdo_mysql \
+    php83-bcmath \
+    php83-sockets \
+    php83-intl \
+    php83-cli \
+    php83-pdo_sqlite \
+    php83-simplexml \
+    supervisor \
+    bash && \
+    rm -rf /var/cache/apk/*
+
+# Setup document root
+WORKDIR /var/www/html
+
+# Configure nginx
+COPY infrastructure/docker/willowcms/config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY infrastructure/docker/willowcms/config/nginx/nginx-cms.conf /etc/nginx/conf.d/default.conf
+
+# Configure PHP-FPM for production
+ENV PHP_INI_DIR /etc/php83
+COPY infrastructure/docker/willowcms/config/php/fpm-pool.conf ${PHP_INI_DIR}/php-fpm.d/www.conf
+COPY infrastructure/docker/willowcms/config/php/php.ini ${PHP_INI_DIR}/conf.d/custom.ini
+
+# Production PHP settings
+RUN echo "opcache.enable=1" >> ${PHP_INI_DIR}/conf.d/custom.ini && \
+    echo "opcache.memory_consumption=256" >> ${PHP_INI_DIR}/conf.d/custom.ini && \
+    echo "opcache.interned_strings_buffer=8" >> ${PHP_INI_DIR}/conf.d/custom.ini && \
+    echo "opcache.max_accelerated_files=4000" >> ${PHP_INI_DIR}/conf.d/custom.ini && \
+    echo "opcache.revalidate_freq=2" >> ${PHP_INI_DIR}/conf.d/custom.ini && \
+    echo "opcache.fast_shutdown=1" >> ${PHP_INI_DIR}/conf.d/custom.ini && \
+    echo "opcache.validate_timestamps=0" >> ${PHP_INI_DIR}/conf.d/custom.ini
+
+# Configure supervisord
+COPY infrastructure/docker/willowcms/config/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# User configuration
+ARG UID=1000
+ARG GID=1000
+ENV UID=${UID}
+ENV GID=${GID}
+
+# Create application user
+RUN deluser nobody 2>/dev/null || true && \
+    delgroup nobody 2>/dev/null || true && \
+    if ! getent group ${GID} >/dev/null 2>&1; then \
+        addgroup -g ${GID} -S appuser; \
+    else \
+        addgroup -S appuser; \
+    fi && \
+    adduser -u ${UID} -S -G appuser appuser
+
+# Copy built application from builder stage
+COPY --from=builder --chown=appuser:appuser /app/ /var/www/html/
+
+# Create necessary directories with proper permissions
+RUN mkdir -p \
+        /var/www/html/tmp/cache/models \
+        /var/www/html/tmp/cache/persistent \
+        /var/www/html/tmp/sessions \
+        /var/www/html/logs \
+        /var/www/html/webroot/files \
+        /var/www/html/webroot/files/ImageGalleries/preview \
+        /run \
+        /var/lib/nginx \
+        /var/log/nginx && \
+    chown -R appuser:appuser \
+        /var/www/html \
+        /run \
+        /var/lib/nginx \
+        /var/log/nginx && \
+    chmod -R 755 /var/www/html && \
+    chmod -R 777 /var/www/html/tmp && \
+    chmod -R 777 /var/www/html/logs && \
+    chmod -R 755 /var/www/html/webroot
+
+# Install Composer for runtime (for potential migrations)
+RUN wget https://getcomposer.org/installer -O composer-setup.php && \
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
+    rm composer-setup.php
+
+# Create entrypoint script for initialization
+COPY infrastructure/docker/willowcms/entrypoint-prod.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Switch to non-root user
+USER appuser
+
+# Expose port
+EXPOSE 80
+
+# Health check
+HEALTHCHECK --timeout=10s --interval=30s --retries=3 --start-period=60s \
+    CMD curl --silent --fail http://localhost:80/ || exit 1
+
+# Use entrypoint for initialization
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

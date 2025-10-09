@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Job</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../index.html">/var/www/html</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Job</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AbstractJob.php.html#22">App\Job\AbstractJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#27">App\Job\ArticleImageGenerationJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJob.php.html#16">App\Job\ArticleSeoUpdateJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJobRefactored.php.html#18">App\Job\ArticleSeoUpdateJobRefactored</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSummaryUpdateJob.php.html#17">App\Job\ArticleSummaryUpdateJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleTagUpdateJob.php.html#18">App\Job\ArticleTagUpdateJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleTagUpdateJobRefactored.php.html#18">App\Job\ArticleTagUpdateJobRefactored</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentAnalysisJob.php.html#18">App\Job\CommentAnalysisJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#33">App\Job\EnhancedAbstractJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#26">App\Job\EnhancedAiOperationJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#25">App\Job\GenerateGalleryPreviewJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageAnalysisJob.php.html#16">App\Job\ImageAnalysisJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGallerySeoUpdateJob.php.html#16">App\Job\ImageGallerySeoUpdateJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProcessImageJob.php.html#19">App\Job\ProcessImageJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#27">App\Job\ProductImageGenerationJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductSeoUpdateJob.php.html#11">App\Job\ProductSeoUpdateJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductVerificationJob.php.html#13">App\Job\ProductVerificationJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SendEmailJob.php.html#18">App\Job\SendEmailJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagSeoUpdateJob.php.html#16">App\Job\TagSeoUpdateJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateArticleJob.php.html#12">App\Job\TranslateArticleJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateArticleJobRefactored.php.html#18">App\Job\TranslateArticleJobRefactored</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateI18nJob.php.html#18">App\Job\TranslateI18nJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateImageGalleryJob.php.html#12">App\Job\TranslateImageGalleryJob</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateTagJob.php.html#19">App\Job\TranslateTagJob</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="EnhancedAbstractJob.php.html#33">App\Job\EnhancedAbstractJob</a></td><td class="text-right">2652</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#26">App\Job\EnhancedAiOperationJob</a></td><td class="text-right">2450</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#27">App\Job\ProductImageGenerationJob</a></td><td class="text-right">1640</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#27">App\Job\ArticleImageGenerationJob</a></td><td class="text-right">1260</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#25">App\Job\GenerateGalleryPreviewJob</a></td><td class="text-right">600</td></tr>
+       <tr><td><a href="ProductVerificationJob.php.html#13">App\Job\ProductVerificationJob</a></td><td class="text-right">506</td></tr>
+       <tr><td><a href="AbstractJob.php.html#22">App\Job\AbstractJob</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="ArticleTagUpdateJob.php.html#18">App\Job\ArticleTagUpdateJob</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="ProcessImageJob.php.html#19">App\Job\ProcessImageJob</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="ArticleSummaryUpdateJob.php.html#17">App\Job\ArticleSummaryUpdateJob</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="ArticleTagUpdateJobRefactored.php.html#18">App\Job\ArticleTagUpdateJobRefactored</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="TranslateArticleJob.php.html#12">App\Job\TranslateArticleJob</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="TranslateImageGalleryJob.php.html#12">App\Job\TranslateImageGalleryJob</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="TranslateTagJob.php.html#19">App\Job\TranslateTagJob</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="CommentAnalysisJob.php.html#18">App\Job\CommentAnalysisJob</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="TranslateI18nJob.php.html#18">App\Job\TranslateI18nJob</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ImageGallerySeoUpdateJob.php.html#16">App\Job\ImageGallerySeoUpdateJob</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="TranslateArticleJobRefactored.php.html#18">App\Job\TranslateArticleJobRefactored</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJob.php.html#16">App\Job\ArticleSeoUpdateJob</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ImageAnalysisJob.php.html#16">App\Job\ImageAnalysisJob</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ProductSeoUpdateJob.php.html#11">App\Job\ProductSeoUpdateJob</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="SendEmailJob.php.html#18">App\Job\SendEmailJob</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="TagSeoUpdateJob.php.html#16">App\Job\TagSeoUpdateJob</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJobRefactored.php.html#18">App\Job\ArticleSeoUpdateJobRefactored</a></td><td class="text-right">12</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AbstractJob.php.html#47"><abbr title="App\Job\AbstractJob::logJobStart">logJobStart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractJob.php.html#63"><abbr title="App\Job\AbstractJob::logJobSuccess">logJobSuccess</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractJob.php.html#80"><abbr title="App\Job\AbstractJob::logJobError">logJobError</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractJob.php.html#97"><abbr title="App\Job\AbstractJob::executeWithErrorHandling">executeWithErrorHandling</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractJob.php.html#129"><abbr title="App\Job\AbstractJob::executeWithEntitySave">executeWithEntitySave</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractJob.php.html#149"><abbr title="App\Job\AbstractJob::clearContentCache">clearContentCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractJob.php.html#160"><abbr title="App\Job\AbstractJob::getTable">getTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractJob.php.html#172"><abbr title="App\Job\AbstractJob::validateArguments">validateArguments</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractJob.php.html#194"><abbr title="App\Job\AbstractJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractJob.php.html#202"><abbr title="App\Job\AbstractJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#39"><abbr title="App\Job\ArticleImageGenerationJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#49"><abbr title="App\Job\ArticleImageGenerationJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#60"><abbr title="App\Job\ArticleImageGenerationJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#128"><abbr title="App\Job\ArticleImageGenerationJob::articleHasImage">articleHasImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#158"><abbr title="App\Job\ArticleImageGenerationJob::downloadAndSaveImage">downloadAndSaveImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#201"><abbr title="App\Job\ArticleImageGenerationJob::associateImageWithArticle">associateImageWithArticle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#252"><abbr title="App\Job\ArticleImageGenerationJob::generateImageName">generateImageName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#272"><abbr title="App\Job\ArticleImageGenerationJob::getImageExtensionFromUrl">getImageExtensionFromUrl</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#289"><abbr title="App\Job\ArticleImageGenerationJob::verifyDownloadedImage">verifyDownloadedImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#325"><abbr title="App\Job\ArticleImageGenerationJob::cleanupFile">cleanupFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJob.php.html#30"><abbr title="App\Job\ArticleSeoUpdateJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJob.php.html#40"><abbr title="App\Job\ArticleSeoUpdateJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJob.php.html#51"><abbr title="App\Job\ArticleSeoUpdateJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJobRefactored.php.html#23"><abbr title="App\Job\ArticleSeoUpdateJobRefactored::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJobRefactored.php.html#31"><abbr title="App\Job\ArticleSeoUpdateJobRefactored::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSummaryUpdateJob.php.html#31"><abbr title="App\Job\ArticleSummaryUpdateJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSummaryUpdateJob.php.html#43"><abbr title="App\Job\ArticleSummaryUpdateJob::getSummaryGenerator">getSummaryGenerator</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSummaryUpdateJob.php.html#60"><abbr title="App\Job\ArticleSummaryUpdateJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleSummaryUpdateJob.php.html#74"><abbr title="App\Job\ArticleSummaryUpdateJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleTagUpdateJob.php.html#32"><abbr title="App\Job\ArticleTagUpdateJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleTagUpdateJob.php.html#42"><abbr title="App\Job\ArticleTagUpdateJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleTagUpdateJob.php.html#56"><abbr title="App\Job\ArticleTagUpdateJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleTagUpdateJob.php.html#123"><abbr title="App\Job\ArticleTagUpdateJob::findOrSaveTag">findOrSaveTag</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleTagUpdateJobRefactored.php.html#23"><abbr title="App\Job\ArticleTagUpdateJobRefactored::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleTagUpdateJobRefactored.php.html#31"><abbr title="App\Job\ArticleTagUpdateJobRefactored::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticleTagUpdateJobRefactored.php.html#75"><abbr title="App\Job\ArticleTagUpdateJobRefactored::processTagHierarchy">processTagHierarchy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentAnalysisJob.php.html#32"><abbr title="App\Job\CommentAnalysisJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentAnalysisJob.php.html#42"><abbr title="App\Job\CommentAnalysisJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentAnalysisJob.php.html#56"><abbr title="App\Job\CommentAnalysisJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentAnalysisJob.php.html#102"><abbr title="App\Job\CommentAnalysisJob::updateCommentStatus">updateCommentStatus</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#63"><abbr title="App\Job\EnhancedAbstractJob::getAnthropicService">getAnthropicService</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#82"><abbr title="App\Job\EnhancedAbstractJob::getGoogleService">getGoogleService</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#109"><abbr title="App\Job\EnhancedAbstractJob::updateSeoFields">updateSeoFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#168"><abbr title="App\Job\EnhancedAbstractJob::areTranslationsEnabled">areTranslationsEnabled</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#182"><abbr title="App\Job\EnhancedAbstractJob::processTranslations">processTranslations</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#244"><abbr title="App\Job\EnhancedAbstractJob::requeueWithBackoff">requeueWithBackoff</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#304"><abbr title="App\Job\EnhancedAbstractJob::applyBulkFieldUpdates">applyBulkFieldUpdates</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#326"><abbr title="App\Job\EnhancedAbstractJob::findOrCreateEntity">findOrCreateEntity</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#354"><abbr title="App\Job\EnhancedAbstractJob::getValidatedConfig">getValidatedConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#381"><abbr title="App\Job\EnhancedAbstractJob::logJobStart">logJobStart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#393"><abbr title="App\Job\EnhancedAbstractJob::logJobSuccess">logJobSuccess</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#405"><abbr title="App\Job\EnhancedAbstractJob::logJobError">logJobError</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#417"><abbr title="App\Job\EnhancedAbstractJob::executeWithErrorHandling">executeWithErrorHandling</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#441"><abbr title="App\Job\EnhancedAbstractJob::executeWithEntitySave">executeWithEntitySave</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#458"><abbr title="App\Job\EnhancedAbstractJob::clearContentCache">clearContentCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#466"><abbr title="App\Job\EnhancedAbstractJob::getTable">getTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#474"><abbr title="App\Job\EnhancedAbstractJob::validateArguments">validateArguments</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#493"><abbr title="App\Job\EnhancedAbstractJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#498"><abbr title="App\Job\EnhancedAbstractJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#52"><abbr title="App\Job\EnhancedAiOperationJob::run">run</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#163"><abbr title="App\Job\EnhancedAiOperationJob::executeOperation">executeOperation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#195"><abbr title="App\Job\EnhancedAiOperationJob::generateSeoContent">generateSeoContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#225"><abbr title="App\Job\EnhancedAiOperationJob::analyzeImage">analyzeImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#254"><abbr title="App\Job\EnhancedAiOperationJob::generateTags">generateTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#283"><abbr title="App\Job\EnhancedAiOperationJob::analyzeSentiment">analyzeSentiment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#312"><abbr title="App\Job\EnhancedAiOperationJob::translateContent">translateContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#342"><abbr title="App\Job\EnhancedAiOperationJob::generateSummary">generateSummary</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#376"><abbr title="App\Job\EnhancedAiOperationJob::getServiceInstance">getServiceInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#390"><abbr title="App\Job\EnhancedAiOperationJob::recordMetrics">recordMetrics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#427"><abbr title="App\Job\EnhancedAiOperationJob::updateEntity">updateEntity</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#447"><abbr title="App\Job\EnhancedAiOperationJob::retryJob">retryJob</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#481"><abbr title="App\Job\EnhancedAiOperationJob::rescheduleJob">rescheduleJob</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#498"><abbr title="App\Job\EnhancedAiOperationJob::shouldRetry">shouldRetry</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#506"><abbr title="App\Job\EnhancedAiOperationJob::isRetryableError">isRetryableError</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#534"><abbr title="App\Job\EnhancedAiOperationJob::isCircuitBreakerOpen">isCircuitBreakerOpen</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#548"><abbr title="App\Job\EnhancedAiOperationJob::recordCircuitBreakerFailure">recordCircuitBreakerFailure</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#562"><abbr title="App\Job\EnhancedAiOperationJob::resetCircuitBreaker">resetCircuitBreaker</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#61"><abbr title="App\Job\GenerateGalleryPreviewJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#146"><abbr title="App\Job\GenerateGalleryPreviewJob::generatePreview">generatePreview</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#181"><abbr title="App\Job\GenerateGalleryPreviewJob::createSingleImagePreview">createSingleImagePreview</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#227"><abbr title="App\Job\GenerateGalleryPreviewJob::createSmartMontagePreview">createSmartMontagePreview</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#309"><abbr title="App\Job\GenerateGalleryPreviewJob::calculateOptimalGrid">calculateOptimalGrid</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#328"><abbr title="App\Job\GenerateGalleryPreviewJob::addGradientBackground">addGradientBackground</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#349"><abbr title="App\Job\GenerateGalleryPreviewJob::applyImageStyling">applyImageStyling</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#396"><abbr title="App\Job\GenerateGalleryPreviewJob::clearExistingPreview">clearExistingPreview</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageAnalysisJob.php.html#30"><abbr title="App\Job\ImageAnalysisJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageAnalysisJob.php.html#40"><abbr title="App\Job\ImageAnalysisJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageAnalysisJob.php.html#51"><abbr title="App\Job\ImageAnalysisJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGallerySeoUpdateJob.php.html#30"><abbr title="App\Job\ImageGallerySeoUpdateJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGallerySeoUpdateJob.php.html#40"><abbr title="App\Job\ImageGallerySeoUpdateJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGallerySeoUpdateJob.php.html#51"><abbr title="App\Job\ImageGallerySeoUpdateJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProcessImageJob.php.html#26"><abbr title="App\Job\ProcessImageJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProcessImageJob.php.html#40"><abbr title="App\Job\ProcessImageJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProcessImageJob.php.html#101"><abbr title="App\Job\ProcessImageJob::createImage">createImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#39"><abbr title="App\Job\ProductImageGenerationJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#49"><abbr title="App\Job\ProductImageGenerationJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#60"><abbr title="App\Job\ProductImageGenerationJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#129"><abbr title="App\Job\ProductImageGenerationJob::productHasImage">productHasImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#159"><abbr title="App\Job\ProductImageGenerationJob::downloadAndSaveImage">downloadAndSaveImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#202"><abbr title="App\Job\ProductImageGenerationJob::associateImageWithProduct">associateImageWithProduct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#260"><abbr title="App\Job\ProductImageGenerationJob::generateImageName">generateImageName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#285"><abbr title="App\Job\ProductImageGenerationJob::generateAltText">generateAltText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#306"><abbr title="App\Job\ProductImageGenerationJob::getImageExtensionFromUrl">getImageExtensionFromUrl</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#323"><abbr title="App\Job\ProductImageGenerationJob::verifyDownloadedImage">verifyDownloadedImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#359"><abbr title="App\Job\ProductImageGenerationJob::cleanupFile">cleanupFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductSeoUpdateJob.php.html#26"><abbr title="App\Job\ProductSeoUpdateJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductSeoUpdateJob.php.html#34"><abbr title="App\Job\ProductSeoUpdateJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductVerificationJob.php.html#28"><abbr title="App\Job\ProductVerificationJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductVerificationJob.php.html#36"><abbr title="App\Job\ProductVerificationJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductVerificationJob.php.html#88"><abbr title="App\Job\ProductVerificationJob::calculateVerificationScore">calculateVerificationScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductVerificationJob.php.html#141"><abbr title="App\Job\ProductVerificationJob::runAIVerification">runAIVerification</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SendEmailJob.php.html#25"><abbr title="App\Job\SendEmailJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SendEmailJob.php.html#36"><abbr title="App\Job\SendEmailJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagSeoUpdateJob.php.html#30"><abbr title="App\Job\TagSeoUpdateJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagSeoUpdateJob.php.html#40"><abbr title="App\Job\TagSeoUpdateJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagSeoUpdateJob.php.html#54"><abbr title="App\Job\TagSeoUpdateJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateArticleJob.php.html#24"><abbr title="App\Job\TranslateArticleJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateArticleJob.php.html#34"><abbr title="App\Job\TranslateArticleJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateArticleJob.php.html#45"><abbr title="App\Job\TranslateArticleJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateArticleJob.php.html#121"><abbr title="App\Job\TranslateArticleJob::handleEmptySeoFields">handleEmptySeoFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateArticleJobRefactored.php.html#23"><abbr title="App\Job\TranslateArticleJobRefactored::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateArticleJobRefactored.php.html#31"><abbr title="App\Job\TranslateArticleJobRefactored::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateArticleJobRefactored.php.html#82"><abbr title="App\Job\TranslateArticleJobRefactored::handleSeoFieldDependency">handleSeoFieldDependency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateI18nJob.php.html#31"><abbr title="App\Job\TranslateI18nJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateI18nJob.php.html#47"><abbr title="App\Job\TranslateI18nJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateI18nJob.php.html#61"><abbr title="App\Job\TranslateI18nJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateImageGalleryJob.php.html#24"><abbr title="App\Job\TranslateImageGalleryJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateImageGalleryJob.php.html#34"><abbr title="App\Job\TranslateImageGalleryJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateImageGalleryJob.php.html#45"><abbr title="App\Job\TranslateImageGalleryJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateImageGalleryJob.php.html#117"><abbr title="App\Job\TranslateImageGalleryJob::handleEmptySeoFields">handleEmptySeoFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateTagJob.php.html#31"><abbr title="App\Job\TranslateTagJob::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateTagJob.php.html#41"><abbr title="App\Job\TranslateTagJob::getJobType">getJobType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateTagJob.php.html#52"><abbr title="App\Job\TranslateTagJob::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TranslateTagJob.php.html#124"><abbr title="App\Job\TranslateTagJob::handleEmptySeoFields">handleEmptySeoFields</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#52"><abbr title="App\Job\EnhancedAiOperationJob::run">run</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#109"><abbr title="App\Job\EnhancedAbstractJob::updateSeoFields">updateSeoFields</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="ProductVerificationJob.php.html#88"><abbr title="App\Job\ProductVerificationJob::calculateVerificationScore">calculateVerificationScore</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#60"><abbr title="App\Job\ArticleImageGenerationJob::execute">execute</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ArticleTagUpdateJob.php.html#56"><abbr title="App\Job\ArticleTagUpdateJob::execute">execute</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#182"><abbr title="App\Job\EnhancedAbstractJob::processTranslations">processTranslations</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#163"><abbr title="App\Job\EnhancedAiOperationJob::executeOperation">executeOperation</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#60"><abbr title="App\Job\ProductImageGenerationJob::execute">execute</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#289"><abbr title="App\Job\ArticleImageGenerationJob::verifyDownloadedImage">verifyDownloadedImage</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#227"><abbr title="App\Job\GenerateGalleryPreviewJob::createSmartMontagePreview">createSmartMontagePreview</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ProcessImageJob.php.html#101"><abbr title="App\Job\ProcessImageJob::createImage">createImage</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#323"><abbr title="App\Job\ProductImageGenerationJob::verifyDownloadedImage">verifyDownloadedImage</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ProductVerificationJob.php.html#36"><abbr title="App\Job\ProductVerificationJob::execute">execute</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="TranslateArticleJob.php.html#45"><abbr title="App\Job\TranslateArticleJob::execute">execute</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="TranslateImageGalleryJob.php.html#45"><abbr title="App\Job\TranslateImageGalleryJob::execute">execute</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="TranslateTagJob.php.html#52"><abbr title="App\Job\TranslateTagJob::execute">execute</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ArticleSummaryUpdateJob.php.html#74"><abbr title="App\Job\ArticleSummaryUpdateJob::execute">execute</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ArticleTagUpdateJobRefactored.php.html#75"><abbr title="App\Job\ArticleTagUpdateJobRefactored::processTagHierarchy">processTagHierarchy</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#61"><abbr title="App\Job\GenerateGalleryPreviewJob::execute">execute</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ImageGallerySeoUpdateJob.php.html#51"><abbr title="App\Job\ImageGallerySeoUpdateJob::execute">execute</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#202"><abbr title="App\Job\ProductImageGenerationJob::associateImageWithProduct">associateImageWithProduct</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ProductVerificationJob.php.html#141"><abbr title="App\Job\ProductVerificationJob::runAIVerification">runAIVerification</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="TranslateI18nJob.php.html#61"><abbr title="App\Job\TranslateI18nJob::execute">execute</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#128"><abbr title="App\Job\ArticleImageGenerationJob::articleHasImage">articleHasImage</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#158"><abbr title="App\Job\ArticleImageGenerationJob::downloadAndSaveImage">downloadAndSaveImage</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#201"><abbr title="App\Job\ArticleImageGenerationJob::associateImageWithArticle">associateImageWithArticle</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ArticleTagUpdateJobRefactored.php.html#31"><abbr title="App\Job\ArticleTagUpdateJobRefactored::execute">execute</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="CommentAnalysisJob.php.html#56"><abbr title="App\Job\CommentAnalysisJob::execute">execute</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#146"><abbr title="App\Job\GenerateGalleryPreviewJob::generatePreview">generatePreview</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#396"><abbr title="App\Job\GenerateGalleryPreviewJob::clearExistingPreview">clearExistingPreview</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProcessImageJob.php.html#40"><abbr title="App\Job\ProcessImageJob::execute">execute</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#129"><abbr title="App\Job\ProductImageGenerationJob::productHasImage">productHasImage</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#159"><abbr title="App\Job\ProductImageGenerationJob::downloadAndSaveImage">downloadAndSaveImage</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#260"><abbr title="App\Job\ProductImageGenerationJob::generateImageName">generateImageName</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductSeoUpdateJob.php.html#34"><abbr title="App\Job\ProductSeoUpdateJob::execute">execute</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="SendEmailJob.php.html#36"><abbr title="App\Job\SendEmailJob::execute">execute</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="TranslateArticleJobRefactored.php.html#31"><abbr title="App\Job\TranslateArticleJobRefactored::execute">execute</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="AbstractJob.php.html#97"><abbr title="App\Job\AbstractJob::executeWithErrorHandling">executeWithErrorHandling</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AbstractJob.php.html#172"><abbr title="App\Job\AbstractJob::validateArguments">validateArguments</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#252"><abbr title="App\Job\ArticleImageGenerationJob::generateImageName">generateImageName</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJob.php.html#51"><abbr title="App\Job\ArticleSeoUpdateJob::execute">execute</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#63"><abbr title="App\Job\EnhancedAbstractJob::getAnthropicService">getAnthropicService</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#82"><abbr title="App\Job\EnhancedAbstractJob::getGoogleService">getGoogleService</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#304"><abbr title="App\Job\EnhancedAbstractJob::applyBulkFieldUpdates">applyBulkFieldUpdates</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#354"><abbr title="App\Job\EnhancedAbstractJob::getValidatedConfig">getValidatedConfig</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#417"><abbr title="App\Job\EnhancedAbstractJob::executeWithErrorHandling">executeWithErrorHandling</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#474"><abbr title="App\Job\EnhancedAbstractJob::validateArguments">validateArguments</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#390"><abbr title="App\Job\EnhancedAiOperationJob::recordMetrics">recordMetrics</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#427"><abbr title="App\Job\EnhancedAiOperationJob::updateEntity">updateEntity</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#506"><abbr title="App\Job\EnhancedAiOperationJob::isRetryableError">isRetryableError</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImageAnalysisJob.php.html#51"><abbr title="App\Job\ImageAnalysisJob::execute">execute</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#285"><abbr title="App\Job\ProductImageGenerationJob::generateAltText">generateAltText</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TagSeoUpdateJob.php.html#54"><abbr title="App\Job\TagSeoUpdateJob::execute">execute</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AbstractJob.php.html#47"><abbr title="App\Job\AbstractJob::logJobStart">logJobStart</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractJob.php.html#63"><abbr title="App\Job\AbstractJob::logJobSuccess">logJobSuccess</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractJob.php.html#80"><abbr title="App\Job\AbstractJob::logJobError">logJobError</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractJob.php.html#129"><abbr title="App\Job\AbstractJob::executeWithEntitySave">executeWithEntitySave</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#272"><abbr title="App\Job\ArticleImageGenerationJob::getImageExtensionFromUrl">getImageExtensionFromUrl</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ArticleImageGenerationJob.php.html#325"><abbr title="App\Job\ArticleImageGenerationJob::cleanupFile">cleanupFile</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ArticleSeoUpdateJobRefactored.php.html#31"><abbr title="App\Job\ArticleSeoUpdateJobRefactored::execute">execute</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ArticleSummaryUpdateJob.php.html#31"><abbr title="App\Job\ArticleSummaryUpdateJob::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ArticleSummaryUpdateJob.php.html#43"><abbr title="App\Job\ArticleSummaryUpdateJob::getSummaryGenerator">getSummaryGenerator</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ArticleTagUpdateJob.php.html#123"><abbr title="App\Job\ArticleTagUpdateJob::findOrSaveTag">findOrSaveTag</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CommentAnalysisJob.php.html#102"><abbr title="App\Job\CommentAnalysisJob::updateCommentStatus">updateCommentStatus</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#244"><abbr title="App\Job\EnhancedAbstractJob::requeueWithBackoff">requeueWithBackoff</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#326"><abbr title="App\Job\EnhancedAbstractJob::findOrCreateEntity">findOrCreateEntity</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#381"><abbr title="App\Job\EnhancedAbstractJob::logJobStart">logJobStart</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#393"><abbr title="App\Job\EnhancedAbstractJob::logJobSuccess">logJobSuccess</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#405"><abbr title="App\Job\EnhancedAbstractJob::logJobError">logJobError</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAbstractJob.php.html#441"><abbr title="App\Job\EnhancedAbstractJob::executeWithEntitySave">executeWithEntitySave</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#195"><abbr title="App\Job\EnhancedAiOperationJob::generateSeoContent">generateSeoContent</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#225"><abbr title="App\Job\EnhancedAiOperationJob::analyzeImage">analyzeImage</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#254"><abbr title="App\Job\EnhancedAiOperationJob::generateTags">generateTags</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#283"><abbr title="App\Job\EnhancedAiOperationJob::analyzeSentiment">analyzeSentiment</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#312"><abbr title="App\Job\EnhancedAiOperationJob::translateContent">translateContent</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#342"><abbr title="App\Job\EnhancedAiOperationJob::generateSummary">generateSummary</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EnhancedAiOperationJob.php.html#376"><abbr title="App\Job\EnhancedAiOperationJob::getServiceInstance">getServiceInstance</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="GenerateGalleryPreviewJob.php.html#181"><abbr title="App\Job\GenerateGalleryPreviewJob::createSingleImagePreview">createSingleImagePreview</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#306"><abbr title="App\Job\ProductImageGenerationJob::getImageExtensionFromUrl">getImageExtensionFromUrl</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductImageGenerationJob.php.html#359"><abbr title="App\Job\ProductImageGenerationJob::cleanupFile">cleanupFile</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TranslateArticleJob.php.html#121"><abbr title="App\Job\TranslateArticleJob::handleEmptySeoFields">handleEmptySeoFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TranslateI18nJob.php.html#31"><abbr title="App\Job\TranslateI18nJob::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TranslateImageGalleryJob.php.html#117"><abbr title="App\Job\TranslateImageGalleryJob::handleEmptySeoFields">handleEmptySeoFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TranslateTagJob.php.html#124"><abbr title="App\Job\TranslateTagJob::handleEmptySeoFields">handleEmptySeoFields</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.26</a> and <a href="https://phpunit.de/">PHPUnit 10.5.55</a> at Tue Oct 7 15:04:30 CDT 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([24,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([134,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,16,"<a href=\"AbstractJob.php.html#22\">App\\Job\\AbstractJob<\/a>"],[0,35,"<a href=\"ArticleImageGenerationJob.php.html#27\">App\\Job\\ArticleImageGenerationJob<\/a>"],[0,5,"<a href=\"ArticleSeoUpdateJob.php.html#16\">App\\Job\\ArticleSeoUpdateJob<\/a>"],[0,3,"<a href=\"ArticleSeoUpdateJobRefactored.php.html#18\">App\\Job\\ArticleSeoUpdateJobRefactored<\/a>"],[0,10,"<a href=\"ArticleSummaryUpdateJob.php.html#17\">App\\Job\\ArticleSummaryUpdateJob<\/a>"],[0,12,"<a href=\"ArticleTagUpdateJob.php.html#18\">App\\Job\\ArticleTagUpdateJob<\/a>"],[0,10,"<a href=\"ArticleTagUpdateJobRefactored.php.html#18\">App\\Job\\ArticleTagUpdateJobRefactored<\/a>"],[0,8,"<a href=\"CommentAnalysisJob.php.html#18\">App\\Job\\CommentAnalysisJob<\/a>"],[0,51,"<a href=\"EnhancedAbstractJob.php.html#33\">App\\Job\\EnhancedAbstractJob<\/a>"],[0,49,"<a href=\"EnhancedAiOperationJob.php.html#26\">App\\Job\\EnhancedAiOperationJob<\/a>"],[0,24,"<a href=\"GenerateGalleryPreviewJob.php.html#25\">App\\Job\\GenerateGalleryPreviewJob<\/a>"],[0,5,"<a href=\"ImageAnalysisJob.php.html#16\">App\\Job\\ImageAnalysisJob<\/a>"],[0,7,"<a href=\"ImageGallerySeoUpdateJob.php.html#16\">App\\Job\\ImageGallerySeoUpdateJob<\/a>"],[0,11,"<a href=\"ProcessImageJob.php.html#19\">App\\Job\\ProcessImageJob<\/a>"],[0,40,"<a href=\"ProductImageGenerationJob.php.html#27\">App\\Job\\ProductImageGenerationJob<\/a>"],[0,5,"<a href=\"ProductSeoUpdateJob.php.html#11\">App\\Job\\ProductSeoUpdateJob<\/a>"],[0,22,"<a href=\"ProductVerificationJob.php.html#13\">App\\Job\\ProductVerificationJob<\/a>"],[0,5,"<a href=\"SendEmailJob.php.html#18\">App\\Job\\SendEmailJob<\/a>"],[0,5,"<a href=\"TagSeoUpdateJob.php.html#16\">App\\Job\\TagSeoUpdateJob<\/a>"],[0,10,"<a href=\"TranslateArticleJob.php.html#12\">App\\Job\\TranslateArticleJob<\/a>"],[0,6,"<a href=\"TranslateArticleJobRefactored.php.html#18\">App\\Job\\TranslateArticleJobRefactored<\/a>"],[0,8,"<a href=\"TranslateI18nJob.php.html#18\">App\\Job\\TranslateI18nJob<\/a>"],[0,10,"<a href=\"TranslateImageGalleryJob.php.html#12\">App\\Job\\TranslateImageGalleryJob<\/a>"],[0,10,"<a href=\"TranslateTagJob.php.html#19\">App\\Job\\TranslateTagJob<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,2,"<a href=\"AbstractJob.php.html#47\">App\\Job\\AbstractJob::logJobStart<\/a>"],[0,2,"<a href=\"AbstractJob.php.html#63\">App\\Job\\AbstractJob::logJobSuccess<\/a>"],[0,2,"<a href=\"AbstractJob.php.html#80\">App\\Job\\AbstractJob::logJobError<\/a>"],[0,3,"<a href=\"AbstractJob.php.html#97\">App\\Job\\AbstractJob::executeWithErrorHandling<\/a>"],[0,2,"<a href=\"AbstractJob.php.html#129\">App\\Job\\AbstractJob::executeWithEntitySave<\/a>"],[0,1,"<a href=\"AbstractJob.php.html#149\">App\\Job\\AbstractJob::clearContentCache<\/a>"],[0,1,"<a href=\"AbstractJob.php.html#160\">App\\Job\\AbstractJob::getTable<\/a>"],[0,3,"<a href=\"AbstractJob.php.html#172\">App\\Job\\AbstractJob::validateArguments<\/a>"],[0,0,"<a href=\"AbstractJob.php.html#194\">App\\Job\\AbstractJob::getJobType<\/a>"],[0,0,"<a href=\"AbstractJob.php.html#202\">App\\Job\\AbstractJob::execute<\/a>"],[0,1,"<a href=\"ArticleImageGenerationJob.php.html#39\">App\\Job\\ArticleImageGenerationJob::__construct<\/a>"],[0,1,"<a href=\"ArticleImageGenerationJob.php.html#49\">App\\Job\\ArticleImageGenerationJob::getJobType<\/a>"],[0,8,"<a href=\"ArticleImageGenerationJob.php.html#60\">App\\Job\\ArticleImageGenerationJob::execute<\/a>"],[0,4,"<a href=\"ArticleImageGenerationJob.php.html#128\">App\\Job\\ArticleImageGenerationJob::articleHasImage<\/a>"],[0,4,"<a href=\"ArticleImageGenerationJob.php.html#158\">App\\Job\\ArticleImageGenerationJob::downloadAndSaveImage<\/a>"],[0,4,"<a href=\"ArticleImageGenerationJob.php.html#201\">App\\Job\\ArticleImageGenerationJob::associateImageWithArticle<\/a>"],[0,3,"<a href=\"ArticleImageGenerationJob.php.html#252\">App\\Job\\ArticleImageGenerationJob::generateImageName<\/a>"],[0,2,"<a href=\"ArticleImageGenerationJob.php.html#272\">App\\Job\\ArticleImageGenerationJob::getImageExtensionFromUrl<\/a>"],[0,6,"<a href=\"ArticleImageGenerationJob.php.html#289\">App\\Job\\ArticleImageGenerationJob::verifyDownloadedImage<\/a>"],[0,2,"<a href=\"ArticleImageGenerationJob.php.html#325\">App\\Job\\ArticleImageGenerationJob::cleanupFile<\/a>"],[0,1,"<a href=\"ArticleSeoUpdateJob.php.html#30\">App\\Job\\ArticleSeoUpdateJob::__construct<\/a>"],[0,1,"<a href=\"ArticleSeoUpdateJob.php.html#40\">App\\Job\\ArticleSeoUpdateJob::getJobType<\/a>"],[0,3,"<a href=\"ArticleSeoUpdateJob.php.html#51\">App\\Job\\ArticleSeoUpdateJob::execute<\/a>"],[0,1,"<a href=\"ArticleSeoUpdateJobRefactored.php.html#23\">App\\Job\\ArticleSeoUpdateJobRefactored::getJobType<\/a>"],[0,2,"<a href=\"ArticleSeoUpdateJobRefactored.php.html#31\">App\\Job\\ArticleSeoUpdateJobRefactored::execute<\/a>"],[0,2,"<a href=\"ArticleSummaryUpdateJob.php.html#31\">App\\Job\\ArticleSummaryUpdateJob::__construct<\/a>"],[0,2,"<a href=\"ArticleSummaryUpdateJob.php.html#43\">App\\Job\\ArticleSummaryUpdateJob::getSummaryGenerator<\/a>"],[0,1,"<a href=\"ArticleSummaryUpdateJob.php.html#60\">App\\Job\\ArticleSummaryUpdateJob::getJobType<\/a>"],[0,5,"<a href=\"ArticleSummaryUpdateJob.php.html#74\">App\\Job\\ArticleSummaryUpdateJob::execute<\/a>"],[0,1,"<a href=\"ArticleTagUpdateJob.php.html#32\">App\\Job\\ArticleTagUpdateJob::__construct<\/a>"],[0,1,"<a href=\"ArticleTagUpdateJob.php.html#42\">App\\Job\\ArticleTagUpdateJob::getJobType<\/a>"],[0,8,"<a href=\"ArticleTagUpdateJob.php.html#56\">App\\Job\\ArticleTagUpdateJob::execute<\/a>"],[0,2,"<a href=\"ArticleTagUpdateJob.php.html#123\">App\\Job\\ArticleTagUpdateJob::findOrSaveTag<\/a>"],[0,1,"<a href=\"ArticleTagUpdateJobRefactored.php.html#23\">App\\Job\\ArticleTagUpdateJobRefactored::getJobType<\/a>"],[0,4,"<a href=\"ArticleTagUpdateJobRefactored.php.html#31\">App\\Job\\ArticleTagUpdateJobRefactored::execute<\/a>"],[0,5,"<a href=\"ArticleTagUpdateJobRefactored.php.html#75\">App\\Job\\ArticleTagUpdateJobRefactored::processTagHierarchy<\/a>"],[0,1,"<a href=\"CommentAnalysisJob.php.html#32\">App\\Job\\CommentAnalysisJob::__construct<\/a>"],[0,1,"<a href=\"CommentAnalysisJob.php.html#42\">App\\Job\\CommentAnalysisJob::getJobType<\/a>"],[0,4,"<a href=\"CommentAnalysisJob.php.html#56\">App\\Job\\CommentAnalysisJob::execute<\/a>"],[0,2,"<a href=\"CommentAnalysisJob.php.html#102\">App\\Job\\CommentAnalysisJob::updateCommentStatus<\/a>"],[0,3,"<a href=\"EnhancedAbstractJob.php.html#63\">App\\Job\\EnhancedAbstractJob::getAnthropicService<\/a>"],[0,3,"<a href=\"EnhancedAbstractJob.php.html#82\">App\\Job\\EnhancedAbstractJob::getGoogleService<\/a>"],[0,10,"<a href=\"EnhancedAbstractJob.php.html#109\">App\\Job\\EnhancedAbstractJob::updateSeoFields<\/a>"],[0,1,"<a href=\"EnhancedAbstractJob.php.html#168\">App\\Job\\EnhancedAbstractJob::areTranslationsEnabled<\/a>"],[0,8,"<a href=\"EnhancedAbstractJob.php.html#182\">App\\Job\\EnhancedAbstractJob::processTranslations<\/a>"],[0,2,"<a href=\"EnhancedAbstractJob.php.html#244\">App\\Job\\EnhancedAbstractJob::requeueWithBackoff<\/a>"],[0,3,"<a href=\"EnhancedAbstractJob.php.html#304\">App\\Job\\EnhancedAbstractJob::applyBulkFieldUpdates<\/a>"],[0,2,"<a href=\"EnhancedAbstractJob.php.html#326\">App\\Job\\EnhancedAbstractJob::findOrCreateEntity<\/a>"],[0,3,"<a href=\"EnhancedAbstractJob.php.html#354\">App\\Job\\EnhancedAbstractJob::getValidatedConfig<\/a>"],[0,2,"<a href=\"EnhancedAbstractJob.php.html#381\">App\\Job\\EnhancedAbstractJob::logJobStart<\/a>"],[0,2,"<a href=\"EnhancedAbstractJob.php.html#393\">App\\Job\\EnhancedAbstractJob::logJobSuccess<\/a>"],[0,2,"<a href=\"EnhancedAbstractJob.php.html#405\">App\\Job\\EnhancedAbstractJob::logJobError<\/a>"],[0,3,"<a href=\"EnhancedAbstractJob.php.html#417\">App\\Job\\EnhancedAbstractJob::executeWithErrorHandling<\/a>"],[0,2,"<a href=\"EnhancedAbstractJob.php.html#441\">App\\Job\\EnhancedAbstractJob::executeWithEntitySave<\/a>"],[0,1,"<a href=\"EnhancedAbstractJob.php.html#458\">App\\Job\\EnhancedAbstractJob::clearContentCache<\/a>"],[0,1,"<a href=\"EnhancedAbstractJob.php.html#466\">App\\Job\\EnhancedAbstractJob::getTable<\/a>"],[0,3,"<a href=\"EnhancedAbstractJob.php.html#474\">App\\Job\\EnhancedAbstractJob::validateArguments<\/a>"],[0,0,"<a href=\"EnhancedAbstractJob.php.html#493\">App\\Job\\EnhancedAbstractJob::getJobType<\/a>"],[0,0,"<a href=\"EnhancedAbstractJob.php.html#498\">App\\Job\\EnhancedAbstractJob::execute<\/a>"],[0,12,"<a href=\"EnhancedAiOperationJob.php.html#52\">App\\Job\\EnhancedAiOperationJob::run<\/a>"],[0,8,"<a href=\"EnhancedAiOperationJob.php.html#163\">App\\Job\\EnhancedAiOperationJob::executeOperation<\/a>"],[0,2,"<a href=\"EnhancedAiOperationJob.php.html#195\">App\\Job\\EnhancedAiOperationJob::generateSeoContent<\/a>"],[0,2,"<a href=\"EnhancedAiOperationJob.php.html#225\">App\\Job\\EnhancedAiOperationJob::analyzeImage<\/a>"],[0,2,"<a href=\"EnhancedAiOperationJob.php.html#254\">App\\Job\\EnhancedAiOperationJob::generateTags<\/a>"],[0,2,"<a href=\"EnhancedAiOperationJob.php.html#283\">App\\Job\\EnhancedAiOperationJob::analyzeSentiment<\/a>"],[0,2,"<a href=\"EnhancedAiOperationJob.php.html#312\">App\\Job\\EnhancedAiOperationJob::translateContent<\/a>"],[0,2,"<a href=\"EnhancedAiOperationJob.php.html#342\">App\\Job\\EnhancedAiOperationJob::generateSummary<\/a>"],[0,2,"<a href=\"EnhancedAiOperationJob.php.html#376\">App\\Job\\EnhancedAiOperationJob::getServiceInstance<\/a>"],[0,3,"<a href=\"EnhancedAiOperationJob.php.html#390\">App\\Job\\EnhancedAiOperationJob::recordMetrics<\/a>"],[0,3,"<a href=\"EnhancedAiOperationJob.php.html#427\">App\\Job\\EnhancedAiOperationJob::updateEntity<\/a>"],[0,1,"<a href=\"EnhancedAiOperationJob.php.html#447\">App\\Job\\EnhancedAiOperationJob::retryJob<\/a>"],[0,1,"<a href=\"EnhancedAiOperationJob.php.html#481\">App\\Job\\EnhancedAiOperationJob::rescheduleJob<\/a>"],[0,1,"<a href=\"EnhancedAiOperationJob.php.html#498\">App\\Job\\EnhancedAiOperationJob::shouldRetry<\/a>"],[0,3,"<a href=\"EnhancedAiOperationJob.php.html#506\">App\\Job\\EnhancedAiOperationJob::isRetryableError<\/a>"],[0,1,"<a href=\"EnhancedAiOperationJob.php.html#534\">App\\Job\\EnhancedAiOperationJob::isCircuitBreakerOpen<\/a>"],[0,1,"<a href=\"EnhancedAiOperationJob.php.html#548\">App\\Job\\EnhancedAiOperationJob::recordCircuitBreakerFailure<\/a>"],[0,1,"<a href=\"EnhancedAiOperationJob.php.html#562\">App\\Job\\EnhancedAiOperationJob::resetCircuitBreaker<\/a>"],[0,5,"<a href=\"GenerateGalleryPreviewJob.php.html#61\">App\\Job\\GenerateGalleryPreviewJob::execute<\/a>"],[0,4,"<a href=\"GenerateGalleryPreviewJob.php.html#146\">App\\Job\\GenerateGalleryPreviewJob::generatePreview<\/a>"],[0,2,"<a href=\"GenerateGalleryPreviewJob.php.html#181\">App\\Job\\GenerateGalleryPreviewJob::createSingleImagePreview<\/a>"],[0,6,"<a href=\"GenerateGalleryPreviewJob.php.html#227\">App\\Job\\GenerateGalleryPreviewJob::createSmartMontagePreview<\/a>"],[0,1,"<a href=\"GenerateGalleryPreviewJob.php.html#309\">App\\Job\\GenerateGalleryPreviewJob::calculateOptimalGrid<\/a>"],[0,1,"<a href=\"GenerateGalleryPreviewJob.php.html#328\">App\\Job\\GenerateGalleryPreviewJob::addGradientBackground<\/a>"],[0,1,"<a href=\"GenerateGalleryPreviewJob.php.html#349\">App\\Job\\GenerateGalleryPreviewJob::applyImageStyling<\/a>"],[0,4,"<a href=\"GenerateGalleryPreviewJob.php.html#396\">App\\Job\\GenerateGalleryPreviewJob::clearExistingPreview<\/a>"],[0,1,"<a href=\"ImageAnalysisJob.php.html#30\">App\\Job\\ImageAnalysisJob::__construct<\/a>"],[0,1,"<a href=\"ImageAnalysisJob.php.html#40\">App\\Job\\ImageAnalysisJob::getJobType<\/a>"],[0,3,"<a href=\"ImageAnalysisJob.php.html#51\">App\\Job\\ImageAnalysisJob::execute<\/a>"],[0,1,"<a href=\"ImageGallerySeoUpdateJob.php.html#30\">App\\Job\\ImageGallerySeoUpdateJob::__construct<\/a>"],[0,1,"<a href=\"ImageGallerySeoUpdateJob.php.html#40\">App\\Job\\ImageGallerySeoUpdateJob::getJobType<\/a>"],[0,5,"<a href=\"ImageGallerySeoUpdateJob.php.html#51\">App\\Job\\ImageGallerySeoUpdateJob::execute<\/a>"],[0,1,"<a href=\"ProcessImageJob.php.html#26\">App\\Job\\ProcessImageJob::getJobType<\/a>"],[0,4,"<a href=\"ProcessImageJob.php.html#40\">App\\Job\\ProcessImageJob::execute<\/a>"],[0,6,"<a href=\"ProcessImageJob.php.html#101\">App\\Job\\ProcessImageJob::createImage<\/a>"],[0,1,"<a href=\"ProductImageGenerationJob.php.html#39\">App\\Job\\ProductImageGenerationJob::__construct<\/a>"],[0,1,"<a href=\"ProductImageGenerationJob.php.html#49\">App\\Job\\ProductImageGenerationJob::getJobType<\/a>"],[0,8,"<a href=\"ProductImageGenerationJob.php.html#60\">App\\Job\\ProductImageGenerationJob::execute<\/a>"],[0,4,"<a href=\"ProductImageGenerationJob.php.html#129\">App\\Job\\ProductImageGenerationJob::productHasImage<\/a>"],[0,4,"<a href=\"ProductImageGenerationJob.php.html#159\">App\\Job\\ProductImageGenerationJob::downloadAndSaveImage<\/a>"],[0,5,"<a href=\"ProductImageGenerationJob.php.html#202\">App\\Job\\ProductImageGenerationJob::associateImageWithProduct<\/a>"],[0,4,"<a href=\"ProductImageGenerationJob.php.html#260\">App\\Job\\ProductImageGenerationJob::generateImageName<\/a>"],[0,3,"<a href=\"ProductImageGenerationJob.php.html#285\">App\\Job\\ProductImageGenerationJob::generateAltText<\/a>"],[0,2,"<a href=\"ProductImageGenerationJob.php.html#306\">App\\Job\\ProductImageGenerationJob::getImageExtensionFromUrl<\/a>"],[0,6,"<a href=\"ProductImageGenerationJob.php.html#323\">App\\Job\\ProductImageGenerationJob::verifyDownloadedImage<\/a>"],[0,2,"<a href=\"ProductImageGenerationJob.php.html#359\">App\\Job\\ProductImageGenerationJob::cleanupFile<\/a>"],[0,1,"<a href=\"ProductSeoUpdateJob.php.html#26\">App\\Job\\ProductSeoUpdateJob::getJobType<\/a>"],[0,4,"<a href=\"ProductSeoUpdateJob.php.html#34\">App\\Job\\ProductSeoUpdateJob::execute<\/a>"],[0,1,"<a href=\"ProductVerificationJob.php.html#28\">App\\Job\\ProductVerificationJob::getJobType<\/a>"],[0,6,"<a href=\"ProductVerificationJob.php.html#36\">App\\Job\\ProductVerificationJob::execute<\/a>"],[0,10,"<a href=\"ProductVerificationJob.php.html#88\">App\\Job\\ProductVerificationJob::calculateVerificationScore<\/a>"],[0,5,"<a href=\"ProductVerificationJob.php.html#141\">App\\Job\\ProductVerificationJob::runAIVerification<\/a>"],[0,1,"<a href=\"SendEmailJob.php.html#25\">App\\Job\\SendEmailJob::getJobType<\/a>"],[0,4,"<a href=\"SendEmailJob.php.html#36\">App\\Job\\SendEmailJob::execute<\/a>"],[0,1,"<a href=\"TagSeoUpdateJob.php.html#30\">App\\Job\\TagSeoUpdateJob::__construct<\/a>"],[0,1,"<a href=\"TagSeoUpdateJob.php.html#40\">App\\Job\\TagSeoUpdateJob::getJobType<\/a>"],[0,3,"<a href=\"TagSeoUpdateJob.php.html#54\">App\\Job\\TagSeoUpdateJob::execute<\/a>"],[0,1,"<a href=\"TranslateArticleJob.php.html#24\">App\\Job\\TranslateArticleJob::__construct<\/a>"],[0,1,"<a href=\"TranslateArticleJob.php.html#34\">App\\Job\\TranslateArticleJob::getJobType<\/a>"],[0,6,"<a href=\"TranslateArticleJob.php.html#45\">App\\Job\\TranslateArticleJob::execute<\/a>"],[0,2,"<a href=\"TranslateArticleJob.php.html#121\">App\\Job\\TranslateArticleJob::handleEmptySeoFields<\/a>"],[0,1,"<a href=\"TranslateArticleJobRefactored.php.html#23\">App\\Job\\TranslateArticleJobRefactored::getJobType<\/a>"],[0,4,"<a href=\"TranslateArticleJobRefactored.php.html#31\">App\\Job\\TranslateArticleJobRefactored::execute<\/a>"],[0,1,"<a href=\"TranslateArticleJobRefactored.php.html#82\">App\\Job\\TranslateArticleJobRefactored::handleSeoFieldDependency<\/a>"],[0,2,"<a href=\"TranslateI18nJob.php.html#31\">App\\Job\\TranslateI18nJob::__construct<\/a>"],[0,1,"<a href=\"TranslateI18nJob.php.html#47\">App\\Job\\TranslateI18nJob::getJobType<\/a>"],[0,5,"<a href=\"TranslateI18nJob.php.html#61\">App\\Job\\TranslateI18nJob::execute<\/a>"],[0,1,"<a href=\"TranslateImageGalleryJob.php.html#24\">App\\Job\\TranslateImageGalleryJob::__construct<\/a>"],[0,1,"<a href=\"TranslateImageGalleryJob.php.html#34\">App\\Job\\TranslateImageGalleryJob::getJobType<\/a>"],[0,6,"<a href=\"TranslateImageGalleryJob.php.html#45\">App\\Job\\TranslateImageGalleryJob::execute<\/a>"],[0,2,"<a href=\"TranslateImageGalleryJob.php.html#117\">App\\Job\\TranslateImageGalleryJob::handleEmptySeoFields<\/a>"],[0,1,"<a href=\"TranslateTagJob.php.html#31\">App\\Job\\TranslateTagJob::__construct<\/a>"],[0,1,"<a href=\"TranslateTagJob.php.html#41\">App\\Job\\TranslateTagJob::getJobType<\/a>"],[0,6,"<a href=\"TranslateTagJob.php.html#52\">App\\Job\\TranslateTagJob::execute<\/a>"],[0,2,"<a href=\"TranslateTagJob.php.html#124\">App\\Job\\TranslateTagJob::handleEmptySeoFields<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

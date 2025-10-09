@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Service</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../index.html">/var/www/html</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Service</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Ai/NullAiProvider.php.html#10">App\Service\Ai\NullAiProvider</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#16">App\Service\Ai\ProductFormAiProvider</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#20">App\Service\Ai\SlugValidationService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#20">App\Service\Ai\TagDetectionService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#21">App\Service\Ai\WebpageExtractionService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AbstractApiService.php.html#16">App\Service\Api\AbstractApiService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#16">App\Service\Api\Anthropic\AbstractAnthropicGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicService.php.html#8">App\Service\Api\Anthropic\AbstractAnthropicService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#24">App\Service\Api\Anthropic\AnthropicApiService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ArticleTagsGenerator.php.html#13">App\Service\Api\Anthropic\ArticleTagsGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/CommentAnalyzer.php.html#13">App\Service\Api\Anthropic\CommentAnalyzer</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#15">App\Service\Api\Anthropic\ImageAnalyzer</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#13">App\Service\Api\Anthropic\SeoContentGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TextSummaryGenerator.php.html#13">App\Service\Api\Anthropic\TextSummaryGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TranslationGenerator.php.html#13">App\Service\Api\Anthropic\TranslationGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#17">App\Service\Api\Google\GoogleApiService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#24">App\Service\Api\ImageGenerationService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#16">App\Service\CacheService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#27">App\Service\ImageProcessingService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#27">App\Service\IpSecurityService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#18">App\Service\ProductFormFieldService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#21">App\Service\Quiz\AiProductMatcherService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#22">App\Service\Quiz\DecisionTreeService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#17">App\Service\Quiz\QuestionStrategyService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#24">App\Service\ReliabilityService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#12">App\Service\Search\UnifiedSearchService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#19">App\Service\Settings\SettingsService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#15">App\Service\WebpageExtractor</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#19">App\Service\Api\AiMetricsService</a></td><td class="text-right">39%</td></tr>
+       <tr><td><a href="ConsentService.php.html#16">App\Service\ConsentService</a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#16">App\Service\LogChecksumService</a></td><td class="text-right">68%</td></tr>
+       <tr><td><a href="Api/RateLimitService.php.html#14">App\Service\Api\RateLimitService</a></td><td class="text-right">68%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#22">App\Service\Quiz\DecisionTreeService</a></td><td class="text-right">7656</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#17">App\Service\Quiz\QuestionStrategyService</a></td><td class="text-right">7140</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#21">App\Service\Quiz\AiProductMatcherService</a></td><td class="text-right">6972</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#16">App\Service\Ai\ProductFormAiProvider</a></td><td class="text-right">4422</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#24">App\Service\Api\ImageGenerationService</a></td><td class="text-right">4290</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#24">App\Service\ReliabilityService</a></td><td class="text-right">3422</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#24">App\Service\Api\Anthropic\AnthropicApiService</a></td><td class="text-right">3080</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#27">App\Service\IpSecurityService</a></td><td class="text-right">3080</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#18">App\Service\ProductFormFieldService</a></td><td class="text-right">2070</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#20">App\Service\Ai\SlugValidationService</a></td><td class="text-right">1980</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#21">App\Service\Ai\WebpageExtractionService</a></td><td class="text-right">1980</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#15">App\Service\WebpageExtractor</a></td><td class="text-right">1560</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#20">App\Service\Ai\TagDetectionService</a></td><td class="text-right">992</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#27">App\Service\ImageProcessingService</a></td><td class="text-right">930</td></tr>
+       <tr><td><a href="CacheService.php.html#16">App\Service\CacheService</a></td><td class="text-right">650</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#19">App\Service\Settings\SettingsService</a></td><td class="text-right">650</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#12">App\Service\Search\UnifiedSearchService</a></td><td class="text-right">462</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#17">App\Service\Api\Google\GoogleApiService</a></td><td class="text-right">420</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#19">App\Service\Api\AiMetricsService</a></td><td class="text-right">141</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#16">App\Service\Api\Anthropic\AbstractAnthropicGenerator</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#16">App\Service\LogChecksumService</a></td><td class="text-right">91</td></tr>
+       <tr><td><a href="Ai/NullAiProvider.php.html#10">App\Service\Ai\NullAiProvider</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicService.php.html#8">App\Service\Api\Anthropic\AbstractAnthropicService</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Api/RateLimitService.php.html#14">App\Service\Api\RateLimitService</a></td><td class="text-right">37</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#15">App\Service\Api\Anthropic\ImageAnalyzer</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ConsentService.php.html#16">App\Service\ConsentService</a></td><td class="text-right">10</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Ai/NullAiProvider.php.html#19"><abbr title="App\Service\Ai\NullAiProvider::getSuggestions">getSuggestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/NullAiProvider.php.html#64"><abbr title="App\Service\Ai\NullAiProvider::getFieldSuggestion">getFieldSuggestion</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#65"><abbr title="App\Service\Ai\ProductFormAiProvider::getSuggestions">getSuggestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#111"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestTitle">suggestTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#156"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestManufacturer">suggestManufacturer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#190"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestDescription">suggestDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#246"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestTechnicalSpecs">suggestTechnicalSpecs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#281"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestModelNumber">suggestModelNumber</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#318"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestPrice">suggestPrice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#368"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestAltText">suggestAltText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#401"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestTestingStandard">suggestTestingStandard</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#438"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestCertifyingOrganization">suggestCertifyingOrganization</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#475"><abbr title="App\Service\Ai\ProductFormAiProvider::getDefaultSuggestions">getDefaultSuggestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#490"><abbr title="App\Service\Ai\ProductFormAiProvider::extractProductType">extractProductType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#511"><abbr title="App\Service\Ai\ProductFormAiProvider::extractKeyTerms">extractKeyTerms</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#40"><abbr title="App\Service\Ai\SlugValidationService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#67"><abbr title="App\Service\Ai\SlugValidationService::suggestSlugs">suggestSlugs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#118"><abbr title="App\Service\Ai\SlugValidationService::validateSlug">validateSlug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#172"><abbr title="App\Service\Ai\SlugValidationService::optimizeSlug">optimizeSlug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#213"><abbr title="App\Service\Ai\SlugValidationService::buildSlugSuggestionPrompt">buildSlugSuggestionPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#260"><abbr title="App\Service\Ai\SlugValidationService::buildSlugValidationPrompt">buildSlugValidationPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#306"><abbr title="App\Service\Ai\SlugValidationService::getExistingSlugs">getExistingSlugs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#323"><abbr title="App\Service\Ai\SlugValidationService::checkSlugConflicts">checkSlugConflicts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#361"><abbr title="App\Service\Ai\SlugValidationService::performTechnicalValidation">performTechnicalValidation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#418"><abbr title="App\Service\Ai\SlugValidationService::parseSlugSuggestions">parseSlugSuggestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#460"><abbr title="App\Service\Ai\SlugValidationService::parseSlugValidation">parseSlugValidation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#493"><abbr title="App\Service\Ai\SlugValidationService::estimateTokenCount">estimateTokenCount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#505"><abbr title="App\Service\Ai\SlugValidationService::generateSlugWithFallback">generateSlugWithFallback</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#40"><abbr title="App\Service\Ai\TagDetectionService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#67"><abbr title="App\Service\Ai\TagDetectionService::suggestTags">suggestTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#128"><abbr title="App\Service\Ai\TagDetectionService::validateTags">validateTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#177"><abbr title="App\Service\Ai\TagDetectionService::buildTagSuggestionPrompt">buildTagSuggestionPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#225"><abbr title="App\Service\Ai\TagDetectionService::buildTagValidationPrompt">buildTagValidationPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#262"><abbr title="App\Service\Ai\TagDetectionService::parseTagSuggestions">parseTagSuggestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#301"><abbr title="App\Service\Ai\TagDetectionService::parseTagValidation">parseTagValidation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#329"><abbr title="App\Service\Ai\TagDetectionService::isExistingTag">isExistingTag</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#342"><abbr title="App\Service\Ai\TagDetectionService::estimateTokenCount">estimateTokenCount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#355"><abbr title="App\Service\Ai\TagDetectionService::processTagSuggestions">processTagSuggestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#51"><abbr title="App\Service\Ai\WebpageExtractionService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#78"><abbr title="App\Service\Ai\WebpageExtractionService::extractWebpage">extractWebpage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#140"><abbr title="App\Service\Ai\WebpageExtractionService::fetchWebpageContent">fetchWebpageContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#193"><abbr title="App\Service\Ai\WebpageExtractionService::analyzeContentWithAI">analyzeContentWithAI</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#216"><abbr title="App\Service\Ai\WebpageExtractionService::cleanHtmlContent">cleanHtmlContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#256"><abbr title="App\Service\Ai\WebpageExtractionService::buildExtractionPrompt">buildExtractionPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#309"><abbr title="App\Service\Ai\WebpageExtractionService::generateEnhancements">generateEnhancements</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#339"><abbr title="App\Service\Ai\WebpageExtractionService::parseExtractionResponse">parseExtractionResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#379"><abbr title="App\Service\Ai\WebpageExtractionService::createPageFromExtraction">createPageFromExtraction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#414"><abbr title="App\Service\Ai\WebpageExtractionService::formatContentForPage">formatContentForPage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#459"><abbr title="App\Service\Ai\WebpageExtractionService::estimateTokenCount">estimateTokenCount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#471"><abbr title="App\Service\Ai\WebpageExtractionService::batchExtractWebpages">batchExtractWebpages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AbstractApiService.php.html#46"><abbr title="App\Service\Api\AbstractApiService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AbstractApiService.php.html#61"><abbr title="App\Service\Api\AbstractApiService::sendRequest">sendRequest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AbstractApiService.php.html#84"><abbr title="App\Service\Api\AbstractApiService::getHeaders">getHeaders</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AbstractApiService.php.html#92"><abbr title="App\Service\Api\AbstractApiService::handleApiError">handleApiError</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AbstractApiService.php.html#111"><abbr title="App\Service\Api\AbstractApiService::parseResponse">parseResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#48"><abbr title="App\Service\Api\AiMetricsService::recordMetrics">recordMetrics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#133"><abbr title="App\Service\Api\AiMetricsService::isDailyCostLimitReached">isDailyCostLimitReached</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#152"><abbr title="App\Service\Api\AiMetricsService::checkCostAlert">checkCostAlert</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#210"><abbr title="App\Service\Api\AiMetricsService::getRealtimeData">getRealtimeData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#264"><abbr title="App\Service\Api\AiMetricsService::getRecentErrors">getRecentErrors</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#294"><abbr title="App\Service\Api\AiMetricsService::calculateAnthropicCost">calculateAnthropicCost</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#42"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#55"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::getPromptData">getPromptData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#83"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::createPayload">createPayload</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#108"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::formatContent">formatContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#120"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::ensureExpectedKeys">ensureExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#145"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::sendApiRequest">sendApiRequest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#160"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#168"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicService.php.html#19"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicService::validateAndFallback">validateAndFallback</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicService.php.html#39"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicService::validateField">validateField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicService.php.html#63"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicService::getSmartFallback">getSmartFallback</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#80"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#102"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::sendRequest">sendRequest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#118"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::getHeaders">getHeaders</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#134"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateTagSeo">generateTagSeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#146"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateArticleSeo">generateArticleSeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#158"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateGallerySeo">generateGallerySeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#171"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateArticleTags">generateArticleTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#182"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::analyzeImage">analyzeImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#193"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::analyzeComment">analyzeComment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#205"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateTextSummary">generateTextSummary</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#221"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::translateStrings">translateStrings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#232"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::parseResponse">parseResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#246"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateNextQuestion">generateNextQuestion</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#282"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateRecommendations">generateRecommendations</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#313"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::analyzeAnswers">analyzeAnswers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#345"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::buildQuestionPrompt">buildQuestionPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#395"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::buildRecommendationPrompt">buildRecommendationPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#438"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::buildAnalysisPrompt">buildAnalysisPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#472"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::parseQuestionResponse">parseQuestionResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#513"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::parseRecommendationResponse">parseRecommendationResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#558"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::parseAnalysisResponse">parseAnalysisResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#588"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateFallbackQuestion">generateFallbackQuestion</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#640"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateFallbackRecommendations">generateFallbackRecommendations</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#659"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::fallbackAnalyzeAnswers">fallbackAnalyzeAnswers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#689"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::recordMetrics">recordMetrics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ArticleTagsGenerator.php.html#27"><abbr title="App\Service\Api\Anthropic\ArticleTagsGenerator::generateArticleTags">generateArticleTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ArticleTagsGenerator.php.html#46"><abbr title="App\Service\Api\Anthropic\ArticleTagsGenerator::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ArticleTagsGenerator.php.html#56"><abbr title="App\Service\Api\Anthropic\ArticleTagsGenerator::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/CommentAnalyzer.php.html#25"><abbr title="App\Service\Api\Anthropic\CommentAnalyzer::analyze">analyze</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/CommentAnalyzer.php.html#40"><abbr title="App\Service\Api\Anthropic\CommentAnalyzer::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/CommentAnalyzer.php.html#54"><abbr title="App\Service\Api\Anthropic\CommentAnalyzer::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#31"><abbr title="App\Service\Api\Anthropic\ImageAnalyzer::analyze">analyze</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#56"><abbr title="App\Service\Api\Anthropic\ImageAnalyzer::createImagePayload">createImagePayload</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#86"><abbr title="App\Service\Api\Anthropic\ImageAnalyzer::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#100"><abbr title="App\Service\Api\Anthropic\ImageAnalyzer::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#29"><abbr title="App\Service\Api\Anthropic\SeoContentGenerator::generateTagSeo">generateTagSeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#67"><abbr title="App\Service\Api\Anthropic\SeoContentGenerator::generateArticleSeo">generateArticleSeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#95"><abbr title="App\Service\Api\Anthropic\SeoContentGenerator::generateGallerySeo">generateGallerySeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#113"><abbr title="App\Service\Api\Anthropic\SeoContentGenerator::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#131"><abbr title="App\Service\Api\Anthropic\SeoContentGenerator::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TextSummaryGenerator.php.html#22"><abbr title="App\Service\Api\Anthropic\TextSummaryGenerator::generateTextSummary">generateTextSummary</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TextSummaryGenerator.php.html#40"><abbr title="App\Service\Api\Anthropic\TextSummaryGenerator::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TextSummaryGenerator.php.html#54"><abbr title="App\Service\Api\Anthropic\TextSummaryGenerator::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TranslationGenerator.php.html#27"><abbr title="App\Service\Api\Anthropic\TranslationGenerator::generateTranslation">generateTranslation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TranslationGenerator.php.html#48"><abbr title="App\Service\Api\Anthropic\TranslationGenerator::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TranslationGenerator.php.html#58"><abbr title="App\Service\Api\Anthropic\TranslationGenerator::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#40"><abbr title="App\Service\Api\Google\GoogleApiService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#57"><abbr title="App\Service\Api\Google\GoogleApiService::translateStrings">translateStrings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#107"><abbr title="App\Service\Api\Google\GoogleApiService::translateArticle">translateArticle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#198"><abbr title="App\Service\Api\Google\GoogleApiService::translateTag">translateTag</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#277"><abbr title="App\Service\Api\Google\GoogleApiService::translateImageGallery">translateImageGallery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#351"><abbr title="App\Service\Api\Google\GoogleApiService::preprocessContent">preprocessContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#392"><abbr title="App\Service\Api\Google\GoogleApiService::postprocessContent">postprocessContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#411"><abbr title="App\Service\Api\Google\GoogleApiService::executeWithMetrics">executeWithMetrics</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#60"><abbr title="App\Service\Api\ImageGenerationService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#90"><abbr title="App\Service\Api\ImageGenerationService::generateArticleImage">generateArticleImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#124"><abbr title="App\Service\Api\ImageGenerationService::generateProductImage">generateProductImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#165"><abbr title="App\Service\Api\ImageGenerationService::generateWithOpenAI">generateWithOpenAI</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#225"><abbr title="App\Service\Api\ImageGenerationService::generateWithAnthropic">generateWithAnthropic</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#253"><abbr title="App\Service\Api\ImageGenerationService::generateWithStockAPI">generateWithStockAPI</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#322"><abbr title="App\Service\Api\ImageGenerationService::buildImagePrompt">buildImagePrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#369"><abbr title="App\Service\Api\ImageGenerationService::buildProductImagePrompt">buildProductImagePrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#426"><abbr title="App\Service\Api\ImageGenerationService::generateImageSearchTerms">generateImageSearchTerms</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#462"><abbr title="App\Service\Api\ImageGenerationService::sanitizePrompt">sanitizePrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#483"><abbr title="App\Service\Api\ImageGenerationService::sanitizeSearchQuery">sanitizeSearchQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#504"><abbr title="App\Service\Api\ImageGenerationService::downloadImage">downloadImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#534"><abbr title="App\Service\Api\ImageGenerationService::getHeaders">getHeaders</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#555"><abbr title="App\Service\Api\ImageGenerationService::parseResponse">parseResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/RateLimitService.php.html#155"><abbr title="App\Service\Api\RateLimitService::checkDailyCostLimit">checkDailyCostLimit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/RateLimitService.php.html#174"><abbr title="App\Service\Api\RateLimitService::getActiveKeys">getActiveKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#28"><abbr title="App\Service\CacheService::cacheSearch">cacheSearch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#50"><abbr title="App\Service\CacheService::cacheStats">cacheStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#62"><abbr title="App\Service\CacheService::cacheJunctionData">cacheJunctionData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#74"><abbr title="App\Service\CacheService::invalidateTableCache">invalidateTableCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#95"><abbr title="App\Service\CacheService::invalidateProductCaches">invalidateProductCaches</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#112"><abbr title="App\Service\CacheService::cacheAdvancedSearch">cacheAdvancedSearch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#123"><abbr title="App\Service\CacheService::cacheListings">cacheListings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#135"><abbr title="App\Service\CacheService::getWithFallback">getWithFallback</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#161"><abbr title="App\Service\CacheService::warmUpCaches">warmUpCaches</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#190"><abbr title="App\Service\CacheService::getCacheStats">getCacheStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#206"><abbr title="App\Service\CacheService::buildJunctionCacheKey">buildJunctionCacheKey</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#216"><abbr title="App\Service\CacheService::clearCachePattern">clearCachePattern</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#233"><abbr title="App\Service\CacheService::warmupProductStats">warmupProductStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#246"><abbr title="App\Service\CacheService::warmupCapabilityCategories">warmupCapabilityCategories</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#254"><abbr title="App\Service\CacheService::warmupPortFamilies">warmupPortFamilies</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CacheService.php.html#262"><abbr title="App\Service\CacheService::warmupDeviceCategories">warmupDeviceCategories</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#53"><abbr title="App\Service\ImageProcessingService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#70"><abbr title="App\Service\ImageProcessingService::processUploadedFiles">processUploadedFiles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#133"><abbr title="App\Service\ImageProcessingService::createImageFromFile">createImageFromFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#184"><abbr title="App\Service\ImageProcessingService::isArchiveFile">isArchiveFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#200"><abbr title="App\Service\ImageProcessingService::processArchive">processArchive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#298"><abbr title="App\Service\ImageProcessingService::processSingleImage">processSingleImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#332"><abbr title="App\Service\ImageProcessingService::addImageToGallery">addImageToGallery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#361"><abbr title="App\Service\ImageProcessingService::mergeResults">mergeResults</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#375"><abbr title="App\Service\ImageProcessingService::generateResultMessage">generateResultMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#399"><abbr title="App\Service\ImageProcessingService::getUploadErrorMessage">getUploadErrorMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#57"><abbr title="App\Service\IpSecurityService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#71"><abbr title="App\Service\IpSecurityService::getClientIp">getClientIp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#132"><abbr title="App\Service\IpSecurityService::parseIpHeader">parseIpHeader</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#147"><abbr title="App\Service\IpSecurityService::isValidIp">isValidIp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#158"><abbr title="App\Service\IpSecurityService::isInternalIp">isInternalIp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#173"><abbr title="App\Service\IpSecurityService::isIpBlocked">isIpBlocked</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#220"><abbr title="App\Service\IpSecurityService::blockIp">blockIp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#282"><abbr title="App\Service\IpSecurityService::unblockIp">unblockIp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#314"><abbr title="App\Service\IpSecurityService::isSuspiciousRequest">isSuspiciousRequest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#362"><abbr title="App\Service\IpSecurityService::trackSuspiciousActivity">trackSuspiciousActivity</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#113"><abbr title="App\Service\LogChecksumService::createVerifiedBackup">createVerifiedBackup</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#28"><abbr title="App\Service\ProductFormFieldService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#39"><abbr title="App\Service\ProductFormFieldService::getActiveFormFields">getActiveFormFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#63"><abbr title="App\Service\ProductFormFieldService::getAiSuggestions">getAiSuggestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#119"><abbr title="App\Service\ProductFormFieldService::buildAiContext">buildAiContext</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#149"><abbr title="App\Service\ProductFormFieldService::buildAiPrompt">buildAiPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#168"><abbr title="App\Service\ProductFormFieldService::validateFormData">validateFormData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#229"><abbr title="App\Service\ProductFormFieldService::getFieldConfig">getFieldConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#265"><abbr title="App\Service\ProductFormFieldService::updateFieldConfig">updateFieldConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#291"><abbr title="App\Service\ProductFormFieldService::getFieldGroups">getFieldGroups</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#46"><abbr title="App\Service\Quiz\AiProductMatcherService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#77"><abbr title="App\Service\Quiz\AiProductMatcherService::match">match</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#166"><abbr title="App\Service\Quiz\AiProductMatcherService::explain">explain</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#186"><abbr title="App\Service\Quiz\AiProductMatcherService::getCandidateProducts">getCandidateProducts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#203"><abbr title="App\Service\Quiz\AiProductMatcherService::scoreProducts">scoreProducts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#249"><abbr title="App\Service\Quiz\AiProductMatcherService::getAiScore">getAiScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#290"><abbr title="App\Service\Quiz\AiProductMatcherService::buildAiScoringPrompt">buildAiScoringPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#310"><abbr title="App\Service\Quiz\AiProductMatcherService::parseAiScoreResponse">parseAiScoreResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#333"><abbr title="App\Service\Quiz\AiProductMatcherService::buildUserProfile">buildUserProfile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#372"><abbr title="App\Service\Quiz\AiProductMatcherService::buildProductSummary">buildProductSummary</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#419"><abbr title="App\Service\Quiz\AiProductMatcherService::generateAiExplanation">generateAiExplanation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#445"><abbr title="App\Service\Quiz\AiProductMatcherService::generateRuleBasedExplanation">generateRuleBasedExplanation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#502"><abbr title="App\Service\Quiz\AiProductMatcherService::getMatchReasons">getMatchReasons</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#545"><abbr title="App\Service\Quiz\AiProductMatcherService::calculateOverallConfidence">calculateOverallConfidence</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#566"><abbr title="App\Service\Quiz\AiProductMatcherService::generateCacheKey">generateCacheKey</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#584"><abbr title="App\Service\Quiz\AiProductMatcherService::fallbackMatch">fallbackMatch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#56"><abbr title="App\Service\Quiz\DecisionTreeService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#85"><abbr title="App\Service\Quiz\DecisionTreeService::start">start</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#150"><abbr title="App\Service\Quiz\DecisionTreeService::next">next</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#223"><abbr title="App\Service\Quiz\DecisionTreeService::isTerminal">isTerminal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#234"><abbr title="App\Service\Quiz\DecisionTreeService::serializeState">serializeState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#245"><abbr title="App\Service\Quiz\DecisionTreeService::deserializeState">deserializeState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#263"><abbr title="App\Service\Quiz\DecisionTreeService::getStoredState">getStoredState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#284"><abbr title="App\Service\Quiz\DecisionTreeService::loadDecisionTree">loadDecisionTree</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#315"><abbr title="App\Service\Quiz\DecisionTreeService::buildDefaultTree">buildDefaultTree</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#452"><abbr title="App\Service\Quiz\DecisionTreeService::validateTree">validateTree</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#470"><abbr title="App\Service\Quiz\DecisionTreeService::getQuestionForNode">getQuestionForNode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#503"><abbr title="App\Service\Quiz\DecisionTreeService::generateAIQuestion">generateAIQuestion</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#537"><abbr title="App\Service\Quiz\DecisionTreeService::getRemainingProducts">getRemainingProducts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#569"><abbr title="App\Service\Quiz\DecisionTreeService::productMatchesAnswers">productMatchesAnswers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#611"><abbr title="App\Service\Quiz\DecisionTreeService::generateFallbackQuestion">generateFallbackQuestion</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#665"><abbr title="App\Service\Quiz\DecisionTreeService::getNextNode">getNextNode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#683"><abbr title="App\Service\Quiz\DecisionTreeService::shouldTerminate">shouldTerminate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#714"><abbr title="App\Service\Quiz\DecisionTreeService::calculateConfidence">calculateConfidence</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#742"><abbr title="App\Service\Quiz\DecisionTreeService::generateResult">generateResult</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#779"><abbr title="App\Service\Quiz\DecisionTreeService::normalizeAnswers">normalizeAnswers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#824"><abbr title="App\Service\Quiz\DecisionTreeService::storeSessionState">storeSessionState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#836"><abbr title="App\Service\Quiz\DecisionTreeService::getSessionState">getSessionState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#849"><abbr title="App\Service\Quiz\DecisionTreeService::clearSessionState">clearSessionState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#155"><abbr title="App\Service\Quiz\QuestionStrategyService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#167"><abbr title="App\Service\Quiz\QuestionStrategyService::generateQuestionBatch">generateQuestionBatch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#206"><abbr title="App\Service\Quiz\QuestionStrategyService::determineStage">determineStage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#220"><abbr title="App\Service\Quiz\QuestionStrategyService::getAvailableProducts">getAvailableProducts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#249"><abbr title="App\Service\Quiz\QuestionStrategyService::applyFilters">applyFilters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#277"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateQuestionPriorities">calculateQuestionPriorities</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#307"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateInformationGain">calculateInformationGain</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#357"><abbr title="App\Service\Quiz\QuestionStrategyService::productMatchesFilter">productMatchesFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#391"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateContextualWeight">calculateContextualWeight</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#416"><abbr title="App\Service\Quiz\QuestionStrategyService::selectOptimalQuestions">selectOptimalQuestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#446"><abbr title="App\Service\Quiz\QuestionStrategyService::getFallbackQuestion">getFallbackQuestion</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#463"><abbr title="App\Service\Quiz\QuestionStrategyService::customizeQuestions">customizeQuestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#492"><abbr title="App\Service\Quiz\QuestionStrategyService::customizeQuestionText">customizeQuestionText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#503"><abbr title="App\Service\Quiz\QuestionStrategyService::customizeOptions">customizeOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#514"><abbr title="App\Service\Quiz\QuestionStrategyService::shouldTerminate">shouldTerminate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#539"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateConfidence">calculateConfidence</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#572"><abbr title="App\Service\Quiz\QuestionStrategyService::updateUserProfile">updateUserProfile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#598"><abbr title="App\Service\Quiz\QuestionStrategyService::deriveInsights">deriveInsights</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#35"><abbr title="App\Service\ReliabilityService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#55"><abbr title="App\Service\ReliabilityService::computeProvisionalScore">computeProvisionalScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#132"><abbr title="App\Service\ReliabilityService::persistFinalScore">persistFinalScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#197"><abbr title="App\Service\ReliabilityService::computeChecksum">computeChecksum</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#216"><abbr title="App\Service\ReliabilityService::calculateFieldImportance">calculateFieldImportance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#243"><abbr title="App\Service\ReliabilityService::getFieldWeights">getFieldWeights</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#262"><abbr title="App\Service\ReliabilityService::calculateFieldScore">calculateFieldScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#289"><abbr title="App\Service\ReliabilityService::scoreJsonField">scoreJsonField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#310"><abbr title="App\Service\ReliabilityService::scoreVerificationField">scoreVerificationField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#338"><abbr title="App\Service\ReliabilityService::scoreNumericField">scoreNumericField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#355"><abbr title="App\Service\ReliabilityService::scoreBooleanField">scoreBooleanField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#368"><abbr title="App\Service\ReliabilityService::scoreTextualField">scoreTextualField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#390"><abbr title="App\Service\ReliabilityService::scorePriceField">scorePriceField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#401"><abbr title="App\Service\ReliabilityService::scoreCurrencyField">scoreCurrencyField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#414"><abbr title="App\Service\ReliabilityService::scoreMediaField">scoreMediaField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#427"><abbr title="App\Service\ReliabilityService::scoreGenericField">scoreGenericField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#440"><abbr title="App\Service\ReliabilityService::getFieldScoreRationale">getFieldScoreRationale</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#460"><abbr title="App\Service\ReliabilityService::updateFieldScores">updateFieldScores</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#500"><abbr title="App\Service\ReliabilityService::createLogEntry">createLogEntry</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#550"><abbr title="App\Service\ReliabilityService::updateLegacyReliabilityScore">updateLegacyReliabilityScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#563"><abbr title="App\Service\ReliabilityService::initializeAiProvider">initializeAiProvider</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#36"><abbr title="App\Service\Search\UnifiedSearchService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#46"><abbr title="App\Service\Search\UnifiedSearchService::search">search</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#152"><abbr title="App\Service\Search\UnifiedSearchService::searchByTag">searchByTag</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#188"><abbr title="App\Service\Search\UnifiedSearchService::getSuggestions">getSuggestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#253"><abbr title="App\Service\Search\UnifiedSearchService::calculateRelevanceScore">calculateRelevanceScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#24"><abbr title="App\Service\Settings\SettingsService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#37"><abbr title="App\Service\Settings\SettingsService::get">get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#74"><abbr title="App\Service\Settings\SettingsService::set">set</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#127"><abbr title="App\Service\Settings\SettingsService::getAll">getAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#159"><abbr title="App\Service\Settings\SettingsService::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#187"><abbr title="App\Service\Settings\SettingsService::deleteNamespace">deleteNamespace</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#213"><abbr title="App\Service\Settings\SettingsService::mergeIntoConfigure">mergeIntoConfigure</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#249"><abbr title="App\Service\Settings\SettingsService::tableExists">tableExists</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#266"><abbr title="App\Service\Settings\SettingsService::arrayMergeRecursive">arrayMergeRecursive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#27"><abbr title="App\Service\WebpageExtractor::extractContent">extractContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#83"><abbr title="App\Service\WebpageExtractor::isValidUrl">isValidUrl</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#95"><abbr title="App\Service\WebpageExtractor::fetchWebpage">fetchWebpage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#136"><abbr title="App\Service\WebpageExtractor::parseHtml">parseHtml</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#158"><abbr title="App\Service\WebpageExtractor::extractFromDom">extractFromDom</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#177"><abbr title="App\Service\WebpageExtractor::extractTitle">extractTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#206"><abbr title="App\Service\WebpageExtractor::extractMainContent">extractMainContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#246"><abbr title="App\Service\WebpageExtractor::extractMetaTitle">extractMetaTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#273"><abbr title="App\Service\WebpageExtractor::extractMetaDescription">extractMetaDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#300"><abbr title="App\Service\WebpageExtractor::extractMetaKeywords">extractMetaKeywords</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#333"><abbr title="App\Service\WebpageExtractor::extractTextContent">extractTextContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#359"><abbr title="App\Service\WebpageExtractor::cleanText">cleanText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/RateLimitService.php.html#30"><abbr title="App\Service\Api\RateLimitService::ensureRateLimitCacheConfig">ensureRateLimitCacheConfig</abbr></a></td><td class="text-right">12%</td></tr>
+       <tr><td><a href="ConsentService.php.html#50"><abbr title="App\Service\ConsentService::handleConsentCookie">handleConsentCookie</abbr></a></td><td class="text-right">42%</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#344"><abbr title="App\Service\LogChecksumService::getOverallStatus">getOverallStatus</abbr></a></td><td class="text-right">42%</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#331"><abbr title="App\Service\LogChecksumService::ensureChecksumDirectory">ensureChecksumDirectory</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="ConsentService.php.html#77"><abbr title="App\Service\ConsentService::startSessionIfNeeded">startSessionIfNeeded</abbr></a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="Api/RateLimitService.php.html#60"><abbr title="App\Service\Api\RateLimitService::enforceLimit">enforceLimit</abbr></a></td><td class="text-right">64%</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#213"><abbr title="App\Service\LogChecksumService::verifyChecksumsForFile">verifyChecksumsForFile</abbr></a></td><td class="text-right">64%</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#51"><abbr title="App\Service\LogChecksumService::verifyChecksums">verifyChecksums</abbr></a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#308"><abbr title="App\Service\LogChecksumService::getLogFiles">getLogFiles</abbr></a></td><td class="text-right">87%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#445"><abbr title="App\Service\Quiz\AiProductMatcherService::generateRuleBasedExplanation">generateRuleBasedExplanation</abbr></a></td><td class="text-right">420</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#71"><abbr title="App\Service\IpSecurityService::getClientIp">getClientIp</abbr></a></td><td class="text-right">342</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#168"><abbr title="App\Service\ProductFormFieldService::validateFormData">validateFormData</abbr></a></td><td class="text-right">342</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#569"><abbr title="App\Service\Quiz\DecisionTreeService::productMatchesAnswers">productMatchesAnswers</abbr></a></td><td class="text-right">342</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#65"><abbr title="App\Service\Ai\ProductFormAiProvider::getSuggestions">getSuggestions</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#314"><abbr title="App\Service\IpSecurityService::isSuspiciousRequest">isSuspiciousRequest</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#307"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateInformationGain">calculateInformationGain</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#357"><abbr title="App\Service\Quiz\QuestionStrategyService::productMatchesFilter">productMatchesFilter</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#369"><abbr title="App\Service\Api\ImageGenerationService::buildProductImagePrompt">buildProductImagePrompt</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#502"><abbr title="App\Service\Quiz\AiProductMatcherService::getMatchReasons">getMatchReasons</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#253"><abbr title="App\Service\Search\UnifiedSearchService::calculateRelevanceScore">calculateRelevanceScore</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#372"><abbr title="App\Service\Quiz\AiProductMatcherService::buildProductSummary">buildProductSummary</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#150"><abbr title="App\Service\Quiz\DecisionTreeService::next">next</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#111"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestTitle">suggestTitle</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#190"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestDescription">suggestDescription</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#414"><abbr title="App\Service\Ai\WebpageExtractionService::formatContentForPage">formatContentForPage</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#659"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::fallbackAnalyzeAnswers">fallbackAnalyzeAnswers</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#322"><abbr title="App\Service\Api\ImageGenerationService::buildImagePrompt">buildImagePrompt</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#200"><abbr title="App\Service\ImageProcessingService::processArchive">processArchive</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#779"><abbr title="App\Service\Quiz\DecisionTreeService::normalizeAnswers">normalizeAnswers</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Ai/NullAiProvider.php.html#19"><abbr title="App\Service\Ai\NullAiProvider::getSuggestions">getSuggestions</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#318"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestPrice">suggestPrice</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#361"><abbr title="App\Service\Ai\SlugValidationService::performTechnicalValidation">performTechnicalValidation</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#355"><abbr title="App\Service\Ai\TagDetectionService::processTagSuggestions">processTagSuggestions</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#140"><abbr title="App\Service\Ai\WebpageExtractionService::fetchWebpageContent">fetchWebpageContent</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#362"><abbr title="App\Service\IpSecurityService::trackSuspiciousActivity">trackSuspiciousActivity</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#119"><abbr title="App\Service\ProductFormFieldService::buildAiContext">buildAiContext</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#77"><abbr title="App\Service\Quiz\AiProductMatcherService::match">match</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#333"><abbr title="App\Service\Quiz\AiProductMatcherService::buildUserProfile">buildUserProfile</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#220"><abbr title="App\Service\Quiz\QuestionStrategyService::getAvailableProducts">getAvailableProducts</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#249"><abbr title="App\Service\Quiz\QuestionStrategyService::applyFilters">applyFilters</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#418"><abbr title="App\Service\Ai\SlugValidationService::parseSlugSuggestions">parseSlugSuggestions</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#262"><abbr title="App\Service\Ai\TagDetectionService::parseTagSuggestions">parseTagSuggestions</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#513"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::parseRecommendationResponse">parseRecommendationResponse</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#60"><abbr title="App\Service\Api\ImageGenerationService::__construct">__construct</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#90"><abbr title="App\Service\Api\ImageGenerationService::generateArticleImage">generateArticleImage</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#124"><abbr title="App\Service\Api\ImageGenerationService::generateProductImage">generateProductImage</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#165"><abbr title="App\Service\Api\ImageGenerationService::generateWithOpenAI">generateWithOpenAI</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#173"><abbr title="App\Service\IpSecurityService::isIpBlocked">isIpBlocked</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#220"><abbr title="App\Service\IpSecurityService::blockIp">blockIp</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#113"><abbr title="App\Service\LogChecksumService::createVerifiedBackup">createVerifiedBackup</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#391"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateContextualWeight">calculateContextualWeight</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#539"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateConfidence">calculateConfidence</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#401"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestTestingStandard">suggestTestingStandard</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#438"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestCertifyingOrganization">suggestCertifyingOrganization</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#505"><abbr title="App\Service\Ai\SlugValidationService::generateSlugWithFallback">generateSlugWithFallback</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#78"><abbr title="App\Service\Ai\WebpageExtractionService::extractWebpage">extractWebpage</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#339"><abbr title="App\Service\Ai\WebpageExtractionService::parseExtractionResponse">parseExtractionResponse</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#472"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::parseQuestionResponse">parseQuestionResponse</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#411"><abbr title="App\Service\Api\Google\GoogleApiService::executeWithMetrics">executeWithMetrics</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#253"><abbr title="App\Service\Api\ImageGenerationService::generateWithStockAPI">generateWithStockAPI</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#426"><abbr title="App\Service\Api\ImageGenerationService::generateImageSearchTerms">generateImageSearchTerms</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#70"><abbr title="App\Service\ImageProcessingService::processUploadedFiles">processUploadedFiles</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#229"><abbr title="App\Service\ProductFormFieldService::getFieldConfig">getFieldConfig</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#203"><abbr title="App\Service\Quiz\AiProductMatcherService::scoreProducts">scoreProducts</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#284"><abbr title="App\Service\Quiz\DecisionTreeService::loadDecisionTree">loadDecisionTree</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#470"><abbr title="App\Service\Quiz\DecisionTreeService::getQuestionForNode">getQuestionForNode</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#503"><abbr title="App\Service\Quiz\DecisionTreeService::generateAIQuestion">generateAIQuestion</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#683"><abbr title="App\Service\Quiz\DecisionTreeService::shouldTerminate">shouldTerminate</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#416"><abbr title="App\Service\Quiz\QuestionStrategyService::selectOptimalQuestions">selectOptimalQuestions</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#572"><abbr title="App\Service\Quiz\QuestionStrategyService::updateUserProfile">updateUserProfile</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#598"><abbr title="App\Service\Quiz\QuestionStrategyService::deriveInsights">deriveInsights</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#55"><abbr title="App\Service\ReliabilityService::computeProvisionalScore">computeProvisionalScore</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#310"><abbr title="App\Service\ReliabilityService::scoreVerificationField">scoreVerificationField</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#266"><abbr title="App\Service\Settings\SettingsService::arrayMergeRecursive">arrayMergeRecursive</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#27"><abbr title="App\Service\WebpageExtractor::extractContent">extractContent</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#206"><abbr title="App\Service\WebpageExtractor::extractMainContent">extractMainContent</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#156"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestManufacturer">suggestManufacturer</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#281"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestModelNumber">suggestModelNumber</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#490"><abbr title="App\Service\Ai\ProductFormAiProvider::extractProductType">extractProductType</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#323"><abbr title="App\Service\Ai\SlugValidationService::checkSlugConflicts">checkSlugConflicts</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#301"><abbr title="App\Service\Ai\TagDetectionService::parseTagValidation">parseTagValidation</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#309"><abbr title="App\Service\Ai\WebpageExtractionService::generateEnhancements">generateEnhancements</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#152"><abbr title="App\Service\Api\AiMetricsService::checkCostAlert">checkCostAlert</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicService.php.html#19"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicService::validateAndFallback">validateAndFallback</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#246"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateNextQuestion">generateNextQuestion</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#558"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::parseAnalysisResponse">parseAnalysisResponse</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#57"><abbr title="App\Service\Api\Google\GoogleApiService::translateStrings">translateStrings</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#504"><abbr title="App\Service\Api\ImageGenerationService::downloadImage">downloadImage</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#133"><abbr title="App\Service\ImageProcessingService::createImageFromFile">createImageFromFile</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#63"><abbr title="App\Service\ProductFormFieldService::getAiSuggestions">getAiSuggestions</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#249"><abbr title="App\Service\Quiz\AiProductMatcherService::getAiScore">getAiScore</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#584"><abbr title="App\Service\Quiz\AiProductMatcherService::fallbackMatch">fallbackMatch</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#263"><abbr title="App\Service\Quiz\DecisionTreeService::getStoredState">getStoredState</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#452"><abbr title="App\Service\Quiz\DecisionTreeService::validateTree">validateTree</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#714"><abbr title="App\Service\Quiz\DecisionTreeService::calculateConfidence">calculateConfidence</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#446"><abbr title="App\Service\Quiz\QuestionStrategyService::getFallbackQuestion">getFallbackQuestion</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#514"><abbr title="App\Service\Quiz\QuestionStrategyService::shouldTerminate">shouldTerminate</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#289"><abbr title="App\Service\ReliabilityService::scoreJsonField">scoreJsonField</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#563"><abbr title="App\Service\ReliabilityService::initializeAiProvider">initializeAiProvider</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#46"><abbr title="App\Service\Search\UnifiedSearchService::search">search</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#188"><abbr title="App\Service\Search\UnifiedSearchService::getSuggestions">getSuggestions</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#213"><abbr title="App\Service\Settings\SettingsService::mergeIntoConfigure">mergeIntoConfigure</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#177"><abbr title="App\Service\WebpageExtractor::extractTitle">extractTitle</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#246"><abbr title="App\Service\WebpageExtractor::extractMetaTitle">extractMetaTitle</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#273"><abbr title="App\Service\WebpageExtractor::extractMetaDescription">extractMetaDescription</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#300"><abbr title="App\Service\WebpageExtractor::extractMetaKeywords">extractMetaKeywords</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#333"><abbr title="App\Service\WebpageExtractor::extractTextContent">extractTextContent</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#246"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestTechnicalSpecs">suggestTechnicalSpecs</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#368"><abbr title="App\Service\Ai\ProductFormAiProvider::suggestAltText">suggestAltText</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#67"><abbr title="App\Service\Ai\SlugValidationService::suggestSlugs">suggestSlugs</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#118"><abbr title="App\Service\Ai\SlugValidationService::validateSlug">validateSlug</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#172"><abbr title="App\Service\Ai\SlugValidationService::optimizeSlug">optimizeSlug</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#213"><abbr title="App\Service\Ai\SlugValidationService::buildSlugSuggestionPrompt">buildSlugSuggestionPrompt</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#260"><abbr title="App\Service\Ai\SlugValidationService::buildSlugValidationPrompt">buildSlugValidationPrompt</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#460"><abbr title="App\Service\Ai\SlugValidationService::parseSlugValidation">parseSlugValidation</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#67"><abbr title="App\Service\Ai\TagDetectionService::suggestTags">suggestTags</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#128"><abbr title="App\Service\Ai\TagDetectionService::validateTags">validateTags</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#177"><abbr title="App\Service\Ai\TagDetectionService::buildTagSuggestionPrompt">buildTagSuggestionPrompt</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#216"><abbr title="App\Service\Ai\WebpageExtractionService::cleanHtmlContent">cleanHtmlContent</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#379"><abbr title="App\Service\Ai\WebpageExtractionService::createPageFromExtraction">createPageFromExtraction</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#471"><abbr title="App\Service\Ai\WebpageExtractionService::batchExtractWebpages">batchExtractWebpages</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#48"><abbr title="App\Service\Api\AiMetricsService::recordMetrics">recordMetrics</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#120"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::ensureExpectedKeys">ensureExpectedKeys</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicService.php.html#39"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicService::validateField">validateField</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#395"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::buildRecommendationPrompt">buildRecommendationPrompt</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#534"><abbr title="App\Service\Api\ImageGenerationService::getHeaders">getHeaders</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="CacheService.php.html#135"><abbr title="App\Service\CacheService::getWithFallback">getWithFallback</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="CacheService.php.html#161"><abbr title="App\Service\CacheService::warmUpCaches">warmUpCaches</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="CacheService.php.html#216"><abbr title="App\Service\CacheService::clearCachePattern">clearCachePattern</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#184"><abbr title="App\Service\ImageProcessingService::isArchiveFile">isArchiveFile</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#375"><abbr title="App\Service\ImageProcessingService::generateResultMessage">generateResultMessage</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#282"><abbr title="App\Service\IpSecurityService::unblockIp">unblockIp</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#39"><abbr title="App\Service\ProductFormFieldService::getActiveFormFields">getActiveFormFields</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#149"><abbr title="App\Service\ProductFormFieldService::buildAiPrompt">buildAiPrompt</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductFormFieldService.php.html#265"><abbr title="App\Service\ProductFormFieldService::updateFieldConfig">updateFieldConfig</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#46"><abbr title="App\Service\Quiz\AiProductMatcherService::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#166"><abbr title="App\Service\Quiz\AiProductMatcherService::explain">explain</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#310"><abbr title="App\Service\Quiz\AiProductMatcherService::parseAiScoreResponse">parseAiScoreResponse</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#545"><abbr title="App\Service\Quiz\AiProductMatcherService::calculateOverallConfidence">calculateOverallConfidence</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#537"><abbr title="App\Service\Quiz\DecisionTreeService::getRemainingProducts">getRemainingProducts</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#206"><abbr title="App\Service\Quiz\QuestionStrategyService::determineStage">determineStage</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#277"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateQuestionPriorities">calculateQuestionPriorities</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Quiz/QuestionStrategyService.php.html#463"><abbr title="App\Service\Quiz\QuestionStrategyService::customizeQuestions">customizeQuestions</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#132"><abbr title="App\Service\ReliabilityService::persistFinalScore">persistFinalScore</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#262"><abbr title="App\Service\ReliabilityService::calculateFieldScore">calculateFieldScore</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#338"><abbr title="App\Service\ReliabilityService::scoreNumericField">scoreNumericField</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#368"><abbr title="App\Service\ReliabilityService::scoreTextualField">scoreTextualField</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#390"><abbr title="App\Service\ReliabilityService::scorePriceField">scorePriceField</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#427"><abbr title="App\Service\ReliabilityService::scoreGenericField">scoreGenericField</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#440"><abbr title="App\Service\ReliabilityService::getFieldScoreRationale">getFieldScoreRationale</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#460"><abbr title="App\Service\ReliabilityService::updateFieldScores">updateFieldScores</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#37"><abbr title="App\Service\Settings\SettingsService::get">get</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#74"><abbr title="App\Service\Settings\SettingsService::set">set</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#127"><abbr title="App\Service\Settings\SettingsService::getAll">getAll</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#83"><abbr title="App\Service\WebpageExtractor::isValidUrl">isValidUrl</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="WebpageExtractor.php.html#95"><abbr title="App\Service\WebpageExtractor::fetchWebpage">fetchWebpage</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#213"><abbr title="App\Service\LogChecksumService::verifyChecksumsForFile">verifyChecksumsForFile</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Api/RateLimitService.php.html#60"><abbr title="App\Service\Api\RateLimitService::enforceLimit">enforceLimit</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#344"><abbr title="App\Service\LogChecksumService::getOverallStatus">getOverallStatus</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#51"><abbr title="App\Service\LogChecksumService::verifyChecksums">verifyChecksums</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Ai/ProductFormAiProvider.php.html#511"><abbr title="App\Service\Ai\ProductFormAiProvider::extractKeyTerms">extractKeyTerms</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Ai/SlugValidationService.php.html#40"><abbr title="App\Service\Ai\SlugValidationService::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Ai/TagDetectionService.php.html#40"><abbr title="App\Service\Ai\TagDetectionService::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#51"><abbr title="App\Service\Ai\WebpageExtractionService::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Ai/WebpageExtractionService.php.html#193"><abbr title="App\Service\Ai\WebpageExtractionService::analyzeContentWithAI">analyzeContentWithAI</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/AbstractApiService.php.html#61"><abbr title="App\Service\Api\AbstractApiService::sendRequest">sendRequest</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#133"><abbr title="App\Service\Api\AiMetricsService::isDailyCostLimitReached">isDailyCostLimitReached</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/AiMetricsService.php.html#264"><abbr title="App\Service\Api\AiMetricsService::getRecentErrors">getRecentErrors</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#55"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::getPromptData">getPromptData</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#108"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::formatContent">formatContent</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/AbstractAnthropicGenerator.php.html#145"><abbr title="App\Service\Api\Anthropic\AbstractAnthropicGenerator::sendApiRequest">sendApiRequest</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#102"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::sendRequest">sendRequest</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#282"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateRecommendations">generateRecommendations</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#313"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::analyzeAnswers">analyzeAnswers</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#345"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::buildQuestionPrompt">buildQuestionPrompt</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#588"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateFallbackQuestion">generateFallbackQuestion</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#689"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::recordMetrics">recordMetrics</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#31"><abbr title="App\Service\Api\Anthropic\ImageAnalyzer::analyze">analyze</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#107"><abbr title="App\Service\Api\Google\GoogleApiService::translateArticle">translateArticle</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#198"><abbr title="App\Service\Api\Google\GoogleApiService::translateTag">translateTag</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#277"><abbr title="App\Service\Api\Google\GoogleApiService::translateImageGallery">translateImageGallery</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#351"><abbr title="App\Service\Api\Google\GoogleApiService::preprocessContent">preprocessContent</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#392"><abbr title="App\Service\Api\Google\GoogleApiService::postprocessContent">postprocessContent</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#225"><abbr title="App\Service\Api\ImageGenerationService::generateWithAnthropic">generateWithAnthropic</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/ImageGenerationService.php.html#462"><abbr title="App\Service\Api\ImageGenerationService::sanitizePrompt">sanitizePrompt</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/RateLimitService.php.html#155"><abbr title="App\Service\Api\RateLimitService::checkDailyCostLimit">checkDailyCostLimit</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CacheService.php.html#28"><abbr title="App\Service\CacheService::cacheSearch">cacheSearch</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CacheService.php.html#74"><abbr title="App\Service\CacheService::invalidateTableCache">invalidateTableCache</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CacheService.php.html#95"><abbr title="App\Service\CacheService::invalidateProductCaches">invalidateProductCaches</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#298"><abbr title="App\Service\ImageProcessingService::processSingleImage">processSingleImage</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#332"><abbr title="App\Service\ImageProcessingService::addImageToGallery">addImageToGallery</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Quiz/AiProductMatcherService.php.html#419"><abbr title="App\Service\Quiz\AiProductMatcherService::generateAiExplanation">generateAiExplanation</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#56"><abbr title="App\Service\Quiz\DecisionTreeService::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#245"><abbr title="App\Service\Quiz\DecisionTreeService::deserializeState">deserializeState</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#611"><abbr title="App\Service\Quiz\DecisionTreeService::generateFallbackQuestion">generateFallbackQuestion</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#665"><abbr title="App\Service\Quiz\DecisionTreeService::getNextNode">getNextNode</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Quiz/DecisionTreeService.php.html#836"><abbr title="App\Service\Quiz\DecisionTreeService::getSessionState">getSessionState</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#216"><abbr title="App\Service\ReliabilityService::calculateFieldImportance">calculateFieldImportance</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#243"><abbr title="App\Service\ReliabilityService::getFieldWeights">getFieldWeights</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#355"><abbr title="App\Service\ReliabilityService::scoreBooleanField">scoreBooleanField</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#401"><abbr title="App\Service\ReliabilityService::scoreCurrencyField">scoreCurrencyField</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#414"><abbr title="App\Service\ReliabilityService::scoreMediaField">scoreMediaField</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#500"><abbr title="App\Service\ReliabilityService::createLogEntry">createLogEntry</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReliabilityService.php.html#550"><abbr title="App\Service\ReliabilityService::updateLegacyReliabilityScore">updateLegacyReliabilityScore</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Search/UnifiedSearchService.php.html#152"><abbr title="App\Service\Search\UnifiedSearchService::searchByTag">searchByTag</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#159"><abbr title="App\Service\Settings\SettingsService::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#187"><abbr title="App\Service\Settings\SettingsService::deleteNamespace">deleteNamespace</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Settings/SettingsService.php.html#249"><abbr title="App\Service\Settings\SettingsService::tableExists">tableExists</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#308"><abbr title="App\Service\LogChecksumService::getLogFiles">getLogFiles</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Api/RateLimitService.php.html#30"><abbr title="App\Service\Api\RateLimitService::ensureRateLimitCacheConfig">ensureRateLimitCacheConfig</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="ConsentService.php.html#50"><abbr title="App\Service\ConsentService::handleConsentCookie">handleConsentCookie</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="ConsentService.php.html#77"><abbr title="App\Service\ConsentService::startSessionIfNeeded">startSessionIfNeeded</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="LogChecksumService.php.html#331"><abbr title="App\Service\LogChecksumService::ensureChecksumDirectory">ensureChecksumDirectory</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.26</a> and <a href="https://phpunit.de/">PHPUnit 10.5.55</a> at Tue Oct 7 15:04:30 CDT 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([28,0,0,0,1,0,0,3,0,0,0,1], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([292,0,1,0,0,2,1,3,0,2,1,16], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,8,"<a href=\"Ai\/NullAiProvider.php.html#10\">App\\Service\\Ai\\NullAiProvider<\/a>"],[0,66,"<a href=\"Ai\/ProductFormAiProvider.php.html#16\">App\\Service\\Ai\\ProductFormAiProvider<\/a>"],[0,44,"<a href=\"Ai\/SlugValidationService.php.html#20\">App\\Service\\Ai\\SlugValidationService<\/a>"],[0,31,"<a href=\"Ai\/TagDetectionService.php.html#20\">App\\Service\\Ai\\TagDetectionService<\/a>"],[0,44,"<a href=\"Ai\/WebpageExtractionService.php.html#21\">App\\Service\\Ai\\WebpageExtractionService<\/a>"],[0,4,"<a href=\"Api\/AbstractApiService.php.html#16\">App\\Service\\Api\\AbstractApiService<\/a>"],[39.21568627450981,23,"<a href=\"Api\/AiMetricsService.php.html#19\">App\\Service\\Api\\AiMetricsService<\/a>"],[0,11,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#16\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator<\/a>"],[0,8,"<a href=\"Api\/Anthropic\/AbstractAnthropicService.php.html#8\">App\\Service\\Api\\Anthropic\\AbstractAnthropicService<\/a>"],[0,55,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#24\">App\\Service\\Api\\Anthropic\\AnthropicApiService<\/a>"],[0,3,"<a href=\"Api\/Anthropic\/ArticleTagsGenerator.php.html#13\">App\\Service\\Api\\Anthropic\\ArticleTagsGenerator<\/a>"],[0,3,"<a href=\"Api\/Anthropic\/CommentAnalyzer.php.html#13\">App\\Service\\Api\\Anthropic\\CommentAnalyzer<\/a>"],[0,5,"<a href=\"Api\/Anthropic\/ImageAnalyzer.php.html#15\">App\\Service\\Api\\Anthropic\\ImageAnalyzer<\/a>"],[0,5,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#13\">App\\Service\\Api\\Anthropic\\SeoContentGenerator<\/a>"],[0,3,"<a href=\"Api\/Anthropic\/TextSummaryGenerator.php.html#13\">App\\Service\\Api\\Anthropic\\TextSummaryGenerator<\/a>"],[0,3,"<a href=\"Api\/Anthropic\/TranslationGenerator.php.html#13\">App\\Service\\Api\\Anthropic\\TranslationGenerator<\/a>"],[0,20,"<a href=\"Api\/Google\/GoogleApiService.php.html#17\">App\\Service\\Api\\Google\\GoogleApiService<\/a>"],[100,0,"<a href=\"Api\/Google\/TranslationException.php.html#11\">App\\Service\\Api\\Google\\TranslationException<\/a>"],[0,65,"<a href=\"Api\/ImageGenerationService.php.html#24\">App\\Service\\Api\\ImageGenerationService<\/a>"],[68.25396825396825,22,"<a href=\"Api\/RateLimitService.php.html#14\">App\\Service\\Api\\RateLimitService<\/a>"],[0,25,"<a href=\"CacheService.php.html#16\">App\\Service\\CacheService<\/a>"],[60,7,"<a href=\"ConsentService.php.html#16\">App\\Service\\ConsentService<\/a>"],[0,30,"<a href=\"ImageProcessingService.php.html#27\">App\\Service\\ImageProcessingService<\/a>"],[0,55,"<a href=\"IpSecurityService.php.html#27\">App\\Service\\IpSecurityService<\/a>"],[68.09815950920245,40,"<a href=\"LogChecksumService.php.html#16\">App\\Service\\LogChecksumService<\/a>"],[0,45,"<a href=\"ProductFormFieldService.php.html#18\">App\\Service\\ProductFormFieldService<\/a>"],[0,83,"<a href=\"Quiz\/AiProductMatcherService.php.html#21\">App\\Service\\Quiz\\AiProductMatcherService<\/a>"],[0,87,"<a href=\"Quiz\/DecisionTreeService.php.html#22\">App\\Service\\Quiz\\DecisionTreeService<\/a>"],[0,84,"<a href=\"Quiz\/QuestionStrategyService.php.html#17\">App\\Service\\Quiz\\QuestionStrategyService<\/a>"],[0,58,"<a href=\"ReliabilityService.php.html#24\">App\\Service\\ReliabilityService<\/a>"],[0,21,"<a href=\"Search\/UnifiedSearchService.php.html#12\">App\\Service\\Search\\UnifiedSearchService<\/a>"],[0,25,"<a href=\"Settings\/SettingsService.php.html#19\">App\\Service\\Settings\\SettingsService<\/a>"],[0,39,"<a href=\"WebpageExtractor.php.html#15\">App\\Service\\WebpageExtractor<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,7,"<a href=\"Ai\/NullAiProvider.php.html#19\">App\\Service\\Ai\\NullAiProvider::getSuggestions<\/a>"],[0,1,"<a href=\"Ai\/NullAiProvider.php.html#64\">App\\Service\\Ai\\NullAiProvider::getFieldSuggestion<\/a>"],[0,12,"<a href=\"Ai\/ProductFormAiProvider.php.html#65\">App\\Service\\Ai\\ProductFormAiProvider::getSuggestions<\/a>"],[0,8,"<a href=\"Ai\/ProductFormAiProvider.php.html#111\">App\\Service\\Ai\\ProductFormAiProvider::suggestTitle<\/a>"],[0,4,"<a href=\"Ai\/ProductFormAiProvider.php.html#156\">App\\Service\\Ai\\ProductFormAiProvider::suggestManufacturer<\/a>"],[0,8,"<a href=\"Ai\/ProductFormAiProvider.php.html#190\">App\\Service\\Ai\\ProductFormAiProvider::suggestDescription<\/a>"],[0,3,"<a href=\"Ai\/ProductFormAiProvider.php.html#246\">App\\Service\\Ai\\ProductFormAiProvider::suggestTechnicalSpecs<\/a>"],[0,4,"<a href=\"Ai\/ProductFormAiProvider.php.html#281\">App\\Service\\Ai\\ProductFormAiProvider::suggestModelNumber<\/a>"],[0,7,"<a href=\"Ai\/ProductFormAiProvider.php.html#318\">App\\Service\\Ai\\ProductFormAiProvider::suggestPrice<\/a>"],[0,3,"<a href=\"Ai\/ProductFormAiProvider.php.html#368\">App\\Service\\Ai\\ProductFormAiProvider::suggestAltText<\/a>"],[0,5,"<a href=\"Ai\/ProductFormAiProvider.php.html#401\">App\\Service\\Ai\\ProductFormAiProvider::suggestTestingStandard<\/a>"],[0,5,"<a href=\"Ai\/ProductFormAiProvider.php.html#438\">App\\Service\\Ai\\ProductFormAiProvider::suggestCertifyingOrganization<\/a>"],[0,1,"<a href=\"Ai\/ProductFormAiProvider.php.html#475\">App\\Service\\Ai\\ProductFormAiProvider::getDefaultSuggestions<\/a>"],[0,4,"<a href=\"Ai\/ProductFormAiProvider.php.html#490\">App\\Service\\Ai\\ProductFormAiProvider::extractProductType<\/a>"],[0,2,"<a href=\"Ai\/ProductFormAiProvider.php.html#511\">App\\Service\\Ai\\ProductFormAiProvider::extractKeyTerms<\/a>"],[0,2,"<a href=\"Ai\/SlugValidationService.php.html#40\">App\\Service\\Ai\\SlugValidationService::__construct<\/a>"],[0,3,"<a href=\"Ai\/SlugValidationService.php.html#67\">App\\Service\\Ai\\SlugValidationService::suggestSlugs<\/a>"],[0,3,"<a href=\"Ai\/SlugValidationService.php.html#118\">App\\Service\\Ai\\SlugValidationService::validateSlug<\/a>"],[0,3,"<a href=\"Ai\/SlugValidationService.php.html#172\">App\\Service\\Ai\\SlugValidationService::optimizeSlug<\/a>"],[0,3,"<a href=\"Ai\/SlugValidationService.php.html#213\">App\\Service\\Ai\\SlugValidationService::buildSlugSuggestionPrompt<\/a>"],[0,3,"<a href=\"Ai\/SlugValidationService.php.html#260\">App\\Service\\Ai\\SlugValidationService::buildSlugValidationPrompt<\/a>"],[0,1,"<a href=\"Ai\/SlugValidationService.php.html#306\">App\\Service\\Ai\\SlugValidationService::getExistingSlugs<\/a>"],[0,4,"<a href=\"Ai\/SlugValidationService.php.html#323\">App\\Service\\Ai\\SlugValidationService::checkSlugConflicts<\/a>"],[0,7,"<a href=\"Ai\/SlugValidationService.php.html#361\">App\\Service\\Ai\\SlugValidationService::performTechnicalValidation<\/a>"],[0,6,"<a href=\"Ai\/SlugValidationService.php.html#418\">App\\Service\\Ai\\SlugValidationService::parseSlugSuggestions<\/a>"],[0,3,"<a href=\"Ai\/SlugValidationService.php.html#460\">App\\Service\\Ai\\SlugValidationService::parseSlugValidation<\/a>"],[0,1,"<a href=\"Ai\/SlugValidationService.php.html#493\">App\\Service\\Ai\\SlugValidationService::estimateTokenCount<\/a>"],[0,5,"<a href=\"Ai\/SlugValidationService.php.html#505\">App\\Service\\Ai\\SlugValidationService::generateSlugWithFallback<\/a>"],[0,2,"<a href=\"Ai\/TagDetectionService.php.html#40\">App\\Service\\Ai\\TagDetectionService::__construct<\/a>"],[0,3,"<a href=\"Ai\/TagDetectionService.php.html#67\">App\\Service\\Ai\\TagDetectionService::suggestTags<\/a>"],[0,3,"<a href=\"Ai\/TagDetectionService.php.html#128\">App\\Service\\Ai\\TagDetectionService::validateTags<\/a>"],[0,3,"<a href=\"Ai\/TagDetectionService.php.html#177\">App\\Service\\Ai\\TagDetectionService::buildTagSuggestionPrompt<\/a>"],[0,1,"<a href=\"Ai\/TagDetectionService.php.html#225\">App\\Service\\Ai\\TagDetectionService::buildTagValidationPrompt<\/a>"],[0,6,"<a href=\"Ai\/TagDetectionService.php.html#262\">App\\Service\\Ai\\TagDetectionService::parseTagSuggestions<\/a>"],[0,4,"<a href=\"Ai\/TagDetectionService.php.html#301\">App\\Service\\Ai\\TagDetectionService::parseTagValidation<\/a>"],[0,1,"<a href=\"Ai\/TagDetectionService.php.html#329\">App\\Service\\Ai\\TagDetectionService::isExistingTag<\/a>"],[0,1,"<a href=\"Ai\/TagDetectionService.php.html#342\">App\\Service\\Ai\\TagDetectionService::estimateTokenCount<\/a>"],[0,7,"<a href=\"Ai\/TagDetectionService.php.html#355\">App\\Service\\Ai\\TagDetectionService::processTagSuggestions<\/a>"],[0,2,"<a href=\"Ai\/WebpageExtractionService.php.html#51\">App\\Service\\Ai\\WebpageExtractionService::__construct<\/a>"],[0,5,"<a href=\"Ai\/WebpageExtractionService.php.html#78\">App\\Service\\Ai\\WebpageExtractionService::extractWebpage<\/a>"],[0,7,"<a href=\"Ai\/WebpageExtractionService.php.html#140\">App\\Service\\Ai\\WebpageExtractionService::fetchWebpageContent<\/a>"],[0,2,"<a href=\"Ai\/WebpageExtractionService.php.html#193\">App\\Service\\Ai\\WebpageExtractionService::analyzeContentWithAI<\/a>"],[0,3,"<a href=\"Ai\/WebpageExtractionService.php.html#216\">App\\Service\\Ai\\WebpageExtractionService::cleanHtmlContent<\/a>"],[0,1,"<a href=\"Ai\/WebpageExtractionService.php.html#256\">App\\Service\\Ai\\WebpageExtractionService::buildExtractionPrompt<\/a>"],[0,4,"<a href=\"Ai\/WebpageExtractionService.php.html#309\">App\\Service\\Ai\\WebpageExtractionService::generateEnhancements<\/a>"],[0,5,"<a href=\"Ai\/WebpageExtractionService.php.html#339\">App\\Service\\Ai\\WebpageExtractionService::parseExtractionResponse<\/a>"],[0,3,"<a href=\"Ai\/WebpageExtractionService.php.html#379\">App\\Service\\Ai\\WebpageExtractionService::createPageFromExtraction<\/a>"],[0,8,"<a href=\"Ai\/WebpageExtractionService.php.html#414\">App\\Service\\Ai\\WebpageExtractionService::formatContentForPage<\/a>"],[0,1,"<a href=\"Ai\/WebpageExtractionService.php.html#459\">App\\Service\\Ai\\WebpageExtractionService::estimateTokenCount<\/a>"],[0,3,"<a href=\"Ai\/WebpageExtractionService.php.html#471\">App\\Service\\Ai\\WebpageExtractionService::batchExtractWebpages<\/a>"],[0,1,"<a href=\"Api\/AbstractApiService.php.html#46\">App\\Service\\Api\\AbstractApiService::__construct<\/a>"],[0,2,"<a href=\"Api\/AbstractApiService.php.html#61\">App\\Service\\Api\\AbstractApiService::sendRequest<\/a>"],[0,0,"<a href=\"Api\/AbstractApiService.php.html#84\">App\\Service\\Api\\AbstractApiService::getHeaders<\/a>"],[0,1,"<a href=\"Api\/AbstractApiService.php.html#92\">App\\Service\\Api\\AbstractApiService::handleApiError<\/a>"],[0,0,"<a href=\"Api\/AbstractApiService.php.html#111\">App\\Service\\Api\\AbstractApiService::parseResponse<\/a>"],[100,1,"<a href=\"Api\/AiMetricsService.php.html#29\">App\\Service\\Api\\AiMetricsService::__construct<\/a>"],[0,3,"<a href=\"Api\/AiMetricsService.php.html#48\">App\\Service\\Api\\AiMetricsService::recordMetrics<\/a>"],[100,1,"<a href=\"Api\/AiMetricsService.php.html#93\">App\\Service\\Api\\AiMetricsService::calculateGoogleTranslateCost<\/a>"],[100,2,"<a href=\"Api\/AiMetricsService.php.html#105\">App\\Service\\Api\\AiMetricsService::countCharacters<\/a>"],[100,1,"<a href=\"Api\/AiMetricsService.php.html#120\">App\\Service\\Api\\AiMetricsService::getDailyCost<\/a>"],[0,2,"<a href=\"Api\/AiMetricsService.php.html#133\">App\\Service\\Api\\AiMetricsService::isDailyCostLimitReached<\/a>"],[0,4,"<a href=\"Api\/AiMetricsService.php.html#152\">App\\Service\\Api\\AiMetricsService::checkCostAlert<\/a>"],[100,3,"<a href=\"Api\/AiMetricsService.php.html#174\">App\\Service\\Api\\AiMetricsService::getMetricsSummary<\/a>"],[0,1,"<a href=\"Api\/AiMetricsService.php.html#210\">App\\Service\\Api\\AiMetricsService::getRealtimeData<\/a>"],[100,2,"<a href=\"Api\/AiMetricsService.php.html#236\">App\\Service\\Api\\AiMetricsService::getTaskTypeStatistics<\/a>"],[0,2,"<a href=\"Api\/AiMetricsService.php.html#264\">App\\Service\\Api\\AiMetricsService::getRecentErrors<\/a>"],[0,1,"<a href=\"Api\/AiMetricsService.php.html#294\">App\\Service\\Api\\AiMetricsService::calculateAnthropicCost<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#42\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::__construct<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#55\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::getPromptData<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#83\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::createPayload<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#108\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::formatContent<\/a>"],[0,3,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#120\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::ensureExpectedKeys<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#145\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::sendApiRequest<\/a>"],[0,0,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#160\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::getExpectedKeys<\/a>"],[0,0,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#168\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::getLoggerName<\/a>"],[0,4,"<a href=\"Api\/Anthropic\/AbstractAnthropicService.php.html#19\">App\\Service\\Api\\Anthropic\\AbstractAnthropicService::validateAndFallback<\/a>"],[0,3,"<a href=\"Api\/Anthropic\/AbstractAnthropicService.php.html#39\">App\\Service\\Api\\Anthropic\\AbstractAnthropicService::validateField<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AbstractAnthropicService.php.html#63\">App\\Service\\Api\\Anthropic\\AbstractAnthropicService::getSmartFallback<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#80\">App\\Service\\Api\\Anthropic\\AnthropicApiService::__construct<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#102\">App\\Service\\Api\\Anthropic\\AnthropicApiService::sendRequest<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#118\">App\\Service\\Api\\Anthropic\\AnthropicApiService::getHeaders<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#134\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateTagSeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#146\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateArticleSeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#158\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateGallerySeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#171\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateArticleTags<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#182\">App\\Service\\Api\\Anthropic\\AnthropicApiService::analyzeImage<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#193\">App\\Service\\Api\\Anthropic\\AnthropicApiService::analyzeComment<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#205\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateTextSummary<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#221\">App\\Service\\Api\\Anthropic\\AnthropicApiService::translateStrings<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#232\">App\\Service\\Api\\Anthropic\\AnthropicApiService::parseResponse<\/a>"],[0,4,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#246\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateNextQuestion<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#282\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateRecommendations<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#313\">App\\Service\\Api\\Anthropic\\AnthropicApiService::analyzeAnswers<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#345\">App\\Service\\Api\\Anthropic\\AnthropicApiService::buildQuestionPrompt<\/a>"],[0,3,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#395\">App\\Service\\Api\\Anthropic\\AnthropicApiService::buildRecommendationPrompt<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#438\">App\\Service\\Api\\Anthropic\\AnthropicApiService::buildAnalysisPrompt<\/a>"],[0,5,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#472\">App\\Service\\Api\\Anthropic\\AnthropicApiService::parseQuestionResponse<\/a>"],[0,6,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#513\">App\\Service\\Api\\Anthropic\\AnthropicApiService::parseRecommendationResponse<\/a>"],[0,4,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#558\">App\\Service\\Api\\Anthropic\\AnthropicApiService::parseAnalysisResponse<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#588\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateFallbackQuestion<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#640\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateFallbackRecommendations<\/a>"],[0,8,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#659\">App\\Service\\Api\\Anthropic\\AnthropicApiService::fallbackAnalyzeAnswers<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#689\">App\\Service\\Api\\Anthropic\\AnthropicApiService::recordMetrics<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/ArticleTagsGenerator.php.html#27\">App\\Service\\Api\\Anthropic\\ArticleTagsGenerator::generateArticleTags<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/ArticleTagsGenerator.php.html#46\">App\\Service\\Api\\Anthropic\\ArticleTagsGenerator::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/ArticleTagsGenerator.php.html#56\">App\\Service\\Api\\Anthropic\\ArticleTagsGenerator::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/CommentAnalyzer.php.html#25\">App\\Service\\Api\\Anthropic\\CommentAnalyzer::analyze<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/CommentAnalyzer.php.html#40\">App\\Service\\Api\\Anthropic\\CommentAnalyzer::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/CommentAnalyzer.php.html#54\">App\\Service\\Api\\Anthropic\\CommentAnalyzer::getLoggerName<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/ImageAnalyzer.php.html#31\">App\\Service\\Api\\Anthropic\\ImageAnalyzer::analyze<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/ImageAnalyzer.php.html#56\">App\\Service\\Api\\Anthropic\\ImageAnalyzer::createImagePayload<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/ImageAnalyzer.php.html#86\">App\\Service\\Api\\Anthropic\\ImageAnalyzer::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/ImageAnalyzer.php.html#100\">App\\Service\\Api\\Anthropic\\ImageAnalyzer::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#29\">App\\Service\\Api\\Anthropic\\SeoContentGenerator::generateTagSeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#67\">App\\Service\\Api\\Anthropic\\SeoContentGenerator::generateArticleSeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#95\">App\\Service\\Api\\Anthropic\\SeoContentGenerator::generateGallerySeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#113\">App\\Service\\Api\\Anthropic\\SeoContentGenerator::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#131\">App\\Service\\Api\\Anthropic\\SeoContentGenerator::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TextSummaryGenerator.php.html#22\">App\\Service\\Api\\Anthropic\\TextSummaryGenerator::generateTextSummary<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TextSummaryGenerator.php.html#40\">App\\Service\\Api\\Anthropic\\TextSummaryGenerator::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TextSummaryGenerator.php.html#54\">App\\Service\\Api\\Anthropic\\TextSummaryGenerator::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TranslationGenerator.php.html#27\">App\\Service\\Api\\Anthropic\\TranslationGenerator::generateTranslation<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TranslationGenerator.php.html#48\">App\\Service\\Api\\Anthropic\\TranslationGenerator::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TranslationGenerator.php.html#58\">App\\Service\\Api\\Anthropic\\TranslationGenerator::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Google\/GoogleApiService.php.html#40\">App\\Service\\Api\\Google\\GoogleApiService::__construct<\/a>"],[0,4,"<a href=\"Api\/Google\/GoogleApiService.php.html#57\">App\\Service\\Api\\Google\\GoogleApiService::translateStrings<\/a>"],[0,2,"<a href=\"Api\/Google\/GoogleApiService.php.html#107\">App\\Service\\Api\\Google\\GoogleApiService::translateArticle<\/a>"],[0,2,"<a href=\"Api\/Google\/GoogleApiService.php.html#198\">App\\Service\\Api\\Google\\GoogleApiService::translateTag<\/a>"],[0,2,"<a href=\"Api\/Google\/GoogleApiService.php.html#277\">App\\Service\\Api\\Google\\GoogleApiService::translateImageGallery<\/a>"],[0,2,"<a href=\"Api\/Google\/GoogleApiService.php.html#351\">App\\Service\\Api\\Google\\GoogleApiService::preprocessContent<\/a>"],[0,2,"<a href=\"Api\/Google\/GoogleApiService.php.html#392\">App\\Service\\Api\\Google\\GoogleApiService::postprocessContent<\/a>"],[0,5,"<a href=\"Api\/Google\/GoogleApiService.php.html#411\">App\\Service\\Api\\Google\\GoogleApiService::executeWithMetrics<\/a>"],[0,6,"<a href=\"Api\/ImageGenerationService.php.html#60\">App\\Service\\Api\\ImageGenerationService::__construct<\/a>"],[0,6,"<a href=\"Api\/ImageGenerationService.php.html#90\">App\\Service\\Api\\ImageGenerationService::generateArticleImage<\/a>"],[0,6,"<a href=\"Api\/ImageGenerationService.php.html#124\">App\\Service\\Api\\ImageGenerationService::generateProductImage<\/a>"],[0,6,"<a href=\"Api\/ImageGenerationService.php.html#165\">App\\Service\\Api\\ImageGenerationService::generateWithOpenAI<\/a>"],[0,2,"<a href=\"Api\/ImageGenerationService.php.html#225\">App\\Service\\Api\\ImageGenerationService::generateWithAnthropic<\/a>"],[0,5,"<a href=\"Api\/ImageGenerationService.php.html#253\">App\\Service\\Api\\ImageGenerationService::generateWithStockAPI<\/a>"],[0,8,"<a href=\"Api\/ImageGenerationService.php.html#322\">App\\Service\\Api\\ImageGenerationService::buildImagePrompt<\/a>"],[0,10,"<a href=\"Api\/ImageGenerationService.php.html#369\">App\\Service\\Api\\ImageGenerationService::buildProductImagePrompt<\/a>"],[0,5,"<a href=\"Api\/ImageGenerationService.php.html#426\">App\\Service\\Api\\ImageGenerationService::generateImageSearchTerms<\/a>"],[0,2,"<a href=\"Api\/ImageGenerationService.php.html#462\">App\\Service\\Api\\ImageGenerationService::sanitizePrompt<\/a>"],[0,1,"<a href=\"Api\/ImageGenerationService.php.html#483\">App\\Service\\Api\\ImageGenerationService::sanitizeSearchQuery<\/a>"],[0,4,"<a href=\"Api\/ImageGenerationService.php.html#504\">App\\Service\\Api\\ImageGenerationService::downloadImage<\/a>"],[0,3,"<a href=\"Api\/ImageGenerationService.php.html#534\">App\\Service\\Api\\ImageGenerationService::getHeaders<\/a>"],[0,1,"<a href=\"Api\/ImageGenerationService.php.html#555\">App\\Service\\Api\\ImageGenerationService::parseResponse<\/a>"],[100,1,"<a href=\"Api\/RateLimitService.php.html#21\">App\\Service\\Api\\RateLimitService::__construct<\/a>"],[12.5,2,"<a href=\"Api\/RateLimitService.php.html#30\">App\\Service\\Api\\RateLimitService::ensureRateLimitCacheConfig<\/a>"],[100,2,"<a href=\"Api\/RateLimitService.php.html#46\">App\\Service\\Api\\RateLimitService::readSetting<\/a>"],[64.70588235294117,6,"<a href=\"Api\/RateLimitService.php.html#60\">App\\Service\\Api\\RateLimitService::enforceLimit<\/a>"],[100,2,"<a href=\"Api\/RateLimitService.php.html#104\">App\\Service\\Api\\RateLimitService::getCurrentUsage<\/a>"],[100,2,"<a href=\"Api\/RateLimitService.php.html#120\">App\\Service\\Api\\RateLimitService::getCurrentUsageForServices<\/a>"],[100,3,"<a href=\"Api\/RateLimitService.php.html#134\">App\\Service\\Api\\RateLimitService::getCombinedUsage<\/a>"],[0,2,"<a href=\"Api\/RateLimitService.php.html#155\">App\\Service\\Api\\RateLimitService::checkDailyCostLimit<\/a>"],[100,1,"<a href=\"Api\/RateLimitService.php.html#165\">App\\Service\\Api\\RateLimitService::resetUsage<\/a>"],[0,1,"<a href=\"Api\/RateLimitService.php.html#174\">App\\Service\\Api\\RateLimitService::getActiveKeys<\/a>"],[0,2,"<a href=\"CacheService.php.html#28\">App\\Service\\CacheService::cacheSearch<\/a>"],[0,1,"<a href=\"CacheService.php.html#50\">App\\Service\\CacheService::cacheStats<\/a>"],[0,1,"<a href=\"CacheService.php.html#62\">App\\Service\\CacheService::cacheJunctionData<\/a>"],[0,2,"<a href=\"CacheService.php.html#74\">App\\Service\\CacheService::invalidateTableCache<\/a>"],[0,2,"<a href=\"CacheService.php.html#95\">App\\Service\\CacheService::invalidateProductCaches<\/a>"],[0,1,"<a href=\"CacheService.php.html#112\">App\\Service\\CacheService::cacheAdvancedSearch<\/a>"],[0,1,"<a href=\"CacheService.php.html#123\">App\\Service\\CacheService::cacheListings<\/a>"],[0,3,"<a href=\"CacheService.php.html#135\">App\\Service\\CacheService::getWithFallback<\/a>"],[0,3,"<a href=\"CacheService.php.html#161\">App\\Service\\CacheService::warmUpCaches<\/a>"],[0,1,"<a href=\"CacheService.php.html#190\">App\\Service\\CacheService::getCacheStats<\/a>"],[0,1,"<a href=\"CacheService.php.html#206\">App\\Service\\CacheService::buildJunctionCacheKey<\/a>"],[0,3,"<a href=\"CacheService.php.html#216\">App\\Service\\CacheService::clearCachePattern<\/a>"],[0,1,"<a href=\"CacheService.php.html#233\">App\\Service\\CacheService::warmupProductStats<\/a>"],[0,1,"<a href=\"CacheService.php.html#246\">App\\Service\\CacheService::warmupCapabilityCategories<\/a>"],[0,1,"<a href=\"CacheService.php.html#254\">App\\Service\\CacheService::warmupPortFamilies<\/a>"],[0,1,"<a href=\"CacheService.php.html#262\">App\\Service\\CacheService::warmupDeviceCategories<\/a>"],[100,1,"<a href=\"ConsentService.php.html#32\">App\\Service\\ConsentService::getConsentData<\/a>"],[42.857142857142854,3,"<a href=\"ConsentService.php.html#50\">App\\Service\\ConsentService::handleConsentCookie<\/a>"],[60,3,"<a href=\"ConsentService.php.html#77\">App\\Service\\ConsentService::startSessionIfNeeded<\/a>"],[0,1,"<a href=\"ImageProcessingService.php.html#53\">App\\Service\\ImageProcessingService::__construct<\/a>"],[0,5,"<a href=\"ImageProcessingService.php.html#70\">App\\Service\\ImageProcessingService::processUploadedFiles<\/a>"],[0,4,"<a href=\"ImageProcessingService.php.html#133\">App\\Service\\ImageProcessingService::createImageFromFile<\/a>"],[0,3,"<a href=\"ImageProcessingService.php.html#184\">App\\Service\\ImageProcessingService::isArchiveFile<\/a>"],[0,8,"<a href=\"ImageProcessingService.php.html#200\">App\\Service\\ImageProcessingService::processArchive<\/a>"],[0,2,"<a href=\"ImageProcessingService.php.html#298\">App\\Service\\ImageProcessingService::processSingleImage<\/a>"],[0,2,"<a href=\"ImageProcessingService.php.html#332\">App\\Service\\ImageProcessingService::addImageToGallery<\/a>"],[0,1,"<a href=\"ImageProcessingService.php.html#361\">App\\Service\\ImageProcessingService::mergeResults<\/a>"],[0,3,"<a href=\"ImageProcessingService.php.html#375\">App\\Service\\ImageProcessingService::generateResultMessage<\/a>"],[0,1,"<a href=\"ImageProcessingService.php.html#399\">App\\Service\\ImageProcessingService::getUploadErrorMessage<\/a>"],[0,1,"<a href=\"IpSecurityService.php.html#57\">App\\Service\\IpSecurityService::__construct<\/a>"],[0,18,"<a href=\"IpSecurityService.php.html#71\">App\\Service\\IpSecurityService::getClientIp<\/a>"],[0,1,"<a href=\"IpSecurityService.php.html#132\">App\\Service\\IpSecurityService::parseIpHeader<\/a>"],[0,1,"<a href=\"IpSecurityService.php.html#147\">App\\Service\\IpSecurityService::isValidIp<\/a>"],[0,1,"<a href=\"IpSecurityService.php.html#158\">App\\Service\\IpSecurityService::isInternalIp<\/a>"],[0,6,"<a href=\"IpSecurityService.php.html#173\">App\\Service\\IpSecurityService::isIpBlocked<\/a>"],[0,6,"<a href=\"IpSecurityService.php.html#220\">App\\Service\\IpSecurityService::blockIp<\/a>"],[0,3,"<a href=\"IpSecurityService.php.html#282\">App\\Service\\IpSecurityService::unblockIp<\/a>"],[0,11,"<a href=\"IpSecurityService.php.html#314\">App\\Service\\IpSecurityService::isSuspiciousRequest<\/a>"],[0,7,"<a href=\"IpSecurityService.php.html#362\">App\\Service\\IpSecurityService::trackSuspiciousActivity<\/a>"],[100,2,"<a href=\"LogChecksumService.php.html#28\">App\\Service\\LogChecksumService::generateChecksums<\/a>"],[82.6086956521739,6,"<a href=\"LogChecksumService.php.html#51\">App\\Service\\LogChecksumService::verifyChecksums<\/a>"],[100,1,"<a href=\"LogChecksumService.php.html#89\">App\\Service\\LogChecksumService::getIntegrityReport<\/a>"],[0,6,"<a href=\"LogChecksumService.php.html#113\">App\\Service\\LogChecksumService::createVerifiedBackup<\/a>"],[95.65217391304348,4,"<a href=\"LogChecksumService.php.html#169\">App\\Service\\LogChecksumService::generateChecksumsForFile<\/a>"],[64.86486486486487,7,"<a href=\"LogChecksumService.php.html#213\">App\\Service\\LogChecksumService::verifyChecksumsForFile<\/a>"],[100,3,"<a href=\"LogChecksumService.php.html#277\">App\\Service\\LogChecksumService::generateMasterChecksumFile<\/a>"],[87.5,5,"<a href=\"LogChecksumService.php.html#308\">App\\Service\\LogChecksumService::getLogFiles<\/a>"],[50,2,"<a href=\"LogChecksumService.php.html#331\">App\\Service\\LogChecksumService::ensureChecksumDirectory<\/a>"],[42.857142857142854,4,"<a href=\"LogChecksumService.php.html#344\">App\\Service\\LogChecksumService::getOverallStatus<\/a>"],[0,1,"<a href=\"ProductFormFieldService.php.html#28\">App\\Service\\ProductFormFieldService::__construct<\/a>"],[0,3,"<a href=\"ProductFormFieldService.php.html#39\">App\\Service\\ProductFormFieldService::getActiveFormFields<\/a>"],[0,4,"<a href=\"ProductFormFieldService.php.html#63\">App\\Service\\ProductFormFieldService::getAiSuggestions<\/a>"],[0,7,"<a href=\"ProductFormFieldService.php.html#119\">App\\Service\\ProductFormFieldService::buildAiContext<\/a>"],[0,3,"<a href=\"ProductFormFieldService.php.html#149\">App\\Service\\ProductFormFieldService::buildAiPrompt<\/a>"],[0,18,"<a href=\"ProductFormFieldService.php.html#168\">App\\Service\\ProductFormFieldService::validateFormData<\/a>"],[0,5,"<a href=\"ProductFormFieldService.php.html#229\">App\\Service\\ProductFormFieldService::getFieldConfig<\/a>"],[0,3,"<a href=\"ProductFormFieldService.php.html#265\">App\\Service\\ProductFormFieldService::updateFieldConfig<\/a>"],[0,1,"<a href=\"ProductFormFieldService.php.html#291\">App\\Service\\ProductFormFieldService::getFieldGroups<\/a>"],[0,3,"<a href=\"Quiz\/AiProductMatcherService.php.html#46\">App\\Service\\Quiz\\AiProductMatcherService::__construct<\/a>"],[0,7,"<a href=\"Quiz\/AiProductMatcherService.php.html#77\">App\\Service\\Quiz\\AiProductMatcherService::match<\/a>"],[0,3,"<a href=\"Quiz\/AiProductMatcherService.php.html#166\">App\\Service\\Quiz\\AiProductMatcherService::explain<\/a>"],[0,1,"<a href=\"Quiz\/AiProductMatcherService.php.html#186\">App\\Service\\Quiz\\AiProductMatcherService::getCandidateProducts<\/a>"],[0,5,"<a href=\"Quiz\/AiProductMatcherService.php.html#203\">App\\Service\\Quiz\\AiProductMatcherService::scoreProducts<\/a>"],[0,4,"<a href=\"Quiz\/AiProductMatcherService.php.html#249\">App\\Service\\Quiz\\AiProductMatcherService::getAiScore<\/a>"],[0,1,"<a href=\"Quiz\/AiProductMatcherService.php.html#290\">App\\Service\\Quiz\\AiProductMatcherService::buildAiScoringPrompt<\/a>"],[0,3,"<a href=\"Quiz\/AiProductMatcherService.php.html#310\">App\\Service\\Quiz\\AiProductMatcherService::parseAiScoreResponse<\/a>"],[0,7,"<a href=\"Quiz\/AiProductMatcherService.php.html#333\">App\\Service\\Quiz\\AiProductMatcherService::buildUserProfile<\/a>"],[0,9,"<a href=\"Quiz\/AiProductMatcherService.php.html#372\">App\\Service\\Quiz\\AiProductMatcherService::buildProductSummary<\/a>"],[0,2,"<a href=\"Quiz\/AiProductMatcherService.php.html#419\">App\\Service\\Quiz\\AiProductMatcherService::generateAiExplanation<\/a>"],[0,20,"<a href=\"Quiz\/AiProductMatcherService.php.html#445\">App\\Service\\Quiz\\AiProductMatcherService::generateRuleBasedExplanation<\/a>"],[0,10,"<a href=\"Quiz\/AiProductMatcherService.php.html#502\">App\\Service\\Quiz\\AiProductMatcherService::getMatchReasons<\/a>"],[0,3,"<a href=\"Quiz\/AiProductMatcherService.php.html#545\">App\\Service\\Quiz\\AiProductMatcherService::calculateOverallConfidence<\/a>"],[0,1,"<a href=\"Quiz\/AiProductMatcherService.php.html#566\">App\\Service\\Quiz\\AiProductMatcherService::generateCacheKey<\/a>"],[0,4,"<a href=\"Quiz\/AiProductMatcherService.php.html#584\">App\\Service\\Quiz\\AiProductMatcherService::fallbackMatch<\/a>"],[0,2,"<a href=\"Quiz\/DecisionTreeService.php.html#56\">App\\Service\\Quiz\\DecisionTreeService::__construct<\/a>"],[0,1,"<a href=\"Quiz\/DecisionTreeService.php.html#85\">App\\Service\\Quiz\\DecisionTreeService::start<\/a>"],[0,9,"<a href=\"Quiz\/DecisionTreeService.php.html#150\">App\\Service\\Quiz\\DecisionTreeService::next<\/a>"],[0,1,"<a href=\"Quiz\/DecisionTreeService.php.html#223\">App\\Service\\Quiz\\DecisionTreeService::isTerminal<\/a>"],[0,1,"<a href=\"Quiz\/DecisionTreeService.php.html#234\">App\\Service\\Quiz\\DecisionTreeService::serializeState<\/a>"],[0,2,"<a href=\"Quiz\/DecisionTreeService.php.html#245\">App\\Service\\Quiz\\DecisionTreeService::deserializeState<\/a>"],[0,4,"<a href=\"Quiz\/DecisionTreeService.php.html#263\">App\\Service\\Quiz\\DecisionTreeService::getStoredState<\/a>"],[0,5,"<a href=\"Quiz\/DecisionTreeService.php.html#284\">App\\Service\\Quiz\\DecisionTreeService::loadDecisionTree<\/a>"],[0,1,"<a href=\"Quiz\/DecisionTreeService.php.html#315\">App\\Service\\Quiz\\DecisionTreeService::buildDefaultTree<\/a>"],[0,4,"<a href=\"Quiz\/DecisionTreeService.php.html#452\">App\\Service\\Quiz\\DecisionTreeService::validateTree<\/a>"],[0,5,"<a href=\"Quiz\/DecisionTreeService.php.html#470\">App\\Service\\Quiz\\DecisionTreeService::getQuestionForNode<\/a>"],[0,5,"<a href=\"Quiz\/DecisionTreeService.php.html#503\">App\\Service\\Quiz\\DecisionTreeService::generateAIQuestion<\/a>"],[0,3,"<a href=\"Quiz\/DecisionTreeService.php.html#537\">App\\Service\\Quiz\\DecisionTreeService::getRemainingProducts<\/a>"],[0,18,"<a href=\"Quiz\/DecisionTreeService.php.html#569\">App\\Service\\Quiz\\DecisionTreeService::productMatchesAnswers<\/a>"],[0,2,"<a href=\"Quiz\/DecisionTreeService.php.html#611\">App\\Service\\Quiz\\DecisionTreeService::generateFallbackQuestion<\/a>"],[0,2,"<a href=\"Quiz\/DecisionTreeService.php.html#665\">App\\Service\\Quiz\\DecisionTreeService::getNextNode<\/a>"],[0,5,"<a href=\"Quiz\/DecisionTreeService.php.html#683\">App\\Service\\Quiz\\DecisionTreeService::shouldTerminate<\/a>"],[0,4,"<a href=\"Quiz\/DecisionTreeService.php.html#714\">App\\Service\\Quiz\\DecisionTreeService::calculateConfidence<\/a>"],[0,1,"<a href=\"Quiz\/DecisionTreeService.php.html#742\">App\\Service\\Quiz\\DecisionTreeService::generateResult<\/a>"],[0,8,"<a href=\"Quiz\/DecisionTreeService.php.html#779\">App\\Service\\Quiz\\DecisionTreeService::normalizeAnswers<\/a>"],[0,1,"<a href=\"Quiz\/DecisionTreeService.php.html#824\">App\\Service\\Quiz\\DecisionTreeService::storeSessionState<\/a>"],[0,2,"<a href=\"Quiz\/DecisionTreeService.php.html#836\">App\\Service\\Quiz\\DecisionTreeService::getSessionState<\/a>"],[0,1,"<a href=\"Quiz\/DecisionTreeService.php.html#849\">App\\Service\\Quiz\\DecisionTreeService::clearSessionState<\/a>"],[0,1,"<a href=\"Quiz\/QuestionStrategyService.php.html#155\">App\\Service\\Quiz\\QuestionStrategyService::__construct<\/a>"],[0,1,"<a href=\"Quiz\/QuestionStrategyService.php.html#167\">App\\Service\\Quiz\\QuestionStrategyService::generateQuestionBatch<\/a>"],[0,3,"<a href=\"Quiz\/QuestionStrategyService.php.html#206\">App\\Service\\Quiz\\QuestionStrategyService::determineStage<\/a>"],[0,7,"<a href=\"Quiz\/QuestionStrategyService.php.html#220\">App\\Service\\Quiz\\QuestionStrategyService::getAvailableProducts<\/a>"],[0,7,"<a href=\"Quiz\/QuestionStrategyService.php.html#249\">App\\Service\\Quiz\\QuestionStrategyService::applyFilters<\/a>"],[0,3,"<a href=\"Quiz\/QuestionStrategyService.php.html#277\">App\\Service\\Quiz\\QuestionStrategyService::calculateQuestionPriorities<\/a>"],[0,11,"<a href=\"Quiz\/QuestionStrategyService.php.html#307\">App\\Service\\Quiz\\QuestionStrategyService::calculateInformationGain<\/a>"],[0,11,"<a href=\"Quiz\/QuestionStrategyService.php.html#357\">App\\Service\\Quiz\\QuestionStrategyService::productMatchesFilter<\/a>"],[0,6,"<a href=\"Quiz\/QuestionStrategyService.php.html#391\">App\\Service\\Quiz\\QuestionStrategyService::calculateContextualWeight<\/a>"],[0,5,"<a href=\"Quiz\/QuestionStrategyService.php.html#416\">App\\Service\\Quiz\\QuestionStrategyService::selectOptimalQuestions<\/a>"],[0,4,"<a href=\"Quiz\/QuestionStrategyService.php.html#446\">App\\Service\\Quiz\\QuestionStrategyService::getFallbackQuestion<\/a>"],[0,3,"<a href=\"Quiz\/QuestionStrategyService.php.html#463\">App\\Service\\Quiz\\QuestionStrategyService::customizeQuestions<\/a>"],[0,1,"<a href=\"Quiz\/QuestionStrategyService.php.html#492\">App\\Service\\Quiz\\QuestionStrategyService::customizeQuestionText<\/a>"],[0,1,"<a href=\"Quiz\/QuestionStrategyService.php.html#503\">App\\Service\\Quiz\\QuestionStrategyService::customizeOptions<\/a>"],[0,4,"<a href=\"Quiz\/QuestionStrategyService.php.html#514\">App\\Service\\Quiz\\QuestionStrategyService::shouldTerminate<\/a>"],[0,6,"<a href=\"Quiz\/QuestionStrategyService.php.html#539\">App\\Service\\Quiz\\QuestionStrategyService::calculateConfidence<\/a>"],[0,5,"<a href=\"Quiz\/QuestionStrategyService.php.html#572\">App\\Service\\Quiz\\QuestionStrategyService::updateUserProfile<\/a>"],[0,5,"<a href=\"Quiz\/QuestionStrategyService.php.html#598\">App\\Service\\Quiz\\QuestionStrategyService::deriveInsights<\/a>"],[0,1,"<a href=\"ReliabilityService.php.html#35\">App\\Service\\ReliabilityService::__construct<\/a>"],[0,5,"<a href=\"ReliabilityService.php.html#55\">App\\Service\\ReliabilityService::computeProvisionalScore<\/a>"],[0,3,"<a href=\"ReliabilityService.php.html#132\">App\\Service\\ReliabilityService::persistFinalScore<\/a>"],[0,1,"<a href=\"ReliabilityService.php.html#197\">App\\Service\\ReliabilityService::computeChecksum<\/a>"],[0,2,"<a href=\"ReliabilityService.php.html#216\">App\\Service\\ReliabilityService::calculateFieldImportance<\/a>"],[0,2,"<a href=\"ReliabilityService.php.html#243\">App\\Service\\ReliabilityService::getFieldWeights<\/a>"],[0,3,"<a href=\"ReliabilityService.php.html#262\">App\\Service\\ReliabilityService::calculateFieldScore<\/a>"],[0,4,"<a href=\"ReliabilityService.php.html#289\">App\\Service\\ReliabilityService::scoreJsonField<\/a>"],[0,5,"<a href=\"ReliabilityService.php.html#310\">App\\Service\\ReliabilityService::scoreVerificationField<\/a>"],[0,3,"<a href=\"ReliabilityService.php.html#338\">App\\Service\\ReliabilityService::scoreNumericField<\/a>"],[0,2,"<a href=\"ReliabilityService.php.html#355\">App\\Service\\ReliabilityService::scoreBooleanField<\/a>"],[0,3,"<a href=\"ReliabilityService.php.html#368\">App\\Service\\ReliabilityService::scoreTextualField<\/a>"],[0,3,"<a href=\"ReliabilityService.php.html#390\">App\\Service\\ReliabilityService::scorePriceField<\/a>"],[0,2,"<a href=\"ReliabilityService.php.html#401\">App\\Service\\ReliabilityService::scoreCurrencyField<\/a>"],[0,2,"<a href=\"ReliabilityService.php.html#414\">App\\Service\\ReliabilityService::scoreMediaField<\/a>"],[0,3,"<a href=\"ReliabilityService.php.html#427\">App\\Service\\ReliabilityService::scoreGenericField<\/a>"],[0,3,"<a href=\"ReliabilityService.php.html#440\">App\\Service\\ReliabilityService::getFieldScoreRationale<\/a>"],[0,3,"<a href=\"ReliabilityService.php.html#460\">App\\Service\\ReliabilityService::updateFieldScores<\/a>"],[0,2,"<a href=\"ReliabilityService.php.html#500\">App\\Service\\ReliabilityService::createLogEntry<\/a>"],[0,2,"<a href=\"ReliabilityService.php.html#550\">App\\Service\\ReliabilityService::updateLegacyReliabilityScore<\/a>"],[0,4,"<a href=\"ReliabilityService.php.html#563\">App\\Service\\ReliabilityService::initializeAiProvider<\/a>"],[0,1,"<a href=\"Search\/UnifiedSearchService.php.html#36\">App\\Service\\Search\\UnifiedSearchService::__construct<\/a>"],[0,4,"<a href=\"Search\/UnifiedSearchService.php.html#46\">App\\Service\\Search\\UnifiedSearchService::search<\/a>"],[0,2,"<a href=\"Search\/UnifiedSearchService.php.html#152\">App\\Service\\Search\\UnifiedSearchService::searchByTag<\/a>"],[0,4,"<a href=\"Search\/UnifiedSearchService.php.html#188\">App\\Service\\Search\\UnifiedSearchService::getSuggestions<\/a>"],[0,10,"<a href=\"Search\/UnifiedSearchService.php.html#253\">App\\Service\\Search\\UnifiedSearchService::calculateRelevanceScore<\/a>"],[0,1,"<a href=\"Settings\/SettingsService.php.html#24\">App\\Service\\Settings\\SettingsService::__construct<\/a>"],[0,3,"<a href=\"Settings\/SettingsService.php.html#37\">App\\Service\\Settings\\SettingsService::get<\/a>"],[0,3,"<a href=\"Settings\/SettingsService.php.html#74\">App\\Service\\Settings\\SettingsService::set<\/a>"],[0,3,"<a href=\"Settings\/SettingsService.php.html#127\">App\\Service\\Settings\\SettingsService::getAll<\/a>"],[0,2,"<a href=\"Settings\/SettingsService.php.html#159\">App\\Service\\Settings\\SettingsService::delete<\/a>"],[0,2,"<a href=\"Settings\/SettingsService.php.html#187\">App\\Service\\Settings\\SettingsService::deleteNamespace<\/a>"],[0,4,"<a href=\"Settings\/SettingsService.php.html#213\">App\\Service\\Settings\\SettingsService::mergeIntoConfigure<\/a>"],[0,2,"<a href=\"Settings\/SettingsService.php.html#249\">App\\Service\\Settings\\SettingsService::tableExists<\/a>"],[0,5,"<a href=\"Settings\/SettingsService.php.html#266\">App\\Service\\Settings\\SettingsService::arrayMergeRecursive<\/a>"],[0,5,"<a href=\"WebpageExtractor.php.html#27\">App\\Service\\WebpageExtractor::extractContent<\/a>"],[0,3,"<a href=\"WebpageExtractor.php.html#83\">App\\Service\\WebpageExtractor::isValidUrl<\/a>"],[0,3,"<a href=\"WebpageExtractor.php.html#95\">App\\Service\\WebpageExtractor::fetchWebpage<\/a>"],[0,1,"<a href=\"WebpageExtractor.php.html#136\">App\\Service\\WebpageExtractor::parseHtml<\/a>"],[0,1,"<a href=\"WebpageExtractor.php.html#158\">App\\Service\\WebpageExtractor::extractFromDom<\/a>"],[0,4,"<a href=\"WebpageExtractor.php.html#177\">App\\Service\\WebpageExtractor::extractTitle<\/a>"],[0,5,"<a href=\"WebpageExtractor.php.html#206\">App\\Service\\WebpageExtractor::extractMainContent<\/a>"],[0,4,"<a href=\"WebpageExtractor.php.html#246\">App\\Service\\WebpageExtractor::extractMetaTitle<\/a>"],[0,4,"<a href=\"WebpageExtractor.php.html#273\">App\\Service\\WebpageExtractor::extractMetaDescription<\/a>"],[0,4,"<a href=\"WebpageExtractor.php.html#300\">App\\Service\\WebpageExtractor::extractMetaKeywords<\/a>"],[0,4,"<a href=\"WebpageExtractor.php.html#333\">App\\Service\\WebpageExtractor::extractTextContent<\/a>"],[0,1,"<a href=\"WebpageExtractor.php.html#359\">App\\Service\\WebpageExtractor::cleanText<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

@@ -70,13 +70,25 @@ echo -e "${GREEN}✓ SSH connection successful${NC}"
 
 # Create deployment directory on remote
 echo -e "${YELLOW}Creating deployment directory...${NC}"
-ssh_exec "mkdir -p ~/willow/{app,logs,config,backups/db,html}"
+ssh_exec "mkdir -p ~/willow/{app,logs,config,backups/db,html,infrastructure}"
 echo -e "${GREEN}✓ Deployment directory created${NC}"
 
 # Copy Docker Compose file
 echo -e "${YELLOW}Copying Docker Compose configuration...${NC}"
 scp_copy "$COMPOSE_FILE" "~/willow/docker-compose.yml"
 echo -e "${GREEN}✓ Docker Compose file copied${NC}"
+
+# Copy CakePHP application files
+echo -e "${YELLOW}Copying CakePHP application...${NC}"
+scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+    "${SCRIPT_DIR}/../../app" "${SSH_USER}@${DROPLET_IP}:~/willow/"
+echo -e "${GREEN}✓ CakePHP application copied${NC}"
+
+# Copy Docker infrastructure
+echo -e "${YELLOW}Copying Docker infrastructure...${NC}"
+scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+    "${SCRIPT_DIR}/../../infrastructure" "${SSH_USER}@${DROPLET_IP}:~/willow/"
+echo -e "${GREEN}✓ Docker infrastructure copied${NC}"
 
 # Copy environment file (excluding sensitive local paths)
 echo -e "${YELLOW}Copying environment configuration...${NC}"

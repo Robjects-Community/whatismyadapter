@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Service/Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../../_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../../_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../../_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../../index.html">/var/www/html</a></li>
+         <li class="breadcrumb-item"><a href="../../index.html">src</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">Service</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Quiz</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AiProductMatcherService.php.html#21">App\Service\Quiz\AiProductMatcherService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#22">App\Service\Quiz\DecisionTreeService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#17">App\Service\Quiz\QuestionStrategyService</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="DecisionTreeService.php.html#22">App\Service\Quiz\DecisionTreeService</a></td><td class="text-right">7656</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#17">App\Service\Quiz\QuestionStrategyService</a></td><td class="text-right">7140</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#21">App\Service\Quiz\AiProductMatcherService</a></td><td class="text-right">6972</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AiProductMatcherService.php.html#46"><abbr title="App\Service\Quiz\AiProductMatcherService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#77"><abbr title="App\Service\Quiz\AiProductMatcherService::match">match</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#166"><abbr title="App\Service\Quiz\AiProductMatcherService::explain">explain</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#186"><abbr title="App\Service\Quiz\AiProductMatcherService::getCandidateProducts">getCandidateProducts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#203"><abbr title="App\Service\Quiz\AiProductMatcherService::scoreProducts">scoreProducts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#249"><abbr title="App\Service\Quiz\AiProductMatcherService::getAiScore">getAiScore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#290"><abbr title="App\Service\Quiz\AiProductMatcherService::buildAiScoringPrompt">buildAiScoringPrompt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#310"><abbr title="App\Service\Quiz\AiProductMatcherService::parseAiScoreResponse">parseAiScoreResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#333"><abbr title="App\Service\Quiz\AiProductMatcherService::buildUserProfile">buildUserProfile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#372"><abbr title="App\Service\Quiz\AiProductMatcherService::buildProductSummary">buildProductSummary</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#419"><abbr title="App\Service\Quiz\AiProductMatcherService::generateAiExplanation">generateAiExplanation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#445"><abbr title="App\Service\Quiz\AiProductMatcherService::generateRuleBasedExplanation">generateRuleBasedExplanation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#502"><abbr title="App\Service\Quiz\AiProductMatcherService::getMatchReasons">getMatchReasons</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#545"><abbr title="App\Service\Quiz\AiProductMatcherService::calculateOverallConfidence">calculateOverallConfidence</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#566"><abbr title="App\Service\Quiz\AiProductMatcherService::generateCacheKey">generateCacheKey</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#584"><abbr title="App\Service\Quiz\AiProductMatcherService::fallbackMatch">fallbackMatch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#56"><abbr title="App\Service\Quiz\DecisionTreeService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#85"><abbr title="App\Service\Quiz\DecisionTreeService::start">start</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#150"><abbr title="App\Service\Quiz\DecisionTreeService::next">next</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#223"><abbr title="App\Service\Quiz\DecisionTreeService::isTerminal">isTerminal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#234"><abbr title="App\Service\Quiz\DecisionTreeService::serializeState">serializeState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#245"><abbr title="App\Service\Quiz\DecisionTreeService::deserializeState">deserializeState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#263"><abbr title="App\Service\Quiz\DecisionTreeService::getStoredState">getStoredState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#284"><abbr title="App\Service\Quiz\DecisionTreeService::loadDecisionTree">loadDecisionTree</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#315"><abbr title="App\Service\Quiz\DecisionTreeService::buildDefaultTree">buildDefaultTree</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#452"><abbr title="App\Service\Quiz\DecisionTreeService::validateTree">validateTree</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#470"><abbr title="App\Service\Quiz\DecisionTreeService::getQuestionForNode">getQuestionForNode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#503"><abbr title="App\Service\Quiz\DecisionTreeService::generateAIQuestion">generateAIQuestion</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#537"><abbr title="App\Service\Quiz\DecisionTreeService::getRemainingProducts">getRemainingProducts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#569"><abbr title="App\Service\Quiz\DecisionTreeService::productMatchesAnswers">productMatchesAnswers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#611"><abbr title="App\Service\Quiz\DecisionTreeService::generateFallbackQuestion">generateFallbackQuestion</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#665"><abbr title="App\Service\Quiz\DecisionTreeService::getNextNode">getNextNode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#683"><abbr title="App\Service\Quiz\DecisionTreeService::shouldTerminate">shouldTerminate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#714"><abbr title="App\Service\Quiz\DecisionTreeService::calculateConfidence">calculateConfidence</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#742"><abbr title="App\Service\Quiz\DecisionTreeService::generateResult">generateResult</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#779"><abbr title="App\Service\Quiz\DecisionTreeService::normalizeAnswers">normalizeAnswers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#824"><abbr title="App\Service\Quiz\DecisionTreeService::storeSessionState">storeSessionState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#836"><abbr title="App\Service\Quiz\DecisionTreeService::getSessionState">getSessionState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#849"><abbr title="App\Service\Quiz\DecisionTreeService::clearSessionState">clearSessionState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#155"><abbr title="App\Service\Quiz\QuestionStrategyService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#167"><abbr title="App\Service\Quiz\QuestionStrategyService::generateQuestionBatch">generateQuestionBatch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#206"><abbr title="App\Service\Quiz\QuestionStrategyService::determineStage">determineStage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#220"><abbr title="App\Service\Quiz\QuestionStrategyService::getAvailableProducts">getAvailableProducts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#249"><abbr title="App\Service\Quiz\QuestionStrategyService::applyFilters">applyFilters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#277"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateQuestionPriorities">calculateQuestionPriorities</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#307"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateInformationGain">calculateInformationGain</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#357"><abbr title="App\Service\Quiz\QuestionStrategyService::productMatchesFilter">productMatchesFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#391"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateContextualWeight">calculateContextualWeight</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#416"><abbr title="App\Service\Quiz\QuestionStrategyService::selectOptimalQuestions">selectOptimalQuestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#446"><abbr title="App\Service\Quiz\QuestionStrategyService::getFallbackQuestion">getFallbackQuestion</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#463"><abbr title="App\Service\Quiz\QuestionStrategyService::customizeQuestions">customizeQuestions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#492"><abbr title="App\Service\Quiz\QuestionStrategyService::customizeQuestionText">customizeQuestionText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#503"><abbr title="App\Service\Quiz\QuestionStrategyService::customizeOptions">customizeOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#514"><abbr title="App\Service\Quiz\QuestionStrategyService::shouldTerminate">shouldTerminate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#539"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateConfidence">calculateConfidence</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#572"><abbr title="App\Service\Quiz\QuestionStrategyService::updateUserProfile">updateUserProfile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#598"><abbr title="App\Service\Quiz\QuestionStrategyService::deriveInsights">deriveInsights</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AiProductMatcherService.php.html#445"><abbr title="App\Service\Quiz\AiProductMatcherService::generateRuleBasedExplanation">generateRuleBasedExplanation</abbr></a></td><td class="text-right">420</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#569"><abbr title="App\Service\Quiz\DecisionTreeService::productMatchesAnswers">productMatchesAnswers</abbr></a></td><td class="text-right">342</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#307"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateInformationGain">calculateInformationGain</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#357"><abbr title="App\Service\Quiz\QuestionStrategyService::productMatchesFilter">productMatchesFilter</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#502"><abbr title="App\Service\Quiz\AiProductMatcherService::getMatchReasons">getMatchReasons</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#372"><abbr title="App\Service\Quiz\AiProductMatcherService::buildProductSummary">buildProductSummary</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#150"><abbr title="App\Service\Quiz\DecisionTreeService::next">next</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#779"><abbr title="App\Service\Quiz\DecisionTreeService::normalizeAnswers">normalizeAnswers</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#77"><abbr title="App\Service\Quiz\AiProductMatcherService::match">match</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#333"><abbr title="App\Service\Quiz\AiProductMatcherService::buildUserProfile">buildUserProfile</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#220"><abbr title="App\Service\Quiz\QuestionStrategyService::getAvailableProducts">getAvailableProducts</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#249"><abbr title="App\Service\Quiz\QuestionStrategyService::applyFilters">applyFilters</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#391"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateContextualWeight">calculateContextualWeight</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#539"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateConfidence">calculateConfidence</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#203"><abbr title="App\Service\Quiz\AiProductMatcherService::scoreProducts">scoreProducts</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#284"><abbr title="App\Service\Quiz\DecisionTreeService::loadDecisionTree">loadDecisionTree</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#470"><abbr title="App\Service\Quiz\DecisionTreeService::getQuestionForNode">getQuestionForNode</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#503"><abbr title="App\Service\Quiz\DecisionTreeService::generateAIQuestion">generateAIQuestion</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#683"><abbr title="App\Service\Quiz\DecisionTreeService::shouldTerminate">shouldTerminate</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#416"><abbr title="App\Service\Quiz\QuestionStrategyService::selectOptimalQuestions">selectOptimalQuestions</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#572"><abbr title="App\Service\Quiz\QuestionStrategyService::updateUserProfile">updateUserProfile</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#598"><abbr title="App\Service\Quiz\QuestionStrategyService::deriveInsights">deriveInsights</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#249"><abbr title="App\Service\Quiz\AiProductMatcherService::getAiScore">getAiScore</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#584"><abbr title="App\Service\Quiz\AiProductMatcherService::fallbackMatch">fallbackMatch</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#263"><abbr title="App\Service\Quiz\DecisionTreeService::getStoredState">getStoredState</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#452"><abbr title="App\Service\Quiz\DecisionTreeService::validateTree">validateTree</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#714"><abbr title="App\Service\Quiz\DecisionTreeService::calculateConfidence">calculateConfidence</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#446"><abbr title="App\Service\Quiz\QuestionStrategyService::getFallbackQuestion">getFallbackQuestion</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#514"><abbr title="App\Service\Quiz\QuestionStrategyService::shouldTerminate">shouldTerminate</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#46"><abbr title="App\Service\Quiz\AiProductMatcherService::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#166"><abbr title="App\Service\Quiz\AiProductMatcherService::explain">explain</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#310"><abbr title="App\Service\Quiz\AiProductMatcherService::parseAiScoreResponse">parseAiScoreResponse</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#545"><abbr title="App\Service\Quiz\AiProductMatcherService::calculateOverallConfidence">calculateOverallConfidence</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#537"><abbr title="App\Service\Quiz\DecisionTreeService::getRemainingProducts">getRemainingProducts</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#206"><abbr title="App\Service\Quiz\QuestionStrategyService::determineStage">determineStage</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#277"><abbr title="App\Service\Quiz\QuestionStrategyService::calculateQuestionPriorities">calculateQuestionPriorities</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="QuestionStrategyService.php.html#463"><abbr title="App\Service\Quiz\QuestionStrategyService::customizeQuestions">customizeQuestions</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AiProductMatcherService.php.html#419"><abbr title="App\Service\Quiz\AiProductMatcherService::generateAiExplanation">generateAiExplanation</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#56"><abbr title="App\Service\Quiz\DecisionTreeService::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#245"><abbr title="App\Service\Quiz\DecisionTreeService::deserializeState">deserializeState</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#611"><abbr title="App\Service\Quiz\DecisionTreeService::generateFallbackQuestion">generateFallbackQuestion</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#665"><abbr title="App\Service\Quiz\DecisionTreeService::getNextNode">getNextNode</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DecisionTreeService.php.html#836"><abbr title="App\Service\Quiz\DecisionTreeService::getSessionState">getSessionState</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.26</a> and <a href="https://phpunit.de/">PHPUnit 10.5.55</a> at Tue Oct 7 15:04:30 CDT 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../../_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../../_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../../_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([3,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([57,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,83,"<a href=\"AiProductMatcherService.php.html#21\">App\\Service\\Quiz\\AiProductMatcherService<\/a>"],[0,87,"<a href=\"DecisionTreeService.php.html#22\">App\\Service\\Quiz\\DecisionTreeService<\/a>"],[0,84,"<a href=\"QuestionStrategyService.php.html#17\">App\\Service\\Quiz\\QuestionStrategyService<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,3,"<a href=\"AiProductMatcherService.php.html#46\">App\\Service\\Quiz\\AiProductMatcherService::__construct<\/a>"],[0,7,"<a href=\"AiProductMatcherService.php.html#77\">App\\Service\\Quiz\\AiProductMatcherService::match<\/a>"],[0,3,"<a href=\"AiProductMatcherService.php.html#166\">App\\Service\\Quiz\\AiProductMatcherService::explain<\/a>"],[0,1,"<a href=\"AiProductMatcherService.php.html#186\">App\\Service\\Quiz\\AiProductMatcherService::getCandidateProducts<\/a>"],[0,5,"<a href=\"AiProductMatcherService.php.html#203\">App\\Service\\Quiz\\AiProductMatcherService::scoreProducts<\/a>"],[0,4,"<a href=\"AiProductMatcherService.php.html#249\">App\\Service\\Quiz\\AiProductMatcherService::getAiScore<\/a>"],[0,1,"<a href=\"AiProductMatcherService.php.html#290\">App\\Service\\Quiz\\AiProductMatcherService::buildAiScoringPrompt<\/a>"],[0,3,"<a href=\"AiProductMatcherService.php.html#310\">App\\Service\\Quiz\\AiProductMatcherService::parseAiScoreResponse<\/a>"],[0,7,"<a href=\"AiProductMatcherService.php.html#333\">App\\Service\\Quiz\\AiProductMatcherService::buildUserProfile<\/a>"],[0,9,"<a href=\"AiProductMatcherService.php.html#372\">App\\Service\\Quiz\\AiProductMatcherService::buildProductSummary<\/a>"],[0,2,"<a href=\"AiProductMatcherService.php.html#419\">App\\Service\\Quiz\\AiProductMatcherService::generateAiExplanation<\/a>"],[0,20,"<a href=\"AiProductMatcherService.php.html#445\">App\\Service\\Quiz\\AiProductMatcherService::generateRuleBasedExplanation<\/a>"],[0,10,"<a href=\"AiProductMatcherService.php.html#502\">App\\Service\\Quiz\\AiProductMatcherService::getMatchReasons<\/a>"],[0,3,"<a href=\"AiProductMatcherService.php.html#545\">App\\Service\\Quiz\\AiProductMatcherService::calculateOverallConfidence<\/a>"],[0,1,"<a href=\"AiProductMatcherService.php.html#566\">App\\Service\\Quiz\\AiProductMatcherService::generateCacheKey<\/a>"],[0,4,"<a href=\"AiProductMatcherService.php.html#584\">App\\Service\\Quiz\\AiProductMatcherService::fallbackMatch<\/a>"],[0,2,"<a href=\"DecisionTreeService.php.html#56\">App\\Service\\Quiz\\DecisionTreeService::__construct<\/a>"],[0,1,"<a href=\"DecisionTreeService.php.html#85\">App\\Service\\Quiz\\DecisionTreeService::start<\/a>"],[0,9,"<a href=\"DecisionTreeService.php.html#150\">App\\Service\\Quiz\\DecisionTreeService::next<\/a>"],[0,1,"<a href=\"DecisionTreeService.php.html#223\">App\\Service\\Quiz\\DecisionTreeService::isTerminal<\/a>"],[0,1,"<a href=\"DecisionTreeService.php.html#234\">App\\Service\\Quiz\\DecisionTreeService::serializeState<\/a>"],[0,2,"<a href=\"DecisionTreeService.php.html#245\">App\\Service\\Quiz\\DecisionTreeService::deserializeState<\/a>"],[0,4,"<a href=\"DecisionTreeService.php.html#263\">App\\Service\\Quiz\\DecisionTreeService::getStoredState<\/a>"],[0,5,"<a href=\"DecisionTreeService.php.html#284\">App\\Service\\Quiz\\DecisionTreeService::loadDecisionTree<\/a>"],[0,1,"<a href=\"DecisionTreeService.php.html#315\">App\\Service\\Quiz\\DecisionTreeService::buildDefaultTree<\/a>"],[0,4,"<a href=\"DecisionTreeService.php.html#452\">App\\Service\\Quiz\\DecisionTreeService::validateTree<\/a>"],[0,5,"<a href=\"DecisionTreeService.php.html#470\">App\\Service\\Quiz\\DecisionTreeService::getQuestionForNode<\/a>"],[0,5,"<a href=\"DecisionTreeService.php.html#503\">App\\Service\\Quiz\\DecisionTreeService::generateAIQuestion<\/a>"],[0,3,"<a href=\"DecisionTreeService.php.html#537\">App\\Service\\Quiz\\DecisionTreeService::getRemainingProducts<\/a>"],[0,18,"<a href=\"DecisionTreeService.php.html#569\">App\\Service\\Quiz\\DecisionTreeService::productMatchesAnswers<\/a>"],[0,2,"<a href=\"DecisionTreeService.php.html#611\">App\\Service\\Quiz\\DecisionTreeService::generateFallbackQuestion<\/a>"],[0,2,"<a href=\"DecisionTreeService.php.html#665\">App\\Service\\Quiz\\DecisionTreeService::getNextNode<\/a>"],[0,5,"<a href=\"DecisionTreeService.php.html#683\">App\\Service\\Quiz\\DecisionTreeService::shouldTerminate<\/a>"],[0,4,"<a href=\"DecisionTreeService.php.html#714\">App\\Service\\Quiz\\DecisionTreeService::calculateConfidence<\/a>"],[0,1,"<a href=\"DecisionTreeService.php.html#742\">App\\Service\\Quiz\\DecisionTreeService::generateResult<\/a>"],[0,8,"<a href=\"DecisionTreeService.php.html#779\">App\\Service\\Quiz\\DecisionTreeService::normalizeAnswers<\/a>"],[0,1,"<a href=\"DecisionTreeService.php.html#824\">App\\Service\\Quiz\\DecisionTreeService::storeSessionState<\/a>"],[0,2,"<a href=\"DecisionTreeService.php.html#836\">App\\Service\\Quiz\\DecisionTreeService::getSessionState<\/a>"],[0,1,"<a href=\"DecisionTreeService.php.html#849\">App\\Service\\Quiz\\DecisionTreeService::clearSessionState<\/a>"],[0,1,"<a href=\"QuestionStrategyService.php.html#155\">App\\Service\\Quiz\\QuestionStrategyService::__construct<\/a>"],[0,1,"<a href=\"QuestionStrategyService.php.html#167\">App\\Service\\Quiz\\QuestionStrategyService::generateQuestionBatch<\/a>"],[0,3,"<a href=\"QuestionStrategyService.php.html#206\">App\\Service\\Quiz\\QuestionStrategyService::determineStage<\/a>"],[0,7,"<a href=\"QuestionStrategyService.php.html#220\">App\\Service\\Quiz\\QuestionStrategyService::getAvailableProducts<\/a>"],[0,7,"<a href=\"QuestionStrategyService.php.html#249\">App\\Service\\Quiz\\QuestionStrategyService::applyFilters<\/a>"],[0,3,"<a href=\"QuestionStrategyService.php.html#277\">App\\Service\\Quiz\\QuestionStrategyService::calculateQuestionPriorities<\/a>"],[0,11,"<a href=\"QuestionStrategyService.php.html#307\">App\\Service\\Quiz\\QuestionStrategyService::calculateInformationGain<\/a>"],[0,11,"<a href=\"QuestionStrategyService.php.html#357\">App\\Service\\Quiz\\QuestionStrategyService::productMatchesFilter<\/a>"],[0,6,"<a href=\"QuestionStrategyService.php.html#391\">App\\Service\\Quiz\\QuestionStrategyService::calculateContextualWeight<\/a>"],[0,5,"<a href=\"QuestionStrategyService.php.html#416\">App\\Service\\Quiz\\QuestionStrategyService::selectOptimalQuestions<\/a>"],[0,4,"<a href=\"QuestionStrategyService.php.html#446\">App\\Service\\Quiz\\QuestionStrategyService::getFallbackQuestion<\/a>"],[0,3,"<a href=\"QuestionStrategyService.php.html#463\">App\\Service\\Quiz\\QuestionStrategyService::customizeQuestions<\/a>"],[0,1,"<a href=\"QuestionStrategyService.php.html#492\">App\\Service\\Quiz\\QuestionStrategyService::customizeQuestionText<\/a>"],[0,1,"<a href=\"QuestionStrategyService.php.html#503\">App\\Service\\Quiz\\QuestionStrategyService::customizeOptions<\/a>"],[0,4,"<a href=\"QuestionStrategyService.php.html#514\">App\\Service\\Quiz\\QuestionStrategyService::shouldTerminate<\/a>"],[0,6,"<a href=\"QuestionStrategyService.php.html#539\">App\\Service\\Quiz\\QuestionStrategyService::calculateConfidence<\/a>"],[0,5,"<a href=\"QuestionStrategyService.php.html#572\">App\\Service\\Quiz\\QuestionStrategyService::updateUserProfile<\/a>"],[0,5,"<a href=\"QuestionStrategyService.php.html#598\">App\\Service\\Quiz\\QuestionStrategyService::deriveInsights<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
