@@ -208,6 +208,10 @@ docker-compose-*.yml
 *.p12
 *.pfx
 
+# GitHub Actions Runner #
+########################
+actions-runner/
+
 # Security & Secrets (Enhanced) #
 #################################
 # API keys and tokens
@@ -35819,3 +35823,24 @@ actions-runner/externals/node24/lib/node_modules/npm/node_modules/yallist/yallis
 actions-runner/externals/node24/share/doc/node/gdbinit
 actions-runner/externals/node24/share/doc/node/lldb_commands.py
 actions-runner/externals/node24/share/man/man1/node.1
+portainer-stacks/stack.env.cloud
+portainer-stacks/stack.env.template
+blue-waterfall-2679/.env.example
+blue-waterfall-2679/Dockerfile
+blue-waterfall-2679/package-lock.json
+blue-waterfall-2679/package.json
+blue-waterfall-2679/README.md
+blue-waterfall-2679/tsconfig.json
+blue-waterfall-2679/worker-configuration.d.ts
+blue-waterfall-2679/wrangler.jsonc
+blue-waterfall-2679/container_src/go.mod
+blue-waterfall-2679/container_src/go.sum
+blue-waterfall-2679/container_src/main.go
+blue-waterfall-2679/src/index.ts
+.gitignore
+.app-ignition/config.json
+app/config/Migrations/schema-dump-test.lock
+app/webroot/css/funding-banner.css
+app/webroot/js/funding-banner.js
+app/config/Migrations/schema-dump-test.lock
+banner.png
