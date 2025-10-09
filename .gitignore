@@ -101,6 +101,71 @@ yarn-error.log*
 *.temp
 *~
 
+# Organized backup directories #
+################################
+# Main backup directory (contains sensitive data)
+.backups/
+# Legacy backup patterns
+deployment-cleanup-backup*/
+data-cleanse-backup*/
+# Project-specific backup directories
+project_files_backups/
+project_mysql_backups/
+project_log_backups/
+# Numbered backup directories
+tools/backup/stack/[0-9]*/
+tools/backup/app_backups/
+# Docker configuration backups
+.docker-config-backups/
+
+# Database and cache files #
+############################
+dump.rdb
+*.sql.backup
+*.dump
+.phpunit.cache/
+
+# Archive and storage directories #
+###################################
+archive/
+archives/
+storage/
+tmp/
+
+# Development and testing artifacts #
+#####################################
+test.sqlite
+checksums/
+blue-waterfall-*/
+customer-worker-*/
+wait-for-it.sh
+
+# Build and deployment artifacts #
+##################################
+banner.png
+
+# Developer and IDE specific files #
+####################################
+# Warp terminal files
+.warp/
+.warpindexingignore
+WARP.md
+# DevContainer
+.devcontainer/
+# GitHub Dependabot
+.github/dependabot.yml
+# Composer lock files (should be project-specific)
+composer.lock
+# Log files with timestamps
+*.log.[0-9]*
+logserror.log.*
+# Generated webroot content
+app/webroot/css/
+app/webroot/data/
+app/webroot/js/quiz-akinator.js
+# Docker configuration directories
+config/docker/
+
 # OS and editor temporary files #
 #################################
 .AppleDouble
@@ -116,3 +181,4 @@ Icon?
 *.pfx
 .secrets/
 secrets/
+.DS_Store
