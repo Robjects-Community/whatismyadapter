@@ -158,11 +158,15 @@ ssh_exec "
         COMPOSE_CMD='docker-compose'
     fi
     
+    # Stop and remove existing containers
+    \$COMPOSE_CMD down --remove-orphans
+    
+    # Remove any existing containers with the same names
+    echo 'Removing any existing containers with conflicting names...'
+    docker rm -f willow-web-prod willow-db-prod willow-redis-prod willow-phpmyadmin-prod 2>/dev/null || true
+    
     # Pull latest images
     \$COMPOSE_CMD pull
-    
-    # Stop existing containers
-    \$COMPOSE_CMD down --remove-orphans
     
     # Start new containers
     \$COMPOSE_CMD up -d
