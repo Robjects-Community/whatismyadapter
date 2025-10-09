@@ -86,6 +86,45 @@ scp_copy "$temp_env" "/opt/willow/.env"
 rm "$temp_env"
 echo -e "${GREEN}✓ Environment configuration copied${NC}"
 
+# Create basic index.html for testing
+echo -e "${YELLOW}Creating initial web content...${NC}"
+ssh_exec "
+    mkdir -p /opt/willow/html
+    cat > /opt/willow/html/index.html << 'HTML_EOF'
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Willow CMS - Production Deployment</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c5530; }
+        .status { background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .links { display: flex; gap: 20px; margin-top: 30px; }
+        .links a { background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .links a:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 Willow CMS - Successfully Deployed!</h1>
+        <div class="status">
+            ✅ <strong>Deployment Status:</strong> Active and Running<br>
+            🐳 <strong>Services:</strong> Web Server, Database, Redis, phpMyAdmin<br>
+            📅 <strong>Deployed:</strong> $(date)
+        </div>
+        <p>Your Willow CMS application has been successfully deployed to production!</p>
+        <div class="links">
+            <a href="/phpMyAdmin" target="_blank">phpMyAdmin</a>
+            <a href="https://github.com/Robjects-Community/WhatIsMyAdaptor" target="_blank">Source Code</a>
+        </div>
+    </div>
+</body>
+</html>
+HTML_EOF
+"
+echo -e "${GREEN}✓ Initial web content created${NC}"
+
 # Install Docker and Docker Compose if not present
 echo -e "${YELLOW}Ensuring Docker is installed...${NC}"
 ssh_exec "
@@ -97,8 +136,9 @@ ssh_exec "
         rm get-docker.sh
     fi
     
-    if ! command -v docker-compose &> /dev/null; then
-        echo 'Installing Docker Compose...'
+    # Modern Docker includes compose plugin by default
+    if ! docker compose version &> /dev/null; then
+        echo 'Docker Compose plugin not available, installing standalone...'
         curl -L \"https://github.com/docker/compose/releases/latest/download/docker-compose-\$(uname -s)-\$(uname -m)\" -o /usr/local/bin/docker-compose
         chmod +x /usr/local/bin/docker-compose
     fi
@@ -112,21 +152,27 @@ echo -e "${YELLOW}Deploying application...${NC}"
 ssh_exec "
     cd /opt/willow
     
+    # Use docker compose (modern syntax)
+    COMPOSE_CMD='docker compose'
+    if ! docker compose version &> /dev/null; then
+        COMPOSE_CMD='docker-compose'
+    fi
+    
     # Pull latest images
-    docker-compose pull
+    \$COMPOSE_CMD pull
     
     # Stop existing containers
-    docker-compose down --remove-orphans
+    \$COMPOSE_CMD down --remove-orphans
     
     # Start new containers
-    docker-compose up -d
+    \$COMPOSE_CMD up -d
     
     # Wait for services to be healthy
     echo 'Waiting for services to start...'
     sleep 30
     
     # Check container status
-    docker-compose ps
+    \$COMPOSE_CMD ps
 "
 echo -e "${GREEN}✓ Application deployed successfully${NC}"
 

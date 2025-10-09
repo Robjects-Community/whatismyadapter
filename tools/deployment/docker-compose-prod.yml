@@ -1,42 +1,29 @@
 version: '3.8'
 
 services:
-  willowcms:
-    image: php:8.3-apache
-    container_name: willow-prod
+  # Simple nginx web server for now
+  web:
+    image: nginx:alpine
+    container_name: willow-web-prod
     platform: linux/amd64
-    hostname: willowcms
-    user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
     restart: unless-stopped
     ports:
       - "80:80"
-      - "443:443"
     depends_on:
       - db
-      - redis
     volumes:
-      - ./app:/var/www/html:rw
-      - ./config/apache:/etc/apache2/sites-available:ro
-      - ./logs:/var/log/apache2:rw
+      - ./html:/usr/share/nginx/html:ro
     environment:
       - APP_ENV=${APP_ENV:-production}
-      - APP_DEBUG=${APP_DEBUG:-false}
       - APP_URL=${APP_URL}
-      - DB_HOST=${DB_HOST:-db}
-      - DB_PORT=${DB_PORT:-3306}
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - JWT_SECRET=${JWT_SECRET}
-      - APP_KEY=${APP_KEY}
     networks:
       - willow_network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 60s
+      start_period: 30s
 
   db:
     image: mariadb:11.4-noble
@@ -55,8 +42,9 @@ services:
       - ./backups/db:/docker-entrypoint-initdb.d:ro
     networks:
       - willow_network
-    ports:
-      - "127.0.0.1:3306:3306"
+    # Database exposed only internally by default
+    # ports:
+    #   - "3306:3306"
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 30s
@@ -88,7 +76,7 @@ services:
     platform: linux/amd64
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8080:80"
+      - "8080:80"
     environment:
       - PMA_HOST=db
       - PMA_PORT=3306
@@ -107,17 +95,9 @@ services:
 volumes:
   db_data:
     driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /var/lib/docker/volumes/willow_db_data
   
   redis_data:
     driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /var/lib/docker/volumes/willow_redis_data
 
 networks:
   willow_network:
