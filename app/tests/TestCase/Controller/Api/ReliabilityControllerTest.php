@@ -75,6 +75,13 @@ class ReliabilityControllerTest extends TestCase
             ]
         ]);
         
+        // Debug: output response if not JSON
+        if ($this->_response->getHeaderLine('Content-Type') !== 'application/json') {
+            echo "\n\nDEBUG Response Status: " . $this->_response->getStatusCode() . "\n";
+            echo "Content-Type: " . $this->_response->getHeaderLine('Content-Type') . "\n";
+            echo "Response Body: " . substr((string)$this->_response->getBody(), 0, 500) . "\n\n";
+        }
+        
         // Verify API responds with JSON
         $this->assertResponseOk();
         $this->assertContentType('application/json');

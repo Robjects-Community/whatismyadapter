@@ -206,7 +206,7 @@ class ImageGenerationControllerTest extends AdminControllerTestCase
         $this->loginAsAdmin();
         
         // Get first fixture ID dynamically
-        $tableName = strtolower('ImageGeneration');
+        $tableName = 'ImageGenerations';
         $id = $this->getFirstFixtureId($tableName);
         
         if ($id) {

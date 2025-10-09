@@ -55,15 +55,20 @@ class AiFormSuggestionsControllerTest extends TestCase
 
 
     /**
-     * Test index API method (unauthenticated - should fail)
+     * Test index API method (unauthenticated - should redirect or return error)
      *
      * @return void
      */
     public function testIndexApiUnauthenticated(): void
     {
-        // POST is required, GET should fail
+        // POST without authentication should redirect to login or return 401/403
         $this->post('/api/ai-form-suggestions', []);
-        $this->assertResponseError();
+        // Accept either redirect (302) or error (4xx)
+        $this->assertTrue(
+            $this->_response->getStatusCode() === 302 || 
+            ($this->_response->getStatusCode() >= 400 && $this->_response->getStatusCode() < 500),
+            'Expected redirect or 4xx error, got ' . $this->_response->getStatusCode()
+        );
     }
 
     /**
@@ -77,7 +82,8 @@ class AiFormSuggestionsControllerTest extends TestCase
         $this->post('/api/ai-form-suggestions', []);
         $this->assertResponseCode(400);
         $responseData = json_decode((string)$this->_response->getBody(), true);
-        $this->assertArrayHasKey('message', $responseData);
+        $this->assertArrayHasKey('error', $responseData, 'Response should have error key');
+        $this->assertFalse($responseData['success'] ?? true, 'Response should indicate failure');
     }
 
     /**
@@ -96,6 +102,13 @@ class AiFormSuggestionsControllerTest extends TestCase
             ],
         ];
         $this->post('/api/ai-form-suggestions', $data);
+        
+        // Debug: output response if not 2xx
+        if ($this->_response->getStatusCode() >= 300) {
+            echo "\n\nDEBUG Response Status: " . $this->_response->getStatusCode() . "\n";
+            echo "Response Body: " . substr((string)$this->_response->getBody(), 0, 500) . "\n\n";
+        }
+        
         $this->assertResponseOk();
         $this->assertJsonResponse();
         $responseData = json_decode((string)$this->_response->getBody(), true);

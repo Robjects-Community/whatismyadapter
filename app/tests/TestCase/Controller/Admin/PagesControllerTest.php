@@ -403,7 +403,7 @@ class PagesControllerTest extends AdminControllerTestCase
         $this->loginAsAdmin();
         
         // Get first fixture ID dynamically
-        $tableName = strtolower('Pages');
+        $tableName = 'Articles';
         $id = $this->getFirstFixtureId($tableName);
         
         if ($id) {

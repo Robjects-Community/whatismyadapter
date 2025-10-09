@@ -65,7 +65,7 @@ class ProductFormFieldsControllerTest extends AdminControllerTestCase
         $this->loginAsAdmin();
         
         // Get first fixture ID dynamically
-        $tableName = strtolower('ProductFormFields');
+        $tableName = 'ProductFormFields';
         $id = $this->getFirstFixtureId($tableName);
         
         if ($id) {

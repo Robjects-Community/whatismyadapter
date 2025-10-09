@@ -10,6 +10,25 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class VideosFixture extends TestFixture
 {
+    public string $table = 'videos';
+
+    public array $fields = [
+        'id' => ['type' => 'uuid', 'null' => false],
+        'title' => ['type' => 'string', 'length' => 255, 'null' => false],
+        'slug' => ['type' => 'string', 'length' => 255, 'null' => false],
+        'description' => ['type' => 'text', 'null' => true],
+        'url' => ['type' => 'string', 'length' => 500, 'null' => false],
+        'thumbnail' => ['type' => 'string', 'length' => 500, 'null' => true],
+        'duration' => ['type' => 'integer', 'null' => true],
+        'is_published' => ['type' => 'boolean', 'null' => false, 'default' => false],
+        'created' => ['type' => 'datetime', 'null' => false],
+        'modified' => ['type' => 'datetime', 'null' => false],
+        '_constraints' => [
+            'primary' => ['type' => 'primary', 'columns' => ['id']],
+            'unique_slug' => ['type' => 'unique', 'columns' => ['slug']],
+        ],
+    ];
+
     /**
      * Init method
      *

@@ -149,7 +149,7 @@ class CacheControllerTest extends AdminControllerTestCase
         $this->loginAsAdmin();
         
         // Get first fixture ID dynamically
-        $tableName = strtolower('Cache');
+        $tableName = 'Cache';
         $id = $this->getFirstFixtureId($tableName);
         
         if ($id) {

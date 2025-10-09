@@ -65,7 +65,7 @@ class ProductPageViewsControllerTest extends AdminControllerTestCase
         $this->loginAsAdmin();
         
         // Get first fixture ID dynamically
-        $tableName = strtolower('ProductPageViews');
+        $tableName = 'ProductPageViews';
         $id = $this->getFirstFixtureId($tableName);
         
         if ($id) {

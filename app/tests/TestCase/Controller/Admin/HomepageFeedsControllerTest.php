@@ -206,7 +206,7 @@ class HomepageFeedsControllerTest extends AdminControllerTestCase
         $this->loginAsAdmin();
         
         // Get first fixture ID dynamically
-        $tableName = strtolower('HomepageFeeds');
+        $tableName = 'HomepageFeeds';
         $id = $this->getFirstFixtureId($tableName);
         
         if ($id) {

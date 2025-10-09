@@ -616,10 +616,13 @@ return function (RouteBuilder $routes): void {
         ]);
         
         // AI Form Field Suggestions API
-        $routes->connect('/form-ai-suggestions', [
+        $routes->connect('/ai-form-suggestions', [
             'controller' => 'AiFormSuggestions',
             'action' => 'index'
         ]);
+        
+        // Enable fallbacks for API routes to handle conventional routing
+        $routes->fallbacks(DashedRoute::class);
     });
 
     $routes->prefix('Admin', function (RouteBuilder $routes) {

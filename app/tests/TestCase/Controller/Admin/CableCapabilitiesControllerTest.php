@@ -318,7 +318,7 @@ class CableCapabilitiesControllerTest extends AdminControllerTestCase
         $this->loginAsAdmin();
         
         // Get first fixture ID dynamically
-        $tableName = strtolower('CableCapabilities');
+        $tableName = 'Products';
         $id = $this->getFirstFixtureId($tableName);
         
         if ($id) {

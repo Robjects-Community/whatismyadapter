@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller\Api;
 
+use App\Controller\Api\QuizController;
 use App\Test\TestCase\Controller\AuthenticationTestTrait;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
@@ -19,6 +20,7 @@ class QuizControllerTest extends TestCase
 {
     use IntegrationTestTrait;
     use AuthenticationTestTrait;
+    use MockAiServiceTrait;
 
     /**
      * Fixtures
@@ -44,6 +46,27 @@ class QuizControllerTest extends TestCase
         $this->configRequest([
             'headers' => ['Accept' => 'application/json']
         ]);
+    }
+    
+    /**
+     * Build controller with mocked AI services
+     *
+     * @param string $class Controller class name
+     * @return \Cake\Controller\Controller
+     */
+    protected function _buildController(string $class)
+    {
+        $controller = parent::_buildController($class);
+        
+        // Inject mocks for QuizController after it's built by the framework
+        if ($controller instanceof QuizController) {
+            $mockDecisionTree = $this->mockDecisionTreeService();
+            $mockProductMatcher = $this->mockAiProductMatcherService();
+            
+            $controller->setAiServices($mockProductMatcher, $mockDecisionTree);
+        }
+        
+        return $controller;
     }
 
     /**

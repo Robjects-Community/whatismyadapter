@@ -121,7 +121,7 @@ class VideosControllerTest extends AdminControllerTestCase
         $this->loginAsAdmin();
         
         // Get first fixture ID dynamically
-        $tableName = strtolower('Videos');
+        $tableName = 'Videos';
         $id = $this->getFirstFixtureId($tableName);
         
         if ($id) {

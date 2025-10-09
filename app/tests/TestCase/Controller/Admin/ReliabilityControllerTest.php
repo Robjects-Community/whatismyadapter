@@ -178,7 +178,7 @@ class ReliabilityControllerTest extends AdminControllerTestCase
         $this->loginAsAdmin();
         
         // Get first fixture ID dynamically
-        $tableName = strtolower('Reliability');
+        $tableName = 'ProductsReliability';
         $id = $this->getFirstFixtureId($tableName);
         
         if ($id) {

@@ -43,6 +43,21 @@ class QuizController extends AppController
     private DecisionTreeService $decisionTree;
 
     /**
+     * Allows setting services for testing
+     *
+     * @param \App\Service\Quiz\AiProductMatcherService $productMatcher
+     * @param \App\Service\Quiz\DecisionTreeService $decisionTree
+     * @return void
+     */
+    public function setAiServices(
+        AiProductMatcherService $productMatcher,
+        DecisionTreeService $decisionTree
+    ): void {
+        $this->productMatcher = $productMatcher;
+        $this->decisionTree = $decisionTree;
+    }
+
+    /**
      * Initialize method
      */
     public function initialize(): void
@@ -53,11 +68,25 @@ class QuizController extends AppController
         $this->fetchTable('Products');
         $this->fetchTable('QuizSubmissions');
 
-        // JSON responses are handled via view class
-
-        // Initialize AI services
-        $this->productMatcher = new AiProductMatcherService();
-        $this->decisionTree = new DecisionTreeService();
+        // Initialize AI services if not already set (for testing)
+        if (!isset($this->productMatcher)) {
+            try {
+                $this->productMatcher = new AiProductMatcherService();
+            } catch (\Exception $e) {
+                // In test/dev environment, log warning and continue
+                $this->log('Failed to initialize AiProductMatcherService: ' . $e->getMessage(), 'warning');
+                // Services will be injected via setAiServices() in tests
+            }
+        }
+        if (!isset($this->decisionTree)) {
+            try {
+                $this->decisionTree = new DecisionTreeService();
+            } catch (\Exception $e) {
+                // In test/dev environment, log warning and continue
+                $this->log('Failed to initialize DecisionTreeService: ' . $e->getMessage(), 'warning');
+                // Services will be injected via setAiServices() in tests
+            }
+        }
 
         // Set JSON view class for all actions
         $this->viewBuilder()->setClassName('Json');

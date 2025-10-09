@@ -66,7 +66,7 @@ class ReliabilityController extends AppController
 
             // Validate required fields
             if (empty($productData)) {
-                return $this->response->withType('application/json')
+                return $this->response
                     ->withStatus(400)
                     ->withStringBody(json_encode([
                         'error' => 'Missing required field: data',
@@ -85,11 +85,11 @@ class ReliabilityController extends AppController
                 'request_id' => $this->generateRequestId(),
             ]);
 
-            return $this->response->withType('application/json')
+            return $this->response
                 ->withStatus(200)
                 ->withStringBody(json_encode($responseData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         } catch (InvalidArgumentException $e) {
-            return $this->response->withType('application/json')
+            return $this->response
                 ->withStatus(400)
                 ->withStringBody(json_encode([
                     'error' => $e->getMessage(),
@@ -99,7 +99,7 @@ class ReliabilityController extends AppController
             // Log error but don't expose internal details
             error_log('ReliabilityController::score error: ' . $e->getMessage());
 
-            return $this->response->withType('application/json')
+            return $this->response
                 ->withStatus(500)
                 ->withStringBody(json_encode([
                     'error' => 'Internal server error during score calculation',
@@ -130,7 +130,7 @@ class ReliabilityController extends AppController
             $logId = $requestData['log_id'] ?? '';
 
             if (empty($model) || empty($foreignKey) || empty($logId)) {
-                return $this->response->withType('application/json')
+                return $this->response
                     ->withStatus(400)
                     ->withStringBody(json_encode([
                         'error' => 'Missing required fields: model, foreign_key, log_id',
@@ -149,7 +149,7 @@ class ReliabilityController extends AppController
                 ->first();
 
             if (!$logEntry) {
-                return $this->response->withType('application/json')
+                return $this->response
                     ->withStatus(404)
                     ->withStringBody(json_encode([
                         'error' => 'Log entry not found',
@@ -177,7 +177,7 @@ class ReliabilityController extends AppController
             $storedChecksum = $logEntry->checksum_sha256;
             $isValid = hash_equals($storedChecksum, $computedChecksum);
 
-            return $this->response->withType('application/json')
+            return $this->response
                 ->withStatus(200)
                 ->withStringBody(json_encode([
                     'success' => true,
@@ -190,7 +190,7 @@ class ReliabilityController extends AppController
         } catch (Exception $e) {
             error_log('ReliabilityController::verifyChecksum error: ' . $e->getMessage());
 
-            return $this->response->withType('application/json')
+            return $this->response
                 ->withStatus(500)
                 ->withStringBody(json_encode([
                     'error' => 'Internal server error during checksum verification',
@@ -211,7 +211,7 @@ class ReliabilityController extends AppController
             $fieldsTable = $this->fetchTable('ProductsReliabilityFields');
             $stats = $fieldsTable->getFieldStats($model);
 
-            return $this->response->withType('application/json')
+            return $this->response
                 ->withStatus(200)
                 ->withStringBody(json_encode([
                     'success' => true,
@@ -222,7 +222,7 @@ class ReliabilityController extends AppController
         } catch (Exception $e) {
             error_log('ReliabilityController::fieldStats error: ' . $e->getMessage());
 
-            return $this->response->withType('application/json')
+            return $this->response
                 ->withStatus(500)
                 ->withStringBody(json_encode([
                     'error' => 'Internal server error retrieving field statistics',

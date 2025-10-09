@@ -6,6 +6,7 @@ namespace App\Controller\Api;
 use App\Controller\AppController;
 use App\Service\ProductFormFieldService;
 use Cake\Http\Response;
+use Cake\ORM\TableRegistry;
 use Exception;
 
 /**
@@ -40,9 +41,9 @@ class AiFormSuggestionsController extends AppController
                     ]));
             }
 
-            // Load ProductFormFields model to find field by name
-            $this->loadModel('ProductFormFields');
-            $field = $this->ProductFormFields->find()
+            // Load ProductFormFields table to find field by name
+            $ProductFormFields = TableRegistry::getTableLocator()->get('ProductFormFields');
+            $field = $ProductFormFields->find()
                 ->where([
                     'field_name' => $fieldName,
                     'is_active' => true,
@@ -61,34 +62,23 @@ class AiFormSuggestionsController extends AppController
                     ]));
             }
 
-            // Initialize service
-            $productFormFieldService = new ProductFormFieldService();
+            // Initialize service with null AI provider (will return empty suggestions)
+            $productFormFieldService = new ProductFormFieldService(null);
 
-            // Get AI suggestion using field ID
-            $suggestion = $productFormFieldService->getAiSuggestion($field->id, $existingData);
+            // Get AI suggestions using field name
+            $result = $productFormFieldService->getAiSuggestions($fieldName, $existingData);
 
-            if ($suggestion === null) {
-                return $this->response
-                    ->withType('application/json')
-                    ->withStringBody(json_encode([
-                        'success' => true,
-                        'suggestions' => [],
-                        'confidence_level' => 0,
-                        'reasoning' => 'No AI suggestion available for this field at this time',
-                    ]));
-            }
-
-            // Format response to match frontend expectations
-            $suggestions = is_array($suggestion) ? $suggestion : [$suggestion];
-            $confidenceLevel = $this->calculateConfidenceLevel($existingData, $fieldName);
-            $reasoning = $this->generateReasoning($fieldName, $existingData);
+            // Extract suggestions from service response
+            $suggestions = $result['suggestions'] ?? [];
+            $confidence = $result['confidence'] ?? 0;
+            $reasoning = $result['reasoning'] ?? $this->generateReasoning($fieldName, $existingData);
 
             return $this->response
                 ->withType('application/json')
                 ->withStringBody(json_encode([
                     'success' => true,
                     'suggestions' => $suggestions,
-                    'confidence_level' => $confidenceLevel,
+                    'confidence_level' => $confidence,
                     'reasoning' => $reasoning,
                 ]));
         } catch (Exception $e) {

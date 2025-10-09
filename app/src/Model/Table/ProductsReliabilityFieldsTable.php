@@ -187,7 +187,7 @@ class ProductsReliabilityFieldsTable extends Table
                 'max_score' => $this->find()->func()->max('score'),
                 'avg_weight' => $this->find()->func()->avg('weight'),
             ])
-            ->group('field');
+            ->groupBy('field');
 
         if ($field !== null) {
             $query->where(['field' => $field]);
@@ -260,7 +260,7 @@ class ProductsReliabilityFieldsTable extends Table
                 'field',
                 'avg_weight' => $this->find()->func()->avg('weight'),
             ])
-            ->group('field')
+            ->groupBy('field')
             ->orderBy(['avg_weight' => 'DESC'])
             ->toArray();
 
@@ -287,7 +287,7 @@ class ProductsReliabilityFieldsTable extends Table
                 'field',
                 'avg_score' => $this->find()->func()->avg('score'),
             ])
-            ->group('field')
+            ->groupBy('field')
             ->orderBy(['avg_score' => 'DESC'])
             ->limit($limit)
             ->toArray();
