@@ -1,0 +1,127 @@
+name: Test Self-Hosted Runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      runner_label:
+        description: 'Runner label to test'
+        required: false
+        default: 'self-hosted,linux,willowcms'
+        type: choice
+        options:
+          - 'self-hosted,linux,willowcms'
+          - 'self-hosted,linux,x64,willowcms'
+          - 'self-hosted,linux,arm64,willowcms'
+
+jobs:
+  test-runner:
+    runs-on: ${{ fromJSON(format('[{0}]', inputs.runner_label)) }}
+    
+    steps:
+      - name: Runner Information
+        run: |
+          echo "🏃 Running on self-hosted runner"
+          echo "Runner Name: ${{ runner.name }}"
+          echo "Runner OS: ${{ runner.os }}"
+          echo "Runner Arch: ${{ runner.arch }}"
+          echo "Runner Temp: ${{ runner.temp }}"
+          echo "GitHub Workspace: ${{ github.workspace }}"
+          
+      - name: Check System Info
+        run: |
+          echo "=== System Information ==="
+          uname -a
+          echo ""
+          echo "=== CPU Info ==="
+          lscpu | head -20
+          echo ""
+          echo "=== Memory Info ==="
+          free -h
+          echo ""
+          echo "=== Disk Space ==="
+          df -h
+          
+      - name: Check Docker
+        run: |
+          echo "=== Docker Version ==="
+          docker --version
+          echo ""
+          echo "=== Docker Info ==="
+          docker info --format '{{json .}}' | jq '{ServerVersion, OSType, Architecture, NCPU, MemTotal}'
+          
+      - name: Check Development Tools
+        run: |
+          echo "=== Development Tools ==="
+          echo -n "Git: " && git --version
+          echo -n "Node.js: " && node --version
+          echo -n "NPM: " && npm --version
+          echo -n "PHP: " && php --version | head -1
+          echo -n "Composer: " && composer --version --no-ansi 2>/dev/null | head -1 || echo "Not installed"
+          echo -n "Python: " && python3 --version
+          echo -n "Ruby: " && ruby --version 2>/dev/null || echo "Not installed"
+          
+      - name: Network Connectivity Test
+        run: |
+          echo "=== Network Tests ==="
+          echo "Testing DNS resolution..."
+          nslookup github.com
+          echo ""
+          echo "Testing HTTPS connectivity..."
+          curl -I https://api.github.com
+          
+      - name: Checkout Code
+        uses: actions/checkout@v5
+        
+      - name: Test File Operations
+        run: |
+          echo "=== File Operations Test ==="
+          echo "Creating test file..."
+          echo "Test content from runner ${{ runner.name }}" > test-file.txt
+          echo "File created:"
+          ls -la test-file.txt
+          echo "File content:"
+          cat test-file.txt
+          echo "Removing test file..."
+          rm test-file.txt
+          echo "File operations successful!"
+          
+      - name: Test Docker Operations
+        run: |
+          echo "=== Docker Operations Test ==="
+          echo "Pulling test image..."
+          docker pull hello-world
+          echo "Running test container..."
+          docker run --rm hello-world
+          echo "Docker operations successful!"
+          
+      - name: Test Build Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.test-cache
+          key: test-cache-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            test-cache-${{ runner.os }}-
+            
+      - name: Create Cache Content
+        run: |
+          mkdir -p ~/.test-cache
+          echo "Cache test at $(date)" > ~/.test-cache/test.txt
+          echo "Cache content:"
+          cat ~/.test-cache/test.txt
+          
+      - name: Test Artifact Upload
+        run: |
+          mkdir -p test-artifacts
+          echo "Artifact from ${{ runner.name }}" > test-artifacts/runner-info.txt
+          echo "Runner test completed at $(date)" > test-artifacts/test-complete.txt
+          
+      - name: Upload Test Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: runner-test-artifacts
+          path: test-artifacts/
+          
+      - name: Summary
+        run: |
+          echo "✅ Self-hosted runner test completed successfully!"
+          echo "Runner '${{ runner.name }}' is ready for use."
