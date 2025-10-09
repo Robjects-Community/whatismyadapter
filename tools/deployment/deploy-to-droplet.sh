@@ -158,12 +158,16 @@ ssh_exec "
         COMPOSE_CMD='docker-compose'
     fi
     
-    # Stop and remove existing containers
-    \$COMPOSE_CMD down --remove-orphans
+    # Stop and remove all existing containers - more thorough approach
+    echo 'Stopping and removing all existing containers...'
+    \$COMPOSE_CMD down --remove-orphans --volumes || true
     
-    # Remove any existing containers with the same names
-    echo 'Removing any existing containers with conflicting names...'
-    docker rm -f willow-web-prod willow-db-prod willow-redis-prod willow-phpmyadmin-prod 2>/dev/null || true
+    # Force remove any containers with conflicting names (all possible variants)
+    echo 'Force removing containers with conflicting names...'
+    docker ps -a --format 'table {{.Names}}' | grep -E '(willow|nginx|mariadb|redis|phpmyadmin)' | xargs -r docker rm -f 2>/dev/null || true
+    
+    # Clean up any dangling containers from previous deployments
+    docker container prune -f || true
     
     # Pull latest images
     \$COMPOSE_CMD pull
