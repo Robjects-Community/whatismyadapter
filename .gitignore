@@ -1,4 +1,4 @@
-# CakePHP specific files #
+b# CakePHP specific files #
 ##########################
 /cakephp/config/app_local.php
 /cakephp/config/.env*
@@ -3979,3 +3979,5 @@ tools/reference/main-clean-snapshot/tests/TestCase/View/Helper/.gitkeep
 tools/reference/main-clean-snapshot/tests/TestSuite/AdminAuthTrait.php
 tools/reference/main-clean-snapshot/tests/TestSuite/Stub/SettingsManagerStub.php
 tools/reference/main-clean-snapshot/tests/Traits/SecurityMiddlewareTestTrait.php
+docker/mailpit/data/mailpit.db-shm
+docker/mailpit/data/mailpit.db-wal
