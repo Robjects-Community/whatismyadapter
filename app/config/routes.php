@@ -973,7 +973,5 @@ return function (RouteBuilder $routes): void {
         });
         Configure::write('DebugKit.safeTld', ['local', 'localhost', 'dev']);
         Configure::write('DebugKit.ignoreAuthorization', true);
-
-
     }
 };
