@@ -13,13 +13,16 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     volumes:
       - app_data:/var/www/html/tmp:rw
       - app_logs:/var/www/html/logs:rw
       - app_uploads:/var/www/html/webroot/files:rw
       - ./app:/var/www/html/:rw
+      - ./production-entrypoint.sh:/usr/local/bin/production-entrypoint.sh:ro
     environment:
       - APP_NAME=WillowCMS Production
       - DEBUG=false
@@ -35,18 +38,24 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_DATABASE=${DB_DATABASE}
       - DB_PORT=3306
-      # Redis Configuration
+      # Redis Configuration  
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_PASSWORD=${REDIS_PASSWORD:-}
       - REDIS_DATABASE=0
-      # Email Configuration (using local SMTP for now)
+      - REDIS_URL=redis://redis:6379/0
+      # Email Configuration
       - EMAIL_HOST=localhost
       - EMAIL_PORT=587
       - EMAIL_USERNAME=
       - EMAIL_PASSWORD=
+      # Admin Configuration
+      - WILLOW_ADMIN_USERNAME=${WILLOW_ADMIN_USERNAME:-admin}
+      - WILLOW_ADMIN_PASSWORD=${WILLOW_ADMIN_PASSWORD:-password}
+      - WILLOW_ADMIN_EMAIL=${WILLOW_ADMIN_EMAIL:-admin@willowcms.app}
     networks:
       - willow_network
+    entrypoint: ["/usr/local/bin/production-entrypoint.sh"]
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80/"]
       interval: 30s
