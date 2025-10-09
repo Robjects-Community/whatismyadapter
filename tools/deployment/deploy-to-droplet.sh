@@ -70,27 +70,27 @@ echo -e "${GREEN}✓ SSH connection successful${NC}"
 
 # Create deployment directory on remote
 echo -e "${YELLOW}Creating deployment directory...${NC}"
-ssh_exec "mkdir -p /opt/willow/{app,logs,config,backups/db}"
+ssh_exec "mkdir -p ~/willow/{app,logs,config,backups/db,html}"
 echo -e "${GREEN}✓ Deployment directory created${NC}"
 
 # Copy Docker Compose file
 echo -e "${YELLOW}Copying Docker Compose configuration...${NC}"
-scp_copy "$COMPOSE_FILE" "/opt/willow/docker-compose.yml"
+scp_copy "$COMPOSE_FILE" "~/willow/docker-compose.yml"
 echo -e "${GREEN}✓ Docker Compose file copied${NC}"
 
 # Copy environment file (excluding sensitive local paths)
 echo -e "${YELLOW}Copying environment configuration...${NC}"
 temp_env=$(mktemp)
 grep -v "SSH_KEY_PATH\|BACKUP_PATH" "$ENV_FILE" > "$temp_env"
-scp_copy "$temp_env" "/opt/willow/.env"
+scp_copy "$temp_env" "~/willow/.env"
 rm "$temp_env"
 echo -e "${GREEN}✓ Environment configuration copied${NC}"
 
 # Create basic index.html for testing
 echo -e "${YELLOW}Creating initial web content...${NC}"
 ssh_exec "
-    mkdir -p /opt/willow/html
-    cat > /opt/willow/html/index.html << 'HTML_EOF'
+    mkdir -p ~/willow/html
+    cat > ~/willow/html/index.html << 'HTML_EOF'
 <!DOCTYPE html>
 <html>
 <head>
@@ -150,7 +150,7 @@ echo -e "${GREEN}✓ Docker installation verified${NC}"
 # Deploy the application
 echo -e "${YELLOW}Deploying application...${NC}"
 ssh_exec "
-    cd /opt/willow
+    cd ~/willow
     
     # Use docker compose (modern syntax)
     COMPOSE_CMD='docker compose'
@@ -188,6 +188,7 @@ echo ""
 echo -e "${GREEN}🎉 Deployment completed successfully!${NC}"
 echo -e "${BLUE}Access your application at: http://${DROPLET_IP}${NC}"
 echo -e "${BLUE}PhpMyAdmin available at: http://${DROPLET_IP}:8080${NC}"
+echo -e "${BLUE}Deployment directory: ~/willow${NC}"
 echo ""
 echo -e "${YELLOW}Next steps:${NC}"
 echo -e "  1. Configure SSL certificate"
