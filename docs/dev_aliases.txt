@@ -1,0 +1,42 @@
+# WillowCMS Development Aliases
+# This file contains useful aliases for CakePHP/WillowCMS development
+
+# Docker Compose aliases (using modern syntax)
+alias dcu='docker compose up'
+alias dcd='docker compose down'
+alias dcb='docker compose build'
+alias dcr='docker compose restart'
+alias dcl='docker compose logs'
+alias dcps='docker compose ps'
+
+# WillowCMS specific aliases
+alias willow-up='docker compose up -d'
+alias willow-down='docker compose down'
+alias willow-logs='docker compose logs -f'
+alias willow-shell='docker compose exec willowcms bash'
+alias willow-mysql='docker compose exec willowcms-db mysql -u root -p'
+
+# CakePHP development aliases
+alias cake-migrate='docker compose exec willowcms php bin/cake migrations migrate'
+alias cake-seed='docker compose exec willowcms php bin/cake migrations seed'
+alias cake-clear-cache='docker compose exec willowcms php bin/cake cache clear_all'
+
+# PHPUnit testing (following user's preference to run selective tests)
+alias phpunit-test='docker compose exec willowcms php vendor/bin/phpunit'
+alias phpunit-mvc='docker compose exec willowcms php vendor/bin/phpunit --filter mvc'
+
+# PHPUnit with HTML coverage generation
+alias phpunit-coverage='docker compose exec willowcms php vendor/bin/phpunit --coverage-html /var/www/html/webroot/coverage'
+alias phpunit-coverage-text='docker compose exec willowcms php vendor/bin/phpunit --coverage-text'
+alias phpunit-coverage-clover='docker compose exec willowcms php vendor/bin/phpunit --coverage-clover /var/www/html/webroot/coverage.xml'
+
+# Open coverage report in browser (macOS/Linux)
+alias coverage-open='open http://localhost:8080/coverage/ 2>/dev/null || xdg-open http://localhost:8080/coverage/ 2>/dev/null'
+
+# Clean coverage reports
+alias coverage-clean='docker compose exec willowcms rm -rf /var/www/html/webroot/coverage'
+
+# General development shortcuts
+alias ll='ls -la'
+alias la='ls -A'
+alias l='ls -CF'
