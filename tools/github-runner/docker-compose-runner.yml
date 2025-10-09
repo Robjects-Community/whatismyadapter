@@ -1,0 +1,129 @@
+version: '3.8'
+
+services:
+  github-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RUNNER_VERSION: ${RUNNER_VERSION:-2.320.0}
+    image: willowcms-github-runner:latest
+    container_name: github-runner-${RUNNER_NAME:-willowcms}
+    platform: ${PLATFORM:-linux/amd64}
+    restart: unless-stopped
+    
+    environment:
+      # GitHub Configuration
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GITHUB_OWNER: ${GITHUB_OWNER}
+      GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}
+      
+      # Runner Configuration
+      RUNNER_NAME: ${RUNNER_NAME:-willowcms-runner}
+      RUNNER_LABELS: ${RUNNER_LABELS:-self-hosted,linux,x64,willowcms}
+      RUNNER_WORKDIR: ${RUNNER_WORKDIR:-_work}
+      RUNNER_EPHEMERAL: ${RUNNER_EPHEMERAL:-false}
+      
+      # Application Environment (pass through from host)
+      APP_NAME: ${APP_NAME:-WillowCMS}
+      DEBUG: ${DEBUG:-false}
+      APP_ENCODING: ${APP_ENCODING:-UTF-8}
+      APP_DEFAULT_LOCALE: ${APP_DEFAULT_LOCALE:-en_GB}
+      APP_DEFAULT_TIMEZONE: ${APP_DEFAULT_TIMEZONE:-America/Chicago}
+      
+      # Database Configuration (for workflow testing)
+      DB_HOST: mysql
+      DB_DATABASE: ${MYSQL_DATABASE:-cms}
+      DB_USERNAME: ${MYSQL_USER:-cms_user}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-password}
+      DB_PORT: 3306
+      
+      # Redis Configuration
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-root}
+      
+      # Email Configuration
+      EMAIL_HOST: mailpit
+      EMAIL_PORT: 1025
+      
+    volumes:
+      # Docker socket for DinD support
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+      # Runner workspace
+      - ./workspace:/home/runner/work
+      
+      # Logs
+      - ./logs:/home/runner/logs
+      
+      # Shared cache directories
+      - runner_composer_cache:/home/runner/.composer
+      - runner_npm_cache:/home/runner/.npm
+      - runner_cache:/home/runner/.cache
+      
+      # Share app directory for builds (read-only)
+      - ../../app:/workspace/app:ro
+      - ../../.github:/workspace/.github:ro
+      
+    networks:
+      - willow_network
+      
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "Runner.Listener"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+      
+    deploy:
+      resources:
+        limits:
+          cpus: '${RUNNER_CPU_LIMIT:-2.0}'
+          memory: ${RUNNER_MEMORY_LIMIT:-4G}
+        reservations:
+          cpus: '${RUNNER_CPU_RESERVE:-0.5}'
+          memory: ${RUNNER_MEMORY_RESERVE:-512M}
+          
+    labels:
+      - "com.willowcms.service=github-runner"
+      - "com.willowcms.environment=${ENVIRONMENT:-development}"
+      
+    env_file:
+      - .env.runner
+      
+  # Optional: Runner monitoring with Prometheus metrics
+  runner-exporter:
+    image: prom/node-exporter:latest
+    container_name: github-runner-exporter
+    platform: ${PLATFORM:-linux/amd64}
+    restart: unless-stopped
+    profiles:
+      - monitoring
+    networks:
+      - willow_network
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    ports:
+      - "${METRICS_PORT:-9100}:9100"
+    labels:
+      - "com.willowcms.service=github-runner-metrics"
+
+networks:
+  willow_network:
+    external: true
+    name: willow_default
+
+volumes:
+  runner_composer_cache:
+    driver: local
+  runner_npm_cache:
+    driver: local
+  runner_cache:
+    driver: local
