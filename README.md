@@ -42,8 +42,10 @@ open http://localhost:8080
 ## 📚 Documentation
 
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Comprehensive deployment guide and platform compatibility
+- **[CLOUDFLARE_FAQ.md](CLOUDFLARE_FAQ.md)** - Why Cloudflare Workers fails and what to do about it
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history and changes
 - **[cakephp/README.md](cakephp/README.md)** - Application directory structure
+- **[.github/workflows/README.md](.github/workflows/README.md)** - CI/CD workflows documentation
 - **[docs/](docs/)** - Additional documentation (if available)
 
 ## ⚠️ Important: Cloudflare Workers Compatibility
@@ -57,9 +59,10 @@ Cloudflare Workers is a serverless JavaScript/WebAssembly platform. This project
 - Writable filesystem
 - Long-running background processes
 
-The `wrangler.toml` file exists to prevent automatic deployment attempts by the Cloudflare Workers GitHub integration.
+The `wrangler.toml` file exists to prevent automatic deployment attempts by the Cloudflare Workers GitHub integration. **Deployment failures are intentional and expected.**
 
-👉 **See [DEPLOYMENT.md](DEPLOYMENT.md) for proper deployment instructions.**
+👉 **See [DEPLOYMENT.md](DEPLOYMENT.md) for proper deployment instructions.**  
+👉 **See [CLOUDFLARE_FAQ.md](CLOUDFLARE_FAQ.md) for details about the Cloudflare Workers situation.**
 
 ## 🐳 Docker Services
 
