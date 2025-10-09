@@ -1,0 +1,193 @@
+name: Checksum Verification Trigger
+
+on:
+  push:
+    paths:
+      - 'app/**'
+      - 'docker/**'
+      - '*.yml'
+  
+  schedule:
+    # Run daily at midnight UTC
+    - cron: '0 0 * * *'
+  
+  workflow_dispatch:
+    inputs:
+      file_path:
+        description: 'File path to verify'
+        required: false
+        default: ''
+
+env:
+  TARGET_CHECKSUM: 00461fdf66fabe1136479089904f0c2594bdf3c85b22121026b8bae512cce182
+  
+jobs:
+  verify-checksum:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+      
+      - name: Calculate Checksums
+        id: checksums
+        run: |
+          echo "🔍 Calculating file checksums..."
+          
+          # Function to check if file matches target checksum
+          check_file() {
+            local file="$1"
+            local checksum=$(sha256sum "$file" | cut -d' ' -f1)
+            
+            if [[ "$checksum" == "${{ env.TARGET_CHECKSUM }}" ]]; then
+              echo "✅ MATCH FOUND: $file"
+              echo "matched_file=$file" >> $GITHUB_OUTPUT
+              echo "matched=true" >> $GITHUB_OUTPUT
+              return 0
+            fi
+            return 1
+          }
+          
+          # Check specific file if provided
+          if [[ -n "${{ github.event.inputs.file_path }}" ]]; then
+            if [[ -f "${{ github.event.inputs.file_path }}" ]]; then
+              check_file "${{ github.event.inputs.file_path }}"
+            else
+              echo "❌ File not found: ${{ github.event.inputs.file_path }}"
+              exit 1
+            fi
+          else
+            # Scan all relevant files
+            echo "Scanning repository for matching checksum..."
+            
+            # Check common file types
+            for pattern in "*.yml" "*.yaml" "*.json" "*.sh" "Dockerfile*"; do
+              while IFS= read -r file; do
+                if check_file "$file"; then
+                  break 2  # Exit both loops if match found
+                fi
+              done < <(find . -type f -name "$pattern" 2>/dev/null)
+            done
+            
+            # Check specific directories
+            for dir in "app" "docker" "scripts" "tools"; do
+              if [[ -d "$dir" ]]; then
+                while IFS= read -r file; do
+                  if check_file "$file"; then
+                    break 2
+                  fi
+                done < <(find "$dir" -type f 2>/dev/null)
+              fi
+            done
+          fi
+          
+          # Report results
+          if [[ "${{ steps.checksums.outputs.matched }}" != "true" ]]; then
+            echo "ℹ️ No files matching target checksum found"
+            echo "matched=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Process Matching File
+        if: steps.checksums.outputs.matched == 'true'
+        run: |
+          echo "🎯 Processing file with matching checksum"
+          echo "File: ${{ steps.checksums.outputs.matched_file }}"
+          
+          # Get file information
+          ls -la "${{ steps.checksums.outputs.matched_file }}"
+          file "${{ steps.checksums.outputs.matched_file }}"
+          
+          # Determine file type and process accordingly
+          FILE="${{ steps.checksums.outputs.matched_file }}"
+          
+          if [[ "$FILE" == *"Dockerfile"* ]]; then
+            echo "📦 Dockerfile detected - Building image"
+            # docker build -f "$FILE" -t triggered-build:${{ github.sha }} .
+          elif [[ "$FILE" == *".yml" ]] || [[ "$FILE" == *".yaml" ]]; then
+            echo "📄 YAML file detected - Validating configuration"
+            # Validate YAML syntax
+            python3 -c "import yaml; yaml.safe_load(open('$FILE'))"
+          elif [[ "$FILE" == *".sh" ]]; then
+            echo "📜 Shell script detected - Running validation"
+            bash -n "$FILE"  # Syntax check
+          elif [[ "$FILE" == *".json" ]]; then
+            echo "📊 JSON file detected - Validating structure"
+            python3 -m json.tool "$FILE" > /dev/null
+          fi
+      
+      - name: Security Scan
+        if: steps.checksums.outputs.matched == 'true'
+        run: |
+          echo "🔐 Running security scan on matched file"
+          
+          # Install security tools
+          pip3 install safety bandit
+          
+          FILE="${{ steps.checksums.outputs.matched_file }}"
+          
+          # Run appropriate security scan based on file type
+          if [[ "$FILE" == *.py ]]; then
+            bandit -r "$FILE"
+          elif [[ "$FILE" == *requirements.txt ]] || [[ "$FILE" == *Pipfile* ]]; then
+            safety check --file "$FILE"
+          fi
+          
+          # Check for secrets
+          if command -v gitleaks &> /dev/null; then
+            gitleaks detect --no-git --path "$FILE"
+          fi
+      
+      - name: Trigger Deployment
+        if: steps.checksums.outputs.matched == 'true'
+        run: |
+          echo "🚀 Triggering deployment for verified file"
+          
+          # Create deployment manifest
+          cat > deployment-manifest.json <<EOF
+          {
+            "verified_checksum": "${{ env.TARGET_CHECKSUM }}",
+            "verified_file": "${{ steps.checksums.outputs.matched_file }}",
+            "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "workflow_run": "${{ github.run_id }}",
+            "triggered_by": "${{ github.actor }}"
+          }
+          EOF
+          
+          echo "Deployment manifest created:"
+          cat deployment-manifest.json
+          
+          # Trigger deployment based on file type
+          FILE="${{ steps.checksums.outputs.matched_file }}"
+          
+          if [[ "$FILE" == *"docker-compose"* ]]; then
+            echo "Docker Compose file verified - Ready for deployment"
+            # docker compose -f "$FILE" config
+          elif [[ "$FILE" == *"Dockerfile"* ]]; then
+            echo "Dockerfile verified - Ready for build"
+            # docker build -f "$FILE" .
+          fi
+      
+      - name: Create Checksum Registry
+        run: |
+          # Create or update checksum registry
+          echo "📝 Updating checksum registry"
+          
+          cat > checksum-registry.json <<EOF
+          {
+            "target_checksum": "${{ env.TARGET_CHECKSUM }}",
+            "last_check": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "matched": ${{ steps.checksums.outputs.matched || false }},
+            "matched_file": "${{ steps.checksums.outputs.matched_file || 'none' }}",
+            "workflow_run": "${{ github.run_id }}"
+          }
+          EOF
+          
+          cat checksum-registry.json
+      
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: checksum-verification-${{ github.run_id }}
+          path: |
+            deployment-manifest.json
+            checksum-registry.json

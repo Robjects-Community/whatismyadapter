@@ -1,0 +1,102 @@
+name: Docker Image Digest Trigger
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_digest:
+        description: 'Docker image digest SHA256'
+        required: true
+        default: 'sha256:00461fdf66fabe1136479089904f0c2594bdf3c85b22121026b8bae512cce182'
+  
+  # Trigger on registry webhook (if configured)
+  repository_dispatch:
+    types: [image_updated]
+
+env:
+  TARGET_DIGEST: sha256:00461fdf66fabe1136479089904f0c2594bdf3c85b22121026b8bae512cce182
+  IMAGE_NAME: willowcms/app  # Update with your image name
+
+jobs:
+  validate-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Validate Image Digest
+        id: validate
+        run: |
+          # Check if this is the target digest
+          if [[ "${{ github.event.inputs.image_digest || env.TARGET_DIGEST }}" == "${{ env.TARGET_DIGEST }}" ]]; then
+            echo "✅ Target digest matched: ${{ env.TARGET_DIGEST }}"
+            echo "matched=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Digest mismatch"
+            echo "matched=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+      
+      - name: Pull Image by Digest
+        if: steps.validate.outputs.matched == 'true'
+        run: |
+          # Pull the specific image version by digest
+          docker pull ${{ env.IMAGE_NAME }}@${{ env.TARGET_DIGEST }}
+          
+          # Tag it for local use
+          docker tag ${{ env.IMAGE_NAME }}@${{ env.TARGET_DIGEST }} ${{ env.IMAGE_NAME }}:validated
+          
+          # Verify the image
+          docker inspect ${{ env.IMAGE_NAME }}:validated
+      
+      - name: Run Security Scan
+        if: steps.validate.outputs.matched == 'true'
+        run: |
+          # Install trivy for security scanning
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update && sudo apt-get install -y trivy
+          
+          # Scan the image
+          trivy image ${{ env.IMAGE_NAME }}@${{ env.TARGET_DIGEST }}
+      
+      - name: Deploy to Environment
+        if: steps.validate.outputs.matched == 'true'
+        run: |
+          echo "🚀 Deploying image with digest: ${{ env.TARGET_DIGEST }}"
+          
+          # Update docker-compose or deployment configuration
+          # This is where you'd update your deployment files
+          
+          # Example: Update docker-compose.yml with the specific image
+          sed -i "s|image: .*|image: ${{ env.IMAGE_NAME }}@${{ env.TARGET_DIGEST }}|" docker-compose.yml
+          
+          echo "Deployment configuration updated"
+      
+      - name: Create Deployment Record
+        if: steps.validate.outputs.matched == 'true'
+        run: |
+          # Create a deployment record
+          cat > deployment-record.json <<EOF
+          {
+            "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "image": "${{ env.IMAGE_NAME }}",
+            "digest": "${{ env.TARGET_DIGEST }}",
+            "triggered_by": "${{ github.actor }}",
+            "workflow_run": "${{ github.run_id }}"
+          }
+          EOF
+          
+          cat deployment-record.json
+      
+      - name: Upload Deployment Artifacts
+        if: steps.validate.outputs.matched == 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployment-${{ github.run_id }}
+          path: |
+            deployment-record.json
+            docker-compose.yml

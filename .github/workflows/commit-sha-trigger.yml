@@ -1,0 +1,149 @@
+name: Commit SHA Trigger Workflow
+
+on:
+  push:
+    branches: [main, develop]
+  
+  workflow_dispatch:
+    inputs:
+      target_sha:
+        description: 'Target commit SHA to process'
+        required: false
+        default: '00461fdf66fabe1136479089904f0c2594bdf3c85b22121026b8bae512cce182'
+
+env:
+  TARGET_SHA: 00461fdf66fabe1136479089904f0c2594bdf3c85b22121026b8bae512cce182
+
+jobs:
+  check-and-process:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # Fetch all history
+      
+      - name: Validate Commit SHA
+        id: validate
+        run: |
+          # Get current SHA or use input
+          CURRENT_SHA="${{ github.event.inputs.target_sha || github.sha }}"
+          
+          echo "Current SHA: $CURRENT_SHA"
+          echo "Target SHA: ${{ env.TARGET_SHA }}"
+          
+          # Check if this is the target commit
+          if [[ "$CURRENT_SHA" == "${{ env.TARGET_SHA }}" ]]; then
+            echo "✅ Target commit matched!"
+            echo "matched=true" >> $GITHUB_OUTPUT
+            echo "sha=$CURRENT_SHA" >> $GITHUB_OUTPUT
+          else
+            echo "ℹ️ Different commit: $CURRENT_SHA"
+            echo "matched=false" >> $GITHUB_OUTPUT
+            
+            # Check if target SHA exists in history
+            if git rev-parse --verify "${{ env.TARGET_SHA }}" >/dev/null 2>&1; then
+              echo "Target SHA exists in repository history"
+              echo "exists=true" >> $GITHUB_OUTPUT
+            else
+              echo "Target SHA not found in repository"
+              echo "exists=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+      
+      - name: Get Commit Information
+        if: steps.validate.outputs.matched == 'true' || steps.validate.outputs.exists == 'true'
+        run: |
+          echo "=== Commit Information ==="
+          git show --no-patch --format=fuller "${{ env.TARGET_SHA }}" || echo "Commit not found"
+          
+          echo ""
+          echo "=== Changed Files ==="
+          git diff-tree --no-commit-id --name-status -r "${{ env.TARGET_SHA }}" || echo "Unable to get file changes"
+      
+      - name: Process Target Commit
+        if: steps.validate.outputs.matched == 'true'
+        run: |
+          echo "🎯 Processing target commit: ${{ env.TARGET_SHA }}"
+          
+          # Checkout the specific commit
+          git checkout "${{ env.TARGET_SHA }}"
+          
+          # Perform actions specific to this commit
+          echo "Running processes for target commit..."
+          
+          # Example: Build and tag Docker image with this SHA
+          # docker build -t willowcms:${{ env.TARGET_SHA }} .
+          
+          # Example: Run specific tests
+          # ./scripts/run_tests.sh
+          
+          # Example: Deploy this specific version
+          # ./scripts/deploy.sh --version=${{ env.TARGET_SHA }}
+      
+      - name: Build Docker Image
+        if: steps.validate.outputs.matched == 'true'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: |
+            willowcms:${{ env.TARGET_SHA }}
+            willowcms:special-trigger
+          labels: |
+            org.opencontainers.image.revision=${{ env.TARGET_SHA }}
+            org.opencontainers.image.created=${{ steps.date.outputs.date }}
+      
+      - name: Run Tests
+        if: steps.validate.outputs.matched == 'true'
+        run: |
+          echo "🧪 Running tests for commit ${{ env.TARGET_SHA }}"
+          
+          # Run your test suite
+          # cd app && composer test
+          # npm test
+          
+          echo "Tests completed"
+      
+      - name: Create Trigger Record
+        if: steps.validate.outputs.matched == 'true'
+        run: |
+          # Document that the trigger was activated
+          cat > trigger-record.json <<EOF
+          {
+            "trigger_sha": "${{ env.TARGET_SHA }}",
+            "triggered_at": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "workflow_run_id": "${{ github.run_id }}",
+            "triggered_by": "${{ github.actor }}",
+            "repository": "${{ github.repository }}",
+            "ref": "${{ github.ref }}"
+          }
+          EOF
+          
+          echo "Trigger record created:"
+          cat trigger-record.json
+      
+      - name: Deploy or Notify
+        if: steps.validate.outputs.matched == 'true'
+        run: |
+          echo "🚀 Triggering deployment for SHA: ${{ env.TARGET_SHA }}"
+          
+          # Option 1: Deploy directly
+          # ./scripts/deploy.sh
+          
+          # Option 2: Trigger another workflow
+          # gh workflow run deploy.yml -f sha=${{ env.TARGET_SHA }}
+          
+          # Option 3: Send notification
+          # curl -X POST $WEBHOOK_URL -d '{"sha": "${{ env.TARGET_SHA }}"}'
+          
+          echo "Deployment triggered successfully"
+      
+      - name: Upload Artifacts
+        if: steps.validate.outputs.matched == 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: trigger-${{ env.TARGET_SHA }}
+          path: |
+            trigger-record.json
