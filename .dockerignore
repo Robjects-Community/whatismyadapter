@@ -1,0 +1,215 @@
+# Docker build context optimization and security
+# Exclude files not needed in container images
+
+# =============================================================================
+# Version Control and Development Files
+# =============================================================================
+.git
+.github
+.gitignore
+.gitattributes
+.gitmodules
+
+# =============================================================================
+# Documentation and Non-Runtime Files
+# =============================================================================
+docs
+*.md
+README*
+LICENSE*
+CHANGELOG*
+CONTRIBUTING*
+
+# Development and IDE files
+.vscode
+.idea
+.phpunit.cache
+.warp
+.warpindexingignore
+*.swp
+*.swo
+*~
+
+# =============================================================================
+# Build and Deployment Artifacts
+# =============================================================================
+node_modules
+npm-debug.log
+yarn-error.log
+.npm
+.yarn
+
+# Build outputs
+dist
+build
+out
+
+# =============================================================================
+# Environment and Configuration Files
+# =============================================================================
+# Secrets and sensitive configuration
+.env*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+.secrets/
+
+# Local configuration overrides
+config/app_local.php
+app/config/app_local.php
+*.local.*
+
+# =============================================================================
+# Cache and Temporary Files
+# =============================================================================
+# Application caches
+tmp/*
+temp/*
+.tmp
+.cache
+
+# Logs
+logs
+*.log
+log/
+app/logs/
+infrastructure/docker/logs/
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# =============================================================================
+# Backup and Archive Files
+# =============================================================================
+# Project backups
+.backups/
+backups/
+*.backup
+*.bak
+*.old
+*.orig
+
+# Deployment cleanup backups
+deployment-cleanup-backup-*/
+
+# Project-specific backup directories
+project_files_backups/
+project_mysql_backups/
+
+# Archive files
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# =============================================================================
+# Tools and Scripts (Selective Inclusion)
+# =============================================================================
+# Include only necessary tool directories for the image
+tools/backup/
+tools/ci/
+tools/oci/build-oci.sh
+tools/oci/README.md
+tools/maintenance/
+
+# Keep these tools directories (needed by Dockerfile):
+# tools/docker/
+# tools/entrypoint/
+# tools/healthcheck/
+
+# =============================================================================
+# Test and Development Dependencies
+# =============================================================================
+tests/
+test/
+spec/
+coverage/
+.nyc_output
+.coverage
+htmlcov/
+.pytest_cache
+.tox/
+.nox/
+
+# PHP testing
+phpunit.xml
+phpunit.xml.dist
+.phpunit.result.cache
+
+# =============================================================================
+# Runtime and Deployment Files
+# =============================================================================
+# Docker related
+docker-compose.override.yml
+docker-compose.*.yml
+!docker-compose.yml
+Dockerfile.*
+!Dockerfile
+
+# Kubernetes and orchestration
+k8s/
+kubernetes/
+helm/
+kustomize/
+
+# CI/CD
+.travis.yml
+.circleci/
+.jenkins/
+Jenkinsfile
+.gitlab-ci.yml
+azure-pipelines.yml
+
+# =============================================================================
+# Application-Specific Exclusions
+# =============================================================================
+# CakePHP specific
+app/tmp/*
+app/logs/*
+!app/tmp/.gitkeep
+!app/logs/.gitkeep
+
+# Storage and uploads (should be external volumes)
+storage/
+uploads/
+public/uploads/
+app/webroot/files/
+
+# Vendor directory (handled separately in multi-stage build)
+vendor/
+app/vendor/
+
+# Composer files (copied separately for better caching)
+composer.phar
+
+# =============================================================================
+# Security-Sensitive Files
+# =============================================================================
+# SSL certificates and keys
+*.crt
+*.cert
+*.ca-bundle
+ssl/
+certificates/
+
+# Database dumps and sensitive data
+*.sql
+*.db
+*.sqlite
+*.dump
+
+# Configuration with potential secrets
+config.json
+settings.json
+app.json

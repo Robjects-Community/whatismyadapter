@@ -1,0 +1,256 @@
+#
+# DigitalOcean App Platform Specification - WillowCMS Production
+# Deploy with: doctl apps create --spec tools/deploy/do-app-production.yaml
+#
+
+name: willowcms-production
+region: nyc1
+
+# Database dependencies (create separately via doctl or DO Console)
+databases:
+  - name: willowcms-mysql-production
+    engine: MYSQL
+    version: "8"
+    size: db-s-2vcpu-4gb  # Larger for production
+    num_nodes: 1
+    production: true
+    db_name: willowcms_production
+  - name: willowcms-redis-production
+    engine: REDIS
+    version: "7"
+    size: db-s-2vcpu-4gb  # Larger for production
+    num_nodes: 1
+    production: true
+
+# Services
+services:
+  # Main WillowCMS Web Application
+  - name: willowcms-web
+    source_dir: ./app
+    github:
+      repo: your-username/willow  # Update with your GitHub repo
+      branch: main  # Production uses main branch
+      deploy_on_push: false  # Manual deploys for production
+    
+    # Use PHP runtime (recommended over custom Dockerfile)
+    environment_slug: php
+    instance_count: 2  # Multiple instances for HA
+    instance_size_slug: basic-xs  # 1GB RAM, 1 vCPU
+    
+    # Build configuration
+    build_command: |
+      composer install --no-dev --optimize-autoloader
+      # If you have asset building: npm ci && npm run build
+    
+    # Health check
+    health_check:
+      http_path: /healthz
+      initial_delay_seconds: 90
+      period_seconds: 10
+      timeout_seconds: 5
+      success_threshold: 1
+      failure_threshold: 3
+    
+    # HTTP configuration
+    http_port: 80
+    routes:
+      - path: /
+    
+    # Post-deploy commands for migrations
+    run_command: |
+      heroku-php-nginx webroot/
+    
+    # Environment variables (non-secrets)
+    envs:
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: APP_NAME
+        value: WillowCMS
+      - key: APP_DEFAULT_TIMEZONE
+        value: America/Chicago
+      - key: LOG_DEBUG_LEVELS
+        value: error,critical,alert,emergency  # Minimal logging in prod
+      - key: LOG_ERROR_LEVELS
+        value: warning,error,critical,alert,emergency
+      - key: LOG_DEBUG_FILE
+        value: debug
+      - key: LOG_ERROR_FILE
+        value: error
+      - key: LOG_QUERIES_FILE
+        value: queries
+      - key: LOG_ADMIN_ACTIONS_FILE
+        value: bulk_actions
+      - key: TRUSTED_PROXIES
+        value: "*"  # Trust App Platform load balancer
+      - key: FORCE_HTTPS
+        value: "true"
+      - key: CACHE_DURATION
+        value: "3600"  # 1 hour cache
+        
+    # Secrets (create these separately via doctl or DO Console)
+    envs:
+      # Database connection (references managed database)
+      - key: DATABASE_URL
+        value: ${willowcms-mysql-production.DATABASE_URL}
+        type: SECRET
+      
+      # Redis connection (references managed Redis)
+      - key: REDIS_URL
+        value: ${willowcms-redis-production.REDIS_URL}
+        type: SECRET
+        
+      # Application secrets (set these manually)
+      - key: SECURITY_SALT
+        value: CHANGE_ME_32_CHAR_RANDOM_STRING_HERE_PROD
+        type: SECRET
+        
+      - key: OPENAI_API_KEY
+        value: YOUR_PRODUCTION_OPENAI_API_KEY_HERE
+        type: SECRET
+        
+      # Spaces configuration for file uploads
+      - key: SPACES_ENDPOINT
+        value: nyc3.digitaloceanspaces.com
+        
+      - key: SPACES_REGION
+        value: nyc3
+        
+      - key: SPACES_BUCKET
+        value: willowcms-production-uploads
+        
+      - key: SPACES_KEY
+        value: YOUR_PRODUCTION_SPACES_ACCESS_KEY
+        type: SECRET
+        
+      - key: SPACES_SECRET
+        value: YOUR_PRODUCTION_SPACES_SECRET_KEY
+        type: SECRET
+        
+      - key: SPACES_BASE_URL
+        value: https://willowcms-production-uploads.nyc3.digitaloceanspaces.com
+        
+      - key: SPACES_CDN_URL
+        value: https://cdn.yourdomain.com  # Optional CDN endpoint
+
+  # Background Queue Worker (Production)
+  - name: willowcms-worker
+    source_dir: ./app
+    github:
+      repo: your-username/willow  # Update with your GitHub repo
+      branch: main
+      deploy_on_push: false
+    
+    environment_slug: php
+    instance_count: 2  # Multiple workers for production
+    instance_size_slug: basic-xs
+    
+    build_command: composer install --no-dev --optimize-autoloader
+    run_command: bin/cake queue run --max-jobs=1000 --max-runtime=3600
+    
+    # Environment variables
+    envs:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        value: ${willowcms-mysql-production.DATABASE_URL}
+        type: SECRET
+      - key: REDIS_URL
+        value: ${willowcms-redis-production.REDIS_URL}
+        type: SECRET
+      - key: SECURITY_SALT
+        value: CHANGE_ME_32_CHAR_RANDOM_STRING_HERE_PROD
+        type: SECRET
+      - key: OPENAI_API_KEY
+        value: YOUR_PRODUCTION_OPENAI_API_KEY_HERE
+        type: SECRET
+
+# Scheduled Jobs
+jobs:
+  # Database backup job (daily)
+  - name: database-backup
+    source_dir: ./app
+    github:
+      repo: your-username/willow  # Update with your GitHub repo
+      branch: main
+    
+    environment_slug: php
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    
+    build_command: composer install --no-dev --optimize-autoloader
+    
+    # Run daily backup at 2 AM UTC
+    kind: CRON
+    schedule: "0 2 * * *"
+    run_command: tools/backup/backup-db-to-spaces.sh
+    
+    envs:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        value: ${willowcms-mysql-production.DATABASE_URL}
+        type: SECRET
+      - key: SPACES_KEY
+        value: YOUR_PRODUCTION_SPACES_ACCESS_KEY
+        type: SECRET
+      - key: SPACES_SECRET
+        value: YOUR_PRODUCTION_SPACES_SECRET_KEY
+        type: SECRET
+  
+  # Log integrity check (hourly)
+  - name: log-integrity-check
+    source_dir: ./app
+    github:
+      repo: your-username/willow
+      branch: main
+    
+    environment_slug: php
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    
+    build_command: composer install --no-dev --optimize-autoloader
+    
+    # Run hourly log verification
+    kind: CRON
+    schedule: "0 * * * *"
+    run_command: tools/security/verify-log-integrity.sh
+    
+    envs:
+      - key: APP_ENV
+        value: production
+      - key: SPACES_KEY
+        value: YOUR_PRODUCTION_SPACES_ACCESS_KEY
+        type: SECRET
+      - key: SPACES_SECRET
+        value: YOUR_PRODUCTION_SPACES_SECRET_KEY
+        type: SECRET
+
+# Domains (configure after app creation)
+domains:
+  - domain: yourdomain.com
+    type: PRIMARY
+    wildcard: false
+    certificate_id: ""  # Let DO generate SSL cert
+  - domain: www.yourdomain.com
+    type: ALIAS
+    wildcard: false
+    certificate_id: ""  # Let DO generate SSL cert
+
+# Features
+features:
+  - buildpack-stack=heroku-22
+
+# Production-level alerts
+alerts:
+  - rule: CPU_UTILIZATION
+    value: 70  # Lower threshold for production
+  - rule: MEM_UTILIZATION
+    value: 70  # Lower threshold for production
+  - rule: RESPONSE_TIME_95TH_PERCENTILE_5M
+    value: 2000  # 2 seconds max response time
+  - rule: RESPONSE_TIME_99TH_PERCENTILE_5M
+    value: 5000  # 5 seconds max for 99th percentile
+  - rule: ERROR_RATE_5M
+    value: 5  # Max 5% error rate

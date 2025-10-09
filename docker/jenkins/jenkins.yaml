@@ -22,7 +22,7 @@ jobs:
                   }
                   stage('Setup Configuration') {
                     steps {
-                      sh 'cp docker/php/cms_app_local.php config/app_local.php'
+                      sh 'cp docker/willowcms/config/app/cms_app_local.php config/app_local.php'
                     }
                   }
                   stage('Install Composer Dependencies') {

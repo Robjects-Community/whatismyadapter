@@ -1,139 +1,146 @@
 services:
   willowcms:
-    env_file:
-      - ./config/.env
-    image: docker.io/garzarobmdocker/willowcms:latest
-    build:
-      context: .
-      dockerfile: docker/willowcms/Dockerfile
-      args:
-        UID: ${UID:-1000} # Test
-        GID: ${GID:-1000}
+    platform: linux/amd64
+    image: ${WILLOWCMS_IMAGE:-garzarobmdocker/willowcms:pre-willowcms-beta}
     ports:
-      - '8080:80'
+      - ${WILLOW_HTTP_PORT:-8080}:80
     volumes:
-      - .:/var/www/html/
+      - ./app:/var/www/html/
       - ./docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
-      - ./docker/willowcms/config/nginx/logs:/var/log/nginx/
+      - ./docker/logs/willowcms/nginx:/var/log/nginx/
+      - ./docker/logs/willowcms/app:/var/www/html/logs/
     environment:
-      - APP_NAME=${APP_NAME}
-      - DEBUG=${DEBUG}
-      - APP_ENCODING=${APP_ENCODING}
-      - APP_DEFAULT_LOCALE=${APP_DEFAULT_LOCALE}
-      - APP_DEFAULT_TIMEZONE=${APP_DEFAULT_TIMEZONE}
-      - APP_FULL_BASE_URL=${APP_FULL_BASE_URL}
-      - SECURITY_SALT=${SECURITY_SALT}
-      - DB_HOST=${DB_HOST}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_PORT=${DB_PORT}
-      - TEST_DB_HOST=${TEST_DB_HOST}
-      - TEST_DB_USERNAME=${TEST_DB_USERNAME}
-      - TEST_DB_PASSWORD=${TEST_DB_PASSWORD}
-      - TEST_DB_DATABASE=${TEST_DB_DATABASE}
-      - TEST_DB_PORT=${TEST_DB_PORT}
-      - EMAIL_HOST=${EMAIL_HOST}
-      - EMAIL_PORT=${EMAIL_PORT}
-      - EMAIL_TIMEOUT=${EMAIL_TIMEOUT}
-      - EMAIL_USERNAME=${EMAIL_USERNAME}
-      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
-      - EMAIL_REPLY=${EMAIL_REPLY}
-      - EMAIL_NOREPLY=${EMAIL_NOREPLY}
-      - REDIS_USERNAME=${REDIS_USERNAME}
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-      - REDIS_HOST=${REDIS_HOST}
-      - REDIS_PORT=${REDIS_PORT}
-      - REDIS_DATABASE=${REDIS_DATABASE}
-      - REDIS_URL=${REDIS_URL}
-      - REDIS_TEST_URL=${REDIS_TEST_URL}
-      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
-      - TRANSLATE_API_KEY=${TRANSLATE_API_KEY}
-      - QUEUE_DEFAULT_URL=${QUEUE_DEFAULT_URL}
-      - QUEUE_TEST_URL=${QUEUE_TEST_URL}
-      - WILLOW_ADMIN_USERNAME=${WILLOW_ADMIN_USERNAME}
-      - WILLOW_ADMIN_PASSWORD=${WILLOW_ADMIN_PASSWORD}
-      - WILLOW_ADMIN_EMAIL=${WILLOW_ADMIN_EMAIL}
-      - EXPERIMENTAL_TESTS=${EXPERIMENTAL_TESTS}
-
-  mysql:
+      DB_HOST: mysql
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      TEST_DB_HOST: mysql
+      REDIS_HOST: redis
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      LOG_DEBUG_PATH: ${LOG_DEBUG_PATH:-/var/www/html/logs}
+      LOG_ERROR_PATH: ${LOG_ERROR_PATH:-/var/www/html/logs}
+      LOG_QUERIES_PATH: ${LOG_QUERIES_PATH:-/var/www/html/logs}
+      LOG_ADMIN_ACTIONS_PATH: ${LOG_ADMIN_ACTIONS_PATH:-/var/www/html/logs}
+      LOG_DEBUG_FILE: ${LOG_DEBUG_FILE:-debug}
+      LOG_ERROR_FILE: ${LOG_ERROR_FILE:-error}
+      LOG_QUERIES_FILE: ${LOG_QUERIES_FILE:-queries}
+      LOG_ADMIN_ACTIONS_FILE: ${LOG_ADMIN_ACTIONS_FILE:-bulk_actions}
+      LOG_DEBUG_LEVELS: ${LOG_DEBUG_LEVELS:-notice,info,debug}
+      LOG_ERROR_LEVELS: ${LOG_ERROR_LEVELS:-warning,error,critical,alert,emergency}
+    depends_on:
+      redis:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
     env_file:
-      - ./config/.env
-    image: mysql:8.4.3
+      - ./.env
+
+  redis:
+    image: redis:${REDIS_TAG:-7.2-alpine}
     platform: linux/amd64
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_DATABASE=${DB_DATABASE}
-    ports:
-      - "3310:3306"
+      TZ: ${APP_DEFAULT_TIMEZONE:-America/Chicago}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_APPENDONLY: ${REDIS_APPENDONLY:-yes}
+      REDIS_SAVE: ${REDIS_SAVE:-"900 1 300 10 60 10000"}
+      REDIS_DATA_DIR: /data
+    healthcheck:
+      test: ["CMD-SHELL", 'redis-cli -a "$REDIS_PASSWORD" ping | grep PONG']
+      interval: ${REDIS_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${REDIS_HEALTHCHECK_TIMEOUT:-3s}
+      retries: ${REDIS_HEALTHCHECK_RETRIES:-5}
     volumes:
-      - ./docker/mysql/data:/var/lib/mysql
+      - ${REDIS_DATA_VOLUME:-redis-data:/data}
+    restart: on-failure:5
+    command: >
+      redis-server
+      --bind 0.0.0.0
+      --port 6379
+      --dir /data
+      --requirepass ${REDIS_PASSWORD:-}
+      --appendonly yes
+      --appendfsync everysec
+      --save 900 1
+      --save 300 10
+      --save 60 10000
+      --maxmemory-policy allkeys-lru
+      --tcp-keepalive 300
+      --loglevel notice
+    env_file:
+      - ./.env
+
+  mysql:
+    platform: linux/amd64
+    image: mysql:${MYSQL_IMAGE_TAG:-8.0}
+    ports:
+      - ${MYSQL_PORT:-3310}:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_INNODB_LOG_FILE_SIZE: ${MYSQL_INNODB_LOG_FILE_SIZE:-256M}
+      MYSQL_INNODB_BUFFER_POOL_SIZE: ${MYSQL_INNODB_BUFFER_POOL_SIZE:-256M}
+    env_file:
+      - ./.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    command: "--default-authentication-plugin=mysql_native_password --log-error=/var/log/mysql/error.log --slow-query-log=1 --slow-query-log-file=/var/log/mysql/slow.log --general-log=1 --general-log-file=/var/log/mysql/query.log"
 
   phpmyadmin:
+    image: phpmyadmin:${PHPMYADMIN_IMAGE_TAG:-latest}
+    platform: linux/amd64
+    depends_on:
+      - mysql
+    ports:
+      - ${PMA_HTTP_PORT:-8082}:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=${PMA_USER:-root}
+      - PMA_PASSWORD=${PMA_PASSWORD:-password}
+      - UPLOAD_LIMIT=${UPLOAD_LIMIT:-300M}
     env_file:
-      - ./config/.env
-    image: phpmyadmin
-    ports:
-      - '8082:80'
-    environment:
-      - PMA_HOST=${PMA_HOST}
-      - PMA_USER=${PMA_USER}
-      - PMA_PASSWORD=${PMA_PASSWORD}
-      - UPLOAD_LIMIT=${UPLOAD_LIMIT}
-
-  jenkins:
-    image: docker.io/garzarobmdocker/jenkins:latest
-    build:
-      context: .
-      dockerfile: docker/jenkins/Dockerfile
-    privileged: true
-    user: root
-    ports:
-      - '8081:8080'
-      - '50000:50000'
-    volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
-    environment:
-      - JAVA_OPTS=${JAVA_OPTS}
-
+      - ./.env
 
   mailpit:
-    image: axllent/mailpit:latest
+    image: axllent/mailpit:${MAILPIT_IMAGE_TAG:-latest}
+    platform: linux/amd64
     ports:
-      - '1125:1025'
-      - '8025:8025'
+      - ${MAILPIT_SMTP_PORT:-1125}:1025
+      - ${MAILPIT_HTTP_PORT:-8025}:8025
     volumes:
-      - mailpit_data:/data
-    env_file:
-      - ./config/.env
+      - ./docker/mailpit/data:/data
+      - ./docker/logs/mailpit:/var/log/mailpit
     environment:
-      - MP_MAX_MESSAGES=${MP_MAX_MESSAGES}
-      - MP_DATABASE=${MP_DATABASE}
-      - MP_SMTP_AUTH_ACCEPT_ANY=${MP_SMTP_AUTH_ACCEPT_ANY}
-      - MP_SMTP_AUTH_ALLOW_INSECURE=${MP_SMTP_AUTH_ALLOW_INSECURE}
+      - MP_MAX_MESSAGES=${MP_MAX_MESSAGES:-5000}
+      - MP_DATABASE=${MP_DATABASE:-/data/mailpit.db}
+      - MP_SMTP_AUTH_ACCEPT_ANY=${MP_SMTP_AUTH_ACCEPT_ANY:-1}
+      - MP_SMTP_AUTH_ALLOW_INSECURE=${MP_SMTP_AUTH_ALLOW_INSECURE:-1}
 
   redis-commander:
-    image: rediscommander/redis-commander:latest
-    ports:
-      - '8084:8081'
-    environment:
-      - REDIS_HOST=${REDIS_COMMANDER_HOST}
-      - REDIS_PORT=${REDIS_COMMANDER_PORT}
-      - REDIS_PASSWORD=${REDIS_COMMANDER_PASSWORD}
-      - REDIS_USERNAME=${REDIS_COMMANDER_USERNAME}
-      - HTTP_USER=${HTTP_USER}
-      - HTTP_PASSWORD=${HTTP_PASSWORD}
+    image: rediscommander/redis-commander:${REDIS_COMMANDER_IMAGE_TAG:-latest}
+    platform: linux/amd64
     depends_on:
-      - willowcms
+      redis:
+        condition: service_healthy
+    ports:
+      - ${REDIS_COMMANDER_HTTP_PORT:-8084}:8081
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - HTTP_USER=${REDIS_COMMANDER_USERNAME:-root}
+      - HTTP_PASSWORD=${REDIS_COMMANDER_PASSWORD:-root}
 
 volumes:
-  # mysql_data:
-  redis_data:
-  rabbitmq_data:
-  jenkins_home:
-  mailpit_data:
+  mysql_data: null
+  redis-data: null
+  rabbitmq_data: null
+  mailpit_data: null

@@ -1,0 +1,220 @@
+#
+# DigitalOcean App Platform Specification - WillowCMS Staging
+# Deploy with: doctl apps create --spec tools/deploy/do-app-staging.yaml
+#
+
+name: willowcms-staging
+region: nyc1
+
+# Database dependencies (create separately via doctl or DO Console)
+databases:
+  - name: willowcms-mysql-staging
+    engine: MYSQL
+    version: "8"
+    size: db-s-1vcpu-1gb
+    num_nodes: 1
+    production: false
+  - name: willowcms-redis-staging  
+    engine: REDIS
+    version: "7"
+    size: db-s-1vcpu-1gb
+    num_nodes: 1
+    production: false
+
+# Services
+services:
+  # Main WillowCMS Web Application
+  - name: willowcms-web
+    source_dir: ./app
+    github:
+      repo: Robjects-Community/WhatIsMyAdapter  # Update with your GitHub repo
+      branch: develop
+      deploy_on_push: true
+    
+    # Use PHP runtime (recommended over custom Dockerfile)
+    environment_slug: php
+    instance_count: 1
+    instance_size_slug: basic-xxs  # 512MB RAM, 1 vCPU - adjust as needed
+    
+    # Build configuration
+    build_command: |
+      composer install --no-dev --optimize-autoloader
+      # If you have asset building: npm ci && npm run build
+    
+    # Health check
+    health_check:
+      http_path: /healthz
+      initial_delay_seconds: 60
+      period_seconds: 10
+      timeout_seconds: 5
+      success_threshold: 1
+      failure_threshold: 3
+    
+    # HTTP configuration
+    http_port: 80
+    routes:
+      - path: /
+    
+    # Post-deploy commands
+    run_command: heroku-php-nginx webroot/
+    
+    # Environment variables (non-secrets)
+    envs:
+      - key: APP_ENV
+        value: staging
+      - key: DEBUG  
+        value: "false"
+      - key: APP_NAME
+        value: WillowCMS
+      - key: APP_DEFAULT_TIMEZONE
+        value: America/Chicago
+      - key: LOG_DEBUG_LEVELS
+        value: notice,info,debug
+      - key: LOG_ERROR_LEVELS
+        value: warning,error,critical,alert,emergency
+      - key: LOG_DEBUG_FILE
+        value: debug
+      - key: LOG_ERROR_FILE
+        value: error
+      - key: LOG_QUERIES_FILE
+        value: queries
+      - key: LOG_ADMIN_ACTIONS_FILE
+        value: bulk_actions
+      - key: TRUSTED_PROXIES
+        value: "*"  # Trust App Platform load balancer
+      - key: FORCE_HTTPS
+        value: "true"
+        
+    # Secrets (create these separately via doctl or DO Console)
+    # doctl apps create-deployment --app-id <app-id> --image <image>
+    envs:
+      # Database connection (references managed database)
+      - key: DATABASE_URL
+        value: ${willowcms-mysql-staging.DATABASE_URL}
+        type: SECRET
+      
+      # Redis connection (references managed Redis)  
+      - key: REDIS_URL
+        value: ${willowcms-redis-staging.REDIS_URL}
+        type: SECRET
+        
+      # Application secrets (set these manually)
+      - key: SECURITY_SALT
+        value: CHANGE_ME_32_CHAR_RANDOM_STRING_HERE
+        type: SECRET
+        
+      - key: OPENAI_API_KEY
+        value: YOUR_OPENAI_API_KEY_HERE
+        type: SECRET
+        
+      # Spaces configuration for file uploads
+      - key: SPACES_ENDPOINT
+        value: nyc3.digitaloceanspaces.com
+        
+      - key: SPACES_REGION  
+        value: nyc3
+        
+      - key: SPACES_BUCKET
+        value: willowcms-staging-uploads
+        
+      - key: SPACES_KEY
+        value: YOUR_SPACES_ACCESS_KEY
+        type: SECRET
+        
+      - key: SPACES_SECRET
+        value: YOUR_SPACES_SECRET_KEY  
+        type: SECRET
+        
+      - key: SPACES_BASE_URL
+        value: https://willowcms-staging-uploads.nyc3.digitaloceanspaces.com
+
+  # Background Queue Worker (Optional)
+  - name: willowcms-worker
+    source_dir: ./app
+    github:
+      repo: your-username/willow  # Update with your GitHub repo
+      branch: develop
+      deploy_on_push: true
+    
+    environment_slug: php
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    
+    build_command: composer install --no-dev --optimize-autoloader
+    run_command: bin/cake queue run
+    
+    # Inherit environment from web service
+    envs:
+      - key: APP_ENV
+        value: staging
+      - key: DATABASE_URL
+        value: ${willowcms-mysql-staging.DATABASE_URL}
+        type: SECRET
+      - key: REDIS_URL
+        value: ${willowcms-redis-staging.REDIS_URL}
+        type: SECRET
+      - key: SECURITY_SALT
+        value: CHANGE_ME_32_CHAR_RANDOM_STRING_HERE
+        type: SECRET
+
+# Scheduled Jobs
+jobs:
+  # Database backup job
+  - name: database-backup
+    source_dir: ./app
+    github:
+      repo: your-username/willow  # Update with your GitHub repo  
+      branch: develop
+    
+    environment_slug: php
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    
+    build_command: composer install --no-dev --optimize-autoloader
+    
+    # Run daily backup at 2 AM UTC
+    kind: CRON
+    schedule: "0 2 * * *"
+    run_command: tools/backup/backup-db-to-spaces.sh
+    
+    envs:
+      - key: APP_ENV
+        value: staging
+      - key: DATABASE_URL
+        value: ${willowcms-mysql-staging.DATABASE_URL}
+        type: SECRET
+      - key: SPACES_KEY
+        value: YOUR_SPACES_ACCESS_KEY
+        type: SECRET
+      - key: SPACES_SECRET
+        value: YOUR_SPACES_SECRET_KEY
+        type: SECRET
+
+# Static sites (if you have frontend assets)
+# static_sites:
+#   - name: willowcms-assets
+#     source_dir: ./app/webroot
+#     github:
+#       repo: your-username/willow
+#       branch: develop
+#     build_command: echo "Static assets ready"
+#     output_dir: /
+
+# Domains (configure after app creation)
+domains:
+  - domain: willowcms-staging.yourdomain.com
+    type: PRIMARY
+    wildcard: false
+    certificate_id: ""  # Let DO generate SSL cert
+
+# Features
+features:
+  - buildpack-stack=heroku-22
+
+alerts:
+  - rule: CPU_UTILIZATION
+    value: 80
+  - rule: MEM_UTILIZATION  
+    value: 80
+  - rule: RESPONSE_TIME_95TH_PERCENTILE_5M
+    value: 5000  # 5 seconds

@@ -1,0 +1,744 @@
+# Deploy WillowCMS Static Sites to GitHub Pages using Docker Compose
+name: Deploy to GitHub Pages (Docker)
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: [main]
+    paths:
+      - 'app/plugins/DefaultTheme/**'
+      - 'docs/**'
+      - '.github/workflows/deploy-pages-docker.yml'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        description: 'Run the build with tmate debugging'
+        type: boolean
+        required: false
+        default: false
+      skip_content_export:
+        description: 'Skip CakePHP content export and use cached version'
+        type: boolean
+        required: false
+        default: false
+
+  # Daily rebuild at midnight UTC
+  schedule:
+    - cron: '0 0 * * *'
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Job 1: Export content using Docker Compose
+  export-and-build:
+    runs-on: ubuntu-22.04
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup tmate session
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+
+      - name: Create .env file
+        run: |
+          # Copy example env and set required values
+          cp .env.example .env
+          cp stack.env.example stack.env 2>/dev/null || true
+          
+          # Update .env with CI-specific values
+          cat >> .env << 'EOF'
+          
+          # CI/CD Specific Settings
+          WILLOW_HTTP_PORT=8080
+          MYSQL_PORT=3310
+          PMA_HTTP_PORT=8082
+          MAILPIT_HTTP_PORT=8025
+          REDIS_COMMANDER_HTTP_PORT=8084
+          WILLOWCMS_IMAGE=garzarobmdocker/willowcms:pre-willowcms-beta
+          EOF
+
+      - name: Start Docker Compose services
+        if: ${{ !inputs.skip_content_export }}
+        run: |
+          # Start all required services
+          docker compose up -d willowcms mysql redis
+          
+          # Wait for services to be healthy
+          echo "Waiting for MySQL to be ready..."
+          for i in {1..30}; do
+            if docker compose exec -T mysql mysqladmin ping -h localhost -u root -p${MYSQL_ROOT_PASSWORD:-password} 2>/dev/null; then
+              echo "MySQL is ready!"
+              break
+            fi
+            echo "Waiting for MySQL... ($i/30)"
+            sleep 5
+          done
+          
+          # Wait for WillowCMS to be ready
+          echo "Waiting for WillowCMS to be ready..."
+          for i in {1..30}; do
+            if curl -f http://localhost:8080 > /dev/null 2>&1; then
+              echo "WillowCMS is ready!"
+              break
+            fi
+            echo "Waiting for WillowCMS... ($i/30)"
+            sleep 5
+          done
+
+      - name: Run database migrations
+        if: ${{ !inputs.skip_content_export }}
+        run: |
+          docker compose exec -T willowcms bin/cake migrations migrate
+          
+      - name: Import sample data
+        if: ${{ !inputs.skip_content_export }}
+        run: |
+          # Import default data
+          docker compose exec -T willowcms bin/cake default_data_import aiprompts || true
+          docker compose exec -T willowcms bin/cake default_data_import email_templates || true
+          docker compose exec -T willowcms bin/cake default_data_import articles || true
+          
+          # Create admin user for testing
+          docker compose exec -T willowcms bin/cake create_user \
+            -u admin \
+            -p password \
+            -e admin@test.com \
+            -a 1 || true
+
+      - name: Create export commands
+        run: |
+          # Create the export commands inside the container
+          mkdir -p app/src/Command
+          
+          # Create ExportBlogCommand.php
+          cat > app/src/Command/ExportBlogCommand.php << 'EOF'
+          <?php
+          namespace App\Command;
+          
+          use Cake\Console\Arguments;
+          use Cake\Console\Command;
+          use Cake\Console\ConsoleIo;
+          
+          class ExportBlogCommand extends Command
+          {
+              public function execute(Arguments $args, ConsoleIo $io)
+              {
+                  $outputDir = $args->getOption('output') ?? 'exported/blog';
+                  $format = $args->getOption('format') ?? 'jekyll';
+                  $limit = $args->getOption('limit') ?? 50;
+                  
+                  $io->out("Exporting blog articles to $outputDir...");
+                  
+                  // Create output directory
+                  if (!is_dir($outputDir)) {
+                      mkdir($outputDir, 0777, true);
+                  }
+                  
+                  // Load articles
+                  $articlesTable = $this->fetchTable('Articles');
+                  $query = $articlesTable->find('all')
+                      ->where(['is_published' => true])
+                      ->limit($limit)
+                      ->order(['created' => 'DESC']);
+                  
+                  $count = 0;
+                  foreach ($query as $article) {
+                      $filename = date('Y-m-d', strtotime($article->created)) . '-' . $article->slug . '.md';
+                      $filepath = $outputDir . '/' . $filename;
+                      
+                      // Generate Jekyll front matter
+                      $content = "---\n";
+                      $content .= "layout: post\n";
+                      $content .= "title: \"" . addslashes($article->title) . "\"\n";
+                      $content .= "date: " . $article->created->format('Y-m-d H:i:s O') . "\n";
+                      $content .= "categories: blog\n";
+                      $content .= "tags: [" . implode(', ', $article->tags ?? []) . "]\n";
+                      $content .= "excerpt: \"" . addslashes($article->summary ?? '') . "\"\n";
+                      $content .= "---\n\n";
+                      $content .= $article->content;
+                      
+                      file_put_contents($filepath, $content);
+                      $count++;
+                      $io->success("Exported: $filename");
+                  }
+                  
+                  $io->out("Exported $count articles to $outputDir");
+                  return static::CODE_SUCCESS;
+              }
+              
+              protected function buildOptionParser($parser)
+              {
+                  $parser->addOption('output', [
+                      'help' => 'Output directory',
+                      'default' => 'exported/blog'
+                  ]);
+                  $parser->addOption('format', [
+                      'help' => 'Export format (jekyll, hugo, markdown)',
+                      'default' => 'jekyll'
+                  ]);
+                  $parser->addOption('limit', [
+                      'help' => 'Maximum number of articles to export',
+                      'default' => 50
+                  ]);
+                  return $parser;
+              }
+          }
+          EOF
+          
+          # Create ExportPagesCommand.php
+          cat > app/src/Command/ExportPagesCommand.php << 'EOF'
+          <?php
+          namespace App\Command;
+          
+          use Cake\Console\Arguments;
+          use Cake\Console\Command;
+          use Cake\Console\ConsoleIo;
+          use Cake\View\View;
+          
+          class ExportPagesCommand extends Command
+          {
+              public function execute(Arguments $args, ConsoleIo $io)
+              {
+                  $outputDir = $args->getOption('output') ?? 'exported/pages';
+                  $theme = $args->getOption('theme') ?? 'DefaultTheme';
+                  
+                  $io->out("Exporting pages from $theme to $outputDir...");
+                  
+                  // Create output directory
+                  if (!is_dir($outputDir)) {
+                      mkdir($outputDir, 0777, true);
+                  }
+                  
+                  // Export specific DefaultTheme pages
+                  $pages = [
+                      'about_author' => 'About the Author',
+                      'hire_me' => 'Hire Me',
+                      'follow_me' => 'Follow Me',
+                      'github' => 'GitHub Projects'
+                  ];
+                  
+                  foreach ($pages as $slug => $title) {
+                      $content = $this->renderPage($slug, $title, $theme);
+                      $filename = $slug . '.html';
+                      $filepath = $outputDir . '/' . $filename;
+                      
+                      file_put_contents($filepath, $content);
+                      $io->success("Exported: $filename");
+                  }
+                  
+                  $io->out("Exported " . count($pages) . " pages to $outputDir");
+                  return static::CODE_SUCCESS;
+              }
+              
+              private function renderPage($slug, $title, $theme)
+              {
+                  // Simple HTML template
+                  $html = <<<HTML
+                  <!DOCTYPE html>
+                  <html lang="en">
+                  <head>
+                      <meta charset="UTF-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                      <title>$title - WillowCMS</title>
+                      <link rel="stylesheet" href="../assets/css/style.css">
+                  </head>
+                  <body>
+                      <header>
+                          <nav>
+                              <a href="index.html">Home</a>
+                              <a href="about_author.html">About</a>
+                              <a href="hire_me.html">Hire Me</a>
+                              <a href="follow_me.html">Connect</a>
+                              <a href="github.html">GitHub</a>
+                          </nav>
+                      </header>
+                      <main>
+                          <h1>$title</h1>
+                          <div class="content">
+                              <!-- Content would be loaded from database/templates here -->
+                              <p>This is the $title page exported from WillowCMS.</p>
+                          </div>
+                      </main>
+                      <footer>
+                          <p>&copy; 2025 WillowCMS. All rights reserved.</p>
+                      </footer>
+                  </body>
+                  </html>
+                  HTML;
+                  
+                  return $html;
+              }
+              
+              protected function buildOptionParser($parser)
+              {
+                  $parser->addOption('output', [
+                      'help' => 'Output directory',
+                      'default' => 'exported/pages'
+                  ]);
+                  $parser->addOption('theme', [
+                      'help' => 'Theme to export from',
+                      'default' => 'DefaultTheme'
+                  ]);
+                  return $parser;
+              }
+          }
+          EOF
+
+      - name: Export content from WillowCMS
+        if: ${{ !inputs.skip_content_export }}
+        run: |
+          # Create export directories
+          mkdir -p _static/{blog,pages,products,api,assets}
+          
+          # Export blog articles
+          docker compose exec -T willowcms bin/cake export_blog \
+            --output=/var/www/html/exported/blog \
+            --format=jekyll \
+            --limit=50
+          
+          # Export static pages
+          docker compose exec -T willowcms bin/cake export_pages \
+            --output=/var/www/html/exported/pages \
+            --theme=DefaultTheme
+          
+          # Copy exported content from container
+          docker cp $(docker compose ps -q willowcms):/var/www/html/exported/blog/. _static/blog/
+          docker cp $(docker compose ps -q willowcms):/var/www/html/exported/pages/. _static/pages/
+          
+          # Copy DefaultTheme assets
+          docker cp $(docker compose ps -q willowcms):/var/www/html/plugins/DefaultTheme/webroot/. _static/assets/
+
+      - name: Setup Ruby for Jekyll
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Setup Python for MkDocs
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install documentation tools
+        run: |
+          # Install MkDocs
+          pip install mkdocs mkdocs-material mkdocs-minify-plugin
+          
+          # Setup Jekyll
+          cd _static/blog
+          cat > Gemfile << 'EOF'
+          source "https://rubygems.org"
+          gem "jekyll", "~> 4.3"
+          gem "minima"
+          gem "jekyll-feed"
+          gem "jekyll-sitemap"
+          gem "jekyll-seo-tag"
+          EOF
+          bundle install
+
+      - name: Create MkDocs configuration
+        run: |
+          mkdir -p docs
+          cat > docs/mkdocs.yml << 'EOF'
+          site_name: WillowCMS Documentation
+          site_url: https://${{ github.repository_owner }}.github.io/willow/docs
+          theme:
+            name: material
+            palette:
+              primary: green
+              accent: light green
+            features:
+              - navigation.tabs
+              - navigation.sections
+              - navigation.expand
+              - search.highlight
+          plugins:
+            - search
+            - minify:
+                minify_html: true
+          nav:
+            - Home: index.md
+            - Installation:
+                - Quick Start: installation/quickstart.md
+                - Docker Setup: installation/docker.md
+                - Configuration: installation/configuration.md
+            - DefaultTheme:
+                - Overview: theme/overview.md
+                - Templates: theme/templates.md
+                - Customization: theme/customization.md
+            - API:
+                - REST API: api/rest.md
+                - Authentication: api/auth.md
+            - Deployment:
+                - GitHub Pages: deployment/github-pages.md
+                - DigitalOcean: deployment/digitalocean.md
+                - Portainer: deployment/portainer.md
+          EOF
+          
+          # Create basic documentation structure
+          mkdir -p docs/{installation,theme,api,deployment}
+          echo "# WillowCMS Documentation" > docs/index.md
+          echo "## Quick Start Guide" > docs/installation/quickstart.md
+          echo "## Docker Setup" > docs/installation/docker.md
+          echo "## DefaultTheme Overview" > docs/theme/overview.md
+
+      - name: Build documentation site
+        run: |
+          cd docs
+          mkdocs build --site-dir=../_site/docs
+
+      - name: Build Jekyll blog
+        run: |
+          cd _static/blog
+          
+          # Create Jekyll config
+          cat > _config.yml << 'EOF'
+          title: WillowCMS Blog
+          description: Articles and tutorials from WillowCMS
+          baseurl: "/willow/blog"
+          url: "https://${{ github.repository_owner }}.github.io"
+          theme: minima
+          plugins:
+            - jekyll-feed
+            - jekyll-sitemap
+            - jekyll-seo-tag
+          EOF
+          
+          # Build Jekyll site
+          bundle exec jekyll build --destination=../../_site/blog
+
+      - name: Build marketing pages
+        run: |
+          # Create main site structure
+          mkdir -p _site
+          cp -r _static/pages/* _site/
+          cp -r _static/assets _site/
+          
+          # Create main landing page
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>WillowCMS - Modern CakePHP Content Management</title>
+              <style>
+                  * { margin: 0; padding: 0; box-sizing: border-box; }
+                  body { 
+                      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                      line-height: 1.6;
+                      color: #333;
+                  }
+                  header {
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      color: white;
+                      padding: 2rem 0;
+                      text-align: center;
+                  }
+                  nav {
+                      background: #333;
+                      padding: 1rem;
+                      text-align: center;
+                  }
+                  nav a {
+                      color: white;
+                      text-decoration: none;
+                      padding: 0 1rem;
+                      display: inline-block;
+                  }
+                  nav a:hover {
+                      color: #667eea;
+                  }
+                  main {
+                      max-width: 1200px;
+                      margin: 2rem auto;
+                      padding: 0 2rem;
+                  }
+                  .hero {
+                      text-align: center;
+                      padding: 4rem 0;
+                  }
+                  .hero h1 {
+                      font-size: 3rem;
+                      margin-bottom: 1rem;
+                  }
+                  .hero p {
+                      font-size: 1.2rem;
+                      color: #666;
+                      margin-bottom: 2rem;
+                  }
+                  .features {
+                      display: grid;
+                      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                      gap: 2rem;
+                      margin: 3rem 0;
+                  }
+                  .feature {
+                      padding: 2rem;
+                      border-radius: 8px;
+                      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                  }
+                  .feature h3 {
+                      color: #667eea;
+                      margin-bottom: 1rem;
+                  }
+                  .cta {
+                      background: #667eea;
+                      color: white;
+                      padding: 1rem 2rem;
+                      border-radius: 5px;
+                      text-decoration: none;
+                      display: inline-block;
+                      margin: 1rem;
+                  }
+                  .cta:hover {
+                      background: #764ba2;
+                  }
+                  footer {
+                      background: #333;
+                      color: white;
+                      text-align: center;
+                      padding: 2rem;
+                      margin-top: 4rem;
+                  }
+              </style>
+          </head>
+          <body>
+              <header>
+                  <h1>🌳 WillowCMS</h1>
+                  <p>A Modern CakePHP Content Management System</p>
+              </header>
+              
+              <nav>
+                  <a href="/">Home</a>
+                  <a href="/blog/">Blog</a>
+                  <a href="/docs/">Documentation</a>
+                  <a href="/api/">API</a>
+                  <a href="about_author.html">About</a>
+                  <a href="hire_me.html">Hire Me</a>
+                  <a href="follow_me.html">Connect</a>
+                  <a href="github.html">GitHub</a>
+              </nav>
+              
+              <main>
+                  <div class="hero">
+                      <h1>Welcome to WillowCMS</h1>
+                      <p>Build powerful, scalable content management solutions with CakePHP 5.x</p>
+                      <a href="/docs/" class="cta">Get Started</a>
+                      <a href="https://github.com/${{ github.repository }}" class="cta">View on GitHub</a>
+                  </div>
+                  
+                  <div class="features">
+                      <div class="feature">
+                          <h3>🚀 DefaultTheme Ready</h3>
+                          <p>Beautiful, responsive theme out of the box with customizable templates for articles, products, and pages.</p>
+                      </div>
+                      <div class="feature">
+                          <h3>🐳 Docker Powered</h3>
+                          <p>Full Docker Compose setup with MySQL, Redis, PHPMyAdmin, and Mailpit for easy development and deployment.</p>
+                      </div>
+                      <div class="feature">
+                          <h3>📱 Mobile First</h3>
+                          <p>Responsive design that looks great on all devices with progressive enhancement.</p>
+                      </div>
+                      <div class="feature">
+                          <h3>🔌 API Ready</h3>
+                          <p>RESTful API endpoints for headless CMS operations and third-party integrations.</p>
+                      </div>
+                      <div class="feature">
+                          <h3>🎨 Customizable</h3>
+                          <p>Easily extend with plugins, custom themes, and your own business logic.</p>
+                      </div>
+                      <div class="feature">
+                          <h3>⚡ Performance</h3>
+                          <p>Redis caching, optimized queries, and efficient asset management for blazing fast performance.</p>
+                      </div>
+                  </div>
+              </main>
+              
+              <footer>
+                  <p>&copy; 2025 WillowCMS. Built with ❤️ using CakePHP</p>
+                  <p>
+                      <a href="https://github.com/${{ github.repository }}" style="color: #667eea;">GitHub</a> |
+                      <a href="/docs/" style="color: #667eea;">Documentation</a> |
+                      <a href="/blog/" style="color: #667eea;">Blog</a>
+                  </p>
+              </footer>
+          </body>
+          </html>
+          EOF
+
+      - name: Generate API documentation
+        run: |
+          mkdir -p _site/api
+          
+          # Create OpenAPI spec from WillowCMS
+          cat > _site/api/openapi.json << 'EOF'
+          {
+            "openapi": "3.0.0",
+            "info": {
+              "title": "WillowCMS API",
+              "version": "1.0.0",
+              "description": "RESTful API for WillowCMS"
+            },
+            "servers": [
+              {
+                "url": "https://api.willowcms.com/v1",
+                "description": "Production API"
+              }
+            ],
+            "paths": {
+              "/articles": {
+                "get": {
+                  "summary": "List all articles",
+                  "tags": ["Articles"],
+                  "responses": {
+                    "200": {
+                      "description": "Successful response",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Article"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "/pages": {
+                "get": {
+                  "summary": "List all pages",
+                  "tags": ["Pages"],
+                  "responses": {
+                    "200": {
+                      "description": "Successful response"
+                    }
+                  }
+                }
+              }
+            },
+            "components": {
+              "schemas": {
+                "Article": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer" },
+                    "title": { "type": "string" },
+                    "content": { "type": "string" },
+                    "created": { "type": "string", "format": "date-time" }
+                  }
+                }
+              }
+            }
+          }
+          EOF
+          
+          # Create API documentation HTML
+          cat > _site/api/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>WillowCMS API Documentation</title>
+              <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui.css">
+          </head>
+          <body>
+              <div id="swagger-ui"></div>
+              <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui-bundle.js"></script>
+              <script>
+                  window.onload = function() {
+                      SwaggerUIBundle({
+                          url: "openapi.json",
+                          dom_id: '#swagger-ui',
+                          presets: [
+                              SwaggerUIBundle.presets.apis,
+                              SwaggerUIBundle.SwaggerUIStandalonePreset
+                          ]
+                      });
+                  }
+              </script>
+          </body>
+          </html>
+          EOF
+
+      - name: Create sitemap and robots.txt
+        run: |
+          cat > _site/sitemap.xml << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+              <url>
+                  <loc>https://${{ github.repository_owner }}.github.io/willow/</loc>
+                  <changefreq>daily</changefreq>
+                  <priority>1.0</priority>
+              </url>
+              <url>
+                  <loc>https://${{ github.repository_owner }}.github.io/willow/docs/</loc>
+                  <changefreq>weekly</changefreq>
+                  <priority>0.8</priority>
+              </url>
+              <url>
+                  <loc>https://${{ github.repository_owner }}.github.io/willow/blog/</loc>
+                  <changefreq>daily</changefreq>
+                  <priority>0.9</priority>
+              </url>
+              <url>
+                  <loc>https://${{ github.repository_owner }}.github.io/willow/api/</loc>
+                  <changefreq>weekly</changefreq>
+                  <priority>0.7</priority>
+              </url>
+          </urlset>
+          EOF
+          
+          cat > _site/robots.txt << 'EOF'
+          User-agent: *
+          Allow: /
+          Sitemap: https://${{ github.repository_owner }}.github.io/willow/sitemap.xml
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site/
+
+      - name: Cleanup Docker Compose
+        if: always()
+        run: |
+          docker compose down -v
+
+  # Deploy job
+  deploy:
+    runs-on: ubuntu-22.04
+    needs: export-and-build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    permissions:
+      pages: write
+      id-token: write
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

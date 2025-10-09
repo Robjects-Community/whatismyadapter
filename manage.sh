@@ -86,6 +86,8 @@ source "${MODULE_DIR}/service_checks.sh"
 source "${MODULE_DIR}/data_management.sh"
 source "${MODULE_DIR}/internationalization.sh"
 source "${MODULE_DIR}/asset_management.sh"  # New module
+source "${MODULE_DIR}/log_management.sh"  # Log management module
+source "${MODULE_DIR}/backup_management.sh"  # Backup management module
 source "${MODULE_DIR}/system.sh"
 source "${MODULE_DIR}/docker_management.sh"  # Docker management module
 

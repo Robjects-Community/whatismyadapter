@@ -5,28 +5,52 @@ namespace App\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
 
-/**
- * AipromptsFixture
- */
 class AipromptsFixture extends TestFixture
 {
-    /**
-     * Init method
-     *
-     * @return void
-     */
+    public string $table = 'aiprompts';
+
     public function init(): void
     {
         $this->records = [
             [
-                'id' => '12f92bb6-668e-41a2-b07b-6e3aa059d64a',
-                'task_type' => 'Lorem ipsum dolor sit amet',
-                'system_prompt' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'model' => 'Lorem ipsum dolor sit amet',
-                'max_tokens' => 1,
-                'temperature' => 1,
-                'created' => '2025-07-12 21:48:31',
-                'modified' => '2025-07-12 21:48:31',
+                'id' => '40000000-0000-0000-0000-000000000000',
+                'task_type' => 'summarize',
+                'system_prompt' => 'Summarize the following text clearly and concisely.',
+                'model' => 'gpt-4o-mini',
+                'max_tokens' => 256,
+                'temperature' => 0.20,
+                'status' => 'stable',
+                'last_used' => '2025-08-12 09:00:00',
+                'usage_count' => 10,
+                'success_rate' => 95.50,
+                'description' => 'General summarization prompt',
+                'preview_sample' => 'Preview text',
+                'expected_output' => 'A concise summary',
+                'is_active' => 1,
+                'category' => 'content',
+                'version' => 'v1',
+                'created' => '2025-08-10 12:00:00',
+                'modified' => '2025-08-10 12:00:00',
+            ],
+            [
+                'id' => '40000000-0000-0000-0000-000000000001',
+                'task_type' => 'classify',
+                'system_prompt' => 'Classify the sentiment of the text as positive, neutral, or negative.',
+                'model' => 'gpt-4o-mini',
+                'max_tokens' => 64,
+                'temperature' => 0.00,
+                'status' => 'beta',
+                'last_used' => null,
+                'usage_count' => 0,
+                'success_rate' => null,
+                'description' => 'Sentiment classification',
+                'preview_sample' => 'Sample text',
+                'expected_output' => 'One of: positive | neutral | negative',
+                'is_active' => 1,
+                'category' => 'nlp',
+                'version' => 'v1',
+                'created' => '2025-08-11 12:00:00',
+                'modified' => '2025-08-11 12:00:00',
             ],
         ];
         parent::init();

@@ -1,0 +1,151 @@
+
+services:
+  willowcms:
+    build:
+      context: .
+      dockerfile: docker/willowcms/Dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    ports: 
+      - "8080:80"
+    volumes:
+      - /volume1/docker/whatismyadapter/.:/var/www/html/:rw
+      - / volumel/whatismyadapter/docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php:rw
+      - /volume1/docker/whatismyadapter/docker/willowcms/config/logs/nginx:/var/log/nginx/:rw
+    environment:
+      - APP_NAME=WillowCMS
+      - DEBUG=true
+      - APP_ENCODING=UTF-8
+      - APP_DEFAULT_LOCALE=en_GB
+      - APP_DEFAULT_TIMEZONE=Europe/London
+      - SECURITY_SALT=developmentsalt
+      - DB_HOST=mysql
+      - DB_USERNAME=cms_user
+      - DB_PASSWORD=password
+      - DB_DATABASE=cms
+      - DB_PORT=3306
+      - TEST_DB_HOST=mysql
+      - TEST_DB_USERNAME=cms_user_test
+      - TEST_DB_PASSWORD=password
+      - TEST_DB_DATABASE=cms_test
+      - TEST_DB_PORT=3306
+      - EMAIL_HOST=mailpit
+      - EMAIL_PORT=1025
+      - EMAIL_TIMEOUT=30
+      - EMAIL_USERNAME=
+      - EMAIL_PASSWORD=
+      - EMAIL_REPLY=hello@willowcms.app
+      - EMAIL_NOREPLY=noreply@willowcms.app
+      - REDIS_USERNAME=root
+      - REDIS_PASSWORD=root
+      - REDIS_HOST=127.0.0.1
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+      - REDIS_URL=redis://root:root@127.0.0.1:6379/0
+      - REDIS_TEST_URL=redis://root:root@127.0.0.1:6379/0
+      - YOUTUBE_API_KEY=
+      - TRANSLATE_API_KEY=
+      - QUEUE_DEFAULT_URL=redis://root:root@127.0.0.1:6379/0
+      - QUEUE_TEST_URL=redis://root:root@127.0.0.1:6379/0
+      - EXPERIMENTAL_TESTS=Off
+      - WILLOW_ADMIN_USERNAME=admin
+      - WILLOW_ADMIN_PASSWORD=password
+      - WILLOW_ADMIN_EMAIL=admin@test.com
+      - APP_FULL_BASE_URL=http://localhost:8080
+
+  mysql:
+    image: mysql:8.4.3
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      DB_USERNAME: cms_user
+      DB_PASSWORD: password
+      DB_DATABASE: cms
+    ports:
+      - "3310:3306"
+    volumes:
+      - /volume1/docker/whatismyadapter/docker/mysql/mysql_data:/var/lib/mysql:rw
+      - /volume1/docker/whatismyadapter/docker/mysql/mysql_init:/docker-entrypoint-initdb.d/init.sql:rw
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8082:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+      - UPLOAD_LIMIT=300M
+
+  # jenkins:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/jenkins/Dockerfile
+  #   privileged: true
+  #   user: root
+  #   ports:
+  #     - "8081:8080"
+  #     - "50000:50000"
+  #   volumes:
+  #     - /volume1/docker/adaptercmsdocker/jenkins/jenkins_home:/var/jenkins_home
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - /volume1/docker/adaptercmsdocker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+  #   environment:
+  #     - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "1125:1025"
+      - "8025:8025"
+    volumes:
+      - /volume1/docker/whatismyadapter/docker/mailpit/data:/data:rw
+    environment:
+      - MP_MAX_MESSAGES=5000
+      - MP_DATABASE=/data/mailpit.db
+      - MP_SMTP_AUTH_ACCEPT_ANY=1
+      - MP_SMTP_AUTH_ALLOW_INSECURE=1
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOST=willowcms
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=root
+      - HTTP_USER=root
+      - HTTP_PASSWORD=root
+    ports:
+      - "8084:8081"
+    depends_on:
+      - willowcms
+
+# Volumes for persistent storage
+volumes:
+  mysql_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /volume1/docker/adaptercms/docker/mysql/data:rw
+      o: bind
+  mysql_init:
+    driver: local
+    driver_opts:
+      type: none
+      device: /volume1/docker/adaptercms/docker/mysql/init.sql:rw
+      o: bind
+  # adaptercms_data:
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     device: /volume1/docker/adaptercms
+  #     o: bind
+  mailpit_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /volume1/docker/adaptercms/docker/mailpit/data:rw
+      o: bind
+  
+  
+

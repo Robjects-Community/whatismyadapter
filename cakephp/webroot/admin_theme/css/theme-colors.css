@@ -1,0 +1,341 @@
+/**
+ * Unified Theme Colors CSS
+ * Provides consistent color scheme for AdminTheme that matches DefaultTheme
+ * Supports both light and dark modes
+ */
+
+:root {
+    /* Base colors - matching DefaultTheme */
+    --background-color: #ffffff;
+    --text-color: #212529;
+    --meta-color: #727272;
+    
+    /* Code and pre blocks */
+    --code-bg: #f8f9fa;
+    --code-color: #212529;
+    --pre-bg: #f8f9fa;
+    --pre-border: #dee2e6;
+    --blockquote-border: #dee2e6;
+    --blockquote-bg: rgba(0, 0, 0, 0.03);
+    --inline-code-color: #d63384;
+    
+    /* Table styling */
+    --table-header-bg: #f8f9fa;
+    --table-border: #dee2e6;
+    
+    /* Admin-specific colors */
+    --admin-sidebar-bg: #f8f9fa;
+    --admin-sidebar-text: #495057;
+    --admin-sidebar-header: #6c757d;
+    --admin-sidebar-hover-bg: #e9ecef;
+    --admin-sidebar-active-bg: #0d6efd;
+    --admin-sidebar-active-text: #ffffff;
+    
+    /* Header colors */
+    --admin-header-bg: #212529;
+    --admin-header-text: #ffffff;
+    --admin-header-border: #343a40;
+    
+    /* Button colors - matching DefaultTheme btn-bd-primary */
+    --admin-primary-bg: #712cf9;
+    --admin-primary-text: #ffffff;
+    --admin-primary-hover-bg: #6528e0;
+    --admin-primary-active-bg: #5a23c8;
+    
+    /* Form elements */
+    --admin-form-bg: #ffffff;
+    --admin-form-border: #dee2e6;
+    --admin-form-focus-border: #86b7fe;
+    --admin-form-focus-shadow: rgba(13, 110, 253, 0.25);
+    
+    /* Content area */
+    --admin-content-bg: #ffffff;
+    --admin-content-border: #dee2e6;
+    
+    /* Status colors */
+    --admin-success-bg: #d1e7dd;
+    --admin-success-border: #badbcc;
+    --admin-success-text: #0f5132;
+    --admin-warning-bg: #fff3cd;
+    --admin-warning-border: #ffecb5;
+    --admin-warning-text: #664d03;
+    --admin-danger-bg: #f8d7da;
+    --admin-danger-border: #f5c2c7;
+    --admin-danger-text: #842029;
+    --admin-info-bg: #d1ecf1;
+    --admin-info-border: #b8daff;
+    --admin-info-text: #055160;
+}
+
+[data-bs-theme="dark"] {
+    /* Base colors - matching DefaultTheme dark mode */
+    --background-color: #1e2124;
+    --text-color: #e9ecef;
+    --meta-color: #a0a0a0;
+    
+    /* Code and pre blocks */
+    --code-bg: #2d2d2d;
+    --code-color: #e9ecef;
+    --pre-bg: #1e1e1e;
+    --pre-border: #373b3e;
+    --blockquote-border: #373b3e;
+    --blockquote-bg: rgba(255, 255, 255, 0.05);
+    --inline-code-color: #e685b5;
+    
+    /* Table styling */
+    --table-header-bg: #2d2d2d;
+    --table-border: #373b3e;
+    
+    /* Admin-specific colors - dark mode */
+    --admin-sidebar-bg: #2d2d2d;
+    --admin-sidebar-text: #e9ecef;
+    --admin-sidebar-header: #a0a0a0;
+    --admin-sidebar-hover-bg: #373b3e;
+    --admin-sidebar-active-bg: #6528e0;
+    --admin-sidebar-active-text: #ffffff;
+    
+    /* Header colors - dark mode */
+    --admin-header-bg: #1a1d20;
+    --admin-header-text: #ffffff;
+    --admin-header-border: #373b3e;
+    
+    /* Button colors - dark mode compatible */
+    --admin-primary-bg: #712cf9;
+    --admin-primary-text: #ffffff;
+    --admin-primary-hover-bg: #6528e0;
+    --admin-primary-active-bg: #5a23c8;
+    
+    /* Form elements - dark mode */
+    --admin-form-bg: #2d2d2d;
+    --admin-form-border: #495057;
+    --admin-form-focus-border: #86b7fe;
+    --admin-form-focus-shadow: rgba(13, 110, 253, 0.25);
+    
+    /* Content area - dark mode */
+    --admin-content-bg: #2d2d2d;
+    --admin-content-border: #495057;
+    
+    /* Status colors - dark mode */
+    --admin-success-bg: #0f2419;
+    --admin-success-border: #1e4d2b;
+    --admin-success-text: #75dd8f;
+    --admin-warning-bg: #322300;
+    --admin-warning-border: #664d03;
+    --admin-warning-text: #ffdf6b;
+    --admin-danger-bg: #2c0b0e;
+    --admin-danger-border: #5c1920;
+    --admin-danger-text: #ea868f;
+    --admin-info-bg: #032830;
+    --admin-info-border: #055160;
+    --admin-info-text: #6edff6;
+}
+
+/* Apply theme colors to admin layout components */
+body.admin-layout {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.admin-header {
+    background-color: var(--admin-header-bg) !important;
+    color: var(--admin-header-text) !important;
+    border-bottom: 1px solid var(--admin-header-border);
+}
+
+.admin-sidebar {
+    background-color: var(--admin-sidebar-bg) !important;
+    color: var(--admin-sidebar-text);
+    border-right: 1px solid var(--admin-content-border);
+}
+
+.admin-main {
+    background-color: var(--admin-content-bg);
+}
+
+/* Sidebar styling with theme colors */
+.sidebar-header h6 {
+    color: var(--admin-sidebar-header);
+}
+
+.sidebar-link {
+    color: var(--admin-sidebar-text);
+}
+
+.sidebar-link:hover {
+    background-color: var(--admin-sidebar-hover-bg) !important;
+    color: var(--admin-primary-bg) !important;
+}
+
+.sidebar-link.active {
+    background-color: var(--admin-sidebar-active-bg) !important;
+    color: var(--admin-sidebar-active-text) !important;
+}
+
+/* Button styling */
+.btn-bd-primary,
+.btn-primary {
+    --bs-btn-bg: var(--admin-primary-bg);
+    --bs-btn-border-color: var(--admin-primary-bg);
+    --bs-btn-hover-bg: var(--admin-primary-hover-bg);
+    --bs-btn-hover-border-color: var(--admin-primary-hover-bg);
+    --bs-btn-active-bg: var(--admin-primary-active-bg);
+    --bs-btn-active-border-color: var(--admin-primary-active-bg);
+    --bs-btn-color: var(--admin-primary-text);
+    --bs-btn-hover-color: var(--admin-primary-text);
+    --bs-btn-active-color: var(--admin-primary-text);
+}
+
+/* Form controls */
+.form-control,
+.form-select {
+    background-color: var(--admin-form-bg);
+    border-color: var(--admin-form-border);
+    color: var(--text-color);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--admin-form-focus-border);
+    box-shadow: 0 0 0 0.25rem var(--admin-form-focus-shadow);
+}
+
+/* Cards and content areas */
+.card {
+    background-color: var(--admin-content-bg);
+    border-color: var(--admin-content-border);
+}
+
+.card-header {
+    background-color: var(--admin-sidebar-bg);
+    border-bottom-color: var(--admin-content-border);
+}
+
+/* Tables */
+.table {
+    --bs-table-bg: var(--admin-content-bg);
+    --bs-table-border-color: var(--table-border);
+    color: var(--text-color);
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > td,
+.table-striped > tbody > tr:nth-of-type(odd) > th {
+    background-color: var(--blockquote-bg);
+}
+
+.table thead th {
+    background-color: var(--table-header-bg);
+    border-bottom-color: var(--table-border);
+}
+
+/* Alert styling */
+.alert-success {
+    background-color: var(--admin-success-bg);
+    border-color: var(--admin-success-border);
+    color: var(--admin-success-text);
+}
+
+.alert-warning {
+    background-color: var(--admin-warning-bg);
+    border-color: var(--admin-warning-border);
+    color: var(--admin-warning-text);
+}
+
+.alert-danger {
+    background-color: var(--admin-danger-bg);
+    border-color: var(--admin-danger-border);
+    color: var(--admin-danger-text);
+}
+
+.alert-info {
+    background-color: var(--admin-info-bg);
+    border-color: var(--admin-info-border);
+    color: var(--admin-info-text);
+}
+
+/* Typography consistency */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+}
+
+/* Code styling consistency */
+code {
+    background-color: var(--code-bg);
+    color: var(--inline-code-color);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+}
+
+pre {
+    background-color: var(--pre-bg);
+    border: 1px solid var(--pre-border);
+    color: var(--code-color);
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+pre code {
+    background-color: transparent;
+    color: var(--code-color);
+    padding: 0;
+    border-radius: 0;
+}
+
+/* Blockquotes */
+blockquote {
+    background-color: var(--blockquote-bg);
+    border-left: 4px solid var(--blockquote-border);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+}
+
+/* Navigation and link colors */
+.nav-link {
+    color: var(--text-color);
+}
+
+.nav-link:hover {
+    color: var(--admin-primary-bg);
+}
+
+.nav-link.active {
+    color: var(--admin-primary-bg);
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+    background-color: var(--admin-content-bg);
+    border-color: var(--admin-content-border);
+}
+
+.dropdown-item {
+    color: var(--text-color);
+}
+
+.dropdown-item:hover {
+    background-color: var(--admin-sidebar-hover-bg);
+    color: var(--admin-primary-bg);
+}
+
+/* Pagination */
+.page-link {
+    color: var(--admin-primary-bg);
+    background-color: var(--admin-content-bg);
+    border-color: var(--admin-content-border);
+}
+
+.page-link:hover {
+    color: var(--admin-primary-hover-bg);
+    background-color: var(--admin-sidebar-hover-bg);
+    border-color: var(--admin-content-border);
+}
+
+.page-item.active .page-link {
+    background-color: var(--admin-primary-bg);
+    border-color: var(--admin-primary-bg);
+    color: var(--admin-primary-text);
+}

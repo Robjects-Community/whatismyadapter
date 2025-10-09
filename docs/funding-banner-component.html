@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funding Banner Component - robjects-community Documentation</title>
+    
+    <style>
+        /* Page Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .documentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        h1 {
+            border-bottom: 3px solid #027ba7;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.3rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        
+        .example-section {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .demo-controls {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .demo-controls h3 {
+            margin-top: 0;
+        }
+        
+        .control-group {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .control-group label {
+            min-width: 150px;
+            font-weight: bold;
+        }
+        
+        .control-group input,
+        .control-group select {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            flex: 1;
+            max-width: 300px;
+        }
+        
+        .button-group {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        button {
+            padding: 0.5rem 1rem;
+            background: #027ba7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background: #015471;
+        }
+        
+        .tab-container {
+            margin: 2rem 0;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: #f4f4f4;
+            border: 1px solid #e0e0e0;
+            border-bottom: none;
+            cursor: pointer;
+            margin-right: 0.25rem;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab.active {
+            background: white;
+            border-bottom: 2px solid white;
+            margin-bottom: -2px;
+        }
+        
+        .tab-content {
+            padding: 1.5rem;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #17a2b8;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        /* Funding Banner Component Styles */
+        :root {
+            --funding-banner-bg: #2e3440;
+            --funding-banner-text: #ffffff;
+            --funding-banner-progress-bg: rgba(255, 255, 255, 0.2);
+            --funding-banner-progress-fill: #02a8e2;
+            --funding-banner-button-bg: #027ba7;
+            --funding-banner-button-hover: #015471;
+        }
+        
+        .robjects-funding-banner {
+            background: var(--funding-banner-bg);
+            color: var(--funding-banner-text);
+            padding: 0.75rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-family: ui-sans-serif, system-ui, sans-serif;
+            font-size: 14px;
+            width: 100%;
+            margin: 1rem 0;
+        }
+        
+        .robjects-funding-banner * {
+            box-sizing: border-box;
+        }
+        
+        .robjects-funding-banner__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .robjects-funding-banner__content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .robjects-funding-banner__desktop-view {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .robjects-funding-banner__mobile-view {
+            display: none;
+        }
+        
+        .robjects-funding-banner__amount {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .robjects-funding-banner__progress-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .robjects-funding-banner__progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        
+        .robjects-funding-banner__progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: var(--funding-banner-progress-bg);
+            overflow: hidden;
+            margin: 4px 0;
+        }
+        
+        .robjects-funding-banner__progress-fill {
+            height: 100%;
+            background: var(--funding-banner-progress-fill);
+            transition: width 1s ease;
+            border-radius: 3px;
+        }
+        
+        .robjects-funding-banner__cta {
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        .robjects-funding-banner__button {
+            background: var(--funding-banner-button-bg);
+            color: var(--funding-banner-text);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            border: none;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .robjects-funding-banner__button:hover {
+            background: var(--funding-banner-button-hover);
+        }
+        
+        @media (max-width: 700px) {
+            .robjects-funding-banner__desktop-view {
+                display: none;
+            }
+            
+            .robjects-funding-banner__mobile-view {
+                display: block;
+            }
+            
+            .robjects-funding-banner__amounts-row {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.25rem;
+            }
+            
+            .robjects-funding-banner__meta-row {
+                display: flex;
+                justify-content: space-between;
+                font-size: 12px;
+                margin-top: 0.25rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .robjects-funding-banner__container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .robjects-funding-banner__button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="documentation-container">
+        <h1>🎯 Funding Banner Component Documentation</h1>
+        <p>A flexible, responsive funding/sponsorship banner component for CakePHP applications and robjects-community projects.</p>
+        
+        <!-- Live Demo Banner -->
+        <div class="example-section">
+            <h2>Live Demo</h2>
+            <div id="demo-banner" class="robjects-funding-banner">
+                <div class="robjects-funding-banner__container">
+                    <div class="robjects-funding-banner__content">
+                        <!-- Desktop Layout -->
+                        <div class="robjects-funding-banner__desktop-view">
+                            <span class="robjects-funding-banner__amount" data-field="raised">
+                                Raised: $8,226
+                            </span>
+                            <div class="robjects-funding-banner__progress-section">
+                                <div class="robjects-funding-banner__progress-header">
+                                    <span data-field="percent">69% of Monthly Goal</span>
+                                    <span class="robjects-funding-banner__cta">Help us reach our goal!</span>
+                                </div>
+                                <div class="robjects-funding-banner__progress-bar">
+                                    <div class="robjects-funding-banner__progress-fill" 
+                                         data-field="progress" 
+                                         style="width: 69%;"></div>
+                                </div>
+                            </div>
+                            <span class="robjects-funding-banner__amount" data-field="goal">
+                                Goal: $12,000
+                            </span>
+                        </div>
+                        
+                        <!-- Mobile Layout -->
+                        <div class="robjects-funding-banner__mobile-view">
+                            <div class="robjects-funding-banner__amounts-row">
+                                <span class="robjects-funding-banner__amount">Raised: $8,226</span>
+                                <span class="robjects-funding-banner__amount">Goal: $12,000</span>
+                            </div>
+                            <div class="robjects-funding-banner__progress-bar">
+                                <div class="robjects-funding-banner__progress-fill" style="width: 69%;"></div>
+                            </div>
+                            <div class="robjects-funding-banner__meta-row">
+                                <span>69% of Monthly Goal</span>
+                                <span class="robjects-funding-banner__cta">Help us reach our goal!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://github.com/sponsors/robjects-community" 
+                       target="_blank" 
+                       class="robjects-funding-banner__button">
+                        Sponsor robjects-community
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Controls -->
+        <div class="demo-controls">
+            <h3>Interactive Demo Controls</h3>
+            <div class="control-group">
+                <label for="current-amount">Current Amount:</label>
+                <input type="number" id="current-amount" value="8226" min="0" max="20000">
+            </div>
+            <div class="control-group">
+                <label for="goal-amount">Goal Amount:</label>
+                <input type="number" id="goal-amount" value="12000" min="1000" max="50000">
+            </div>
+            <div class="control-group">
+                <label for="campaign-name">Campaign Name:</label>
+                <input type="text" id="campaign-name" value="Monthly Goal">
+            </div>
+            <div class="control-group">
+                <label for="cta-text">CTA Text:</label>
+                <input type="text" id="cta-text" value="Help us reach our goal!">
+            </div>
+            <div class="button-group">
+                <button onclick="updateDemoBanner()">Update Banner</button>
+                <button onclick="simulateAPIUpdate()">Simulate API Update</button>
+                <button onclick="resetDemoBanner()">Reset</button>
+            </div>
+        </div>
+        
+        <h2>Features</h2>
+        <ul class="feature-list">
+            <li>Responsive design with mobile and desktop layouts</li>
+            <li>Animated progress bar with smooth transitions</li>
+            <li>API integration support for real-time updates</li>
+            <li>Local storage caching with configurable TTL</li>
+            <li>CakePHP 5.x compatible element structure</li>
+            <li>Customizable through CSS variables</li>
+            <li>Accessibility-friendly with ARIA attributes</li>
+            <li>Support for multiple funding platforms (GitHub Sponsors, Patreon, Custom)</li>
+        </ul>
+        
+        <!-- Integration Tabs -->
+        <div class="tab-container">
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('cakephp')">CakePHP Integration</div>
+                <div class="tab" onclick="showTab('ddev')">DDEV Setup</div>
+                <div class="tab" onclick="showTab('api')">API Integration</div>
+                <div class="tab" onclick="showTab('customization')">Customization</div>
+            </div>
+            
+            <div class="tab-content">
+                <!-- CakePHP Integration Tab -->
+                <div id="cakephp-tab" class="tab-pane active">
+                    <h3>CakePHP 5.x Integration</h3>
+                    
+                    <h4>1. Add the Element to Your Layout</h4>
+                    <pre><code>&lt;?php
+// In app/templates/layout/default.php or app/plugins/DefaultTheme/templates/layout/default.php
+
+// Add CSS in the head section
+echo $this->Html->css('funding-banner');
+
+// Add the banner element (typically after header)
+echo $this->element('funding_banner', [
+    'current_amount' => 8226,
+    'goal_amount' => 12000,
+    'campaign_name' => 'Monthly Goal',
+    'sponsor_url' => 'https://github.com/sponsors/robjects-community',
+    'api_endpoint' => '/api/funding-status' // Optional
+]);
+
+// Add JavaScript before closing body tag
+echo $this->Html->script('funding-banner');
+?&gt;</code></pre>
+                    
+                    <h4>2. Using SettingsManager (Recommended)</h4>
+                    <pre><code>&lt;?php
+// The element automatically uses SettingsManager for configuration
+// No parameters needed if settings are configured:
+echo $this->element('funding_banner');
+
+// Or override specific settings:
+echo $this->element('funding_banner', [
+    'goal_amount' => 15000 // Override just the goal
+]);
+?&gt;</code></pre>
+                    
+                    <h4>3. Database Configuration</h4>
+                    <pre><code># Run migration to create funding settings table
+bin/cake migrations migrate
+
+# Seed initial data
+bin/cake migrations seed --seed FundingSettingsSeed</code></pre>
+                </div>
+                
+                <!-- DDEV Setup Tab -->
+                <div id="ddev-tab" class="tab-pane">
+                    <h3>DDEV Configuration for CakePHP</h3>
+                    
+                    <h4>1. Create a CakePHP Project with DDEV</h4>
+                    <pre><code># Create and configure the project
+mkdir my-cakephp-app && cd my-cakephp-app
+ddev config --project-type=cakephp --docroot=webroot --create-docroot
+ddev start
+
+# Install CakePHP
+ddev composer create --prefer-dist cakephp/app:~5.0
+ddev exec bin/cake</code></pre>
+                    
+                    <h4>2. Install the Funding Banner</h4>
+                    <pre><code># Copy component files
+ddev exec cp templates/element/funding_banner.php app/templates/element/
+ddev exec cp webroot/css/funding-banner.css app/webroot/css/
+ddev exec cp webroot/js/funding-banner.js app/webroot/js/
+
+# Set permissions
+ddev exec chmod -R 755 app/webroot/
+ddev exec chmod -R 755 app/templates/</code></pre>
+                    
+                    <h4>3. Configure Environment Variables</h4>
+                    <pre><code># In .ddev/config.yaml
+web_environment:
+  - FUNDING_GOAL=12000
+  - FUNDING_CURRENT=8226
+  - FUNDING_API_URL=https://api.github.com/sponsors/robjects-community
+  - FUNDING_CACHE_TTL=43200</code></pre>
+                    
+                    <div class="info-box">
+                        <strong>Note:</strong> DDEV automatically handles database connections and environment configuration for CakePHP projects.
+                    </div>
+                </div>
+                
+                <!-- API Integration Tab -->
+                <div id="api-tab" class="tab-pane">
+                    <h3>API Integration</h3>
+                    
+                    <h4>GitHub Sponsors API Format</h4>
+                    <pre><code>{
+    "total_monthly_average_income": 8226,
+    "current_goal": {
+        "target_amount": 12000,
+        "title": "Monthly Infrastructure Goal"
+    }
+}</code></pre>
+                    
+                    <h4>Custom API Endpoint (CakePHP Controller)</h4>
+                    <pre><code>&lt;?php
+// src/Controller/Api/FundingController.php
+namespace App\Controller\Api;
+
+use App\Controller\AppController;
+
+class FundingController extends AppController
+{
+    public function status()
+    {
+        $this->request->allowMethod(['get']);
+        
+        // Get current funding data from database or external service
+        $fundingData = $this->Funding->getCurrentStatus();
+        
+        $response = [
+            'current' => $fundingData['current_amount'],
+            'goal' => $fundingData['goal_amount'],
+            'campaign' => $fundingData['campaign_name'],
+            'percentage' => round(($fundingData['current_amount'] / $fundingData['goal_amount']) * 100)
+        ];
+        
+        $this->set(compact('response'));
+        $this->viewBuilder()->setOption('serialize', 'response');
+    }
+}</code></pre>
+                    
+                    <h4>JavaScript API Integration</h4>
+                    <pre><code>// Initialize with API endpoint
+initializeFundingBanner('banner-id', {
+    apiEndpoint: '/api/funding/status',
+    cacheTTL: 12 * 60 * 60 * 1000, // 12 hours
+    enableAutoUpdate: true
+});</code></pre>
+                </div>
+                
+                <!-- Customization Tab -->
+                <div id="customization-tab" class="tab-pane">
+                    <h3>Customization Options</h3>
+                    
+                    <h4>CSS Variables</h4>
+                    <pre><code>:root {
+    /* Colors */
+    --funding-banner-bg: #2e3440;
+    --funding-banner-text: #ffffff;
+    --funding-banner-progress-bg: rgba(255, 255, 255, 0.2);
+    --funding-banner-progress-fill: #02a8e2;
+    --funding-banner-button-bg: #027ba7;
+    --funding-banner-button-hover: #015471;
+    
+    /* Typography */
+    --funding-banner-font-size: 14px;
+    --funding-banner-font-weight-bold: 600;
+    
+    /* Spacing */
+    --funding-banner-padding: 0.75rem 1rem;
+    --funding-banner-gap: 1rem;
+}</code></pre>
+                    
+                    <h4>Theme Integration</h4>
+                    <pre><code>/* Dark theme override */
+[data-bs-theme="dark"] .robjects-funding-banner {
+    --funding-banner-bg: #1a1d23;
+    --funding-banner-progress-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Bootstrap 5 integration */
+.robjects-funding-banner {
+    @extend .bg-dark;
+    @extend .text-white;
+    @extend .p-3;
+}</code></pre>
+                    
+                    <h4>Configuration Options</h4>
+                    <pre><code>&lt;?= $this->element('funding_banner', [
+    // Display Options
+    'position' => 'top', // 'top' or 'bottom'
+    'banner_enabled' => true,
+    
+    // Content Options
+    'current_amount' => 8226,
+    'goal_amount' => 12000,
+    'campaign_name' => 'Monthly Goal',
+    'cta_text' => 'Help us reach our goal!',
+    'button_text' => 'Sponsor Now',
+    'sponsor_url' => 'https://github.com/sponsors/robjects-community',
+    
+    // API Options
+    'api_endpoint' => '/api/funding-status',
+    'cache_ttl' => 43200, // 12 hours in seconds
+    'enable_auto_update' => true,
+    
+    // Styling Options
+    'custom_class' => 'my-custom-banner',
+    'show_animations' => true
+]) ?&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        
+        <h2>File Structure</h2>
+        <pre><code>willow/
+├── app/
+│   ├── templates/
+│   │   └── element/
+│   │       └── funding_banner.php       # CakePHP element file
+│   ├── webroot/
+│   │   ├── css/
+│   │   │   └── funding-banner.css       # Component styles
+│   │   └── js/
+│   │       └── funding-banner.js        # JavaScript functionality
+│   └── src/
+│       └── Controller/
+│           └── Admin/
+│               └── FundingController.php # Admin configuration
+└── docs/
+    └── funding-banner-component.html    # This documentation</code></pre>
+        
+        <div class="warning-box">
+            <strong>Important:</strong> Always test the banner in both mobile and desktop views before deploying to production.
+        </div>
+        
+        <h2>Troubleshooting</h2>
+        <h3>Common Issues</h3>
+        <ul>
+            <li><strong>Banner not showing:</strong> Check if SettingsManager has 'Funding.enabled' set to true</li>
+            <li><strong>API not updating:</strong> Verify CORS headers and API endpoint accessibility</li>
+            <li><strong>Styles not loading:</strong> Ensure CSS file is included in the layout</li>
+            <li><strong>JavaScript errors:</strong> Check console for errors and ensure script is loaded after DOM</li>
+        </ul>
+        
+        <h2>Support</h2>
+        <p>For questions and support regarding the funding banner component:</p>
+        <ul>
+            <li>GitHub Issues: <a href="https://github.com/robjects-community/willow">github.com/robjects-community/willow</a></li>
+            <li>Documentation: <a href="https://docs.robjects.community">docs.robjects.community</a></li>
+            <li>CakePHP Community: <a href="https://discourse.cakephp.org/">discourse.cakephp.org</a></li>
+        </ul>
+    </div>
+    
+    <script>
+        // Demo Functionality
+        function updateDemoBanner() {
+            const current = document.getElementById('current-amount').value;
+            const goal = document.getElementById('goal-amount').value;
+            const campaign = document.getElementById('campaign-name').value;
+            const cta = document.getElementById('cta-text').value;
+            
+            const percentage = Math.min((current / goal) * 100, 100).toFixed(0);
+            const currentFormatted = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0
+            }).format(current);
+            const goalFormatted = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0
+            }).format(goal);
+            
+            // Update desktop view
+            document.querySelector('[data-field="raised"]').textContent = `Raised: ${currentFormatted}`;
+            document.querySelector('[data-field="goal"]').textContent = `Goal: ${goalFormatted}`;
+            document.querySelector('[data-field="percent"]').textContent = `${percentage}% of ${campaign}`;
+            document.querySelector('[data-field="progress"]').style.width = `${percentage}%`;
+            
+            // Update CTA
+            document.querySelectorAll('.robjects-funding-banner__cta').forEach(el => {
+                el.textContent = cta;
+            });
+            
+            // Update mobile view
+            const mobileAmounts = document.querySelectorAll('.robjects-funding-banner__mobile-view .robjects-funding-banner__amount');
+            if (mobileAmounts[0]) mobileAmounts[0].textContent = `Raised: ${currentFormatted}`;
+            if (mobileAmounts[1]) mobileAmounts[1].textContent = `Goal: ${goalFormatted}`;
+            
+            const mobileMeta = document.querySelector('.robjects-funding-banner__meta-row span:first-child');
+            if (mobileMeta) mobileMeta.textContent = `${percentage}% of ${campaign}`;
+            
+            const mobileProgress = document.querySelector('.robjects-funding-banner__mobile-view .robjects-funding-banner__progress-fill');
+            if (mobileProgress) mobileProgress.style.width = `${percentage}%`;
+        }
+        
+        function simulateAPIUpdate() {
+            // Simulate loading state
+            const banner = document.getElementById('demo-banner');
+            banner.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                // Simulate new data
+                const newAmount = Math.floor(Math.random() * 5000) + 7000;
+                document.getElementById('current-amount').value = newAmount;
+                updateDemoBanner();
+                banner.style.opacity = '1';
+                
+                // Show animation
+                const fills = banner.querySelectorAll('.robjects-funding-banner__progress-fill');
+                fills.forEach(fill => {
+                    const width = fill.style.width;
+                    fill.style.width = '0%';
+                    setTimeout(() => {
+                        fill.style.width = width;
+                    }, 100);
+                });
+            }, 1000);
+        }
+        
+        function resetDemoBanner() {
+            document.getElementById('current-amount').value = 8226;
+            document.getElementById('goal-amount').value = 12000;
+            document.getElementById('campaign-name').value = 'Monthly Goal';
+            document.getElementById('cta-text').value = 'Help us reach our goal!';
+            updateDemoBanner();
+        }
+        
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar on load
+            const fills = document.querySelectorAll('.robjects-funding-banner__progress-fill');
+            fills.forEach(fill => {
+                const width = fill.style.width;
+                fill.style.width = '0%';
+                setTimeout(() => {
+                    fill.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

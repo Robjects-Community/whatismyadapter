@@ -1,0 +1,1309 @@
+{
+    "Health": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/HealthController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "healthz",
+            "readyz"
+        ],
+        "unauthenticated_methods": [
+            "healthz",
+            "readyz"
+        ],
+        "model": null,
+        "requires_fixtures": []
+    },
+    "Users": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/UsersController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete",
+            "login",
+            "logout",
+            "register",
+            "forgotPassword",
+            "resetPassword",
+            "confirmEmail"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Users",
+        "requires_fixtures": [
+            "Users"
+        ]
+    },
+    "Error": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ErrorController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "viewClasses",
+            "beforeFilter",
+            "beforeRender",
+            "afterFilter"
+        ],
+        "unauthenticated_methods": [],
+        "model": null,
+        "requires_fixtures": []
+    },
+    "BlockedIps": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/BlockedIpsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "BlockedIps",
+        "requires_fixtures": [
+            "BlockedIps"
+        ]
+    },
+    "SystemLogs": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/SystemLogsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "SystemLogs",
+        "requires_fixtures": [
+            "SystemLogs"
+        ]
+    },
+    "ArticlesTags": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ArticlesTagsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ArticlesTags",
+        "requires_fixtures": [
+            "ArticlesTags"
+        ]
+    },
+    "TagsTranslations": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/TagsTranslationsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "TagsTranslations",
+        "requires_fixtures": [
+            "TagsTranslations"
+        ]
+    },
+    "Images": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ImagesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Images",
+        "requires_fixtures": [
+            "Images"
+        ]
+    },
+    "ProductsTags": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ProductsTagsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ProductsTags",
+        "requires_fixtures": [
+            "ProductsTags"
+        ]
+    },
+    "Robots": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/RobotsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "beforeFilter",
+            "index"
+        ],
+        "unauthenticated_methods": [],
+        "model": null,
+        "requires_fixtures": []
+    },
+    "Rss": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/RssController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "beforeFilter",
+            "viewClasses",
+            "index"
+        ],
+        "unauthenticated_methods": [
+            "index"
+        ],
+        "model": null,
+        "requires_fixtures": []
+    },
+    "Tags": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/TagsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete",
+            "viewBySlug"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Tags",
+        "requires_fixtures": [
+            "Tags"
+        ]
+    },
+    "ImageGalleriesTranslations": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ImageGalleriesTranslationsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ImageGalleriesTranslations",
+        "requires_fixtures": [
+            "ImageGalleriesTranslations"
+        ]
+    },
+    "ImageGalleriesImages": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ImageGalleriesImagesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ImageGalleriesImages",
+        "requires_fixtures": [
+            "ImageGalleriesImages"
+        ]
+    },
+    "Pages": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/PagesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "display"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Pages",
+        "requires_fixtures": [
+            "Pages"
+        ]
+    },
+    "Internationalisations": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/InternationalisationsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Internationalisations",
+        "requires_fixtures": [
+            "Internationalisations"
+        ]
+    },
+    "Aiprompts": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/AipromptsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Aiprompts",
+        "requires_fixtures": [
+            "Aiprompts"
+        ]
+    },
+    "Products": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ProductsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "beforeFilter",
+            "index",
+            "view",
+            "quiz",
+            "edit",
+            "delete",
+            "add"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Products",
+        "requires_fixtures": [
+            "Products"
+        ]
+    },
+    "App": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/AppController.php",
+        "extends": "Controller",
+        "public_methods": [
+            "initialize",
+            "beforeFilter",
+            "beforeRender"
+        ],
+        "unauthenticated_methods": [],
+        "model": null,
+        "requires_fixtures": []
+    },
+    "ProductPageViews": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ProductPageViewsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ProductPageViews",
+        "requires_fixtures": [
+            "ProductPageViews"
+        ]
+    },
+    "Quiz": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/QuizController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "beforeFilter",
+            "index",
+            "akinator",
+            "comprehensive",
+            "submit",
+            "result",
+            "take",
+            "preview"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Quiz",
+        "requires_fixtures": [
+            "Quiz"
+        ]
+    },
+    "Author": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/AuthorController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "about",
+            "hireMe",
+            "social",
+            "github"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Author",
+        "requires_fixtures": [
+            "Author"
+        ]
+    },
+    "Articles": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ArticlesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "beforeFilter",
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete",
+            "viewBySlug",
+            "addComment"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Articles",
+        "requires_fixtures": [
+            "Articles"
+        ]
+    },
+    "ModelsImages": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ModelsImagesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ModelsImages",
+        "requires_fixtures": [
+            "ModelsImages"
+        ]
+    },
+    "EmailTemplates": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/EmailTemplatesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "EmailTemplates",
+        "requires_fixtures": [
+            "EmailTemplates"
+        ]
+    },
+    "ArticlesTranslations": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ArticlesTranslationsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ArticlesTranslations",
+        "requires_fixtures": [
+            "ArticlesTranslations"
+        ]
+    },
+    "ImageGalleries": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ImageGalleriesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ImageGalleries",
+        "requires_fixtures": [
+            "ImageGalleries"
+        ]
+    },
+    "UserAccountConfirmations": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/UserAccountConfirmationsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "UserAccountConfirmations",
+        "requires_fixtures": [
+            "UserAccountConfirmations"
+        ]
+    },
+    "ProductsTranslations": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/ProductsTranslationsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ProductsTranslations",
+        "requires_fixtures": [
+            "ProductsTranslations"
+        ]
+    },
+    "admin\/AdminCrud": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/AdminCrudController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": null,
+        "requires_fixtures": [
+            "Users"
+        ]
+    },
+    "admin\/Users": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/UsersController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "beforeFilter",
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete",
+            "login",
+            "logout"
+        ],
+        "unauthenticated_methods": [
+            "login"
+        ],
+        "model": "Users",
+        "requires_fixtures": [
+            "Users"
+        ]
+    },
+    "admin\/BlockedIps": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/BlockedIpsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "BlockedIps",
+        "requires_fixtures": [
+            "Users",
+            "BlockedIps"
+        ]
+    },
+    "admin\/SystemLogs": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/SystemLogsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "SystemLogs",
+        "requires_fixtures": [
+            "Users",
+            "SystemLogs"
+        ]
+    },
+    "admin\/Images": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/ImagesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "viewClasses",
+            "index",
+            "view",
+            "imageSelect",
+            "add",
+            "bulkUpload",
+            "edit",
+            "delete",
+            "deleteUploadedImage",
+            "picker"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Images",
+        "requires_fixtures": [
+            "Users",
+            "Images"
+        ]
+    },
+    "admin\/Tags": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/TagsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "treeIndex",
+            "updateTree",
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Tags",
+        "requires_fixtures": [
+            "Users",
+            "Tags"
+        ]
+    },
+    "admin\/QueueConfigurations": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/QueueConfigurationsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete",
+            "sync",
+            "healthCheck",
+            "healthCheckAll"
+        ],
+        "unauthenticated_methods": [],
+        "model": "QueueConfigurations",
+        "requires_fixtures": [
+            "Users",
+            "QueueConfigurations"
+        ]
+    },
+    "admin\/Reliability": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/ReliabilityController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "view",
+            "recalc",
+            "verifyChecksums"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Reliability",
+        "requires_fixtures": [
+            "Users",
+            "Reliability"
+        ]
+    },
+    "admin\/AiMetrics": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/AiMetricsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "dashboard",
+            "realtimeData",
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "AiMetrics",
+        "requires_fixtures": [
+            "Users",
+            "AiMetrics"
+        ]
+    },
+    "admin\/Pages": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/PagesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete",
+            "bulkActions",
+            "createConnectPages",
+            "extract",
+            "extractPreview",
+            "extractWebpage",
+            "costAnalysis"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Pages",
+        "requires_fixtures": [
+            "Users",
+            "Pages"
+        ]
+    },
+    "admin\/Internationalisations": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/InternationalisationsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Internationalisations",
+        "requires_fixtures": [
+            "Users",
+            "Internationalisations"
+        ]
+    },
+    "admin\/Aiprompts": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/AipromptsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Aiprompts",
+        "requires_fixtures": [
+            "Users",
+            "Aiprompts"
+        ]
+    },
+    "admin\/Products": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/ProductsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "dashboard",
+            "index",
+            "pendingReview",
+            "index2",
+            "formsDashboard",
+            "view",
+            "view2",
+            "add2",
+            "edit2",
+            "addBeautiful",
+            "aiScore",
+            "add",
+            "edit",
+            "delete",
+            "verify",
+            "toggleFeatured",
+            "togglePublished",
+            "approve",
+            "reject",
+            "bulkVerify",
+            "bulkApprove",
+            "bulkReject",
+            "formsRedirect",
+            "forms",
+            "formsQuiz",
+            "formsCustomerQuiz",
+            "formsFields",
+            "formsStats",
+            "aiSuggest",
+            "bulkEdit",
+            "bulkTogglePublished",
+            "bulkToggleFeatured",
+            "bulkDelete",
+            "bulkUpdateFields",
+            "quizSettings"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Products",
+        "requires_fixtures": [
+            "Users",
+            "Products"
+        ]
+    },
+    "admin\/ProductPageViews": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/ProductPageViewsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "pageViewStats",
+            "viewRecords",
+            "filterStats",
+            "dashboard"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ProductPageViews",
+        "requires_fixtures": [
+            "Users",
+            "ProductPageViews"
+        ]
+    },
+    "admin\/HomepageFeeds": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/HomepageFeedsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "configure",
+            "preview",
+            "reset"
+        ],
+        "unauthenticated_methods": [],
+        "model": "HomepageFeeds",
+        "requires_fixtures": [
+            "Users",
+            "HomepageFeeds"
+        ]
+    },
+    "admin\/CableCapabilities": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/CableCapabilitiesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "index",
+            "view",
+            "category",
+            "certified",
+            "search",
+            "analytics",
+            "export",
+            "returnToProducts"
+        ],
+        "unauthenticated_methods": [],
+        "model": "CableCapabilities",
+        "requires_fixtures": [
+            "Users",
+            "CableCapabilities"
+        ]
+    },
+    "admin\/Articles": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/ArticlesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "treeIndex",
+            "updateTree",
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete",
+            "bulkAction"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Articles",
+        "requires_fixtures": [
+            "Users",
+            "Articles"
+        ]
+    },
+    "admin\/EmailTemplates": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/EmailTemplatesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete",
+            "sendEmail"
+        ],
+        "unauthenticated_methods": [],
+        "model": "EmailTemplates",
+        "requires_fixtures": [
+            "Users",
+            "EmailTemplates"
+        ]
+    },
+    "admin\/ImageGeneration": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/ImageGenerationController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "index",
+            "statistics",
+            "batch",
+            "config"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ImageGeneration",
+        "requires_fixtures": [
+            "Users",
+            "ImageGeneration"
+        ]
+    },
+    "admin\/ImageGalleries": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/ImageGalleriesController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete",
+            "manageImages",
+            "addImages",
+            "removeImage",
+            "updateImageOrder",
+            "picker"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ImageGalleries",
+        "requires_fixtures": [
+            "Users",
+            "ImageGalleries"
+        ]
+    },
+    "admin\/Videos": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/VideosController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "videoSelect"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Videos",
+        "requires_fixtures": [
+            "Users",
+            "Videos"
+        ]
+    },
+    "admin\/Settings": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/SettingsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "saveSettings"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Settings",
+        "requires_fixtures": [
+            "Users",
+            "Settings"
+        ]
+    },
+    "admin\/Cache": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/CacheController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "clearAll",
+            "clear"
+        ],
+        "unauthenticated_methods": [],
+        "model": null,
+        "requires_fixtures": [
+            "Users"
+        ]
+    },
+    "admin\/Slugs": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/SlugsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Slugs",
+        "requires_fixtures": [
+            "Users",
+            "Slugs"
+        ]
+    },
+    "admin\/Comments": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/CommentsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "index",
+            "view",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Comments",
+        "requires_fixtures": [
+            "Users",
+            "Comments"
+        ]
+    },
+    "admin\/ProductFormFields": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/ProductFormFieldsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete",
+            "reorder",
+            "toggleAi",
+            "testAi",
+            "resetOrder"
+        ],
+        "unauthenticated_methods": [],
+        "model": "ProductFormFields",
+        "requires_fixtures": [
+            "Users",
+            "ProductFormFields"
+        ]
+    },
+    "admin\/PageViews": {
+        "namespace": "App\\Controller\\Admin",
+        "type": "admin",
+        "file_path": "\/src\/Controller\/Admin\/PageViewsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "pageViewStats",
+            "viewRecords",
+            "filterStats",
+            "dashboard"
+        ],
+        "unauthenticated_methods": [],
+        "model": "PageViews",
+        "requires_fixtures": [
+            "Users",
+            "PageViews"
+        ]
+    },
+    "Settings": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/SettingsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Settings",
+        "requires_fixtures": [
+            "Settings"
+        ]
+    },
+    "CookieConsents": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/CookieConsentsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "beforeFilter",
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "model": "CookieConsents",
+        "requires_fixtures": [
+            "CookieConsents"
+        ]
+    },
+    "Slugs": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/SlugsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Slugs",
+        "requires_fixtures": [
+            "Slugs"
+        ]
+    },
+    "api\/AiFormSuggestions": {
+        "namespace": "App\\Controller\\Api",
+        "type": "api",
+        "file_path": "\/src\/Controller\/Api\/AiFormSuggestionsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index"
+        ],
+        "unauthenticated_methods": [],
+        "model": "AiFormSuggestions",
+        "requires_fixtures": [
+            "Users",
+            "AiFormSuggestions"
+        ]
+    },
+    "api\/Reliability": {
+        "namespace": "App\\Controller\\Api",
+        "type": "api",
+        "file_path": "\/src\/Controller\/Api\/ReliabilityController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "score",
+            "verifyChecksum",
+            "fieldStats"
+        ],
+        "unauthenticated_methods": [
+            "score",
+            "verifyChecksum",
+            "fieldStats"
+        ],
+        "model": "Reliability",
+        "requires_fixtures": [
+            "Users",
+            "Reliability"
+        ]
+    },
+    "api\/Products": {
+        "namespace": "App\\Controller\\Api",
+        "type": "api",
+        "file_path": "\/src\/Controller\/Api\/ProductsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "index",
+            "view"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Products",
+        "requires_fixtures": [
+            "Users",
+            "Products"
+        ]
+    },
+    "api\/Quiz": {
+        "namespace": "App\\Controller\\Api",
+        "type": "api",
+        "file_path": "\/src\/Controller\/Api\/QuizController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "beforeFilter",
+            "akinatorStart",
+            "akinatorNext",
+            "akinatorResult",
+            "comprehensiveSubmit"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Quiz",
+        "requires_fixtures": [
+            "Users",
+            "Quiz"
+        ]
+    },
+    "Comments": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/CommentsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "Comments",
+        "requires_fixtures": [
+            "Comments"
+        ]
+    },
+    "PageViews": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/PageViewsController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "index",
+            "view",
+            "add",
+            "edit",
+            "delete"
+        ],
+        "unauthenticated_methods": [],
+        "model": "PageViews",
+        "requires_fixtures": [
+            "PageViews"
+        ]
+    },
+    "LoginTest": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/LoginTestController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "index",
+            "login"
+        ],
+        "unauthenticated_methods": [
+            "index",
+            "login"
+        ],
+        "model": null,
+        "requires_fixtures": []
+    },
+    "Sitemap": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/SitemapController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "beforeFilter",
+            "viewClasses",
+            "index"
+        ],
+        "unauthenticated_methods": [
+            "index"
+        ],
+        "model": null,
+        "requires_fixtures": []
+    },
+    "Home": {
+        "namespace": "App\\Controller",
+        "type": "root",
+        "file_path": "\/src\/Controller\/HomeController.php",
+        "extends": "AppController",
+        "public_methods": [
+            "initialize",
+            "index"
+        ],
+        "unauthenticated_methods": [
+            "index"
+        ],
+        "model": null,
+        "requires_fixtures": []
+    }
+}

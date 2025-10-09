@@ -1,0 +1,11 @@
+# Git Tools - Ignore generated files and logs
+logs/*.log
+reports/*.txt
+reports/*.html
+archives/*.log
+archives/*.tar.gz
+config/*.tmp
+*.backup
+*.swp
+*~
+.DS_Store

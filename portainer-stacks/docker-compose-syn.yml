@@ -1,0 +1,216 @@
+# docker-compose-syn.yml
+# Synology NAS Deployment Configuration for WhatIsMyAdapter Stack
+# 
+# This configuration is optimized for Synology NAS environments with:
+# - User permissions set to UID:1034, GID:100 (Synology standard)
+# - Volume paths defaulting to /volume1/docker/whatismyadapter/*
+# - All services suffixed with -syn for namespace isolation
+# - Environment variables for all paths and sensitive data
+#
+# Required: Create a stack-syn.env file from stack-syn.env.template
+# and configure your environment-specific values before deployment.
+#
+# Security: No hardcoded paths, passwords, or secrets in this file.
+# All sensitive data must be provided via environment variables.
+#
+# DEPLOYMENT INSTRUCTIONS:
+# 1. Copy stack-syn.env.template to stack-syn.env
+# 2. Edit stack-syn.env with your environment-specific values
+# 3. Ensure volume paths exist with proper ownership (chown -R 1034:100)
+# 4. Deploy via Portainer using this file and the stack-syn.env file
+
+services:
+  willowcms-syn:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/willowcms/Dockerfile
+      args:
+        - UID=${PUID:-1034}
+        - GID=${PGID:-100}
+    image: ${WILLOWCMS_IMAGE:-whatismyadapter-syn:latest}
+    container_name: willowcms-syn
+    hostname: willowcms-syn
+    ports:
+      - "${WILLOW_HTTP_PORT:-8080}:80"
+    volumes:
+      - ${WILLOWCMS_APP_PATH:-/volume1/docker/whatismyadapter/app}:/var/www/html:rw
+      - ${WILLOWCMS_LOGS_PATH:-/volume1/docker/whatismyadapter/logs}:/var/www/html/logs:rw
+      - ${WILLOWCMS_TMP_PATH:-/volume1/docker/whatismyadapter/tmp}:/var/www/html/tmp:rw
+    user: "${PUID:-1034}:${PGID:-100}"
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - APP_NAME=${APP_NAME:-WhatIsMyAdapter}
+      - DEBUG=${DEBUG:-false}
+      - APP_ENCODING=UTF-8
+      - APP_DEFAULT_LOCALE=en_US
+      - APP_DEFAULT_TIMEZONE=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+      - SECURITY_SALT=${SECURITY_SALT}
+      - APP_FULL_BASE_URL=${APP_FULL_BASE_URL}
+      - DB_HOST=mysql-syn
+      - DB_USERNAME=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - DB_PORT=3306
+      - TEST_DB_HOST=mysql-syn
+      - TEST_DB_USERNAME=${MYSQL_USER}
+      - TEST_DB_PASSWORD=${MYSQL_PASSWORD}
+      - TEST_DB_DATABASE=${MYSQL_DATABASE}_test
+      - TEST_DB_PORT=3306
+      - EMAIL_HOST=mailpit-syn
+      - EMAIL_PORT=1025
+      - EMAIL_TIMEOUT=30
+      - EMAIL_REPLY=${EMAIL_REPLY:-hello@whatismyadapter.com}
+      - EMAIL_NOREPLY=${EMAIL_NOREPLY:-noreply@whatismyadapter.com}
+      - REDIS_HOST=redis-syn
+      - REDIS_PORT=6379
+      - REDIS_USERNAME=${REDIS_USERNAME:-default}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DATABASE=0
+      - REDIS_URL=redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@redis-syn:6379/0
+      - REDIS_TEST_URL=redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@redis-syn:6379/0
+      - QUEUE_DEFAULT_URL=redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@redis-syn:6379/0
+      - QUEUE_TEST_URL=redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@redis-syn:6379/0
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY:-}
+      - TRANSLATE_API_KEY=${TRANSLATE_API_KEY:-}
+      - WILLOW_ADMIN_USERNAME=${WILLOW_ADMIN_USERNAME:-admin}
+      - WILLOW_ADMIN_PASSWORD=${WILLOW_ADMIN_PASSWORD}
+      - WILLOW_ADMIN_EMAIL=${WILLOW_ADMIN_EMAIL}
+      - LOG_DEBUG_PATH=/var/www/html/logs
+      - LOG_ERROR_PATH=/var/www/html/logs
+      - LOG_QUERIES_PATH=/var/www/html/logs
+      - LOG_ADMIN_ACTIONS_PATH=/var/www/html/logs
+      - LOG_DEBUG_FILE=debug
+      - LOG_ERROR_FILE=error
+      - LOG_QUERIES_FILE=queries
+      - LOG_ADMIN_ACTIONS_FILE=bulk_actions
+      - LOG_DEBUG_LEVELS=notice,info,debug
+      - LOG_ERROR_LEVELS=warning,error,critical,alert,emergency
+      - EXPERIMENTAL_TESTS=${EXPERIMENTAL_TESTS:-Off}
+    depends_on:
+      redis-syn:
+        condition: service_healthy
+      mysql-syn:
+        condition: service_started
+    restart: unless-stopped
+    networks:
+      - whatismyadapter-syn-network
+
+  redis-syn:
+    image: redis:${REDIS_TAG:-7.2-alpine}
+    container_name: redis-syn
+    hostname: redis-syn
+    command: >
+      redis-server 
+      --requirepass ${REDIS_PASSWORD}
+      --appendonly yes
+      --save 900 1
+      --save 300 10
+      --save 60 10000
+    user: "${PUID:-1034}:${PGID:-100}"
+    environment:
+      - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+    healthcheck:
+      test: ["CMD-SHELL", 'redis-cli -a "$REDIS_PASSWORD" ping | grep PONG']
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - ${REDIS_DATA_PATH:-/volume1/docker/whatismyadapter/redis}:/data:rw
+    restart: unless-stopped
+    networks:
+      - whatismyadapter-syn-network
+
+  mysql-syn:
+    image: mysql:${MYSQL_IMAGE_TAG:-8.0}
+    container_name: mysql-syn
+    hostname: mysql-syn
+    platform: linux/amd64
+    ports:
+      - "${MYSQL_PORT:-3310}:3306"
+    volumes:
+      - ${MYSQL_DATA_PATH:-/volume1/docker/whatismyadapter/mysql}:/var/lib/mysql:rw
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_INNODB_LOG_FILE_SIZE=${MYSQL_INNODB_LOG_FILE_SIZE:-256M}
+      - MYSQL_INNODB_BUFFER_POOL_SIZE=${MYSQL_INNODB_BUFFER_POOL_SIZE:-256M}
+      - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --log-error=/var/log/mysql/error.log
+      --slow-query-log=1
+      --slow-query-log-file=/var/log/mysql/slow.log
+      --general-log=1
+      --general-log-file=/var/log/mysql/query.log
+    restart: unless-stopped
+    networks:
+      - whatismyadapter-syn-network
+
+  phpmyadmin-syn:
+    image: phpmyadmin:${PHPMYADMIN_IMAGE_TAG:-latest}
+    container_name: phpmyadmin-syn
+    hostname: phpmyadmin-syn
+    depends_on:
+      - mysql-syn
+    ports:
+      - "${PMA_HTTP_PORT:-8082}:80"
+    environment:
+      - PMA_HOST=mysql-syn
+      - PMA_USER=${PMA_USER:-root}
+      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - UPLOAD_LIMIT=${UPLOAD_LIMIT:-300M}
+      - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+    restart: unless-stopped
+    networks:
+      - whatismyadapter-syn-network
+
+  mailpit-syn:
+    image: axllent/mailpit:${MAILPIT_IMAGE_TAG:-latest}
+    container_name: mailpit-syn
+    hostname: mailpit-syn
+    ports:
+      - "${MAILPIT_SMTP_PORT:-1125}:1025"
+      - "${MAILPIT_HTTP_PORT:-8025}:8025"
+    user: "${PUID:-1034}:${PGID:-100}"
+    volumes:
+      - ${MAILPIT_DATA_PATH:-/volume1/docker/whatismyadapter/mailpit}:/data:rw
+    environment:
+      - MP_MAX_MESSAGES=${MP_MAX_MESSAGES:-5000}
+      - MP_DATABASE=/data/mailpit.db
+      - MP_SMTP_AUTH_ACCEPT_ANY=${MP_SMTP_AUTH_ACCEPT_ANY:-1}
+      - MP_SMTP_AUTH_ALLOW_INSECURE=${MP_SMTP_AUTH_ALLOW_INSECURE:-1}
+      - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+    restart: unless-stopped
+    networks:
+      - whatismyadapter-syn-network
+
+  redis-commander-syn:
+    image: rediscommander/redis-commander:${REDIS_COMMANDER_IMAGE_TAG:-latest}
+    container_name: redis-commander-syn
+    hostname: redis-commander-syn
+    depends_on:
+      redis-syn:
+        condition: service_healthy
+    ports:
+      - "${REDIS_COMMANDER_HTTP_PORT:-8084}:8081"
+    environment:
+      - REDIS_HOST=redis-syn
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - HTTP_USER=${REDIS_COMMANDER_USERNAME:-admin}
+      - HTTP_PASSWORD=${REDIS_COMMANDER_PASSWORD}
+      - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+    restart: unless-stopped
+    networks:
+      - whatismyadapter-syn-network
+
+networks:
+  whatismyadapter-syn-network:
+    driver: bridge
+    name: whatismyadapter-syn-network

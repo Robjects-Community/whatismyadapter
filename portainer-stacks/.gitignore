@@ -1,0 +1,24 @@
+# Prevent accidental commit of sensitive environment files
+.env
+.env.local
+.env.production
+.env.development
+.env.staging
+
+# Prevent accidental commit of generated passwords/secrets
+passwords.txt
+secrets.txt
+generated-env.txt
+
+# Prevent accidental commit of deployment logs
+deployment-*.log
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+
+# Backup files
+*.bak
+*.backup

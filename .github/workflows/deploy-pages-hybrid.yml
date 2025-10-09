@@ -1,0 +1,222 @@
+# Deploy WillowCMS to GitHub Pages - Hybrid Runner Strategy
+# This workflow uses self-hosted runners for build jobs and GitHub-hosted runners for deployment
+name: Deploy to GitHub Pages (Hybrid)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'docs/**'
+      - '_static/**'
+      - '.github/workflows/deploy-pages-hybrid.yml'
+  
+  workflow_dispatch:
+    inputs:
+      use_self_hosted:
+        description: 'Use self-hosted runners for builds'
+        type: boolean
+        required: false
+        default: true
+      export_limit:
+        description: 'Number of articles/products to export (0 = all)'
+        type: number
+        required: false
+        default: 50
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-hybrid"
+  cancel-in-progress: false
+
+jobs:
+  # Determine which runner to use based on availability
+  runner-selection:
+    runs-on: ubuntu-latest
+    outputs:
+      runner-type: ${{ steps.select.outputs.runner }}
+    steps:
+      - id: select
+        run: |
+          # Check if self-hosted runner should be used
+          if [[ "${{ inputs.use_self_hosted }}" == "true" || "${{ inputs.use_self_hosted }}" == "" ]]; then
+            echo "runner=['self-hosted', 'linux', 'willowcms']" >> $GITHUB_OUTPUT
+          else
+            echo "runner='ubuntu-latest'" >> $GITHUB_OUTPUT
+          fi
+
+  # Build job using self-hosted runner (preferred) or GitHub-hosted as fallback
+  build-content:
+    needs: runner-selection
+    runs-on: ${{ fromJSON(needs.runner-selection.outputs.runner-type) }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: export-content
+            type: cakephp
+          - name: build-docs
+            type: mkdocs
+          - name: build-blog
+            type: jekyll
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup build environment
+        run: |
+          echo "Setting up ${{ matrix.type }} build environment"
+          echo "Runner: ${{ runner.name }}"
+          echo "Runner OS: ${{ runner.os }}"
+          echo "Runner Arch: ${{ runner.arch }}"
+
+      # PHP/CakePHP setup (for export-content)
+      - name: Setup PHP
+        if: matrix.type == 'cakephp'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl, pdo_mysql, redis, gd, zip
+          tools: composer:v2
+
+      - name: Cache Composer dependencies
+        if: matrix.type == 'cakephp'
+        uses: actions/cache@v3
+        with:
+          path: app/vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('app/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install PHP dependencies
+        if: matrix.type == 'cakephp'
+        run: |
+          cd app
+          composer install --no-dev --optimize-autoloader
+
+      - name: Export CakePHP content
+        if: matrix.type == 'cakephp'
+        run: |
+          cd app
+          mkdir -p ../_static/{blog,pages,products,api,assets}
+          
+          # Mock export commands for demonstration
+          echo "Exporting content with limit: ${{ inputs.export_limit || 50 }}"
+          echo "Export completed" > ../_static/export.log
+
+      # Python/MkDocs setup (for build-docs)
+      - name: Setup Python
+        if: matrix.type == 'mkdocs'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install MkDocs
+        if: matrix.type == 'mkdocs'
+        run: |
+          pip install mkdocs mkdocs-material mkdocs-minify-plugin
+          pip install mkdocs-git-revision-date-localized-plugin
+
+      - name: Build documentation
+        if: matrix.type == 'mkdocs'
+        run: |
+          echo "Building MkDocs documentation"
+          mkdir -p _site/docs
+          echo "Docs built" > _site/docs/index.html
+
+      # Ruby/Jekyll setup (for build-blog)
+      - name: Setup Ruby
+        if: matrix.type == 'jekyll'
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+
+      - name: Build Jekyll blog
+        if: matrix.type == 'jekyll'
+        run: |
+          echo "Building Jekyll blog"
+          mkdir -p _site/blog
+          echo "Blog built" > _site/blog/index.html
+
+      # Upload artifacts for all build types
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.name }}-artifacts
+          path: |
+            _static/
+            _site/
+          retention-days: 1
+
+  # Combine all built content (runs on GitHub-hosted runner for reliability)
+  combine-artifacts:
+    runs-on: ubuntu-latest
+    needs: build-content
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts/
+
+      - name: Combine artifacts
+        run: |
+          echo "Combining all build artifacts"
+          mkdir -p _site
+          
+          # Merge all artifacts into _site directory
+          if [ -d "artifacts/export-content-artifacts/_static" ]; then
+            cp -r artifacts/export-content-artifacts/_static/* _site/ || true
+          fi
+          if [ -d "artifacts/build-docs-artifacts/_site" ]; then
+            cp -r artifacts/build-docs-artifacts/_site/* _site/ || true
+          fi
+          if [ -d "artifacts/build-blog-artifacts/_site" ]; then
+            cp -r artifacts/build-blog-artifacts/_site/* _site/ || true
+          fi
+          
+          # Create index page if not exists
+          if [ ! -f "_site/index.html" ]; then
+            echo "<h1>WillowCMS</h1>" > _site/index.html
+          fi
+
+      - name: Upload combined site
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: _site/
+
+  # Deploy to GitHub Pages (MUST run on GitHub-hosted runner)
+  deploy:
+    runs-on: ubuntu-latest
+    needs: combine-artifacts
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
+
+  # Cleanup job for self-hosted runners
+  cleanup:
+    runs-on: ${{ fromJSON(needs.runner-selection.outputs.runner-type) }}
+    needs: [runner-selection, deploy]
+    if: always()
+    steps:
+      - name: Clean workspace
+        run: |
+          echo "Cleaning up workspace"
+          # Only cleanup on self-hosted runners
+          if [[ "${{ runner.name }}" == *"self-hosted"* ]]; then
+            rm -rf _static _site artifacts
+            echo "Workspace cleaned"
+          fi

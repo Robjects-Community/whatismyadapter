@@ -1,99 +1,129 @@
 <?php
 declare(strict_types=1);
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link      https://cakephp.org CakePHP(tm) Project
- * @since     3.0.0
- * @license   https://opensource.org/licenses/mit-license.php MIT License
- */
+// Minimal CakePHP 5 test bootstrap
+// Sets up paths and loads application bootstrap for running PHPUnit tests.
 
-use Cake\Cache\Cache;
-use Cake\Chronos\Chronos;
 use Cake\Core\Configure;
-use Cake\Database\TypeFactory;
-use Cake\Datasource\ConnectionManager;
-use Cake\Queue\QueueManager;
-use Josegonzalez\Upload\Database\Type\FileType;
-use Migrations\TestSuite\Migrator;
 
-// Clear all caches before running tests
-Cache::clearAll();
-
-// Set a consistent timezone for tests
-date_default_timezone_set('UTC');
-
-/**
- * Test runner bootstrap.
- *
- * Add additional configuration/setup your application needs when running
- * unit tests in this file.
- */
-require dirname(__DIR__) . '/vendor/autoload.php';
-
-require dirname(__DIR__) . '/config/bootstrap.php';
-
-if (empty($_SERVER['HTTP_HOST']) && !Configure::read('App.fullBaseUrl')) {
-    Configure::write('App.fullBaseUrl', 'http://localhost');
+// Define directory separator if not defined
+if (!defined('DS')) {
+    define('DS', DIRECTORY_SEPARATOR);
 }
 
-// DebugKit skips settings these connection config if PHP SAPI is CLI / PHPDBG.
-// But since PagesControllerTest is run with debug enabled and DebugKit is loaded
-// in application, without setting up these config DebugKit errors out.
-ConnectionManager::setConfig('test_debug_kit', [
-    'className' => 'Cake\Database\Connection',
-    'driver' => 'Cake\Database\Driver\Sqlite',
-    'database' => TMP . 'debug_kit.sqlite',
+$root = dirname(__DIR__);
+
+// Composer autoload
+require $root . '/vendor/autoload.php';
+
+// Define core path constants if not already defined
+if (!defined('ROOT')) {
+    define('ROOT', $root);
+}
+if (!defined('APP')) {
+    define('APP', $root . '/src/');
+}
+if (!defined('CONFIG')) {
+    define('CONFIG', $root . '/config/');
+}
+if (!defined('TMP')) {
+    define('TMP', $root . '/tmp/');
+}
+if (!defined('LOGS')) {
+    define('LOGS', $root . '/logs/');
+}
+if (!defined('WWW_ROOT')) {
+    define('WWW_ROOT', $root . '/webroot/');
+}
+if (!defined('TESTS')) {
+    define('TESTS', $root . '/tests/');
+}
+
+// Ensure tmp directories exist
+@mkdir(TMP, 0775, true);
+@mkdir(LOGS, 0775, true);
+
+// Load application bootstrap
+require CONFIG . 'bootstrap.php';
+
+// Configure in-memory SQLite for test connection
+use Cake\Datasource\ConnectionManager;
+if (in_array('test', ConnectionManager::configured() ?? [], true)) {
+    ConnectionManager::drop('test');
+}
+ConnectionManager::setConfig('test', [
+    'className' => Cake\Database\Connection::class,
+    'driver' => Cake\Database\Driver\Sqlite::class,
+    'database' => ':memory:',
     'encoding' => 'utf8',
     'cacheMetadata' => true,
     'quoteIdentifiers' => false,
+    'log' => false,
 ]);
 
-ConnectionManager::alias('test_debug_kit', 'debug_kit');
+// Make the test connection the default ORM connection during tests
+ConnectionManager::alias('test', 'default');
+Configure::write('App.defaultConnection', 'test');
 
-// Fixate now to avoid one-second-leap-issues
-Chronos::setTestNow(Chronos::now());
+// Rely on fixtures to create/drop tables; avoid preloading schema to keep SQLite setup minimal
 
-// Fixate sessionid early on, as php7.2+
-// does not allow the sessionid to be set after stdout
-// has been written to.
-session_id('cli');
+// Additionally, create minimal SQLite tables that our tests depend on when they don't exist yet.
+// CakePHP 5 fixtures reflect schema from the connection by default, so we ensure the essential tables exist.
+try {
+    /** @var \Cake\Database\Connection $conn */
+    $conn = \Cake\Datasource\ConnectionManager::get('test');
 
-// Ensure the Upload plugin is loaded for tests
-Configure::write('Plugin.Upload', ['bootstrap' => true]);
+    // ai_metrics table
+    $conn->execute(
+        "CREATE TABLE IF NOT EXISTS ai_metrics (
+            id CHAR(36) PRIMARY KEY,
+            task_type VARCHAR(50) NOT NULL,
+            execution_time_ms INTEGER NULL,
+            tokens_used INTEGER NULL,
+            cost_usd DECIMAL(10,6) NULL,
+            success BOOLEAN NOT NULL DEFAULT 1,
+            error_message TEXT NULL,
+            model_used VARCHAR(50) NULL,
+            created DATETIME NOT NULL,
+            modified DATETIME NOT NULL
+        )"
+    );
 
-// Register the custom database type for 'upload.file'
-TypeFactory::map('upload.file', FileType::class);
+    // comments table
+    $conn->execute(
+        "CREATE TABLE IF NOT EXISTS comments (
+            id CHAR(36) PRIMARY KEY,
+            foreign_key CHAR(36) NOT NULL,
+            model VARCHAR(255) NOT NULL,
+            user_id CHAR(36) NOT NULL,
+            content TEXT NOT NULL,
+            display BOOLEAN NOT NULL DEFAULT 1,
+            is_inappropriate BOOLEAN NOT NULL DEFAULT 0,
+            is_analyzed BOOLEAN NOT NULL DEFAULT 0,
+            inappropriate_reason VARCHAR(300) NULL,
+            created DATETIME NULL,
+            modified DATETIME NULL,
+            created_by CHAR(36) NULL,
+            modified_by CHAR(36) NULL
+        )"
+    );
 
-// Use migrations to build test database schema.
-//
-// Will rebuild the database if the migration state differs
-// from the migration history in files.
-//
-// If you are not using CakePHP's migrations you can
-// hook into your migration tool of choice here or
-// load schema from a SQL dump file with
-// use Cake\TestSuite\Fixture\SchemaLoader;
-// (new SchemaLoader())->loadSqlFiles('./tests/schema.sql', 'test');
-
-(new Migrator())->run();
-
-// Switch queue connection for testing
-if (env('CAKE_ENV') === 'test') {
-    Configure::write('Queue.default', Configure::read('Queue.test'));
+    // email_templates table
+    $conn->execute(
+        "CREATE TABLE IF NOT EXISTS email_templates (
+            id CHAR(36) PRIMARY KEY,
+            template_identifier VARCHAR(50) NULL,
+            name VARCHAR(255) NOT NULL,
+            subject VARCHAR(255) NOT NULL,
+            body_html TEXT NULL,
+            body_plain TEXT NULL,
+            created DATETIME NOT NULL,
+            modified DATETIME NOT NULL
+        )"
+    );
+} catch (\Throwable $e) {
+    // Ignore table creation issues in bootstrap; tests will surface actionable errors
 }
 
-QueueManager::setConfig('default', Configure::read('Queue.default') ?: [
-    'url' => 'null://localhost',
-    'queue' => 'test_queue',
-    'logger' => false,
-    'receiveTimeout' => 0,
-    'storeFailedJobs' => false,
-]);
+// Force test env settings
+Configure::write('debug', true);

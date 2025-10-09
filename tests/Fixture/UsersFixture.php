@@ -5,54 +5,40 @@ namespace App\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
 
-/**
- * UsersFixture
- */
 class UsersFixture extends TestFixture
 {
-    /**
-     * Table schema
-     *
-     * @var array
-     */
-    protected array $schema = [
-        'id' => ['type' => 'uuid', 'null' => false],
-        'email' => ['type' => 'string', 'length' => 255, 'null' => false],
-        'username' => ['type' => 'string', 'length' => 255, 'null' => false],
-        'password' => ['type' => 'string', 'length' => 255, 'null' => false],
-        'is_admin' => ['type' => 'boolean', 'null' => false, 'default' => false],
-        'active' => ['type' => 'boolean', 'null' => false, 'default' => true],
-        'created' => ['type' => 'datetime', 'null' => false],
-        'modified' => ['type' => 'datetime', 'null' => false],
-        '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id']],
-        ],
-    ];
+    public string $table = 'users';
 
-    /**
-     * Init method
-     *
-     * @return void
-     */
     public function init(): void
     {
         $this->records = [
             [
-                'id' => '2d3bf4a6-a2dc-47a4-b817-dd7af2ed485d',
+                'id' => '00000000-0000-0000-0000-000000000001',
+                'username' => 'admin',
+                'password' => '$2y$10$abcdefghijklmnopqrstuv',
+                'email' => 'admin@example.com',
+                'role' => 'admin',
                 'is_admin' => 1,
-                'email' => 'Lorem ipsum dolor sit amet',
-                'password' => 'Lorem ipsum dolor sit amet',
-                'image' => '',
-                'alt_text' => 'Lorem ipsum dolor sit amet',
-                'keywords' => 'Lorem ipsum dolor sit amet',
-                'name' => 'Lorem ipsum dolor sit amet',
-                'dir' => 'Lorem ipsum dolor sit amet',
-                'size' => 1,
-                'mime' => 'Lorem ipsum dolor sit amet',
-                'created' => '2025-07-12 21:49:10',
-                'modified' => '2025-07-12 21:49:10',
-                'username' => 'Lorem ipsum dolor sit amet',
                 'active' => 1,
+                'image' => null,
+                'keywords' => null,
+                'alt_text' => null,
+                'created' => '2025-08-10 00:00:00',
+                'modified' => '2025-08-10 00:00:00',
+            ],
+            [
+                'id' => '00000000-0000-0000-0000-000000000002',
+                'username' => 'user',
+                'password' => '$2y$10$abcdefghijklmnopqrstuv',
+                'email' => 'user@example.com',
+                'role' => 'user',
+                'is_admin' => 0,
+                'active' => 1,
+                'image' => null,
+                'keywords' => null,
+                'alt_text' => null,
+                'created' => '2025-08-10 00:00:00',
+                'modified' => '2025-08-10 00:00:00',
             ],
         ];
         parent::init();
