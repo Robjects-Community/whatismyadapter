@@ -89,6 +89,7 @@ source "${MODULE_DIR}/asset_management.sh"  # New module
 source "${MODULE_DIR}/log_management.sh"  # Log management module
 source "${MODULE_DIR}/system.sh"
 source "${MODULE_DIR}/docker_management.sh"  # Docker management module
+source "${MODULE_DIR}/debugging.sh"  # Debugging module
 
 # Start the main function
 main
