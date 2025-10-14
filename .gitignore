@@ -1038,3 +1038,8 @@ tmp/coverage
 tmp
 .warpindexingignore
 app/config/Migrations/schema-dump-default.lock
+
+# Warp IDE configuration files
+.warp/
+.warpindexingignore
+docker-compose.override.yml.example
