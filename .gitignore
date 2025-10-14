@@ -168,6 +168,21 @@ project_mysql_backups/
 *.dump
 docker-compose-*.yml
 
+# Comprehensive .env file protection
+**/.env
+**/.env.*
+**/stack.env
+**/stack.env.*
+tools/backup/**/.env
+tools/backup/**/stack.env
+tools/deployment/**/.env
+tools/**/stack.env
+actions-runner/.env
+app/config/.env
+cakephp/config/.env
+portainer-stacks/.env
+blue-waterfall-*/.env
+
 # CakePHP Book
 CakePHPBook.txt
 
