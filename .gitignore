@@ -877,3 +877,13 @@ cakephp/dump.rdb
 generated-image.png
 ROUTE_OPTIMIZATION_RECOMMENDATIONS.md
 dump.rdb
+
+# Cloudflare Workers/Pages (intentionally disabled - see DEPLOYMENT.md) #
+########################################################################
+# wrangler.toml - kept in repo to disable auto-deployments
+# .cfignore - kept in repo to prevent file uploads
+.wrangler/
+wrangler.toml.bak
+dist/
+worker-*.js
+*.worker.js

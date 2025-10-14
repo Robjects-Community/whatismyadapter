@@ -1,0 +1,27 @@
+# Cloudflare Workers Configuration
+# 
+# This project is a PHP CakePHP application that cannot run on Cloudflare Workers.
+# Cloudflare Workers is a serverless JavaScript/WebAssembly platform, while this
+# application requires:
+# - PHP 8.1+ runtime
+# - MySQL database
+# - Redis for caching and queues
+# - Full filesystem access for uploads/cache
+# - Long-running processes (queue workers)
+#
+# This configuration file exists to prevent automatic deployment attempts
+# by the Cloudflare Workers GitHub integration.
+#
+# DEPLOYMENT OPTIONS:
+# 1. Use Docker Compose (recommended) - see docker-compose.yml
+# 2. Deploy to traditional PHP hosting (shared hosting, VPS, cloud instances)
+# 3. Use Cloudflare Pages for static documentation site only
+#
+# For deployment documentation, see DEPLOYMENT.md
+
+# Explicitly disable worker deployment
+name = "whatismyadapter-disabled"
+compatibility_date = "2025-10-09"
+
+# Note: No main entry point specified - deployment will fail by design
+# This prevents accidental deployments of incompatible code to Cloudflare Workers

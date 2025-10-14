@@ -1,0 +1,14 @@
+# Cloudflare Ignore File
+# This file prevents Cloudflare Workers/Pages from attempting to deploy
+# files that are not compatible with the platform.
+#
+# NOTE: This entire repository is incompatible with Cloudflare Workers
+# because it's a PHP CakePHP application. See DEPLOYMENT.md for proper
+# deployment instructions.
+
+# Ignore everything - this is a PHP application, not a Worker
+*
+
+# If you want to deploy static docs to Cloudflare Pages in the future,
+# you could create a separate /docs-static folder and exclude it above:
+# !docs-static/**
