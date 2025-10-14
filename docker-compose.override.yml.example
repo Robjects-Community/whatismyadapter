@@ -160,20 +160,20 @@ services:
 
   # 🏗️ Jenkins CI/CD (Optional)
   # Uncomment to add Jenkins for continuous integration
-  # jenkins:
-  #   image: jenkins/jenkins:lts
-  #   user: root
-  #   environment:
-  #     - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
-  #   volumes:
-  #     - jenkins_home:/var/jenkins_home
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - ./jenkins/plugins.txt:/usr/share/jenkins/ref/plugins.txt
-  #   ports:
-  #     - "8081:8080"
-  #     - "50000:50000"
-  #   networks:
-  #     - willowcms
+  jenkins-override:
+    image: jenkins/jenkins:lts
+    user: root
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./jenkins/plugins.txt:/usr/share/jenkins/ref/plugins.txt
+    ports:
+      - "${JENKINS_OVERRIDE_HTTP_PORT:-8087}:8080"
+      - "${JENKINS_OVERRIDE_AGENT_PORT:-50004}:50000"
+    networks:
+      - willowcms
 
 # ========================================
 # 📁 Additional Volumes
@@ -182,8 +182,8 @@ volumes:
   # Uncomment to define additional volumes
   # redis_data:
   #   driver: local
-  # jenkins_home:
-  #   driver: local
+  jenkins_home:
+    driver: local
   # custom_mysql_data:
   #   driver: local
 

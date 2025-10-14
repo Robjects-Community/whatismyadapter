@@ -1,5 +1,22 @@
 services:
 
+  jenkins-alt:
+    image: docker.io/garzarobmdocker/jenkins:latest
+    build:
+      context: .
+      dockerfile: infrastructure/docker/jenkins/Dockerfile
+    ports:
+      - '${JENKINS_ALT_HTTP_PORT:-8083}:8080'
+      - '${JENKINS_ALT_AGENT_PORT:-50001}:50000'
+    volumes:
+      - jenkins_alt_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./infrastructure/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+    environment:
+      - JAVA_OPTS=${JAVA_OPTS}
+    privileged: true
+    user: root
+
   willowcms:
     build:
       context: .
@@ -156,141 +173,6 @@ volumes:
   jenkins_home:
   jenkins_alt_home:
   mailpit_data:
-# services:
-#   willowcms:
-#     image: ${WILLOWCMS_IMAGE:-ghcr.io/robjects-community/whatismyadapter_cms}:${WILLOWCMS_TAG:-pre-willowcms-beta}
-#     build:
-#       context: .
-#       dockerfile: infrastructure/docker/willowcms/Dockerfile
-#       args:
-#         UID: ${UID:-1000}
-#         GID: ${GID:-1000}
-#     ports:
-#       - '8080:80'
-#     volumes:
-#       - .:/var/www/html/
-#       - ./infrastructure/docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
-#       - ./infrastructure/docker/willowcms/config/nginx/logs:/var/log/nginx/
-#     environment:
-#       - APP_NAME=WillowCMS
-#       - DEBUG=true
-#       - APP_ENCODING=UTF-8
-#       - APP_DEFAULT_LOCALE=en_GB
-#       - APP_DEFAULT_TIMEZONE=Europe/London
-#       - SECURITY_SALT=developmentsalt
-#       - DB_HOST=mysql
-#       - DB_USERNAME=cms_user
-#       - DB_PASSWORD=password
-#       - DB_DATABASE=cms
-#       - DB_PORT=3306
-#       - TEST_DB_HOST=mysql
-#       - TEST_DB_USERNAME=cms_user_test
-#       - TEST_DB_PASSWORD=password
-#       - TEST_DB_DATABASE=cms_test
-#       - TEST_DB_PORT=3306
-#       - EMAIL_HOST=mailpit
-#       - EMAIL_PORT=1025
-#       - EMAIL_TIMEOUT=30
-#       - EMAIL_USERNAME=
-#       - EMAIL_PASSWORD=
-#       - EMAIL_REPLY=hello@willowcms.app
-#       - EMAIL_NOREPLY=noreply@willowcms.app
-#       - REDIS_USERNAME=root
-#       - REDIS_PASSWORD=root
-#       - REDIS_HOST=127.0.0.1
-#       - REDIS_PORT=6379
-#       - REDIS_DATABASE=0
-#       - REDIS_URL=redis://root:root@127.0.0.1:6379/0
-#       - REDIS_TEST_URL=redis://root:root@127.0.0.1:6379/0
-#       - YOUTUBE_API_KEY=
-#       - TRANSLATE_API_KEY=
-#       - QUEUE_DEFAULT_URL=redis://root:root@127.0.0.1:6379/0
-#       - QUEUE_TEST_URL=redis://root:root@127.0.0.1
-#       # - APP_NAME=${APP_NAME}
-#       # - DEBUG=${DEBUG}
-#       # - APP_ENCODING=${APP_ENCODING}
-#       # - APP_DEFAULT_LOCALE=${APP_DEFAULT_LOCALE}
-#       # - APP_DEFAULT_TIMEZONE=${APP_DEFAULT_TIMEZONE}
-#       # - APP_FULL_BASE_URL=${APP_FULL_BASE_URL}
-#       # - SECURITY_SALT=${SECURITY_SALT}
-#       # - DB_HOST=${DB_HOST}
-#       # - DB_USERNAME=${DB_USERNAME}
-#       # - DB_PASSWORD=${DB_PASSWORD}
-#       # - DB_DATABASE=${DB_DATABASE}
-#       # - DB_PORT=${DB_PORT}
-#       # - TEST_DB_HOST=${TEST_DB_HOST}
-#       # - TEST_DB_USERNAME=${TEST_DB_USERNAME}
-#       # - TEST_DB_PASSWORD=${TEST_DB_PASSWORD}
-#       # - TEST_DB_DATABASE=${TEST_DB_DATABASE}
-#       # - TEST_DB_PORT=${TEST_DB_PORT}
-#       # - EMAIL_HOST=${EMAIL_HOST}
-#       # - EMAIL_PORT=${EMAIL_PORT}
-#       # - EMAIL_TIMEOUT=${EMAIL_TIMEOUT}
-#       # - EMAIL_USERNAME=${EMAIL_USERNAME}
-#       # - EMAIL_PASSWORD=${EMAIL_PASSWORD}
-#       # - EMAIL_REPLY=${EMAIL_REPLY}
-#       # - EMAIL_NOREPLY=${EMAIL_NOREPLY}
-#       # - REDIS_USERNAME=${REDIS_USERNAME}
-#       # - REDIS_PASSWORD=${REDIS_PASSWORD}
-#       # - REDIS_HOST=${REDIS_HOST}
-#       # - REDIS_PORT=${REDIS_PORT}
-#       # - REDIS_DATABASE=${REDIS_DATABASE}
-#       # - REDIS_URL=${REDIS_URL}
-#       # - REDIS_TEST_URL=${REDIS_TEST_URL}
-#       # - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
-#       # - TRANSLATE_API_KEY=${TRANSLATE_API_KEY}
-#       # - QUEUE_DEFAULT_URL=${QUEUE_DEFAULT_URL}
-#       # - QUEUE_TEST_URL=${QUEUE_TEST_URL}
-#       # - WILLOW_ADMIN_USERNAME=${WILLOW_ADMIN_USERNAME}
-#       # - WILLOW_ADMIN_PASSWORD=${WILLOW_ADMIN_PASSWORD}
-#       # - WILLOW_ADMIN_EMAIL=${WILLOW_ADMIN_EMAIL}
-#       # - EXPERIMENTAL_TESTS=${EXPERIMENTAL_TESTS}
-#     env_file:
-#       - ./config/.env
-
-#   mysql:
-#     image: mysql:8.4.3
-#     ports:
-#       - '3310:3306'
-#     volumes:
-#       - mysql_data:/var/lib/mysql
-#       - ./infrastructure/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
-#     environment:
-#       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-#       - DB_USERNAME=${DB_USERNAME}
-#       - DB_PASSWORD=${DB_PASSWORD}
-#       - DB_DATABASE=${DB_DATABASE}
-#     env_file:
-#       - ./config/.env
-#     platform: linux/amd64
-
-#   phpmyadmin:
-#     image: phpmyadmin
-#     ports:
-#       - '8082:80'
-#     environment:
-#       - PMA_HOST=${PMA_HOST}
-#       - PMA_USER=${PMA_USER}
-#       - PMA_PASSWORD=${PMA_PASSWORD}
-#       - UPLOAD_LIMIT=${UPLOAD_LIMIT}
-#     env_file:
-#       - ./config/.env
-
-  jenkins-alt:
-    image: docker.io/garzarobmdocker/jenkins:latest
-    build:
-      context: .
-      dockerfile: infrastructure/docker/jenkins/Dockerfile
-    ports:
-      - '${JENKINS_ALT_HTTP_PORT:-8083}:8080'
-      - '${JENKINS_ALT_AGENT_PORT:-50001}:50000'
-    volumes:
-      - jenkins_alt_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./infrastructure/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
-    environment:
-      - JAVA_OPTS=${JAVA_OPTS}
-    privileged: true
     user: root
 
 #   mailpit:

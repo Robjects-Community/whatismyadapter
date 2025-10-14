@@ -1034,3 +1034,7 @@ app/tmp/cache/settings/cms_settings_setting_Users_registrationEnabled
 app/logs/database_log_errors.log
 app/logs/error.log
 .warpindexingignore
+tmp/coverage
+tmp
+.warpindexingignore
+app/config/Migrations/schema-dump-default.lock
