@@ -1,2 +1,0 @@
-timestamp,connector_type_a,connector_type_b,supports_usb_pd,max_power_delivery,usb_version,supports_displayport,supports_hdmi,supports_alt_mode,supports_thunderbolt,supports_quick_charge,supports_audio
-2024-11-02 10:11:32.817581,USB-C,USB-A,True,20V/5A,USB 3.1,True,False,True,False,True,True

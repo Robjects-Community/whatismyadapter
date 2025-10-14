@@ -1,0 +1,61 @@
+{#
+/**
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://cakephp.org CakePHP(tm) Project
+ * @since         2.0.0
+ * @license       https://www.opensource.org/licenses/mit-license.php MIT License
+ */
+#}
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function index(): ?Response
+    {
+        $statusFilter = $this->request->getQuery('status');
+{% set belongsTo = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
+{% if belongsTo %}
+        $query = $this->{{ currentModelName }}->find()
+            ->contain({{ Bake.exportArray(belongsTo)|raw }});
+{% else %}
+        $query = $this->{{ currentModelName }}->find()
+            ->select([
+{% for column in modelObj.getSchema().columns() %}
+                '{{ name }}.{{ column }}',
+{% endfor %}
+            ]);
+{% endif %}
+
+        
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $query->where([
+                'OR' => [
+{% for field in searchFields %}
+                    '{{ name }}.{{ field }} LIKE' => '%' . $search . '%',
+{% endfor %}
+                ],
+            ]);
+        }
+        ${{ pluralName }} = $this->paginate($query);
+        if ($this->request->is('ajax')) {
+            $this->set(compact('{{ pluralName }}', 'search'));
+            $this->viewBuilder()->setLayout('ajax');
+
+            return $this->render('search_results');
+        }
+{% if Bake.hasPlugin('Authorization') %}
+        $query = $this->Authorization->applyScope($query);
+{% endif %}
+        $this->set(compact('{{ pluralName }}'));
+
+        return null;
+    }

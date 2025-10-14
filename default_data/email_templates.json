@@ -1,0 +1,18 @@
+[
+    {
+        "id": "a29a3f40-302a-46f4-a01b-f87df65af7e1",
+        "template_identifier": null,
+        "name": "Confirm your email",
+        "subject": "Confirm your email",
+        "body_html": "<p>Hello {username}!</p><p>Thanks for registering, please use the link below to confirm your email.</p><p>&lt;a href=\"{confirm_email_link}\"&gt;{confirm_email_link}&lt;/a&gt;</p><p>Thanks!</p><p>Matt</p>",
+        "body_plain": "Hello {username}!Thanks for registering, please use the link below to confirm your email.<a href=\"{confirm_email_link}\">{confirm_email_link}</a>Thanks!Matt"
+    },
+    {
+        "id": "e2fd7d3b-ab3f-46a1-bc95-dbd06e4bb217",
+        "template_identifier": null,
+        "name": "Reset Your Password",
+        "subject": "Reset Your Password",
+        "body_html": "<p>Hello {username}!</p><p>Use the link below to reset your password.</p><p>&lt;a href=\"{reset_password_link}\"&gt;{reset_password_link}&lt;/a&gt;</p><p>Thanks,<br></p><p>Matt</p>",
+        "body_plain": "Hello {username}!Use the link below to reset your password.<a href=\"{reset_password_link}\">{reset_password_link}</a>Thanks,Matt"
+    }
+]

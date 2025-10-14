@@ -1,0 +1,193 @@
+# CakePHP Shells
+
+# Usage: cake_shell some_command --option 'value'
+#        cake_shell bake migration_snapshot Initial
+cake_shell() {
+    local cmd="docker compose exec willowcms bin/cake"
+    if [ "$#" -gt 0 ]; then
+        # Corrected quoting for arguments passed to bin/cake
+        # Each argument should be individually quoted if it contains spaces.
+        # This loop handles arguments more robustly for the 'bin/cake' command.
+        local args_string=""
+        for arg in "$@"; do
+            args_string="$args_string \"$arg\"" # Quote each argument
+        done
+        cmd="$cmd$args_string"
+    fi
+    eval "$cmd"
+}
+# Usage: willowcms_exec some_command --arg1 "value with spaces"
+willowcms_exec() {
+    local cmd_base="docker compose exec willowcms"
+    # For willowcms_exec, we pass the command and its arguments as separate arguments to 'docker compose exec'.
+    # 'docker compose exec' will then execute the first argument as the command inside the container,
+    # and the rest as arguments to that command.
+    # No complex eval or string building is needed here if we pass arguments directly.
+    if [ "$#" -gt 0 ]; then
+        docker compose exec willowcms "$@"
+    else
+        # Handle case where willowcms_exec is called without arguments if that's intended to do something
+        # or just let it error if it's not valid.
+        # For now, assuming it always needs at least one argument (the command to run).
+        echo "willowcms_exec: Missing command to execute." >&2
+        return 1
+    fi
+}
+
+alias willowcms_shell='docker compose exec -it willowcms /bin/sh'
+
+# Testing Commands
+# Usage:
+#   phpunit
+#   phpunit MyTest
+#   phpunit MyTest.php
+#   phpunit --filter testMyMethod MyTest
+phpunit() {
+    if [ "$#" -gt 0 ]; then
+        local -a args=("$@")
+        local last_i=$((${#args[@]} - 1))
+        local last="${args[$last_i]}"
+
+        # Only try to resolve when the last arg is not an option and has no path
+        case "$last" in
+            -*|*/*) : ;;
+            *)
+                local resolved=""
+                # Try common candidates
+                for cand in \
+                    "$last" \
+                    "tests/TestCase/$last" \
+                    "tests/TestCase/${last%.*}.php" \
+                    "tests/TestCase/${last%.*}Test.php"
+                do
+                    [ -f "$cand" ] && { resolved="$cand"; break; }
+                done
+                # Fallback to find
+                if [ -z "$resolved" ]; then
+                    if printf %s "$last" | grep -q '\.php$'; then
+                        resolved=$(find tests/TestCase -type f -name "$last" -print -quit 2>/dev/null)
+                    else
+                        resolved=$(find tests/TestCase -type f \( \
+                            -name "${last}Test.php" -o \
+                            -name "${last}.php" -o \
+                            -name "*${last}*Test.php" -o \
+                            -name "*${last}*.php" \
+                        \) -print -quit 2>/dev/null)
+                    fi
+                fi
+                if [ -n "$resolved" ]; then
+                    resolved="${resolved#./}"
+                    args[$last_i]="$resolved"
+                fi
+            ;;
+        esac
+
+        willowcms_exec php vendor/bin/phpunit "${args[@]}"
+    else
+        willowcms_exec php vendor/bin/phpunit
+    fi
+}
+
+alias phpunit_cov='phpunit --coverage-text'
+alias phpunit_cov_html='phpunit --coverage-html webroot/coverage tests/TestCase/'
+
+# Code Quality Commands
+alias composer_cs_check='willowcms_exec composer cs-check'
+alias composer_cs_fix='willowcms_exec composer cs-fix'
+alias phpcs_sniff='willowcms_exec php vendor/bin/phpcs --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/'
+alias phpcs_fix='willowcms_exec php vendor/bin/phpcbf'
+alias phpstan_analyse='willowcms_exec php vendor/bin/phpstan analyse src/'
+
+# Composer Commands
+alias composer_update='willowcms_exec composer update'
+
+# Queue Worker
+alias cake_queue_worker='willowcms_exec bin/cake queue worker'
+alias cake_queue_worker_verbose='willowcms_exec bin/cake queue worker --verbose'
+
+# Set permissions for specific directories (executed inside the container)
+alias set_permissions='willowcms_exec chmod -R 777 tmp logs webroot' # Be cautious with 777
+
+# Quick BashRC Edits
+alias edit_bashrc='nano ~/.bashrc'
+alias reload_bashrc='source ~/.bashrc'
+
+# Docker Management
+alias docker_names='docker container ls -a --format "{{.Names}}"'
+alias docker_prune='docker system prune -a'
+alias docker_up='docker compose up -d'
+alias docker_down='docker compose down'
+alias docker_downv='docker compose down -v'
+alias docker_logs='docker compose logs -f'
+alias docker_dev_prune='docker system prune -a'
+alias docker_dev_build='docker compose --env-file ./config/.env build'
+alias docker_dev_up='docker compose --env-file ./config/.env up --build'
+alias docker_dev_restart='docker compose --env-file ./config/.env restart'
+alias docker_dev_prune='docker compose down && docker system prune -a'
+alias docker_dev_down='docker compose down -v'
+
+
+
+# Git Commands
+alias gs='git status'
+alias gp='git pull'
+alias gc='git commit'
+alias gd='git diff'
+
+# CakePHP Bake Commands
+cake_bake_model() {
+    cake_shell bake model "$@"
+}
+cake_bake_controller() {
+    cake_shell bake controller "$@"
+}
+cake_bake_template() {
+    cake_shell bake template "$@"
+}
+cake_bake_migration() {
+    cake_shell bake migration "$@"
+}
+
+# CakePHP Cache and Migrations
+alias cake_clear_cache='cake_shell cache clear_all'
+alias cake_migrate='cake_shell migrations migrate'
+alias cake_rollback='cake_shell migrations rollback'
+
+bake_snapshot() {
+    cake_shell bake migration_snapshot "$@"
+}
+bake_diff() {
+    cake_shell bake migration_diff "$@"
+}
+
+# i18n Commands
+alias i18n_extract='willowcms_exec bin/cake i18n extract --paths /var/www/html/src,/var/www/html/plugins,/var/www/html/templates'
+alias i18n_load='willowcms_exec bin/cake load_default18n'
+alias i18n_translate='willowcms_exec bin/cake translate_i18n'
+alias i18n_gen_po='willowcms_exec bin/cake generate_po_files'
+
+# default data Commands
+alias export_data='willowcms_exec bin/cake default_data_export'
+
+# Change ownership of current directory to current user on the host
+change_ownership() {
+    local current_user
+    local current_group
+    current_user=$(whoami)
+    current_group=$(id -gn)
+    if command -v sudo >/dev/null && sudo -n true 2>/dev/null; then
+        sudo chown -R "$current_user:$current_group" .
+    elif command -v sudo >/dev/null; then
+        echo "Sudo requires a password or is not configured for passwordless operation."
+        echo "Attempting chown with sudo (password may be required):"
+        sudo chown -R "$current_user:$current_group" .
+    else
+        echo "Sudo not available. Attempting chown without sudo (may fail due to permissions):"
+        chown -R "$current_user:$current_group" .
+    fi
+    if [ $? -eq 0 ]; then
+        echo "Ownership of current directory and subdirectories set to $current_user:$current_group."
+    else
+        echo "Failed to change ownership. Please check permissions or run with sudo if necessary."
+    fi
+}

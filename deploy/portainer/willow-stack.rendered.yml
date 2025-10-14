@@ -1,0 +1,356 @@
+services:
+  jenkins:
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: "2147483648"
+        reservations:
+          cpus: "0.5"
+          memory: "536870912"
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -f http://localhost:8080/login || exit 1
+      timeout: 7s
+      interval: 15s
+      retries: 6
+      start_period: 1m0s
+    image: jenkins:stack
+    networks:
+      willow_port_net: null
+    ports:
+      - mode: host
+        target: 8080
+        published: 7772
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: jenkins_home
+        target: /var/jenkins_home
+        volume: {}
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /Users/mikey/Docs/git-repo-loc/docker-hub/adaptercms-beta/willow-whatismyadapter/WhatIsMyAdaptor/docker/jenkins/jenkins.yaml
+        target: /var/jenkins_home/jenkins.yaml
+        read_only: true
+        bind:
+          create_host_path: true
+  mailpit:
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "268435456"
+        reservations:
+          cpus: "0.1"
+          memory: "67108864"
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      MP_DATABASE: /data/mailpit.db
+      MP_MAX_MESSAGES: "5000"
+      MP_SMTP_AUTH_ACCEPT_ANY: "1"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "1"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q -O- http://localhost:8025/ || exit 1
+      timeout: 5s
+      interval: 10s
+      retries: 6
+      start_period: 15s
+    image: axllent/mailpit:latest
+    networks:
+      willow_port_net: null
+    ports:
+      - mode: host
+        target: 8025
+        published: 7773
+        protocol: tcp
+      - mode: host
+        target: 1025
+        published: 7725
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: mailpit_data
+        target: /data
+        volume: {}
+  mysql:
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --mysql-native-password=ON
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1073741824"
+        reservations:
+          cpus: "0.25"
+          memory: "268435456"
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      DB_DATABASE: cms
+      DB_PASSWORD: password
+      DB_USERNAME: cms_user
+      MYSQL_DATABASE: cms
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: cms_user
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - mysqladmin ping -h localhost -u root -ppassword || exit 1
+      timeout: 5s
+      interval: 10s
+      retries: 5
+      start_period: 30s
+    image: mysql:8.4.3
+    networks:
+      willow_port_net: null
+    ports:
+      - mode: host
+        target: 3306
+        published: 7710
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: mysql_data
+        target: /var/lib/mysql
+        volume: {}
+      - type: bind
+        source: /Users/mikey/Docs/git-repo-loc/docker-hub/adaptercms-beta/willow-whatismyadapter/WhatIsMyAdaptor/docker/mysql/init.sql
+        target: /docker-entrypoint-initdb.d/init.sql
+        read_only: true
+        bind:
+          create_host_path: true
+  phpmyadmin:
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "536870912"
+        reservations:
+          cpus: "0.1"
+          memory: "67108864"
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      PMA_ABSOLUTE_URI: http://localhost:7771/
+      PMA_HOST: mysql
+      PMA_PASSWORD: password
+      PMA_USER: root
+      UPLOAD_LIMIT: 300M
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -f http://localhost/ || exit 1
+      timeout: 5s
+      interval: 10s
+      retries: 6
+      start_period: 20s
+    image: phpmyadmin
+    networks:
+      willow_port_net: null
+    ports:
+      - mode: host
+        target: 80
+        published: 7771
+        protocol: tcp
+  redis:
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --requirepass
+      - root
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "268435456"
+        reservations:
+          cpus: "0.1"
+          memory: "67108864"
+      placement:
+        constraints:
+          - node.role == manager
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - -a
+        - root
+        - ping
+      timeout: 5s
+      interval: 10s
+      retries: 6
+      start_period: 10s
+    image: redis:7-alpine
+    networks:
+      willow_port_net: null
+    volumes:
+      - type: volume
+        source: redis_data
+        target: /data
+        volume: {}
+  redis-commander:
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "268435456"
+        reservations:
+          cpus: "0.1"
+          memory: "67108864"
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      HTTP_PASSWORD: root
+      HTTP_USER: root
+      REDIS_HOST: redis
+      REDIS_PASSWORD: root
+      REDIS_PORT: "6379"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q -O- http://localhost:8081/ || exit 1
+      timeout: 5s
+      interval: 10s
+      retries: 6
+      start_period: 20s
+    image: rediscommander/redis-commander:latest
+    networks:
+      willow_port_net: null
+    ports:
+      - mode: host
+        target: 8081
+        published: 7774
+        protocol: tcp
+  willowcms:
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: "2147483648"
+        reservations:
+          cpus: "0.5"
+          memory: "536870912"
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    environment:
+      APP_DEFAULT_LOCALE: en_GB
+      APP_DEFAULT_TIMEZONE: Europe/London
+      APP_ENCODING: UTF-8
+      APP_FULL_BASE_URL: http://localhost:7770
+      APP_NAME: WillowCMS
+      DB_DATABASE: cms
+      DB_HOST: mysql
+      DB_PASSWORD: password
+      DB_PORT: "3306"
+      DB_USERNAME: cms_user
+      DEBUG: "true"
+      EMAIL_HOST: mailpit
+      EMAIL_NOREPLY: noreply@willowcms.app
+      EMAIL_PASSWORD: ""
+      EMAIL_PORT: "1025"
+      EMAIL_REPLY: hello@willowcms.app
+      EMAIL_TIMEOUT: "30"
+      EMAIL_USERNAME: ""
+      EXPERIMENTAL_TESTS: "Off"
+      QUEUE_DEFAULT_URL: redis://root:root@redis:6379/0
+      QUEUE_TEST_URL: redis://root:root@redis:6379/0
+      REDIS_DATABASE: "0"
+      REDIS_HOST: redis
+      REDIS_PASSWORD: root
+      REDIS_PORT: "6379"
+      REDIS_TEST_URL: redis://root:root@redis:6379/0
+      REDIS_URL: redis://root:root@redis:6379/0
+      REDIS_USERNAME: root
+      SECURITY_SALT: developmentsalt
+      TEST_DB_DATABASE: cms_test
+      TEST_DB_HOST: mysql
+      TEST_DB_PASSWORD: password
+      TEST_DB_PORT: "3306"
+      TEST_DB_USERNAME: cms_user_test
+      TRANSLATE_API_KEY: ""
+      WILLOW_ADMIN_EMAIL: admin@test.com
+      WILLOW_ADMIN_PASSWORD: password
+      WILLOW_ADMIN_USERNAME: admin
+      YOUTUBE_API_KEY: ""
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost/ || exit 1
+      timeout: 10s
+      interval: 15s
+      retries: 6
+      start_period: 1m0s
+    image: willowcms:stack
+    networks:
+      willow_port_net: null
+    ports:
+      - mode: host
+        target: 80
+        published: 7770
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /Users/mikey/Docs/git-repo-loc/docker-hub/adaptercms-beta/willow-whatismyadapter/WhatIsMyAdaptor
+        target: /var/www/html
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /Users/mikey/Docs/git-repo-loc/docker-hub/adaptercms-beta/willow-whatismyadapter/WhatIsMyAdaptor/docker/willowcms/config/app/cms_app_local.php
+        target: /var/www/html/config/app_local.php
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: volume
+        source: willowcms_logs
+        target: /var/log/nginx
+        volume: {}
+networks:
+  willow_port_net:
+    name: portainer_willow_port_net
+    driver: overlay
+    attachable: true
+volumes:
+  jenkins_home:
+    name: portainer_jenkins_home
+    driver: local
+  mailpit_data:
+    name: portainer_mailpit_data
+    driver: local
+  mysql_data:
+    name: portainer_mysql_data
+    driver: local
+  redis_data:
+    name: portainer_redis_data
+    driver: local
+  willowcms_logs:
+    name: portainer_willowcms_logs
+    driver: local

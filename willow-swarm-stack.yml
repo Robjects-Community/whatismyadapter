@@ -1,0 +1,255 @@
+version: '3.9'
+
+services:
+  willowcms:
+    image: robjects/whatismyadapter_cms:portainer-swarm-build
+    ports:
+      - "7870:80"
+    environment:
+      - APP_NAME=WillowCMS
+      - DEBUG=false  # Set to false for production
+      - APP_ENCODING=UTF-8
+      - APP_DEFAULT_LOCALE=en_GB
+      - APP_DEFAULT_TIMEZONE=Europe/London
+      - SECURITY_SALT=developmentsalt
+      - DB_HOST=mysql
+      - DB_USERNAME=cms_user
+      - DB_PASSWORD=password
+      - DB_DATABASE=cms
+      - DB_PORT=3306
+      - TEST_DB_HOST=mysql
+      - TEST_DB_USERNAME=cms_user_test
+      - TEST_DB_PASSWORD=password
+      - TEST_DB_DATABASE=cms_test
+      - TEST_DB_PORT=3306
+      - EMAIL_HOST=mailpit
+      - EMAIL_PORT=1025
+      - EMAIL_TIMEOUT=30
+      - EMAIL_USERNAME=
+      - EMAIL_PASSWORD=
+      - EMAIL_REPLY=admin@yourdomain.com
+      - EMAIL_NOREPLY=noreply@yourdomain.com
+      - REDIS_USERNAME=root
+      - REDIS_PASSWORD=root
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+      - REDIS_URL=redis://root:root@redis:6379/0
+      - REDIS_TEST_URL=redis://root:root@redis:6379/0
+      - QUEUE_DEFAULT_URL=redis://root:root@redis:6379/0
+      - QUEUE_TEST_URL=redis://root:root@redis:6379/0
+      - EXPERIMENTAL_TESTS=Off
+      - WILLOW_ADMIN_USERNAME=admin
+      - WILLOW_ADMIN_PASSWORD=password
+      - WILLOW_ADMIN_EMAIL=admin@yourdomain.com
+      - APP_FULL_BASE_URL=http://localhost:7870
+    networks:
+      - willow_network
+    volumes:
+      - willowcms_logs:/var/log/nginx
+    depends_on:
+      - mysql
+      - mailpit
+      - redis
+    deploy:
+      replicas: 2  # Scale for high availability
+      placement:
+        constraints: [node.role == manager]
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  mysql:
+    image: mysql:8.4.3
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: cms_user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: cms
+    ports:
+      - "7810:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # Add init script if needed
+      # - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - willow_network
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --mysql-native-password=ON
+    deploy:
+      replicas: 1  # Database should typically run as single instance
+      placement:
+        constraints: [node.role == manager]
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "7871:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+      - UPLOAD_LIMIT=300M
+    networks:
+      - willow_network
+    depends_on:
+      - mysql
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+      restart_policy:
+        condition: on-failure
+
+  jenkins:
+    image: robjects/whatismyadapter_jenkins:portainer-swarm-build
+    ports:
+      - "7872:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    networks:
+      - willow_network
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "7825:1025"
+      - "7873:8025"
+    volumes:
+      - mailpit_data:/data
+    environment:
+      - MP_MAX_MESSAGES=5000
+      - MP_DATABASE=/data/mailpit.db
+      - MP_SMTP_AUTH_ACCEPT_ANY=1
+      - MP_SMTP_AUTH_ALLOW_INSECURE=1
+    networks:
+      - willow_network
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+      restart_policy:
+        condition: on-failure
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "7876:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --requirepass root
+    networks:
+      - willow_network
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "root", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=root
+      - HTTP_USER=admin
+      - HTTP_PASSWORD=password
+    ports:
+      - "7874:8081"
+    networks:
+      - willow_network
+    depends_on:
+      - redis
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+      restart_policy:
+        condition: on-failure
+
+networks:
+  willow_network:
+    driver: overlay
+    attachable: true
+
+volumes:
+  mysql_data:
+  jenkins_home:
+  mailpit_data:
+  redis_data:
+  willowcms_logs:

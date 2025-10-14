@@ -1,0 +1,131 @@
+# Swarm Development Aliases for WillowCMS
+# Source this file to get convenient aliases for manage_swarm.sh
+# Usage: source dev_aliases_swarm.txt
+
+# === Core Swarm Operations ===
+alias sw_deploy='./manage_swarm.sh --deploy'
+alias sw_remove='./manage_swarm.sh --remove'
+alias sw_status='./manage_swarm.sh --status'
+alias sw_restart='./manage_swarm.sh --restart'
+alias sw_scale='./manage_swarm.sh --scale'
+
+# === Service Management ===
+alias sw_logs='./manage_swarm.sh --logs'
+alias sw_shell='./manage_swarm.sh --shell willowcms'
+alias sw_mysql_shell='./manage_swarm.sh --db-shell'
+
+# === Development Operations ===
+alias sw_migrate='./manage_swarm.sh --migrate'
+alias sw_cache_clear='./manage_swarm.sh --cache-clear'
+alias sw_composer='./manage_swarm.sh --composer-install'
+alias sw_tests='./manage_swarm.sh --tests'
+alias sw_health='./manage_swarm.sh --health'
+
+# === Data Management ===
+alias sw_db_backup='./manage_swarm.sh --db-backup'
+alias sw_db_restore='./manage_swarm.sh --db-restore'
+alias sw_files_backup='./manage_swarm.sh --files-backup'
+
+# === Asset Management ===
+alias sw_assets_build='./manage_swarm.sh --assets-build'
+alias sw_assets_publish='./manage_swarm.sh --assets-publish'
+
+# === i18n Operations ===
+alias sw_i18n_extract='./manage_swarm.sh --i18n-extract'
+alias sw_i18n_translate='./manage_swarm.sh --i18n-translate'
+
+# === Debug and Dry Run ===
+alias sw_debug='DEBUG=1 ./manage_swarm.sh'
+alias sw_dry='./manage_swarm.sh --dry-run'
+alias sw_debug_dry='DEBUG=1 ./manage_swarm.sh --dry-run'
+
+# === Service-specific Logs ===
+alias sw_logs_app='./manage_swarm.sh --logs willowcms'
+alias sw_logs_mysql='./manage_swarm.sh --logs mysql'
+alias sw_logs_redis='./manage_swarm.sh --logs redis'
+alias sw_logs_mailpit='./manage_swarm.sh --logs mailpit'
+
+# === Quick Service Access ===
+alias sw_exec='./manage_swarm.sh --exec'
+alias sw_php='./manage_swarm.sh --exec willowcms php'
+alias sw_cake='./manage_swarm.sh --exec willowcms bin/cake'
+
+# === Convenience Functions ===
+sw_help() {
+    echo "Docker Swarm Management Aliases for WillowCMS"
+    echo "=============================================="
+    echo ""
+    echo "Core Operations:"
+    echo "  sw_deploy           - Deploy/update stack"  
+    echo "  sw_remove           - Remove stack"
+    echo "  sw_status           - Show stack status"
+    echo "  sw_restart [svc]    - Restart service or stack"
+    echo "  sw_scale svc N      - Scale service to N replicas"
+    echo ""
+    echo "Development:"
+    echo "  sw_shell            - Open shell in willowcms"
+    echo "  sw_mysql_shell      - Open MySQL shell"
+    echo "  sw_migrate          - Run database migrations"
+    echo "  sw_cache_clear      - Clear all caches"
+    echo "  sw_composer         - Install Composer deps"
+    echo "  sw_tests            - Run PHPUnit tests"
+    echo "  sw_health           - Health check"
+    echo ""
+    echo "Data Management:"
+    echo "  sw_db_backup        - Backup database"
+    echo "  sw_db_restore FILE  - Restore database"
+    echo "  sw_files_backup     - Backup application files"
+    echo ""
+    echo "Assets & i18n:"
+    echo "  sw_assets_build     - Build assets"
+    echo "  sw_assets_publish   - Publish plugin assets"
+    echo "  sw_i18n_extract     - Extract i18n strings"
+    echo "  sw_i18n_translate   - AI translation"
+    echo ""
+    echo "Logs:"
+    echo "  sw_logs SERVICE     - Follow service logs"
+    echo "  sw_logs_app         - Follow willowcms logs"
+    echo "  sw_logs_mysql       - Follow MySQL logs"
+    echo ""
+    echo "Utilities:"
+    echo "  sw_exec SVC CMD     - Execute command in service"
+    echo "  sw_php [args]       - Run PHP in willowcms"
+    echo "  sw_cake [cmd]       - Run CakePHP command"
+    echo "  sw_debug [cmd]      - Run with debug mode"
+    echo "  sw_dry [cmd]        - Run in dry-run mode"
+    echo ""
+    echo "Interactive mode: ./manage_swarm.sh"
+    echo ""
+}
+
+# === Environment Helpers ===
+sw_env() {
+    echo "Current Swarm Environment:"
+    echo "========================="
+    echo "STACK_NAME=${STACK_NAME:-willow}"
+    echo "DEBUG=${DEBUG:-0}"
+    echo "DRY_RUN=${DRY_RUN:-0}"
+    echo "DOCKER_CONTEXT=${DOCKER_CONTEXT:-local}"
+    echo "BACKUP_DIR=${BACKUP_DIR:-./backups}"
+    echo ""
+}
+
+sw_urls() {
+    echo "Service URLs (based on willow-swarm-stack.yml):"
+    echo "============================================="
+    echo "WillowCMS:     http://localhost:7870"
+    echo "Admin Panel:   http://localhost:7870/admin"
+    echo "phpMyAdmin:    http://localhost:7871"
+    echo "Jenkins:       http://localhost:7872"
+    echo "Mailpit UI:    http://localhost:7873"
+    echo "Redis Cmd:     http://localhost:7874"
+    echo ""
+    echo "Database Connections:"
+    echo "MySQL:         localhost:7810"
+    echo "Redis:         localhost:7876"
+    echo "SMTP:          localhost:7825"
+    echo ""
+}
+
+echo "Docker Swarm aliases loaded. Type 'sw_help' for usage."
+echo "Service URLs available with 'sw_urls'."

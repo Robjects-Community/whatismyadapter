@@ -1,276 +1,155 @@
-.DS_Store
-database development/adapter-tiered-predictions/models/rull-test-with-form-data/sample_requirements.csv
+# CakePHP specific files #
+##########################
+/config/app_local.php
+/config/.env
+.env
+/logs/*
+/tmp/*
+/vendor/*
 
-dev/database development/helpers/csv-generators/adapter_database.csv
-dev/database development/helpers/csv-generators/hard-coded-links.ipynb
-dev/database development/helpers/csv-generators/Templates/Forms.ipynb
-dev/database development/helpers/csv-generators/Templates/fill-data/input-filled-data.ipynb
-dev/database development/helpers/csv-generators/Templates/fill-data/sample_requirements.csv
-dev/database development/models/other models/full-test-with-form-data
-dev/database development/models/other models/improved-model-with-weight-adjustments.ipynb
-dev/database development/models/other models/pre-selected-scores.ipynb
-dev/database development/USB-C Documentation/UCSI Revision 3.0/USB Type-C Connector System Software Interface UCSI Revision_3.0 REDLINE.pdf
-dev/dataset/main-dataset/examples based on schema/Adapter-Type-C (full colu.csv
-dev/dataset/main-dataset/examples based on schema/Adapter-Type-C.csv
-dev/dataset/main-dataset/schema/~$type-c-Adapters_full-schema-with-color-coded-options.xlsx
-dev/dataset/main-dataset/schema/type-c-Adapters_full-schema-with-color-coded-options.xlsx
-dev/dataset/main-dataset/schema-related-docs/adapters_eer.pdf
-dev/dataset/main-dataset/schema-related-docs/full-eer-schema.png
-dev/dataset/main-dataset/schema-related-docs/model.pdf
-dev/dataset/main-dataset/schema-related-docs/schema_outline_0.jpeg
-dev/dataset/other examples (unused)/ebay_phone_chargers/eBay_Phone_Chargers.csv
-dev/dataset/other examples (unused)/ebay_phone_chargers/trending-ebay-phone-charger.zip
-dev/dataset/other examples (unused)/electronics-computer-vision/electronics-computer-vision.zip
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201230_15_02_32_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201230_15_08_20_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201230_15_21_44_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201230_15_22_20_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201230_17_02_33_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_T_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201231_11_10_08_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201231_11_14_42_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201231_11_18_07_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201231_14_57_25_000_E6PxFNY1Vsb8ebbISmYzvCKKshS2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201231_14_58_03_000_E6PxFNY1Vsb8ebbISmYzvCKKshS2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201231_18_31_31_000_r8FuglH9p9cGrfnIFjfWEW9V3EG3_T_1968_4144.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201231_18_32_17_000_r8FuglH9p9cGrfnIFjfWEW9V3EG3_T_1968_4144.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20201231_22_20_10_000_r8FuglH9p9cGrfnIFjfWEW9V3EG3_T_1968_4144.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_06_17_39_000_r8FuglH9p9cGrfnIFjfWEW9V3EG3_T_1968_4144.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_10_07_22_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_10_07_39_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_10_09_13_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_11_53_21_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_11_53_46_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_11_57_55_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_12_01_28_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_12_03_47_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_T_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_12_04_30_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_T_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_12_07_00_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_12_07_33_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_12_34_55_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_13_39_19_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_T_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_13_39_33_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_T_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_19_10_17_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_T_4000_3000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210101_20_49_01_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_T_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_09_36_26_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_T_1968_4144.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_09_36_33_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_T_1968_4144.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_10_06_04_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_10_06_19_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_10_09_03_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_T_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_10_13_54_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_T_2448_3264.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_10_14_08_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_10_15_11_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_10_16_36_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_11_42_48_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_T_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_11_43_55_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_T_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_11_54_27_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_11_54_47_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_11_58_12_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_T_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_12_12_15_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_T_1968_4144.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_12_12_19_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_T_1968_4144.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_12_12_33_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_T_1968_4144.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_14_51_38_000_ED8APwkrunTluVxK3VsSuEPMXAr2_T_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_14_52_31_000_ED8APwkrunTluVxK3VsSuEPMXAr2_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_14_55_00_000_DBC5P2vMe3YUUHs8w9cjaUm5VwJ3_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_19_07_16_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210102_19_07_28_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210103_13_56_01_000_ED8APwkrunTluVxK3VsSuEPMXAr2_T_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210104_14_19_53_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210104_14_27_04_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210105_12_39_44_000_DBC5P2vMe3YUUHs8w9cjaUm5VwJ3_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210106_07_53_42_000_PWh8ns3YkwdaMirTVzu92TGtpMt1_F_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210106_07_54_15_000_PWh8ns3YkwdaMirTVzu92TGtpMt1_F_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210106_11_59_43_000_2ma82BCxRqPzpTTB8Z98xDtLUry2_F_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210106_14_36_02_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210106_17_28_05_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_2448_3264.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210106_22_50_34_000_2ma82BCxRqPzpTTB8Z98xDtLUry2_F_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210107_07_00_15_000_60wu7E3xOUcMv1XXoCvsjgRkxou2_F_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210107_07_01_15_000_60wu7E3xOUcMv1XXoCvsjgRkxou2_F_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210107_11_02_57_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210108_06_48_44_000_60wu7E3xOUcMv1XXoCvsjgRkxou2_F_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210108_06_49_32_000_60wu7E3xOUcMv1XXoCvsjgRkxou2_F_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210108_14_32_40_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210108_17_44_42_000_owROjUYB7PcLpQkWExt2bm2Q92m2_F_4032_3024.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210108_20_49_09_000_lLntf88xwZV7pgnKz1uJVyqXTx73_F_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210109_13_10_34_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210109_13_12_13_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210111_17_00_26_000_v2CuGRQi0yOkExd9y7zLt2NrF2q2_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210111_17_01_02_000_v2CuGRQi0yOkExd9y7zLt2NrF2q2_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210111_18_53_51_000_7JL773T7gubMd0YKSvY0wjpSW8d2_F_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210111_18_53_57_000_7JL773T7gubMd0YKSvY0wjpSW8d2_F_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210112_10_05_58_000_bmXQbhr8pbh11y4b2Ny5MyRTcck2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210112_10_10_44_000_bmXQbhr8pbh11y4b2Ny5MyRTcck2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210113_11_18_29_000_uJx7dTNSOqgKtkQY5qbYPvKwj3Y2_F_4016_3008.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210113_14_06_33_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/20210113_14_16_24_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112364_01_42_43_000_aM018pmdRTQQkeL1PokkOIJjDfH3_T_2988_5312.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112364_01_43_05_000_aM018pmdRTQQkeL1PokkOIJjDfH3_T_2988_5312.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112364_12_40_12_000_aM018pmdRTQQkeL1PokkOIJjDfH3_F_2448_3264.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112364_12_40_21_000_aM018pmdRTQQkeL1PokkOIJjDfH3_F_2448_3264.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112364_18_58_28_000_PWh8ns3YkwdaMirTVzu92TGtpMt1_F_3120_4160.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112364_19_19_21_000_2VNitjTt6QOyrXtcgeqpgIB5MWq1_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_09_32_44_000_TUxYYKA7ltRp7T2NfCQhk1PrtQK2_F_7296_5472.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_10_00_40_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_15_52_02_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_15_52_24_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_16_11_38_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_19_10_18_000_ED8APwkrunTluVxK3VsSuEPMXAr2_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_19_11_55_000_ED8APwkrunTluVxK3VsSuEPMXAr2_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_19_16_56_000_EjyxP6Vx1PgZ8OFocvsXAof9Mh22_F_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_19_17_46_000_EjyxP6Vx1PgZ8OFocvsXAof9Mh22_F_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_19_21_05_000_EjyxP6Vx1PgZ8OFocvsXAof9Mh22_T_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112365_19_21_24_000_EjyxP6Vx1PgZ8OFocvsXAof9Mh22_T_3000_4000.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112366_10_42_39_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_F_4160_3120.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/annotations/annotations/202112366_10_45_47_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_F_3264_2448.jpg.xml
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201230_15_02_32_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201230_15_08_20_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201230_15_21_44_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201230_15_22_20_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201230_17_02_33_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_T_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201231_11_10_08_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201231_11_14_42_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201231_11_18_07_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201231_14_57_25_000_E6PxFNY1Vsb8ebbISmYzvCKKshS2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201231_14_58_03_000_E6PxFNY1Vsb8ebbISmYzvCKKshS2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201231_18_31_31_000_r8FuglH9p9cGrfnIFjfWEW9V3EG3_T_1968_4144.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201231_18_32_17_000_r8FuglH9p9cGrfnIFjfWEW9V3EG3_T_1968_4144.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20201231_22_20_10_000_r8FuglH9p9cGrfnIFjfWEW9V3EG3_T_1968_4144.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_06_17_39_000_r8FuglH9p9cGrfnIFjfWEW9V3EG3_T_1968_4144.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_10_07_22_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_10_07_39_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_10_09_13_000_M9gVSRUsnJYxozuIsk4ReQjamuJ2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_11_53_21_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_11_53_46_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_11_57_55_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_12_01_28_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_12_03_47_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_T_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_12_04_30_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_T_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_12_07_00_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_12_07_33_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_12_34_55_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_13_39_19_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_T_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_13_39_33_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_T_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_19_10_17_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_T_4000_3000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210101_20_49_01_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_T_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_09_36_26_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_T_1968_4144.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_09_36_33_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_T_1968_4144.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_10_06_04_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_10_06_19_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_10_09_03_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_T_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_10_13_54_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_T_2448_3264.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_10_14_08_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_10_15_11_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_10_16_36_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_11_42_48_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_T_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_11_43_55_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_T_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_11_54_27_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_11_54_47_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_11_58_12_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_T_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_12_12_15_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_T_1968_4144.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_12_12_19_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_T_1968_4144.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_12_12_33_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_T_1968_4144.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_14_51_38_000_ED8APwkrunTluVxK3VsSuEPMXAr2_T_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_14_52_31_000_ED8APwkrunTluVxK3VsSuEPMXAr2_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_14_55_00_000_DBC5P2vMe3YUUHs8w9cjaUm5VwJ3_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_19_07_16_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210102_19_07_28_000_kZtbG1otWiPSOj3R1bPYdq2J3Bz1_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210103_13_56_01_000_ED8APwkrunTluVxK3VsSuEPMXAr2_T_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210104_14_19_53_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210104_14_27_04_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210105_12_39_44_000_DBC5P2vMe3YUUHs8w9cjaUm5VwJ3_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210106_07_53_42_000_PWh8ns3YkwdaMirTVzu92TGtpMt1_F_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210106_07_54_15_000_PWh8ns3YkwdaMirTVzu92TGtpMt1_F_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210106_11_59_43_000_2ma82BCxRqPzpTTB8Z98xDtLUry2_F_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210106_14_36_02_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210106_17_28_05_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_2448_3264.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210106_22_50_34_000_2ma82BCxRqPzpTTB8Z98xDtLUry2_F_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210107_07_00_15_000_60wu7E3xOUcMv1XXoCvsjgRkxou2_F_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210107_07_01_15_000_60wu7E3xOUcMv1XXoCvsjgRkxou2_F_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210107_11_02_57_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210108_06_48_44_000_60wu7E3xOUcMv1XXoCvsjgRkxou2_F_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210108_06_49_32_000_60wu7E3xOUcMv1XXoCvsjgRkxou2_F_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210108_14_32_40_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210108_17_44_42_000_owROjUYB7PcLpQkWExt2bm2Q92m2_F_4032_3024.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210108_20_49_09_000_lLntf88xwZV7pgnKz1uJVyqXTx73_F_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210109_13_10_34_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210109_13_12_13_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_T_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210111_17_00_26_000_v2CuGRQi0yOkExd9y7zLt2NrF2q2_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210111_17_01_02_000_v2CuGRQi0yOkExd9y7zLt2NrF2q2_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210111_18_53_51_000_7JL773T7gubMd0YKSvY0wjpSW8d2_F_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210111_18_53_57_000_7JL773T7gubMd0YKSvY0wjpSW8d2_F_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210112_10_05_58_000_bmXQbhr8pbh11y4b2Ny5MyRTcck2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210112_10_10_44_000_bmXQbhr8pbh11y4b2Ny5MyRTcck2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210113_11_18_29_000_uJx7dTNSOqgKtkQY5qbYPvKwj3Y2_F_4016_3008.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210113_14_06_33_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/20210113_14_16_24_000_esT1IdYPcnVs66nDt0aaoLhoB4n1_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112364_01_42_43_000_aM018pmdRTQQkeL1PokkOIJjDfH3_T_2988_5312.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112364_01_43_05_000_aM018pmdRTQQkeL1PokkOIJjDfH3_T_2988_5312.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112364_12_40_12_000_aM018pmdRTQQkeL1PokkOIJjDfH3_F_2448_3264.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112364_12_40_21_000_aM018pmdRTQQkeL1PokkOIJjDfH3_F_2448_3264.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112364_18_58_28_000_PWh8ns3YkwdaMirTVzu92TGtpMt1_F_3120_4160.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112364_19_19_21_000_2VNitjTt6QOyrXtcgeqpgIB5MWq1_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_09_32_44_000_TUxYYKA7ltRp7T2NfCQhk1PrtQK2_F_7296_5472.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_10_00_40_000_MHvmWMWftvMzzFmedX6ol5Q5I5t2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_15_52_02_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_15_52_24_000_ZTr8uoDUDPNPmJQIpuiUM01PlU43_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_16_11_38_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_19_10_18_000_ED8APwkrunTluVxK3VsSuEPMXAr2_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_19_11_55_000_ED8APwkrunTluVxK3VsSuEPMXAr2_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_19_16_56_000_EjyxP6Vx1PgZ8OFocvsXAof9Mh22_F_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_19_17_46_000_EjyxP6Vx1PgZ8OFocvsXAof9Mh22_F_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_19_21_05_000_EjyxP6Vx1PgZ8OFocvsXAof9Mh22_T_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112365_19_21_24_000_EjyxP6Vx1PgZ8OFocvsXAof9Mh22_T_3000_4000.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112366_10_42_39_000_MDSgjhI7R1QGOxGR7k7XvKjGQA22_F_4160_3120.jpg.jpg
-dev/dataset/other examples (unused)/electronics-computer-vision/samples_for_clients/samples_for_clients/202112366_10_45_47_000_PRE8DAtpJ1Q5yPNHZdoqaOWxHNA2_F_3264_2448.jpg.jpg
-dev/dataset/other examples (unused)/sample-ebay-adapters/eBay_Phone_Chargers.csv
-dev/dataset/other examples (unused)/trending-youtube-statistics/CA_category_id.json
-dev/dataset/other examples (unused)/trending-youtube-statistics/CAvideos.csv
-dev/dataset/other examples (unused)/trending-youtube-statistics/DE_category_id.json
-dev/dataset/other examples (unused)/trending-youtube-statistics/DEvideos.csv
-dev/dataset/other examples (unused)/trending-youtube-statistics/FR_category_id.json
-dev/dataset/other examples (unused)/trending-youtube-statistics/FRvideos.csv
-dev/dataset/other examples (unused)/trending-youtube-statistics/GB_category_id.json
-dev/dataset/other examples (unused)/trending-youtube-statistics/GBvideos.csv
-dev/dataset/other examples (unused)/trending-youtube-statistics/IN_category_id.json
-dev/dataset/other examples (unused)/trending-youtube-statistics/INvideos.csv
-dev/dataset/other examples (unused)/trending-youtube-statistics/JP_category_id.json
-dev/dataset/other examples (unused)/trending-youtube-statistics/JPvideos.csv
-dev/dataset/other examples (unused)/trending-youtube-statistics/KR_category_id.json
-dev/dataset/other examples (unused)/trending-youtube-statistics/KRvideos.csv
-dev/dataset/other examples (unused)/trending-youtube-statistics/MX_category_id.json
-dev/dataset/other examples (unused)/trending-youtube-statistics/MXvideos.csv
-dev/dataset/other examples (unused)/trending-youtube-statistics/RU_category_id.json
-dev/dataset/other examples (unused)/trending-youtube-statistics/RUvideos.csv
-dev/dataset/other examples (unused)/trending-youtube-statistics/US_category_id.json
-dev/dataset/other examples (unused)/trending-youtube-statistics/USvideos.csv
-dev/dataset/want-to-incorporate(todo)/kaggle (1.4 million)/original-test-data-sets.zip
-dev/dataset/want-to-incorporate(todo)/kaggle (1.4 million)/test-data-sets/amazon_categories.csv
-dev/dataset/want-to-incorporate(todo)/kaggle (1.4 million)/test-data-sets/trimmed/amazon_categories.csv
-dev/dataset/want-to-incorporate(todo)/kaggle (1.4 million)/test-data-sets/trimmed/amazon_products.csv
-dev/dataset/want-to-incorporate(todo)/kaggle (1.4 million)/test-data-sets/unedited/amazon_products copy.csv
-dev/models/jupyter-notebook-samples/creating-csv-and-customizing/csv-generators/adapter_database.csv
-dev/models/jupyter-notebook-samples/creating-csv-and-customizing/csv-generators/generate-html-table-and-csv-export.ipynb
-dev/models/jupyter-notebook-samples/creating-csv-and-customizing/webpage scraping and finding compatible-adapter/find_compatible_adapters_type_c_only.ipynb
-dev/models/jupyter-notebook-samples/creating-csv-and-customizing/webpage scraping and finding compatible-adapter/Scraping_Amazon_Product_Information_using_Beautiful_Soup.ipynb
-dev/models/jupyter-notebook-samples/creating-scores/pre-selected-scores-example/full-test-with-form-data
-dev/models/jupyter-notebook-samples/creating-scores/pre-selected-scores-example/improved-model-with-weight-adjustments.ipynb
-dev/models/jupyter-notebook-samples/creating-scores/pre-selected-scores-example/pre-selected-scores.ipynb
-dev/models/jupyter-notebook-samples/making_requirements/parameterize-data/parameterize-form-data.ipynb
-dev/models/jupyter-notebook-samples/making_requirements/specifying-requirements/sample_requirements.csv
-dev/models/jupyter-notebook-samples/making_requirements/specifying-requirements/specify-adapter-requirements-form-and-specification-conversion.ipynb
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/sql_example/Sakila.sqlite3
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/sql_example/Untitled.sql
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/python-webservice-test/main.py
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/python-webservice-test/uswgi.py
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/python-webservice-test/wsgi-file.ini
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/sql/adapters/adapters.sqlproj
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/sql/adapters/type_c_cords_&_adapters.sql
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/webadapters-website/~$amazon.xlsx
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/webadapters-website/sample-adapters-reduced-side/Adapter-Type-C (full colu.csv
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/webadapters-website/sample-adapters-reduced-side/Adapter-Type-C.csv
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/webadapters-website/sample-adapters-reduced-side/all-adapter-columns.json
-dev/models/jupyter-notebook-samples/making_requirements/webapps(with coding files)/webservice-application(wordpress.robjects.me)/webadapters-website/sample-adapters-reduced-side/amazon.xlsx
-etc/images/clone_sd_card_configuration.png
+# app folder
+##########################
+app/config/app_local.php
+app/config/.env
+app/.env
+app/logs/*
+app/tmp/*
+app/vendor/*
+
+
+# Willow code_exports #
+#######################
+willow_cms_code.txt
+willow_cms_code_Controllers.txt
+willow_cms_code_Models.txt
+willow_cms_code_Plugins.txt
+willow_cms_code_Tests.txt
+willow_cms_code_Views.txt
+willow_cms_code_Commands.txt
+willow_cms_code_Jobs.txt
+willow_cms_code_Logs.txt
+willow_cms_code_Services.txt
+willow_cms_code_Utilities.txt
+
+# Code Coverage Report #
+########################
+/webroot/coverage
+
+# Willow specific files/folders #
+#################################
+/webroot/files/*
+!/webroot/files/Images
+/webroot/files/Images/*
+!/webroot/files/Images/image
+/webroot/files/Images/image/*
+!/webroot/files/Images/image/.gitkeep
+!/webroot/files/Users
+/webroot/files/Users/*
+!/webroot/files/Users/image
+/webroot/files/Users/image/*
+!/webroot/files/Users/image/.gitkeep
+!/webroot/files/Articles
+/webroot/files/Articles/*
+!/webroot/files/Articles/image
+/webroot/files/Articles/image/*
+!/webroot/files/Articles/image/.gitkeep
+/dump.rdb
+
+# Robots.txt #
+##############
+/webroot/robots.txt.template
+
+# Willow specific files/folders (app) #
+#######################################
+/app/webroot/files/*
+!/app/webroot/files/Images
+/app/webroot/files/Images/*
+!/app/webroot/files/Images/image
+/app/webroot/files/Images/image/*
+!/app/webroot/files/Images/image/.gitkeep
+!/app/webroot/files/Users
+/app/webroot/files/Users/*
+!/app/webroot/files/Users/image
+/app/webroot/files/Users/image/*
+!/app/webroot/files/Users/image/.gitkeep
+!/app/webroot/files/Articles
+/app/webroot/files/Articles/*
+!/app/webroot/files/Articles/image
+/app/webroot/files/Articles/image/*
+!/app/webroot/files/Articles/image/.gitkeep
+/app/dump.rdb
+
+# Robots.txt (app) #
+####################
+/app/webroot/robots.txt.template
+
+# Willow Dev Env Setup #
+########################
+/wait-for-it.sh
+
+# OS generated files #
+######################
 .DS_Store
-.DS_Store
-.DS_Store
-whatismyadapter-dev_portainer.code-workspace
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+# Icon must end with two \r
+Icon
+
+ehthumbs.db
+Thumbs.db
+.directory
+
+# Tool specific files #
+#######################
+# PHPUnit
+.phpunit.cache
+tests.sqlite
+# vim
+*~
+*.swp
+*.swo
+# sublime text & textmate
+*.sublime-*
+*.stTheme.cache
+*.tmlanguage.cache
+*.tmPreferences.cache
+# Eclipse
+.settings/*
+# JetBrains, aka PHPStorm, IntelliJ IDEA
+.idea/*
+# NetBeans
+nbproject/*
+# Visual Studio Code
+.vscode
+# nova
+.nova
+# Sass preprocessor
+.sass-cache/
+# node
+/node_modules/*
+# yarn
+yarn-debug.log
+yarn-error.log
+
+# manage.sh outputs
+project_files_backups
+project_mysql_backups
+
+# CakePHP Book
+CakePHPBook.txt
+
+# default_data exports
+default_data
+WARP.md
+# Portainer Environment Files
+.env.portainer
+*.portainer.env
+
+# Backup files
+*.backup
+*.bak
+
+# Temporary deployment files
+docker-compose.override.yml

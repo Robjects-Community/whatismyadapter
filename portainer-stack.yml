@@ -1,0 +1,206 @@
+version: '3.9'
+
+services:
+  willowcms:
+    image: willowcms:portainer
+    ports:
+      - "7770:80"
+    environment:
+      - APP_NAME=WillowCMS
+      - DEBUG=true
+      - APP_ENCODING=UTF-8
+      - APP_DEFAULT_LOCALE=en_GB
+      - APP_DEFAULT_TIMEZONE=Europe/London
+      - SECURITY_SALT=developmentsalt
+      - DB_HOST=mysql
+      - DB_USERNAME=cms_user
+      - DB_PASSWORD=password
+      - DB_DATABASE=cms
+      - DB_PORT=3306
+      - TEST_DB_HOST=mysql
+      - TEST_DB_USERNAME=cms_user_test
+      - TEST_DB_PASSWORD=password
+      - TEST_DB_DATABASE=cms_test
+      - TEST_DB_PORT=3306
+      - EMAIL_HOST=mailpit
+      - EMAIL_PORT=1025
+      - EMAIL_TIMEOUT=30
+      - EMAIL_USERNAME=
+      - EMAIL_PASSWORD=
+      - EMAIL_REPLY=hello@willowcms.app
+      - EMAIL_NOREPLY=noreply@willowcms.app
+      - REDIS_USERNAME=root
+      - REDIS_PASSWORD=root
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+      - REDIS_URL=redis://root:root@redis:6379/0
+      - REDIS_TEST_URL=redis://root:root@redis:6379/0
+      - YOUTUBE_API_KEY=
+      - TRANSLATE_API_KEY=
+      - QUEUE_DEFAULT_URL=redis://root:root@redis:6379/0
+      - QUEUE_TEST_URL=redis://root:root@redis:6379/0
+      - EXPERIMENTAL_TESTS=Off
+      - WILLOW_ADMIN_USERNAME=admin
+      - WILLOW_ADMIN_PASSWORD=password
+      - WILLOW_ADMIN_EMAIL=admin@test.com
+      - APP_FULL_BASE_URL=http://localhost:7770
+    networks:
+      - willow_network
+    volumes:
+      - willowcms_logs:/var/log/nginx
+    depends_on:
+      - mysql
+      - mailpit
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  mysql:
+    image: mysql:8.4.3
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: cms_user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: cms
+      DB_USERNAME: cms_user
+      DB_PASSWORD: password
+      DB_DATABASE: cms
+    ports:
+      - "7710:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - willow_network
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --mysql-native-password=ON
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "7771:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+      - UPLOAD_LIMIT=300M
+    networks:
+      - willow_network
+    depends_on:
+      - mysql
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+  jenkins:
+    image: whatismyadaptor-jenkins:latest
+    ports:
+      - "7772:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    networks:
+      - willow_network
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "7725:1025"
+      - "7773:8025"
+    volumes:
+      - mailpit_data:/data
+    environment:
+      - MP_MAX_MESSAGES=5000
+      - MP_DATABASE=/data/mailpit.db
+      - MP_SMTP_AUTH_ACCEPT_ANY=1
+      - MP_SMTP_AUTH_ALLOW_INSECURE=1
+    networks:
+      - willow_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "7776:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --requirepass root
+    networks:
+      - willow_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=root
+      - HTTP_USER=root
+      - HTTP_PASSWORD=root
+    ports:
+      - "7774:8081"
+    networks:
+      - willow_network
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+
+networks:
+  willow_network:
+    driver: overlay
+    attachable: true
+
+volumes:
+  mysql_data:
+  jenkins_home:
+  mailpit_data:
+  redis_data:
+  willowcms_logs:

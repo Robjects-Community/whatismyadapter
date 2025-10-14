@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Model/Table</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../../_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../../_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../../_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../../index.html">/var/www/html</a></li>
+         <li class="breadcrumb-item"><a href="../../index.html">src</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">Model</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Table</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="EmailTemplatesTable.php.html#28">App\Model\Table\EmailTemplatesTable</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InternationalisationsTable.php.html#26">App\Model\Table\InternationalisationsTable</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SeoFieldsTrait.php.html#15">App\Model\Table\SeoFieldsTrait</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesTranslationsTable.php.html#26">App\Model\Table\ArticlesTranslationsTable</a></td><td class="text-right">26%</td></tr>
+       <tr><td><a href="PageViewsTable.php.html#29">App\Model\Table\PageViewsTable</a></td><td class="text-right">51%</td></tr>
+       <tr><td><a href="ArticlesTagsTable.php.html#29">App\Model\Table\ArticlesTagsTable</a></td><td class="text-right">52%</td></tr>
+       <tr><td><a href="TagsTable.php.html#34">App\Model\Table\TagsTable</a></td><td class="text-right">63%</td></tr>
+       <tr><td><a href="CookieConsentsTable.php.html#32">App\Model\Table\CookieConsentsTable</a></td><td class="text-right">65%</td></tr>
+       <tr><td><a href="QueueableJobsTrait.php.html#15">App\Model\Table\QueueableJobsTrait</a></td><td class="text-right">76%</td></tr>
+       <tr><td><a href="ArticlesTable.php.html#42">App\Model\Table\ArticlesTable</a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="CommentsTable.php.html#20">App\Model\Table\CommentsTable</a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="ImageGalleriesTable.php.html#37">App\Model\Table\ImageGalleriesTable</a></td><td class="text-right">87%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="SeoFieldsTrait.php.html#15">App\Model\Table\SeoFieldsTrait</a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="ArticlesTable.php.html#42">App\Model\Table\ArticlesTable</a></td><td class="text-right">39</td></tr>
+       <tr><td><a href="ImageGalleriesTable.php.html#37">App\Model\Table\ImageGalleriesTable</a></td><td class="text-right">28</td></tr>
+       <tr><td><a href="CookieConsentsTable.php.html#32">App\Model\Table\CookieConsentsTable</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="TagsTable.php.html#34">App\Model\Table\TagsTable</a></td><td class="text-right">19</td></tr>
+       <tr><td><a href="QueueableJobsTrait.php.html#15">App\Model\Table\QueueableJobsTrait</a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="CommentsTable.php.html#20">App\Model\Table\CommentsTable</a></td><td class="text-right">5</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ArticlesTable.php.html#332"><abbr title="App\Model\Table\ArticlesTable::getMainMenuPages">getMainMenuPages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesTagsTable.php.html#61"><abbr title="App\Model\Table\ArticlesTagsTable::validationDefault">validationDefault</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesTagsTable.php.html#81"><abbr title="App\Model\Table\ArticlesTagsTable::buildRules">buildRules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ArticlesTranslationsTable.php.html#49"><abbr title="App\Model\Table\ArticlesTranslationsTable::validationDefault">validationDefault</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CookieConsentsTable.php.html#157"><abbr title="App\Model\Table\CookieConsentsTable::getLatestConsent">getLatestConsent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesTable.php.html#36"><abbr title="App\Model\Table\EmailTemplatesTable::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesTable.php.html#53"><abbr title="App\Model\Table\EmailTemplatesTable::validationDefault">validationDefault</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailTemplatesTable.php.html#91"><abbr title="App\Model\Table\EmailTemplatesTable::buildRules">buildRules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesImagesTable.php.html#140"><abbr title="App\Model\Table\ImageGalleriesImagesTable::afterDelete">afterDelete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageGalleriesTable.php.html#329"><abbr title="App\Model\Table\ImageGalleriesTable::imagesChanged">imagesChanged</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InternationalisationsTable.php.html#34"><abbr title="App\Model\Table\InternationalisationsTable::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InternationalisationsTable.php.html#49"><abbr title="App\Model\Table\InternationalisationsTable::validationDefault">validationDefault</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ModelsImagesTable.php.html#86"><abbr title="App\Model\Table\ModelsImagesTable::buildRules">buildRules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageViewsTable.php.html#65"><abbr title="App\Model\Table\PageViewsTable::validationDefault">validationDefault</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsTable.php.html#125"><abbr title="App\Model\Table\TagsTable::afterSave">afterSave</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsTable.php.html#150"><abbr title="App\Model\Table\TagsTable::getAllSeoFields">getAllSeoFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsTable.php.html#166"><abbr title="App\Model\Table\TagsTable::getSimpleThreadedArray">getSimpleThreadedArray</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TagsTable.php.html#223"><abbr title="App\Model\Table\TagsTable::getMainMenuTags">getMainMenuTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueableJobsTrait.php.html#51"><abbr title="App\Model\Table\QueueableJobsTrait::queueJobs">queueJobs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="QueueableJobsTrait.php.html#67"><abbr title="App\Model\Table\QueueableJobsTrait::queueDelayedJob">queueDelayedJob</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SeoFieldsTrait.php.html#22"><abbr title="App\Model\Table\SeoFieldsTrait::getStandardSeoFields">getStandardSeoFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SeoFieldsTrait.php.html#40"><abbr title="App\Model\Table\SeoFieldsTrait::getAllSeoFields">getAllSeoFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SeoFieldsTrait.php.html#51"><abbr title="App\Model\Table\SeoFieldsTrait::emptySeoFields">emptySeoFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SeoFieldsTrait.php.html#64"><abbr title="App\Model\Table\SeoFieldsTrait::emptyTranslationFields">emptyTranslationFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SeoFieldsTrait.php.html#82"><abbr title="App\Model\Table\SeoFieldsTrait::updateEmptySeoFields">updateEmptySeoFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentsTable.php.html#108"><abbr title="App\Model\Table\CommentsTable::afterSave">afterSave</abbr></a></td><td class="text-right">14%</td></tr>
+       <tr><td><a href="ArticlesTable.php.html#204"><abbr title="App\Model\Table\ArticlesTable::afterSave">afterSave</abbr></a></td><td class="text-right">23%</td></tr>
+       <tr><td><a href="ImageGalleriesTable.php.html#257"><abbr title="App\Model\Table\ImageGalleriesTable::queuePreviewGeneration">queuePreviewGeneration</abbr></a></td><td class="text-right">33%</td></tr>
+       <tr><td><a href="ImageGalleriesTable.php.html#234"><abbr title="App\Model\Table\ImageGalleriesTable::beforeDelete">beforeDelete</abbr></a></td><td class="text-right">42%</td></tr>
+       <tr><td><a href="ImageGalleriesTable.php.html#182"><abbr title="App\Model\Table\ImageGalleriesTable::afterSave">afterSave</abbr></a></td><td class="text-right">61%</td></tr>
+       <tr><td><a href="SlugsTable.php.html#65"><abbr title="App\Model\Table\SlugsTable::setupAssociations">setupAssociations</abbr></a></td><td class="text-right">72%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ArticlesTable.php.html#204"><abbr title="App\Model\Table\ArticlesTable::afterSave">afterSave</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="CookieConsentsTable.php.html#157"><abbr title="App\Model\Table\CookieConsentsTable::getLatestConsent">getLatestConsent</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="TagsTable.php.html#125"><abbr title="App\Model\Table\TagsTable::afterSave">afterSave</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="SeoFieldsTrait.php.html#82"><abbr title="App\Model\Table\SeoFieldsTrait::updateEmptySeoFields">updateEmptySeoFields</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ImageGalleriesTable.php.html#182"><abbr title="App\Model\Table\ImageGalleriesTable::afterSave">afterSave</abbr></a></td><td class="text-right">17</td></tr>
+       <tr><td><a href="ImageGalleriesTable.php.html#234"><abbr title="App\Model\Table\ImageGalleriesTable::beforeDelete">beforeDelete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImageGalleriesTable.php.html#329"><abbr title="App\Model\Table\ImageGalleriesTable::imagesChanged">imagesChanged</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="QueueableJobsTrait.php.html#51"><abbr title="App\Model\Table\QueueableJobsTrait::queueJobs">queueJobs</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="SeoFieldsTrait.php.html#64"><abbr title="App\Model\Table\SeoFieldsTrait::emptyTranslationFields">emptyTranslationFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CommentsTable.php.html#108"><abbr title="App\Model\Table\CommentsTable::afterSave">afterSave</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="SlugsTable.php.html#65"><abbr title="App\Model\Table\SlugsTable::setupAssociations">setupAssociations</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="ImageGalleriesTable.php.html#257"><abbr title="App\Model\Table\ImageGalleriesTable::queuePreviewGeneration">queuePreviewGeneration</abbr></a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.15</a> and <a href="https://phpunit.de/">PHPUnit 10.5.46</a> at Sun Aug 31 2:55:50 BST 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../../_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../../_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../../_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([3,0,0,1,0,0,2,2,1,3,4,6], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([25,0,1,1,1,1,0,1,1,0,2,63], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,2,"<a href=\"AipromptsTable.php.html#26\">App\\Model\\Table\\AipromptsTable<\/a>"],[80.3680981595092,32,"<a href=\"ArticlesTable.php.html#42\">App\\Model\\Table\\ArticlesTable<\/a>"],[52.38095238095239,3,"<a href=\"ArticlesTagsTable.php.html#29\">App\\Model\\Table\\ArticlesTagsTable<\/a>"],[26.666666666666668,2,"<a href=\"ArticlesTranslationsTable.php.html#26\">App\\Model\\Table\\ArticlesTranslationsTable<\/a>"],[100,3,"<a href=\"BlockedIpsTable.php.html#28\">App\\Model\\Table\\BlockedIpsTable<\/a>"],[85,5,"<a href=\"CommentsTable.php.html#20\">App\\Model\\Table\\CommentsTable<\/a>"],[65.11627906976744,13,"<a href=\"CookieConsentsTable.php.html#32\">App\\Model\\Table\\CookieConsentsTable<\/a>"],[0,3,"<a href=\"EmailTemplatesTable.php.html#28\">App\\Model\\Table\\EmailTemplatesTable<\/a>"],[97.26027397260275,14,"<a href=\"ImageGalleriesImagesTable.php.html#37\">App\\Model\\Table\\ImageGalleriesImagesTable<\/a>"],[87.07482993197279,27,"<a href=\"ImageGalleriesTable.php.html#37\">App\\Model\\Table\\ImageGalleriesTable<\/a>"],[100,4,"<a href=\"ImagesTable.php.html#29\">App\\Model\\Table\\ImagesTable<\/a>"],[0,2,"<a href=\"InternationalisationsTable.php.html#26\">App\\Model\\Table\\InternationalisationsTable<\/a>"],[91.66666666666666,3,"<a href=\"ModelsImagesTable.php.html#29\">App\\Model\\Table\\ModelsImagesTable<\/a>"],[51.61290322580645,3,"<a href=\"PageViewsTable.php.html#29\">App\\Model\\Table\\PageViewsTable<\/a>"],[98.4126984126984,16,"<a href=\"SettingsTable.php.html#27\">App\\Model\\Table\\SettingsTable<\/a>"],[90.9090909090909,8,"<a href=\"SlugsTable.php.html#31\">App\\Model\\Table\\SlugsTable<\/a>"],[100,2,"<a href=\"SystemLogsTable.php.html#27\">App\\Model\\Table\\SystemLogsTable<\/a>"],[63.095238095238095,12,"<a href=\"TagsTable.php.html#34\">App\\Model\\Table\\TagsTable<\/a>"],[100,3,"<a href=\"UserAccountConfirmationsTable.php.html#29\">App\\Model\\Table\\UserAccountConfirmationsTable<\/a>"],[100,5,"<a href=\"UsersTable.php.html#12\">App\\Model\\Table\\UsersTable<\/a>"],[76.47058823529412,5,"<a href=\"QueueableJobsTrait.php.html#15\">App\\Model\\Table\\QueueableJobsTrait<\/a>"],[0,9,"<a href=\"SeoFieldsTrait.php.html#15\">App\\Model\\Table\\SeoFieldsTrait<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"AipromptsTable.php.html#34\">App\\Model\\Table\\AipromptsTable::initialize<\/a>"],[100,1,"<a href=\"AipromptsTable.php.html#49\">App\\Model\\Table\\AipromptsTable::validationDefault<\/a>"],[100,1,"<a href=\"ArticlesTable.php.html#58\">App\\Model\\Table\\ArticlesTable::initialize<\/a>"],[100,1,"<a href=\"ArticlesTable.php.html#129\">App\\Model\\Table\\ArticlesTable::validationDefault<\/a>"],[100,1,"<a href=\"ArticlesTable.php.html#156\">App\\Model\\Table\\ArticlesTable::buildRules<\/a>"],[100,6,"<a href=\"ArticlesTable.php.html#175\">App\\Model\\Table\\ArticlesTable::beforeSave<\/a>"],[23.076923076923077,16,"<a href=\"ArticlesTable.php.html#204\">App\\Model\\Table\\ArticlesTable::afterSave<\/a>"],[100,1,"<a href=\"ArticlesTable.php.html#270\">App\\Model\\Table\\ArticlesTable::getFeatured<\/a>"],[100,1,"<a href=\"ArticlesTable.php.html#299\">App\\Model\\Table\\ArticlesTable::getRootPages<\/a>"],[0,1,"<a href=\"ArticlesTable.php.html#332\">App\\Model\\Table\\ArticlesTable::getMainMenuPages<\/a>"],[100,3,"<a href=\"ArticlesTable.php.html#361\">App\\Model\\Table\\ArticlesTable::getArchiveDates<\/a>"],[100,1,"<a href=\"ArticlesTable.php.html#401\">App\\Model\\Table\\ArticlesTable::getRecentArticles<\/a>"],[100,1,"<a href=\"ArticlesTagsTable.php.html#37\">App\\Model\\Table\\ArticlesTagsTable::initialize<\/a>"],[0,1,"<a href=\"ArticlesTagsTable.php.html#61\">App\\Model\\Table\\ArticlesTagsTable::validationDefault<\/a>"],[0,1,"<a href=\"ArticlesTagsTable.php.html#81\">App\\Model\\Table\\ArticlesTagsTable::buildRules<\/a>"],[100,1,"<a href=\"ArticlesTranslationsTable.php.html#34\">App\\Model\\Table\\ArticlesTranslationsTable::initialize<\/a>"],[0,1,"<a href=\"ArticlesTranslationsTable.php.html#49\">App\\Model\\Table\\ArticlesTranslationsTable::validationDefault<\/a>"],[100,1,"<a href=\"BlockedIpsTable.php.html#36\">App\\Model\\Table\\BlockedIpsTable::initialize<\/a>"],[100,1,"<a href=\"BlockedIpsTable.php.html#53\">App\\Model\\Table\\BlockedIpsTable::validationDefault<\/a>"],[100,1,"<a href=\"BlockedIpsTable.php.html#85\">App\\Model\\Table\\BlockedIpsTable::buildRules<\/a>"],[100,1,"<a href=\"CommentsTable.php.html#30\">App\\Model\\Table\\CommentsTable::initialize<\/a>"],[100,1,"<a href=\"CommentsTable.php.html#58\">App\\Model\\Table\\CommentsTable::validationDefault<\/a>"],[100,1,"<a href=\"CommentsTable.php.html#90\">App\\Model\\Table\\CommentsTable::buildRules<\/a>"],[14.285714285714285,2,"<a href=\"CommentsTable.php.html#108\">App\\Model\\Table\\CommentsTable::afterSave<\/a>"],[100,1,"<a href=\"CookieConsentsTable.php.html#40\">App\\Model\\Table\\CookieConsentsTable::initialize<\/a>"],[100,1,"<a href=\"CookieConsentsTable.php.html#61\">App\\Model\\Table\\CookieConsentsTable::validationDefault<\/a>"],[100,1,"<a href=\"CookieConsentsTable.php.html#110\">App\\Model\\Table\\CookieConsentsTable::buildRules<\/a>"],[94.11764705882352,3,"<a href=\"CookieConsentsTable.php.html#124\">App\\Model\\Table\\CookieConsentsTable::createConsentCookie<\/a>"],[0,7,"<a href=\"CookieConsentsTable.php.html#157\">App\\Model\\Table\\CookieConsentsTable::getLatestConsent<\/a>"],[0,1,"<a href=\"EmailTemplatesTable.php.html#36\">App\\Model\\Table\\EmailTemplatesTable::initialize<\/a>"],[0,1,"<a href=\"EmailTemplatesTable.php.html#53\">App\\Model\\Table\\EmailTemplatesTable::validationDefault<\/a>"],[0,1,"<a href=\"EmailTemplatesTable.php.html#91\">App\\Model\\Table\\EmailTemplatesTable::buildRules<\/a>"],[100,1,"<a href=\"ImageGalleriesImagesTable.php.html#47\">App\\Model\\Table\\ImageGalleriesImagesTable::initialize<\/a>"],[100,1,"<a href=\"ImageGalleriesImagesTable.php.html#73\">App\\Model\\Table\\ImageGalleriesImagesTable::validationDefault<\/a>"],[100,1,"<a href=\"ImageGalleriesImagesTable.php.html#104\">App\\Model\\Table\\ImageGalleriesImagesTable::buildRules<\/a>"],[100,1,"<a href=\"ImageGalleriesImagesTable.php.html#120\">App\\Model\\Table\\ImageGalleriesImagesTable::afterSave<\/a>"],[0,1,"<a href=\"ImageGalleriesImagesTable.php.html#140\">App\\Model\\Table\\ImageGalleriesImagesTable::afterDelete<\/a>"],[100,3,"<a href=\"ImageGalleriesImagesTable.php.html#154\">App\\Model\\Table\\ImageGalleriesImagesTable::reorderImages<\/a>"],[100,3,"<a href=\"ImageGalleriesImagesTable.php.html#187\">App\\Model\\Table\\ImageGalleriesImagesTable::getNextPosition<\/a>"],[100,1,"<a href=\"ImageGalleriesImagesTable.php.html#205\">App\\Model\\Table\\ImageGalleriesImagesTable::findOrdered<\/a>"],[100,1,"<a href=\"ImageGalleriesImagesTable.php.html#216\">App\\Model\\Table\\ImageGalleriesImagesTable::queuePreviewRegeneration<\/a>"],[100,1,"<a href=\"ImageGalleriesImagesTable.php.html#229\">App\\Model\\Table\\ImageGalleriesImagesTable::clearGalleryCache<\/a>"],[100,1,"<a href=\"ImageGalleriesTable.php.html#50\">App\\Model\\Table\\ImageGalleriesTable::initialize<\/a>"],[100,1,"<a href=\"ImageGalleriesTable.php.html#99\">App\\Model\\Table\\ImageGalleriesTable::validationDefault<\/a>"],[100,1,"<a href=\"ImageGalleriesTable.php.html#167\">App\\Model\\Table\\ImageGalleriesTable::buildRules<\/a>"],[61.904761904761905,11,"<a href=\"ImageGalleriesTable.php.html#182\">App\\Model\\Table\\ImageGalleriesTable::afterSave<\/a>"],[42.857142857142854,4,"<a href=\"ImageGalleriesTable.php.html#234\">App\\Model\\Table\\ImageGalleriesTable::beforeDelete<\/a>"],[33.33333333333333,2,"<a href=\"ImageGalleriesTable.php.html#257\">App\\Model\\Table\\ImageGalleriesTable::queuePreviewGeneration<\/a>"],[100,5,"<a href=\"ImageGalleriesTable.php.html#280\">App\\Model\\Table\\ImageGalleriesTable::getGalleryForPlaceholder<\/a>"],[0,2,"<a href=\"ImageGalleriesTable.php.html#329\">App\\Model\\Table\\ImageGalleriesTable::imagesChanged<\/a>"],[100,1,"<a href=\"ImagesTable.php.html#41\">App\\Model\\Table\\ImagesTable::initialize<\/a>"],[100,1,"<a href=\"ImagesTable.php.html#70\">App\\Model\\Table\\ImagesTable::validationDefault<\/a>"],[100,1,"<a href=\"ImagesTable.php.html#87\">App\\Model\\Table\\ImagesTable::validationCreate<\/a>"],[100,1,"<a href=\"ImagesTable.php.html#111\">App\\Model\\Table\\ImagesTable::validationUpdate<\/a>"],[0,1,"<a href=\"InternationalisationsTable.php.html#34\">App\\Model\\Table\\InternationalisationsTable::initialize<\/a>"],[0,1,"<a href=\"InternationalisationsTable.php.html#49\">App\\Model\\Table\\InternationalisationsTable::validationDefault<\/a>"],[100,1,"<a href=\"ModelsImagesTable.php.html#37\">App\\Model\\Table\\ModelsImagesTable::initialize<\/a>"],[100,1,"<a href=\"ModelsImagesTable.php.html#59\">App\\Model\\Table\\ModelsImagesTable::validationDefault<\/a>"],[0,1,"<a href=\"ModelsImagesTable.php.html#86\">App\\Model\\Table\\ModelsImagesTable::buildRules<\/a>"],[100,1,"<a href=\"PageViewsTable.php.html#37\">App\\Model\\Table\\PageViewsTable::initialize<\/a>"],[0,1,"<a href=\"PageViewsTable.php.html#65\">App\\Model\\Table\\PageViewsTable::validationDefault<\/a>"],[100,1,"<a href=\"PageViewsTable.php.html#95\">App\\Model\\Table\\PageViewsTable::buildRules<\/a>"],[100,1,"<a href=\"SettingsTable.php.html#38\">App\\Model\\Table\\SettingsTable::initialize<\/a>"],[97.43589743589743,7,"<a href=\"SettingsTable.php.html#58\">App\\Model\\Table\\SettingsTable::validationDefault<\/a>"],[100,3,"<a href=\"SettingsTable.php.html#123\">App\\Model\\Table\\SettingsTable::getSettingValue<\/a>"],[100,5,"<a href=\"SettingsTable.php.html#156\">App\\Model\\Table\\SettingsTable::castValue<\/a>"],[100,1,"<a href=\"SlugsTable.php.html#39\">App\\Model\\Table\\SlugsTable::initialize<\/a>"],[72.72727272727273,4,"<a href=\"SlugsTable.php.html#65\">App\\Model\\Table\\SlugsTable::setupAssociations<\/a>"],[100,1,"<a href=\"SlugsTable.php.html#102\">App\\Model\\Table\\SlugsTable::validationDefault<\/a>"],[100,1,"<a href=\"SlugsTable.php.html#140\">App\\Model\\Table\\SlugsTable::buildRules<\/a>"],[100,1,"<a href=\"SlugsTable.php.html#157\">App\\Model\\Table\\SlugsTable::findBySlugAndModel<\/a>"],[100,1,"<a href=\"SystemLogsTable.php.html#35\">App\\Model\\Table\\SystemLogsTable::initialize<\/a>"],[100,1,"<a href=\"SystemLogsTable.php.html#52\">App\\Model\\Table\\SystemLogsTable::validationDefault<\/a>"],[100,1,"<a href=\"TagsTable.php.html#47\">App\\Model\\Table\\TagsTable::initialize<\/a>"],[100,1,"<a href=\"TagsTable.php.html#102\">App\\Model\\Table\\TagsTable::validationDefault<\/a>"],[0,6,"<a href=\"TagsTable.php.html#125\">App\\Model\\Table\\TagsTable::afterSave<\/a>"],[0,1,"<a href=\"TagsTable.php.html#150\">App\\Model\\Table\\TagsTable::getAllSeoFields<\/a>"],[0,1,"<a href=\"TagsTable.php.html#166\">App\\Model\\Table\\TagsTable::getSimpleThreadedArray<\/a>"],[100,1,"<a href=\"TagsTable.php.html#194\">App\\Model\\Table\\TagsTable::getRootTags<\/a>"],[0,1,"<a href=\"TagsTable.php.html#223\">App\\Model\\Table\\TagsTable::getMainMenuTags<\/a>"],[100,1,"<a href=\"UserAccountConfirmationsTable.php.html#37\">App\\Model\\Table\\UserAccountConfirmationsTable::initialize<\/a>"],[100,1,"<a href=\"UserAccountConfirmationsTable.php.html#59\">App\\Model\\Table\\UserAccountConfirmationsTable::validationDefault<\/a>"],[100,1,"<a href=\"UserAccountConfirmationsTable.php.html#83\">App\\Model\\Table\\UserAccountConfirmationsTable::buildRules<\/a>"],[100,1,"<a href=\"UsersTable.php.html#23\">App\\Model\\Table\\UsersTable::initialize<\/a>"],[100,1,"<a href=\"UsersTable.php.html#53\">App\\Model\\Table\\UsersTable::validationDefault<\/a>"],[100,1,"<a href=\"UsersTable.php.html#101\">App\\Model\\Table\\UsersTable::validationResetPassword<\/a>"],[100,1,"<a href=\"UsersTable.php.html#129\">App\\Model\\Table\\UsersTable::buildRules<\/a>"],[100,1,"<a href=\"UsersTable.php.html#147\">App\\Model\\Table\\UsersTable::findAuth<\/a>"],[100,2,"<a href=\"QueueableJobsTrait.php.html#25\">App\\Model\\Table\\QueueableJobsTrait::queueJob<\/a>"],[0,2,"<a href=\"QueueableJobsTrait.php.html#51\">App\\Model\\Table\\QueueableJobsTrait::queueJobs<\/a>"],[0,1,"<a href=\"QueueableJobsTrait.php.html#67\">App\\Model\\Table\\QueueableJobsTrait::queueDelayedJob<\/a>"],[0,1,"<a href=\"SeoFieldsTrait.php.html#22\">App\\Model\\Table\\SeoFieldsTrait::getStandardSeoFields<\/a>"],[0,1,"<a href=\"SeoFieldsTrait.php.html#40\">App\\Model\\Table\\SeoFieldsTrait::getAllSeoFields<\/a>"],[0,1,"<a href=\"SeoFieldsTrait.php.html#51\">App\\Model\\Table\\SeoFieldsTrait::emptySeoFields<\/a>"],[0,2,"<a href=\"SeoFieldsTrait.php.html#64\">App\\Model\\Table\\SeoFieldsTrait::emptyTranslationFields<\/a>"],[0,4,"<a href=\"SeoFieldsTrait.php.html#82\">App\\Model\\Table\\SeoFieldsTrait::updateEmptySeoFields<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

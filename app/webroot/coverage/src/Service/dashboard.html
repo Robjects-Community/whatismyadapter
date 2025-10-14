@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Service</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../index.html">/var/www/html</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Service</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Api/AbstractApiService.php.html#16">App\Service\Api\AbstractApiService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#20">App\Service\Api\Anthropic\AnthropicApiService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/CommentAnalyzer.php.html#13">App\Service\Api\Anthropic\CommentAnalyzer</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#15">App\Service\Api\Anthropic\ImageAnalyzer</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#13">App\Service\Api\Anthropic\SeoContentGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TextSummaryGenerator.php.html#13">App\Service\Api\Anthropic\TextSummaryGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TranslationGenerator.php.html#13">App\Service\Api\Anthropic\TranslationGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#14">App\Service\Api\Google\GoogleApiService</a></td><td class="text-right">14%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#27">App\Service\ImageProcessingService</a></td><td class="text-right">37%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#25">App\Service\IpSecurityService</a></td><td class="text-right">70%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ImageProcessingService.php.html#27">App\Service\ImageProcessingService</a></td><td class="text-right">251</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#14">App\Service\Api\Google\GoogleApiService</a></td><td class="text-right">175</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#25">App\Service\IpSecurityService</a></td><td class="text-right">130</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#15">App\Service\Api\Anthropic\ImageAnalyzer</a></td><td class="text-right">30</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Api/AbstractApiService.php.html#46"><abbr title="App\Service\Api\AbstractApiService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AbstractApiService.php.html#61"><abbr title="App\Service\Api\AbstractApiService::sendRequest">sendRequest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/AbstractApiService.php.html#92"><abbr title="App\Service\Api\AbstractApiService::handleApiError">handleApiError</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#76"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#95"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::getHeaders">getHeaders</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#111"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateTagSeo">generateTagSeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#123"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateArticleSeo">generateArticleSeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#135"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateGallerySeo">generateGallerySeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#148"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateArticleTags">generateArticleTags</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#159"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::analyzeImage">analyzeImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#170"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::analyzeComment">analyzeComment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#182"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::generateTextSummary">generateTextSummary</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#198"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::translateStrings">translateStrings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/AnthropicApiService.php.html#209"><abbr title="App\Service\Api\Anthropic\AnthropicApiService::parseResponse">parseResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/CommentAnalyzer.php.html#25"><abbr title="App\Service\Api\Anthropic\CommentAnalyzer::analyze">analyze</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/CommentAnalyzer.php.html#40"><abbr title="App\Service\Api\Anthropic\CommentAnalyzer::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/CommentAnalyzer.php.html#54"><abbr title="App\Service\Api\Anthropic\CommentAnalyzer::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#31"><abbr title="App\Service\Api\Anthropic\ImageAnalyzer::analyze">analyze</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#56"><abbr title="App\Service\Api\Anthropic\ImageAnalyzer::createImagePayload">createImagePayload</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#86"><abbr title="App\Service\Api\Anthropic\ImageAnalyzer::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#100"><abbr title="App\Service\Api\Anthropic\ImageAnalyzer::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#29"><abbr title="App\Service\Api\Anthropic\SeoContentGenerator::generateTagSeo">generateTagSeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#68"><abbr title="App\Service\Api\Anthropic\SeoContentGenerator::generateArticleSeo">generateArticleSeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#96"><abbr title="App\Service\Api\Anthropic\SeoContentGenerator::generateGallerySeo">generateGallerySeo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#114"><abbr title="App\Service\Api\Anthropic\SeoContentGenerator::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/SeoContentGenerator.php.html#132"><abbr title="App\Service\Api\Anthropic\SeoContentGenerator::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TextSummaryGenerator.php.html#22"><abbr title="App\Service\Api\Anthropic\TextSummaryGenerator::generateTextSummary">generateTextSummary</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TextSummaryGenerator.php.html#40"><abbr title="App\Service\Api\Anthropic\TextSummaryGenerator::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TextSummaryGenerator.php.html#54"><abbr title="App\Service\Api\Anthropic\TextSummaryGenerator::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TranslationGenerator.php.html#27"><abbr title="App\Service\Api\Anthropic\TranslationGenerator::generateTranslation">generateTranslation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TranslationGenerator.php.html#48"><abbr title="App\Service\Api\Anthropic\TranslationGenerator::getExpectedKeys">getExpectedKeys</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Anthropic/TranslationGenerator.php.html#58"><abbr title="App\Service\Api\Anthropic\TranslationGenerator::getLoggerName">getLoggerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#32"><abbr title="App\Service\Api\Google\GoogleApiService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#47"><abbr title="App\Service\Api\Google\GoogleApiService::translateStrings">translateStrings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#95"><abbr title="App\Service\Api\Google\GoogleApiService::translateArticle">translateArticle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#167"><abbr title="App\Service\Api\Google\GoogleApiService::translateTag">translateTag</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#228"><abbr title="App\Service\Api\Google\GoogleApiService::translateImageGallery">translateImageGallery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#133"><abbr title="App\Service\ImageProcessingService::createImageFromFile">createImageFromFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#298"><abbr title="App\Service\ImageProcessingService::processSingleImage">processSingleImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#332"><abbr title="App\Service\ImageProcessingService::addImageToGallery">addImageToGallery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#130"><abbr title="App\Service\IpSecurityService::parseIpHeader">parseIpHeader</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#156"><abbr title="App\Service\IpSecurityService::isInternalIp">isInternalIp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#280"><abbr title="App\Service\IpSecurityService::unblockIp">unblockIp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#375"><abbr title="App\Service\ImageProcessingService::generateResultMessage">generateResultMessage</abbr></a></td><td class="text-right">20%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#69"><abbr title="App\Service\IpSecurityService::getClientIp">getClientIp</abbr></a></td><td class="text-right">44%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#200"><abbr title="App\Service\ImageProcessingService::processArchive">processArchive</abbr></a></td><td class="text-right">44%</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#70"><abbr title="App\Service\ImageProcessingService::processUploadedFiles">processUploadedFiles</abbr></a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#171"><abbr title="App\Service\IpSecurityService::isIpBlocked">isIpBlocked</abbr></a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#218"><abbr title="App\Service\IpSecurityService::blockIp">blockIp</abbr></a></td><td class="text-right">86%</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#360"><abbr title="App\Service\IpSecurityService::trackSuspiciousActivity">trackSuspiciousActivity</abbr></a></td><td class="text-right">86%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="IpSecurityService.php.html#69"><abbr title="App\Service\IpSecurityService::getClientIp">getClientIp</abbr></a></td><td class="text-right">74</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#47"><abbr title="App\Service\Api\Google\GoogleApiService::translateStrings">translateStrings</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#133"><abbr title="App\Service\ImageProcessingService::createImageFromFile">createImageFromFile</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#200"><abbr title="App\Service\ImageProcessingService::processArchive">processArchive</abbr></a></td><td class="text-right">19</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#280"><abbr title="App\Service\IpSecurityService::unblockIp">unblockIp</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#375"><abbr title="App\Service\ImageProcessingService::generateResultMessage">generateResultMessage</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#360"><abbr title="App\Service\IpSecurityService::trackSuspiciousActivity">trackSuspiciousActivity</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#70"><abbr title="App\Service\ImageProcessingService::processUploadedFiles">processUploadedFiles</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#171"><abbr title="App\Service\IpSecurityService::isIpBlocked">isIpBlocked</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="IpSecurityService.php.html#218"><abbr title="App\Service\IpSecurityService::blockIp">blockIp</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/AbstractApiService.php.html#61"><abbr title="App\Service\Api\AbstractApiService::sendRequest">sendRequest</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Anthropic/ImageAnalyzer.php.html#31"><abbr title="App\Service\Api\Anthropic\ImageAnalyzer::analyze">analyze</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#95"><abbr title="App\Service\Api\Google\GoogleApiService::translateArticle">translateArticle</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#167"><abbr title="App\Service\Api\Google\GoogleApiService::translateTag">translateTag</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Api/Google/GoogleApiService.php.html#228"><abbr title="App\Service\Api\Google\GoogleApiService::translateImageGallery">translateImageGallery</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#298"><abbr title="App\Service\ImageProcessingService::processSingleImage">processSingleImage</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ImageProcessingService.php.html#332"><abbr title="App\Service\ImageProcessingService::addImageToGallery">addImageToGallery</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.15</a> and <a href="https://phpunit.de/">PHPUnit 10.5.46</a> at Sun Aug 31 2:55:50 BST 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([7,0,1,0,1,0,0,0,1,0,0,3], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([43,0,0,1,0,2,0,1,0,3,0,25], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,4,"<a href=\"Api\/AbstractApiService.php.html#16\">App\\Service\\Api\\AbstractApiService<\/a>"],[100,11,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#16\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator<\/a>"],[0,11,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#20\">App\\Service\\Api\\Anthropic\\AnthropicApiService<\/a>"],[100,3,"<a href=\"Api\/Anthropic\/ArticleTagsGenerator.php.html#13\">App\\Service\\Api\\Anthropic\\ArticleTagsGenerator<\/a>"],[0,3,"<a href=\"Api\/Anthropic\/CommentAnalyzer.php.html#13\">App\\Service\\Api\\Anthropic\\CommentAnalyzer<\/a>"],[0,5,"<a href=\"Api\/Anthropic\/ImageAnalyzer.php.html#15\">App\\Service\\Api\\Anthropic\\ImageAnalyzer<\/a>"],[0,5,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#13\">App\\Service\\Api\\Anthropic\\SeoContentGenerator<\/a>"],[0,3,"<a href=\"Api\/Anthropic\/TextSummaryGenerator.php.html#13\">App\\Service\\Api\\Anthropic\\TextSummaryGenerator<\/a>"],[0,3,"<a href=\"Api\/Anthropic\/TranslationGenerator.php.html#13\">App\\Service\\Api\\Anthropic\\TranslationGenerator<\/a>"],[14.5985401459854,16,"<a href=\"Api\/Google\/GoogleApiService.php.html#14\">App\\Service\\Api\\Google\\GoogleApiService<\/a>"],[100,7,"<a href=\"ConsentService.php.html#16\">App\\Service\\ConsentService<\/a>"],[37.30569948186528,30,"<a href=\"ImageProcessingService.php.html#27\">App\\Service\\ImageProcessingService<\/a>"],[70.73170731707317,55,"<a href=\"IpSecurityService.php.html#25\">App\\Service\\IpSecurityService<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"Api\/AbstractApiService.php.html#46\">App\\Service\\Api\\AbstractApiService::__construct<\/a>"],[0,2,"<a href=\"Api\/AbstractApiService.php.html#61\">App\\Service\\Api\\AbstractApiService::sendRequest<\/a>"],[100,0,"<a href=\"Api\/AbstractApiService.php.html#84\">App\\Service\\Api\\AbstractApiService::getHeaders<\/a>"],[0,1,"<a href=\"Api\/AbstractApiService.php.html#92\">App\\Service\\Api\\AbstractApiService::handleApiError<\/a>"],[100,0,"<a href=\"Api\/AbstractApiService.php.html#111\">App\\Service\\Api\\AbstractApiService::parseResponse<\/a>"],[100,1,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#42\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::__construct<\/a>"],[100,2,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#55\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::getPromptData<\/a>"],[100,1,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#83\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::createPayload<\/a>"],[100,2,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#108\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::formatContent<\/a>"],[100,3,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#120\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::ensureExpectedKeys<\/a>"],[100,2,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#145\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::sendApiRequest<\/a>"],[100,0,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#160\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::getExpectedKeys<\/a>"],[100,0,"<a href=\"Api\/Anthropic\/AbstractAnthropicGenerator.php.html#168\">App\\Service\\Api\\Anthropic\\AbstractAnthropicGenerator::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#76\">App\\Service\\Api\\Anthropic\\AnthropicApiService::__construct<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#95\">App\\Service\\Api\\Anthropic\\AnthropicApiService::getHeaders<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#111\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateTagSeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#123\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateArticleSeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#135\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateGallerySeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#148\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateArticleTags<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#159\">App\\Service\\Api\\Anthropic\\AnthropicApiService::analyzeImage<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#170\">App\\Service\\Api\\Anthropic\\AnthropicApiService::analyzeComment<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#182\">App\\Service\\Api\\Anthropic\\AnthropicApiService::generateTextSummary<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#198\">App\\Service\\Api\\Anthropic\\AnthropicApiService::translateStrings<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/AnthropicApiService.php.html#209\">App\\Service\\Api\\Anthropic\\AnthropicApiService::parseResponse<\/a>"],[100,1,"<a href=\"Api\/Anthropic\/ArticleTagsGenerator.php.html#27\">App\\Service\\Api\\Anthropic\\ArticleTagsGenerator::generateArticleTags<\/a>"],[100,1,"<a href=\"Api\/Anthropic\/ArticleTagsGenerator.php.html#46\">App\\Service\\Api\\Anthropic\\ArticleTagsGenerator::getExpectedKeys<\/a>"],[100,1,"<a href=\"Api\/Anthropic\/ArticleTagsGenerator.php.html#56\">App\\Service\\Api\\Anthropic\\ArticleTagsGenerator::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/CommentAnalyzer.php.html#25\">App\\Service\\Api\\Anthropic\\CommentAnalyzer::analyze<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/CommentAnalyzer.php.html#40\">App\\Service\\Api\\Anthropic\\CommentAnalyzer::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/CommentAnalyzer.php.html#54\">App\\Service\\Api\\Anthropic\\CommentAnalyzer::getLoggerName<\/a>"],[0,2,"<a href=\"Api\/Anthropic\/ImageAnalyzer.php.html#31\">App\\Service\\Api\\Anthropic\\ImageAnalyzer::analyze<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/ImageAnalyzer.php.html#56\">App\\Service\\Api\\Anthropic\\ImageAnalyzer::createImagePayload<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/ImageAnalyzer.php.html#86\">App\\Service\\Api\\Anthropic\\ImageAnalyzer::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/ImageAnalyzer.php.html#100\">App\\Service\\Api\\Anthropic\\ImageAnalyzer::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#29\">App\\Service\\Api\\Anthropic\\SeoContentGenerator::generateTagSeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#68\">App\\Service\\Api\\Anthropic\\SeoContentGenerator::generateArticleSeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#96\">App\\Service\\Api\\Anthropic\\SeoContentGenerator::generateGallerySeo<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#114\">App\\Service\\Api\\Anthropic\\SeoContentGenerator::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/SeoContentGenerator.php.html#132\">App\\Service\\Api\\Anthropic\\SeoContentGenerator::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TextSummaryGenerator.php.html#22\">App\\Service\\Api\\Anthropic\\TextSummaryGenerator::generateTextSummary<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TextSummaryGenerator.php.html#40\">App\\Service\\Api\\Anthropic\\TextSummaryGenerator::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TextSummaryGenerator.php.html#54\">App\\Service\\Api\\Anthropic\\TextSummaryGenerator::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TranslationGenerator.php.html#27\">App\\Service\\Api\\Anthropic\\TranslationGenerator::generateTranslation<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TranslationGenerator.php.html#48\">App\\Service\\Api\\Anthropic\\TranslationGenerator::getExpectedKeys<\/a>"],[0,1,"<a href=\"Api\/Anthropic\/TranslationGenerator.php.html#58\">App\\Service\\Api\\Anthropic\\TranslationGenerator::getLoggerName<\/a>"],[0,1,"<a href=\"Api\/Google\/GoogleApiService.php.html#32\">App\\Service\\Api\\Google\\GoogleApiService::__construct<\/a>"],[0,5,"<a href=\"Api\/Google\/GoogleApiService.php.html#47\">App\\Service\\Api\\Google\\GoogleApiService::translateStrings<\/a>"],[0,2,"<a href=\"Api\/Google\/GoogleApiService.php.html#95\">App\\Service\\Api\\Google\\GoogleApiService::translateArticle<\/a>"],[0,2,"<a href=\"Api\/Google\/GoogleApiService.php.html#167\">App\\Service\\Api\\Google\\GoogleApiService::translateTag<\/a>"],[0,2,"<a href=\"Api\/Google\/GoogleApiService.php.html#228\">App\\Service\\Api\\Google\\GoogleApiService::translateImageGallery<\/a>"],[100,2,"<a href=\"Api\/Google\/GoogleApiService.php.html#284\">App\\Service\\Api\\Google\\GoogleApiService::preprocessContent<\/a>"],[100,2,"<a href=\"Api\/Google\/GoogleApiService.php.html#325\">App\\Service\\Api\\Google\\GoogleApiService::postprocessContent<\/a>"],[100,1,"<a href=\"ConsentService.php.html#32\">App\\Service\\ConsentService::getConsentData<\/a>"],[100,3,"<a href=\"ConsentService.php.html#50\">App\\Service\\ConsentService::handleConsentCookie<\/a>"],[100,3,"<a href=\"ConsentService.php.html#77\">App\\Service\\ConsentService::startSessionIfNeeded<\/a>"],[100,1,"<a href=\"ImageProcessingService.php.html#53\">App\\Service\\ImageProcessingService::__construct<\/a>"],[60.97560975609756,5,"<a href=\"ImageProcessingService.php.html#70\">App\\Service\\ImageProcessingService::processUploadedFiles<\/a>"],[0,4,"<a href=\"ImageProcessingService.php.html#133\">App\\Service\\ImageProcessingService::createImageFromFile<\/a>"],[100,3,"<a href=\"ImageProcessingService.php.html#184\">App\\Service\\ImageProcessingService::isArchiveFile<\/a>"],[44.26229508196721,8,"<a href=\"ImageProcessingService.php.html#200\">App\\Service\\ImageProcessingService::processArchive<\/a>"],[0,2,"<a href=\"ImageProcessingService.php.html#298\">App\\Service\\ImageProcessingService::processSingleImage<\/a>"],[0,2,"<a href=\"ImageProcessingService.php.html#332\">App\\Service\\ImageProcessingService::addImageToGallery<\/a>"],[100,1,"<a href=\"ImageProcessingService.php.html#361\">App\\Service\\ImageProcessingService::mergeResults<\/a>"],[20,3,"<a href=\"ImageProcessingService.php.html#375\">App\\Service\\ImageProcessingService::generateResultMessage<\/a>"],[100,1,"<a href=\"ImageProcessingService.php.html#399\">App\\Service\\ImageProcessingService::getUploadErrorMessage<\/a>"],[100,1,"<a href=\"IpSecurityService.php.html#55\">App\\Service\\IpSecurityService::__construct<\/a>"],[44,18,"<a href=\"IpSecurityService.php.html#69\">App\\Service\\IpSecurityService::getClientIp<\/a>"],[0,1,"<a href=\"IpSecurityService.php.html#130\">App\\Service\\IpSecurityService::parseIpHeader<\/a>"],[100,1,"<a href=\"IpSecurityService.php.html#145\">App\\Service\\IpSecurityService::isValidIp<\/a>"],[0,1,"<a href=\"IpSecurityService.php.html#156\">App\\Service\\IpSecurityService::isInternalIp<\/a>"],[82.6086956521739,6,"<a href=\"IpSecurityService.php.html#171\">App\\Service\\IpSecurityService::isIpBlocked<\/a>"],[86.48648648648648,6,"<a href=\"IpSecurityService.php.html#218\">App\\Service\\IpSecurityService::blockIp<\/a>"],[0,3,"<a href=\"IpSecurityService.php.html#280\">App\\Service\\IpSecurityService::unblockIp<\/a>"],[100,11,"<a href=\"IpSecurityService.php.html#312\">App\\Service\\IpSecurityService::isSuspiciousRequest<\/a>"],[86.66666666666667,7,"<a href=\"IpSecurityService.php.html#360\">App\\Service\\IpSecurityService::trackSuspiciousActivity<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
