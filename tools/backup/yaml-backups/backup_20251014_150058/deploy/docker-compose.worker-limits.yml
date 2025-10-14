@@ -1,0 +1,75 @@
+# Improved image-analysis-worker with resource constraints
+services:
+  image-analysis-worker:
+    build:
+      context: .
+      dockerfile: docker/willowcms/Dockerfile
+      args:
+        - UID=${DOCKER_UID:-1000}
+        - GID=${DOCKER_GID:-1000}
+    volumes:
+      - ./cakephp:/var/www/html/
+      - ./docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
+    env_file:
+      - ./cakephp/config/.env
+    environment:
+      - DB_HOST=mysql
+      - TEST_DB_HOST=mysql
+      - REDIS_HOST=willowcms
+      - QUEUE_RABBITMQ_URL=${QUEUE_RABBITMQ_URL}
+      - QUEUE_RABBITMQ_QUEUE=${QUEUE_RABBITMQ_QUEUE:-image_analysis}
+    
+    # 🛡️ RESOURCE LIMITS (Critical!)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'        # Max 1 CPU core
+          memory: 1G         # Max 1GB RAM
+        reservations:
+          cpus: '0.25'       # Guaranteed 0.25 CPU
+          memory: 512M       # Guaranteed 512MB
+    
+    # 🔧 PROCESS LIMITS
+    pids_limit: 128          # Max 128 processes/threads
+    
+    # 📝 LOGGING LIMITS  
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"      # Max 10MB per log file
+        max-file: "3"        # Keep 3 log files
+    
+    # ⏱️ GRACEFUL SHUTDOWN
+    stop_grace_period: 30s   # Allow jobs to complete
+    
+    # 🎛️ PRIORITIZED COMMAND (Lower priority than web)
+    command: >
+      sh -c "while ! rabbitmq-diagnostics -q ping -t 10; do 
+               echo 'Waiting for RabbitMQ...'; sleep 3; 
+             done &&
+             exec nice -n 10 ionice -c2 -n7 bin/cake queue worker --connection=rabbitmq --queue=image_analysis --verbose"
+    
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      willowcms:
+        condition: service_started
+      mysql:
+        condition: service_started
+    restart: unless-stopped
+
+  # 📊 OPTIONAL: Add monitoring
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+    devices:
+      - /dev/kmsg

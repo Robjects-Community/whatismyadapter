@@ -1,0 +1,493 @@
+# Deploy WillowCMS Static Sites to GitHub Pages
+name: Deploy to GitHub Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: [main]
+    paths:
+      - 'app/plugins/DefaultTheme/**'
+      - 'docs/**'
+      - '_static/**'
+      - '.github/workflows/deploy-pages.yml'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        description: 'Run the build with tmate debugging'
+        type: boolean
+        required: false
+        default: false
+      skip_content_export:
+        description: 'Skip CakePHP content export and use cached version'
+        type: boolean
+        required: false
+        default: false
+      export_limit:
+        description: 'Number of articles/products to export (0 = all)'
+        type: number
+        required: false
+        default: 50
+
+  # Daily rebuild at midnight UTC
+  schedule:
+    - cron: '0 0 * * *'
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Job 1: Export CakePHP content to static files
+  export-content:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: willowcms
+          MYSQL_USER: cms_user
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl, pdo_mysql, redis, gd, zip
+          tools: composer:v2
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: app/vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('app/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Setup tmate session
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+
+      - name: Install dependencies
+        if: ${{ !inputs.skip_content_export }}
+        run: |
+          cd app
+          composer install --no-dev --optimize-autoloader
+          
+      - name: Configure application
+        if: ${{ !inputs.skip_content_export }}
+        run: |
+          cd app
+          cp config/.env.example config/.env
+          # Update database configuration
+          sed -i 's/DB_HOST=.*/DB_HOST=127.0.0.1/' config/.env
+          sed -i 's/DB_DATABASE=.*/DB_DATABASE=willowcms/' config/.env
+          sed -i 's/DB_USERNAME=.*/DB_USERNAME=cms_user/' config/.env
+          sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=password/' config/.env
+          sed -i 's/REDIS_HOST=.*/REDIS_HOST=127.0.0.1/' config/.env
+
+      - name: Run migrations
+        if: ${{ !inputs.skip_content_export }}
+        run: |
+          cd app
+          bin/cake migrations migrate
+
+      - name: Seed database with sample data
+        if: ${{ !inputs.skip_content_export }}
+        run: |
+          cd app
+          bin/cake migrations seed || true
+          bin/cake default_data_import articles || true
+          bin/cake default_data_import pages || true
+
+      - name: Export DefaultTheme content
+        if: ${{ !inputs.skip_content_export }}
+        run: |
+          cd app
+          # Create export directory structure
+          mkdir -p ../_static/{blog,pages,products,api,assets}
+          
+          # Export articles as Jekyll posts
+          bin/cake export_blog \
+            --output=../_static/blog \
+            --format=jekyll \
+            --limit=${{ inputs.export_limit || 50 }}
+          
+          # Export static pages (about, hire_me, follow_me, etc.)
+          bin/cake export_pages \
+            --output=../_static/pages \
+            --theme=DefaultTheme
+          
+          # Export product showcases
+          bin/cake export_products \
+            --output=../_static/products \
+            --limit=${{ inputs.export_limit || 50 }}
+          
+          # Generate API documentation
+          bin/cake generate_api_docs \
+            --output=../_static/api \
+            --format=openapi
+
+          # Copy DefaultTheme assets
+          cp -r plugins/DefaultTheme/webroot/* ../_static/assets/
+
+      - name: Generate social media previews
+        if: ${{ !inputs.skip_content_export }}
+        run: |
+          cd app
+          # Generate Open Graph images for pages
+          bin/cake generate_social_previews \
+            --input=../_static/pages \
+            --output=../_static/assets/og
+
+      - name: Upload exported content
+        uses: actions/upload-artifact@v3
+        with:
+          name: exported-content
+          path: _static/
+          retention-days: 1
+
+  # Job 2: Build documentation with MkDocs
+  build-docs:
+    runs-on: ubuntu-latest
+    needs: export-content
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install MkDocs
+        run: |
+          pip install mkdocs mkdocs-material mkdocs-minify-plugin
+          pip install mkdocs-git-revision-date-localized-plugin
+
+      - name: Download exported content
+        uses: actions/download-artifact@v3
+        with:
+          name: exported-content
+          path: _static/
+
+      - name: Build documentation
+        run: |
+          cd docs
+          mkdocs build --site-dir=../_site/docs
+
+      - name: Upload docs artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs-site
+          path: _site/docs/
+          retention-days: 1
+
+  # Job 3: Build Jekyll blog
+  build-blog:
+    runs-on: ubuntu-latest
+    needs: export-content
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Download exported content
+        uses: actions/download-artifact@v3
+        with:
+          name: exported-content
+          path: _static/
+
+      - name: Configure Jekyll
+        run: |
+          cd _static/blog
+          # Create Jekyll configuration if not exists
+          if [ ! -f _config.yml ]; then
+            cat > _config.yml << 'EOF'
+          title: WillowCMS Blog
+          description: Articles and tutorials from WillowCMS
+          baseurl: "/willow/blog"
+          url: "https://${{ github.repository_owner }}.github.io"
+          theme: minima
+          plugins:
+            - jekyll-feed
+            - jekyll-sitemap
+            - jekyll-seo-tag
+          collections:
+            articles:
+              output: true
+              permalink: /:year/:month/:title/
+          EOF
+          fi
+
+      - name: Build Jekyll site
+        run: |
+          cd _static/blog
+          bundle init || true
+          echo 'gem "jekyll", "~> 4.3"' >> Gemfile
+          echo 'gem "minima"' >> Gemfile
+          echo 'gem "jekyll-feed"' >> Gemfile
+          echo 'gem "jekyll-sitemap"' >> Gemfile
+          echo 'gem "jekyll-seo-tag"' >> Gemfile
+          bundle install
+          bundle exec jekyll build --destination=../../_site/blog
+
+      - name: Upload blog artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: blog-site
+          path: _site/blog/
+          retention-days: 1
+
+  # Job 4: Build marketing/landing pages
+  build-marketing:
+    runs-on: ubuntu-latest
+    needs: export-content
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Download exported content
+        uses: actions/download-artifact@v3
+        with:
+          name: exported-content
+          path: _static/
+
+      - name: Build marketing site
+        run: |
+          # Copy static pages to site root
+          cp -r _static/pages/* _site/
+          cp -r _static/assets _site/
+          
+          # Create landing page
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>WillowCMS - Modern Content Management</title>
+              <link rel="stylesheet" href="assets/css/style.css">
+          </head>
+          <body>
+              <nav>
+                  <ul>
+                      <li><a href="about.html">About</a></li>
+                      <li><a href="blog/">Blog</a></li>
+                      <li><a href="docs/">Documentation</a></li>
+                      <li><a href="api/">API</a></li>
+                      <li><a href="hire_me.html">Hire Me</a></li>
+                      <li><a href="follow_me.html">Connect</a></li>
+                  </ul>
+              </nav>
+              <main>
+                  <h1>Welcome to WillowCMS</h1>
+                  <p>A powerful CakePHP-based content management system</p>
+              </main>
+          </body>
+          </html>
+          EOF
+
+      - name: Optimize images
+        run: |
+          # Install image optimization tools
+          sudo apt-get update
+          sudo apt-get install -y jpegoptim optipng
+          
+          # Optimize images
+          find _site/assets -name "*.jpg" -exec jpegoptim --strip-all {} \;
+          find _site/assets -name "*.png" -exec optipng -o2 {} \;
+
+      - name: Upload marketing artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: marketing-site
+          path: _site/
+          retention-days: 1
+
+  # Job 5: Generate API documentation
+  build-api-docs:
+    runs-on: ubuntu-latest
+    needs: export-content
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Download exported content
+        uses: actions/download-artifact@v3
+        with:
+          name: exported-content
+          path: _static/
+
+      - name: Install Swagger UI
+        run: |
+          npm install -g @apidevtools/swagger-cli
+          npm install -g redoc-cli
+
+      - name: Build API documentation
+        run: |
+          mkdir -p _site/api
+          
+          # Validate OpenAPI spec
+          swagger-cli validate _static/api/openapi.json || true
+          
+          # Generate ReDoc documentation
+          redoc-cli bundle _static/api/openapi.json \
+            --output _site/api/index.html \
+            --title "WillowCMS API Documentation" \
+            --options.theme.colors.primary.main="#4CAF50"
+
+          # Copy OpenAPI spec for direct access
+          cp _static/api/openapi.json _site/api/
+
+      - name: Upload API docs artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: api-docs-site
+          path: _site/api/
+          retention-days: 1
+
+  # Job 6: Combine all sites and deploy to GitHub Pages
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build-docs, build-blog, build-marketing, build-api-docs]
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: _artifacts/
+
+      - name: Combine all sites
+        run: |
+          mkdir -p _site
+          
+          # Copy marketing site (root)
+          cp -r _artifacts/marketing-site/* _site/ 2>/dev/null || true
+          
+          # Copy documentation
+          mkdir -p _site/docs
+          cp -r _artifacts/docs-site/* _site/docs/ 2>/dev/null || true
+          
+          # Copy blog
+          mkdir -p _site/blog  
+          cp -r _artifacts/blog-site/* _site/blog/ 2>/dev/null || true
+          
+          # Copy API docs
+          mkdir -p _site/api
+          cp -r _artifacts/api-docs-site/* _site/api/ 2>/dev/null || true
+
+          # Create sitemap
+          cat > _site/sitemap.xml << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+              <url>
+                  <loc>https://${{ github.repository_owner }}.github.io/willow/</loc>
+                  <changefreq>daily</changefreq>
+                  <priority>1.0</priority>
+              </url>
+              <url>
+                  <loc>https://${{ github.repository_owner }}.github.io/willow/docs/</loc>
+                  <changefreq>weekly</changefreq>
+                  <priority>0.8</priority>
+              </url>
+              <url>
+                  <loc>https://${{ github.repository_owner }}.github.io/willow/blog/</loc>
+                  <changefreq>daily</changefreq>
+                  <priority>0.9</priority>
+              </url>
+              <url>
+                  <loc>https://${{ github.repository_owner }}.github.io/willow/api/</loc>
+                  <changefreq>weekly</changefreq>
+                  <priority>0.7</priority>
+              </url>
+          </urlset>
+          EOF
+
+          # Create robots.txt
+          cat > _site/robots.txt << 'EOF'
+          User-agent: *
+          Allow: /
+          Sitemap: https://${{ github.repository_owner }}.github.io/willow/sitemap.xml
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload combined site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Comment on PR with deployment URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.name,
+              body: `🚀 **Deployment successful!**\n\nView the deployed site at: ${{ steps.deployment.outputs.page_url }}`
+            })

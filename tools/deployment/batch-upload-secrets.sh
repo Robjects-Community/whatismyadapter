@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ENV_FILE="${SCRIPT_DIR}/.env"
-REPO="garzarobm/willow"  # Change this to your repo
+#
 
 # Default exclusions (variables that shouldn't be uploaded as secrets)
 EXCLUDE_PATTERNS=(

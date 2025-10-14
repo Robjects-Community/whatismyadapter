@@ -1,0 +1,235 @@
+# WillowCMS Portainer Stack
+# This compose file is fully compatible with Portainer's environment variable requirements
+# as documented at: https://docs.portainer.io/user/docker/stacks/add#environment-variables
+#
+# Deployment Options:
+# 1. Local Docker Compose: docker compose --env-file env/local.env up -d
+# 2. Portainer Stack: Uses environment variables defined in Portainer UI + stack.env
+# 3. Git Repository: Automatic deployment from GitHub with environment variables
+
+version: '3.8'
+
+services:
+  willowcms:
+    build:
+      context: ${GIT_URL}#${GIT_REF}
+      dockerfile: infrastructure/docker/willowcms/Dockerfile
+      args:
+        - UID=${DOCKER_UID:-1000}
+        - GID=${DOCKER_GID:-1000}
+    ports:
+      - "${WILLOW_HTTP_PORT:-8080}:80"
+    volumes:
+      - willow_app_data:/var/www/html/
+      - willow_logs:/var/www/html/logs/
+      - willow_nginx_logs:/var/log/nginx/
+    env_file:
+      - stack.env
+    environment:
+      # App Configuration
+      - APP_NAME=${APP_NAME:-WillowCMS}
+      - DEBUG=${DEBUG:-false}
+      - APP_ENCODING=${APP_ENCODING:-UTF-8}
+      - APP_DEFAULT_LOCALE=${APP_DEFAULT_LOCALE:-en_US}
+      - APP_DEFAULT_TIMEZONE=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+      - SECURITY_SALT=${SECURITY_SALT}
+      - APP_FULL_BASE_URL=${APP_FULL_BASE_URL}
+      
+      # Database Configuration  
+      - DB_HOST=${WILLOW_DB_SERVICE:-mysql}
+      - DB_USERNAME=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - DB_PORT=3306
+      
+      # Test Database Configuration
+      - TEST_DB_HOST=${WILLOW_DB_SERVICE:-mysql}
+      - TEST_DB_USERNAME=${MYSQL_USER}
+      - TEST_DB_PASSWORD=${MYSQL_PASSWORD}
+      - TEST_DB_DATABASE=${MYSQL_DATABASE}_test
+      - TEST_DB_PORT=3306
+      
+      # Email Configuration
+      - EMAIL_HOST=${EMAIL_HOST:-mailpit}
+      - EMAIL_PORT=${EMAIL_PORT:-1025}
+      - EMAIL_TIMEOUT=30
+      - EMAIL_USERNAME=
+      - EMAIL_PASSWORD=
+      - EMAIL_REPLY=${EMAIL_REPLY:-hello@willowcms.app}
+      - EMAIL_NOREPLY=${EMAIL_NOREPLY:-noreply@willowcms.app}
+      
+      # Redis Configuration
+      - REDIS_HOST=${WILLOW_REDIS_SERVICE:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_USERNAME=${REDIS_USERNAME}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DATABASE=0
+      - REDIS_URL=redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@redis:6379/0
+      - REDIS_TEST_URL=redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@redis:6379/0
+      
+      # Queue Configuration
+      - QUEUE_DEFAULT_URL=redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@redis:6379/0
+      - QUEUE_TEST_URL=redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@redis:6379/0
+      
+      # API Keys (set these in Portainer environment variables)
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
+      - TRANSLATE_API_KEY=${TRANSLATE_API_KEY}
+      
+      # Admin Configuration
+      - WILLOW_ADMIN_USERNAME=${WILLOW_ADMIN_USERNAME:-admin}
+      - WILLOW_ADMIN_PASSWORD=${WILLOW_ADMIN_PASSWORD}
+      - WILLOW_ADMIN_EMAIL=${WILLOW_ADMIN_EMAIL}
+      
+      # Logging Configuration
+      - LOG_DEBUG_PATH=${LOG_DEBUG_PATH:-/var/www/html/logs}
+      - LOG_ERROR_PATH=${LOG_ERROR_PATH:-/var/www/html/logs}
+      - LOG_QUERIES_PATH=${LOG_QUERIES_PATH:-/var/www/html/logs}
+      - LOG_ADMIN_ACTIONS_PATH=${LOG_ADMIN_ACTIONS_PATH:-/var/www/html/logs}
+      - LOG_DEBUG_FILE=${LOG_DEBUG_FILE:-debug}
+      - LOG_ERROR_FILE=${LOG_ERROR_FILE:-error}
+      - LOG_QUERIES_FILE=${LOG_QUERIES_FILE:-queries}
+      - LOG_ADMIN_ACTIONS_FILE=${LOG_ADMIN_ACTIONS_FILE:-bulk_actions}
+      - LOG_DEBUG_LEVELS=${LOG_DEBUG_LEVELS:-notice,info,debug}
+      - LOG_ERROR_LEVELS=${LOG_ERROR_LEVELS:-warning,error,critical,alert,emergency}
+      
+      # Feature Flags
+      - EXPERIMENTAL_TESTS=${EXPERIMENTAL_TESTS:-Off}
+    depends_on:
+      redis:
+        condition: service_healthy
+      mysql:
+        condition: service_started
+    restart: unless-stopped
+    networks:
+      - ${NETWORK_NAME:-willow_network}
+
+  redis:
+    image: redis:${REDIS_TAG:-7.2-alpine}
+    command: >
+      redis-server 
+      --requirepass ${REDIS_PASSWORD}
+      --appendonly yes
+      --save 900 1
+      --save 300 10
+      --save 60 10000
+    env_file:
+      - stack.env
+    environment:
+      - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$REDIS_PASSWORD\" ping | grep PONG"]
+      interval: ${REDIS_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${REDIS_HEALTHCHECK_TIMEOUT:-3s}
+      retries: ${REDIS_HEALTHCHECK_RETRIES:-5}
+    volumes:
+      - willow_redis_data:/data
+    restart: unless-stopped
+    networks:
+      - ${NETWORK_NAME:-willow_network}
+
+  mysql:
+    image: mysql:${MYSQL_IMAGE_TAG:-8.0}
+    platform: linux/amd64
+    ports:
+      - "${MYSQL_PORT:-3310}:3306"
+    volumes:
+      - willow_mysql_data:/var/lib/mysql
+    env_file:
+      - stack.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_INNODB_LOG_FILE_SIZE=${MYSQL_INNODB_LOG_FILE_SIZE:-256M}
+      - MYSQL_INNODB_BUFFER_POOL_SIZE=${MYSQL_INNODB_BUFFER_POOL_SIZE:-256M}
+      - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --log-error=/var/log/mysql/error.log
+      --slow-query-log=1
+      --slow-query-log-file=/var/log/mysql/slow.log
+      --general-log=1
+      --general-log-file=/var/log/mysql/query.log
+    restart: unless-stopped
+    networks:
+      - ${NETWORK_NAME:-willow_network}
+
+  phpmyadmin:
+    image: phpmyadmin:${PHPMYADMIN_IMAGE_TAG:-latest}
+    depends_on:
+      - mysql
+    ports:
+      - "${PMA_HTTP_PORT:-8082}:80"
+    env_file:
+      - stack.env
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=${PMA_USER:-root}
+      - PMA_PASSWORD=${PMA_PASSWORD:-${MYSQL_ROOT_PASSWORD}}
+      - UPLOAD_LIMIT=${UPLOAD_LIMIT:-300M}
+      - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+    restart: unless-stopped
+    networks:
+      - ${NETWORK_NAME:-willow_network}
+
+  mailpit:
+    image: axllent/mailpit:${MAILPIT_IMAGE_TAG:-latest}
+    ports:
+      - "${MAILPIT_SMTP_PORT:-1125}:1025"
+      - "${MAILPIT_HTTP_PORT:-8025}:8025"
+    volumes:
+      - willow_mailpit_data:/data
+      - willow_mailpit_logs:/var/log/mailpit
+    env_file:
+      - stack.env
+    environment:
+      - MP_MAX_MESSAGES=${MP_MAX_MESSAGES:-5000}
+      - MP_DATABASE=/data/mailpit.db
+      - MP_SMTP_AUTH_ACCEPT_ANY=${MP_SMTP_AUTH_ACCEPT_ANY:-1}
+      - MP_SMTP_AUTH_ALLOW_INSECURE=${MP_SMTP_AUTH_ALLOW_INSECURE:-1}
+      - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+    restart: unless-stopped
+    networks:
+      - ${NETWORK_NAME:-willow_network}
+
+  redis-commander:
+    image: rediscommander/redis-commander:${REDIS_COMMANDER_IMAGE_TAG:-latest}
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "${REDIS_COMMANDER_HTTP_PORT:-8084}:8081"
+    env_file:
+      - stack.env
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - HTTP_USER=${REDIS_COMMANDER_USERNAME:-root}
+      - HTTP_PASSWORD=${REDIS_COMMANDER_PASSWORD:-root}
+      - TZ=${APP_DEFAULT_TIMEZONE:-America/Chicago}
+    restart: unless-stopped
+    networks:
+      - ${NETWORK_NAME:-willow_network}
+
+volumes:
+  willow_mysql_data:
+    driver: ${VOLUME_DRIVER:-local}
+  willow_redis_data:
+    driver: ${VOLUME_DRIVER:-local}
+  willow_mailpit_data:
+    driver: ${VOLUME_DRIVER:-local}
+  willow_mailpit_logs:
+    driver: ${VOLUME_DRIVER:-local}
+  willow_app_data:
+    driver: ${VOLUME_DRIVER:-local}
+  willow_logs:
+    driver: ${VOLUME_DRIVER:-local}
+  willow_nginx_logs:
+    driver: ${VOLUME_DRIVER:-local}
+
+networks:
+  ${NETWORK_NAME:-willow_network}:
+    driver: bridge

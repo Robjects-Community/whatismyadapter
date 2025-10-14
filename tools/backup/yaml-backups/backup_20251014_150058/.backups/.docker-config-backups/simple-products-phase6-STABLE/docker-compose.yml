@@ -1,0 +1,234 @@
+# Docker Compose Template for WillowCMS
+# 
+# CONFIGURATION INSTRUCTIONS:
+# 1. Copy this file to docker-compose.yml
+# 2. Create a .env file in the ./config/ directory
+# 3. Configure all environment variables marked with ${...} below
+# 4. Ensure proper file permissions and directory structure
+#
+# REQUIRED ENVIRONMENT VARIABLES:
+# See the sections below for detailed explanations of each variable
+
+services:
+  willowcms:
+    env_file:
+      # Environment file configuration
+      # Mounts the local .env file from the config directory to provide
+      # environment variables to the container at runtime
+      # This allows for configuration management without rebuilding the image
+      # ./config/.env (contains) -> APP_NAME=WillowCMS \n  APP_ENV=local \n  APP_DEBUG=true
+      - ./config/.env
+    build:
+      context: .
+      dockerfile: docker/willowcms/Dockerfile
+      args:
+        # Build arguments for UID and GID to ensure correct file permissions
+        # CONFIGURE: Set these to your host system's user/group IDs
+        UID: ${UID}                           # Your user ID (run: id -u)
+        GID: ${GID}                           # Your group ID (run: id -g)
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html/
+      - ./docker/willowcms/config/app/cms_app_local.php:/var/www/html/config/app_local.php
+      - ./docker/willowcms/logs/nginx:/var/log/nginx/
+    environment:
+      # Application Configuration
+      # CONFIGURE: Basic application settings
+      - APP_NAME=${APP_NAME}                                    # Application name (e.g., "WillowCMS")
+      - DEBUG=${DEBUG}                                          # Debug mode (true/false)
+      - APP_ENCODING=${APP_ENCODING}                            # Character encoding (e.g., "UTF-8")
+      - APP_DEFAULT_LOCALE=${APP_DEFAULT_LOCALE}                # Default locale (e.g., "en_US")
+      - APP_DEFAULT_TIMEZONE=${APP_DEFAULT_TIMEZONE}            # Timezone (e.g., "UTC")
+      - APP_FULL_BASE_URL=${APP_FULL_BASE_URL}                  # Full base URL (e.g., "http://localhost:8080")
+      
+      # Security Configuration
+      # CONFIGURE: Generate a secure random salt for encryption
+      - SECURITY_SALT=${SECURITY_SALT}                          # Random string for encryption (generate securely!)
+      
+      # Database Configuration
+      # CONFIGURE: Main database connection settings
+      - DB_HOST=${DB_HOST}                                      # Database host (e.g., "mysql")
+      - DB_USERNAME=${DB_USERNAME}                              # Database username
+      - DB_PASSWORD=${DB_PASSWORD}                              # Database password (use strong password!)
+      - DB_DATABASE=${DB_DATABASE}                              # Database name
+      - DB_PORT=${DB_PORT}                                      # Database port (e.g., "3306")
+      
+      # Test Database Configuration
+      # CONFIGURE: Test database connection settings
+      - TEST_DB_HOST=${TEST_DB_HOST}                            # Test database host
+      - TEST_DB_USERNAME=${TEST_DB_USERNAME}                    # Test database username
+      - TEST_DB_PASSWORD=${TEST_DB_PASSWORD}                    # Test database password
+      - TEST_DB_DATABASE=${TEST_DB_DATABASE}                    # Test database name
+      - TEST_DB_PORT=${TEST_DB_PORT}                            # Test database port
+      
+      # Email Configuration
+      # CONFIGURE: SMTP settings for email functionality
+      - EMAIL_HOST=${EMAIL_HOST}                                # SMTP server host
+      - EMAIL_PORT=${EMAIL_PORT}                                # SMTP server port
+      - EMAIL_TIMEOUT=${EMAIL_TIMEOUT}                          # SMTP timeout in seconds
+      - EMAIL_USERNAME=${EMAIL_USERNAME}                        # SMTP username
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}                        # SMTP password (keep secure!)
+      - EMAIL_REPLY=${EMAIL_REPLY}                              # Reply-to email address
+      - EMAIL_NOREPLY=${EMAIL_NOREPLY}                          # No-reply email address
+      
+      # Redis Configuration
+      # CONFIGURE: Redis cache/session storage settings
+      - REDIS_USERNAME=${REDIS_USERNAME}                        # Redis username (if auth enabled)
+      - REDIS_PASSWORD=${REDIS_PASSWORD}                        # Redis password (if auth enabled)
+      - REDIS_HOST=${REDIS_HOST}                                # Redis host (e.g., "redis")
+      - REDIS_PORT=${REDIS_PORT}                                # Redis port (e.g., "6379")
+      - REDIS_DATABASE=${REDIS_DATABASE}                        # Redis database number
+      - REDIS_URL=${REDIS_URL}                                  # Redis connection URL
+      - REDIS_TEST_URL=${REDIS_TEST_URL}                        # Redis test connection URL
+      
+      # External API Configuration
+      # CONFIGURE: Third-party API keys (optional)
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}                      # YouTube API key (optional)
+      - TRANSLATE_API_KEY=${TRANSLATE_API_KEY}                  # Translation API key (optional)
+      
+      # Queue Configuration
+      # CONFIGURE: Message queue settings
+      - QUEUE_DEFAULT_URL=${QUEUE_DEFAULT_URL}                  # Default queue URL
+      - QUEUE_TEST_URL=${QUEUE_TEST_URL}                        # Test queue URL
+      
+      # Admin Configuration
+      # CONFIGURE: Default admin user credentials
+      - WILLOW_ADMIN_USERNAME=${WILLOW_ADMIN_USERNAME}          # Admin username
+      - WILLOW_ADMIN_PASSWORD=${WILLOW_ADMIN_PASSWORD}          # Admin password (use strong password!)
+      - WILLOW_ADMIN_EMAIL=${WILLOW_ADMIN_EMAIL}                # Admin email address
+      
+      # Development/Testing Configuration
+      - EXPERIMENTAL_TESTS=${EXPERIMENTAL_TESTS}                # Enable experimental tests (true/false)
+    networks:
+      - cms_default
+
+  mysql:
+    env_file:
+      - ./config/.env
+    image: mysql:8.4.3
+    environment:
+      # MySQL Configuration
+      # CONFIGURE: Database server settings
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}               # MySQL root password (use strong password!)
+      DB_USERNAME: ${DB_USERNAME}                               # Database username (must match willowcms service)
+      DB_PASSWORD: ${DB_PASSWORD}                               # Database password (must match willowcms service)
+      DB_DATABASE: ${DB_DATABASE}                               # Database name (must match willowcms service)
+    ports:
+      - "3310:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - cms_default
+
+  phpmyadmin:
+    env_file:
+      - ./config/.env
+    image: phpmyadmin
+    ports:
+      - 8082:80
+    environment:
+      # PhpMyAdmin Configuration
+      # CONFIGURE: Database management interface settings
+      - PMA_HOST=${PMA_HOST}                                    # Database host (usually "mysql")
+      - PMA_USER=${PMA_USER}                                    # Default login user
+      - PMA_PASSWORD=${PMA_PASSWORD}                            # Default login password
+      - UPLOAD_LIMIT=${UPLOAD_LIMIT}                            # File upload limit (e.g., "64M")
+    networks:
+      - cms_default
+
+  jenkins:
+    env_file:
+      - ./config/.env
+    build:
+      context: .
+      dockerfile: docker/jenkins/Dockerfile
+    privileged: true
+    user: root
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+    environment:
+      # Jenkins Configuration
+      # CONFIGURE: CI/CD server JVM options
+      - JAVA_OPTS=${JAVA_OPTS}                                  # Java options (e.g., "-Xmx1024m")
+    networks:
+      - cms_default
+
+  mailpit:
+    env_file:
+      - ./config/.env
+    image: axllent/mailpit:latest
+    ports:
+      - "1125:1025"
+      - "8025:8025"
+    volumes:
+      - mailpit_data:/data
+    environment:
+      # Mailpit Configuration
+      # CONFIGURE: Email testing interface settings
+      - MP_MAX_MESSAGES=${MP_MAX_MESSAGES}                      # Maximum messages to store
+      - MP_DATABASE=${MP_DATABASE}                              # Database path for messages
+      - MP_SMTP_AUTH_ACCEPT_ANY=${MP_SMTP_AUTH_ACCEPT_ANY}      # Accept any SMTP auth (true/false)
+      - MP_SMTP_AUTH_ALLOW_INSECURE=${MP_SMTP_AUTH_ALLOW_INSECURE} # Allow insecure SMTP auth (true/false)
+    networks:
+      - cms_default
+
+  redis-commander:
+    env_file:
+      - ./config/.env
+    image: rediscommander/redis-commander:latest
+    environment:
+      # Redis Commander Configuration
+      # CONFIGURE: Redis management interface settings
+      - REDIS_HOST=${REDIS_HOST}                                # Redis host (must match willowcms service)
+      - REDIS_PORT=${REDIS_PORT}                                # Redis port (must match willowcms service)
+      - REDIS_PASSWORD=${REDIS_PASSWORD}                        # Redis password (must match willowcms service)
+      - HTTP_USER=${HTTP_USER}                                  # Web interface username
+      - HTTP_PASSWORD=${HTTP_PASSWORD}                          # Web interface password
+    ports:
+      - "8084:8081"
+    depends_on:
+      - willowcms
+    networks:
+      - cms_default
+
+networks:
+  cms_default:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  rabbitmq_data:
+  jenkins_home:
+  mailpit_data:
+
+# CONFIGURATION CHECKLIST:
+# 
+# □ 1. Copy this file to docker-compose.yml
+# □ 2. Create ./config/.env file with all required variables
+# □ 3. Set secure passwords for:
+#      - SECURITY_SALT (random 32+ character string)
+#      - DB_PASSWORD & MYSQL_ROOT_PASSWORD
+#      - WILLOW_ADMIN_PASSWORD
+#      - EMAIL_PASSWORD (if using SMTP)
+#      - HTTP_PASSWORD (for Redis Commander)
+# □ 4. Configure database settings (DB_HOST, DB_USERNAME, etc.)
+# □ 5. Set up email configuration if needed
+# □ 6. Configure API keys if using external services
+# □ 7. Set proper UID/GID for file permissions
+# □ 8. Review and adjust port mappings if needed
+# □ 9. Ensure all referenced files and directories exist
+# □ 10. Test the configuration with 'docker-compose up'
+#
+# SECURITY NOTES:
+# - Never commit the actual docker-compose.yml with real credentials to git
+# - Always use strong, unique passwords
+# - Consider using Docker secrets for production environments
+# - Regularly rotate credentials and API keys
+# - Ensure the ./config/.env file is in your .gitignore

@@ -17,84 +17,82 @@
 #
 # 📚 Documentation: https://docs.docker.com/compose/override/
 
-version: '3.8'
-
 services:
   # ========================================
   # 🌐 Main Application Service (willowcms)
   # ========================================
-  willowcms:
-    # 🔧 Environment Variables Override
-    # Uncomment to override environment variables
-    # environment:
-    #   - DEBUG=true
-    #   - APP_DEFAULT_LOCALE=es_ES
-    #   - ANTHROPIC_API_KEY=your_dev_api_key_here
-    #   - GOOGLE_TRANSLATE_API_KEY=your_dev_translate_key
-    #   - AI_ENABLED=true
-    #   - TRANSLATION_ENABLED=true
-    
-    # 📁 Additional Volume Mounts
-    # Uncomment to add custom volume mounts
-    # volumes:
-    #   # Mount local configuration files
-    #   - ./config/local.php:/var/www/html/config/local.php:ro
-    #   
-    #   # Mount custom theme development
-    #   - ./custom-theme:/var/www/html/plugins/CustomTheme:cached
-    #   
-    #   # Mount logs to host for easier debugging
-    #   - ./local-logs:/var/www/html/logs:cached
-    #   
-    #   # Mount custom uploads directory
-    #   - ./local-uploads:/var/www/html/webroot/uploads:cached
-    
-    # 🌐 Port Mapping Override
-    # Uncomment to change the port mapping
-    # ports:
-    #   - "8080:80"  # Default
-    #   - "9080:80"  # Alternative port
-    
-    # 💻 Resource Limits for Development
-    # Uncomment to limit resource usage
-    # deploy:
-    #   resources:
-    #     limits:
-    #       cpus: '2.0'
-    #       memory: 2G
-    #     reservations:
-    #       memory: 512M
+  # willowcms:
+  #   # 🔧 Environment Variables Override
+  #   # Uncomment to override environment variables
+  #   environment:
+  #     - DEBUG=true
+  #     - APP_DEFAULT_LOCALE=es_ES
+  #     - ANTHROPIC_API_KEY=your_dev_api_key_here
+  #     - GOOGLE_TRANSLATE_API_KEY=your_dev_translate_key
+  #     - AI_ENABLED=true
+  #     - TRANSLATION_ENABLED=true
+  #   
+  #   # 📁 Additional Volume Mounts
+  #   # Uncomment to add custom volume mounts
+  #   volumes:
+  #     # Mount local configuration files
+  #     - ./config/local.php:/var/www/html/config/local.php:ro
+  #     
+  #     # Mount custom theme development
+  #     - ./custom-theme:/var/www/html/plugins/CustomTheme:cached
+  #     
+  #     # Mount logs to host for easier debugging
+  #     - ./local-logs:/var/www/html/logs:cached
+  #     
+  #     # Mount custom uploads directory
+  #     - ./local-uploads:/var/www/html/webroot/uploads:cached
+  #   
+  #   # 🌐 Port Mapping Override
+  #   # Uncomment to change the port mapping
+  #   ports:
+  #     - "8080:80"  # Default
+  #     - "9080:80"  # Alternative port
+  #   
+  #   # 💻 Resource Limits for Development
+  #   # Uncomment to limit resource usage
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '2.0'
+  #         memory: 2G
+  #       reservations:
+  #         memory: 512M
 
   # ========================================
   # 🗄️ Database Service (mysql)
   # ========================================
-  mysql:
-    # 🔧 Environment Variables Override
-    # Uncomment to override database configuration
-    # environment:
-    #   - MYSQL_ROOT_PASSWORD=custom_root_password
-    #   - MYSQL_DATABASE=custom_cms_db
-    #   - MYSQL_USER=custom_cms_user
-    #   - MYSQL_PASSWORD=custom_password
-    
-    # 🌐 Port Mapping for External Access
-    # Uncomment to expose MySQL port to host
-    # ports:
-    #   - "3310:3306"  # External:Internal
-    #   # WARNING: Only do this for development, never in production
-    
-    # 📁 Custom Configuration
-    # Uncomment to mount custom MySQL configuration
-    # volumes:
-    #   - ./config/mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf:ro
-    
-    # 🔧 MySQL Configuration Override
-    # Uncomment to override MySQL settings
-    # command: >
-    #   --character-set-server=utf8mb4
-    #   --collation-server=utf8mb4_unicode_ci
-    #   --innodb-buffer-pool-size=512M
-    #   --max-connections=200
+  # mysql:
+  #   # 🔧 Environment Variables Override
+  #   # Uncomment to override database configuration
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=custom_root_password
+  #     - MYSQL_DATABASE=custom_cms_db
+  #     - MYSQL_USER=custom_cms_user
+  #     - MYSQL_PASSWORD=custom_password
+  #   
+  #   # 🌐 Port Mapping for External Access
+  #   # Uncomment to expose MySQL port to host
+  #   ports:
+  #     - "3310:3306"  # External:Internal
+  #     # WARNING: Only do this for development, never in production
+  #   
+  #   # 📁 Custom Configuration
+  #   # Uncomment to mount custom MySQL configuration
+  #   volumes:
+  #     - ./config/mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf:ro
+  #   
+  #   # 🔧 MySQL Configuration Override
+  #   # Uncomment to override MySQL settings
+  #   command: >
+  #     --character-set-server=utf8mb4
+  #     --collation-server=utf8mb4_unicode_ci
+  #     --innodb-buffer-pool-size=512M
+  #     --max-connections=200
 
   # ========================================
   # 🚀 Redis Service Override
@@ -120,28 +118,28 @@ services:
   # ========================================
   
   # 📊 phpMyAdmin Service Override
-  phpmyadmin:
-    # 🔧 Environment Override
-    # Uncomment to customize phpMyAdmin
-    # environment:
-    #   - PMA_HOST=mysql
-    #   - PMA_USER=root
-    #   - PMA_PASSWORD=password
-    #   - UPLOAD_LIMIT=512M
-    #   - MEMORY_LIMIT=512M
-    
-    # 🌐 Alternative Port
-    # ports:
-    #   - "8082:80"  # Default
-    #   - "9082:80"  # Alternative port
+  # phpmyadmin:
+  #   # 🔧 Environment Override
+  #   # Uncomment to customize phpMyAdmin
+  #   environment:
+  #     - PMA_HOST=mysql
+  #     - PMA_USER=root
+  #     - PMA_PASSWORD=password
+  #     - UPLOAD_LIMIT=512M
+  #     - MEMORY_LIMIT=512M
+  #   
+  #   # 🌐 Alternative Port
+  #   ports:
+  #     - "8082:80"  # Default
+  #     - "9082:80"  # Alternative port
 
   # 📧 Mailpit Service Override
-  mailpit:
-    # 🌐 Alternative Ports
-    # ports:
-    #   - "8025:8025"  # Default web interface
-    #   - "1025:1025"  # Default SMTP
-    #   - "9025:8025"  # Alternative web interface
+  # mailpit:
+  #   # 🌐 Alternative Ports
+  #   ports:
+  #     - "8025:8025"  # Default web interface
+  #     - "1025:1025"  # Default SMTP
+  #     - "9025:8025"  # Alternative web interface
 
   # 🔧 Redis Commander (Optional)
   # Uncomment to add Redis management interface
@@ -172,8 +170,8 @@ services:
     ports:
       - "${JENKINS_OVERRIDE_HTTP_PORT:-8087}:8080"
       - "${JENKINS_OVERRIDE_AGENT_PORT:-50004}:50000"
-    networks:
-      - willowcms
+    # networks:
+    #   - willowcms
 
 # ========================================
 # 📁 Additional Volumes
@@ -190,15 +188,15 @@ volumes:
 # ========================================
 # 🌐 Additional Networks
 # ========================================
-networks:
-  # Uncomment to define additional networks
-  # development:
-  #   driver: bridge
-  #   ipam:
-  #     config:
-  #       - subnet: 172.20.0.0/16
-  # external_network:
-  #   external: true
+# networks:
+#   # Uncomment to define additional networks
+#   development:
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: **********/16
+#   external_network:
+#     external: true
 
 # ========================================
 # 📋 Common Development Scenarios

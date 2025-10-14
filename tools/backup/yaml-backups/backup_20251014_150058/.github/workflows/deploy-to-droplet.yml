@@ -1,0 +1,111 @@
+name: Deploy to DigitalOcean Droplet
+
+# Trigger the workflow
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Allow manual trigger
+
+# Define environment variables from secrets
+env:
+  DROPLET_IP: ${{ secrets.DROPLET_IP }}
+  SSH_USER: deploy
+  DB_DATABASE: ${{ secrets.DB_DATABASE }}
+  DB_USERNAME: ${{ secrets.DB_USERNAME }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  APP_KEY: ${{ secrets.APP_KEY }}
+  MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # GitHub provides this VM
+    
+    steps:
+    # Step 1: Download your code to the GitHub VM
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # Step 2: Set up SSH key for connecting to droplet
+    - name: Setup SSH Key
+      run: |
+        # Create SSH directory
+        mkdir -p ~/.ssh
+        
+        # Write the private key from secrets to a file
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        
+        # Add droplet to known hosts (skip host key verification)
+        ssh-keyscan -H ${{ env.DROPLET_IP }} >> ~/.ssh/known_hosts
+    
+    # Step 3: Create .env file on the GitHub VM
+    - name: Create Environment File
+      run: |
+        mkdir -p ./tools/deployment
+        cat > ./tools/deployment/.env << EOF
+        DROPLET_IP=${{ env.DROPLET_IP }}
+        SSH_USER=${{ env.SSH_USER }}
+        DB_DATABASE=${{ env.DB_DATABASE }}
+        DB_USERNAME=${{ env.DB_USERNAME }}
+        DB_PASSWORD=${{ env.DB_PASSWORD }}
+        MYSQL_ROOT_PASSWORD=${{ env.MYSQL_ROOT_PASSWORD }}
+        APP_KEY=${{ env.APP_KEY }}
+        JWT_SECRET=${{ env.JWT_SECRET }}
+        REDIS_PASSWORD=${{ env.REDIS_PASSWORD }}
+        APP_ENV=production
+        APP_DEBUG=false
+        APP_URL=http://${{ env.DROPLET_IP }}
+        DOCKER_PLATFORM=linux/amd64
+        USER_ID=1000
+        GROUP_ID=1000
+        # CakePHP Database Config
+        DB_HOST=db
+        DB_PORT=3306
+        # Redis Config
+        REDIS_HOST=redis
+        REDIS_PORT=6379
+        REDIS_DATABASE=0
+        EOF
+    
+    # Step 4: Make scripts executable
+    - name: Make Scripts Executable
+      run: |
+        chmod +x ./tools/deployment/setup-droplet.sh
+        chmod +x ./tools/deployment/deploy-to-droplet.sh
+    
+    # Step 5: Test SSH connection
+    - name: Test SSH Connection
+      run: |
+        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+          ${{ env.SSH_USER }}@${{ env.DROPLET_IP }} \
+          "echo 'SSH connection successful from GitHub Actions'"
+    
+    # Step 6: Execute the deployment script
+    - name: Deploy Application
+      run: |
+        echo "🚀 Starting deployment to droplet..."
+        ./tools/deployment/deploy-to-droplet.sh
+    
+    # Step 7: Verify deployment
+    - name: Verify Deployment
+      run: |
+        echo "🔍 Verifying deployment..."
+        
+        # Wait a moment for services to start
+        sleep 30
+        
+        # Check if the application responds
+        if curl -f -s http://${{ env.DROPLET_IP }}/ > /dev/null; then
+          echo "✅ Application is responding!"
+        else
+          echo "❌ Application may not be ready yet"
+          exit 1
+        fi
+    
+    # Step 8: Clean up SSH key
+    - name: Clean up
+      if: always()
+      run: |
+        rm -f ~/.ssh/id_rsa
