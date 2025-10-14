@@ -12,6 +12,49 @@
 /cakephp/vendor/*
 /logs/*
 
+# Log files - ALL LOGS IGNORED #
+###############################
+*.log
+*.log.*
+logs/
+/logs/
+*/logs/*
+**/logs/**
+debug.log
+error.log
+access.log
+app.log
+application.log
+database.log
+database_log_errors.log
+php_errors.log
+nginx.log
+apache.log
+web.log
+console.log
+system.log
+runtime.log
+exception.log
+trace.log
+audit.log
+performance.log
+slow.log
+query.log
+binlog.*
+# Docker logs
+docker/*/logs/
+docker/*/*/logs/
+docker/*/*/*/logs/
+infrastructure/*/logs/
+infrastructure/*/*/logs/
+# Application logs
+app/logs/
+cakephp/logs/
+# Actions runner logs
+actions-runner/_diag/
+# Tool logs
+tools/logs/
+
 # CakePHP Migration Schema Dumps #
 ##################################
 /cakephp/config/Migrations/schema-dump-default.lock

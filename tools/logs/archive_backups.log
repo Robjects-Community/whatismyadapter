@@ -1,6 +1,0 @@
-[2025-10-07 12:41:11] [INFO] Starting backup archival (Keep: 3, Dry-run: true)
-[2025-10-07 12:41:11] [INFO] Creating archive directory structure...
-[2025-10-07 12:41:11] [DEBUG] No archival needed for project_files_backups
-[2025-10-07 12:41:11] [DEBUG] No archival needed for project_log_backups
-[2025-10-07 12:41:11] [DEBUG] No archival needed for project_mysql_backups
-[2025-10-07 12:41:11] [INFO] Backup archival completed
