@@ -1,0 +1,86 @@
+services:
+  mariadb:
+    container_name: Whatismyadapter-DB
+    image: mariadb:11.4-noble #LTS Long Time Support Until May 29, 2029.
+    security_opt:
+      - no-new-privileges:true
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-read-only-compressed=OFF
+    volumes:
+      - /volume1/docker/whatismyadapter/db:/var/lib/mysql:rw
+      - /volume1/docker/whatismyadapter/db:/etc/mysql/conf.d:rw
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      TZ: ${TZ}
+    restart: on-failure:15
+
+  redis:
+    image: redis
+    container_name: Whatismyadapter-REDIS
+    hostname: whatismyadapterredis
+    user: 1026:100
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
+    volumes:
+      - /volume1/docker/whatismyadapter/redis:/data:rw
+    environment:
+      TZ: America/Chicago
+    restart: on-failure:10
+
+  phpmyadmin:
+    image: phpmyadmin
+    hostname: whatismyadapter-phpmyadmin
+    healthcheck:
+      test: curl -f http://localhost:80/ || exit 1
+    container_name: Whatismyadapter-phpMyAdmin
+    depends_on:
+      - mariadb
+    ports:
+      - 2515:80
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+    restart: on-failure:5
+
+  whatismyadapter:
+    image: robjects/whatismyadapter_cms:syn-multi-cloud
+    # Uncomment build section if you want to build locally instead of using pre-built image
+    # build:
+    #   context: .
+    #   dockerfile: deployment/dockerfiles/Dockerfile.synology-nas
+    #   args:
+    #     - UID=${UID:-1034}
+    #     - GID=${GID:-100}
+    container_name: whatismyadapter
+    ports:
+      - "6660:80"
+      - 4445:443
+      - 6665:3000
+    volumes:
+      - /volume1/docker/whatismyadapter/logs:/var/www/html/logs:rw
+      - /volume1/docker/whatismyadapter/tmp:/var/www/html/tmp:rw
+      - /volume1/docker/whatismyadapter/files:/var/www/html/webroot/files:rw
+    environment:
+      - APP_NAME=${APP_NAME:-WillowCMS}
+      - DEBUG=${DEBUG:-false}
+      - DB_HOST=mariadb
+      - DB_USERNAME=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - DB_PORT=3306
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      - SECURITY_SALT=${SECURITY_SALT}
+    depends_on:
+      - mariadb
+      - redis
+
+
+volumes:
+  db_data:
+  redis_data:
+  phpmyadmin_data:
+  whatismyadapter_data:

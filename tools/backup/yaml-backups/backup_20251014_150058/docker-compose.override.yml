@@ -1,0 +1,55 @@
+# Docker Compose Override for Local Development
+# This file automatically overrides docker-compose.yml settings for local development
+# Configures WillowCMS to run on localhost:9090
+
+services:
+  willowcms:
+    ports:
+      - "${WILLOW_HTTP_PORT:-9090}:80"
+    environment:
+      # Ensure Docker networking works for local development
+      - REDIS_HOST=willowcms
+      - APP_FULL_BASE_URL=http://localhost:9090
+    # Use development-friendly settings
+    develop:
+      watch:
+        - action: sync
+          path: ./app/
+          target: /var/www/html/
+          ignore:
+            - node_modules/
+            - vendor/
+            - logs/
+            - tmp/
+
+  mysql:
+    # Use consistent platform for local development
+    platform: linux/${DOCKER_PLATFORM:-amd64}
+    
+  phpmyadmin:
+    # Ensure phpMyAdmin can access the MySQL service
+    depends_on:
+      - mysql
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_ABSOLUTE_URI=http://localhost:${PMA_HTTP_PORT:-8082}/
+
+  # Disable Jenkins for local development by default
+  jenkins:
+    profiles:
+      - jenkins
+    
+  # Keep mailpit for local email testing
+  mailpit:
+    environment:
+      - MP_WEBROOT=/
+      - MP_UI_BIND_ADDR=0.0.0.0:8025
+
+  # Enable Redis Commander for local development
+  redis-commander:
+    environment:
+      - REDIS_HOST=willowcms
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=root
+      - HTTP_USER=root
+      - HTTP_PASSWORD=root

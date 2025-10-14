@@ -1,0 +1,150 @@
+services:
+  # WillowCMS CakePHP Application
+  willowcms:
+    build:
+      context: ~/willow/
+      dockerfile: infrastructure/docker/willowcms/Dockerfile
+      args:
+        UID: ${USER_ID:-1000}
+        GID: ${GROUP_ID:-1000}
+    container_name: willow-app-prod
+    platform: linux/amd64
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - app_data:/var/www/html/tmp:rw
+      - app_logs:/var/www/html/logs:rw
+      - app_uploads:/var/www/html/webroot/files:rw
+      - ./app:/var/www/html/:rw
+      - ./production-entrypoint.sh:/usr/local/bin/production-entrypoint.sh:ro
+    environment:
+      - APP_NAME=WillowCMS Production
+      - DEBUG=false
+      - APP_ENV=${APP_ENV:-production}
+      - APP_URL=${APP_URL}
+      - APP_ENCODING=UTF-8
+      - APP_DEFAULT_LOCALE=en_US
+      - APP_DEFAULT_TIMEZONE=UTC
+      - SECURITY_SALT=${APP_KEY}
+      # Database Configuration
+      - DB_HOST=db
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_PORT=3306
+      # Redis Configuration  
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      - REDIS_DATABASE=0
+      - REDIS_URL=redis://redis:6379/0
+      # Email Configuration
+      - EMAIL_HOST=localhost
+      - EMAIL_PORT=587
+      - EMAIL_USERNAME=
+      - EMAIL_PASSWORD=
+      # Admin Configuration
+      - WILLOW_ADMIN_USERNAME=${WILLOW_ADMIN_USERNAME:-admin}
+      - WILLOW_ADMIN_PASSWORD=${WILLOW_ADMIN_PASSWORD:-password}
+      - WILLOW_ADMIN_EMAIL=${WILLOW_ADMIN_EMAIL:-admin@willowcms.app}
+    networks:
+      - willow_network
+    entrypoint: ["/usr/local/bin/production-entrypoint.sh"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  db:
+    image: mariadb:11.4-noble
+    container_name: willow-db-prod
+    platform: linux/amd64
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=America/Chicago
+    volumes:
+      - db_data:/var/lib/mysql:rw
+      - ./backups/db:/docker-entrypoint-initdb.d:ro
+    networks:
+      - willow_network
+    # Database exposed only internally by default
+    # ports:
+    #   - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  redis:
+    image: redis:7-alpine
+    container_name: willow-redis-prod
+    platform: linux/amd64
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data:rw
+    networks:
+      - willow_network
+    environment:
+      - TZ=America/Chicago
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: willow-phpmyadmin-prod
+    platform: linux/amd64
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - PMA_USER=${DB_USERNAME}
+      - PMA_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - willow_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  db_data:
+    driver: local
+  
+  redis_data:
+    driver: local
+    
+  app_data:
+    driver: local
+    
+  app_logs:
+    driver: local
+    
+  app_uploads:
+    driver: local
+
+networks:
+  willow_network:
+    driver: bridge
+    name: willow_production

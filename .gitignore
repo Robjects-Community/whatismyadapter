@@ -73,6 +73,43 @@ willow_cms_code_Logs.txt
 willow_cms_code_Services.txt
 willow_cms_code_Utilities.txt
 
+# Large file protection and backup files
+*.tar.gz
+*.backup
+*.zip
+*.bak
+*.sql.gz
+*.dump
+.backups/
+**/backup/
+**/backups/
+
+# Actions runner files
+actions-runner/
+**/actions-runner-*.tar.gz
+**/externals/node*/bin/node
+
+# Large binaries
+node_modules/
+vendor/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Application backups
+tools/backup/app_backups/
+tools/backup/db_backups/
+tools/backup/code_backups/
+*_backup_*.tar.gz
+
+# Environment and secrets
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+
 # Code Coverage Report #
 ########################
 /cakephp/webroot/coverage
