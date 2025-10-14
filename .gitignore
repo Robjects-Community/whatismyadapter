@@ -938,3 +938,8 @@ docs/cloudflare-outreach/collaboration/containers-beta-proposal.md
 docs/cloudflare-outreach/collaboration/willowcms-portfolio.md
 docs/cloudflare-outreach/README.md
 docs/cloudflare-outreach/assets/technical-examples.md
+docs/deployment-ssh-setup.md
+tools/deployment/deploy-to-droplet-port9090.sh
+docker-compose.override.yml
+app/tmp/cache/cake_database_tables
+app/tmp/cache/cake_database_tables
