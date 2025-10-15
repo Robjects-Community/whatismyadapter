@@ -2,8 +2,9 @@
 
 # Deploy WillowCMS to DigitalOcean Droplet
 # Usage: ./deploy-to-droplet.sh [environment]
+# Can be run from any directory - paths are calculated dynamically
 
-set -e
+set -euo pipefail
 
 # Colors for output
 RED='\033[0;31m'
@@ -12,10 +13,25 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Configuration
+# Determine paths dynamically (works from any directory)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ENV_FILE="${SCRIPT_DIR}/.env"
-COMPOSE_FILE="${SCRIPT_DIR}/docker-compose-prod.yml"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+DEPLOYMENT_DIR="$REPO_ROOT/tools/deployment"
+APP_DIR="$REPO_ROOT/app"
+INFRA_DIR="$REPO_ROOT/infrastructure"
+
+# Configuration
+ENV_FILE="$DEPLOYMENT_DIR/.env"
+COMPOSE_FILE="$DEPLOYMENT_DIR/docker-compose-prod.yml"
+
+# Validate required directories exist
+for dir in "$APP_DIR" "$INFRA_DIR" "$DEPLOYMENT_DIR"; do
+    if [[ ! -d "$dir" ]]; then
+        echo -e "${RED}Error: Required directory not found: $dir${NC}"
+        echo -e "${YELLOW}Please ensure you're running from the WillowCMS repository${NC}"
+        exit 1
+    fi
+done
 
 # Load environment variables
 if [[ -f "$ENV_FILE" ]]; then
@@ -25,6 +41,9 @@ else
     echo -e "${YELLOW}Please copy .env.example to .env and configure your settings${NC}"
     exit 1
 fi
+
+# Defaults
+SSH_PORT="${SSH_PORT:-22}"
 
 # Validate required variables
 required_vars=(
@@ -43,6 +62,35 @@ for var in "${required_vars[@]}"; do
     fi
 done
 
+# Resolve SSH identity (optional)
+SSH_ID_FILE=""
+if [[ -n "${SSH_KEY_PATH}" ]]; then
+    # Expand ~ if present
+    SSH_ID_FILE="${SSH_KEY_PATH/#~/$HOME}"
+    if [[ ! -f "${SSH_ID_FILE}" ]]; then
+        echo -e "${YELLOW}Warning: SSH_KEY_PATH is set to '${SSH_KEY_PATH}' but file not found after expansion ('${SSH_ID_FILE}'). Falling back to default SSH identity/agent.${NC}"
+        SSH_ID_FILE=""
+    fi
+fi
+
+# Build common SSH options
+SSH_COMMON_OPTS=(
+  -o StrictHostKeyChecking=no
+  -o UserKnownHostsFile=/dev/null
+  -p "${SSH_PORT}"
+)
+if [[ -n "${SSH_ID_FILE}" ]]; then
+  SSH_COMMON_OPTS+=( -i "${SSH_ID_FILE}" )
+fi
+
+# Show which key/port will be used (non-sensitive)
+if [[ -n "${SSH_ID_FILE}" ]]; then
+  echo -e "${BLUE}Using SSH identity: ${SSH_ID_FILE}${NC}"
+fi
+if [[ "${SSH_PORT}" != "22" ]]; then
+  echo -e "${BLUE}Using SSH port: ${SSH_PORT}${NC}"
+fi
+
 echo -e "${BLUE}🚀 Starting deployment to DigitalOcean Droplet${NC}"
 echo -e "${BLUE}Target: ${DROPLET_IP}${NC}"
 echo -e "${BLUE}Environment: ${APP_ENV:-production}${NC}"
@@ -50,20 +98,26 @@ echo ""
 
 # Function to execute commands on remote server
 ssh_exec() {
-    ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-        "${SSH_USER}@${DROPLET_IP}" "$@"
+    ssh "${SSH_COMMON_OPTS[@]}" "${SSH_USER}@${DROPLET_IP}" "$@"
 }
 
 # Function to copy files to remote server
 scp_copy() {
-    scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-        "$1" "${SSH_USER}@${DROPLET_IP}:$2"
+    # scp uses -P for port; reuse identity and -o options
+    local SCP_OPTS=()
+    # Extract identity (-i) from SSH_COMMON_OPTS if present
+    if [[ -n "${SSH_ID_FILE}" ]]; then
+      SCP_OPTS+=( -i "${SSH_ID_FILE}" )
+    fi
+    SCP_OPTS+=( -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P "${SSH_PORT}" )
+    scp "${SCP_OPTS[@]}" "$1" "${SSH_USER}@${DROPLET_IP}:$2"
 }
 
 # Test connection
 echo -e "${YELLOW}Testing SSH connection...${NC}"
 if ! ssh_exec "echo 'Connection successful'"; then
     echo -e "${RED}Error: Cannot connect to droplet${NC}"
+    echo -e "${YELLOW}Hint: Ensure the public key corresponding to SSH_KEY_PATH is in ~${SSH_USER}/.ssh/authorized_keys on the droplet and file permissions are correct (700 ~/.ssh, 600 authorized_keys).${NC}"
     exit 1
 fi
 echo -e "${GREEN}✓ SSH connection successful${NC}"
@@ -81,21 +135,22 @@ echo -e "${GREEN}✓ Docker Compose file copied${NC}"
 # Copy CakePHP application files
 echo -e "${YELLOW}Copying CakePHP application...${NC}"
 scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-    "${SCRIPT_DIR}/../../app" "${SSH_USER}@${DROPLET_IP}:~/willow/"
+    "$APP_DIR" "${SSH_USER}@${DROPLET_IP}:~/willow/"
 echo -e "${GREEN}✓ CakePHP application copied${NC}"
 
 # Copy Docker infrastructure
 echo -e "${YELLOW}Copying Docker infrastructure...${NC}"
 scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-    "${SCRIPT_DIR}/../../infrastructure" "${SSH_USER}@${DROPLET_IP}:~/willow/"
+    "$INFRA_DIR" "${SSH_USER}@${DROPLET_IP}:~/willow/"
 echo -e "${GREEN}✓ Docker infrastructure copied${NC}"
 
 # Copy environment file (excluding sensitive local paths)
 echo -e "${YELLOW}Copying environment configuration...${NC}"
 temp_env=$(mktemp)
+trap "rm -f '$temp_env'" EXIT
 grep -v "SSH_KEY_PATH\|BACKUP_PATH" "$ENV_FILE" > "$temp_env"
 scp_copy "$temp_env" "~/willow/.env"
-rm "$temp_env"
+rm -f "$temp_env"
 echo -e "${GREEN}✓ Environment configuration copied${NC}"
 
 # Create basic index.html for testing

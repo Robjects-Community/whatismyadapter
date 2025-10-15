@@ -1,0 +1,58 @@
+# VCS and IDE
+.git/
+.github/
+.gitignore
+.gitattributes
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# Development dependencies
+node_modules/
+vendor/
+coverage/
+dist/
+build/
+
+# CakePHP runtime (recreated on server)
+app/tmp/*
+app/logs/*
+!app/tmp/.gitkeep
+!app/logs/.gitkeep
+
+# Local development files
+docs/
+scripts/
+tools/
+tests/
+storage/backups/
+helper-files*/
+archive-files/
+docker-backups/
+assets/presentations/
+
+# Docker compose files (we copy specific ones)
+docker-compose*.yml
+!docker-compose-prod.yml
+
+# Environment files (we handle separately)
+.env
+.env.*
+!.env.example
+stack.env
+
+# Logs and temporary files
+*.log
+*.cache
+*.pid
+*.seed
+*.sql
+*.sqlite
+
+# Backup files
+*.backup
+*.bak
+*.orig
+*~

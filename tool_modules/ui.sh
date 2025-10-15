@@ -51,6 +51,9 @@ show_menu() {
     echo "  18) Restart Docker Environment (Soft Reset)"
     echo "  19) Restart Docker Environment (Hard Reset)"
     echo
+    echo "Deployment:"
+    echo "  26) Deployment Management Menu"
+    echo
     echo "Debug Tools:"
     echo "  25) Run WillowCMS Debug Script"
     echo "  0) Exit"

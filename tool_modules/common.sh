@@ -55,6 +55,10 @@ execute_command() {
             # Debug commands
             execute_debug_command "$cmd_choice"
             ;;
+        26)
+            # Deployment menu
+            deployment_menu
+            ;;
         0)
             execute_system_command "0"
             ;;
@@ -94,7 +98,7 @@ main() {
     while true; do
         show_header
         show_menu
-        read -r -p "Enter your choice [0-25]: " choice_input
+        read -r -p "Enter your choice [0-26]: " choice_input
 
         if [ -z "$choice_input" ]; then # Handle empty input
             echo "Error: No input. Please enter a number."
@@ -112,8 +116,8 @@ main() {
         local choice_num
         choice_num=$((choice_input))
 
-        if [ "$choice_num" -lt 0 ] || [ "$choice_num" -gt 25 ]; then
-            echo "Error: Please enter a number between 0 and 25."
+        if [ "$choice_num" -lt 0 ] || [ "$choice_num" -gt 26 ]; then
+            echo "Error: Please enter a number between 0 and 26."
             pause
             continue
         fi

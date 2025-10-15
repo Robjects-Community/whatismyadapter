@@ -1178,3 +1178,5 @@ app/tmp/cache/settings/cms_settings_setting_RateLimit_registerNumberOfSeconds
 app/tmp/cache/settings/cms_settings_setting_Security_enableRateLimiting
 app/tmp/cache/settings/cms_settings_setting_Translations
 app/tmp/cache/cake_database_tables
+tools/deployment/logs/*.log
+tools/deployment/logs/*.sha256

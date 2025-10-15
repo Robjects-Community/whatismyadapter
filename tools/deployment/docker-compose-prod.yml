@@ -12,11 +12,11 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+    # depends_on:
+    #   db:
+    #     condition: service_healthy
+    #   redis:
+    #     condition: service_healthy
     volumes:
       - app_data:/var/www/html/tmp:rw
       - app_logs:/var/www/html/logs:rw

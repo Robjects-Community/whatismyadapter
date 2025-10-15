@@ -52,7 +52,7 @@
 2. Create `tools/deployment/.env` with production values
 3. Set `APP_ENV=production`, `APP_DEBUG=false`
 4. Replace localhost URLs with domain: `APP_URL=https://yourdomain.com`
-5. Run: `./tools/deployment/deploy-to-droplet.sh`
+5. Run: `./tools/deployment/deploy-to-droplet.sh` (can be run from any directory)
 
 #### Option C: Portainer Stack
 1. Use Portainer UI to create stack
