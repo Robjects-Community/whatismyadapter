@@ -82,27 +82,27 @@ jobs:
           ${{ env.SSH_USER }}@${{ env.DROPLET_IP }} \
           "echo 'SSH connection successful from GitHub Actions'"
     
-    # Step 6: Execute the deployment script
-    - name: Deploy Application
-      run: |
-        echo "🚀 Starting deployment to droplet..."
-        ./tools/deployment/deploy-to-droplet.sh
+    # # Step 6: Execute the deployment script
+    # - name: Deploy Application
+    #   run: |
+    #     echo "🚀 Starting deployment to droplet..."
+    #     ./tools/deployment/deploy-to-droplet.sh
     
-    # Step 7: Verify deployment
-    - name: Verify Deployment
-      run: |
-        echo "🔍 Verifying deployment..."
+    # # Step 7: Verify deployment
+    # - name: Verify Deployment
+    #   run: |
+    #     echo "🔍 Verifying deployment..."
         
-        # Wait a moment for services to start
-        sleep 30
+    #     # Wait a moment for services to start
+    #     sleep 30
         
-        # Check if the application responds
-        if curl -f -s http://${{ env.DROPLET_IP }}/ > /dev/null; then
-          echo "✅ Application is responding!"
-        else
-          echo "❌ Application may not be ready yet"
-          exit 1
-        fi
+    #     # Check if the application responds
+    #     if curl -f -s http://${{ env.DROPLET_IP }}/ > /dev/null; then
+    #       echo "✅ Application is responding!"
+    #     else
+    #       echo "❌ Application may not be ready yet"
+    #       exit 1
+    #     fi
     
     # Step 8: Clean up SSH key
     - name: Clean up
