@@ -1,21 +1,21 @@
 services:
 
-  jenkins-alt:
-    image: docker.io/garzarobmdocker/jenkins:latest
-    build:
-      context: .
-      dockerfile: infrastructure/docker/jenkins/Dockerfile
-    ports:
-      - '${JENKINS_ALT_HTTP_PORT:-8083}:8080'
-      - '${JENKINS_ALT_AGENT_PORT:-50001}:50000'
-    volumes:
-      - jenkins_alt_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./infrastructure/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
-    environment:
-      - JAVA_OPTS=${JAVA_OPTS}
-    privileged: true
-    user: root
+  # jenkins-alt:
+  #   image: docker.io/garzarobmdocker/jenkins:latest
+  #   build:
+  #     context: .
+  #     dockerfile: infrastructure/docker/jenkins/Dockerfile
+  #   ports:
+  #     - '${JENKINS_ALT_HTTP_PORT:-8083}:8080'
+  #     - '${JENKINS_ALT_AGENT_PORT:-50001}:50000'
+  #   volumes:
+  #     - jenkins_alt_home:/var/jenkins_home
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - ./infrastructure/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+  #   environment:
+  #     - JAVA_OPTS=${JAVA_OPTS}
+  #   privileged: true
+  #   user: root
 
   willowcms:
     build:
@@ -68,21 +68,21 @@ services:
       - PMA_PASSWORD=${MYSQL_PASSWORD}
       - UPLOAD_LIMIT=${UPLOAD_LIMIT:-300M}
 
-  jenkins:
-    build:
-      context: .
-      dockerfile: infrastructure/docker/jenkins/Dockerfile
-    privileged: true
-    user: root
-    ports:
-      - "${JENKINS_HTTP_PORT:-8081}:8080"
-      - "${JENKINS_AGENT_PORT:-50000}:50000"
-    volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./infrastructure/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
-    environment:
-      - JAVA_OPTS=${JAVA_OPTS:--Djenkins.install.runSetupWizard=false}
+  # jenkins:
+  #   build:
+  #     context: .
+  #     dockerfile: infrastructure/docker/jenkins/Dockerfile
+  #   privileged: true
+  #   user: root
+  #   ports:
+  #     - "${JENKINS_HTTP_PORT:-8081}:8080"
+  #     - "${JENKINS_AGENT_PORT:-50000}:50000"
+  #   volumes:
+  #     - jenkins_home:/var/jenkins_home
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - ./infrastructure/docker/jenkins/jenkins.yaml:/var/jenkins_home/jenkins.yaml
+  #   environment:
+  #     - JAVA_OPTS=${JAVA_OPTS:--Djenkins.install.runSetupWizard=false}
 
   mailpit:
     image: axllent/mailpit:${MAILPIT_IMAGE_TAG:-latest}
@@ -103,9 +103,9 @@ services:
     environment:
       - REDIS_HOST=${REDIS_HOST:-willowcms}
       - REDIS_PORT=${REDIS_PORT:-6379}
-      - REDIS_PASSWORD=root
-      - HTTP_USER=root
-      - HTTP_PASSWORD=root
+      - REDIS_PASSWORD=willowcms
+      - HTTP_USER=willowcms
+      - HTTP_PASSWORD=willowcms
     ports:
       - "${REDIS_COMMANDER_HTTP_PORT:-8084}:8081"
     depends_on:
@@ -173,7 +173,6 @@ volumes:
   jenkins_home:
   jenkins_alt_home:
   mailpit_data:
-    user: root
 
 #   mailpit:
 #     image: axllent/mailpit:latest
