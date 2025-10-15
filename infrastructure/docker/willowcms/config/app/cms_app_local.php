@@ -65,6 +65,50 @@ return [
             'cacheMetadata' => true,
             'port' => env('TEST_DB_PORT', 3306)
         ],
+
+        /*
+         * DigitalOcean production database connection with SSL
+         */
+        'digitalocean' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => env('DO_DB_HOST', 'private-cms-mysql-test-do-user-25344929-0.e.db.ondigitalocean.com'),
+            'username' => env('DO_DB_USERNAME', 'cms_user'),
+            'password' => env('DO_DB_PASSWORD', ''),
+            'database' => env('DO_DB_DATABASE', 'cms'),
+            'encoding' => 'utf8mb4',
+            'timezone' => 'UTC',
+            'cacheMetadata' => true,
+            'port' => env('DO_DB_PORT', 25060),
+            'flags' => [
+                // SSL configuration for DigitalOcean managed database
+                PDO::MYSQL_ATTR_SSL_CA => env('DO_DB_SSL_CA', '/var/www/html/config/certs/digitalocean-ca.crt'),
+                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => filter_var(env('DO_DB_SSL_VERIFY', true), FILTER_VALIDATE_BOOLEAN),
+            ],
+        ],
+
+        /*
+         * DigitalOcean test database connection with SSL
+         */
+        'digitalocean_test' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => env('DO_TEST_DB_HOST', 'private-cms-mysql-test-do-user-25344929-0.e.db.ondigitalocean.com'),
+            'username' => env('DO_TEST_DB_USERNAME', 'cms_user_test'),
+            'password' => env('DO_TEST_DB_PASSWORD', ''),
+            'database' => env('DO_TEST_DB_DATABASE', 'cms_test'),
+            'encoding' => 'utf8mb4',
+            'timezone' => 'UTC',
+            'cacheMetadata' => true,
+            'port' => env('DO_TEST_DB_PORT', 25060),
+            'flags' => [
+                // SSL configuration for DigitalOcean managed database
+                PDO::MYSQL_ATTR_SSL_CA => env('DO_TEST_DB_SSL_CA', '/var/www/html/config/certs/digitalocean-ca.crt'),
+                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => filter_var(env('DO_TEST_DB_SSL_VERIFY', true), FILTER_VALIDATE_BOOLEAN),
+            ],
+        ],
     ],
 
     /*

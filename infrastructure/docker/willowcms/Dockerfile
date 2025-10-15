@@ -89,7 +89,7 @@ RUN deluser nobody 2>/dev/null || true && \
 COPY --chown=nobody:nobody app/ /var/www/html/
 
 # Make sure files/folders needed by the processes are accessible when they run under the nobody user
-RUN mkdir -p /var/www/html /var/www/html/tmp/archives /var/www/html/webroot/files/ImageGalleries/preview /run /var/lib/nginx /var/log/nginx && \
+RUN mkdir -p /var/www/html /var/www/html/tmp/archives /var/www/html/webroot/files/ImageGalleries/preview /var/www/html/config/certs /run /var/lib/nginx /var/log/nginx && \
     chown -R nobody:nobody /var/www/html /run /var/lib/nginx /var/log/nginx
 
 # Switch to use a non-root user from here on

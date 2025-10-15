@@ -109,6 +109,12 @@ tools/backup/code_backups/
 *.pem
 *.key
 *.cert
+*.crt
+
+# SSL Certificates
+app/config/certs/
+config/certs/
+**/certs/
 
 # Code Coverage Report #
 ########################
@@ -1171,3 +1177,4 @@ app/tmp/cache/settings/cms_settings_setting_RateLimit_registerNumberOfRequests
 app/tmp/cache/settings/cms_settings_setting_RateLimit_registerNumberOfSeconds
 app/tmp/cache/settings/cms_settings_setting_Security_enableRateLimiting
 app/tmp/cache/settings/cms_settings_setting_Translations
+app/tmp/cache/cake_database_tables
